@@ -1,6 +1,6 @@
-# Configure Server Side Encryption for S3 Buckets when Using AWS CloudFormation or the CLI<a name="S3-rotate-customer-key"></a>
+# Configure Server\-Side Encryption for S3 Buckets When Using AWS CloudFormation or the CLI<a name="S3-rotate-customer-key"></a>
 
-When you create a pipeline using AWS CloudFormation or the CLI, you must configure server side encryption manually\. Use the sample bucket policy above, and then create your own customer\-managed SSE\-KMS encryption keys\. You can also choose to use your own keys instead of the default Amazon S3 key in general\. Some reasons for doing so include:
+When you create a pipeline using AWS CloudFormation or the CLI, you must configure server\-side encryption manually\. Use the sample bucket policy above, and then create your own customer\-managed SSE\-KMS encryption keys\. You can also choose to use your own keys instead of the default Amazon S3 key in general\. Some reasons for doing so include:
 
 + You want to rotate the key on a schedule to meet business or security requirements for your organization\.
 

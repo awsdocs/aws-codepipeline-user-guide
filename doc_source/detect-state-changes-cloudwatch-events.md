@@ -56,7 +56,7 @@ Each type of execution state change event emits notifications with specific mess
     "time": TimeStamp,
     "region": "us-east-1",
     "resources": [
-        "arn:aws:codepipeline:us-east-1:account_ID:pipeline:myPipeline"
+        "arn:aws:codepipeline:us-east-1:account_ID:myPipeline"
     ],
     "detail": {
         "pipeline": "myPipeline",
@@ -79,7 +79,7 @@ Each type of execution state change event emits notifications with specific mess
     "time": TimeStamp,
     "region": "us-east-1",
     "resources": [
-        "arn:aws:codepipeline:us-east-1:account_ID:pipeline:myPipeline"
+        "arn:aws:codepipeline:us-east-1:account_ID:myPipeline"
     ],
     "detail": {
         "pipeline": "myPipeline",
@@ -103,7 +103,7 @@ Each type of execution state change event emits notifications with specific mess
     "time": TimeStamp,
     "region": "us-east-1",
     "resources": [
-        "arn:aws:codepipeline:us-east-1:account_ID:pipeline:myPipeline"
+        "arn:aws:codepipeline:us-east-1:account_ID:myPipeline"
     ],
     "detail": {
         "pipeline": "myPipeline",
@@ -195,10 +195,7 @@ These steps show how to use the CloudWatch console to create a rule to send noti
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/test-notifications-in-cwe.png)
 
 1. For event patterns that are more detailed than the selectors allow, you can also use the **Edit** option in the **Event Pattern Preview** window to designate an event pattern in JSON format\. The following example shows the JSON structure edited manually to specify a pipeline named "myPipeline\."  
-![\[A pipeline name can be edited manually in the JSON structure for the
-                rule.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/cloudwatch-rule-event-pattern.png)![\[A pipeline name can be edited manually in the JSON structure for the
-                rule.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[A pipeline name can be edited manually in the JSON structure for the
-                rule.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+![\[A pipeline name can be edited manually in the JSON structure for the rule.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/cloudwatch-rule-event-pattern.png)![\[A pipeline name can be edited manually in the JSON structure for the rule.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[A pipeline name can be edited manually in the JSON structure for the rule.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 **Note**  
 If not otherwise specified, then the event pattern is created for all pipelines/stages/actions and states\.
 

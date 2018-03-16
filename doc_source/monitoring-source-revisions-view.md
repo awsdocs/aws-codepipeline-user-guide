@@ -19,16 +19,10 @@ You can use the AWS CodePipeline console to view information about the most rece
 1. Choose the name of the pipeline for which you want to view source revision details\. 
 
 1. Locate an action for which you want to view source revision details, and then find the revision information at the bottom of its stage:   
-![\[Information about a revision can be viewed at the bottom of a stage
-                            in the AWS CodePipeline console.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/view-changes-console-3.png)![\[Information about a revision can be viewed at the bottom of a stage
-                            in the AWS CodePipeline console.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Information about a revision can be viewed at the bottom of a stage
-                            in the AWS CodePipeline console.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+![\[Information about a revision can be viewed at the bottom of a stage in the AWS CodePipeline console.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/view-changes-console-3.png)![\[Information about a revision can be viewed at the bottom of a stage in the AWS CodePipeline console.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Information about a revision can be viewed at the bottom of a stage in the AWS CodePipeline console.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
 1. Click in the details area to view more information about the artifact, including the length of time since the artifact was committed\. With the exception of artifacts stored in Amazon S3 buckets, identifiers such as commit IDs in this information detail view are linked to source information pages for the artifacts\.   
-![\[Click in the details area to view more information about the
-                            artifact.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/view-changes-console-4.png)![\[Click in the details area to view more information about the
-                            artifact.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Click in the details area to view more information about the
-                            artifact.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+![\[Click in the details area to view more information about the artifact.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/view-changes-console-4.png)![\[Click in the details area to view more information about the artifact.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Click in the details area to view more information about the artifact.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
 ## View Current Source Revision Details in a Pipeline \(CLI\)<a name="monitoring-source-revisions-view-cli"></a>
 

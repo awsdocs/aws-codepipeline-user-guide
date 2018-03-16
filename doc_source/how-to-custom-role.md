@@ -108,6 +108,9 @@ AWS\-CodePipeline\-Service currently includes the following policy statement:
 }
 ```
 
+**Note**  
+Make sure your service role for AWS CodePipeline includes the `"elasticbeanstalk:DescribeEvents"` action for any pipelines that use AWS Elastic Beanstalk\. Without this permission, AWS Elastic Beanstalk deploy actions hang without failing or indicating an error\.
+
 ## Add Permissions for Other AWS Services<a name="how-to-update-role-new-services"></a>
 
 You must update your service role policy statement with permissions for an AWS service not already included in the default service role policy statement before you can use it in your pipelines\.

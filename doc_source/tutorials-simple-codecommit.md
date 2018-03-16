@@ -249,10 +249,7 @@ If you choose another name for your pipeline, be sure to use it instead of *MyFi
 1. In **Step 2: Source**, in **Source provider**, choose AWS CodeCommit\. In **Repository name**, choose the name of the AWS CodeCommit repository you created in [Step 1: Create an AWS CodeCommit Repository and Local Repo](#codecommit-create-repository)\. In **Branch name**, choose the name of the branch that contains your latest code update\. Unless you created a different branch on your own, only `master` will be available\. 
 
    Choose **Next step**\.  
-![\[The Step 2: Source page in the AWS CodePipeline pipeline
-              wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-wizard-source-codecommit.png)![\[The Step 2: Source page in the AWS CodePipeline pipeline
-              wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The Step 2: Source page in the AWS CodePipeline pipeline
-              wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+![\[The Step 2: Source page in the AWS CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-wizard-source-codecommit.png)![\[The Step 2: Source page in the AWS CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The Step 2: Source page in the AWS CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
    After you select the repository name and branch, you'll see a message showing the Amazon CloudWatch Events rule that will be created for this pipeline\. 
 
@@ -263,10 +260,7 @@ If you choose another name for your pipeline, be sure to use it instead of *MyFi
 In this tutorial, you are deploying code that requires no build service\.
 
 1. In **Step 4: Deploy**, in **Deployment provider**, choose **AWS CodeDeploy**\. In **Application name**, type **MyDemoApplication**, or choose the **Refresh** button, and then choose the application name from the list\. In **Deployment group**, type **MyDemoDeploymentGroup**, or choose it from the list, and then choose **Next step**\.   
-![\[The Step 4: Deploy page in the AWS CodePipeline pipeline
-              wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-wizard-deploy.png)![\[The Step 4: Deploy page in the AWS CodePipeline pipeline
-              wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The Step 4: Deploy page in the AWS CodePipeline pipeline
-              wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+![\[The Step 4: Deploy page in the AWS CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-wizard-deploy.png)![\[The Step 4: Deploy page in the AWS CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The Step 4: Deploy page in the AWS CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 **Note**  
 The name "Staging" is the name given by default to the stage created in the **Step 4: Deploy** step, just as "Source" is the name given to the first stage of the pipeline\.
 
@@ -335,10 +329,7 @@ Congratulations\! You just created a simple pipeline in AWS CodePipeline\. The p
 1. On the **Description** tab, in **Public DNS**, copy the address, and then paste it into the address bar of your web browser\.
 
    This is the sample application you downloaded and pushed to your AWS CodeCommit repository\.  
-![\[The sample web page application that was pushed to your AWS CodeCommit
-              repository.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-demo-success-message-codedeploy.png)![\[The sample web page application that was pushed to your AWS CodeCommit
-              repository.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The sample web page application that was pushed to your AWS CodeCommit
-              repository.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+![\[The sample web page application that was pushed to your AWS CodeCommit repository.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-demo-success-message-codedeploy.png)![\[The sample web page application that was pushed to your AWS CodeCommit repository.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The sample web page application that was pushed to your AWS CodeCommit repository.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
 For more information about stages, actions, and how pipelines work, see [AWS CodePipeline Concepts](concepts.md)\.
 
@@ -425,10 +416,7 @@ Your pipeline is configured to run whenever code changes are made to your AWS Co
 1. On the **Description** tab, in **Public DNS**, copy the address, and then paste it into the address bar of your web browser\.
 
    The updated web page will be displayed:  
-![\[The updated sample web page application that was pushed to your AWS CodeCommit
-              repository.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-demo-success-message-codecommit.png)![\[The updated sample web page application that was pushed to your AWS CodeCommit
-              repository.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The updated sample web page application that was pushed to your AWS CodeCommit
-              repository.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+![\[The updated sample web page application that was pushed to your AWS CodeCommit repository.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-demo-success-message-codecommit.png)![\[The updated sample web page application that was pushed to your AWS CodeCommit repository.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The updated sample web page application that was pushed to your AWS CodeCommit repository.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
 For more information about stages, actions, and how pipelines work, see [AWS CodePipeline Concepts](concepts.md)\.
 
@@ -438,17 +426,17 @@ If you want to gain more experience working with stages before you end the tutor
 
 + [Step 4: Add Another Stage to Your Pipeline](tutorials-simple-s3.md#s3-add-stage)
 
-+ Disable and Enable Transitions Between Stages in AWS CodePipeline
++ [Disable and Enable Transitions Between Stages in AWS CodePipeline](tutorials-simple-s3.md#s3-configure-transitions)
 **Note**  
 In step 4 of the second procedure, instead of uploading your sample to an Amazon S3 bucket again, as described, make a change to the sample app in your local repo and push it to your AWS CodeCommit repository\.
 
 ## Step 8: Clean Up Resources<a name="codecommit-clean-up"></a>
 
-You can use some of the resources you created in this tutorial for the next tutorial, \. For example, you can reuse the AWS CodeDeploy application and deployment\. However, after you complete this and any other tutorials, you should delete the pipeline and the resources it uses, so that you will not be charged for the continued use of those resources\. First, delete the pipeline, then the AWS CodeDeploy application and its associated Amazon EC2 instance, and finally, the AWS CodeCommit repository\.
+You can use some of the resources you created in this tutorial for the next tutorial, [Tutorial: Create a Four\-Stage Pipeline](tutorials-four-stage-pipeline.md)\. For example, you can reuse the AWS CodeDeploy application and deployment\. However, after you complete this and any other tutorials, you should delete the pipeline and the resources it uses, so that you will not be charged for the continued use of those resources\. First, delete the pipeline, then the AWS CodeDeploy application and its associated Amazon EC2 instance, and finally, the AWS CodeCommit repository\.
 
 **To clean up the resources used in this tutorial**
 
-1. To clean up your AWS CodePipeline resources, follow the instructions in Delete a Pipeline in AWS CodePipeline\.
+1. To clean up your AWS CodePipeline resources, follow the instructions in [Delete a Pipeline in AWS CodePipeline](pipelines-delete.md)\.
 
 1. To clean up your AWS CodeDeploy resources, follow the instructions in [Clean Up Deployment Walkthrough Resources](http://docs.aws.amazon.com/codedeploy/latest/userguide/tutorials-simple-s3alkthrough.html#tutorials-simple-s3alkthrough-clean-up)\.
 

@@ -39,7 +39,7 @@ Because all bucket names in Amazon S3 must be unique, use one of your own, not t
 
    When versioning is enabled, Amazon S3 saves every version of every object in the bucket\.
 
-1. Choose **Next**, and modify permissions for the bucket as needed\.
+1. Choose **Next**\. Accept the default permissions to allow your account read/write access on objects\. For more information on Amazon S3 bucket and object permissions, see [Specifying Permissions in a Policy](http://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html)\.
 
 1. Choose **Next**, and then choose **Create bucket**\.
 
@@ -159,7 +159,7 @@ If you chose to copy the sample application to a GitHub repository instead of an
 
 1. In **Step 3: Build**, choose **No Build**, and then choose **Next step**\.
 **Note**  
-Configuring a build requires a build server or system\. You can walk through the steps for setting up build resources and creating a pipeline that uses those resources in the next tutorial, [Tutorial: Create a Four\-Stage Pipeline](tutorials-four-stage-pipeline.md)\.
+You can configure a build action with a provider such as AWS CodeBuild, which is a fully managed build service in the cloud\. You can also configure a build action that uses a provider with a build server or system, such as Jenkins\. You can walk through the steps for setting up build resources and creating a pipeline that uses those resources in the next tutorial, [Tutorial: Create a Four\-Stage Pipeline](tutorials-four-stage-pipeline.md)\.
 
 1. In **Step 4: Deploy**, in **Deployment provider**, choose **AWS CodeDeploy**\. In **Application name**, type **CodePipelineDemoApplication**, or choose the **Refresh** button, and then choose the application name from the list\. In **Deployment group**, type **CodePipelineDemoFleet**, or choose it from the list, and then choose **Next step**\.   
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-wizard-deploy.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
@@ -419,7 +419,7 @@ You can use some of the resources you created in this walkthrough for the tutori
 
 **To clean up the resources used in this tutorial**
 
-1. To clean up your AWS CodePipeline resources, follow the instructions in Delete a Pipeline in AWS CodePipeline\.
+1. To clean up your AWS CodePipeline resources, follow the instructions in [Delete a Pipeline in AWS CodePipeline](pipelines-delete.md)\.
 
 1. To clean up your AWS CodeDeploy resources, follow the instructions in [Clean Up Deployment Walkthrough Resources](http://docs.aws.amazon.com/codedeploy/latest/userguide/tutorials-simple-s3alkthrough.html#tutorials-simple-s3alkthrough-clean-up)\.
 

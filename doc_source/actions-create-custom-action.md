@@ -70,10 +70,7 @@ These instructions assume that you have already completed the steps in [Getting 
    + `executionUrlTemplate`: the dynamic link that will be updated with information about the current or most recent run of the action\. When your custom job worker updates the status of a job \(for example, success, failure, or in progress\), it will also provide an `externalExecutionId` that will be used to complete the link\. This link can be used to provide details about the run of an action\. 
 
    For example, when you view the action in the pipeline, you see the following two links:  
-![\[Links in the AWS CodePipeline console lead to more information about the run of
-                            a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-calinksexplained.png)![\[Links in the AWS CodePipeline console lead to more information about the run of
-                            a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Links in the AWS CodePipeline console lead to more information about the run of
-                            a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+![\[Links in the AWS CodePipeline console lead to more information about the run of a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-calinksexplained.png)![\[Links in the AWS CodePipeline console lead to more information about the run of a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Links in the AWS CodePipeline console lead to more information about the run of a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
    ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/number-1.png) This static link appears after you add your custom action and points to the address in `entityUrlTemplate`, which you specify when you create your custom action\.
 
@@ -142,6 +139,9 @@ Custom actions require a job worker that will poll AWS CodePipeline for job requ
 There are many ways to design your job worker\. The following sections provide some practical guidance for developing your custom job worker for AWS CodePipeline\.
 
 
++ [Choose and Configure a Permissions Management Strategy for Your Job Worker](#actions-create-custom-action-permissions)
++ [Develop a Job Worker for Your Custom Action](#actions-create-custom-action-job-worker-workflow)
++ [Custom Job Worker Architecture and Examples](#actions-create-custom-action-job-worker-common)
 
 ### Choose and Configure a Permissions Management Strategy for Your Job Worker<a name="actions-create-custom-action-permissions"></a>
 

@@ -126,7 +126,7 @@ These are the minimum permissions required for a Lambda function to interoperate
 
 1. On the **Attach Policy** page, select the check box next to **CodePipelineLambdaExecPolicy**, and then choose **Next Step**\.
 
-1. On the **Review** page, choose **Create Role**\.
+1. On the **Review** page, choose **Create Role**\.<a name="LambdaSample1"></a>
 
 **To create the sample Lambda function to use with AWS CodePipeline**
 
@@ -265,10 +265,7 @@ In this step, you will add a new stage to your pipeline, and then add an actionâ
 You can also choose to add your Lambda action to an existing stage\. For demonstration purposes, we are adding the Lambda function as the only action in a stage to allow you to easily view its progress as artifacts progress through a pipeline\.
 
 1. In the **Add action** panel, in **Action category**, choose **Invoke**\. In **Invoke actions**, in **Action name**, type a name for your Lambda action \(for example, **MyLambdaAction**\)\. In **Provider**, choose **AWS Lambda**\. In **Function name**, choose or type the name of your Lambda function \(for example, **MyLambdaFunctionForAWSCodePipeline**\)\. In **User parameters**, specify the IP address for the Amazon EC2 instance you copied earlier \(for example, **http://*192\.0\.2\.4***\), and then choose **Add action**\.   
-![\[The configuration for a Lambda action in the Add
-                                action form.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-lambda-action-add.png)![\[The configuration for a Lambda action in the Add
-                                action form.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The configuration for a Lambda action in the Add
-                                action form.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+![\[The configuration for a Lambda action in the Add action form.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-lambda-action-add.png)![\[The configuration for a Lambda action in the Add action form.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The configuration for a Lambda action in the Add action form.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 **Note**  
 This topic uses an IP address, but in a real\-world scenario, you could provide your registered website name instead \(for example, **http://*www\.example\.com***\)\. For more information about event data and handlers in AWS Lambda, see [Programming Model](http://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html) in the AWS Lambda Developer Guide\.
 

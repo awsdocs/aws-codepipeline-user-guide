@@ -20,10 +20,7 @@ After an hour, the detailed view of a pipeline will stop refreshing automaticall
    The names and creation date of all pipelines associated with your AWS account will be displayed, along with a link to view execution history for the pipeline\.
 
 1. To see details for a single pipeline, in **Name**, choose the pipeline\. You'll see a detailed view of the pipeline, including the state of each action in each stage and the state of the transitions\.  
-![\[The console view of the pipeline indicates the state of each action
-                            in each stage and the state of the transitions.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-disabled-transition2.png)![\[The console view of the pipeline indicates the state of each action
-                            in each stage and the state of the transitions.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The console view of the pipeline indicates the state of each action
-                            in each stage and the state of the transitions.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+![\[The console view of the pipeline indicates the state of each action in each stage and the state of the transitions.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-disabled-transition2.png)![\[The console view of the pipeline indicates the state of each action in each stage and the state of the transitions.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The console view of the pipeline indicates the state of each action in each stage and the state of the transitions.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
    The graphical view displays the following information for each stage:
 

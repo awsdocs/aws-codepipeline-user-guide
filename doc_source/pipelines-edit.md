@@ -5,6 +5,8 @@ A pipeline describes the release process you want AWS CodePipeline to follow, in
 Unlike creating a pipeline, editing a pipeline does not rerun the most recent revision through the pipeline\. If you want to run the most recent revision through a pipeline you've just edited, you must manually rerun it\. Otherwise, the edited pipeline will run the next time you make a change to a source location configured in the source stage of the pipeline\. For information, see [Start a Pipeline Manually in AWS CodePipeline](pipelines-rerun-manually.md)\.
 
 
++ [Edit a Pipeline \(Console\)](#pipelines-edit-console)
++ [Edit a Pipeline \(AWS CLI\)](#pipelines-edit-cli)
 
 ## Edit a Pipeline \(Console\)<a name="pipelines-edit-console"></a>
 

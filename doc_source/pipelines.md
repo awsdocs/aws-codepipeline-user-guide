@@ -9,3 +9,13 @@ Before you can create a pipeline, you must first complete the steps in [Getting 
 
 For more information about pipelines, see [AWS CodePipeline Concepts](concepts.md), [AWS CodePipeline Tutorials](tutorials.md), and, if you want to create a pipeline using the AWS CLI, [AWS CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\. To view a list of pipelines, see [View Pipeline Details and History in AWS CodePipeline](pipelines-view.md)\.
 
+
++ [How to Start a Pipeline Execution](pipelines-about-starting.md)
++ [Create a Pipeline](pipelines-create.md)
++ [Edit a Pipeline](pipelines-edit.md)
++ [Start a Pipeline Manually](pipelines-rerun-manually.md)
++ [Start a Pipeline Automatically Using Amazon CloudWatch Events](triggering.md)
++ [Start a Pipeline Automatically Using Periodic Checks](run-automatically-polling.md)
++ [View Pipeline Details and History](pipelines-view.md)
++ [Delete a Pipeline](pipelines-delete.md)
++ [Create a Pipeline That Uses Resources from Another Account](pipelines-create-cross-account.md)

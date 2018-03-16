@@ -42,10 +42,7 @@ You can use the AWS CodePipeline console to add an approval action to an existin
    1. \(Optional\) In **Comments**, type any additional information you want to share with the reviewer\.
 
       Your completed page might look similar to the following:  
-![\[The Add action page completed for
-                                        an Approval action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/pipeline-add-action-manual-approval.png)![\[The Add action page completed for
-                                        an Approval action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The Add action page completed for
-                                        an Approval action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+![\[The Add action page completed for an Approval action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/pipeline-add-action-manual-approval.png)![\[The Add action page completed for an Approval action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The Add action page completed for an Approval action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
    1. Choose **Add action**\.
 

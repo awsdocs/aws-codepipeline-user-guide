@@ -1,7 +1,7 @@
 # AWS CodePipeline User Guide
 
 -----
-*****Copyright &copy; 2017 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; 2018 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -69,9 +69,9 @@ Amazon's trademarks and trade dress may not be used in
       + [Customer Managed Policy Examples](customer-managed-policies.md)
       + [AWS CodePipeline Permissions Reference](permissions-reference.md)
    + [Security Best Practices](best-practices-security.md)
-      + [Configure Server Side Encryption for Artifacts Stored in Amazon S3 for AWS CodePipeline](S3-artifact-encryption.md)
+      + [Configure Server-Side Encryption for Artifacts Stored in Amazon S3 for AWS CodePipeline](S3-artifact-encryption.md)
          + [View Your Default Amazon S3 SSE-KMS Encryption Keys](S3-view-default-keys.md)
-         + [Configure Server Side Encryption for S3 Buckets when Using AWS CloudFormation or the CLI](S3-rotate-customer-key.md)
+         + [Configure Server-Side Encryption for S3 Buckets When Using AWS CloudFormation or the CLI](S3-rotate-customer-key.md)
       + [Configure GitHub Authentication](GitHub-authentication.md)
          + [View Your Authorized OAuth Apps](GitHub-view-oauth-token.md)
          + [Use GitHub and the AWS CodePipeline CLI to Create and Rotate Your GitHub Personal Access Token on a Regular Basis](GitHub-rotate-personal-token-CLI.md)

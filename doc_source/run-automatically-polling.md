@@ -6,4 +6,4 @@ Although periodic checks are the default way to start your pipeline automaticall
 
 + Amazon CloudWatch Events can be set up to detect changes in an AWS CodeCommit repository and start the pipeline automatically\. 
 
-+ Periodic checks are enabled by default, but can be disabled using the `PollForSourceChanges` flag\. For more information, see \.
++ Periodic checks are enabled by default, but can be disabled using the `PollForSourceChanges` flag\. For more information, see [AWS CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.

@@ -22,10 +22,7 @@ AWS CodePipeline helps you create and manage your release process workflow with 
 
 The following diagram and accompanying descriptions introduce you to terms unique to AWS CodePipeline and how these concepts relate to each other:
 
-![\[A pipeline contains stages that contain actions, separated by transitions that can
-          be disabled and enabled.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/pipeline-elements-workflow.png)![\[A pipeline contains stages that contain actions, separated by transitions that can
-          be disabled and enabled.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[A pipeline contains stages that contain actions, separated by transitions that can
-          be disabled and enabled.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+![\[A pipeline contains stages that contain actions, separated by transitions that can be disabled and enabled.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/pipeline-elements-workflow.png)![\[A pipeline contains stages that contain actions, separated by transitions that can be disabled and enabled.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[A pipeline contains stages that contain actions, separated by transitions that can be disabled and enabled.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
 + You can use the AWS CodePipeline console, the AWS Command Line Interface \(AWS CLI\), the AWS SDKs, or any combination of these to create and manage your pipelines\. 
 
@@ -52,10 +49,7 @@ If a pipeline contains multiple source actions, all of them run again, even if a
   + An output artifact, which is the output of the action\.
 
   Every output artifact in the pipeline must have a unique name\. Every input artifact for an action must match the output artifact of an action earlier in the pipeline, whether that action is immediately before the action in a stage or runs in a stage several stages earlier\. The following illustration demonstrates how input artifacts and output artifacts are produced and consumed in a pipeline:  
-![\[Input artifacts and output artifacts are produced and consumed in a
-              pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-artifactsexplained.png)![\[Input artifacts and output artifacts are produced and consumed in a
-              pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Input artifacts and output artifacts are produced and consumed in a
-              pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+![\[Input artifacts and output artifacts are produced and consumed in a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-artifactsexplained.png)![\[Input artifacts and output artifacts are produced and consumed in a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Input artifacts and output artifacts are produced and consumed in a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
 + A *transition* is the act of a revision in a pipeline continuing from one stage to the next in a workflow\. In the AWS CodePipeline console, transition arrows connect stages together to show the order in which the stages happen\. When a stage is complete, by default the revision will transition to the next stage in the pipeline\. You can disable a transition from one stage to the next\. When you do, your pipeline will run all actions in the stages before that transition, but will not run any stages or actions after that stage until you enable that transition\. This is a simple way to prevent changes from running through the entire pipeline\. After you enable the transition, the most recent revision that ran successfully through the previous stages will be run through the stages after that transition\. If all transitions are enabled, the pipeline runs *continuously*\. Every revision is deployed as part of a successful run through the pipeline \(continuous deployment\)\.
 

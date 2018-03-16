@@ -56,10 +56,7 @@ Create a CloudWatch Events notification rule with AWS CodePipeline as the event 
 1. Choose **Specific state\(s\)**, and choose **FAILED**\.
 
 1. Choose **Edit** to open the JSON editor for the **Event Pattern Preview** pane\. Add the **pipeline** parameter with the name of your pipeline as shown in the following example for a pipeline named "myPipeline\."  
-![\[A pipeline name can be edited manually in the JSON structure for the
-              rule.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/cloudwatch-rule-event-pattern.png)![\[A pipeline name can be edited manually in the JSON structure for the
-              rule.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[A pipeline name can be edited manually in the JSON structure for the
-              rule.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+![\[A pipeline name can be edited manually in the JSON structure for the rule.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/cloudwatch-rule-event-pattern.png)![\[A pipeline name can be edited manually in the JSON structure for the rule.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[A pipeline name can be edited manually in the JSON structure for the rule.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
 1. For **Targets**, choose **Add target**\. 
 

@@ -17,12 +17,3 @@
   *Published November 2015*
 
   *Duration: 3:07*
-
-+ **Apica and AWS CodePipeline Setup Guide**
-
-  Learn how to set up Apica LoadTest with AWS CodePipeline\.  
-[![AWS Videos](http://img.youtube.com/vi/ow8zqli9by4/0.jpg)](http://www.youtube.com/watch?v=ow8zqli9by4)
-
-  *Published July 2015*
-
-  *Duration: 2:59*

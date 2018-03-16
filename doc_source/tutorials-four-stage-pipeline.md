@@ -1,10 +1,10 @@
 # Tutorial: Create a Four\-Stage Pipeline<a name="tutorials-four-stage-pipeline"></a>
 
-Now that you've created your first pipeline in  or , you can start creating more complex pipelines\. This tutorial will walk you through the creation of a four\-stage pipeline that uses a GitHub repository for your source, a Jenkins build server to build the project, and an AWS CodeDeploy application to deploy the built code to a staging server\. After the pipeline is created, you will edit it to add a stage with a test action to test the code, also using Jenkins\. 
+Now that you've created your first pipeline in [Tutorial: Create a Simple Pipeline \(Amazon S3 Bucket\)](tutorials-simple-s3.md) or [Tutorial: Create a Simple Pipeline \(AWS CodeCommit Repository\)](tutorials-simple-codecommit.md), you can start creating more complex pipelines\. This tutorial will walk you through the creation of a four\-stage pipeline that uses a GitHub repository for your source, a Jenkins build server to build the project, and an AWS CodeDeploy application to deploy the built code to a staging server\. After the pipeline is created, you will edit it to add a stage with a test action to test the code, also using Jenkins\. 
 
 Before you can create this pipeline, you must configure the required resources\. For example, if you want to use a GitHub repository for your source code, you must create the repository before you can add it to a pipeline\. As part of setting up, this tutorial walks you through setting up Jenkins on an Amazon EC2 instance for demonstration purposes\. 
 
-Before you begin this tutorial, you should have already completed the general prerequisites in \.
+Before you begin this tutorial, you should have already completed the general prerequisites in [Getting Started with AWS CodePipeline](getting-started-codepipeline.md)\.
 
 
 + [Step 1: Set Up Prerequisites](#tutorials-four-stage-pipeline-prerequisites)
@@ -128,7 +128,7 @@ If you see the AWS CodePipeline start page, choose **Get started**\.
 
 1. In **Step 1: Name**, in **Pipeline name**, type **MySecondPipeline**, and then choose **Next step**\.
 **Note**  
-If you choose another name for your pipeline, be sure to use it instead of *MySecondPipeline* for the rest of this tutorial\. After you create a pipeline, you cannot change its name\. Pipeline names are subject to some limitations\. For more information, see Limits\. 
+If you choose another name for your pipeline, be sure to use it instead of *MySecondPipeline* for the rest of this tutorial\. After you create a pipeline, you cannot change its name\. Pipeline names are subject to some limitations\. For more information, see [Limits](limits.md)\. 
 
 1. In **Step 2: Source**, in **Source provider**, choose **GitHub**, and then choose **Connect to GitHub**\. This will open a new browser window that will connect you to GitHub\. If prompted to sign in, provide your GitHub credentials\. 
 **Important**  
@@ -140,14 +140,14 @@ There is a limit to the number of OAuth tokens you can use in GitHub for a parti
 
 1. In **Step 3: Build**, choose **Add Jenkins**\. In **Provider name**, type the name of the action you provided in the AWS CodePipeline Plugin for Jenkins \(for example *MyJenkinsProviderName*\)\. This name must exactly match the name in the AWS CodePipeline Plugin for Jenkins\. In **Server URL**, type the URL of the Amazon EC2 instance where Jenkins is installed\. In **Project name**, type the name of the project you created in Jenkins, such as *MyDemoProject*, and then choose **Next step**\.
 
-1. In **Step 4: Deploy**, reuse the AWS CodeDeploy application and deployment group you created in \. In **Deployment provider**, choose **AWS CodeDeploy**\. In **Application name**, type **CodePipelineDemoApplication**, or choose the refresh button, and then choose the application name from the list\. In **Deployment group**, type **CodePipelineDemoFleet**, or choose it from the list, and then choose **Next step**\.
+1. In **Step 4: Deploy**, reuse the AWS CodeDeploy application and deployment group you created in [Tutorial: Create a Simple Pipeline \(Amazon S3 Bucket\)](tutorials-simple-s3.md)\. In **Deployment provider**, choose **AWS CodeDeploy**\. In **Application name**, type **CodePipelineDemoApplication**, or choose the refresh button, and then choose the application name from the list\. In **Deployment group**, type **CodePipelineDemoFleet**, or choose it from the list, and then choose **Next step**\.
 **Note**  
 You can use your own AWS CodeDeploy resources or create new ones, but you might incur additional costs\.
 
 1. In **Step 5: Service Role**, from **Role name**, choose the service role you created for AWS CodePipeline \(for example, AWS\-CodePipeline\-Service\), and then choose **Next step**\.
 **Note**  
 Service role creation is only required the first time you create a pipeline in AWS CodePipeline\. If you followed the steps in one of the simple pipeline tutorials, you already created this service role and will be able to choose it from the drop\-down list\. Because the drop\-down list will display all IAM service roles associated with your account, if you chose a name different from the default, choose that name instead\. If you have not yet created a service role, choose **Create role**\.   
-If you are using an AWS CodeCommit repository instead of a GitHub repository, and are using a service role that was created before April 18, 2016, make sure it includes the permissions required to access AWS CodeCommit\. For more information, see \.
+If you are using an AWS CodeCommit repository instead of a GitHub repository, and are using a service role that was created before April 18, 2016, make sure it includes the permissions required to access AWS CodeCommit\. For more information, see [Add Permissions for Other AWS Services](how-to-custom-role.md#how-to-update-role-new-services)\.
 
 1. In **Step 6: Review**, review the information, and then choose **Create pipeline**\.
 
@@ -243,7 +243,7 @@ The test assumes a default port of 80\. If you want to specify a different port,
 
 1. In the **Action category** drop\-down list, choose **Test**\. In **Action name**, type *MyJenkinsTest\-Action*\. In **Test provider**, choose the provider name you specified in Jenkins \(for example, *MyJenkinsProviderName*\)\. In **Project name**, type the name of the project you created in Jenkins \(for example, *MyTestProject*\)\. In **Input artifacts**, choose the artifact from the Jenkins build whose default name is *MyBuiltApp*, and then choose **Add action**\.
 
-   For more information about input and output artifacts and the structure of pipelines, see \.
+   For more information about input and output artifacts and the structure of pipelines, see [AWS CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
 
 1. On the **Edit** page, choose **Save pipeline changes**\. In the **Save pipeline changes** dialog box, choose **Save and continue**\.
 

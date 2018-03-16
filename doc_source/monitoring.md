@@ -22,3 +22,7 @@ You can use the following tools to monitor your AWS CodePipeline pipelines and t
 
 + **Console and CLI** — You can use the AWS CodePipeline console and CLI to view details about the status of a pipeline or a particular pipeline execution\.
 
+
++ [Detect and React to Changes in Pipeline State with CloudWatch Events](detect-state-changes-cloudwatch-events.md)
++ [Log API Calls with AWS CloudTrail](monitoring-cloudtrail-logs.md)
++ [View Current Source Revision Details in a Pipeline](monitoring-source-revisions-view.md)

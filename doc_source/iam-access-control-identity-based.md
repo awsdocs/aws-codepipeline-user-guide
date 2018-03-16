@@ -9,6 +9,7 @@ When granting permissions, you decide who is getting the permissions, the resour
 
 
 + [AWS CodePipeline Resources and Operations](#ACP_ARN_Format)
++ [Supported Resource\-Level Permissions for AWS CodePipeline API Calls](#iam-actions-resource-level)
 + [Understanding Resource Ownership](#understanding-resource-ownership)
 + [Managing Access to Resources](#managing-access-resources)
 + [Specifying Policy Elements: Actions, Effects, and Principals](#actions-effects-principals)
@@ -31,6 +32,8 @@ In AWS CodePipeline, the primary resource is a pipeline\. In a policy, you use a
 **Note**  
 Most services in AWS treat a colon \(:\) or a forward slash \(/\) as the same character in ARNs\. However, AWS CodePipeline uses an exact match in event patterns and rules\. Be sure to use the correct ARN characters when creating event patterns so that they match the ARN syntax in the pipeline you want to match\.
 
+In AWS CodePipeline, there are API calls that support resource\-level permissions\. Resource\-level permissions indicate whether an API call can specify a resource ARN, or whether the API call can only specify all resources using the wildcard\. See [Supported Resource\-Level Permissions for AWS CodePipeline API Calls](#iam-actions-resource-level) for a detailed description of resource\-level permissions and a listing of the AWS CodePipeline API calls that support resource\-level permissions\.
+
 For example, you can indicate a specific pipeline \(*myPipeline*\) in your statement using its ARN as follows:
 
 ```
@@ -49,13 +52,46 @@ To specify all resources, or if a specific API action does not support ARNs, use
 "Resource": "*"
 ```
 
-Some AWS CodePipeline API actions accept multiple resources \(for example, GetPipeline\)\. To specify multiple resources in a single statement, separate their ARNs with commas, as follows:
+**Note**  
+When you create IAM policies, follow the standard security advice of granting least privilege—that is, granting only the permissions required to perform a task\. If an API call supports ARNs, then it supports resource\-level permissions, and you do not need to use the \(\*\) wildcard character\.
+
+Some AWS CodePipeline API calls accept multiple resources \(for example, GetPipeline\)\. To specify multiple resources in a single statement, separate their ARNs with commas, as follows:
 
 ```
 "Resource": ["arn1", "arn2"]
 ```
 
 AWS CodePipeline provides a set of operations to work with the AWS CodePipeline resources\. For a list of available operations, see [AWS CodePipeline Permissions Reference](permissions-reference.md)\.
+
+## Supported Resource\-Level Permissions for AWS CodePipeline API Calls<a name="iam-actions-resource-level"></a>
+
+*Resource\-level permissions* are those that allow you to specify which resources users are allowed to perform actions on\. AWS CodePipeline provides partial support for resource\-level permissions\. This means that for some AWS CodePipeline API calls, you can control when users are allowed to use those actions based on conditions that must be met, or which resources users are allowed to use\. For example, you can grant users permission to list pipeline execution information, but only for a specific pipeline or pipelines\.
+
+The following table describes the AWS CodePipeline API calls that currently support resource\-level permissions, as well as the supported resources, resource ARNs, and condition keys for each action\. 
+
+**Note**  
+AWS CodePipeline API calls that are not listed in this table do not support resource\-level permissions\. If an AWS CodePipeline API call does not support resource\-level permissions, you can grant users permission to use it, but you have to specify a \* for the resource element of your policy statement\. 
+
+
+| API Call | Resource Type | 
+| --- | --- | 
+| PutActionRevision |  Pipeline arn:aws:codepipeline:*region*:*account*:*pipeline\-name*  | 
+| DeleteCustomActionType |  Action Type arn:aws:codepipeline:*region*:*account*:actionType:*owner*/*category*/*provider*/*version*  | 
+| CreatePipeline |  Pipeline arn:aws:codepipeline:*region*:*account*:*pipeline\-name*  | 
+| ListPipelines |  Pipeline arn:aws:codepipeline:*region*:*account*:*pipeline\-name*  | 
+| PollForJobs |  Action Type arn:aws:codepipeline:*region*:*account*:actionType:*owner*/*category*/*provider*/*version*  | 
+| DisableStageTransition |  Pipeline arn:aws:codepipeline:*region*:*account*:*pipeline\-name*  | 
+| StartPipelineExecution |  Pipeline arn:aws:codepipeline:*region*:*account*:*pipeline\-name*  | 
+| UpdatePipeline |  Pipeline arn:aws:codepipeline:*region*:*account*:*pipeline\-name*  | 
+| GetPipelineState |  Pipeline arn:aws:codepipeline:*region*:*account*:*pipeline\-name*  | 
+| RetryStageExecution |  Pipeline arn:aws:codepipeline:*region*:*account*:*pipeline\-name*  | 
+| ListActionTypes |  Action Type arn:aws:codepipeline:*region*:*account*:actionType:*owner*/*category*/*provider*/*version*  | 
+| CreateCustomActionType |  Action Type arn:aws:codepipeline:*region*:*account*:actionType:*owner*/*category*/*provider*/*version*  | 
+| GetPipelineExecution |  Pipeline arn:aws:codepipeline:*region*:*account*:*pipeline\-name*  | 
+| GetPipeline |  Pipeline arn:aws:codepipeline:*region*:*account*:*pipeline\-name*  | 
+| ListPipelineExecutions |  Pipeline arn:aws:codepipeline:*region*:*account*:*pipeline\-name*  | 
+| DeletePipeline |  Pipeline arn:aws:codepipeline:*region*:*account*:*pipeline\-name*  | 
+| EnableStageTransition |  Pipeline arn:aws:codepipeline:*region*:*account*:*pipeline\-name*  | 
 
 ## Understanding Resource Ownership<a name="understanding-resource-ownership"></a>
 

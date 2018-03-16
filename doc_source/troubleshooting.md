@@ -4,6 +4,7 @@ The following information might help you troubleshoot common issues in AWS CodeP
 
 
 + [Pipeline Error: A pipeline configured with AWS Elastic Beanstalk returns an error message: "Deployment failed\. The provided role does not have sufficient permissions: Service:AmazonElasticLoadBalancing"](#troubleshooting-aeb1)
++ [Deployment Error: A pipeline configured with an AWS Elastic Beanstalk deploy action hangs instead of failing if the "DescribeEvents" permission is missing](#troubleshooting-aeb2)
 + [Pipeline Error: A source action returns the insufficient permissions message: "Could not access the AWS CodeCommit repository `repository-name`\. Make sure that the pipeline IAM role has sufficient permissions to access the repository\."](#troubleshooting-service-role-permissions)
 + [Pipeline Error: A Jenkins build or test action runs for a long time and then fails due to lack of credentials or permissions](#troubleshooting-jen1)
 + [Pipeline Error: My GitHub source stage contains Git submodules, but AWS CodePipeline doesn't initialize them](#troubleshooting-gs1)
@@ -44,6 +45,16 @@ After you apply the edited policy, follow the steps in [Start a Pipeline Manuall
 
 Depending on your security needs, you can modify the permissions in other ways, too\. 
 
+## Deployment Error: A pipeline configured with an AWS Elastic Beanstalk deploy action hangs instead of failing if the "DescribeEvents" permission is missing<a name="troubleshooting-aeb2"></a>
+
+**Problem:** The service role for AWS CodePipeline must include the `"elasticbeanstalk:DescribeEvents"` action for any pipelines that use AWS Elastic Beanstalk\. Without this permission, AWS Elastic Beanstalk deploy actions hang without failing or indicating an error\. If this action is missing from your service role, then AWS CodePipeline does not have permissions to run the pipeline deployment stage in AWS Elastic Beanstalk on your behalf\.
+
+**Possible fixes:** Review your AWS CodePipeline service role\. If the `"elasticbeanstalk:DescribeEvents"` action is missing, use the steps in [Add Permissions for Other AWS Services](how-to-custom-role.md#how-to-update-role-new-services) to add it using the **Edit Policy** feature in the IAM console\.
+
+After you apply the edited policy, follow the steps in [Start a Pipeline Manually in AWS CodePipeline](pipelines-rerun-manually.md) to manually rerun any pipelines that use Elastic Beanstalk\.
+
+For more information about the default service role, see [Review the Default AWS CodePipeline Service Role Policy](how-to-custom-role.md#view-default-service-role-policy)\.
+
 ## Pipeline Error: A source action returns the insufficient permissions message: "Could not access the AWS CodeCommit repository `repository-name`\. Make sure that the pipeline IAM role has sufficient permissions to access the repository\."<a name="troubleshooting-service-role-permissions"></a>
 
 **Problem:** The service role for AWS CodePipeline does not have sufficient permissions for AWS CodeCommit and likely was created before support for using AWS CodeCommit repositories was added on April 18, 2016\. Customers who created their service role before this date must modify the policy statement for their service role to add the required permissions\. 
@@ -72,7 +83,7 @@ If you are using an IAM user, make sure the AWS profile configured on the instan
 
 If AWS CodePipeline is present in the list of authorized applications for GitHub, you might have exceeded the allowed number of tokens\. To fix this issue, you can manually configure one OAuth token as a personal access token, and then configure all pipelines in your AWS account to use that token\.
 
-It is a security best practice to rotate your personal access token on a regular basis\. For more information, see [Use GitHub and the AWS CodePipeline CLI to Create and Rotate Your GitHub Personal Access Token on a Regular Basis](GitHub-rotate-personal-token-CLI.md)\.
+It is a security best practice to rotate your personal access token on a regular basis\. For more information, see [Use GitHub and the AWS CodePipeline CLI to Create and Rotate Your GitHub Personal Access Token on a Regular Basis](GitHub-rotate-personal-token-CLI.md)\.<a name="acp-github-manual-token"></a>
 
 **To configure a pipeline to use a personal access token from GitHub**
 
