@@ -3,17 +3,12 @@
 Amazon CloudWatch Events is a web service that monitors your AWS resources and the applications you run on AWS\. You can use Amazon CloudWatch Events to detect and react to changes in the state of a pipeline, stage, or action\. Then, based on rules you create, CloudWatch Events invokes one or more target actions when a pipeline, stage, or action enters the state you specify in a rule\. Depending on the type of state change, you might want to send notifications, capture state information, take corrective action, initiate events, or take other actions\.
 
 Amazon CloudWatch Events are composed of:
-
 + **Rules\.** An event in Amazon CloudWatch Events is configured by first creating a rule with a selected service as the event source\. 
-
 + **Targets\.** The new rule receives a selected service as the event target\. For a list of services available as Amazon CloudWatch Events targets, see [What Is Amazon CloudWatch Events](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html)\.
 
 Examples of Amazon CloudWatch Events rules and targets:
-
 + A rule that sends a notification when the instance state changes, where an EC2 instance is the event source and Amazon SNS is the event target\.
-
 + A rule that sends a notification when the build phase changes, where an AWS CodeBuild configuration is the event source and Amazon SNS is the event target\.
-
 + A rule that detects pipeline changes and invokes an AWS Lambda function\.
 
 To configure AWS CodePipeline as an event source:
@@ -29,19 +24,13 @@ To configure AWS CodePipeline as an event source:
 You build rules for detecting and reacting to pipeline state changes using the **Events** window in Amazon CloudWatch\. As you build your rule, the **Event Pattern Preview** box in the console \(or the `--event-pattern` output in the CLI\) displays the event fields, in JSON format\. 
 
 You can configure notifications to be sent when the state changes for:
-
 + Specified pipelines or all your pipelines\. You control this by using `"detail-type":` `"CodePipeline Pipeline Execution State Change"`\.
-
 + Specified stages or all your stages, within a specified pipeline or all your pipelines\. You control this by using `"detail-type":` `"CodePipeline Stage Execution State Change"`\.
-
 + Specified actions or all actions, within a specified stage or all stages, within a specified pipeline or all your pipelines\. You control this by using `"detail-type":` `"CodePipeline Action Execution State Change"`\.
 
 Each type of execution state change event emits notifications with specific message content, where:
-
 + The initial `version` entry shows the version number for the CloudWatch event\.
-
 + The `version` entry under pipeline `detail` shows the pipeline structure version number\.
-
 + The `execution-id` entry under pipeline `detail` shows the execution ID for the pipeline execution that caused the state change\. Refer to the GetPipelineExecution API call in the [AWS CodePipeline API Reference](http://docs.aws.amazon.com/codepipeline/latest/APIReference/)\.
 
 **Pipeline execution state change message content: ** When a pipeline execution starts, it emits an event that sends notifications with the following content\. This example is for the pipeline named `"myPipeline"` in the `us-east-1` region\.
@@ -160,11 +149,8 @@ Valid state values:
 ### Prerequisites<a name="cloudwatch-notifications-prerequisites"></a>
 
 Before you create event rules for use in your AWS CodePipeline operations, you should do the following:
-
 + Complete the CloudWatch Events prerequisites\. For information, see [Amazon CloudWatch Events Prerequisites](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CWE_Prerequisites.html)\.
-
 + Familiarize yourself with events, rules, and targets in CloudWatch Events\. For more information, see [What Is Amazon CloudWatch Events](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html)\.
-
 + Create the target or targets you will use in your event rules, such as an Amazon SNS notification topic\.
 
 ### Send a Notification Whenever Pipeline State Changes \(Console\)<a name="monitoring-cloudwatch-events-about"></a>
@@ -180,17 +166,12 @@ These steps show how to use the CloudWatch console to create a rule to send noti
 1. Choose **Create rule**\. Under **Event source**, from the **Service Name** drop\-down list, choose **CodePipeline**\.
 
 1. From the **Event Type** drop\-down list, choose the level of state change for the notification\.
-
    + For a rule that applies to pipeline\-level events, choose **CodePipeline Pipeline Execution State Change**\.
-
    + For a rule that applies to stage\-level events, choose **CodePipeline Stage Execution State Change**\.
-
    + For a rule that applies to action\-level events, choose **CodePipeline Action Execution State Change**\.
 
 1. Specify the state changes the rule applies to:
-
    + For a rule that applies to all state changes, choose **Any state**\.
-
    + For a rule that applies to some state changes only, choose **Specific state\(s\)**, and then choose one or more state values from the list\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/test-notifications-in-cwe.png)
 
@@ -200,7 +181,6 @@ These steps show how to use the CloudWatch console to create a rule to send noti
 If not otherwise specified, then the event pattern is created for all pipelines/stages/actions and states\.
 
    For more detailed event patterns, you can copy and paste the following example event patterns into the **Edit** window\.
-
    +   
 **Example**  
 
@@ -224,7 +204,6 @@ If not otherwise specified, then the event pattern is created for all pipelines/
        }
      }
      ```
-
    +   
 **Example**  
 
@@ -248,7 +227,6 @@ If not otherwise specified, then the event pattern is created for all pipelines/
        }
      }
      ```
-
    +   
 **Example**  
 
@@ -285,9 +263,7 @@ If not otherwise specified, then the event pattern is created for all pipelines/
 These steps show how to use the CLI to create a CloudWatch Events rule to send notifications of changes in AWS CodePipeline\. 
 
 To use the AWS CLI to create a rule, call the put\-rule command, specifying:
-
 + A name that uniquely identifies the rule you are creating\. This name must be unique across all of the pipelines you create with AWS CodePipeline associated with your AWS account\.
-
 + The event pattern for the source and detail fields used by the rule\. For more information, see [Amazon CloudWatch Events and Event Patterns](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html)\.
 
 **To create a CloudWatch Events rule with AWS CodePipeline as the event source**

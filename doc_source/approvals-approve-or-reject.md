@@ -62,17 +62,11 @@ To use the CLI to respond to an approval action, you must first use the get\-pip
    ```
 
 1. In a plain\-text editor, create a file where you will record the following, in JSON format:
-
    + The name of the pipeline that contains the approval action\.
-
    + The name of the stage that contains the approval action\.
-
    + The name of the approval action\.
-
    + The token value you collected in the previous step\.
-
    + Your response to the action, either Approved or Rejected\. \(The response must be capitalized\.\)
-
    + Your summary comments\.
 
    For the preceding MyFirstPipeline example, your file would look something like this:

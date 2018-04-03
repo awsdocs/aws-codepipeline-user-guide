@@ -1,17 +1,22 @@
 # Tutorial: Create a Simple Pipeline \(Amazon S3 Bucket\)<a name="tutorials-simple-s3"></a>
 
-The easiest way to get started with AWS CodePipeline is to use the **Create Pipeline** wizard in the AWS CodePipeline console to create a simple pipeline\. 
+The easiest way to create a pipeline is to use the **Create pipeline** wizard in the AWS CodePipeline console\. 
 
-In this walkthrough, you will create a two\-stage pipeline that uses a versioned Amazon S3 bucket and AWS CodeDeploy to release a sample application\. After you create this simple pipeline, you will add an additional stage and then disable and enable the transition between stages\.
+In this walkthrough, you create a two\-stage pipeline that uses a versioned Amazon S3 bucket and AWS CodeDeploy to release a sample application\. 
+
+**Note**  
+For pipelines with an Amazon S3 source, an Amazon CloudWatch Events rule detects source changes and then starts your pipeline when changes occur\. When you use the console to create or change a pipeline, the rule and all associated resources are created for you\. If you create or change an Amazon S3 pipeline in the CLI or AWS CloudFormation, you must create the Amazon CloudWatch Events rule, IAM role, and AWS CloudTrail trail manually\.
+
+After you create this simple pipeline, you add an additional stage and then disable and enable the transition between stages\.
 
 **Important**  
-For this tutorial, in addition to completing the steps in [Getting Started with AWS CodePipeline](getting-started-codepipeline.md), you should create an Amazon EC2 instance key pair you will use to connect to the Amazon EC2 instances after they are launched\. To create an Amazon EC2 instance key pair, follow the instructions in [Creating Your Key Pair Using Amazon EC2](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair)\. 
+In addition to completing the steps in [Getting Started with AWS CodePipeline](getting-started-codepipeline.md), you should create an Amazon EC2 instance key pair to connect to the Amazon EC2 instances after they are launched\. To create an Amazon EC2 instance key pair, follow the instructions in [Creating Your Key Pair Using Amazon EC2](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair)\. 
 
 Not what you're looking for? To create a simple pipeline using an AWS CodeCommit branch as a code repository, see [Tutorial: Create a Simple Pipeline \(AWS CodeCommit Repository\)](tutorials-simple-codecommit.md)\.
 
-Before you begin this walkthrough, you should complete the prerequisites in [Getting Started with AWS CodePipeline](getting-started-codepipeline.md)\.
+Before you begin, you should complete the prerequisites in [Getting Started with AWS CodePipeline](getting-started-codepipeline.md)\.
 
-
+**Topics**
 + [Step 1: Create an Amazon S3 Bucket for Your Application](#s3-create-s3-bucket)
 + [Step 2: Create AWS CodeDeploy Resources to Deploy the Sample Application](#s3-create-deployment)
 + [Step 3: Create Your First Pipeline in AWS CodePipeline](#s3-create-pipeline)
@@ -21,7 +26,11 @@ Before you begin this walkthrough, you should complete the prerequisites in [Get
 
 ## Step 1: Create an Amazon S3 Bucket for Your Application<a name="s3-create-s3-bucket"></a>
 
-You can store your source files or applications in any versioned location\. For the purposes of this walkthrough, you will create an Amazon S3 bucket for the sample applications and enable versioning on that bucket\. After you have enabled versioning, you will copy the sample applications to that bucket\. If you want to use an existing Amazon S3 bucket, see [Enable Versioning for a Bucket](http://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html), copy the sample applications to that bucket, and skip ahead to [Step 2: Create AWS CodeDeploy Resources to Deploy the Sample Application](#s3-create-deployment)\. If you want to use a GitHub repository for your source instead of an Amazon S3 bucket, copy the sample applications to that repository, and skip ahead to [Step 2: Create AWS CodeDeploy Resources to Deploy the Sample Application](#s3-create-deployment)\.
+You can store your source files or applications in any versioned location\. In this walkthrough, you create an Amazon S3 bucket for the sample applications and enable versioning on that bucket\. After you have enabled versioning, you copy the sample applications to that bucket\. 
+
+If you want to use an existing Amazon S3 bucket, see [Enable Versioning for a Bucket](http://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html), copy the sample applications to that bucket, and skip ahead to [Step 2: Create AWS CodeDeploy Resources to Deploy the Sample Application](#s3-create-deployment)\. 
+
+If you want to use a GitHub repository instead of an Amazon S3 bucket, copy the sample applications to that repository, and skip ahead to [Step 2: Create AWS CodeDeploy Resources to Deploy the Sample Application](#s3-create-deployment)\.
 
 **To create an Amazon S3 bucket**
 
@@ -31,34 +40,30 @@ You can store your source files or applications in any versioned location\. For 
 
 1. In **Bucket name**, type a name for your bucket, such as **awscodepipeline\-demobucket\-example\-date**\.
 **Note**  
-Because all bucket names in Amazon S3 must be unique, use one of your own, not the name shown in the example\. You can change the example name just by adding the date to it\. Make a note of this name because you will use it for the rest of this tutorial\.
+Because all bucket names in Amazon S3 must be unique, use one of your own, not the name shown in the example\. You can change the example name just by adding the date to it\. Make a note of this name because you need it for the rest of this walkthrough\.
 
-   In the **Region** drop\-down box, choose the region where you will create your pipeline, such as **US West \(Oregon\)**, and then choose **Next**\.
+   In the **Region** drop\-down box, choose the region where you intend to create your pipeline, such as **US West \(Oregon\)**, and then choose **Next**\.
 
 1. Choose **Versioning**, select **Enable versioning**, and then choose **Save**\.
 
    When versioning is enabled, Amazon S3 saves every version of every object in the bucket\.
 
-1. Choose **Next**\. Accept the default permissions to allow your account read/write access on objects\. For more information on Amazon S3 bucket and object permissions, see [Specifying Permissions in a Policy](http://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html)\.
+1. Choose **Next**\. Accept the default permissions to allow your account read/write access on objects\. For more information about Amazon S3 bucket and object permissions, see [Specifying Permissions in a Policy](http://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html)\.
 
 1. Choose **Next**, and then choose **Create bucket**\.
 
-1. Next, you will download a sample from a GitHub repository and save it into a folder or directory on your local computer\.
+1. Next, you download a sample from a GitHub repository and save it into a folder or directory on your local computer\.
 **Important**  
 Do not use the **Clone or download** or **Download ZIP** buttons in the GitHub repositories\. This creates a nested folder structure that does not work with AWS CodeDeploy\.
 
    1. Open the GitHub repository that hosts the sample\.
-
       + If you want to deploy to Amazon Linux instances using AWS CodeDeploy: [https://github.com/awslabs/aws-codepipeline-s3-aws-codedeploy_linux](https://github.com/awslabs/aws-codepipeline-s3-aws-codedeploy_linux)
-
       + If you want to deploy to Windows Server instances using AWS CodeDeploy: [https://github\.com/awslabs/AWSCodePipeline\-S3\-AWSCodeDeploy\_Windows](https://github.com/awslabs/AWSCodePipeline-S3-AWSCodeDeploy_Windows)
 
    1. Choose the **dist** folder\.
 
    1. Choose the file name\.
-
       + If you want to deploy to Amazon Linux instances: `aws-codepipeline-s3-aws-codedeploy_linux.zip`
-
       + If you want to deploy to Windows Server instances: `AWSCodePipeline-S3-AWSCodeDeploy_Windows.zip`
 
    1. Choose **View Raw**, and then save the sample file to your local computer\.
@@ -67,11 +72,11 @@ Do not use the **Clone or download** or **Download ZIP** buttons in the GitHub r
 
 ## Step 2: Create AWS CodeDeploy Resources to Deploy the Sample Application<a name="s3-create-deployment"></a>
 
-You can use Elastic Beanstalk or AWS CodeDeploy to deploy your code for staging or into production\. In this walkthrough, you will use the **Sample deployment wizard** in AWS CodeDeploy to create your deployment resources\.
+You can use Elastic Beanstalk or AWS CodeDeploy to deploy your code for staging or into production\. In this walkthrough, you use the **Sample deployment** wizard in AWS CodeDeploy to create your deployment resources\.
 
 **To create an AWS CodeDeploy automated deployment**
 
-1. Open the AWS CodeDeploy console at [https://console\.aws\.amazon\.com/codedeploy](https://console.aws.amazon.com/codedeploy) in the region where you intend to create your pipeline\. For example, if you intend to create your pipeline in US East \(Ohio\), choose that region in the region selector\.
+1. Open the AWS CodeDeploy console at [https://console\.aws\.amazon\.com/codedeploy](https://console.aws.amazon.com/codedeploy) in the region where you intend to create your pipeline\. 
 
    For more information about the regions and endpoints available for AWS CodePipeline, see [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html#codepipeline_region)\.
 
@@ -85,10 +90,10 @@ You can use Elastic Beanstalk or AWS CodeDeploy to deploy your code for staging 
 
    1. Choose the operating system and Amazon EC2 instance key pair you want to use\. Your choice of operating system should match the sample application you downloaded from GitHub\.
 **Important**  
-If you downloaded `aws-codepipeline-s3-aws-codedeploy_linux.zip`, choose Amazon Linux\.   
-If you downloaded `AWSCodePipeline-S3-AWSCodeDeploy_Windows.zip`, choose Windows Server\.
+If you downloaded `aws-codepipeline-s3-aws-codedeploy_linux.zip`, choose **Amazon Linux**\.   
+If you downloaded `AWSCodePipeline-S3-AWSCodeDeploy_Windows.zip`, choose **Windows Server**\.
 
-   1. From the **Key pair name** drop\-down list, choose the name of the Amazon EC2 instance key pair you will use to connect to the Amazon EC2 instances after they are launched\.
+   1. From the **Key pair name** drop\-down list, choose the name of the Amazon EC2 instance key pair you intend to use to connect to the Amazon EC2 instances after they are launched\.
 
    1. In **Tag key and value**, leave the **Key** name unchanged\. In **Value**, type **CodePipelineDemo**\.
 
@@ -110,7 +115,7 @@ The instances created for you in **Step 3: Configure instances** are listed in t
 1. On the **Select a service role** page, from the **Service role** drop\-down box, choose **Use an existing service role**\. In the **Role name** list, choose the service role you want to use, and then choose **Next**\.
 **Note**  
 If no service roles appear in **Role name**, or if you do not have a service role you want to use, choose **Create a service role** or follow the steps in [Create a Service Role](http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-create-service-role.html)\.  
-The service role you create or use for AWS CodeDeploy is different from the service role you will create for AWS CodePipeline\.
+The service role you create or use for AWS CodeDeploy is different from the service role you create for AWS CodePipeline\.
 
 1. On the **Choose a deployment configuration** page, choose **Next**\.
 
@@ -118,15 +123,15 @@ The service role you create or use for AWS CodeDeploy is different from the serv
 
 1. After the sample application is successfully deployed, verify the deployment in your web browser by going to `http://PublicDNS` for each Amazon EC2 instance in the deployment\. To get the public DNS value for an Amazon EC2 instance, in the Amazon EC2 console, select the instance, and look for the **Public DNS** value on the **Description** tab\.
 
-    The web page will display links to the AWS CodeDeploy documentation\. 
+    The webpage displays links to the AWS CodeDeploy documentation\. 
 **Note**  
-This web page is not the one you will deploy and release with the pipeline you will create in the next section\.
+This webpage is not the one you deploy and release with the pipeline you create in the next section\.
 
 For more information about AWS CodeDeploy, see [Getting Started with AWS CodeDeploy](http://docs.aws.amazon.com/codedeploy/latest/userguide/getting-started.html)\.
 
 ## Step 3: Create Your First Pipeline in AWS CodePipeline<a name="s3-create-pipeline"></a>
 
-In this part of the walkthrough, you will create the pipeline\. The sample will run automatically through the pipeline\.
+In this part of the walkthrough, you create the pipeline\. The sample runs automatically through the pipeline\.
 
 **To create an AWS CodePipeline automated release process**
 
@@ -155,7 +160,11 @@ If you choose another name for your pipeline, be sure to use that name instead o
    s3://awscodepipeline-demobucket-example-date/AWSCodePipeline-S3-AWSCodeDeploy_Windows.zip
    ```
 **Note**  
-If you chose to copy the sample application to a GitHub repository instead of an Amazon S3 bucket, choose **GitHub** from the list of source providers, and then follow the instructions\. For more information, see [Create a Pipeline \(Console\)](pipelines-create.md#pipelines-create-console)\.
+If you copied the sample application to a GitHub repository instead of an Amazon S3 bucket, choose **GitHub** from the list of source providers, and then follow the instructions\. For more information, see [Create a Pipeline \(Console\)](pipelines-create.md#pipelines-create-console)\.
+
+   After you select the source provider, a message displays the Amazon CloudWatch Events rule to be created for this pipeline\. The message also displays the data event to be added to your AWS CloudTrail trail in the following format: `my-bucket/path/to/object.zip`\.
+
+   Under **Change detection options**, leave the defaults\. This allows AWS CodePipeline to use Amazon CloudWatch Events to detect changes in your source bucket\.
 
 1. In **Step 3: Build**, choose **No Build**, and then choose **Next step**\.
 **Note**  
@@ -168,21 +177,25 @@ The name "Staging" is the name given by default to the stage created in the **St
 
 1. In **Step 5: Service Role**, choose **Create role**\. 
 
-   On the IAM console page that describes the AWS\-CodePipeline\-Service role that will be created for you, choose **Allow**\.
+   On the IAM console page that describes the AWS\-CodePipeline\-Service role to be created for you, choose **Allow**\.
 
    On the **Step 5: Service Role** page where AWS\-CodePipeline\-Service appears in **Role name**, choose **Next step**\.
 **Note**  
-Service role creation is only required the first time you create a pipeline in AWS CodePipeline\. If a service role has already been created, you will be able to choose it from the drop\-down list of roles\. Because the drop\-down list will display all IAM service roles associated with your account, if you choose a name different from the default, be sure that the name is recognizable as the service role for AWS CodePipeline\. 
+Service role creation is only required the first time you create a pipeline in AWS CodePipeline\. If a service role has already been created, you can choose it from the drop\-down list of roles\. The drop\-down list displays all IAM service roles associated with your account\. If you choose a name different from the default, be sure that the name is recognizable as the service role for AWS CodePipeline\. 
 
 1. In **Step 6: Review**, review the information, and then choose **Create pipeline**\.
 
-1. The pipeline automatically starts to run\. You can view progress and success and failure messages as the AWS CodePipeline sample deploys a web page to each of the Amazon EC2 instances in the AWS CodeDeploy deployment\.
+1. The pipeline automatically starts to run\. You can view progress and success and failure messages as the AWS CodePipeline sample deploys a webpage to each of the Amazon EC2 instances in the AWS CodeDeploy deployment\.
 
-Congratulations\! You just created a simple pipeline in AWS CodePipeline\. The pipeline has two stages: a source stage named **Source**, which automatically detects changes in the versioned sample application stored in the Amazon S3 bucket and pulls those changes into the pipeline, and a **Staging** stage that deploys those changes to Amazon EC2 instances with AWS CodeDeploy\. Now, verify the results\.
+Congratulations\! You just created a simple pipeline in AWS CodePipeline\. The pipeline has two stages:
++ A source stage named **Source**, which automatically detects changes in the versioned sample application stored in the Amazon S3 bucket and pulls those changes into the pipeline\.
++ A **Staging** stage that deploys those changes to Amazon EC2 instances with AWS CodeDeploy\. 
+
+Now, verify the results\.
 
 **To verify your pipeline ran successfully**
 
-1. View the initial progress of the pipeline\. The status of each stage will change from **No executions yet** to **In Progress**, and then to either **Succeeded** or **Failed**\. The pipeline should complete the first run within a few minutes\.
+1. View the initial progress of the pipeline\. The status of each stage changes from **No executions yet** to **In Progress**, and then to either **Succeeded** or **Failed**\. The pipeline should complete the first run within a few minutes\.
 
 1. After **Succeeded** is displayed for the action status, in the status area for the **Staging** stage, choose **Details**\. 
 
@@ -197,16 +210,16 @@ For more information about stages, actions, and how pipelines work, see [AWS Cod
 
 ## Step 4: Add Another Stage to Your Pipeline<a name="s3-add-stage"></a>
 
-Now add another stage in the pipeline to deploy from staging servers to production servers using AWS CodeDeploy\. First, you will create another deployment group in the CodePipelineDemoApplication in AWS CodeDeploy\. Then you will add a stage that includes an action that uses this deployment group\. To add another stage, you will use the AWS CodePipeline console or the AWS CLI to retrieve and manually edit the structure of the pipeline in a JSON file, and then run the update\-pipeline command to update the pipeline with your changes\.
+Now add another stage in the pipeline to deploy from staging servers to production servers using AWS CodeDeploy\. First, you create another deployment group in the CodePipelineDemoApplication in AWS CodeDeploy\. Then you add a stage that includes an action that uses this deployment group\. To add another stage, you use the AWS CodePipeline console or the AWS CLI to retrieve and manually edit the structure of the pipeline in a JSON file, and then run the update\-pipeline command to update the pipeline with your changes\.
 
-
+**Topics**
 + [Create a Second Deployment Group in AWS CodeDeploy](#s3-add-stage-part-1)
 + [Add the Deployment Group as Another Stage in Your Pipeline](#s3-add-stage-part-2)
 
 ### Create a Second Deployment Group in AWS CodeDeploy<a name="s3-add-stage-part-1"></a>
 
 **Note**  
-In this part of the walkthrough, you will create a second deployment group, but deploy to the same Amazon EC2 instances as before\. This is for demonstration purposes only\. It is purposely designed to fail in order to show you how errors are displayed in AWS CodePipeline\.
+In this part of the walkthrough, you create a second deployment group, but deploy to the same Amazon EC2 instances as before\. This is for demonstration purposes only\. It is purposely designed to fail in order to show you how errors are displayed in AWS CodePipeline\.
 
 **To create a second deployment group in AWS CodeDeploy**
 
@@ -226,13 +239,13 @@ In this part of the walkthrough, you will create a second deployment group, but 
 
 Now that you have another deployment group, you can add a stage that uses this deployment group to deploy to the same Amazon EC2 instances you used earlier\. You can use the AWS CodePipeline console or the AWS CLI to add this stage\. 
 
-
+**Topics**
 + [Create a Third Stage \(Console\)](#s3-add-stage-part-2-console)
 + [Create a Third Stage \(CLI\)](#s3-add-stage-part-2-cli)
 
 #### Create a Third Stage \(Console\)<a name="s3-add-stage-part-2-console"></a>
 
-You can use the AWS CodePipeline console to add a new stage that uses the new deployment group\. Because this deployment group is deploying to the Amazon EC2 instances you've already used, the deploy action in this stage will fail\. 
+You can use the AWS CodePipeline console to add a new stage that uses the new deployment group\. Because this deployment group is deploying to the Amazon EC2 instances you've already used, the deploy action in this stage fails\. 
 
 1. Sign in to the AWS Management Console and open the AWS CodePipeline console at [http://console\.aws\.amazon\.com/codepipeline](http://console.aws.amazon.com/codepipeline)\.
 
@@ -249,19 +262,19 @@ You can use the AWS CodePipeline console to add a new stage that uses the new de
 
 1. In the **Action category** drop\-down list, choose **Deploy**\. 
 
-   In **Action name**, type ***Deploy\-Second\-Deployment***\. 
+   In **Action name**, type ****Deploy\-Second\-Deployment****\. 
 
    In **Deployment provider**, choose **AWS CodeDeploy** from the drop\-down list\. 
 
-   In the AWS CodeDeploy section, in **Application name**, choose **CodePipelineDemoApplication** from the drop\-down list, as you did when you created the pipeline\. In **Deployment group**, choose the deployment group you just created, **CodePipelineProductionFleet**\. In the **Input artifacts** section, type **MyApp** in **Input artifacts \#1**, and then choose **Add action**\. 
+   In the AWS CodeDeploy section, in **Application name**, choose **CodePipelineDemoApplication**from the drop\-down list, as you did when you created the pipeline\. In **Deployment group**, choose the deployment group you just created, **CodePipelineProductionFleet**\. In the **Input artifacts** section, type **MyApp** in **Input artifacts \#1**, and then choose **Add action**\. 
 **Note**  
-The name of the input artifact, **MyApp**, was created automatically for you in the **Create pipeline** wizard as the output artifact of the source action\. Every action has an input artifact \(the artifact the action works on\), an output artifact \(the product or result of the action\), or both, depending on the action type\. In this example, the deploy action inputs the output of the source action in the source stage, `MyApp`, and deploys it\. Because the action configured for the previous stage \(Staging\) has already deployed the application to the same Amazon EC2 instances, this action will fail\. For more information about input and output artifacts and the structure of pipelines, see [AWS CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
+The name of the input artifact, **MyApp**, was created automatically for you in the **Create pipeline** wizard as the output artifact of the source action\. Every action has an input artifact \(the artifact the action works on\), an output artifact \(the product or result of the action\), or both, depending on the action type\. In this example, the deploy action inputs the output of the source action in the source stage, `MyApp`, and deploys it\. Because the action configured for the previous stage \(Staging\) has already deployed the application to the same Amazon EC2 instances, this action fails\. For more information about input and output artifacts and the structure of pipelines, see [AWS CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
 
 1. On the **Edit** page, choose **Save pipeline changes**\. In the **Save pipeline changes** dialog box, choose **Save and continue**\.
 
-1. Although the new stage has been added to your pipeline, a status of **No executions yet** is displayed because no changes have triggered another run of the pipeline\. You will have to manually rerun the last revision to see how the pipeline runs now that it has been edited\. On the pipeline details page, choose **Release change**, and then choose **Release** when prompted\. This will run the most recent revision available in each source location specified in a source action through the pipeline\. 
+1. Although the new stage has been added to your pipeline, a status of **No executions yet** is displayed because no changes have triggered another run of the pipeline\. You have to manually rerun the last revision to see how the edited pipeline runs\. On the pipeline details page, choose **Release change**, and then choose **Release** when prompted\. This runs the most recent revision available in each source location specified in a source action through the pipeline\. 
 
-   Alternatively, to use the AWS CLI to rerun the pipeline, from a terminal on your local Linux, macOS, or Unix machine, or a command prompt on your local Windows machine, run the start\-pipeline\-execution command, specifying the name of the pipeline\. This will run the application in your source bucket through the pipeline for a second time\.
+   Alternatively, to use the AWS CLI to rerun the pipeline, from a terminal on your local Linux, macOS, or Unix machine, or a command prompt on your local Windows machine, run the start\-pipeline\-execution command, specifying the name of the pipeline\. This runs the application in your source bucket through the pipeline for a second time\.
 
    ```
    aws codepipeline start-pipeline-execution --name MyFirstPipeline
@@ -269,12 +282,12 @@ The name of the input artifact, **MyApp**, was created automatically for you in 
 
    This command returns a `pipelineExecutionId` object\.
 
-1. Return to the AWS CodePipeline console and choose **MyFirstPipeline** in the list of pipelines to open the view page for that pipeline\.
+1. Return to the AWS CodePipeline console and in the list of pipelines, choose **MyFirstPipeline** to open the view page\.
 
    The pipeline shows three stages and the state of the artifact running through those three stages\. It might take up to five minutes for the pipeline to run through all stages\. You'll see the deployment succeeds on the first two stages, just as before, but the **Production** stage shows the **Deploy\-Second\-Deployment** action failed\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-failed-third-stage.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
-1. In the **Deploy\-Second\-Deployment** action, choose **Details**\. In the **Action execution failed **dialog box, choose **Link to execution details**\. You will be redirected to the details page for the AWS CodeDeploy deployment\. In this case, the failure is the result of the first instance group deploying to all of the Amazon EC2 instances, leaving no instances for the second deployment group\.
+1. In the **Deploy\-Second\-Deployment** action, choose **Details**\. In the **Action execution failed **dialog box, choose **Link to execution details**\. You are redirected to the details page for the AWS CodeDeploy deployment\. In this case, the failure is the result of the first instance group deploying to all of the Amazon EC2 instances, leaving no instances for the second deployment group\.
 **Note**  
 This failure is by design, to demonstrate what happens when there is a failure in a pipeline stage\.
 
@@ -328,11 +341,11 @@ You can pipe the JSON directly into a file with the get\-pipeline command as fol
    aws codepipeline get-pipeline --name MyFirstPipeline >pipeline.json
    ```
 
-1. Copy the **Staging** stage section and paste it after the first two stages\. Because it is a deploy stage, just like the **Staging** stage, you will use it as a template for the third stage\. 
+1. Copy the **Staging** stage section and paste it after the first two stages\. Because it is a deploy stage, just like the **Staging** stage, you use it as a template for the third stage\. 
 
 1. Change the name of the stage and the deployment group details, and then save the file\. 
 
-   The following example shows the JSON you will add to the pipeline\.json file after the **Staging** stage\. Edit the emphasized elements with new values\. Remember to include a comma to separate the **Staging** and **Production** stage definitions\.
+   The following example shows the JSON you add to the pipeline\.json file after the **Staging** stage\. Edit the emphasized elements with new values\. Remember to include a comma to separate the **Staging** and **Production** stage definitions\.
 
    ```
    ,
@@ -364,16 +377,16 @@ You can pipe the JSON directly into a file with the get\-pipeline command as fol
    ```
 
 1. Run the update\-pipeline command, specifying the pipeline JSON file, similar to the following:
-**Important**  
-Be sure to include `file://` before the file name\. It is required in this command\.
 
    ```
    aws codepipeline update-pipeline --cli-input-json file://pipeline.json
    ```
 
    This command returns the entire structure of the updated pipeline\.
+**Important**  
+Be sure to include `file://` before the file name\. It is required in this command\.
 
-1.  Run the start\-pipeline\-execution command, specifying the name of the pipeline\. This will run the application in your source bucket through the pipeline for a second time\.
+1.  Run the start\-pipeline\-execution command, specifying the name of the pipeline\. This runs the application in your source bucket through the pipeline for a second time\.
 
    ```
    aws codepipeline start-pipeline-execution --name MyFirstPipeline
@@ -381,12 +394,12 @@ Be sure to include `file://` before the file name\. It is required in this comma
 
    This command returns a `pipelineExecutionId` object\.
 
-1. Open the AWS CodePipeline console and choose **MyFirstPipeline** from the list of pipelines\.
+1. Open the AWS CodePipeline console and choose **MyFirstPipeline**from the list of pipelines\.
 
    The pipeline shows three stages and the state of the artifact running through those three stages\. It might take up to five minutes for the pipeline to run through all stages\. Although the deployment succeeds on the first two stages, just as before, the **Production** stage shows that the **Deploy\-Second\-Deployment** action failed\.   
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-failed-third-stage.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
-1. In the **Deploy\-Second\-Deployment** action, choose **Details** to see details of the failure\. You will be redirected to the details page for the AWS CodeDeploy deployment\. In this case, the failure is the result of the first instance group deploying to all of the Amazon EC2 instances, leaving no instances for the second deployment group\. 
+1. In the **Deploy\-Second\-Deployment** action, choose **Details** to see details of the failure\. You are redirected to the details page for the AWS CodeDeploy deployment\. In this case, the failure is the result of the first instance group deploying to all of the Amazon EC2 instances, leaving no instances for the second deployment group\. 
 **Note**  
 This failure is by design, to demonstrate what happens when there is a failure in a pipeline stage\.
 
@@ -396,7 +409,7 @@ You can enable or disable the transition between stages in a pipeline\. Disablin
 
 **To disable and enable transitions between stages in an AWS CodePipeline pipeline**
 
-1. Open the AWS CodePipeline console and choose **MyFirstPipeline** from the list of pipelines\.
+1. Open the AWS CodePipeline console and choose **MyFirstPipeline**from the list of pipelines\.
 
 1. On the details page for the pipeline, choose the arrow that indicates the transition between the second stage, **Staging**, and the third stage that you added in the previous section, **Production**\.
 
@@ -405,17 +418,17 @@ You can enable or disable the transition between stages in a pipeline\. Disablin
    The arrow between stages displays an icon and color change indicating that the transition has been disabled\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-disabled-transition.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
-1. Upload your sample again to the Amazon S3 bucket\. Because the bucket is versioned, this change will automatically start the pipeline\. For information, see [Upload the sample application](#getting-started-upload-s3)\.
+1. Upload your sample again to the Amazon S3 bucket\. Because the bucket is versioned, this change starts the pipeline\. For information, see [](#getting-started-upload-s3)\.
 
-1. Return to the details page for your pipeline and watch the status of the stages\. The pipeline view will change to show progress and success on the first two stages, but no changes will occur on the third stage\. This process might take a few minutes\.
+1. Return to the details page for your pipeline and watch the status of the stages\. The pipeline view changes to show progress and success on the first two stages, but no changes occur on the third stage\. This process might take a few minutes\.
 
-1. Enable the transition by choosing the arrow that indicates the transition has been disabled between the two stages\. In the **Enable transition** dialog box, choose **Enable**\. The stage will begin running in a few minutes and attempt to process the artifact that has already been run through the first two stages of the pipeline\.
+1. Enable the transition by choosing the arrow that indicates the transition has been disabled between the two stages\. In the **Enable transition** dialog box, choose **Enable**\. The stage starts running in a few minutes and attempts to process the artifact that has already been run through the first two stages of the pipeline\.
 **Note**  
-If you want this third stage to succeed, edit the CodePipelineProductionFleet deployment group before you enable the transition, and specify a different set of Amazon EC2 instances where you will deploy the application\. For more information about how to do this, see [Change Deployment Group Settings](http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-change-deployment-group-settings.html)\. If you create more Amazon EC2 instances, you may incur additional costs\. 
+If you want this third stage to succeed, edit the CodePipelineProductionFleet deployment group before you enable the transition, and specify a different set of Amazon EC2 instances where the application is deployed\. For more information about how to do this, see [Change Deployment Group Settings](http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-change-deployment-group-settings.html)\. If you create more Amazon EC2 instances, you may incur additional costs\. 
 
 ## Step 6: Clean Up Resources<a name="s3-clean-up"></a>
 
-You can use some of the resources you created in this walkthrough for the tutorial, [Tutorial: Create a Four\-Stage Pipeline](tutorials-four-stage-pipeline.md)\. For example, you can reuse the AWS CodeDeploy application and deployment\. However, after you complete this and any other tutorials, you should delete the pipeline and the resources it uses, so that you will not be charged for the continued use of those resources\. First, delete the pipeline, then the AWS CodeDeploy application and its associated Amazon EC2 instances, and finally, the Amazon S3 bucket\.
+You can use some of the resources you created in this walkthrough for the tutorial, [Tutorial: Create a Four\-Stage Pipeline](tutorials-four-stage-pipeline.md)\. For example, you can reuse the AWS CodeDeploy application and deployment\. However, after you complete this and any other tutorials, you should delete the pipeline and the resources it uses, so that you are not be charged for the continued use of those resources\. First, delete the pipeline, then the AWS CodeDeploy application and its associated Amazon EC2 instances, and finally, the Amazon S3 bucket\.
 
 **To clean up the resources used in this tutorial**
 

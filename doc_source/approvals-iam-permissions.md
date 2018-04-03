@@ -34,9 +34,7 @@ Make sure you are signed in to the AWS Management Console with the same account 
 1. On the summary page, choose the **Permissions** tab, and expand the **Inline Policies** section\.
 
 1. Do one of the following:
-
    + If you chose **Groups**, now choose **Create Group Policy**\. If you chose **Users**, now choose **Create User Policy**\.
-
    + If no inline policies have been created yet, choose **click here**\.
 
 1. Choose **Custom Policy**, and then choose **Select**\. 

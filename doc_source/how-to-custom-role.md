@@ -7,7 +7,7 @@ AWS CodePipeline uses this service role when processing revisions through the st
 **Important**  
 Modifying a policy statement or attaching another policy to the role can prevent your pipelines from functioning\. Be sure that you understand the implications before you modify the service role for AWS CodePipeline in any way\. Make sure you test your pipelines after making any changes to the service role\.
 
-
+**Topics**
 + [Review the Default AWS CodePipeline Service Role Policy](#view-default-service-role-policy)
 + [Add Permissions for Other AWS Services](#how-to-update-role-new-services)
 + [Remove Permissions for Unused AWS Services](#remove-permissions-from-policy)

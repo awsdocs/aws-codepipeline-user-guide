@@ -17,21 +17,13 @@ aws codepipeline command-name help
 ```
 
 To begin learning how to use the commands in the AWS CodePipeline extension to the AWS CLI, go to one or more of the following sections:
-
 + [Create a Custom Action \(CLI\)](actions-create-custom-action.md#actions-create-custom-action-cli)
-
 + [Create a Pipeline \(CLI\)](pipelines-create.md#pipelines-create-cli)
-
 + [Delete a Pipeline \(CLI\)](pipelines-delete.md#pipelines-delete-cli)
-
 + [Disable or Enable Transitions \(CLI\)](transitions.md#transitions-disable-enable-cli)
-
 + [View Pipeline Details and History \(CLI\)](pipelines-view.md#pipelines-view-cli)
-
 + [Retry Failed Actions \(CLI\)](actions-retry.md#actions-retry-cli)
-
 + [Start a Pipeline Manually \(CLI\)](pipelines-rerun-manually.md#pipelines-rerun-manually-cli)>
-
 + [Edit a Pipeline \(AWS CLI\)](pipelines-edit.md#pipelines-edit-cli)
 
 You can also view examples of how to use most of these commands in [AWS CodePipeline Tutorials](tutorials.md)\.

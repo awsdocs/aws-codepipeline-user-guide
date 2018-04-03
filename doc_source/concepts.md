@@ -2,7 +2,7 @@
 
 You will find modeling and configuring your automated release process easier if you understand the concepts and terms used in AWS CodePipeline and some of the underlying concepts of release automation\. Here are some concepts to know about as you use AWS CodePipeline\.
 
-
+**Topics**
 + [Continuous Delivery and Integration with AWS CodePipeline](#concepts-continuous-delivery-integration)
 + [How AWS CodePipeline Works](#concepts-how-it-works)
 
@@ -23,48 +23,33 @@ AWS CodePipeline helps you create and manage your release process workflow with 
 The following diagram and accompanying descriptions introduce you to terms unique to AWS CodePipeline and how these concepts relate to each other:
 
 ![\[A pipeline contains stages that contain actions, separated by transitions that can be disabled and enabled.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/pipeline-elements-workflow.png)![\[A pipeline contains stages that contain actions, separated by transitions that can be disabled and enabled.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[A pipeline contains stages that contain actions, separated by transitions that can be disabled and enabled.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
-
 + You can use the AWS CodePipeline console, the AWS Command Line Interface \(AWS CLI\), the AWS SDKs, or any combination of these to create and manage your pipelines\. 
 
   When you use the console to create your first pipeline, AWS CodePipeline creates an Amazon S3 bucket in the same region as the pipeline to store items for all pipelines in that region associated with your account\. Every time you use the console to create another pipeline in that region, AWS CodePipeline creates a folder for that pipeline in the bucket\. It uses that folder to store artifacts for your pipeline as the automated release process runs\. This bucket is named codepipeline\-*region*\-*1234567EXAMPLE*, where *region* is the AWS region in which you created the pipeline, and *1234567EXAMPLE* is a ten\-digit random number that ensures the bucket name is unique\. 
 
   If you use the AWS CLI to create a pipeline, you can store the artifacts for that pipeline in any Amazon S3 bucket as long as that bucket is in the same AWS region as the pipeline\. You might do this if you are concerned about exceeding the limits of Amazon S3 buckets allowed for your account\.
-
 + A *revision* is a change made to a source that is configured in a source action for AWS CodePipeline, such as a pushed commit to a GitHub repository or an AWS CodeCommit repository, or an update to a file in a versioned Amazon S3 bucket\. Each revision is run separately through the pipeline\. Multiple revisions can be processed in the same pipeline, but each stage can process only one revision at a time\. Revisions are run through the pipeline as soon as a change is made in the location specified in the source stage of the pipeline\.
 **Note**  
 If a pipeline contains multiple source actions, all of them run again, even if a change is detected for one source action only\. 
-
 + AWS CodePipeline breaks up your workflow into a series of *stages*\. For example, there might be a build stage, where code is built and tests are run\. There are also deployment stages, where code updates are deployed to runtime environments\. You can configure multiple parallel deployments to different environments in the same deployment stage\. You can label each stage in the release process for better tracking, control, and reporting \(for example "Source," "Build," and "Staging"\)\. 
 
   Each stage in a pipeline has a unique name, and contains a sequence of actions as part of its workflow\. A stage can process only one revision at a time\. A revision must run through a stage before the next revision can run through it\. All actions configured for a stage must be completed successfully before the stage is considered complete\. After a stage is complete, the pipeline transitions the revision and its artifacts created by the actions in that stage to the next stage in the pipeline\. You can manually disable and enable these transitions\. For more information about stage requirements and structure, see [Pipeline and Stage Structure Requirements in AWS CodePipeline](reference-pipeline-structure.md#pipeline-requirements)\.
-
 + Every stage contains at least one *action*, which is some kind of task performed on the artifact\. Pipeline actions occur in a specified order, in sequence or in parallel, as determined in the configuration of the stage\. For example, a deployment stage might contain a deploy action, which deploys code to one or more staging servers\. You can configure a stage with a single action to start, and then add actions to that stage if needed\. For more information, see [Edit a Pipeline in AWS CodePipeline](pipelines-edit.md) and [Action Structure Requirements in AWS CodePipeline](reference-pipeline-structure.md#action-requirements)\. 
 
   After a revision starts running through a pipeline, AWS CodePipeline copies files or changes that will be worked on by the actions and stages in the pipeline to the Amazon S3 bucket\. These objects are referred to as *artifacts*, and might be the source for an action \(*input artifacts*\) or the output of an action \(*output artifacts*\)\. An artifact can be worked on by more than one action\.
-
 + Every action has a type\. Depending on the type, the action might have one or both of the following:
-
   + An input artifact, which is the artifact it consumes or works on over the course of the action run\.
-
   + An output artifact, which is the output of the action\.
 
   Every output artifact in the pipeline must have a unique name\. Every input artifact for an action must match the output artifact of an action earlier in the pipeline, whether that action is immediately before the action in a stage or runs in a stage several stages earlier\. The following illustration demonstrates how input artifacts and output artifacts are produced and consumed in a pipeline:  
 ![\[Input artifacts and output artifacts are produced and consumed in a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-artifactsexplained.png)![\[Input artifacts and output artifacts are produced and consumed in a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Input artifacts and output artifacts are produced and consumed in a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
-
 + A *transition* is the act of a revision in a pipeline continuing from one stage to the next in a workflow\. In the AWS CodePipeline console, transition arrows connect stages together to show the order in which the stages happen\. When a stage is complete, by default the revision will transition to the next stage in the pipeline\. You can disable a transition from one stage to the next\. When you do, your pipeline will run all actions in the stages before that transition, but will not run any stages or actions after that stage until you enable that transition\. This is a simple way to prevent changes from running through the entire pipeline\. After you enable the transition, the most recent revision that ran successfully through the previous stages will be run through the stages after that transition\. If all transitions are enabled, the pipeline runs *continuously*\. Every revision is deployed as part of a successful run through the pipeline \(continuous deployment\)\.
-
 + Because only one revision can run through a stage at a time, AWS CodePipeline batches any revisions that have completed the previous stage until the next stage is available\. If a more recent revision completes running through the stage, the batched revision is replaced by the most current revision\. 
-
 + An *approval action* prevents a pipeline from transitioning to the next action until permission is granted \(for example, by receiving manual approval from an authorized IAM user\)\. You might use an approval action when you want the pipeline to continue only after a successful code review, for example, or you want to control the time at which a pipeline transitions to a final Production stage\. In this case, you can add a manual approval action to a stage just before Production, and approve it yourself when you're ready to release changes to the public\. 
-
 + A *failure* is an action in a stage that is not completed successfully\. If one action fails in a stage, the revision does not transition to the next action in the stage or the next stage in the pipeline\. If a failure occurs, no more transitions occur in the pipeline for that revision\. AWS CodePipeline pauses the pipeline until one of the following occurs: 
-
   + You manually retry the stage that contains the failed actions\.
-
   + You start the pipeline again for that revision\.
-
   + Another revision is made in a source stage action\.
-
 + A pipeline starts automatically when a change is made in the source location \(as defined in a source action in a pipeline\), or when you manually start the pipeline\. You can also set up a rule in Amazon CloudWatch to automatically start a pipeline when events you specify occur\. After a pipeline starts, the revision runs through every stage and action in the pipeline\. You can view details of the last run of each action in a pipeline on the pipeline view page\.
 **Note**  
 If you create or edit a pipeline in the console that has an AWS CodeCommit source repository, AWS CodePipeline uses Amazon CloudWatch Events to detect changes in your repository and start your pipeline when a change occurs\.

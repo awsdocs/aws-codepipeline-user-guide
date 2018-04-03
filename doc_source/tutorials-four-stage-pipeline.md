@@ -6,7 +6,7 @@ Before you can create this pipeline, you must configure the required resources\.
 
 Before you begin this tutorial, you should have already completed the general prerequisites in [Getting Started with AWS CodePipeline](getting-started-codepipeline.md)\.
 
-
+**Topics**
 + [Step 1: Set Up Prerequisites](#tutorials-four-stage-pipeline-prerequisites)
 + [Step 2: Create a Pipeline in AWS CodePipeline](#tutorials-four-stage-pipeline-pipeline-create)
 + [Step 3: Add Another Stage to Your Pipeline](#tutorials-four-stage-pipeline-add-stage)
@@ -23,7 +23,7 @@ You are familiar with installing and administering Jenkins and creating Jenkins 
 You have installed Rake and the Haml gem for Ruby on the same computer or instance that hosts your Jenkins project\.
 You have set the required system environment variables so that Rake commands can be run from the terminal or command line \(for example, on Windows systems, modifying the PATH variable to include the directory where you installed Rake\)\.
 
-
+**Topics**
 + [Copy or Clone the Sample into a GitHub Repository](#tutorials-four-stage-pipeline-prerequisites-github)
 + [Create an IAM Role to Use for Jenkins Integration](#tutorials-four-stage-pipeline-prerequisites-jenkins-iam-role)
 + [Install and Configure Jenkins and the AWS CodePipeline Plugin for Jenkins](#tutorials-four-stage-pipeline-prerequisites-jenkins-configure)
@@ -33,9 +33,7 @@ You have set the required system environment variables so that Rake commands can
 **Clone the sample and push to a GitHub repository**
 
 1. Download the sample code from the GitHub repository, or clone the repositories to your local computer\. There are two sample packages: 
-
    + If you will be deploying your sample to Amazon Linux, RHEL, or Ubuntu Server instances, choose [aws\-codepipeline\-jenkins\-aws\-codedeploy\_linux\.zip](https://github.com/awslabs/aws-codepipeline-jenkins-aws-codedeploy_linux)\. 
-
    + If you will be deploying your sample to Windows Server instances, choose [AWSCodePipeline\-Jenkins\-AWSCodeDeploy\_Windows\.zip](https://github.com/awslabs/AWSCodePipeline-Jenkins-AWSCodeDeploy_windows)\.
 
 1. From the repository, choose **Fork** to clone the sample repo into a repo in your Github account\. For more information, see the [GitHub documentation](https://help.github.com/articles/create-a-repo/)\.
@@ -136,7 +134,7 @@ Do not provide your AWS credentials on the GitHub website\.
 
     After you have connected to GitHub, choose the repository and branch where you pushed the sample you want to use for this tutorial \(aws\-codepipeline\-jenkins\-aws\-codedeploy\_linux\.zip or AWSCodePipeline\-Jenkins\-AWSCodeDeploy\_Windows\.zip\), and then choose **Next step**\.
 **Note**  
-There is a limit to the number of OAuth tokens you can use in GitHub for a particular application, such as AWS CodePipeline\. Within a single AWS account, AWS CodePipeline will automatically update existing equivalent OAuth tokens to in an attempt to avoid exceeding this limit\. If you exceed this limit as a result of connecting many AWS accounts with the same GitHub user account, you can use personal tokens\. For more information, see [To configure a pipeline to use a personal access token from GitHub](troubleshooting.md#troubleshooting-gs2)\.
+In GitHub, there is a limit to the number of OAuth tokens you can use for an application, such as AWS CodePipeline\. If you exceed this limit, retry the connection to allow AWS CodePipeline to reconnect by reusing existing tokens\. For more information, see [To configure a pipeline to use a personal access token from GitHub](troubleshooting.md#troubleshooting-gs2)\.
 
 1. In **Step 3: Build**, choose **Add Jenkins**\. In **Provider name**, type the name of the action you provided in the AWS CodePipeline Plugin for Jenkins \(for example *MyJenkinsProviderName*\)\. This name must exactly match the name in the AWS CodePipeline Plugin for Jenkins\. In **Server URL**, type the URL of the Amazon EC2 instance where Jenkins is installed\. In **Project name**, type the name of the project you created in Jenkins, such as *MyDemoProject*, and then choose **Next step**\.
 
@@ -162,7 +160,7 @@ If you did not want to add another stage to your pipeline, you could add a test 
 
 ### Add a Test Stage to Your Pipeline<a name="tutorials-four-stage-pipeline-add-stage-console"></a>
 
-
+**Topics**
 + [Look Up the IP Address of an Instance](#tutorials-four-stage-pipeline-instance-ip-lookup)
 + [Create a Jenkins project for Testing the Deployment](#tutorials-four-stage-pipeline-create-jenkins-project)
 + [Create a Fourth Stage](#tutorials-four-stage-pipeline-create-fourth-stage)

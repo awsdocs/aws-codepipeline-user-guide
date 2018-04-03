@@ -11,25 +11,19 @@ After you complete this tutorial, you should have enough practice with AWS CodeC
 AWS CodePipeline uses Amazon CloudWatch Events to detect changes in your AWS CodeCommit source repository and branch\. Using Amazon CloudWatch Events to automatically start your pipeline when changes occur is the default for this source type\. When you create a pipeline in this wizard using the console, the rule is created\.
 
 Before you begin, make sure you have completed the following tasks:
-
 + [Configure an IAM user](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html)
-
 + [Install and configure the AWS CLI](http://docs.aws.amazon.com/cli/latest/userguide/installing.html)
-
 + [Create your key pair using Amazon EC2](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair)
 
 In addition, make sure to complete these service\-specific tasks:
-
 + [AWS CodeCommit](http://docs.aws.amazon.com/codecommit/latest/userguide/setting-up.html): Install Git and configure credentials 
-
 +  [AWS CodeDeploy](http://docs.aws.amazon.com/codedeploy/latest/userguide/getting-started-setup.html): Create an IAM instance profile and an AWS CodeDeploy service role
-
 +  [AWS CodePipeline](http://docs.aws.amazon.com/codepipeline/latest/userguide/setting-up.html#setting-up-assign-permissions): Assign AWS CodePipeline permissions to the IAM user role
 
 **Note**  
 If you have already completed the [Tutorial: Create a Simple Pipeline \(Amazon S3 Bucket\)](tutorials-simple-s3.md) tutorial, but not yet cleaned up its resources, you will need to create different names for many of the resources you used in that tutorial\. For example, instead of **MyFirstPipeline**, you might name your pipeline **MySecondPipeline**\.
 
-
+**Topics**
 + [Step 1: Create an AWS CodeCommit Repository and Local Repo](#codecommit-create-repository)
 + [Step 2: Add Sample Code to Your AWS CodeCommit Repository](#codecommit-add-code)
 + [Step 3: Create an Amazon EC2 Instance and Install the AWS CodeDeploy Agent](#codecommit-create-deployment)
@@ -53,9 +47,7 @@ South America \(São Paulo\) Region \(sa\-east\-1\)
 Be sure to complete all of the steps in this tutorial with one of these AWS regions selected\.
 
 Follow the first two procedures in the [Git with AWS CodeCommit Tutorial](http://docs.aws.amazon.com/codecommit/latest/userguide/getting-started.html) in the *AWS CodeCommit User Guide*:
-
 + [Step 1: Create an AWS CodeCommit Repository](http://docs.aws.amazon.com/codecommit/latest/userguide/getting-started.html#getting-started-create-repo)
-
 + [Step 2: Create a Local Repo](http://docs.aws.amazon.com/codecommit/latest/userguide/getting-started.html#getting-started-set-up-folders)
 **Note**  
 For information about connecting to a local repo you create, see [Connect to an AWS CodeCommit Repository](http://docs.aws.amazon.com/codecommit/latest/userguide/how-to-connect.html)\.
@@ -67,7 +59,6 @@ After you complete these two procedures, return to this page and continue to the
 In this step, you will download code for a sample application that was created for an AWS CodeDeploy sample walkthrough, and add it to your AWS CodeCommit repository\.
 
 1. Download the following file: 
-
    +  [SampleApp\_Linux\.zip](https://s3.amazonaws.com/aws-codedeploy-us-east-1/samples/latest/SampleApp_Linux.zip)\. 
 
 1. Unzip the files from [SampleApp\_Linux\.zip](https://s3.amazonaws.com/aws-codedeploy-us-east-1/samples/latest/SampleApp_Linux.zip) into the local directory you created in the previous procedure \(for example, `/tmp/my-demo-repo` or `c:\temp\my-demo-repo`\)\. 
@@ -130,11 +121,8 @@ These basic configurations, called *Amazon Machine Images \(AMIs\)*, serve as te
 1. On the **Step 2: Choose an Instance Type** page, choose the free tier eligible `t2.micro` type as the hardware configuration for your instance, and then choose **Next: Configure Instance Details**\.
 
 1. On the **Step 3: Configure Instance Details** page, do the following:
-
    + In **Number of instances**, enter `1`\.
-
    + In **Auto\-assign Public IP**, choose **Enable**\.
-
    + In **IAM role**, choose an IAM role that has been configured for use as an IAM instance profile for use with AWS CodeDeploy\. If you do not have an IAM instance profile, choose **Create new IAM role** and follow the instructions in [Create an IAM Instance Profile for Your Amazon EC2 Instances](http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-create-iam-instance-profile.html)\.
 **Note**  
 For the purposes of this tutorial, you can use the following unrestricted policy in your IAM instance profile for AWS CodeDeploy\. For pipelines you use in your development workflows, you might create a more restrictive bucket policy\.  
@@ -177,19 +165,14 @@ For the purposes of this tutorial, you can use the following unrestricted policy
 The **Key** and **Value** boxes are case\-sensitive\.
 
 1. On the **Step 6: Configure Security Group** page, do the following: 
-
    + Next to **Assign a security group**, choose **Create a new security group**\.
-
    + In the row for **SSH**, under **Source**, choose **My IP**\.
-
    + Choose **Add Rule**, choose **HTTP**, and then under **Source**, choose **My IP**\.
 
 1. Choose **Review and Launch**\.
 
 1. On the **Review Instance Launch** page, choose **Launch**, and then do one of the following when prompted for a key pair:
-
    + If you already have a key pair to use with Amazon EC2 instances, select **Choose an existing key pair**, and then select your key pair\.
-
    + If you have not created a key pair yet, select **Create a new key pair**, enter a name for the key pair, and then choose **Download Key Pair**\. This is your only chance to save the private key file\. Be sure to download it\. Save the private key file in a safe place\. You'll need to provide the name of your key pair when you launch an instance; you'll need to provide the corresponding private key each time you connect to the instance\. For more information, see [Amazon EC2 Key Pairs](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)\.
 **Warning**  
 Don't select the **Proceed without a key pair** option\. If you launch your instance without a key pair, you can't connect to it if you need to troubleshoot issues with the AWS CodeDeploy agent\.
@@ -423,9 +406,7 @@ For more information about stages, actions, and how pipelines work, see [AWS Cod
 ## Step 7: Optional Stage Management Tasks<a name="codecommit-optional-tasks"></a>
 
 If you want to gain more experience working with stages before you end the tutorial, you can follow two additional procedures in the [Tutorial: Create a Simple Pipeline \(Amazon S3 Bucket\)](tutorials-simple-s3.md)\.
-
 + [Step 4: Add Another Stage to Your Pipeline](tutorials-simple-s3.md#s3-add-stage)
-
 + [Disable and Enable Transitions Between Stages in AWS CodePipeline](tutorials-simple-s3.md#s3-configure-transitions)
 **Note**  
 In step 4 of the second procedure, instead of uploading your sample to an Amazon S3 bucket again, as described, make a change to the sample app in your local repo and push it to your AWS CodeCommit repository\.

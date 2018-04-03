@@ -4,7 +4,7 @@ After you set up a pipeline, you can set up a CloudWatch Events rule to send not
 
 In this tutorial, you configure a notification to send an email when a pipeline's state changes to FAILED\. This tutorial uses an input transformer method when creating the CloudWatch Events rule\. It transforms the message schema details to deliver the message in human\-readable text\.
 
-
+**Topics**
 + [Step 1: Set Up an Email Notification Using Amazon SNS](#create-filter-for-target)
 + [Step 2: Create a Rule and Add the SNS Topic as the Target](#create-notification-rule)
 + [Step 3: Clean Up Resources](#notifications-clean-up-resources)

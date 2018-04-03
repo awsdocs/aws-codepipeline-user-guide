@@ -2,7 +2,7 @@
 
 You can use the AWS CodePipeline console or the AWS CLI to view details about source artifacts \(output artifact that originated in the first stage of a pipeline\) that are used in an execution of a pipeline\. The details include identifiers, such as commit IDs, check\-in comments, time since the artifact was created or updated and, when you use the CLI, version numbers of build actions\. For some revision types, you can view and open the URL of the commit for the artifact version\.
 
-
+**Topics**
 + [View Current Source Revision Details in a Pipeline \(Console\)](#monitoring-source-revisions-view-console)
 + [View Current Source Revision Details in a Pipeline \(CLI\)](#monitoring-source-revisions-view-cli)
 

@@ -5,11 +5,8 @@ In AWS CodePipeline, you can add an approval action to a stage in a pipeline at 
 If the action is approved, the pipeline execution resumes\. If the action is rejected—or if no one approves or rejects the action within seven days of the pipeline reaching the action and stopping—the result is the same as an action failing, and the pipeline execution does not continue\.
 
 You might use manual approvals for a variety of purposes:
-
 + You want someone to perform a code review or change management review before a revision is allowed into the next stage of a pipeline\.
-
 + You want someone to perform manual quality assurance testing on the latest version of an application, or to confirm the integrity of a build artifact, before it is released\.
-
 + You want someone to review new or updated text before it is published to a company website\.
 
 ## Configuration Options for Manual Approval Actions in AWS CodePipeline<a name="approvals-configuration-options"></a>
@@ -19,17 +16,11 @@ AWS CodePipeline provides three configuration options you can use to tell approv
 **Publish Approval Notifications** You can configure an approval action to publish a message to an Amazon Simple Notification Service topic when the pipeline stops at the action\. Amazon SNS delivers the message to every endpoint subscribed to the topic\. You must use a topic created in the same AWS region as the pipeline that will include the approval action\. When you create a topic, we recommend you give it a name that will identify its purpose, in formats such as `MyFirstPipeline-us-east-2-approval`\. 
 
 When you publish approval notifications to Amazon SNS topics, you can choose from formats such as email or SMS recipients, SQS queues, HTTP/HTTPS endpoints, or AWS Lambda functions you invoke using Amazon SNS\. For information about Amazon SNS topic notifications, see the following topics:
-
 + [What Is Amazon Simple Notification Service?](http://docs.aws.amazon.com/sns/latest/dg/welcome.html)
-
 + [Create a Topic in Amazon SNS](http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html)
-
 + [Sending Amazon SNS Messages to Amazon SQS Queues](http://docs.aws.amazon.com/sns/latest/dg/SendMessageToSQS.html)
-
 + [Subscribing a Queue to an Amazon SNS Topic](http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqssubscribe.html)
-
 + [Sending Amazon SNS Messages to HTTP/HTTPS Endpoints](http://docs.aws.amazon.com/sns/latest/dg/SendMessageToHttp.html)
-
 + [Invoking Lambda Functions Using Amazon SNS Notifications](http://docs.aws.amazon.com/sns/latest/dg/sns-lambda.html)
 
 For a look at the structure of the JSON data generated for an approval action notification, see [JSON Data Format for Manual Approval Notifications in AWS CodePipeline](approvals-json-format.md)\.
@@ -59,9 +50,7 @@ The following is an overview for setting up and using manual approvals\.
 1. An approver examines the target URL and reviews comments, if any\.
 
 1. Using the console, CLI, or SDK, the approver provides a summary comment and submits a response:
-
    + Approved: The pipeline execution resumes\.
-
    + Rejected: The stage status is changed to "Failed" and the pipeline execution does not resume\. 
 
    If no response is submitted within seven days, the action is marked as "Failed\."

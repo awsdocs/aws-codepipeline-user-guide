@@ -2,7 +2,7 @@
 
 AWS CodePipeline is a continuous delivery service you can use to model, visualize, and automate the steps required to release your software\. You can quickly model and configure the different stages of a software release process\. AWS CodePipeline automates the steps required to release your software changes continuously\. For information about pricing for AWS CodePipeline, see [Pricing](http://aws.amazon.com/codepipeline/pricing/)\. 
 
-
+**Topics**
 + [Video Introduction to AWS CodePipeline](#intro-video-welcome)
 + [What Can I Do with AWS CodePipeline?](#welcome-what-can-I-do)
 + [A Quick Look at AWS CodePipeline](#welcome-introducing)
@@ -19,17 +19,11 @@ This short video \(3:06\) describes how AWS CodePipeline builds, tests, and depl
 ## What Can I Do with AWS CodePipeline?<a name="welcome-what-can-I-do"></a>
 
 You can use AWS CodePipeline to help you automatically build, test, and deploy your applications in the cloud\. Specifically, you can: 
-
 + **Automate your release processes**: AWS CodePipeline fully automates your release process from end to end, starting from your source repository through build, test, and deployment\. You can prevent changes from moving through a pipeline by including a manual approval action in any stage except a Source stage\. You can automatically release when you want, in the way you want, on the systems of your choice, across one instance or multiple instances\.
-
 + **Establish a consistent release process**: Define a consistent set of steps for every code change\. AWS CodePipeline runs each stage of your release according to your criteria\.
-
 + **Speed up delivery while improving quality**: You can automate your release process to allow your developers to test and release code incrementally and speed up the release of new features to your customers\. 
-
 + **Use your favorite tools**: You can incorporate your existing source, build, and deployment tools into your pipeline\. For a full list of AWS services and third\-party tools currently supported by AWS CodePipeline, see [Product and Service Integrations with AWS CodePipeline](integrations.md)\.
-
 + **View progress at\-a\-glance**: You can review real\-time status of your pipelines, check the details of any alerts, retry failed actions, view details about the source revisions used in the latest pipeline execution in each stage, and manually rerun any pipeline\.
-
 + **View pipeline history details**: You can view details about executions of a pipeline, including start and end times, run duration, and execution IDs\. 
 
 ## A Quick Look at AWS CodePipeline<a name="welcome-introducing"></a>

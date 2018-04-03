@@ -7,7 +7,7 @@ An *account administrator* \(or administrator user\) is a user with administrato
 
 When granting permissions, you decide who is getting the permissions, the resources they get permissions for, and the specific actions that you want to allow on those resources\.
 
-
+**Topics**
 + [AWS CodePipeline Resources and Operations](#ACP_ARN_Format)
 + [Supported Resource\-Level Permissions for AWS CodePipeline API Calls](#iam-actions-resource-level)
 + [Understanding Resource Ownership](#understanding-resource-ownership)
@@ -92,15 +92,13 @@ AWS CodePipeline API calls that are not listed in this table do not support reso
 | ListPipelineExecutions |  Pipeline arn:aws:codepipeline:*region*:*account*:*pipeline\-name*  | 
 | DeletePipeline |  Pipeline arn:aws:codepipeline:*region*:*account*:*pipeline\-name*  | 
 | EnableStageTransition |  Pipeline arn:aws:codepipeline:*region*:*account*:*pipeline\-name*  | 
+| PutApprovalResult |  Action arn:aws:codepipeline:*region*:*account*:*pipeline\-name*/*stage\-name*/*action\-name*  This API call supports resource\-level permissions\. However, you may encounter an error if you use the IAM console or Policy Generator to create policies with `"codepipeline:PutApprovalResult"` that specify a resource ARN\. If you encounter an error, you can use the **JSON** tab in the IAM console or the CLI to create a policy\.   | 
 
 ## Understanding Resource Ownership<a name="understanding-resource-ownership"></a>
 
 The AWS account owns the resources that are created in the account, regardless of who created the resources\. Specifically, the resource owner is the AWS account of the [principal entity](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html) \(that is, the root account, an IAM user, or an IAM role\) that authenticates the resource creation request\. The following examples illustrate how this works:
-
 + If you use the root account credentials of your AWS account to create a rule, your AWS account is the owner of the AWS CodePipeline resource\.
-
 + If you create an IAM user in your AWS account and grant permissions to create AWS CodePipeline resources to that user, the user can create AWS CodePipeline resources\. However, your AWS account, to which the user belongs, owns the AWS CodePipeline resources\.
-
 + If you create an IAM role in your AWS account with permissions to create AWS CodePipeline resources, anyone who can assume the role can create AWS CodePipeline resources\. Your AWS account, to which the role belongs, owns the AWS CodePipeline resources\.
 
 ## Managing Access to Resources<a name="managing-access-resources"></a>
@@ -112,16 +110,14 @@ This section discusses using IAM in the context of AWS CodePipeline\. It doesn't
 
 Policies attached to an IAM identity are referred to as identity\-based policies \(IAM polices\) and policies attached to a resource are referred to as resource\-based policies\. AWS CodePipeline supports only identity\-based \(IAM policies\)\.
 
-
+**Topics**
 + [Identity\-Based Policies \(IAM Policies\)](#identity-based-policies)
 + [Resource\-Based Policies](#resource-based-policies)
 
 ### Identity\-Based Policies \(IAM Policies\)<a name="identity-based-policies"></a>
 
 You can attach policies to IAM identities\. For example, you can do the following: 
-
 + **Attach a permissions policy to a user or a group in your account** – To grant a user permissions to view pipelines in the AWS CodePipeline console, you can attach a permissions policy to a user or group that the user belongs to\.
-
 + **Attach a permissions policy to a role \(grant cross\-account permissions\)** – You can attach an identity\-based permissions policy to an IAM role to grant cross\-account permissions\. For example, the administrator in Account A can create a role to grant cross\-account permissions to another AWS account \(for example, Account B\) or an AWS service as follows:
 
   1. Account A administrator creates an IAM role and attaches a permissions policy to the role that grants permissions on resources in Account A\.
@@ -251,13 +247,9 @@ You can use any versioned Amazon S3 bucket as the artifact store for AWS CodePip
 For each AWS CodePipeline resource, the service defines a set of API operations\. To grant permissions for these API operations, AWS CodePipeline defines a set of actions that you can specify in a policy\. Some API operations can require permissions for more than one action in order to perform the API operation\. For more information about resources and API operations, see [AWS CodePipeline Resources and Operations](#ACP_ARN_Format) and [AWS CodePipeline Permissions Reference](permissions-reference.md)\.
 
 The following are the basic policy elements:
-
 + **Resource** – You use an Amazon Resource Name \(ARN\) to identify the resource that the policy applies to\. For more information, see [AWS CodePipeline Resources and Operations](#ACP_ARN_Format)\.
-
 + **Action** – You use action keywords to identify resource operations that you want to allow or deny\. For example, the `codepipeline:GetPipeline` permission allows the user permissions to perform the `GetPipeline` operation\.
-
 + **Effect** – You specify the effect, either allow or deny, when the user requests the specific action\. If you don't explicitly grant access to \(allow\) a resource, access is implicitly denied\. You can also explicitly deny access to a resource, which you might do to make sure that a user cannot access it, even if a different policy grants access\.
-
 + **Principal** – In identity\-based policies \(IAM policies\), the user that the policy is attached to is the implicit principal\. For resource\-based policies, you specify the user, account, service, or other entity that you want to receive permissions \(applies to resource\-based policies only\)\.
 
 To learn more about IAM policy syntax and descriptions, see [AWS IAM Policy Reference](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in the *IAM User Guide*\.

@@ -2,7 +2,7 @@
 
 You can use the AWS CodePipeline console or the AWS CLI to view details about pipelines associated with your AWS account\. 
 
-
+**Topics**
 + [View Pipeline Details and History \(Console\)](#pipelines-view-console)
 + [View Pipeline Details and History \(CLI\)](#pipelines-view-cli)
 
@@ -23,35 +23,21 @@ After an hour, the detailed view of a pipeline will stop refreshing automaticall
 ![\[The console view of the pipeline indicates the state of each action in each stage and the state of the transitions.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-disabled-transition2.png)![\[The console view of the pipeline indicates the state of each action in each stage and the state of the transitions.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The console view of the pipeline indicates the state of each action in each stage and the state of the transitions.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
    The graphical view displays the following information for each stage:
-
    + The name of the stage\.
-
    + Every action configured for the stage\.
-
    + The state of transitions between stages \(enabled or disabled\), as indicated by the state of the arrow between stages\. An enabled transition is indicated by a plain arrow\. A disabled transition is indicated by a gray arrow and icon\.
-
    + A color bar to indicate the status of the stage:
-
      + Gray: No executions yet
-
      + Blue: In progress
-
      + Green: Succeeded
-
      + Red: Failed
 
    The graphical view also displays the following information about actions in each stage:
-
    + The name of the action\.
-
    + The provider of the action, such as AWS CodeDeploy\.
-
    + When the action was last run\.
-
    + Whether the action succeeded or failed\.
-
    + Links to other details about the last run of the action, where available\.
-
    + Details about the source revisions that are running through the latest pipeline execution in the stage or, for AWS CodeDeploy deployments, the latest source revisions that were deployed to target instances\.
 
 1. To see the configuration details for an action in a stage of a pipeline, choose or hover over the information icon next to the action\.
@@ -75,13 +61,9 @@ Details are available for source actions that retrieve content from GitHub repos
 ## View Pipeline Details and History \(CLI\)<a name="pipelines-view-cli"></a>
 
 You can run the following commands to view details about your pipelines and pipeline executions:
-
 +  list\-pipelines command to view a summary of all of the pipelines associated with your AWS account\.
-
 + get\-pipeline command to review details of a single pipeline\.
-
 + list\-pipeline\-executions to view summaries of the most recent executions for a pipeline\.
-
 + get\-pipeline\-execution to view information about an execution of a pipeline, including details about artifacts, the pipeline execution ID, and the name, version, and status of the pipeline\. 
 
 For information about using the CLI to view details about the source revisions used in the latest pipeline execution for a stage, see [View Current Source Revision Details in a Pipeline \(CLI\)](monitoring-source-revisions-view.md#monitoring-source-revisions-view-cli)\.

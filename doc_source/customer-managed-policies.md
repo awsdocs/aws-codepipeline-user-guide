@@ -6,21 +6,13 @@ In this section, you can find example user policies that grant permissions for v
 All examples use the US West \(Oregon\) Region \(us\-west\-2\) and contain fictitious account IDs\.
 
 **Examples**
-
 + [Example 1: Grant Permissions to Get the State of a Pipeline](#identity-based-policies-example-1)
-
 + [Example 2: Grant Permissions to Enable and Disable Transitions Between Stages](#identity-based-policies-example-2)
-
 + [Example 3: Grant Permissions to Get a List of All Available Action Types](#identity-based-policies-example-3)
-
 + [Example 4: Grant Permissions to Approve or Reject Manual Approval Actions](#identity-based-policies-example-4)
-
 + [Example 5: Grant Permissions to Poll for Jobs for a Custom Action](#identity-based-policies-example-5)
-
 + [Example 6: Attach or Edit a Policy for Jenkins Integration with AWS CodePipeline](#identity-based-policies-example-6)
-
 + [Example 7: Configure Cross\-Account Access to a Pipeline](#identity-based-policies-example-7)
-
 + [Example 8: Use AWS Resources Associated with Another Account in a Pipeline](#identity-based-policies-example-8)
 
 ## Example 1: Grant Permissions to Get the State of a Pipeline<a name="identity-based-policies-example-1"></a>
@@ -224,7 +216,7 @@ The following example shows a policy created in the *111111111111* AWS account t
 
 ## Example 8: Use AWS Resources Associated with Another Account in a Pipeline<a name="identity-based-policies-example-8"></a>
 
-You can configure policies that allow a user to create a pipeline that uses resources in another AWS account\. This requires configuring policies and roles in both the account that will create the pipeline \(AccountA\) and the account that created the resources to be used in the pipeline \(AccountB\)\. You must also create a customer\-managed key in AWS Key Management Service to use for cross\-account access\. For more information and step\-by\-step examples, see [Create a Pipeline in AWS CodePipeline That Uses Resources from Another AWS Account](pipelines-create-cross-account.md) and [Security Best Practices](best-practices-security.md)\.
+You can configure policies that allow a user to create a pipeline that uses resources in another AWS account\. This requires configuring policies and roles in both the account that will create the pipeline \(AccountA\) and the account that created the resources to be used in the pipeline \(AccountB\)\. You must also create a customer\-managed key in AWS Key Management Service to use for cross\-account access\. For more information and step\-by\-step examples, see [Create a Pipeline in AWS CodePipeline That Uses Resources from Another AWS Account](pipelines-create-cross-account.md) and [Security Configuration](security-configuration.md)\.
 
 The following example shows a policy configured by AccountA for an Amazon S3 bucket used to store pipeline artifacts that grants access to AccountB \(where the ARN for AccountB\. In the following example, the ARN is for *AccountB* is *012ID\_ACCOUNT\_B*\. The ARN for the Amazon S3 bucket is *codepipeline\-us\-east\-2\-1234567890*\. Replace these ARNs with the ARN for the account you want to allow access and for the Amazon S3 bucket:
 

@@ -8,32 +8,21 @@ Source actions cannot use Amazon S3 buckets from other AWS accounts\.
 In this walkthrough and its examples, *AccountA* is the account originally used to create the pipeline\. It has access to the Amazon S3 bucket used to store pipeline artifacts and the service role used by AWS CodePipeline\. *AccountB* is the account originally used to create the AWS CodeDeploy application, deployment group, and service role used by AWS CodeDeploy\. 
 
 For *AccountA* to edit a pipeline to use the AWS CodeDeploy application created by *AccountB*, *AccountA* must: 
-
 + Request the ARN or account ID of *AccountB* \(in this walkthrough, the *AccountB* ID is *012ID\_ACCOUNT\_B*\)\.
-
 + Create or use an AWS KMS customer\-managed key in the region for the pipeline, and grant permissions to use that key to the service role \(*AWS\-CodePipeline\-Service*\) and *AccountB*\. 
-
 + Create an Amazon S3 bucket policy that grants *AccountB* access to the Amazon S3 bucket \(for example, *codepipeline\-us\-east\-2\-1234567890*\)\. 
-
 + Create a policy that allows *AccountA* to assume a role configured by *AccountB*, and attach that policy to the service role \(*AWS\-CodePipeline\-Service*\)\.
-
 + Edit the pipeline to use the customer\-managed AWS KMS key instead of the default key\.
 
 For *AccountB* to allow access to its resources to a pipeline created in *AccountA*, *AccountB* must:
-
 + Request the ARN or account ID of *AccountA* \(in this walkthrough, the *AccountA* ID is *012ID\_ACCOUNT\_A*\)\.
-
 + Create a policy applied to the [Amazon EC2 instance role](http://docs.aws.amazon.com/codedeploy/latest/userguide//how-to-create-iam-instance-profile.html) configured for AWS CodeDeploy that allows access to the Amazon S3 bucket \(*codepipeline\-us\-east\-2\-1234567890*\)\.
-
 + Create a policy applied to the [Amazon EC2 instance role](http://docs.aws.amazon.com/codedeploy/latest/userguide//how-to-create-iam-instance-profile.html) configured for AWS CodeDeploy that allows access to the AWS KMS customer\-managed key used to encrypt the pipeline artifacts in *AccountA*\.
-
 + Configure and attach an IAM role \(*CrossAccount\_Role*\) with a trust relationship policy that allows *AccountA* to assume the role\.
-
 + Create a policy that allows access to the deployment resources required by the pipeline and attach it to *CrossAccount\_Role*\.
-
 + Create a policy that allows access to the Amazon S3 bucket \(*codepipeline\-us\-east\-2\-1234567890*\) and attach it to *CrossAccount\_Role*\.
 
-
+**Topics**
 + [Prerequisite: Create an AWS KMS Encryption Key](#pipelines-create-cross-account-create-key)
 + [Step 1: Set Up Account Policies and Roles](#pipelines-create-cross-account-setup)
 + [Step 2: Edit the Pipeline](#pipelines-create-cross-account-create)
@@ -69,7 +58,7 @@ For more information about the regions and endpoints available for AWS CodePipel
 
 Once you have created the AWS KMS key, you must create and attach policies that will enable the cross\-account access\. This requires actions from both *AccountA* and *AccountB*\.
 
-
+**Topics**
 + [Configure Policies and Roles in the Account That Will Create the Pipeline \(*AccountA*\)](#pipelines-create-cross-account-setup-accounta)
 + [Configure Policies and Roles in the Account That Owns the AWS Resource \(*AccountB*\)](#pipelines-create-cross-account-setup-accountb)
 
@@ -187,9 +176,7 @@ If you have not previously created any role policies, **Create Role Policy** wil
 ### Configure Policies and Roles in the Account That Owns the AWS Resource \(*AccountB*\)<a name="pipelines-create-cross-account-setup-accountb"></a>
 
 When you create an application, deployment, and deployment group in AWS CodeDeploy, you also create an [Amazon EC2 instance role](http://docs.aws.amazon.com/codedeploy/latest/userguide//how-to-create-iam-instance-profile.html)\. \(This role is created for you if you use the Run Deployment Walkthrough wizard, but you can also create it manually\.\) For a pipeline created in *AccountA* to use AWS CodeDeploy resources created in *AccountB*, you must: 
-
 + Configure a policy for the instance role that allows it to access the Amazon S3 bucket where pipeline artifacts are stored\.
-
 + Create a second role in *AccountB* configured for cross\-account access\.
 
   This second role must not only have access to the Amazon S3 bucket in *AccountA*, it must also contain a policy that allows access to the AWS CodeDeploy resources and a trust relationship policy that allows *AccountA* to assume the role\.

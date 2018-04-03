@@ -6,9 +6,7 @@ You can add an approval action to a stage in an AWS CodePipeline pipeline at the
 Approval actions can't be added to Source stages\. Source stages can contain only source actions\. 
 
 If you want to use Amazon SNS to send notifications when an approval action is ready for review, you must first complete the following prerequisites: 
-
 + Grant permission to your AWS CodePipeline service role to access Amazon SNS resources\. For information, see [Grant Amazon SNS Permissions to an AWS CodePipeline Service Role](approvals-service-role-permissions.md)\.
-
 + Grant permission to one or more IAM users in your organization to update the status of an approval action\. For information, see [Grant Approval Permissions to an IAM User in AWS CodePipeline](approvals-iam-permissions.md)\.
 
 ## Add a Manual Approval Action to an AWS CodePipeline Pipeline \(Console\)<a name="approvals-action-add-console"></a>

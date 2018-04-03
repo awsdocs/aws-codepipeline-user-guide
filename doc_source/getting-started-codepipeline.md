@@ -2,7 +2,7 @@
 
 Before you can use AWS CodePipeline for the first time, you must complete the following steps\.
 
-
+**Topics**
 + [Step 1: Create an AWS Account](#create-aws-account)
 + [Step 2: Create or Use an IAM User](#create-iam-user)
 + [Step 3: Use an IAM Managed Policy to Assign AWS CodePipeline Permissions to the IAM User](#assign-permissions)
@@ -61,7 +61,6 @@ For more information about IAM, access keys, and secret keys, see [Managing Acce
 For more information about the regions and endpoints available for AWS CodePipeline, see [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html#codepipeline_region)\.
 
 ## Step 5: Open the Console for AWS CodePipeline<a name="open-codepipeline-console"></a>
-
 + Sign in to the AWS Management Console and open the AWS CodePipeline console at [http://console\.aws\.amazon\.com/codepipeline](http://console.aws.amazon.com/codepipeline)\.
 
 ## Next Steps<a name="next-steps"></a>

@@ -5,7 +5,7 @@ Transitions are links between pipeline stages that can be disabled or enabled\. 
 **Note**  
 You can use an approval action to pause the run of a pipeline until it is manually approved to continue\. For more information, see [Manage Approval Actions in AWS CodePipeline](approvals.md)\. 
 
-
+**Topics**
 + [Disable or Enable Transitions \(Console\)](#transitions-disable-enable-console)
 + [Disable or Enable Transitions \(CLI\)](#transitions-disable-enable-cli)
 

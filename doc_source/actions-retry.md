@@ -14,7 +14,7 @@ The overall pipeline structure changed after an action failed\.
 One or more actions in the stage are still in progress\.
 Another retry attempt in the stage is already in progress\.
 
-
+**Topics**
 + [Retry Failed Actions \(Console\)](#actions-retry-console)
 + [Retry Failed Actions \(CLI\)](#actions-retry-cli)
 
@@ -76,13 +76,9 @@ To use the AWS CLI to retry failed actions, you first create a JSON file that id
    ```
 
 1. In a plain\-text editor, create a file where you will record the following, in JSON format:
-
    + The name of the pipeline that contains the failed actions
-
    + The name of the stage that contains the failed actions
-
    + The ID of the latest pipeline execution in the stage
-
    + The retry mode\. \(Currently, the only supported value is FAILED\_ACTIONS\)
 
    For the preceding MyFirstPipeline example, your file would look something like this:

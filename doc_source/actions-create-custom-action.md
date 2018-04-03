@@ -3,13 +3,9 @@
 AWS CodePipeline includes a number of actions that help you configure build, test, and deployment resources for your automated release process\. If your release process includes activities that are not included in the default actions, such as an internally developed build process or a test suite, you can create a custom action for that purpose and include it in your pipeline\. You can use the AWS CLI to create custom actions in pipelines associated with your AWS account\.
 
 Custom actions fall into the following categories:
-
 + A build action that builds or transforms the items
-
 + A deploy action that deploys items to one or more servers, websites, or repositories
-
 + A test action that configures and runs automated tests
-
 + An invoke action that runs functions
 
 When you create a custom action, you must also create a job worker that will poll AWS CodePipeline for job requests for this custom action, execute the job, and return the status result to AWS CodePipeline\. This job worker can be located on any computer or resource as long as it has access to the public endpoint for AWS CodePipeline\. To easily manage access and security, consider hosting your job worker on an Amazon EC2 instance\. 
@@ -23,7 +19,7 @@ When a pipeline includes a custom action as part of a stage, the pipeline will c
 **Note**  
 These instructions assume that you have already completed the steps in [Getting Started with AWS CodePipeline](getting-started-codepipeline.md)\.
 
-
+**Topics**
 + [Create a Custom Action \(CLI\)](#actions-create-custom-action-cli)
 + [Create a Job Worker for Your Custom Action](#actions-create-custom-action-job-worker)
 + [Add a Custom Action to a Pipeline](#actions-create-custom-action-add)
@@ -64,9 +60,7 @@ These instructions assume that you have already completed the steps in [Getting 
    ```
 
    You'll notice that there are two properties included in the JSON file, `entityUrlTemplate` and `executionUrlTemplate`\. You can refer to a name in the configuration properties of the custom action within the URL templates by following the format of `{Config:name}`, as long as the configuration property is both required and not secret\. For example, in the sample above, the `entityUrlTemplate` value refers to the configuration property *ProjectName*\.
-
    + `entityUrlTemplate`: the static link that provides information about the service provider for the action\. In the example, the build system includes a static link to each build project\. The link format will vary, depending on your build provider \(or, if you are creating a different action type, such as test, other service provider\)\. You must provide this link format so that when the custom action is added, the user can choose this link to open a browser to a page on your website that provides the specifics for the build project \(or test environment\)\.
-
    + `executionUrlTemplate`: the dynamic link that will be updated with information about the current or most recent run of the action\. When your custom job worker updates the status of a job \(for example, success, failure, or in progress\), it will also provide an `externalExecutionId` that will be used to complete the link\. This link can be used to provide details about the run of an action\. 
 
    For example, when you view the action in the pipeline, you see the following two links:  
@@ -138,7 +132,7 @@ Custom actions require a job worker that will poll AWS CodePipeline for job requ
 
 There are many ways to design your job worker\. The following sections provide some practical guidance for developing your custom job worker for AWS CodePipeline\.
 
-
+**Topics**
 + [Choose and Configure a Permissions Management Strategy for Your Job Worker](#actions-create-custom-action-permissions)
 + [Develop a Job Worker for Your Custom Action](#actions-create-custom-action-job-worker-workflow)
 + [Custom Job Worker Architecture and Examples](#actions-create-custom-action-job-worker-common)
@@ -164,9 +158,7 @@ Another strategy to consider is using identity federation with IAM to integrate 
 1.  Review the examples in [Scenarios for Granting Temporary Access](http://docs.aws.amazon.com/STS/latest/UsingSTS/STSUseCases.html) to identify the scenario for temporary access that best fits the needs of your custom action\.
 
 1. Review code examples of identity federation relevant to your infrastructure, such as:
-
    + [Identity Federation Sample Application for an Active Directory Use Case](http://aws.amazon.com/code/1288653099190193)
-
    + [Mobile Application Identity Federation with Amazon Cognito](https://github.com/awslabs/aws-sdk-android-samples/tree/master/CognitoSyncDemo)
 
 1. Get started configuring identity federation\. For information, see [Identity Providers and Federation](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers.html) in *IAM User Guide*\.
@@ -228,9 +220,7 @@ If your job worker performs all the work for a custom action, you should conside
    For more information about using the continuation token, see the specifications for `PutJobSuccessResult` in the [AWS CodePipeline API Reference](http://docs.aws.amazon.com/codepipeline/latest/APIReference)\.
 
 1. Once the custom action completes, the job worker returns the result of the custom action to AWS CodePipeline by calling one of two APIs: 
-
    + `PutJobSuccessResult` without a continuation token, which indicates the custom action ran successfully
-
    + `PutJobFailureResult`, which indicates the custom action did not run successfully
 
    Depending on the result, the pipeline will either continue on to the next action \(success\) or stop \(failure\)\.
@@ -238,11 +228,8 @@ If your job worker performs all the work for a custom action, you should conside
 ### Custom Job Worker Architecture and Examples<a name="actions-create-custom-action-job-worker-common"></a>
 
 After you have mapped out your high\-level workflow, you can create your job worker\. Although the specifics of your custom action will ultimately determine what is needed for your job worker, most job workers for custom actions include the following functionality:
-
 + Polling for jobs from AWS CodePipeline using `PollForJobs`\. 
-
 + Acknowledging jobs and returning results to AWS CodePipeline using `AcknowledgeJob`, `PutJobSuccessResult`, and `PutJobFailureResult`\.
-
 + Retrieving artifacts from and/or putting artifacts into the Amazon S3 bucket for the pipeline\. To download artifacts from the Amazon S3 bucket, you must create an Amazon S3 client that uses signature version 4 signing \(Sig V4\)\. Sig V4 is required for SSE\-KMS\.
 
   To upload artifacts to the Amazon S3 bucket, you must additionally configure the Amazon S3 `[PutObject](http://docs.aws.amazon.com/AmazonS3/latest/API/SOAPPutObject.html)` request to use encryption\. Currently only SSE\-KMS is supported for encryption\. In order to know whether to use the default key or a customer\-managed key to upload artifacts, your custom job worker must look at the [job data](http://docs.aws.amazon.com/codepipeline/latest/APIReference/API_JobData.html) and check the [encryption key](http://docs.aws.amazon.com/codepipeline/latest/APIReference/API_EncryptionKey.html) property\. If the encryption key property is set, you should use that encryption key ID when configuring SSE\-KMS\. If the key is null, you use the default master key\. AWS CodePipeline uses the default Amazon S3 master key unless otherwise configured\. 
@@ -265,7 +252,6 @@ After you have mapped out your high\-level workflow, you can create your job wor
   For more samples, see [Specifying the AWS Key Management Service in Amazon S3 Using the AWS SDKs](http://docs.aws.amazon.com/AmazonS3/latest/dev/kms-using-sdks.html)\. For more information about the Amazon S3 bucket for AWS CodePipeline, see [AWS CodePipeline Concepts](concepts.md)\.
 
 A more complex example of a custom job worker is available on GitHub\. This sample is open source and provided as\-is\.
-
 + [Sample Job Worker for AWS CodePipeline](https://github.com/awslabs/aws-codepipeline-custom-job-worker): Download the sample from the GitHub repository\.
 
 ## Add a Custom Action to a Pipeline<a name="actions-create-custom-action-add"></a>
@@ -275,7 +261,7 @@ After you have a job worker, you can add your custom action to a pipeline by cre
 **Note**  
 You can create a pipeline in the Create Pipeline wizard that includes a custom action if it is a  build or deploy action\. If your custom action is in the test category, you must add it by editing an existing pipeline\.
 
-
+**Topics**
 + [Add a Custom Action to a Pipeline \(Console\)](#actions-create-custom-action-add-console)
 + [Add a Custom Action to an Existing Pipeline \(CLI\)](#actions-create-custom-action-add-cli)
 

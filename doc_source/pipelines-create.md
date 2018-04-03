@@ -4,7 +4,7 @@ You can use the AWS CodePipeline console or the AWS CLI to create a pipeline\.
 
 You can also create pipelines that build and deploy container\-based applications by using Amazon ECS as the deployment provider\. Before you create a pipeline that deploys container\-based applications with Amazon ECS, you must prepare an image definitions file\.
 
-
+**Topics**
 + [Create Image Definitions File for Deploying Container\-based Applications](#pipelines-create-image-definitions)
 + [Create a Pipeline \(Console\)](#pipelines-create-console)
 + [Create a Pipeline \(CLI\)](#pipelines-create-cli)
@@ -12,9 +12,7 @@ You can also create pipelines that build and deploy container\-based application
 ## Create Image Definitions File for Deploying Container\-based Applications<a name="pipelines-create-image-definitions"></a>
 
 An image definitions document is a JSON file that describes your Amazon ECS service's container name and the image and tag\. If you are deploying container\-based applications, you must generate an image definitions file to provide the AWS CodePipeline job worker with the Amazon ECS container and image identification to use for your pipeline’s deployment stage\.
-
 + The maximum file size limit for the image definitions file is 100 KB\.
-
 + You must generate the image definitions file so that it is ingested as an input artifact for the deploy action\.
 
 The image definitions file provides the container name and image URI and must be constructed with the following set of key\-value pairs\.
@@ -78,11 +76,11 @@ Remember to zip the JSON file if your source repository is an Amazon S3 bucket\.
 
       You must include the image definitions file as an output artifact in the buildspec\.yml file\.
 
-1. When you create your pipeline in the console, you must enter the exact image definitions filename into the **Image Filename **field on the **Deploy** page of the **Create Pipeline** wizard\.
+1. When you create your pipeline in the console, you must enter the exact image definitions file name into the **Image Filename** field on the **Deploy** page of the **Create Pipeline** wizard\.
 
 For a step\-by\-step tutorial for creating a pipeline that uses Amazon ECS as the deployment provider, see [Tutorial: Continuous Deployment with AWS CodePipeline](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-cd-pipeline.html)\.
 
-
+**Topics**
 + [Create Image Definitions File for Deploying Container\-based Applications](#pipelines-create-image-definitions)
 + [Create a Pipeline \(Console\)](#pipelines-create-console)
 + [Create a Pipeline \(CLI\)](#pipelines-create-cli)
@@ -92,17 +90,15 @@ For a step\-by\-step tutorial for creating a pipeline that uses Amazon ECS as th
 To create a pipeline in the console, you'll need to provide the source file location and information about the providers you will use for your actions\.
 
 When you use the console to create a pipeline, you must include a Source stage and one or both of the following: 
-
 + A Build stage\.
-
 + A Staging \(deployment\) stage\. 
 
 When you use the pipeline wizard, AWS CodePipeline creates the names of stages \(Source, Build, Staging\)\. These names cannot be changed\. You can give more specific names \(for example, BuildToGamma or DeployToProd\) to stages you add later\.
 
-AWS CodePipeline uses Amazon CloudWatch Events to detect changes in your AWS CodeCommit source repository and branch\. Using Amazon CloudWatch Events to automatically start your pipeline when changes occur is the default for this source type\. 
+AWS CodePipeline uses Amazon CloudWatch Events to detect changes in your AWS CodeCommit source repository and branch or your Amazon S3 source bucket\.
 
 **Note**  
-When you use the console to create a pipeline that has an AWS CodeCommit source repository, the rule is created for you\. If you use the AWS CLI to create the pipeline, you must create the Amazon CloudWatch Events rule and IAM role manually\. For more information, see [Start a Pipeline Automatically Using Amazon CloudWatch Events](triggering.md)\.
+When you use the console to create a pipeline that has an AWS CodeCommit source repository or Amazon S3 source bucket, the additional resources are created for you\. If you use the AWS CLI to create the pipeline, you must create the additional resources manually\. For more information, see [ Start a Pipeline Automatically Using a CloudWatch Events Rule](triggering.md)\.
 
 **To create a pipeline**
 
@@ -119,23 +115,22 @@ When you use the console to create a pipeline that has an AWS CodeCommit source 
 After you create a pipeline, you cannot change its name\. For information about other limitations, see [Limits in AWS CodePipeline](limits.md)\.
 
 1. On the **Step 2: Source** page, in the **Source provider** drop\-down list, choose the type of repository where your source code is stored and specify its required options:
-
    + **GitHub**: Choose **Connect to GitHub**\. If prompted to sign in, provide your GitHub credentials\. 
 **Important**  
 Do not provide your AWS credentials\.
 
-     If this is your first time connecting to GitHub from AWS CodePipeline, you will be asked to authorize application access to your account\. Review the permissions required for integration, and then, if you want to continue, choose **Authorize application**\. For more information about how AWS CodePipeline integrates with GitHub, see [Source Action Integrations](integrations-action-type.md#integrations-source)\.
+     If this is your first time connecting to GitHub from AWS CodePipeline, you are asked to authorize application access to your account\. Review the permissions required for integration, and then, if you want to continue, choose **Authorize application**\. For more information about how AWS CodePipeline integrates with GitHub, see [Source Action Integrations](integrations-action-type.md#integrations-source)\.
 **Note**  
-There is a limit to the number of OAuth tokens you can use in GitHub for a particular application, such as AWS CodePipeline\. Within a single AWS account, AWS CodePipeline will automatically update existing equivalent OAuth tokens to in an attempt to avoid exceeding this limit\. If you exceed this limit as a result of connecting many AWS accounts with the same GitHub user account, you can use personal tokens\. For more information, see [To configure a pipeline to use a personal access token from GitHub](troubleshooting.md#troubleshooting-gs2)\.
+In GitHub, there is a limit to the number of OAuth tokens you can use for an application, such as AWS CodePipeline\. If you exceed this limit, retry the connection to allow AWS CodePipeline to reconnect by reusing existing tokens\. For more information, see [To configure a pipeline to use a personal access token from GitHub](troubleshooting.md#troubleshooting-gs2)\.
 
      On the **Source** page in the **Create Pipeline** wizard, from the **Repository** drop\-down list, choose the GitHub repository you want to use as the source location for your pipeline\. In **Branch**, from the drop\-down list, choose the branch you want to use, and then choose **Next step**\.
-
-   + **Amazon S3**: In **Amazon S3 location**, provide the Amazon S3 bucket name and path to the object in a bucket with versioning enabled, and then choose **Next step**\. The format of the bucket name and path will look something like this:
+   + **Amazon S3**: In **Amazon S3 location**, provide the Amazon S3 bucket name and path to the object in a bucket with versioning enabled, and then choose **Next step**\. The format of the bucket name and path looks like this:
 
      ```
       s3://bucketName/folderName/objectName
      ```
 
+     After you choose the Amazon S3 source bucket, a message appears in **Change detection options** that shows the Amazon CloudWatch Events rule and the AWS CloudTrail trail to be created for this pipeline\. The message also displays the data event to be added to your AWS CloudTrail trail in the following format: `my-bucket/path/to/object.zip`\. Accept the defaults under **Change detection options**\. This allows AWS CodePipeline to use Amazon CloudWatch Events and AWS CloudTrail to detect changes for your new pipeline\. Choose **Next step**\.
    + **AWS CodeCommit**: In **Repository name**, choose the name of the AWS CodeCommit repository you want to use as the source location for your pipeline\. In **Branch name**, from the drop\-down list, choose the branch you want to use\.
 
      After you choose the AWS CodeCommit repository name and branch, a message is displayed in **Change detection options** showing the Amazon CloudWatch Events rule that will be created for this pipeline\. Accept the defaults under **Change detection options**\. This allows AWS CodePipeline to use Amazon CloudWatch Events to detect changes for your new pipeline\. Choose **Next step**\.
@@ -143,33 +138,20 @@ There is a limit to the number of OAuth tokens you can use in GitHub for a parti
 The object and file type must be compatible with the deployment system you plan to use \(for example, Elastic Beanstalk or AWS CodeDeploy\)\. Supported file types might include \.zip, \.tar, and \.tgz files\. For more information about the supported container types for Elastic Beanstalk, see [Customizing and Configuring Elastic Beanstalk Environments](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/customize-containers.html) and [Supported Platforms](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html)\. For more information about deploying revisions with AWS CodeDeploy, see [Uploading Your Application Revision](http://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-steps.html#deployment-steps-uploading-your-app) and [Prepare a Revision](http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-prepare-revision.html)\.
 
 1. On the **Step 3: Build** page, do one of the following, and then choose **Next step**:
-
    + Choose **No Build** to skip the configuration of a build stage\.
-
    + Choose a custom action provider of build services that you want to use, and provide the configuration details for that provider\.
 **Note**  
 The steps for adding a build provider vary by provider\. For an example of how to add Jenkins as a build provider, see [Tutorial: Create a Four\-Stage Pipeline](tutorials-four-stage-pipeline.md)\.
-
    + Choose AWS CodeBuild, and then choose your build options\. You can follow the instructions in [Create a Pipeline that Uses AWS CodeBuild](http://docs.aws.amazon.com/codebuild/latest/userguide/how-to-create-pipeline.html#pipelines-create-console) in *[AWS CodeBuild User Guide](http://docs.aws.amazon.com/codebuild/latest/userguide/)*\. 
-
      + Choose one of the following:
-
        + If you have already created the project in AWS CodeBuild, choose **Select an existing build project**\. In **Project name**, choose the name of the build project, and then choose **Save build project**\.
-
        + To use the AWS CodePipeline wizard to create your AWS CodeBuild project, choose **Create a new build project**\. Make sure you have completed the steps in [Plan a Build](http://docs.aws.amazon.com/codebuild/latest/userguide/planning.html)\. In **Project name**, type a name for your build project\.
-
      + Choose the image and operating system for your build project\.
-
      + Choose one of the following build specification options:
-
        + If you have already included a build spec file in your pipeline's source location, choose **Use the buildspec\.yml in the source code root directory**\.
-
        + To specify build commands and output file names in the wizard, choose **Insert build commands**\.
-
      + In **Cache**, do one of the following:
-
        + If you do not want to use a cache for build dependencies, choose **No cache**\.
-
        + If you want to use a cache for build dependencies, choose **Amazon S3**, and then type the location of your Amazon S3 cache bucket\. Using a cache saves considerable build time because some reusable pieces of the build environment are stored in the cache and used across builds\.
 
          A valid cache bucket location must include the bucket name and prefix \(folder name\), as shown in this example:
@@ -182,23 +164,17 @@ Make sure your bucket is in the same region as your pipeline\.
 Make sure that the service role for AWS CodePipeline has appropriate permissions for AWS CodeBuild\. For more information, see [Add Permissions for Other AWS Services](how-to-custom-role.md#how-to-update-role-new-services)\.
 
 1. On the **Step 4: Deploy** page, do one of the following, and then choose **Next step**:
-
    + To skip the configuration of a deployment stage, choose **No Deployment**\.
 **Note**  
 You can skip adding a deployment provider now only if you chose a build provider in the previous step\.
-
    + Choose a custom action that you have created for a deployment provider\.
-
    + From the **Deployment provider** drop\-down list, choose one of the following default providers:
-
      + **AWS CodeDeploy**
 
        In **Application name**, type or choose the name of an existing AWS CodeDeploy application\. In **Deployment group**, type the name of a deployment group for the application\. Choose **Next step**\. You can also create an application, deployment group, or both in the AWS CodeDeploy console\.
-
      + **AWS Elastic Beanstalk**
 
         In **Application name**, type or choose the name of an existing Elastic Beanstalk application\. In **Environment name**, type an environment for the application\. Choose **Next step**\. You can also create an application, environment, or both in the Elastic Beanstalk console\.
-
      + **AWS OpsWorks Stacks**
 
        In **Stack**, type or choose the name of the stack you want to use\. In **Layer**, choose the layer that your target instances belong to\. In **App**, choose the application that you want to update and deploy\. If you need to create an app, choose **create a new one in AWS OpsWorks**\. 
@@ -206,17 +182,13 @@ You can skip adding a deployment provider now only if you chose a build provider
        For information about adding an application to a stack and layer in AWS OpsWorks, see [Adding Apps](http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html) in the *AWS OpsWorks User Guide*\. 
 
        For an end\-to\-end example of how to use a simple pipeline in AWS CodePipeline as the source for code that you run on AWS OpsWorks layers, see [Using AWS CodePipeline with AWS OpsWorks Stacks](http://docs.aws.amazon.com/opsworks/latest/userguide/other-services-cp.html)\.
-
      + **AWS CloudFormation**
 
         Do one of the following:
-
        + In **Action mode**, choose **Create or update a stack**, type a stack name and template file name, and then choose the name of a role for AWS CloudFormation to assume\. Optionally, type the name of a configuration file and choose an IAM capability option\.
-
        + In **Action mode**, choose **Create or replace a change set**, type a stack name and change set name, and then choose the name of a role for AWS CloudFormation to assume\. Optionally, type the name of a configuration file and choose an IAM capability option\.
 
        For information about integrating AWS CloudFormation capabilities into a pipeline in AWS CodePipeline, see [Continuous Delivery with AWS CodePipeline](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline.html) in the *AWS CloudFormation User Guide*\.
-
      + **Amazon ECS**
 
         In **Cluster name**, type or choose the name of an existing Amazon ECS cluster\. In **Service name**, type or choose the name of the service running on the cluster\. You can also create a cluster and service\. In **Image filename**, type the name of the image definitions file that describes your service's container and image\. Choose **Next step**\.
@@ -226,10 +198,8 @@ Make sure your Amazon ECS cluster is configured with two or more instances\. Ama
        For a tutorial about deploying container\-based applications with your pipeline, see [Tutorial: Continuous Deployment with AWS CodePipeline](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-cd-pipeline.html)\.
 
 1. On the **Step 5: Service Role** page, do one of the following, and then choose **Next step**:
-
    + In the **Service Role** drop\-down list, choose an IAM service role that you have set up for AWS CodePipeline\.
-
-   + If you do not have a service role, choose **Create role**\. On the IAM console page that describes the role that will be created for you, choose **Allow**\. On the **Step 5: Service Role** page, *AWS\-CodePipeline\-Service* appears in the drop\-down box\.
+   + If you do not have a service role, choose **Create role**\. On the IAM console page that describes the role to be created for you, choose **Allow**\. On the **Step 5: Service Role** page, *AWS\-CodePipeline\-Service* appears in the drop\-down box\.
 **Note**  
 Depending on when your service role was created, you might need to update its permissions to support additional AWS services\. For information, see [Add Permissions for Other AWS Services](how-to-custom-role.md#how-to-update-role-new-services)\. 
 
@@ -243,37 +213,31 @@ Now that you've created your pipeline, you can view it in the console\. The pipe
 
 To use the AWS CLI to create a pipeline, you create a JSON file to define the pipeline structure, and then run the create\-pipeline command with the `--cli-input-json` parameter\. 
 
-The simplest way to create the JSON file is to start with an existing pipeline\. You can use the get\-pipeline command to get a copy of the JSON structure of that pipeline, and then modify that structure in a plain\-text editor\. For more information about pipeline structure, see [AWS CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md) and [create\-pipeline](http://docs.aws.amazon.com/cli/latest/reference/codepipeline/create-pipeline.html) in the AWS CodePipeline [API Reference](http://docs.aws.amazon.com/cli/latest/reference/codepipeline)\.
-
-**Note**  
-If you don’t already have a pipeline, you can use the wizard in the AWS CodePipeline console to create one, and then use that JSON structure as the basis for your pipeline\.
-
-You need the ARN of the service role you created for AWS CodePipeline in [Getting Started with AWS CodePipeline](getting-started-codepipeline.md) and the name of an Amazon S3 bucket where artifacts for the pipeline will be stored\. This bucket must be in the same region as the pipeline\. You use the ARN and bucket name when you run the create\-pipeline command\. Unlike the console, running the create\-pipeline command in the AWS CLI does not create an Amazon S3 bucket for storing artifacts\. The bucket must already exist\.
-
 **Important**  
 You cannot use the AWS CLI to create a pipeline that includes partner actions\. You must use the AWS CodePipeline console instead\.
 
+For more information about pipeline structure, see [AWS CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md) and [create\-pipeline](http://docs.aws.amazon.com/cli/latest/reference/codepipeline/create-pipeline.html) in the AWS CodePipeline [API Reference](http://docs.aws.amazon.com/cli/latest/reference/codepipeline)\.
 
-+ [Create the JSON File](#pipelines-create-cli-json)
-+ [Run the create\-pipeline Command](#pipelines-create-cli-command)
+To create a JSON file, use the sample pipeline JSON file, edit it, and then call that file when you run the create\-pipeline command\.
 
-### Create the JSON File<a name="pipelines-create-cli-json"></a>
+You need the ARN of the service role you created for AWS CodePipeline in [Getting Started with AWS CodePipeline](getting-started-codepipeline.md) and the name of an Amazon S3 bucket where artifacts for the pipeline are stored\. This bucket must be in the same region as the pipeline\. You use the ARN and bucket name when you run the create\-pipeline command\. Unlike the console, running the create\-pipeline command in the AWS CLI does not create an Amazon S3 bucket for storing artifacts\. The bucket must already exist\.
 
- To create a JSON file, use the get\-pipeline command to copy the structure of an existing pipeline to a file, edit it, and then call that file when running the create\-pipeline command\.
+**Note**  
+You can also use the get\-pipeline command to get a copy of the JSON structure of that pipeline, and then modify that structure in a plain\-text editor\.
+
+**Topics**
 
 **To create the JSON file**
 
-1. At a terminal \(Linux, macOS, or Unix\) or command prompt \(Windows\), run the get\-pipeline command on a pipeline, and then copy the output of the command to a JSON file\. For example, for a pipeline named MyFirstPipeline, you would type something similar to the following:
+1. At a terminal \(Linux, macOS, or Unix\) or command prompt \(Windows\), create a new text file in a local directory\.
 
-   ```
-   aws codepipeline get-pipeline --name MyFirstPipeline >pipeline.json
-   ```
+1. Open the file in a plain\-text editor and edit the values to reflect the structure you want to create\. At a minimum, you must change the name of the pipeline\. You should also consider whether you want to change:
+   + The Amazon S3 bucket where artifacts for this pipeline are stored\.
+   + The source location for your code\.
+   + The deployment provider\.
+   + How you want your code deployed\.
 
-   The output of the command is sent to the *pipeline\.json* file\.
-
-1. Open the file in a plain\-text editor and edit the values to reflect the structure you want to create\. At a minimum, you must change the name of the pipeline\. You should also consider whether you want to change the Amazon S3 bucket where artifacts for this pipeline are stored; the source location for your code; the deployment provider; how you want your code deployed; and other details\.
-
-   The following two\-stage sample pipeline structure highlights the values you should consider changing for your pipeline\. Your pipeline will likely contain more than two stages:
+   The following two\-stage sample pipeline structure highlights the values you should consider changing for your pipeline\. Your pipeline likely contains more than two stages:
 
    ```
    {
@@ -346,48 +310,13 @@ You cannot use the AWS CLI to create a pipeline that includes partner actions\. 
    }
    ```
 
-   AWS CodePipeline uses Amazon CloudWatch Events to detect changes in your AWS CodeCommit source repository and branch\. We recommend using Amazon CloudWatch Events to automatically start your pipeline when changes occur\. Follow these steps in the CLI: 
+   AWS CodePipeline uses Amazon CloudWatch Events to detect changes in your AWS CodeCommit source repository and branch or your Amazon S3 source bucket\. For the AWS CodeCommit and Amazon S3 source type, make sure the `PollForSourceChanges` parameter in your JSON file is set as follows: 
 
-   1. Open the JSON file in a plain\-text editor and set the `PollForSourceChanges` parameter to false\. The flag is located in the source stage of the pipeline structure\.
-
-      The following example shows the parameter after the file is modified to disable periodic checks;
-
-      ```
-      {
-          "name": "Source",
-          "actions": [
-              {
-                  "inputArtifacts": [],
-                  "name": "Source",
-                  "actionTypeId": {
-                      "category": "Source",
-                      "owner": "AWS",
-                      "version": "1",
-                      "provider": "CodeCommit"
-                  },
-                  "outputArtifacts": [
-                      {
-                          "name": "MyApp"
-                      }
-                  ],
-                  "configuration": {
-                      "PollForSourceChanges": "false",
-                      "BranchName": "master",
-                      "RepositoryName": "MyTestRepo"
-                  },
-                  "runOrder": 1
-              }
-          ]
-      },
-      ```
-
-   1. After you create your pipeline, you must manually create the CloudWatch Events rule for change detection\. For more information about using the CLI to create the rule, see [Start a Pipeline Automatically Using Amazon CloudWatch Events](triggering.md)\.
+   ```
+                   "PollForSourceChanges": "false",
+   ```
 
 1. When you are satisfied with its structure, save your file with a name like **pipeline\.json**\.
-
-### Run the create\-pipeline Command<a name="pipelines-create-cli-command"></a>
-
-After you have a JSON file that contains the structure of your pipeline, call that file when you run the create\-pipeline command\.
 
 **To create a pipeline**
 
@@ -404,3 +333,7 @@ Be sure to include `file://` before the file name\. It is required in this comma
    This command returns the structure of the entire pipeline you created\.
 
 1. To view the pipeline you just created, either open the AWS CodePipeline console and choose it from the list of pipelines, or use the get\-pipeline\-state command\. For more information, see [View Pipeline Details and History in AWS CodePipeline](pipelines-view.md)\. 
+
+1. If you use the CLI to create a pipeline with an AWS CodeCommit repository, you must manually create the CloudWatch Events rule, as described in [Create a CloudWatch Events Rule That Starts Your AWS CodeCommit Pipeline](pipelines-trigger-source-repo-changes.md)\.
+
+1. If you use the CLI to create a pipeline with an Amazon S3 source, you must manually create the CloudWatch Events rule and AWS CloudTrail trail, as described in [Create a CloudWatch Events Rule That Starts Your Amazon S3 Pipeline](create-cloudtrail-S3-source.md)\.

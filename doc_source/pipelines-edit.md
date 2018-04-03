@@ -2,20 +2,20 @@
 
 A pipeline describes the release process you want AWS CodePipeline to follow, including the stages and actions that must be completed\. You can edit a pipeline to add or remove these elements\. However, when you edit or update a pipeline, values such as the pipeline name or pipeline metadata cannot be changed\.
 
-Unlike creating a pipeline, editing a pipeline does not rerun the most recent revision through the pipeline\. If you want to run the most recent revision through a pipeline you've just edited, you must manually rerun it\. Otherwise, the edited pipeline will run the next time you make a change to a source location configured in the source stage of the pipeline\. For information, see [Start a Pipeline Manually in AWS CodePipeline](pipelines-rerun-manually.md)\.
+Unlike creating a pipeline, editing a pipeline does not rerun the most recent revision through the pipeline\. If you want to run the most recent revision through a pipeline you've just edited, you must manually rerun it\. Otherwise, the edited pipeline runs the next time you make a change to a source location configured in the source stage of the pipeline\. For information, see [Start a Pipeline Manually in AWS CodePipeline](pipelines-rerun-manually.md)\.
 
-
+**Topics**
 + [Edit a Pipeline \(Console\)](#pipelines-edit-console)
 + [Edit a Pipeline \(AWS CLI\)](#pipelines-edit-cli)
 
 ## Edit a Pipeline \(Console\)<a name="pipelines-edit-console"></a>
 
-You can use the AWS CodePipeline console to add, edit, or remove stages in a pipeline, as well as to add, edit, or remove actions in a stage\.
+You can use the AWS CodePipeline console to add, edit, or remove stages in a pipeline and to add, edit, or remove actions in a stage\.
 
-AWS CodePipeline uses Amazon CloudWatch Events to detect changes in your AWS CodeCommit source repository and branch\. Using Amazon CloudWatch Events to automatically start your pipeline when changes occur is the default behavior for this source type\. 
+AWS CodePipeline uses Amazon CloudWatch Events to detect changes in your AWS CodeCommit source repository and branch or your Amazon S3 source bucket\.
 
 **Note**  
-When you use the console to edit a pipeline that has an AWS CodeCommit source repository, the rule and IAM role are created for you\. If you use the AWS CLI to edit the pipeline, you must create the Amazon CloudWatch Events rule and IAM role manually\. For more information, see [Start a Pipeline Automatically Using Amazon CloudWatch Events](triggering.md)\.
+When you use the console to edit a pipeline that has an AWS CodeCommit source repository or an Amazon S3 source bucket, the rule and IAM role are created for you\. If you use the AWS CLI to edit the pipeline, you must create the Amazon CloudWatch Events rule and IAM role manually\. For more information, see [ Start a Pipeline Automatically Using a CloudWatch Events Rule](triggering.md)\.
 
 **To edit a pipeline in the AWS CodePipeline console**
 
@@ -28,20 +28,16 @@ When you use the console to edit a pipeline that has an AWS CodeCommit source re
 1. On the pipeline details page, choose **Edit**\. This opens the editing page for the pipeline\.
 
 1. On the **Edit** page, do one of the following:
-
    + To edit a stage, choose the edit icon \(![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/edit_icon.png)\) on that stage\. You can add actions \(![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/add_action.png)\) in serial and parallel with existing actions:
 
      You can also edit actions in this view by choosing the edit icon for those actions\. To delete an action, choose the delete icon \(![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/delete_icon.png)\) on that action\.
 
      To add AWS CodeBuild as a build action or test action to a stage, see [Use AWS CodePipeline with AWS CodeBuild to Test Code and Run Builds](http://docs.aws.amazon.com/codebuild/latest/userguide/how-to-create-pipeline.html) in *[AWS CodeBuild User Guide](http://docs.aws.amazon.com/codebuild/latest/userguide/)*\.
-
    + To edit an action, choose the edit icon for that action, and then on **Edit action**, change the values\. Items marked with an asterisk \(**\***\) are required\.
-**Note**  
-If you edit a source action by choosing an updated AWS CodeCommit repository name and branch, a message is displayed under **Change detection options** showing the Amazon CloudWatch Events rule that will be created for this pipeline\. This allows AWS CodePipeline to use Amazon CloudWatch Events to detect changes for your new pipeline\.
-
+     + If you edit a source action by adding an AWS CodeCommit repository name and branch, a message appears showing the Amazon CloudWatch Events rule to be created for this pipeline\. If you remove the AWS CodeCommit source, a message appears showing the Amazon CloudWatch Events rule to be deleted\.
+     + If you edit a source action by adding an Amazon S3 source bucket, a message appears showing the Amazon CloudWatch Events rule and AWS CloudTrail trail to be created for this pipeline\. If you remove the Amazon S3 source, a message appears showing the Amazon CloudWatch Events rule and AWS CloudTrail trail to be deleted\. If the AWS CloudTrail trail is in use by other pipelines, then the trail is not removed and the data event is deleted\.
    + To add a stage, choose **\+ Stage** at the point in the pipeline where you want to add a stage\. Provide a name for the stage, and then add at least one action to it\. Items marked with an asterisk \(**\***\) are required\.
-
-   + To delete a stage, choose the delete icon on that stage\. The stage and all of its actions will be deleted\.
+   + To delete a stage, choose the delete icon on that stage\. The stage and all of its actions are deleted\.
 
    For example, if you wanted to add an action to an existing stage in a pipeline:
 
@@ -59,7 +55,7 @@ You cannot rename an action or a stage in the console view\. You can add a new s
 
 1. When you have finished editing your pipeline, choose **Save pipeline changes** to return to the summary page\.
 **Important**  
-After you save your changes, you cannot undo them\. You must re\-edit the pipeline\. In addition, if a revision is running through your pipeline when you save your changes, it will not complete the run\. If you want a specific commit or change to run through the edited pipeline, you must manually rerun the change through the pipeline after saving your changes\. Otherwise, the next commit or change will run automatically through the pipeline\.
+After you save your changes, you cannot undo them\. You must edit the pipeline again\. If a revision is running through your pipeline when you save your changes, the run is not completed\. If you want a specific commit or change to run through the edited pipeline, you must manually run the change through the pipeline after you save your changes\. Otherwise, the next commit or change runs automatically through the pipeline\.
 
 1. To test your action, choose **Release change** to process that commit through the pipeline, commit a change to the source specified in the source stage of the pipeline, or follow the steps in [Start a Pipeline Manually in AWS CodePipeline](pipelines-rerun-manually.md) to manually release a change using the AWS CLI\.
 
@@ -68,7 +64,7 @@ After you save your changes, you cannot undo them\. You must re\-edit the pipeli
 You can use the update\-pipeline command to edit a pipeline\.
 
 **Important**  
-While you can edit pipelines that include partner actions using the AWS CLI, you must not manually edit the JSON of a partner action itself\. If you do so, the partner action will likely fail after you update the pipeline\.
+Although you can use the AWS CLI to edit pipelines that include partner actions, you must not manually edit the JSON of a partner action\. If you do so, the partner action fails after you update the pipeline\.
 
 **To edit a pipeline in the AWS CLI**
 
@@ -84,7 +80,7 @@ While you can edit pipelines that include partner actions using the AWS CLI, you
 **Note**  
 Some edits, such as moving an action from one stage to another stage, delete the last known state history for the action\. In addition, if a pipeline contains one or more secret parameters, such as an OAuth token for an action, that token is masked by a series of asterisks \(\*\*\*\*\)\. These secret parameters are left unchanged unless you edit that portion of the pipeline \(for example, if you change the name of the action that includes the OAuth token or the name of the stage that contains an action that uses an OAuth token\)\. If you make a change that affects an action that includes an OAuth token, you must include the value of the token in the edited JSON\. For more information, see [AWS CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\. It is a security best practice to rotate your personal access token on a regular basis\. For more information, see [Use GitHub and the AWS CodePipeline CLI to Create and Rotate Your GitHub Personal Access Token on a Regular Basis](GitHub-rotate-personal-token-CLI.md)\.
 
-   The following example shows how you would add another deployment stage in the pipeline\.json file\. This stage will run after the first deployment stage named *Staging*\. 
+   The following example shows how you would add another deployment stage in the pipeline\.json file\. This stage runs after the first deployment stage named *Staging*\. 
 **Note**  
 This is just a portion of the file, not the entire structure\. For more information, see [AWS CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
 
@@ -182,42 +178,15 @@ This is just a portion of the file, not the entire structure\. For more informat
 
    For information about using the CLI to add an approval action to a pipeline, see [Add a Manual Approval Action to a Pipeline in AWS CodePipeline ](approvals-action-add.md)\.
 
-   AWS CodePipeline uses Amazon CloudWatch Events to detect changes in your AWS CodeCommit source repository and branch\. Using Amazon CloudWatch Events to automatically start your pipeline when changes occur is recommended and is accomplished using these steps in the CLI: 
+   1. AWS CodePipeline uses Amazon CloudWatch Events to detect changes in your AWS CodeCommit source repository and branch or your Amazon S3 source bucket\. For the AWS CodeCommit and Amazon S3 source type, make sure the `PollForSourceChanges` parameter in your JSON file is set as follows: 
 
-   1. Open the JSON file in a plain\-text editor and modify the file by setting the `PollForSourceChanges` parameter to `false`\. The parameter is located in the source stage of the pipeline structure\.
+     ```
+                     "PollForSourceChanges": "false",
+     ```
 
-      The following example shows how the parameter should look after the file is modified to disable periodic checks:
+1. If you use the CLI to add an AWS CodeCommit repository to your pipeline, you must manually create the CloudWatch Events rule, as described in [Create a CloudWatch Events Rule That Starts Your AWS CodeCommit Pipeline](pipelines-trigger-source-repo-changes.md)\.
 
-      ```
-      {
-          "name": "Source",
-          "actions": [
-              {
-                  "inputArtifacts": [],
-                  "name": "Source",
-                  "actionTypeId": {
-                      "category": "Source",
-                      "owner": "AWS",
-                      "version": "1",
-                      "provider": "CodeCommit"
-                  },
-                  "outputArtifacts": [
-                      {
-                          "name": "MyApp"
-                      }
-                  ],
-                  "configuration": {
-                      "PollForSourceChanges": "false",
-                      "BranchName": "master",
-                      "RepositoryName": "MyTestRepo"
-                  },
-                  "runOrder": 1
-              }
-          ]
-      },
-      ```
-
-   1. After you edit your pipeline, you must manually create the CloudWatch Events rule for change detection\. For more information on using the CLI to create the rule, see [Start a Pipeline Automatically Using Amazon CloudWatch Events](triggering.md)\.
+1. If you use the CLI to add an Amazon S3 source to your pipeline, you must manually create the CloudWatch Events rule and AWS CloudTrail trail, as described in [Create a CloudWatch Events Rule That Starts Your Amazon S3 Pipeline](create-cloudtrail-S3-source.md)\.
 
 1. To apply your changes, run the update\-pipeline command, specifying the pipeline JSON file, similar to the following:
 **Important**  
@@ -229,11 +198,11 @@ Be sure to include `file://` before the file name\. It is required in this comma
 
    This command returns the entire structure of the edited pipeline\.
 **Note**  
-The update\-pipeline command stops the pipeline\. If a revision is being run through the pipeline when you run the update\-pipeline command, that run will be stopped\. You must manually start the pipeline to run that revision through the updated pipeline\.
+The update\-pipeline command stops the pipeline\. If a revision is being run through the pipeline when you run the update\-pipeline command, that run is stopped\. You must manually start the pipeline to run that revision through the updated pipeline\.
 
 1. Open the AWS CodePipeline console and choose the pipeline you just edited from the list\.
 
-   The pipeline shows your changes\. The next time you make a change to the source location, the pipeline will run that revision through the revised structure of the pipeline\.
+   The pipeline shows your changes\. The next time you make a change to the source location, the pipeline runs that revision through the revised structure of the pipeline\.
 
 1. To manually run the last revision through the revised structure of the pipeline, run the start\-pipeline\-execution command\. For more information, see [Start a Pipeline Manually in AWS CodePipeline](pipelines-rerun-manually.md)\.
 

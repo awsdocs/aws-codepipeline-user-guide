@@ -2,7 +2,7 @@
 
 By default, a pipeline starts automatically when it is created and then any time a change is made in a source repository\. However, you might want to rerun the most recent revision through the pipeline a second time\. You can use the AWS CodePipeline console or the AWS CLI and start\-pipeline\-execution command to manually rerun the most recent revision through your pipeline\.
 
-
+**Topics**
 + [Start a Pipeline Manually \(Console\)](#pipelines-rerun-manually-console)
 + [Start a Pipeline Manually \(CLI\)](#pipelines-rerun-manually-cli)
 

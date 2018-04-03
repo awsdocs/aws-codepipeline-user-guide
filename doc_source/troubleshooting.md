@@ -2,7 +2,7 @@
 
 The following information might help you troubleshoot common issues in AWS CodePipeline\.
 
-
+**Topics**
 + [Pipeline Error: A pipeline configured with AWS Elastic Beanstalk returns an error message: "Deployment failed\. The provided role does not have sufficient permissions: Service:AmazonElasticLoadBalancing"](#troubleshooting-aeb1)
 + [Deployment Error: A pipeline configured with an AWS Elastic Beanstalk deploy action hangs instead of failing if the "DescribeEvents" permission is missing](#troubleshooting-aeb2)
 + [Pipeline Error: A source action returns the insufficient permissions message: "Could not access the AWS CodeCommit repository `repository-name`\. Make sure that the pipeline IAM role has sufficient permissions to access the repository\."](#troubleshooting-service-role-permissions)
@@ -175,11 +175,8 @@ To use the AWS CodePipeline console to confirm the name of the build input artif
 ## Need Help with a Different Issue?<a name="troubleshooting-other"></a>
 
 Try these other resources:
-
 + Contact [AWS Support](https://aws.amazon.com/contact-us/)\.
-
 + Ask a question in the [AWS CodePipeline forum](https://forums.aws.amazon.com//forum.jspa?forumID=197)\.
-
 + [Request a limit increase](https://console.aws.amazon.com/support/home#/case/create%3FissueType=service-limit-increase)\. For more information, see [Limits in AWS CodePipeline](limits.md)\.
 **Note**  
 It can take up to two weeks to process requests for a limit increase\.
