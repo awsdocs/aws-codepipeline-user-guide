@@ -125,7 +125,7 @@ The numbering of serial actions do not have to be in strict sequence\. For examp
   + `Test`
   + `Invoke`
 
-  Some provider types and configuration options are provided below\.
+
 + Valid provider types for an action category depend on the category\. For example, for a source action type, a valid provider type is `S3`, `GitHub`, or `CodeCommit`\. This example shows the structure for the `S3` source action provider:
 
   ```
@@ -137,7 +137,6 @@ The numbering of serial actions do not have to be in strict sequence\. For examp
                           },
   ```
 
-  For a full list of valid provider types, see the [AWS CodePipeline API Reference](http://docs.aws.amazon.com/codepipeline/latest/APIReference)\.
 + Every action must have a valid action configuration, which depends on the provider type for that action\. The following table lists the required action configuration elements for each valid provider type:  
 **Action Configuration Properties for Provider Types**    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html)
