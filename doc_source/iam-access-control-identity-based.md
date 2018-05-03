@@ -3,7 +3,7 @@
 Every AWS resource is owned by an AWS account, and permissions to create or access a resource are governed by permissions policies\. An account administrator can attach permissions policies to IAM identities \(that is, users, groups, and roles\), and some services \(such as AWS Lambda\) also support attaching permissions policies to resources\. 
 
 **Note**  
-An *account administrator* \(or administrator user\) is a user with administrator privileges\. For more information, see [IAM Best Practices](http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html) in the *IAM User Guide*\.
+An *account administrator* \(or administrator IAM user\) is a user with administrator privileges\. For more information, see [IAM Best Practices](http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html) in the *IAM User Guide*\.
 
 When granting permissions, you decide who is getting the permissions, the resources they get permissions for, and the specific actions that you want to allow on those resources\.
 
@@ -72,27 +72,7 @@ The following table describes the AWS CodePipeline API calls that currently supp
 **Note**  
 AWS CodePipeline API calls that are not listed in this table do not support resource\-level permissions\. If an AWS CodePipeline API call does not support resource\-level permissions, you can grant users permission to use it, but you have to specify a \* for the resource element of your policy statement\. 
 
-
-| API Call | Resource Type | 
-| --- | --- | 
-| PutActionRevision |  Pipeline arn:aws:codepipeline:*region*:*account*:*pipeline\-name*  | 
-| DeleteCustomActionType |  Action Type arn:aws:codepipeline:*region*:*account*:actionType:*owner*/*category*/*provider*/*version*  | 
-| CreatePipeline |  Pipeline arn:aws:codepipeline:*region*:*account*:*pipeline\-name*  | 
-| ListPipelines |  Pipeline arn:aws:codepipeline:*region*:*account*:*pipeline\-name*  | 
-| PollForJobs |  Action Type arn:aws:codepipeline:*region*:*account*:actionType:*owner*/*category*/*provider*/*version*  | 
-| DisableStageTransition |  Pipeline arn:aws:codepipeline:*region*:*account*:*pipeline\-name*  | 
-| StartPipelineExecution |  Pipeline arn:aws:codepipeline:*region*:*account*:*pipeline\-name*  | 
-| UpdatePipeline |  Pipeline arn:aws:codepipeline:*region*:*account*:*pipeline\-name*  | 
-| GetPipelineState |  Pipeline arn:aws:codepipeline:*region*:*account*:*pipeline\-name*  | 
-| RetryStageExecution |  Pipeline arn:aws:codepipeline:*region*:*account*:*pipeline\-name*  | 
-| ListActionTypes |  Action Type arn:aws:codepipeline:*region*:*account*:actionType:*owner*/*category*/*provider*/*version*  | 
-| CreateCustomActionType |  Action Type arn:aws:codepipeline:*region*:*account*:actionType:*owner*/*category*/*provider*/*version*  | 
-| GetPipelineExecution |  Pipeline arn:aws:codepipeline:*region*:*account*:*pipeline\-name*  | 
-| GetPipeline |  Pipeline arn:aws:codepipeline:*region*:*account*:*pipeline\-name*  | 
-| ListPipelineExecutions |  Pipeline arn:aws:codepipeline:*region*:*account*:*pipeline\-name*  | 
-| DeletePipeline |  Pipeline arn:aws:codepipeline:*region*:*account*:*pipeline\-name*  | 
-| EnableStageTransition |  Pipeline arn:aws:codepipeline:*region*:*account*:*pipeline\-name*  | 
-| PutApprovalResult |  Action arn:aws:codepipeline:*region*:*account*:*pipeline\-name*/*stage\-name*/*action\-name*  This API call supports resource\-level permissions\. However, you may encounter an error if you use the IAM console or Policy Generator to create policies with `"codepipeline:PutApprovalResult"` that specify a resource ARN\. If you encounter an error, you can use the **JSON** tab in the IAM console or the CLI to create a policy\.   | 
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/iam-access-control-identity-based.html)
 
 ## Understanding Resource Ownership<a name="understanding-resource-ownership"></a>
 

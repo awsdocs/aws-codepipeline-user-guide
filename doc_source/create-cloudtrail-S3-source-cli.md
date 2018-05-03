@@ -114,7 +114,9 @@ For more information about creating a trail in the CLI, see [Creating a Trail wi
    aws events put-rule --name "MyS3SourceRule" --event-pattern "{\"source\":[\"aws.s3\"],\"detail-type\":[\"AWS API Call via CloudTrail\"],\"detail\":{\"eventSource\":[\"s3.amazonaws.com\"],\"eventName\":[\"PutObject\"],\"resources\":{\"ARN\":[\"ARN:aws:s3:::myBucket/myFolder/file.zip\"]}}}
    ```
 
-1. To add AWS CodePipeline as a target, call the put\-targets command and include the \-\-rule and \-\-Id parameters\.
+1. To add AWS CodePipeline as a target, call the put\-targets command and include the following parameters:
+   + The \-\-rule parameter is used with the *rule\_name* you created using put\-rule\. 
+   + The \-\-targets parameter is used with the list *Id* of the target in the list of targets and the *ARN* of the target pipeline\.
 
    Use the following syntax:
 
@@ -124,7 +126,7 @@ For more information about creating a trail in the CLI, see [Creating a Trail wi
    --targets Id,ARN
    ```
 
-   The following sample command specifies that for the rule called MyS3SourceRule, the target is the ID and ARN for the pipeline that starts when something changes in the repository\.
+   The following sample command specifies that for the rule called MyS3SourceRule, the target *Id* is composed of the number one, indicating that in what may be a list of targets for the rule, this is target 1\. The sample command also specifies an example *ARN* for the pipeline that starts when something changes in the repository\.
 
    ```
    aws events put-targets --rule MyS3SourceRule --targets Id=1,Arn=arn:aws:codepipeline:us-west-2:80398EXAMPLE:TestPipeline

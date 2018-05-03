@@ -7,7 +7,7 @@
 1. In the navigation pane, choose **Events**\.
 
 1. Choose **Create rule**, and then under **Event Source**, choose **Schedule**\.  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/test-schedule-cptarget.png)
+![\[S3 source state change rule\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/test-schedule-cptarget.png)![\[S3 source state change rule\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[S3 source state change rule\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
 1. Set up the schedule using a fixed rate or expression\. For information, see [Schedule Expression for Rules](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html)\.
 

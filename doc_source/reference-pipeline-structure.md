@@ -125,18 +125,16 @@ The numbering of serial actions do not have to be in strict sequence\. For examp
   + `Test`
   + `Invoke`
 
-
+  Some provider types and configuration options are provided below\.
 + Valid provider types for an action category depend on the category\. For example, for a source action type, a valid provider type is `S3`, `GitHub`, or `CodeCommit`\. This example shows the structure for the `S3` source action provider:
 
   ```
   "actionTypeId": {
-                              "category": "Source",
-                              "owner": "AWS",
-                              "version": "1",
-                              "provider": "S3"
-                          },
+    "category": "Source",
+    "owner": "AWS",
+    "version": "1",
+    "provider": "S3"},
   ```
-
 + Every action must have a valid action configuration, which depends on the provider type for that action\. The following table lists the required action configuration elements for each valid provider type:  
 **Action Configuration Properties for Provider Types**    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html)
@@ -147,7 +145,20 @@ The numbering of serial actions do not have to be in strict sequence\. For examp
   "configuration": {
     "S3Bucket": "awscodepipeline-demobucket-example-date",
     "S3ObjectKey": "CodePipelineDemoApplication.zip",
+    "PollForSourceChanges": "false"
   }
+  ```
+
+  The following example shows the action configuration returned for a source action that uses GitHub:
+
+  ```
+  "configuration": {
+    "Owner": "MyGitHubAccountName",
+    "Repo": "MyGitHubRepositoryName",
+    "PollForSourceChanges": "false",
+    "Branch": "master",
+    "OAuthToken": "****"
+  },
   ```
 
   The following example shows a valid configuration for a deploy action that uses Amazon ECS:
