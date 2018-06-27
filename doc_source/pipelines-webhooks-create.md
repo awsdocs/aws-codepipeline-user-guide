@@ -43,7 +43,7 @@ To use the AWS CLI to create a webhook, call the put\-webhook command and supply
    aws codepipeline put-webhook --cli-input-json file://webhook_json.json --region "eu-central-1"
    ```
 
-1. In the output shown in this example for a webhook named "my\-webhook," the URL and ARN are returned\. Copy the URL\.
+1. In the output shown in this example for a webhook named "my\-webhook," the URL and ARN are returned\.
 
    ```
    {

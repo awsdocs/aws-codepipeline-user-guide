@@ -50,7 +50,7 @@ You can edit the GitHub source action in the console\. This allows AWS CodePipel
 
 **Example 2: To update a webhook name or GitHub repository using the CLI**
 
-1. Deregister and delete the existing webhook that is associated to the old webhook name  or GitHub repository using the steps in [Delete the Webhook for Your GitHub Pipeline](pipelines-webhooks-delete.md)\.
+1. Deregister and delete the existing webhook that is associated to the old webhook name or GitHub repository using the steps in [Delete the Webhook for Your GitHub Pipeline](pipelines-webhooks-delete.md)\.
 
 1. Recreate the webhook by creating and registering a new webhook using the steps in [Create a Webhook for Your GitHub Pipeline](pipelines-webhooks-create.md)\.
 **Note**  

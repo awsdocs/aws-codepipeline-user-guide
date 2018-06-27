@@ -13,7 +13,7 @@ The following are some ways Lambda functions can be used in pipelines:
 + To back up resources before building or deploying by creating an AMI snapshot\.
 + To add integration with third\-party products to your pipeline, such as posting messages to an IRC client\.
 
-This topic assumes you are familiar with AWS CodePipeline and AWS Lambda and know how to create pipelines, functions, and the IAM polices and roles on which they depend\. In this topic, we will walk through the steps for:
+This topic assumes you are familiar with AWS CodePipeline and AWS Lambda and know how to create pipelines, functions, and the IAM policies and roles on which they depend\. In this topic, we will walk through the steps for:
 + Creating a Lambda function that tests whether a web page was deployed successfully\.
 + Configuring the AWS CodePipeline and Lambda execution roles and the permissions required to run the function as part of the pipeline\.
 + Editing a pipeline to add the Lambda function as an action\. 
@@ -31,7 +31,7 @@ This topic includes sample functions to demonstrate the flexibility of working w
 Each sample function includes information about the permissions you must add to the role\. For information about limits in AWS Lambda, see [Limits](http://docs.aws.amazon.com/lambda/latest/dg/limits.html) in the AWS Lambda Developer Guide\.
 
 **Important**  
-The sample code, roles, and polices included in this topic are meant as examples only, and are provided as\-is\.
+The sample code, roles, and policies included in this topic are meant as examples only, and are provided as\-is\.
 
 **Topics**
 + [Step 1: Create a Pipeline](#actions-invoke-lambda-function-create-test-pipeline)

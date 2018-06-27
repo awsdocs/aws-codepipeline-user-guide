@@ -29,6 +29,18 @@ Logging features are available in the following AWS services:
 + AWS CloudTrail can be used to log AWS API calls and related events made by or on behalf of an AWS account\. For more information, see [Log AWS CodePipeline API Calls with AWS CloudTrail](monitoring-cloudtrail-logs.md)\.
 + Amazon CloudWatch Events can be used to monitor your AWS Cloud resources and the applications you run on AWS\. You can create alerts in Amazon CloudWatch Events based on metrics that you define\. For more information, see [Detect and React to Changes in Pipeline State with Amazon CloudWatch Events](detect-state-changes-cloudwatch-events.md)\.
 
+### Best Practices for the Jenkins PlugIn<a name="best-practices-jenkins"></a>
+
+Use the best practices provided in this section for pipelines with a Jenkins action provider\.
+
+#### Configure a Separate Amazon EC2 Instance and IAM Role for Your Jenkins Build Server<a name="best-practices-jenkins-instance"></a>
+
+As a best practice, when you use a Jenkins build provider for your pipeline’s build or test action, install Jenkins on an Amazon EC2 instance and configure a separate EC2 instance profile\. Make sure the instance profile grants Jenkins only the AWS permissions required to perform tasks for your project, such as retrieving files from Amazon S3\. 
+
+The instance profile provides applications running on an Amazon EC2 instance with the credentials to access other AWS services\. As a result, you do not need to configure AWS credentials \(AWS access key and secret key\)\.
+
+To learn how to create the role for your Jenkins instance profile, see the steps in [Create an IAM Role to Use for Jenkins Integration](tutorials-four-stage-pipeline.md#tutorials-four-stage-pipeline-prerequisites-jenkins-iam-role)\.
+
 ## Use Cases for AWS CodePipeline<a name="use-cases"></a>
 
 You can create pipelines that integrate with other AWS services\. These can be AWS services, such as Amazon S3, or third\-party products, such as GitHub\. This section provides examples for using AWS CodePipeline to automate your code releases using different product integrations\. For a full list of integrations with AWS CodePipeline organized by action type, see [AWS CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.

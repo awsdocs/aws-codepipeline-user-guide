@@ -43,7 +43,7 @@ For more information about creating a trail in the CLI, see [Creating a Trail wi
    The following sample command uses \-\-trail\-name and \-\-event\-selectors to specify managing data events for a source bucket and prefix called myBucket/myFolder\.
 
    ```
-   aws cloudtrail put-event-selectors --trail-name my-trail --event-selectors '[{ "ReadWriteType": "WriteOnly", "IncludeManagementEvents":false, "DataResources": [{ "Type": "AWS::S3::Object", "Values": ["ARN:aws:s3:::myBucket/myFolder/file.zip"] }] }]'
+   aws cloudtrail put-event-selectors --trail-name my-trail --event-selectors '[{ "ReadWriteType": "WriteOnly", "IncludeManagementEvents":false, "DataResources": [{ "Type": "AWS::S3::Object", "Values": ["arn:aws:s3:::myBucket/myFolder/file.zip"] }] }]'
    ```
 
 **To create a CloudWatch Events rule with Amazon S3 as the event source and AWS CodePipeline as the target and apply the permissions policy**
@@ -111,7 +111,7 @@ For more information about creating a trail in the CLI, see [Creating a Trail wi
    The following sample command uses \-\-event\-pattern to create a rule called MyS3SourceRule\.
 
    ```
-   aws events put-rule --name "MyS3SourceRule" --event-pattern "{\"source\":[\"aws.s3\"],\"detail-type\":[\"AWS API Call via CloudTrail\"],\"detail\":{\"eventSource\":[\"s3.amazonaws.com\"],\"eventName\":[\"PutObject\"],\"resources\":{\"ARN\":[\"ARN:aws:s3:::myBucket/myFolder/file.zip\"]}}}
+   aws events put-rule --name "MyS3SourceRule" --event-pattern "{\"source\":[\"aws.s3\"],\"detail-type\":[\"AWS API Call via CloudTrail\"],\"detail\":{\"eventSource\":[\"s3.amazonaws.com\"],\"eventName\":[\"PutObject\"],\"resources\":{\"ARN\":[\"arn:aws:s3:::myBucket/myFolder/file.zip\"]}}}
    ```
 
 1. To add AWS CodePipeline as a target, call the put\-targets command and include the following parameters:

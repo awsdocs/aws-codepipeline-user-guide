@@ -108,6 +108,18 @@ It is a security best practice to rotate your personal access token on a regular
                            },
    ```
 
+1. If you are working with the pipeline structure retrieved using the `get-pipeline` command, you must modify the structure in the JSON file by removing the `metadata` lines from the file, or the `update-pipeline` command will not be able to use it\. Remove the section from the pipeline structure in the JSON file \(the "metadata": \{ \} lines and the "created," "pipelineARN," and "updated" fields within\)\.
+
+   For example, remove the following lines from the structure: 
+
+   ```
+   "metadata": {  
+     "pipelineArn": "arn:aws:codepipeline:region:account-ID:pipeline-name",
+     "created": "date",
+     "updated": "date"
+     }
+   ```
+
 1. Save the file, and then run the update\-pipeline with the `--cli-input-json` parameter to specify the JSON file you just edited\. For example, to update a pipeline named MyFirstPipeline, you would type something similar to the following:
 **Important**  
 Be sure to include `file://` before the file name\. It is required in this command\.

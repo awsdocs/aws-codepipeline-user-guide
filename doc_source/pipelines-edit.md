@@ -204,6 +204,20 @@ Some edits, such as moving an action from one stage to another stage, delete the
 
    AWS CodePipeline uses Amazon CloudWatch Events to detect changes in your AWS CodeCommit source repository and branch or your Amazon S3 source bucket\. AWS CodePipeline uses webhooks to detect changes in your GitHub source repository and branch\. The next step includes instructions for creating these resources manually\. Setting the flag to false disables periodic checks, which are not required when you use the recommended change\-detection methods\. 
 
+1. If you are working with the pipeline structure retrieved using the `get-pipeline` command, you must modify the structure in the JSON file by removing the `metadata` lines from the file, or the `update-pipeline` command will not be able to use it\. Remove the section from the pipeline structure in the JSON file \(the "metadata": \{ \} lines and the "created," "pipelineARN," and "updated" fields within\)\.
+
+   For example, remove the following lines from the structure: 
+
+   ```
+   "metadata": {  
+     "pipelineArn": "arn:aws:codepipeline:region:account-ID:pipeline-name",
+     "created": "date",
+     "updated": "date"
+     }
+   ```
+
+   Save the file\.
+
 1. If you use the CLI to edit a pipeline, you must manually manage the recommended change\-detection resources for your pipeline:
    + If you use the CLI to edit a pipeline by adding an AWS CodeCommit repository, you must create the CloudWatch Events rule, as described in [Create a CloudWatch Events Rule That Starts Your AWS CodeCommit Pipeline \(CLI\)](pipelines-trigger-source-repo-changes-cli.md)\.
    + If you use the CLI to edit a pipeline by adding an Amazon S3 source, you must create the CloudWatch Events rule and AWS CloudTrail trail, as described in [Start an Amazon S3 Pipeline Automatically Using a CloudWatch Events Rule](create-cloudtrail-S3-source.md)\.
