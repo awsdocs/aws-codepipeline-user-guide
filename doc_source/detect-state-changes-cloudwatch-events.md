@@ -149,7 +149,7 @@ Valid state values:
 ### Prerequisites<a name="cloudwatch-notifications-prerequisites"></a>
 
 Before you create event rules for use in your AWS CodePipeline operations, you should do the following:
-+ Complete the CloudWatch Events prerequisites\. For information, see [Amazon CloudWatch Events Prerequisites](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CWE_Prerequisites.html)\.
++ Complete the CloudWatch Events prerequisites\. For this information, see [Regional Endpoints](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/GettingSetup_cwe.html#CWE_Prerequisites)\.
 + Familiarize yourself with events, rules, and targets in CloudWatch Events\. For more information, see [What Is Amazon CloudWatch Events](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html)\.
 + Create the target or targets you will use in your event rules, such as an Amazon SNS notification topic\.
 
