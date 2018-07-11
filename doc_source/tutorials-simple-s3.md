@@ -409,7 +409,7 @@ You can enable or disable the transition between stages in a pipeline\. Disablin
 
 **To disable and enable transitions between stages in an AWS CodePipeline pipeline**
 
-1. Open the AWS CodePipeline console and choose **MyFirstPipeline**from the list of pipelines\.
+1. Open the AWS CodePipeline console and choose **MyFirstPipeline** from the list of pipelines\.
 
 1. On the details page for the pipeline, choose the arrow that indicates the transition between the second stage, **Staging**, and the third stage that you added in the previous section, **Production**\.
 
