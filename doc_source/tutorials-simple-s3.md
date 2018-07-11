@@ -394,7 +394,7 @@ Be sure to include `file://` before the file name\. It is required in this comma
 
    This command returns a `pipelineExecutionId` object\.
 
-1. Open the AWS CodePipeline console and choose **MyFirstPipeline**from the list of pipelines\.
+1. Open the AWS CodePipeline console and choose **MyFirstPipeline** from the list of pipelines\.
 
    The pipeline shows three stages and the state of the artifact running through those three stages\. It might take up to five minutes for the pipeline to run through all stages\. Although the deployment succeeds on the first two stages, just as before, the **Production** stage shows that the **Deploy\-Second\-Deployment** action failed\.   
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-failed-third-stage.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
