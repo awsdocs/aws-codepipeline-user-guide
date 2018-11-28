@@ -1,6 +1,12 @@
+--------
+
+The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
+
+--------
+
 # Working with Stage Transitions in AWS CodePipeline<a name="transitions"></a>
 
-Transitions are links between pipeline stages that can be disabled or enabled\. They are enabled by default\. When you re\-enable a disabled transition, the latest revision will run through the remaining stages of the pipeline unless more than 30 days have passed\. Pipeline execution won't resume for a transition that has been disabled more than 30 days unless a new change is detected or you manually rerun the pipeline\.
+Transitions are links between pipeline stages that can be disabled or enabled\. They are enabled by default\. When you re\-enable a disabled transition, the latest revision runs through the remaining stages of the pipeline unless more than 30 days have passed\. Pipeline execution won't resume for a transition that has been disabled more than 30 days unless a new change is detected or you manually rerun the pipeline\.
 
 **Note**  
 You can use an approval action to pause the run of a pipeline until it is manually approved to continue\. For more information, see [Manage Approval Actions in AWS CodePipeline](approvals.md)\. 
@@ -13,21 +19,21 @@ You can use an approval action to pause the run of a pipeline until it is manual
 
 **To disable or enable transitions in a pipeline**
 
-1. Sign in to the AWS Management Console and open the AWS CodePipeline console at [http://console\.aws\.amazon\.com/codepipeline](http://console.aws.amazon.com/codepipeline)\.
+1. Sign in to the AWS Management Console and open the AWS CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
 
    The names of all pipelines associated with your AWS account are displayed\.
 
 1.  In **Name**, choose the name of the pipeline for which you want to enable or disable transitions\. This opens a detailed view of the pipeline, including the transitions between the stages of the pipeline\.
 
-1. Find the arrow after the last stage that you want to run, and then choose it\. For example, in the following example pipeline, if you want the actions in the *Staging* stage to run, but not the actions in the stage named *Production*, you would choose the arrow between those two stages:  
-![\[Select the arrow between stages to enable or disable transitions.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-firstpipeline.png)![\[Select the arrow between stages to enable or disable transitions.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Select the arrow between stages to enable or disable transitions.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+1. Find the arrow after the last stage that you want to run, and then choose the button next to it\. For example, in the following pipeline, if you want the actions in the **Staging** stage to run, but not the actions in the stage named **Production**, choose the **Disable transition** button between those two stages:  
+![\[Select the arrow between stages to enable or disable transitions.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-enabled-transition-pol.png)![\[Select the arrow between stages to enable or disable transitions.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Select the arrow between stages to enable or disable transitions.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
-1. In the **Disable transition** dialog box, type a reason for disabling the transition, and then choose **Disable**\.
+1. In the **Disable transition** dialog box, enter a reason for disabling the transition, and then choose **Disable**\.
 
-   The arrow changes to show that transitions are disabled between the stage preceding the arrow and the stage following the arrow\. Any revisions that were already running in the stages that come after the disabled transition will continue through the pipeline, but any subsequent revisions will not continue past the disabled transition\.   
-![\[The arrow between stages in a pipeline indicates whether a transition is enabled or disabled.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-disabled-transition3.png)![\[The arrow between stages in a pipeline indicates whether a transition is enabled or disabled.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The arrow between stages in a pipeline indicates whether a transition is enabled or disabled.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+   The button changes to show that transitions are disabled between the stage preceding the arrow and the stage following the arrow\. Any revisions that were already running in the stages that come after the disabled transition continue through the pipeline, but any subsequent revisions do not continue past the disabled transition\.   
+![\[The arrow between stages in a pipeline indicates whether a transition is enabled or disabled.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-disabled-transition3-pol.png)![\[The arrow between stages in a pipeline indicates whether a transition is enabled or disabled.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The arrow between stages in a pipeline indicates whether a transition is enabled or disabled.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
-1. To enable transitions, choose the disabled transition arrow\. In the **Enable transition** dialog box, choose **Enable**\. The pipeline will immediately enable the transition between the two stages\. If any revisions have been run through the prior stages after the transition was disabled, in a few moments, the pipeline will start running the latest revision through the stages after the formerly disabled transition\. The pipeline will run the revision through all remaining stages in the pipeline\.
+1. Choose the **Enable transition** button next to the arrow\. In the **Enable transition** dialog box, choose **Enable**\. The pipeline immediately enables the transition between the two stages\. If any revisions have been run through the earlier stages after the transition was disabled, in a few moments, the pipeline starts running the latest revision through the stages after the formerly disabled transition\. The pipeline runs the revision through all remaining stages in the pipeline\.
 **Note**  
 It might take a few seconds for changes to appear in the AWS CodePipeline console after you enable the transition\.
 

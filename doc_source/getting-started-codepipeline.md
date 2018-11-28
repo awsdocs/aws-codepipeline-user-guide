@@ -1,3 +1,9 @@
+--------
+
+The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
+
+--------
+
 # Getting Started with AWS CodePipeline<a name="getting-started-codepipeline"></a>
 
 Before you can use AWS CodePipeline for the first time, you must complete the following steps\.
@@ -16,7 +22,7 @@ Create an AWS account, if you haven't done so already, by going to [https://aws\
 
 ## Step 2: Create or Use an IAM User<a name="create-iam-user"></a>
 
-Create an IAM user or use an existing one in your AWS account\. Make sure that you have an AWS access key ID and an AWS secret access key associated with that IAM user\. For more information, see [Creating an IAM User in Your AWS Account](http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_SettingUpUser.html)\.
+Create an IAM user or use an existing one in your AWS account\. Make sure that you have an AWS access key ID and an AWS secret access key associated with that IAM user\. For more information, see [Creating an IAM User in Your AWS Account](https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_SettingUpUser.html)\.
 
 ## Step 3: Use an IAM Managed Policy to Assign AWS CodePipeline Permissions to the IAM User<a name="assign-permissions"></a>
 
@@ -38,9 +44,9 @@ The **AWSCodePipelineFullAccess** policy provides access to all AWS CodePipeline
 
 **To install and configure the AWS CLI**
 
-1. On your local machine, download and install the AWS CLI\. This will enable you to interact with AWS CodePipeline from the command line\. For more information, see [Getting Set Up with the AWS Command Line Interface](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-set-up.html)\.
+1. On your local machine, download and install the AWS CLI\. This will enable you to interact with AWS CodePipeline from the command line\. For more information, see [Getting Set Up with the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-set-up.html)\.
 **Note**  
-AWS CodePipeline works only with AWS CLI versions 1\.7\.38 and later\. To determine which version of the AWS CLI that you may have installed, run the command `aws --version`\. To upgrade an older version of the AWS CLI to the latest version, follow the instructions in [Uninstalling the AWS CLI](http://docs.aws.amazon.com/cli/latest/userguide/cli-uninstall.html), and then follow the instructions in [Installing the AWS Command Line Interface](http://docs.aws.amazon.com/cli/latest/userguide/installing.html)\.
+AWS CodePipeline works only with AWS CLI versions 1\.7\.38 and later\. To determine which version of the AWS CLI that you may have installed, run the command aws \-\-version\. To upgrade an older version of the AWS CLI to the latest version, follow the instructions in [Uninstalling the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-uninstall.html), and then follow the instructions in [Installing the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/installing.html)\.
 
 1. Configure the AWS CLI with the configure command, as follows:
 
@@ -57,11 +63,11 @@ AWS CodePipeline works only with AWS CLI versions 1\.7\.38 and later\. To determ
    Default output format [None]: Type json here, and then press Enter
    ```
 **Note**  
-For more information about IAM, access keys, and secret keys, see [Managing Access Keys for IAM Users](http://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingCredentials.html) and [How Do I Get Credentials?](http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_Introduction.html#IAM_SecurityCredentials)\.   
-For more information about the regions and endpoints available for AWS CodePipeline, see [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html#codepipeline_region)\.
+For more information about IAM, access keys, and secret keys, see [Managing Access Keys for IAM Users](https://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingCredentials.html) and [How Do I Get Credentials?](https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_Introduction.html#IAM_SecurityCredentials)\.   
+For more information about the regions and endpoints available for AWS CodePipeline, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#codepipeline_region)\.
 
 ## Step 5: Open the Console for AWS CodePipeline<a name="open-codepipeline-console"></a>
-+ Sign in to the AWS Management Console and open the AWS CodePipeline console at [http://console\.aws\.amazon\.com/codepipeline](http://console.aws.amazon.com/codepipeline)\.
++ Sign in to the AWS Management Console and open the AWS CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
 
 ## Next Steps<a name="next-steps"></a>
 

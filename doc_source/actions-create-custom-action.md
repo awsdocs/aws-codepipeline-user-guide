@@ -1,3 +1,9 @@
+--------
+
+The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
+
+--------
+
 # Create and Add a Custom Action in AWS CodePipeline<a name="actions-create-custom-action"></a>
 
 AWS CodePipeline includes a number of actions that help you configure build, test, and deploy resources for your automated release process\. If your release process includes activities that are not included in the default actions, such as an internally developed build process or a test suite, you can create a custom action for that purpose and include it in your pipeline\. You can use the AWS CLI to create custom actions in pipelines associated with your AWS account\.
@@ -70,7 +76,7 @@ These instructions assume that you have already completed the steps in [Getting 
 
    ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/number-2.png) This dynamic link is updated after every run of the action and points to the address in `executionUrlTemplate`, which you specify when you create your custom action\.
 
-   For more information about these link types, as well as `RevisionURLTemplate` and `ThirdPartyURL`, see [ActionTypeSettings](http://docs.aws.amazon.com/codepipeline/latest/APIReference/API_ActionTypeSettings.html) and [CreateCustomActionType](http://docs.aws.amazon.com/codepipeline/latest/APIReference/API_CreateCustomActionType.html) in the [AWS CodePipeline API Reference](http://docs.aws.amazon.com/codepipeline/latest/APIReference/)\. For more information about action structure requirements and how to create an action, see [AWS CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
+   For more information about these link types, as well as `RevisionURLTemplate` and `ThirdPartyURL`, see [ActionTypeSettings](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_ActionTypeSettings.html) and [CreateCustomActionType](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_CreateCustomActionType.html) in the [AWS CodePipeline API Reference](https://docs.aws.amazon.com/codepipeline/latest/APIReference/)\. For more information about action structure requirements and how to create an action, see [AWS CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
 
 1. Save the JSON file and give it a name you can easily remember \(for example, *MyCustomAction*\.json\)\.
 
@@ -147,7 +153,7 @@ The simplest strategy is to add the infrastructure you need for your custom job 
 
 1. Learn more about Amazon EC2 and determine whether it is the right choice for your integration\. For information, see [Amazon EC2 \- Virtual Server Hosting](http://aws.amazon.com/ec2)\.
 
-1. Get started creating your Amazon EC2 instances\. For information, see [Getting Started with Amazon EC2 Linux Instances](http://docs.aws.amazon.com/AWSEC2/latest/GettingStartedGuide/)\.
+1. Get started creating your Amazon EC2 instances\. For information, see [Getting Started with Amazon EC2 Linux Instances](https://docs.aws.amazon.com/AWSEC2/latest/GettingStartedGuide/)\.
 
 Another strategy to consider is using identity federation with IAM to integrate your existing identity provider system and resources\. This strategy is particularly useful if you already have a corporate identity provider or are already configured to support users using web identity providers\. Identity federation allows you to grant secure access to AWS resources, including AWS CodePipeline, without having to create or manage IAM users\. You can leverage features and policies for password security requirements and credential rotation\. You can use sample applications as templates for your own design\. 
 
@@ -155,21 +161,21 @@ Another strategy to consider is using identity federation with IAM to integrate 
 
 1. Learn more about IAM identity federation\. For information, see [Manage Federation](http://aws.amazon.com/iam/details/manage-federation/)\.
 
-1.  Review the examples in [Scenarios for Granting Temporary Access](http://docs.aws.amazon.com/STS/latest/UsingSTS/STSUseCases.html) to identify the scenario for temporary access that best fits the needs of your custom action\.
+1.  Review the examples in [Scenarios for Granting Temporary Access](https://docs.aws.amazon.com/STS/latest/UsingSTS/STSUseCases.html) to identify the scenario for temporary access that best fits the needs of your custom action\.
 
 1. Review code examples of identity federation relevant to your infrastructure, such as:
    + [Identity Federation Sample Application for an Active Directory Use Case](http://aws.amazon.com/code/1288653099190193)
    + [Mobile Application Identity Federation with Amazon Cognito](https://github.com/awslabs/aws-sdk-android-samples/tree/master/CognitoSyncDemo)
 
-1. Get started configuring identity federation\. For information, see [Identity Providers and Federation](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers.html) in *IAM User Guide*\.
+1. Get started configuring identity federation\. For information, see [Identity Providers and Federation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers.html) in *IAM User Guide*\.
 
 A third strategy to consider is to create an IAM user to use under your AWS account when running your custom action and job worker\. 
 
 **To set up an IAM user**
 
-1. Learn more about IAM best practices and use cases in [IAM Best Practices and Use Cases](http://docs.aws.amazon.com/IAM/latest/UserGuide//IAMBestPracticesAndUseCases.html)\.
+1. Learn more about IAM best practices and use cases in [IAM Best Practices and Use Cases](https://docs.aws.amazon.com/IAM/latest/UserGuide//IAMBestPracticesAndUseCases.html)\.
 
-1. Get started creating IAM users by following the steps in [Creating an IAM User in Your AWS Account](http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_SettingUpUser.html)\.
+1. Get started creating IAM users by following the steps in [Creating an IAM User in Your AWS Account](https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_SettingUpUser.html)\.
 
 The following is an example policy you might create for use with your custom job worker\. This policy is meant as an example only and is provided as\-is\.
 
@@ -232,7 +238,7 @@ After you have mapped out your high\-level workflow, you can create your job wor
 + Acknowledging jobs and returning results to AWS CodePipeline using `AcknowledgeJob`, `PutJobSuccessResult`, and `PutJobFailureResult`\.
 + Retrieving artifacts from and/or putting artifacts into the Amazon S3 bucket for the pipeline\. To download artifacts from the Amazon S3 bucket, you must create an Amazon S3 client that uses signature version 4 signing \(Sig V4\)\. Sig V4 is required for SSE\-KMS\.
 
-  To upload artifacts to the Amazon S3 bucket, you must additionally configure the Amazon S3 `[PutObject](http://docs.aws.amazon.com/AmazonS3/latest/API/SOAPPutObject.html)` request to use encryption\. Currently only SSE\-KMS is supported for encryption\. In order to know whether to use the default key or a customer\-managed key to upload artifacts, your custom job worker must look at the [job data](http://docs.aws.amazon.com/codepipeline/latest/APIReference/API_JobData.html) and check the [encryption key](http://docs.aws.amazon.com/codepipeline/latest/APIReference/API_EncryptionKey.html) property\. If the encryption key property is set, you should use that encryption key ID when configuring SSE\-KMS\. If the key is null, you use the default master key\. AWS CodePipeline uses the default Amazon S3 master key unless otherwise configured\. 
+  To upload artifacts to the Amazon S3 bucket, you must additionally configure the Amazon S3 `[PutObject](https://docs.aws.amazon.com/AmazonS3/latest/API/SOAPPutObject.html)` request to use encryption\. Currently only SSE\-KMS is supported for encryption\. In order to know whether to use the default key or a customer\-managed key to upload artifacts, your custom job worker must look at the [job data](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_JobData.html) and check the [encryption key](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_EncryptionKey.html) property\. If the encryption key property is set, you should use that encryption key ID when configuring SSE\-KMS\. If the key is null, you use the default master key\. AWS CodePipeline uses the default Amazon S3 master key unless otherwise configured\. 
 
   The following sample shows how to create the KMS parameters in Java:
 
@@ -249,7 +255,7 @@ After you have mapped out your high\-level workflow, you can create your job wor
   }
   ```
 
-  For more samples, see [Specifying the AWS Key Management Service in Amazon S3 Using the AWS SDKs](http://docs.aws.amazon.com/AmazonS3/latest/dev/kms-using-sdks.html)\. For more information about the Amazon S3 bucket for AWS CodePipeline, see [AWS CodePipeline Concepts](concepts.md)\.
+  For more samples, see [Specifying the AWS Key Management Service in Amazon S3 Using the AWS SDKs](https://docs.aws.amazon.com/AmazonS3/latest/dev/kms-using-sdks.html)\. For more information about the Amazon S3 bucket for AWS CodePipeline, see [AWS CodePipeline Concepts](concepts.md)\.
 
 A more complex example of a custom job worker is available on GitHub\. This sample is open source and provided as\-is\.
 + [Sample Job Worker for AWS CodePipeline](https://github.com/awslabs/aws-codepipeline-custom-job-worker): Download the sample from the GitHub repository\.

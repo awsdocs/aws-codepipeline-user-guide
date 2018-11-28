@@ -1,3 +1,9 @@
+--------
+
+The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
+
+--------
+
 # Manage the AWS CodePipeline Service Role<a name="how-to-custom-role"></a>
 
 Permissions for some aspects of the pipeline execution process are granted to another role type that acts on behalf of AWS CodePipeline, rather than to IAM users\. The **Service role ** is an IAM role that gives AWS CodePipeline permission to use resources in your account\. Service role creation is only required the first time you create a pipeline in AWS CodePipeline\.
@@ -124,6 +130,8 @@ The following table shows when support was added for other AWS services\.
 
 | AWS Service | AWS CodePipeline Support Date | 
 | --- | --- | 
+| AWS Service Catalog | October 16, 2018 | 
+| AWS Device Farm | July 19, 2018 | 
 | Amazon ECS | December 12, 2017 | 
 | AWS CodeCommit | April 18, 2016 | 
 | AWS OpsWorks | June 2, 2016 | 
@@ -210,6 +218,46 @@ Your service role has a name in a format similar to `oneClick_AWS-CodePipeline-1
    },
    ```
 
+   For AWS Device Farm support, add the following to your policy statement:
+
+   ```
+   {
+       "Action": [
+           "devicefarm:ListProjects",
+           "devicefarm:ListDevicePools",
+           "devicefarm:GetRun",
+           "devicefarm:GetUpload",
+           "devicefarm:CreateUpload",
+           "devicefarm:ScheduleRun"
+       ],
+       "Resource": "*",
+       "Effect": "Allow"
+   },
+   ```
+
+   For AWS Service Catalog support, add the following to your policy statement:
+
+   ```
+   {
+       "Effect": "Allow",
+       "Action": [
+           "servicecatalog:ListProvisioningArtifacts",
+           "servicecatalog:CreateProvisioningArtifact",
+           "servicecatalog:DescribeProvisioningArtifact",
+           "servicecatalog:DeleteProvisioningArtifact",
+           "servicecatalog:UpdateProduct"
+       ],
+       "Resource": "*"
+   },
+   {
+       "Effect": "Allow",
+       "Action": [
+           "cloudformation:ValidateTemplate"
+       ],
+       "Resource": "*"
+   }
+   ```
+
 1. For Amazon ECS, the following are the minimum permissions needed to create pipelines with an Amazon ECS deploy action\.
 
    ```
@@ -272,4 +320,4 @@ Similarly, if none of your pipelines includes AWS CodeDeploy, you can edit the p
 },
 ```
 
-For more information about IAM roles, see [IAM Roles](http://docs.aws.amazon.com/IAM/latest/UserGuide//roles-toplevel.html)\.
+For more information about IAM roles, see [IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide//roles-toplevel.html)\.

@@ -1,3 +1,9 @@
+--------
+
+The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
+
+--------
+
 # Troubleshooting AWS CodePipeline<a name="troubleshooting"></a>
 
 The following information might help you troubleshoot common issues in AWS CodePipeline\.
@@ -158,7 +164,7 @@ artifacts:
  discard-paths: yes
 ```
 
-For an example, see [AWS Elastic Beanstalk Sample for AWS CodeBuild](http://docs.aws.amazon.com/codebuild/latest/userguide/sample-elastic-beanstalk.html)\.
+For an example, see [AWS Elastic Beanstalk Sample for AWS CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/sample-elastic-beanstalk.html)\.
 
 ## File permissions are not retained on source files from GitHub when ZIP does not preserve external attributes<a name="troubleshooting-file-permissions"></a>
 

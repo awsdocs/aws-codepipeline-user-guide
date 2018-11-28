@@ -1,3 +1,9 @@
+--------
+
+The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
+
+--------
+
 # Working with Pipelines in AWS CodePipeline<a name="pipelines"></a>
 
 To define an automated release process, you create a pipeline, which is a workflow construct that describes how software changes go through a release process\. A pipeline is composed of stages and actions that you configure\. 
@@ -15,4 +21,6 @@ For more information about pipelines, see [AWS CodePipeline Concepts](concepts.m
 + [Edit a Pipeline](pipelines-edit.md)
 + [View Pipeline Details and History](pipelines-view.md)
 + [Delete a Pipeline](pipelines-delete.md)
++ [View Execution History](pipelines-view-history.md)
 + [Create a Pipeline That Uses Resources from Another Account](pipelines-create-cross-account.md)
++ [Edit a Pipeline for Push Events](update-change-detection.md)

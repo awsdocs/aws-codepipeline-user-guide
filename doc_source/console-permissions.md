@@ -1,3 +1,9 @@
+--------
+
+The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
+
+--------
+
 # Permissions Required to Use the AWS CodePipeline Console<a name="console-permissions"></a>
 
 For a user to work with AWS CodePipeline in the AWS CodePipeline console, that user must have a minimum set of permissions that allows the user to describe other AWS resources for their AWS account\. In order to use AWS CodePipeline in the AWS CodePipeline console, you must have permissions from the following services:

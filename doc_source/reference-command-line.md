@@ -1,6 +1,12 @@
+--------
+
+The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
+
+--------
+
 # AWS CodePipeline Command Line Reference<a name="reference-command-line"></a>
 
-Use this reference when working with the AWS CodePipeline commands and as a supplement to information documented in the [AWS CLI User Guide](http://docs.aws.amazon.com/cli/latest/userguide/) and the [AWS CLI Reference](http://docs.aws.amazon.com/cli/latest/reference/)\.
+Use this reference when working with the AWS CodePipeline commands and as a supplement to information documented in the [AWS CLI User Guide](https://docs.aws.amazon.com/cli/latest/userguide/) and the [AWS CLI Reference](https://docs.aws.amazon.com/cli/latest/reference/)\.
 
 Before you use the AWS CLI, make sure you complete the prerequisites in [Getting Started with AWS CodePipeline](getting-started-codepipeline.md)\.
 

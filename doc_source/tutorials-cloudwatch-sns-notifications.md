@@ -1,3 +1,9 @@
+--------
+
+The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
+
+--------
+
 # Tutorial: Set Up a CloudWatch Events Rule to Receive Email Notifications for Pipeline State Changes<a name="tutorials-cloudwatch-sns-notifications"></a>
 
 After you set up a pipeline, you can set up a CloudWatch Events rule to send notifications whenever there are changes to the execution state of your pipelines, or in the stages or actions in your pipelines\. For more information on using CloudWatch Events to set up notifications for pipeline state changes, see [Detect and React to Changes in Pipeline State with Amazon CloudWatch Events](detect-state-changes-cloudwatch-events.md)\.
@@ -11,7 +17,7 @@ In this tutorial, you configure a notification to send an email when a pipeline'
 
 ## Step 1: Set Up an Email Notification Using Amazon SNS<a name="create-filter-for-target"></a>
 
-Amazon SNS coordinates use of topics to deliver messages to subscribing endpoints or clients\. Use Amazon SNS to create a notification topic and then subscribe to the topic using your email address\. The Amazon SNS topic will be added as a target to your CloudWatch Events rule\. For more information, see the [Amazon Simple Notification Service Developer Guide](http://docs.aws.amazon.com/sns/latest/dg/) \.
+Amazon SNS coordinates use of topics to deliver messages to subscribing endpoints or clients\. Use Amazon SNS to create a notification topic and then subscribe to the topic using your email address\. The Amazon SNS topic will be added as a target to your CloudWatch Events rule\. For more information, see the [Amazon Simple Notification Service Developer Guide](https://docs.aws.amazon.com/sns/latest/dg/) \.
 
 1. Create or identify a topic in Amazon SNS\. AWS CodePipeline will use CloudWatch Events to send notifications to this topic through Amazon SNS\. To create a topic:
 
@@ -24,7 +30,7 @@ Amazon SNS coordinates use of topics to deliver messages to subscribing endpoint
 
    1. Choose **Create topic**\.
 
-      For more information, see [Create a Topic](http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html) in the *Amazon SNS Developer Guide*\.
+      For more information, see [Create a Topic](https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html) in the *Amazon SNS Developer Guide*\.
 
 1. Subscribe one or more recipients to the topic to receive email notifications\. To subscribe a recipient to a topic:
 
@@ -41,7 +47,7 @@ Amazon SNS coordinates use of topics to deliver messages to subscribing endpoint
 
    1. Amazon SNS sends a subscription confirmation email to the recipient\. To receive email notifications, the recipient must choose the **Confirm subscription** link in this email\. After the recipient clicks the link, if successfully subscribed, Amazon SNS displays a confirmation message in the recipient's web browser\.
 
-   For more information, see [Subscribe to a Topic](http://docs.aws.amazon.com/sns/latest/dg/SubscribeTopic.html) in the *Amazon SNS Developer Guide*\.
+   For more information, see [Subscribe to a Topic](https://docs.aws.amazon.com/sns/latest/dg/SubscribeTopic.html) in the *Amazon SNS Developer Guide*\.
 
 ## Step 2: Create a Rule and Add the SNS Topic as the Target<a name="create-notification-rule"></a>
 
@@ -94,4 +100,4 @@ Create a CloudWatch Events notification rule with AWS CodePipeline as the event 
 
 After you complete this tutorial, you should delete the pipeline and the resources it uses so you will not be charged for continued use of those resources\. 
 
-For information about how to clean up the SNS notification and delete the Amazon CloudWatch Events rule, see [Clean Up \(Unsubscribe from an Amazon SNS Topic\)](http://docs.aws.amazon.com/sns/latest/dg/CleanUp.html) and reference `DeleteRule` in the [Amazon CloudWatch Events API Reference](http://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/)\.
+For information about how to clean up the SNS notification and delete the Amazon CloudWatch Events rule, see [Clean Up \(Unsubscribe from an Amazon SNS Topic\)](http://docs.aws.amazon.com/sns/latest/dg/CleanUp.html) and reference `DeleteRule` in the [Amazon CloudWatch Events API Reference](https://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/)\.

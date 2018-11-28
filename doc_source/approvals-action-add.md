@@ -1,3 +1,9 @@
+--------
+
+The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
+
+--------
+
 # Add a Manual Approval Action to a Pipeline in AWS CodePipeline<a name="approvals-action-add"></a>
 
 You can add an approval action to a stage in an AWS CodePipeline pipeline at the point where you want the pipeline to stop so someone can manually approve or reject the action\. 
@@ -19,30 +25,28 @@ You can use the AWS CodePipeline console to add an approval action to an existin
 
 1. On the pipeline details page, choose **Edit**\.
 
-1. If you want to add an approval action to a new stage, choose **\+ Stage** at the point in the pipeline where you want to add an approval request, and type a name for the stage\. 
+1. If you want to add an approval action to a new stage, choose **\+Add stage** at the point in the pipeline where you want to add an approval request, and enter a name for the stage\. 
 
-   If you want to add an approval action to an existing stage, choose the edit icon \(![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/edit_icon.png)\) on that stage\.
+   If you want to add an approval action to an existing stage, choose **Edit stage**\. 
 
-1. Choose the action icon \(![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/add_action.png)\)\.
+1. Choose **\+ Add action group**\.
 
-1. On the **Add action** page, do the following:
+1. On the **Edit action** page, do the following:
 
-   1. In **Action category**, choose **Approval**\.
+   1. In **Action name**, enter a name to identify the action\.
 
-   1. In **Action name**, type a name to identify the action\.
+   1. In **Action provider**, under **Approval**, choose **Manual approval**\.
 
-   1. In **Approval type**, choose **Manual approval**\.
-
-   1. \(Optional\) In **SNS topic ARN**, choose the name of the topic you will use to send notifications for the approval action\.
+   1. \(Optional\) In **SNS topic ARN**, choose the name of the topic to be used to send notifications for the approval action\.
 
    1. \(Optional\) In **URL for review**, enter the URL of the page or application you want the approver to examine\. Approvers can access this URL through a link included in the console view of the pipeline\. 
 
-   1. \(Optional\) In **Comments**, type any additional information you want to share with the reviewer\.
+   1. \(Optional\) In **Comments**, enter any other information you want to share with the reviewer\.
 
       Your completed page might look similar to the following:  
-![\[The Add action page completed for an Approval action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/pipeline-add-action-manual-approval.png)![\[The Add action page completed for an Approval action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The Add action page completed for an Approval action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+![\[The Edit action page completed for an Approval action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/pipeline-add-action-manual-approval-pol.png)![\[The Edit action page completed for an Approval action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The Edit action page completed for an Approval action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
-   1. Choose **Add action**\.
+   1. Choose **Save**\.
 
 ## Add a Manual Approval Action to an AWS CodePipeline Pipeline \(CLI\)<a name="approvals-action-add-cli"></a>
 

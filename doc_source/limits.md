@@ -1,23 +1,29 @@
+--------
+
+The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
+
+--------
+
 # Limits in AWS CodePipeline<a name="limits"></a>
 
-The following table lists current limits in AWS CodePipeline\. Structural requirements are discussed in [AWS CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\. For information about limits that can be changed, see [AWS Service Limits](http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_codepipeline)\.
+The following table lists current limits in AWS CodePipeline\. Structural requirements are discussed in [AWS CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\. For information about limits that can be changed, see [AWS Service Limits](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_codepipeline)\.
 
 
 |  |  | 
 | --- |--- |
-|  Maximum number of pipelines per region in an AWS account  |  US East \(N\. Virginia\) \(us\-east\-1\): 40 US West \(Oregon\) \(us\-west\-2\): 60 EU \(Ireland\) \(eu\-west\-1\): 60 All other supported regions: 20  | 
+|  Maximum number of total pipelines per region in an AWS account  |  300  | 
+|  Maximum number of pipelines per region with change detection set to periodically checking for source changes  |  US East \(N\. Virginia\) \(us\-east\-1\): 40 US West \(Oregon\) \(us\-west\-2\): 60 EU \(Ireland\) \(eu\-west\-1\): 60 All other supported regions: 20  Instead of using periodic checks, configure your pipeline to use the recommended change\-detection method for your source type\. For example, configure your AWS CodeCommit pipeline to use Amazon CloudWatch Events for change detection\. See [ Change Detection Methods Used to Start Pipelines Automatically](pipelines-about-starting.md#change-detection-methods) for instructions specific to your source type\.   | 
 |  Number of stages in a pipeline  |  Minimum of 2, maximum of 10  | 
-|  Number of actions in a stage  |  Minimum of 1, maximum of 20  | 
-| Maximum number of custom actions per region in an AWS account | Maximum of 50 | 
-| Maximum number of parallel actions in a stage | Maximum of 10 | 
-| Maximum number of sequential actions in a stage | Maximum of 10 | 
-| Maximum number of webhooks per region in an AWS account | Maximum of 300 | 
-|  Length of time before an action times out  |  Approval action: 7 days AWS CloudFormation deployment action: 3 days AWS CodeBuild build action and test action: 8 hours AWS CodeDeploy deployment action: 7 days AWS Lambda invoke action: 1 hour  AWS CodePipeline waits one hour to determine if a Lambda function failed\. If the action times out, AWS CodePipeline sets the invoke action state to failed\. AWS Lambda has different limits\. The default for the AWS Lambda function timeout is 3 seconds, but you can set this limit to up to 300 seconds\.  All other actions: 1 hour  | 
-| Number of days before a stage execution times out | 40  The sum total of timeout periods for consecutive actions you add to a stage cannot exceed 40 days\.  | 
+|  Number of actions in a stage  |  Minimum of 1, maximum of 50  | 
+| Maximum number of custom actions per region in an AWS account | 50 | 
+| Maximum number of parallel actions in a stage | 50 | 
+| Maximum number of sequential actions in a stage | 50 | 
+| Maximum number of webhooks per region in an AWS account | 300 | 
+|  Length of time before an action times out  |  Approval action: 7 days AWS CloudFormation deployment action: 3 days AWS CodeBuild build action and test action: 8 hours AWS CodeDeploy deployment action: 7 days AWS Lambda invoke action: 1 hour  AWS CodePipeline waits one hour to determine if a Lambda invoke action failed\. If the action times out, AWS CodePipeline sets the invoke action state to failed\. AWS Lambda has a maximum execution duration per request limit\. This limit is set in AWS Lambda \(see [AWS Lambda Limits](https://docs.aws.amazon.com/lambda/latest/dg/limits.html)\) and does not affect the action timeout in AWS CodePipeline\.  All other actions: 1 hour  | 
 | Maximum number of prior months for which pipeline execution history information can be viewed | 12 | 
 |  Regions where you can create a pipeline  |  US East \(Ohio\) \(us\-east\-2\) US East \(N\. Virginia\) \(us\-east\-1\) US West \(N\. California\) \(us\-west\-1\) US West \(Oregon\) \(us\-west\-2\) Canada \(Central\) \(ca\-central\-1\) EU \(Ireland\) \(eu\-west\-1\) EU \(London\) \(eu\-west\-2\) EU \(Paris\) \(eu\-west\-3\) EU \(Frankfurt\) \(eu\-central\-1\) Asia Pacific \(Mumbai\) \(ap\-south\-1\) Asia Pacific \(Tokyo\) \(ap\-northeast\-1\) Asia Pacific \(Seoul\) \(ap\-northeast\-2\) Asia Pacific \(Singapore\) \(ap\-southeast\-1\) Asia Pacific \(Sydney\) \(ap\-southeast\-2\) South America \(São Paulo\) \(sa\-east\-1\)  | 
 | Maximum size of artifacts in a source stage |  Artifacts stored in Amazon S3 buckets: 2 GB Artifacts stored in AWS CodeCommit or GitHub repositories: 1 GB Exception: If you are using Amazon EBS to deploy applications, the maximum artifact size is always 512 MB\.  | 
-| Maximum size of input artifacts for AWS CloudFormation actions | If you are using AWS CloudFormation to deploy Lambda functions, the Lambda code archive size should not exceed 256 MB\. See [AWS Lambda Limits](http://docs.aws.amazon.com/lambda/latest/dg/limits.html)\. | 
+| Maximum size of input artifacts for AWS CloudFormation actions | If you are using AWS CloudFormation to deploy Lambda functions, the Lambda code archive size should not exceed 256 MB\. See [AWS Lambda Limits](https://docs.aws.amazon.com/lambda/latest/dg/limits.html)\. | 
 | Uniqueness of names |  Within a single AWS account, each pipeline you create in a region must have a unique name\. Names can be reused for pipelines in different regions\.  Stage names must be unique within a pipeline\. Action names must be unique within a stage\.  | 
 | Characters allowed in pipeline name |  Pipeline names cannot exceed 100 characters\. Allowed characters include: The letter characters `a` through `z`, inclusive\. The letter characters `A` through `Z`, inclusive\. The number characters `0` through `9`, inclusive\. The special characters `.` \(period\), `@` \(at sign\), `-` \(minus sign\), and `_` \(underscore\)\. Any other characters, such as spaces, are not allowed\.   | 
 | Characters allowed in stage name |  Stage names cannot exceed 100 characters\. Allowed characters include: The letter characters `a` through `z`, inclusive\. The letter characters `A` through `Z`, inclusive\. The number characters `0` through `9`, inclusive\. The special characters `.` \(period\), `@` \(at sign\), `-` \(minus sign\), and `_` \(underscore\)\. Any other characters, such as spaces, are not allowed\.  | 

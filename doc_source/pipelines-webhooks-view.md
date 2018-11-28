@@ -1,18 +1,14 @@
+--------
+
+The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
+
+--------
+
 # List Webhooks in Your Account<a name="pipelines-webhooks-view"></a>
 
 You can use the AWS CLI to list webhooks in your account\.
 
-1. To list your webhooks, call the list\-webhooks command and include the \-\-endpoint\-url and \-\-region parameters\.
-
-   Use the following syntax:
-
-   ```
-   aws codepipeline list-webhooks
-   --endpoint-url "endpoint_URL" 
-   --region region
-   ```
-
-   Examples:
+1. To list your webhooks, call the list\-webhooks command and include the `--endpoint-url` and `--region` parameters\.
 
    The following sample command lists webhooks for the "eu\-central\-1" endpoint URL\.
 
@@ -47,8 +43,8 @@ You can use the AWS CLI to list webhooks in your account\.
    }
    ```
 
-1. In GitHub, select your repository\.
+1. In GitHub, choose your repository\.
 
-1. Choose **Settings**\.
+1. Choose **Settings**, and then choose **Webhooks**\.
 
-1. Choose **Webhooks**\. View the webhook information for your repository\.
+   View the webhook information for your repository\.

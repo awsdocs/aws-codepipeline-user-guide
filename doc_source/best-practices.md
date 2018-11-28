@@ -1,3 +1,9 @@
+--------
+
+The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
+
+--------
+
 # AWS CodePipeline Best Practices and Use Cases<a name="best-practices"></a>
 
 AWS CodePipeline is integrated with a number of products and services\. The following sections describe best practices and use cases for AWS CodePipeline and these related products and services\.
@@ -26,7 +32,7 @@ You can use logging features in AWS to determine the actions users have taken in
 + Which actions failed due to inadequate permissions\. 
 
 Logging features are available in the following AWS services:
-+ AWS CloudTrail can be used to log AWS API calls and related events made by or on behalf of an AWS account\. For more information, see [Log AWS CodePipeline API Calls with AWS CloudTrail](monitoring-cloudtrail-logs.md)\.
++ AWS CloudTrail can be used to log AWS API calls and related events made by or on behalf of an AWS account\. For more information, see [Logging AWS CodePipeline API Calls with AWS CloudTrail](monitoring-cloudtrail-logs.md)\.
 + Amazon CloudWatch Events can be used to monitor your AWS Cloud resources and the applications you run on AWS\. You can create alerts in Amazon CloudWatch Events based on metrics that you define\. For more information, see [Detect and React to Changes in Pipeline State with Amazon CloudWatch Events](detect-state-changes-cloudwatch-events.md)\.
 
 ### Best Practices for the Jenkins PlugIn<a name="best-practices-jenkins"></a>
@@ -79,15 +85,15 @@ AWS CodeStar is a cloud\-based service that provides a unified user interface fo
 
 To create your AWS CodeStar project, you choose your coding language and the type of application you want to deploy\. You can create the following project types: a web application, a web service, or an Alexa skill\.
 
-At any time, you can integrate your preferred IDE into your AWS CodeStar dashboard\. You can also add and remove team members and manage permissions for team members on your project\. For a tutorial that shows you how to use AWS CodeStar to create a sample pipeline for a serverless application, see [Tutorial: Creating and Managing a Serverless Project in AWS CodeStar](http://docs.aws.amazon.com/codestar/latest/userguide/sam-tutorial.html)\.
+At any time, you can integrate your preferred IDE into your AWS CodeStar dashboard\. You can also add and remove team members and manage permissions for team members on your project\. For a tutorial that shows you how to use AWS CodeStar to create a sample pipeline for a serverless application, see [Tutorial: Creating and Managing a Serverless Project in AWS CodeStar](https://docs.aws.amazon.com/codestar/latest/userguide/sam-tutorial.html)\.
 
 ### Use AWS CodePipeline to Compile, Build, and Test Code with AWS CodeBuild<a name="use-cases-codebuild"></a>
 
-AWS CodeBuild is a managed build service in the cloud that lets you build and test your code without a server or system\. Use AWS CodePipeline with AWS CodeBuild to automate running revisions through the pipeline for continuous delivery of software builds whenever there is a change to the source code\. For more information, see [Use AWS CodePipeline with AWS CodeBuild to Test Code and Run Builds](http://docs.aws.amazon.com/codebuild/latest/userguide/how-to-create-pipeline.html)\.
+AWS CodeBuild is a managed build service in the cloud that lets you build and test your code without a server or system\. Use AWS CodePipeline with AWS CodeBuild to automate running revisions through the pipeline for continuous delivery of software builds whenever there is a change to the source code\. For more information, see [Use AWS CodePipeline with AWS CodeBuild to Test Code and Run Builds](https://docs.aws.amazon.com/codebuild/latest/userguide/how-to-create-pipeline.html)\.
 
 ### Use AWS CodePipeline with Amazon ECS for Continuous Delivery of Container\-Based Applications to the Cloud<a name="use-cases-ecs"></a>
 
-Amazon ECS is a container management service that lets you deploy container\-based applications to Amazon ECS instances in the cloud\. Use AWS CodePipeline with Amazon ECS to automate running revisions through the pipeline for continuous deployment of container\-based applications whenever there is a change to the source image repository\. For more information, see [Tutorial: Continuous Deployment with AWS CodePipeline](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-cd-pipeline.html)\.
+Amazon ECS is a container management service that lets you deploy container\-based applications to Amazon ECS instances in the cloud\. Use AWS CodePipeline with Amazon ECS to automate running revisions through the pipeline for continuous deployment of container\-based applications whenever there is a change to the source image repository\. For more information, see [Tutorial: Continuous Deployment with AWS CodePipeline](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-cd-pipeline.html)\.
 
 ### Use AWS CodePipeline with Elastic Beanstalk for Continuous Delivery of Web Applications to the Cloud<a name="use-cases-elasticbeanstalk"></a>
 
@@ -95,8 +101,8 @@ Elastic Beanstalk is a compute service that lets you deploy web applications and
 
 ### Use AWS CodePipeline with AWS Lambda for Continuous Delivery of Lambda\-Based and Serverless Applications<a name="use-cases-lambda"></a>
 
-You can use AWS Lambda with AWS CodePipeline for invoking an AWS Lambda function, as described in [Automating Deployment of Lambda\-based Applications](http://docs.aws.amazon.com/lambda/latest/dg/automating-deployment.html)\. You can also use AWS Lambda and AWS CodeStar to create a pipeline for deploying serverless applications\.
+You can use AWS Lambda with AWS CodePipeline for invoking an AWS Lambda function, as described in [Automating Deployment of Lambda\-based Applications](https://docs.aws.amazon.com/lambda/latest/dg/automating-deployment.html)\. You can also use AWS Lambda and AWS CodeStar to create a pipeline for deploying serverless applications\.
 
 ### Use AWS CodePipeline with AWS CloudFormation Templates for Continuous Delivery to the Cloud<a name="use-cases-cloudformation"></a>
 
-You can use AWS CloudFormation with AWS CodePipeline for continuous delivery and automation\. For more information, see [Continuous Delivery with AWS CodePipeline](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline.html)\. AWS CloudFormation is also used to create the templates for pipelines created in AWS CodeStar\.
+You can use AWS CloudFormation with AWS CodePipeline for continuous delivery and automation\. For more information, see [Continuous Delivery with AWS CodePipeline](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline.html)\. AWS CloudFormation is also used to create the templates for pipelines created in AWS CodeStar\.

@@ -1,3 +1,9 @@
+--------
+
+The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
+
+--------
+
 # AWS CodePipeline Concepts<a name="concepts"></a>
 
 You will find modeling and configuring your automated release process easier if you understand the concepts and terms used in AWS CodePipeline and some of the underlying concepts of release automation\. Here are some concepts to know about as you use AWS CodePipeline\.
@@ -27,7 +33,7 @@ The following diagram and accompanying descriptions introduce you to terms uniqu
 
   When you use the console to create your first pipeline, AWS CodePipeline creates an Amazon S3 bucket in the same region as the pipeline to store items for all pipelines in that region associated with your account\. Every time you use the console to create another pipeline in that region, AWS CodePipeline creates a folder for that pipeline in the bucket\. It uses that folder to store artifacts for your pipeline as the automated release process runs\. This bucket is named codepipeline\-*region*\-*1234567EXAMPLE*, where *region* is the AWS region in which you created the pipeline, and *1234567EXAMPLE* is a ten\-digit random number that ensures the bucket name is unique\. 
 
-  If you use the AWS CLI to create a pipeline, you can store the artifacts for that pipeline in any Amazon S3 bucket as long as that bucket is in the same AWS region as the pipeline\. You might do this if you are concerned about exceeding the limits of Amazon S3 buckets allowed for your account\.
+  If you use the AWS CLI to create a pipeline, you can store the artifacts for that pipeline in any Amazon S3 bucket as long as that bucket is in the same AWS region as the pipeline\. You might do this if you are concerned about exceeding the limits of Amazon S3 buckets allowed for your account\. If you use the AWS CLI to create or edit a pipeline, you can add a test, build, or deploy action in a separate region\. If you add a cross\-region action to your pipeline, you must provide an artifact bucket for each additional region where you have actions\.
 + A *revision* is a change made to a source that is configured in a source action for AWS CodePipeline, such as a pushed commit to a GitHub repository or an AWS CodeCommit repository, or an update to a file in a versioned Amazon S3 bucket\. Each revision is run separately through the pipeline\. Multiple revisions can be processed in the same pipeline, but each stage can process only one revision at a time\. Revisions are run through the pipeline as soon as a change is made in the location specified in the source stage of the pipeline\.
 **Note**  
 If a pipeline contains multiple source actions, all of them run again, even if a change is detected for one source action only\. 
@@ -56,4 +62,4 @@ If you create or edit a pipeline in the console that has an AWS CodeCommit sourc
 
 The following diagram shows two stages in an example pipeline in the AWS CodePipeline console\. It includes an action in each stage and the enabled transition between the two stages\.
 
-![\[A sample two-stage pipeline viewed in the AWS CodePipeline console.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-firstpipeline.png)![\[A sample two-stage pipeline viewed in the AWS CodePipeline console.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[A sample two-stage pipeline viewed in the AWS CodePipeline console.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+![\[A sample two-stage pipeline viewed in the AWS CodePipeline console.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-firstpipeline-pol.png)![\[A sample two-stage pipeline viewed in the AWS CodePipeline console.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[A sample two-stage pipeline viewed in the AWS CodePipeline console.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)

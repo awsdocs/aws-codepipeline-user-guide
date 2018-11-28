@@ -1,3 +1,9 @@
+--------
+
+The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
+
+--------
+
 # Configure Server\-Side Encryption for Artifacts Stored in Amazon S3 for AWS CodePipeline<a name="S3-artifact-encryption"></a>
 
 There are two ways to configure server\-side encryption for Amazon S3 artifacts:
@@ -41,9 +47,9 @@ Amazon S3 supports bucket policies that you can use if you require server\-side 
 }
 ```
 
-For more information about server\-side encryption and AWS KMS, see [Protecting Data Using Server\-Side Encryption](http://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html) and [\.](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html)
+For more information about server\-side encryption and AWS KMS, see [Protecting Data Using Server\-Side Encryption](https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html) and [\.](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html)
 
-For more information about AWS KMS, see the [AWS Key Management Service Developer Guide](http://docs.aws.amazon.com/kms/latest/developerguide/) and [ and [http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html)](http://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html)
+For more information about AWS KMS, see the [AWS Key Management Service Developer Guide](https://docs.aws.amazon.com/kms/latest/developerguide/) and [ and [https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html)](https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html)
 
 **Topics**
 + [View Your Default Amazon S3 SSE\-KMS Encryption Keys](S3-view-default-keys.md)

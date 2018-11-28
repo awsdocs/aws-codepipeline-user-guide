@@ -1,3 +1,9 @@
+--------
+
+The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
+
+--------
+
 # What Is AWS CodePipeline?<a name="welcome"></a>
 
 AWS CodePipeline is a continuous delivery service you can use to model, visualize, and automate the steps required to release your software\. You can quickly model and configure the different stages of a software release process\. AWS CodePipeline automates the steps required to release your software changes continuously\. For information about pricing for AWS CodePipeline, see [Pricing](http://aws.amazon.com/codepipeline/pricing/)\. 

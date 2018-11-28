@@ -1,24 +1,37 @@
-# Log AWS CodePipeline API Calls with AWS CloudTrail<a name="monitoring-cloudtrail-logs"></a>
+--------
 
-AWS CodePipeline is integrated with CloudTrail, a service that captures API calls made by or on behalf of AWS CodePipeline in your AWS account and delivers the log files to an Amazon S3 bucket you specify\. CloudTrail captures API calls from the AWS CodePipeline console, from AWS CodePipeline commands through the AWS CLI, or from the AWS CodePipeline APIs\. Using the information collected by CloudTrail, you can determine which request was made to AWS CodePipeline, the source IP address from which the request was made, who made the request, when it was made, and so on\. To learn more about CloudTrail, including how to configure and enable it, see the [AWS CloudTrail User Guide](http://docs.aws.amazon.com/awscloudtrail/latest/userguide/)\.
+The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
 
-## AWS CodePipeline Information in CloudTrail<a name="monitoring-cloudtrail-logs-log-entries-about"></a>
+--------
 
-When CloudTrail logging is enabled in your AWS account, API calls made to AWS CodePipeline are tracked in log files\. AWS CodePipeline records are written together with other AWS service records in a log file\. CloudTrail determines when to create and write to a new file based on a time period and file size\. 
+# Logging AWS CodePipeline API Calls with AWS CloudTrail<a name="monitoring-cloudtrail-logs"></a>
 
-All of the AWS CodePipeline actions are logged and documented in the [AWS CodePipeline API Reference](http://docs.aws.amazon.com/codepipeline/latest/APIReference) and the [AWS CodePipeline Command Line Reference](http://docs.aws.amazon.com/cli/latest/reference/codepipeline)\. For example, calls to create, delete, and edit pipelines and create custom actions generate entries in CloudTrail log files\.
+AWS CodePipeline is integrated with AWS CloudTrail, a service that provides a record of actions taken by a user, role, or an AWS service in AWS CodePipeline;\. CloudTrail captures all API calls for AWS CodePipeline as events\. The calls captured include calls from the AWS CodePipeline console and code calls to the AWS CodePipeline API operations\. If you create a trail, you can enable continuous delivery of CloudTrail events to an Amazon S3 bucket, including events for AWS CodePipeline\. If you don't configure a trail, you can still view the most recent events in the CloudTrail console in **Event history**\. Using the information collected by CloudTrail, you can determine the request that was made to AWS CodePipeline, the IP address from which the request was made, who made the request, when it was made, and additional details\. 
 
-Every log entry contains information about who generated the request\. The user identity information in the log helps you determine whether the request was made with root or IAM user credentials, with temporary security credentials for a role or federated user, or by another AWS service\. For more information, see the **userIdentity** field in the [CloudTrail Event Reference](http://docs.aws.amazon.com/awscloudtrail/latest/userguide/event_reference_top_level.html)\.
+To learn more about CloudTrail, see the [AWS CloudTrail User Guide](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/)\.
 
-You can store your log files in your bucket for as long as you want, but you can also define Amazon S3 lifecycle rules to archive or delete log files automatically\. By default, your log files are encrypted by using Amazon S3 server\-side encryption \(SSE\)\.
+## AWS CodePipeline Information in CloudTrail<a name="service-name-info-in-cloudtrail"></a>
 
-You can choose to have CloudTrail publish Amazon SNS notifications when new log files are delivered if you want to take quick action upon log file delivery\. For more information, see [Configuring Amazon SNS Notifications](http://docs.aws.amazon.com/awscloudtrail/latest/userguide/getting_notifications_top_level.html)\.
+CloudTrail is enabled on your AWS account when you create the account\. When activity occurs in AWS CodePipeline, that activity is recorded in a CloudTrail event along with other AWS service events in **Event history**\. You can view, search, and download recent events in your AWS account\. For more information, see [Viewing Events with CloudTrail Event History](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/view-cloudtrail-events.html)\. 
 
-You can also aggregate AWS CodePipeline log files from multiple AWS regions and multiple AWS accounts into a single Amazon S3 bucket\. For more information, see [Aggregating CloudTrail Log Files to a Single Amazon S3 Bucket](http://docs.aws.amazon.com/awscloudtrail/latest/userguide/aggregating_logs_top_level.html)\.
+For an ongoing record of events in your AWS account, including events for AWS CodePipeline, create a trail\. A *trail* enables CloudTrail to deliver log files to an Amazon S3 bucket\. By default, when you create a trail in the console, the trail applies to all AWS Regions\. The trail logs events from all Regions in the AWS partition and delivers the log files to the Amazon S3 bucket that you specify\. Additionally, you can configure other AWS services to further analyze and act upon the event data collected in CloudTrail logs\. For more information, see the following: 
++ [Overview for Creating a Trail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-and-update-a-trail.html)
++ [CloudTrail Supported Services and Integrations](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-aws-service-specific-topics.html#cloudtrail-aws-service-specific-topics-integrations)
++ [Configuring Amazon SNS Notifications for CloudTrail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/getting_notifications_top_level.html)
++ [Receiving CloudTrail Log Files from Multiple Regions](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/receive-cloudtrail-log-files-from-multiple-regions.html) and [Receiving CloudTrail Log Files from Multiple Accounts](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-receive-logs-from-multiple-accounts.html)
+
+All AWS CodePipeline actions are logged by CloudTrail and are documented in the [AWS CodePipeline API Reference](http://docs.aws.amazon.com/codepipeline/latest/APIReference)\. For example, calls to the `CreatePipeline`, `GetPipelineExecution` and `UpdatePipeline` actions generate entries in the CloudTrail log files\. 
+
+Every event or log entry contains information about who generated the request\. The identity information helps you determine the following: 
++ Whether the request was made with root or AWS Identity and Access Management \(IAM\) user credentials\.
++ Whether the request was made with temporary security credentials for a role or federated user\.
++ Whether the request was made by another AWS service\.
+
+For more information, see the [CloudTrail userIdentity Element](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-user-identity.html)\.
 
 ## Understanding AWS CodePipeline Log File Entries<a name="monitoring-cloudtrail-logs-log-entries-example"></a>
 
-CloudTrail log files can contain one or more log entries where each entry is made up of multiple JSON\-formatted events\. A log entry represents a single request from any source and includes information about the requested action, any parameters, the date and time of the action, and so on\. The log entries are not guaranteed to be in any particular order \(that is, they are not an ordered stack trace of the public API calls\)\.
+A trail is a configuration that enables delivery of events as log files to an Amazon S3 bucket that you specify\. CloudTrail log files contain one or more log entries\. An event represents a single request from any source and includes information about the requested action, the date and time of the action, request parameters, and so on\. CloudTrail log files aren't an ordered stack trace of the public API calls, so they don't appear in any specific order\. 
 
 The following example shows a CloudTrail log entry for an update pipeline event, where a pipeline named MyFirstPipeline has been edited by the user named JaneDoe\-CodePipeline with the account ID 80398EXAMPLE\. The user changed the name of the source stage of a pipeline from `Source` to `MySourceStage`\. Because both the `requestParameters` and the `responseElements` elements in the CloudTrail log contain the entire structure of the edited pipeline, those elements have been abbreviated in the following example\. **Emphasis** has been added to the `requestParameters` portion of the pipeline where the change occurred, the previous version number of the pipeline, and the `responseElements` portion, which shows the version number incremented by 1\. Edited portions are marked with ellipses \(\.\.\.\) to illustrate where more data appears in a real log entry\.
 

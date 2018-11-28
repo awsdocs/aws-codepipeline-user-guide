@@ -1,3 +1,9 @@
+--------
+
+The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
+
+--------
+
 # AWS CodePipeline Pipeline Structure Reference<a name="reference-pipeline-structure"></a>
 
 By default, any pipeline you successfully create in AWS CodePipeline will have a valid structure\. However, if you manually create or edit a JSON file to create a pipeline or update a pipeline from the AWS CLI, you might inadvertently create a structure that is not valid\. The following reference can help you better understand the requirements for your pipeline structure and how to troubleshoot issues\. Refer also to the constraints documented in [Limits in AWS CodePipeline](limits.md), which apply to all pipelines\. 
@@ -44,6 +50,7 @@ The pipeline structure has the following requirements:
 + At least one stage in each pipeline must contain an action that is not a source action\.
 + All stage names within a pipeline must be unique\.
 + Stage names cannot be edited within the AWS CodePipeline console\. If you edit a stage name by using the AWS CLI, and the stage contains an action with one or more secret parameters \(such as an OAuth token\), the value of those secret parameters will not be preserved\. You must manually type the value of the parameters \(which are masked by four asterisks in the JSON returned by the AWS CLI\) and include them in the JSON structure\.
++ The `artifactStore` field contains the artifact bucket type and location for a pipeline with all actions in the same region\. If you use the console to create a pipeline, this bucket is created for you\. If you use the AWS CLI to create the pipeline, you can add actions in a region different from your pipeline\. The `artifactStores` mapping is used to list the artifact bucket for each region where there is an action\. You must use either `artifactStore` or `artifactStores`\. You cannot use both\.
 + The pipeline metadata fields are distinct from the pipeline structure and cannot be edited\. When you update a pipeline, the date in the `updated` metadata field changes automatically\. 
 + When you edit or update a pipeline, the pipeline name cannot be changed\.
 **Note**  
@@ -61,7 +68,8 @@ An action has the following high\-level structure:
                    "inputArtifacts": [
                         An input artifact structure, if supported for the action category
                     ],
-                   "name": "ActionName",  
+                   "name": "ActionName",
+                   "region": "Region",  
                     "actionTypeId": {
                         "category": "An action category",
                         "owner": "AWS",
@@ -106,6 +114,10 @@ The action structure has the following requirements:
   The following illustration provides an example of input and output artifacts in actions in a pipeline:  
 ![\[An example of input and output artifacts in actions in a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-artifactsexplained.png)![\[An example of input and output artifacts in actions in a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[An example of input and output artifacts in actions in a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 + Output artifact names must be unique within a pipeline\. For example, a pipeline can include one action that has an output artifact named `"MyApp"` and another action that has an output artifact named `"MyBuiltApp"`\. However, a pipeline cannot include two actions that both have an output artifact named `"MyApp"`\.
++ Cross\-region actions use the `Region` field to designate the AWS Region where the actions is to be created\. The AWS resources created for this action must be created in the same region provided in the `Region` field\. You cannot create cross\-region actions for the following actions types:
+  + Source actions
+  + Third\-party actions
+  + Custom actions
 + If an action contains a parameter whose value is secret, such as the OAuth token for a GitHub source action, the value of that parameter is masked in the JSON by a series of four asterisks \(\*\*\*\*\)\. The actual value is stored, and as long as you do not edit that value, or change the name of the action or the name of the stage where that action runs, you do not have to supply that value when editing the JSON using the AWS CLI or AWS CodePipeline API\. However, if you do change the name of the action, or the name of the stage in which the action runs, the value of any secret parameters will be lost\. You must manually type the values for any secret parameters in the JSON, or the action will fail the next time the pipeline runs\. 
 + For all currently supported action types, the only valid version string is "1"\.
 + For all currently supported action types, the only valid owner string is "AWS", "ThirdParty", or "Custom"\. For more information, see the [AWS CodePipeline API Reference](http://docs.aws.amazon.com/codepipeline/latest/APIReference)\.
@@ -168,5 +180,46 @@ The numbering of serial actions do not have to be in strict sequence\. For examp
     "ClusterName": "my-ecs-cluster",
     "ServiceName": "sample-app-service",
     "FileName": "imagedefinitions.json",
+  }
+  ```
+
+  The following example shows a valid configuration for a test action that uses AWS Device Farm:
+
+  ```
+  "configuration": {
+    "RecordAppPerformanceData": "true",
+    "AppType": "Android",
+    "ProjectId": "Project_ID",
+    "App": "app-release.apk",
+    "RadioBluetoothEnabled": "true",
+    "RecordVideo": "true",
+    "RadioWifiEnabled": "true",
+    "RadioNfcEnabled": "true",
+    "RadioGpsEnabled": "true",
+    "Test": "tests.zip",
+    "DevicePoolArn": "ARN",
+    "TestType": "Calabash",
+    "AppiumVersion": "1.7.2"
+  }
+  ```
+
+  The following example shows a valid configuration for a deploy action that uses AWS Service Catalog, for a pipeline that was created in the console without a separate configuration file:
+
+  ```
+  "configuration": {
+    "TemplateFilePath": "S3_template.json",
+    "ProductVersionName": "devops S3 v2",
+    "ProductType": "CLOUD_FORMATION_TEMPLATE",
+    "ProductVersionDescription": "Product version description",
+    "ProductId": "prod-example123456"
+  }
+  ```
+
+  The following example shows a valid configuration for a deploy action that uses AWS Service Catalog, for a pipeline that was created in the console with a separate `sample_config.json` configuration file:
+
+  ```
+  "configuration": {
+    "ConfigurationFilePath": "sample_config.json",
+    "ProductId": "prod-example123456"
   }
   ```

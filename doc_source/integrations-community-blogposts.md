@@ -1,3 +1,9 @@
+--------
+
+The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
+
+--------
+
 # Integration Examples: Blog Posts<a name="integrations-community-blogposts"></a>
 + [Implementing DevSecOps Using AWS CodePipeline](https://aws.amazon.com/blogs/devops/implementing-devsecops-using-aws-codepipeline/)
 
@@ -26,7 +32,7 @@
   Learn how use Dynatrace monitoring solutions to scale pipelines in AWS CodePipeline, automatically analyze test executions before code is committed, and maintain optimal lead times\.
 
   *Published November 2016*
-+ [Create a Pipeline for AWS Elastic Beanstalk in AWS CodePipeline Using CloudFormation and CodeCommit](http://www.stelligent.com/automation/create-a-pipeline-for-elastic-beanstalk-in-codepipeline-using-cloudformation-and-codecommit/)
++ [Create a Pipeline for AWS Elastic Beanstalk in AWS CodePipeline Using AWS CloudFormation and CodeCommit](http://www.stelligent.com/automation/create-a-pipeline-for-elastic-beanstalk-in-codepipeline-using-cloudformation-and-codecommit/)
 
   Learn how to implement continuous delivery in an AWS CodePipeline pipeline for an application in AWS Elastic Beanstalk\. All AWS resources are provisioned automatically through the use of an AWS CloudFormation template\. This walkthrough also incorporates AWS CodeCommit and AWS Identity and Access Management \(IAM\)\.
 

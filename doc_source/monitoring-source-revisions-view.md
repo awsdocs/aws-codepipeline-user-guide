@@ -1,3 +1,9 @@
+--------
+
+The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
+
+--------
+
 # View Current Source Revision Details in a Pipeline in AWS CodePipeline<a name="monitoring-source-revisions-view"></a>
 
 You can use the AWS CodePipeline console or the AWS CLI to view details about source artifacts \(output artifact that originated in the first stage of a pipeline\) that are used in an execution of a pipeline\. The details include identifiers, such as commit IDs, check\-in comments, time since the artifact was created or updated and, when you use the CLI, version numbers of build actions\. For some revision types, you can view and open the URL of the commit for the artifact version\.
@@ -12,7 +18,7 @@ You can use the AWS CodePipeline console to view information about the most rece
 
 **To view source revisions in a pipeline**
 
-1. Sign in to the AWS Management Console and open the AWS CodePipeline console at [http://console\.aws\.amazon\.com/codepipeline](http://console.aws.amazon.com/codepipeline)\.
+1. Sign in to the AWS Management Console and open the AWS CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
 
    The names of all pipelines associated with your AWS account will be displayed\. 
 

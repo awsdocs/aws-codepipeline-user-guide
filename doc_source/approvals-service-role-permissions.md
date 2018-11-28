@@ -1,3 +1,9 @@
+--------
+
+The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
+
+--------
+
 # Grant Amazon SNS Permissions to an AWS CodePipeline Service Role<a name="approvals-service-role-permissions"></a>
 
 If you plan to use Amazon SNS to publish notifications to topics when approval actions require review, the service role you use in your AWS CodePipeline operations must be granted permission to access the Amazon SNS resources\. You can use the IAM console to add this permission to your service role\.

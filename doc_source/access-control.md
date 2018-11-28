@@ -1,3 +1,9 @@
+--------
+
+The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
+
+--------
+
 # Access Control with IAM Policies<a name="access-control"></a>
 
 You can have valid credentials to authenticate your requests, but unless you have permissions you cannot create or access AWS CodePipeline resources\. For example, you must have permissions to create, view, or delete pipelines; to retrieve information about applications and deployment groups in AWS CodeDeploy, and about stacks, apps and layers in AWS OpsWorks Stacks; to add or retrive artifacts from Amazon Simple Storage Service buckets; and so on\.

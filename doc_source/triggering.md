@@ -1,6 +1,12 @@
-# Start an AWS CodeCommit Pipeline Automatically Using a CloudWatch Events Rule<a name="triggering"></a>
+--------
 
-You can use Amazon CloudWatch Events to trigger pipelines to start automatically when rule or schedule criteria are met\. For pipelines with an Amazon S3 or AWS CodeCommit source, an Amazon CloudWatch Events rule detects source changes and then starts your pipeline\. When you use the console to create or change a pipeline, the rule and all associated resources are created for you\. If you create or change an Amazon S3 or AWS CodeCommit pipeline in the CLI or AWS CloudFormation, you must use these steps to create the Amazon CloudWatch Events rule and all associated resources manually\.
+The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
+
+--------
+
+# Use CloudWatch Events to Start an AWS CodeCommit Pipeline<a name="triggering"></a>
+
+You can use Amazon CloudWatch Events to trigger pipelines to start when rule or schedule criteria are met\. For pipelines with an Amazon S3 or AWS CodeCommit source, an Amazon CloudWatch Events rule detects source changes and then starts your pipeline\. When you use the console to create or change a pipeline, the rule and all associated resources are created for you\. If you create or change an Amazon S3 or AWS CodeCommit pipeline in the AWS CLI or AWS CloudFormation, you must use these steps to create the Amazon CloudWatch Events rule and all associated resources manually\.
 
 In Amazon CloudWatch Events, you create a rule to detect and react to changes in the state of the pipeline's defined source\.
 
@@ -29,7 +35,7 @@ As you build your rule, the **Event Pattern Preview** pane in the console \(or t
 }
 ```
 
-The following is a sample AWS CodeCommit event pattern in the **Event** window for a "MyTestRepo" repository with a branch named "master:"
+The following is a sample AWS CodeCommit event pattern in the **Event** window for a `MyTestRepo` repository with a branch named `master`:
 
 ```
 {
@@ -57,9 +63,10 @@ The event pattern uses these fields:
 + `source:` should contain `aws.codecommit` as the event source\. 
 + `detail-type:` displays the available event type \(`CodeCommit Repository State Change`\)\.
 + `resources:` contains the repository ARN\.
-+ `detail:` contains the repository branch information `referenceType` and `referenceName`\.
++ `detail:` contains the repository branch information, `referenceType` and `referenceName`\.
 
 **Topics**
 + [Create a CloudWatch Events Rule That Starts Your AWS CodeCommit Pipeline \(Console\)](pipelines-trigger-source-repo-changes-console.md)
 + [Create a CloudWatch Events Rule That Starts Your AWS CodeCommit Pipeline \(CLI\)](pipelines-trigger-source-repo-changes-cli.md)
++ [Create a CloudWatch Events Rule That Starts Your AWS CodeCommit Pipeline \(AWS CloudFormation Template\)](pipelines-trigger-source-repo-changes-cfn.md)
 + [Configure Your AWS CodeCommit Pipelines to Use Amazon CloudWatch Events for Change Detection](trigger-codecommit-migration-cwe.md)
