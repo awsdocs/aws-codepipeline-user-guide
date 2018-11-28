@@ -32,7 +32,7 @@ This topic includes sample functions to demonstrate the flexibility of working w
 + [Sample Python Function That Uses an AWS CloudFormation Template ](#actions-invoke-lambda-function-samples-python-cloudformation)
   + Using JSON\-encoded user parameters to pass multiple configuration values to the function \(`get_user_params`\)\.
   + Interacting with \.zip artifacts in an artifact bucket \(`get_template`\)\.
-  + Using a continuation token to monitor a long\-running asynchronous process \(`continue_job_later`\)\. This allows the action to continue and the function to succeed even if it exceeds a five\-minute runtime \(a limitation in Lambda\)\.
+  + Using a continuation token to monitor a long\-running asynchronous process \(`continue_job_later`\)\. This allows the action to continue and the function to succeed even if it exceeds a fifteen\-minute runtime \(a limitation in Lambda\)\.
 
 Each sample function includes information about the permissions you must add to the role\. For information about limits in AWS Lambda, see [Limits](https://docs.aws.amazon.com/lambda/latest/dg/limits.html) in the *AWS Lambda Developer Guide*\.
 
@@ -348,7 +348,7 @@ This Python sample assumes you have a pipeline that uses an Amazon S3 bucket as 
 This sample demonstrates:
 + The use of JSON\-encoded user parameters to pass multiple configuration values to the function \(`get_user_params`\)\.
 + The interaction with \.zip artifacts in an artifact bucket \(`get_template`\)\.
-+ The use of a continuation token to monitor a long\-running asynchronous process \(`continue_job_later`\)\. This allows the action to continue and the function to succeed even if it exceeds a five\-minute runtime \(a limitation in Lambda\)\.
++ The use of a continuation token to monitor a long\-running asynchronous process \(`continue_job_later`\)\. This allows the action to continue and the function to succeed even if it exceeds a fifteen\-minute runtime \(a limitation in Lambda\)\.
 
 To use this sample Lambda function, the policy for the Lambda execution role must have `Allow` permissions in AWS CloudFormation, Amazon S3, and AWS CodePipeline, as shown in this sample policy:
 
