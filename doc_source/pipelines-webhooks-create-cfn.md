@@ -61,7 +61,8 @@ To use AWS CloudFormation to create a webhook, update your template as described
 
 1. Use the `AWS::CodePipeline::Webhook` AWS CloudFormation resource to add a webhook\.
 **Note**  
-The `TargetAction` you specify must match the `Name` property of the source action defined in the pipeline\.
+* The `TargetAction` you specify must match the `Name` property of the source action defined in the pipeline\.
+* If `RegisterWithThirdParty` is set to `true` the user associated to the `OAuthToken` below must have owner privileges for an organization or admin privilegs for the target repository. For more detail see [https://help\.github\.com/articles/about-webhooks/](https://help.github.com/articles/about-webhooks/)\.
 
 ------
 #### [ YAML ]
