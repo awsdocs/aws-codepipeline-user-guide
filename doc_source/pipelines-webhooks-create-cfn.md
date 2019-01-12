@@ -4,7 +4,7 @@ The procedures in this guide support the new console design\. If you choose to u
 
 --------
 
-# Create a CloudWatch Events Rule That Starts Your GitHub Pipeline \(AWS CloudFormation Template\)<a name="pipelines-webhooks-create-cfn"></a>
+# Create a Webhook That Starts Your GitHub Pipeline \(AWS CloudFormation Template\)<a name="pipelines-webhooks-create-cfn"></a>
 
 To use AWS CloudFormation to create a webhook, update your template as described here\.<a name="proc-cfn-webhook-github"></a>
 
@@ -61,8 +61,13 @@ To use AWS CloudFormation to create a webhook, update your template as described
 
 1. Use the `AWS::CodePipeline::Webhook` AWS CloudFormation resource to add a webhook\.
 **Note**  
-* The `TargetAction` you specify must match the `Name` property of the source action defined in the pipeline\.
-* If `RegisterWithThirdParty` is set to `true` the user associated to the `OAuthToken` below must have owner privileges for an organization or admin privilegs for the target repository. For more detail see [https://help\.github\.com/articles/about-webhooks/](https://help.github.com/articles/about-webhooks/)\.
+The `TargetAction` you specify must match the `Name` property of the source action defined in the pipeline\.
+
+   If `RegisterWithThirdParty` is set to `true`, make sure the user associated to the `OAuthToken` can set the required scopes in GitHub\. The token and webhook require the following GitHub scopes: 
+   + `repo` \- used for full control to read and pull artifacts from public and private repositories into a pipeline\. 
+   + `admin:repo_hook` \- used for full control of repository hooks\.
+
+   Otherwise, GitHub returns a 404\. For more information about the 404 returned, see [https://help.github.com/articles/about-webhooks](https://help.github.com/articles/about-webhooks)\.
 
 ------
 #### [ YAML ]

@@ -87,7 +87,7 @@ This is not the source bucket for your pipeline's source code\. This is the arti
 
    1. Choose **Next**\.
 
-   1. In **Deploy provider**, choose **Skip**, accept the warning message by choosing **Skip**, and then choose **Next**\.
+   1. On the **Step 4: Add deploy stage** page, choose **Skip deploy stage**, and then accept the warning message by choosing **Skip** again\. Choose **Next**\.
 
    1. On **Step 5: Review**, choose **Create pipeline**\. You should see a diagram that shows the source and build stages\.  
 ![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-view-pipeline-S3.png)

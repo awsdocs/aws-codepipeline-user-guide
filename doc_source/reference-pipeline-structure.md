@@ -223,3 +223,14 @@ The numbering of serial actions do not have to be in strict sequence\. For examp
     "ProductId": "prod-example123456"
   }
   ```
+
+  The following example shows a valid configuration for a deploy action that uses Alexa Skills Kit:
+
+  ```
+  "configuration": {
+    "ClientId": "amzn1.application-oa2-client.aadEXAMPLE",
+    "ClientSecret": "****",
+    "RefreshToken": "****",
+    "SkillId": "amzn1.ask.skill.22649d8f-0451-4b4b-9ed9-bfb6cEXAMPLE"
+  }
+  ```

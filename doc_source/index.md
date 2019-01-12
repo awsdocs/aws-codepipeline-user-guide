@@ -1,7 +1,7 @@
 # AWS CodePipeline User Guide
 
 -----
-*****Copyright &copy; 2018 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; 2019 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -33,7 +33,9 @@ Amazon's trademarks and trade dress may not be used in
    + [Tutorial: Create a Pipeline That Deploys to AWS Service Catalog](tutorials-S3-servicecatalog.md)
    + [Tutorial: Create a Pipeline with AWS CloudFormation](tutorials-cloudformation.md)
    + [Tutorial: Create a Pipeline with an Amazon ECR Source and ECS-to-CodeDeploy Deployment](tutorials-ecs-ecr-codedeploy.md)
+   + [Tutorial: Create a Pipeline that Deploys an Amazon Alexa Skill](tutorials-alexa-skills-kit.md)
 + [AWS CodePipeline Best Practices and Use Cases](best-practices.md)
++ [Use AWS CodePipeline with Amazon Virtual Private Cloud](vpc-support.md)
 + [Working with Pipelines in AWS CodePipeline](pipelines.md)
    + [Start a Pipeline Execution in AWS CodePipeline](pipelines-about-starting.md)
       + [Use CloudWatch Events to Start an AWS CodeCommit Pipeline](triggering.md)
@@ -51,7 +53,7 @@ Amazon's trademarks and trade dress may not be used in
          + [List Webhooks in Your Account](pipelines-webhooks-view.md)
          + [Edit the Webhook for Your GitHub Pipeline](pipelines-webhooks-update.title.md)
          + [Delete the Webhook for Your GitHub Pipeline](pipelines-webhooks-delete.md)
-         + [Create a CloudWatch Events Rule That Starts Your GitHub Pipeline (AWS CloudFormation Template)](pipelines-webhooks-create-cfn.md)
+         + [Create a Webhook That Starts Your GitHub Pipeline (AWS CloudFormation Template)](pipelines-webhooks-create-cfn.md)
          + [Configure Your GitHub Pipelines to Use Webhooks for Change Detection](pipelines-webhooks-migration.md)
       + [Use Periodic Checks to Start a Pipeline](run-automatically-polling.md)
       + [Start a Pipeline Manually in AWS CodePipeline](pipelines-rerun-manually.md)

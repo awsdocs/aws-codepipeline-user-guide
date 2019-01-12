@@ -16,9 +16,6 @@ Later, you can use the AWS CLI to add a cross\-region build, test, or deploy act
 
 After you create this simple pipeline, you add another stage and then disable and enable the transition between stages\.
 
-**Important**  
-In addition to completing the steps in [Getting Started with AWS CodePipeline](getting-started-codepipeline.md), you should create an Amazon EC2 instance key pair to connect to the Amazon EC2 instances after they are launched\. To create an Amazon EC2 instance key pair, follow the instructions in [Creating Your Key Pair Using Amazon EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair)\. 
-
 Not what you're looking for? To create a simple pipeline using an AWS CodeCommit branch as a code repository, see [Tutorial: Create a Simple Pipeline \(AWS CodeCommit Repository\)](tutorials-simple-codecommit.md)\.
 
 **Note**  
@@ -55,11 +52,11 @@ Because all bucket names in Amazon S3 must be unique, use one of your own, not t
 
    In **Region**, choose the region where you intend to create your pipeline, such as **US West \(Oregon\)**, and then choose **Next**\.
 
-1. In **Versioning**, select **Keep all versions of an object in the same bucket**, and then choose **Next**\.
+1. On the **Configure options** tab, in **Versioning**, select **Keep all versions of an object in the same bucket**, and then choose **Next**\.
 
    When versioning is enabled, Amazon S3 saves every version of every object in the bucket\.
 
-1. In **Versioning**, accept the default permissions to allow your account read/write access on objects, and choose **Next**\. For more information about Amazon S3 bucket and object permissions, see [Specifying Permissions in a Policy](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html)\.
+1. On the **Set permissions** tab, accept the default permissions to allow your account read/write access on objects, and choose **Next**\. For more information about Amazon S3 bucket and object permissions, see [Specifying Permissions in a Policy](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html)\.
 
 1. Choose **Create bucket**\.
 
@@ -84,6 +81,9 @@ Do not use the **Clone or download** or **Download ZIP** buttons in the GitHub r
 ## Step 2: Create Amazon EC2 Windows Instances and Install the AWS CodeDeploy Agent<a name="S3-create-instances"></a>
 
 In this step, you create the Windows Server Amazon EC2 instances to which you will deploy a sample application\. As part of this process, you install the AWS CodeDeploy agent on the instances\. The AWS CodeDeploy agent is a software package that enables an instance to be used in AWS CodeDeploy deployments\.
+
+**Note**  
+This tutorial provides sample steps for creating Amazon EC2 Windows instances\. For sample steps to create Amazon EC2 Linux instances, see Step 3: Create an Amazon EC2 Linux Instance and Install the AWS CodeDeploy Agent in [Tutorial: Create a Simple Pipeline \(AWS CodeCommit Repository\)](tutorials-simple-codecommit.md)\.
 
 **To launch instances**
 
@@ -136,28 +136,15 @@ For the purposes of this tutorial, you can use the following unrestricted policy
 **Important**  
 The **Key** and **Value** boxes are case\-sensitive\.
 
-1. On the **Step 6: Configure Security Group** page, do the following: 
-   + Next to **Assign a security group**, choose **Create a new security group**\.
-   + In the row for **SSH**, under **Source**, choose **My IP**\.
-   + Choose **Add Rule**, choose **HTTP**, and then under **Source**, choose **My IP**\.
-
 1. Choose **Review and Launch**\.
 
-1. On the **Review Instance Launch** page, choose **Launch**, and then do one of the following when prompted for a key pair:
-   + If you already have a key pair to use with Amazon EC2 instances, select **Choose an existing key pair**, and then select your key pair\.
-   + If you have not created a key pair yet, select **Create a new key pair**, enter a name for the key pair, and then choose **Download Key Pair**\. This is your only chance to save the private key file\. Be sure to download it\. Save the private key file in a safe place\. You must provide the name of your key pair when you launch an instance\. You must provide the corresponding private key each time you connect to the instance\. For more information, see [Amazon EC2 Key Pairs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)\.
-**Warning**  
-Don't select the **Proceed without a key pair** option\. If you launch your instance without a key pair, you can't connect to it if you need to troubleshoot issues with the AWS CodeDeploy agent\.
-
-   When you are ready, select the acknowledgement check box, and then choose **Launch Instances**\. 
+1. On the **Review Instance Launch** page, choose **Launch**\.
 
 1. Choose **View Instances** to close the confirmation page and return to the console\.
 
 1. You can view the status of the launch on the **Instances** page\. When you launch an instance, its initial state is `pending`\. After the instance starts, its state changes to `running`, and it receives a public DNS name\. \(If the **Public DNS** column is not displayed, choose the **Show/Hide** icon, and then select **Public DNS**\.\)
 
 1. It can take a few minutes for the instance to be ready for you to connect to it\. Check that your instance has passed its status checks\. You can view this information in the **Status Checks** column\.
-
-If you want to confirm that the AWS CodeDeploy agent is configured correctly, you can [connect to your Linux instance using SSH](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html) and then [verify the AWS CodeDeploy agent is running](https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-run-agent.html#how-to-run-agent-verify-linux)\.
 
 ## Step 3: Create an Application in AWS CodeDeploy<a name="S3-create-deployment"></a>
 
@@ -227,9 +214,9 @@ In this part of the tutorial, you create the pipeline\. The sample runs automati
 **Note**  
 If you choose another name for your pipeline, be sure to use that name instead of *MyFirstPipeline* for the rest of this tutorial\. After you create a pipeline, you cannot change its name\. Pipeline names are subject to some limitations\. For more information, see [Limits in AWS CodePipeline](limits.md)\. 
 
-1. In **Role name**, do one of the following:
-   + If you do not have a service role, choose **New service role** and in **Role name**, enter the name for your new service role\. IAM created the role for you\.
-   + If you have previously created an AWS\-CodePipeline\-Service service role, choose **Existing service role**\.
+1. In **Service role**, do one of the following:
+   + Choose **New service role** to allow AWS CodePipeline to create a new service role in IAM\. In **Role name**, the role and policy name both default to this format: AWSCodePipelineServiceRole\-*region*\-*pipeline\_name*\. For example, this is the service role created for this tutorial: AWSCodePipelineServiceRole\-eu\-west\-2\-MyFirstPipeline\.
+   + Choose **Existing service role** to use a service role already created in IAM\. In **Role name**, choose your service role from the list\.
 **Note**  
 Depending on when your service role was created, you might need to update its permissions to support additional AWS services\. For information, see [Add Permissions for Other AWS Services](how-to-custom-role.md#how-to-update-role-new-services)\. 
 
@@ -264,7 +251,7 @@ If you copied the sample application to a GitHub repository instead of an Amazon
 
     Choose **Next**\.
 
-1. In **Step 3: Add build stage**, choose **Skip**, and accept the warning message by choosing **Skip**\. Choose **Next**\.
+1. In **Step 3: Add build stage**, choose **Skip build stage**, and then accept the warning message by choosing **Skip** again\. Choose **Next**\.
 **Note**  
 You can configure a build action with a provider such as AWS CodeBuild, which is a fully managed build service in the cloud\. You can also configure a build action that uses a provider with a build server or system, such as Jenkins\. You can walk through the steps for setting up build resources and creating a pipeline that uses those resources in the next tutorial, [Tutorial: Create a Four\-Stage Pipeline](tutorials-four-stage-pipeline.md)\.
 

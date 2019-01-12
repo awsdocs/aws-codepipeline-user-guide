@@ -15,5 +15,5 @@ When you use the console to create or edit your GitHub pipeline, AWS CodePipelin
 + [List Webhooks in Your Account](pipelines-webhooks-view.md)
 + [Edit the Webhook for Your GitHub Pipeline](pipelines-webhooks-update.title.md)
 + [Delete the Webhook for Your GitHub Pipeline](pipelines-webhooks-delete.md)
-+ [Create a CloudWatch Events Rule That Starts Your GitHub Pipeline \(AWS CloudFormation Template\)](pipelines-webhooks-create-cfn.md)
++ [Create a Webhook That Starts Your GitHub Pipeline \(AWS CloudFormation Template\)](pipelines-webhooks-create-cfn.md)
 + [Configure Your GitHub Pipelines to Use Webhooks for Change Detection](pipelines-webhooks-migration.md)

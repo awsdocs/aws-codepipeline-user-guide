@@ -70,9 +70,9 @@ If you already have an image you want to use, you can skip this step\.
        "repository": {
            "registryId": "aws_account_id",
            "repositoryName": "nginx",
-           "repositoryArn": "arn:aws:ecr:us-east-1:aws_account_id:repository/hello-world",
+           "repositoryArn": "arn:aws:ecr:us-east-1:aws_account_id:repository/nginx",
            "createdAt": 1505337806.0,
-           "repositoryUri": "aws_account_id.dkr.ecr.us-east-1.amazonaws.com/hello-world"
+           "repositoryUri": "aws_account_id.dkr.ecr.us-east-1.amazonaws.com/nginx"
        }
    }
    ```
@@ -373,15 +373,17 @@ In this section, you create an Amazon ECS cluster and service where AWS CodeDepl
 
 **To create an Amazon ECS service**
 
-Use the AWS CLI to create your service in Amazon ECS\. To use the default cluster rather than the cluster you just created, you can indicate `"default"` in the `"cluster"` field in the JSON file\.
+Use the AWS CLI to create your service in Amazon ECS\.
 
 1. Create a JSON file and name it `create-service.json`\. Paste the following into the JSON file\.
+
+   For the "taskDefinition" field, when you register a task definition in Amazon ECS, you give it a family\. This is similar to a name for multiple versions of the task definition, specified with a revision number\. In this example, use "ecs\-demo:1" for the family and revision number in your file\.
 **Note**  
 You need to include your target group ARN in this file\. Open the Amazon EC2 console and from the navigation pane, under **LOAD BALANCING**, choose **Target Groups**\. Choose your first target group\. Copy your ARN from the **Description** tab\.
 
    ```
    {
-       "taskDefinition": "ecs-demo:1",
+       "taskDefinition": "family:revision-number",
        "cluster": "my-cluster",
        "loadBalancers": [
            {
@@ -478,9 +480,9 @@ In this section, you create a pipeline with the following actions:
 
 1. In **Step 1: Choose pipeline settings**, in **Pipeline name**, enter **MyImagePipeline**\.
 
-1. In **Role name**:
-   + If you do not have a service role, choose **New service role**, and in **Role name**, enter the name for the role\. IAM creates the role for you\.
-   + If you have previously created an AWS\-CodePipeline\-Service service role, choose **Existing service role**\.
+1. In **Service role**, do one of the following:
+   + Choose **New service role** to allow AWS CodePipeline to create a new service role in IAM\. In **Role name**, the role and policy name both default to this format: AWSCodePipelineServiceRole\-*region*\-*pipeline\_name*\. For example, this is the service role created for this tutorial: AWSCodePipelineServiceRole\-eu\-west\-2\-MyImagePipeline\.
+   + Choose **Existing service role** to use a service role already created in IAM\. In **Role name**, choose your service role from the list\.
 **Note**  
 Depending on when your service role was created, you might need to update its permissions to support additional AWS services\. For information, see [Add Permissions for Other AWS Services](how-to-custom-role.md#how-to-update-role-new-services)\. 
 
@@ -500,7 +502,7 @@ This is not the source bucket for your pipeline's source code\. This is the arti
 
    Choose **Next**\.
 
-1. In **Step 3: Add build stage**, choose **Skip**, and then accept the warning message by choosing **Skip** again\. Choose **Next**\.
+1. In **Step 3: Add build stage**, choose **Skip build stage**, and then accept the warning message by choosing **Skip** again\. Choose **Next**\.
 
 1. In **Step 4: Add deploy stage**:
 

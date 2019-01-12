@@ -82,11 +82,6 @@ The procedures in this guide support the new console design\. If you choose to u
   Learn how to use GitHub, AWS CodePipeline, Jenkins, and Elastic Beanstalk to create a deployment pipeline for a web application that is updated automatically every time you change your code\.
 
   *Published December 2015*
-+ [Continuous Delivery for a PHP Application Using AWS CodePipeline, Elastic Beanstalk, and Solano Labs](https://blogs.aws.amazon.com/application-management/post/TxYSRRBH57NP2P/Continuous-Delivery-for-a-PHP-Application-Using-AWS-CodePipeline-AWS-Elastic-Bea)
-
-  Learn how to use Solano CI with AWS CodePipeline to test a PHP application using PHPUnit, and then deploy the application to Elastic Beanstalk\.
-
-  *Published December 2015*
 + [Performance Testing in Continuous Delivery Using AWS CodePipeline and BlazeMeter](https://aws.amazon.com/blogs/apn/performance-testing-in-continuous-delivery-using-aws-codepipeline-and-blazemeter/)
 
   Learn how to inject automated load tests at the right places in the AWS CodePipeline delivery workflow with BlazeMeter’s native AWS CodePipeline integration\.

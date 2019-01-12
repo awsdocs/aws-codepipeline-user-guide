@@ -109,6 +109,9 @@ In this step, you download code for a sample application that was created for an
 
 In this step, you create the Amazon EC2 instance where you deploy a sample application\. As part of this process, you install the AWS CodeDeploy agent on the instance\. The AWS CodeDeploy agent is a software package that enables an instance to be used in AWS CodeDeploy deployments\.
 
+**Note**  
+This tutorial provides sample steps for creating an Amazon EC2 Linux instance\. For sample steps to create an Amazon EC2 Windows instance, see Step 2: Create Amazon EC2 Windows Instances and Install the AWS CodeDeploy Agent in [Tutorial: Create a Simple Pipeline \(Amazon S3 Bucket\)](tutorials-simple-s3.md)\.
+
 **To launch an instance**
 
 1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
@@ -256,9 +259,9 @@ You're now ready to create and run your first pipeline\.
 **Note**  
 If you choose another name for your pipeline, be sure to use it instead of *MyFirstPipeline* in the remaining steps of this tutorial\. After you create a pipeline, you cannot change its name\. Pipeline names are subject to some limitations\. For more information, see [Limits in AWS CodePipeline](limits.md)\. 
 
-1. In **Role name**, do one of the following:
-   + If you do not have a service role, choose **New service role**, and in **Role name**, enter the name for the role\. IAM creates the role for you\.
-   + If you have previously created an AWS\-CodePipeline\-Service service role, choose **Existing service role**\.
+1. In **Service role**, do one of the following:
+   + Choose **New service role** to allow AWS CodePipeline to create a new service role in IAM\. In **Role name**, the role and policy name both default to this format: AWSCodePipelineServiceRole\-*region*\-*pipeline\_name*\. For example, this is the service role created for this tutorial: AWSCodePipelineServiceRole\-eu\-west\-2\-MyFirstPipeline\.
+   + Choose **Existing service role** to use a service role already created in IAM\. In **Role name**, choose your service role from the list\.
 **Note**  
 Depending on when your service role was created, you might need to update its permissions to support additional AWS services\. For information, see [Add Permissions for Other AWS Services](how-to-custom-role.md#how-to-update-role-new-services)\. 
 
@@ -283,7 +286,7 @@ This is not the source bucket for your pipeline's source code\. This is the arti
 
    Choose **Next**\.
 
-1. In **Step 3: Add build stage**, choose **Skip**, and accept the warning message by choosing **Skip**\. Choose **Next**\.
+1. In **Step 3: Add build stage**, choose **Skip build stage**, and then accept the warning message by choosing **Skip** again\. Choose **Next**\.
 **Note**  
 In this tutorial, you are deploying code that requires no build service\.
 

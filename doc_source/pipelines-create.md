@@ -6,7 +6,7 @@ The procedures in this guide support the new console design\. If you choose to u
 
 # Create a Pipeline in AWS CodePipeline<a name="pipelines-create"></a>
 
-You can use the AWS CodePipeline console or the AWS CLI to create a pipeline\.
+You can use the AWS CodePipeline console or the AWS CLI to create a pipeline\. Pipelines must have at least two stages\. The first stage of a pipeline is required to be a source stage, and the pipeline is required to additionally have at least one other stage that is a build or deployment stage\.
 
 You can also create pipelines that build and deploy container\-based applications by using Amazon ECS as the deployment provider\. Before you create a pipeline that deploys container\-based applications with Amazon ECS, you must create an image definitions file\.
 
@@ -114,7 +114,7 @@ When you use the pipeline wizard, AWS CodePipeline creates the names of stages \
 
 1. On the **Welcome** page, choose **Create pipeline**\. 
 
-   If this is your first time using AWS CodePipeline, choose **Get Started Now**\.
+   If this is your first time using AWS CodePipeline, choose **Get Started**\.
 
 1. On the **Step 1: Choose pipeline settings** page, in **Pipeline name**, enter the name for your pipeline\.
 
@@ -122,9 +122,9 @@ When you use the pipeline wizard, AWS CodePipeline creates the names of stages \
 **Note**  
 After you create a pipeline, you cannot change its name\. For information about other limitations, see [Limits in AWS CodePipeline](limits.md)\.
 
-1. In **Role name**, do one of the following:
-   + If you do not have a service role, choose **New service role** and in **Role name**, enter the name for your new service role\. IAM creates the new role for you\.
-   + If you have previously created an AWS\-CodePipeline\-Service service role, choose **Existing service role**\.
+1. In **Service role**, do one of the following:
+   + Choose **New service role** to allow AWS CodePipeline to create a new service role in IAM\. In **Role name**, the role and policy name both default to this format: AWSCodePipelineServiceRole\-*region*\-*pipeline\_name*\. For example, this is the service role created for a pipeline named MyPipeline: AWSCodePipelineServiceRole\-eu\-west\-2\-MyPipeline\.
+   + Choose **Existing service role** to use a service role already created in IAM\. In **Role name**, choose your service role from the list\.
 **Note**  
 Depending on when your service role was created, you might need to update its permissions to support additional AWS services\. For information, see [Add Permissions for Other AWS Services](how-to-custom-role.md#how-to-update-role-new-services)\. 
 
@@ -173,28 +173,28 @@ In GitHub, there is a limit to the number of OAuth tokens you can use for an app
     + In **Repository name**, choose the name of your Amazon ECR repository\.
     + In **Image tag**, specify the image name and version, if different from LATEST\.
     + In **Output artifacts**, choose the output artifact default, such as MyApp, that contains the image name and repository URI information you want the next stage to use\.
+
+      For a tutorial about creating a pipeline for Amazon ECS blue\-green deployments with an Amazon ECR source stage, see [Tutorial: Create a Pipeline with an Amazon ECR Source and ECS\-to\-CodeDeploy Deployment](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/tutorials-ecs-ecr-codedeploy.html)\.
 **Note**  
 The object and file type must be compatible with the deployment system you plan to use \(for example, Elastic Beanstalk or AWS CodeDeploy\)\. Supported file types might include \.zip, \.tar, and \.tgz files\. For more information about the supported container types for Elastic Beanstalk, see [Customizing and Configuring Elastic Beanstalk Environments](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/customize-containers.html) and [Supported Platforms](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html)\. For more information about deploying revisions with AWS CodeDeploy, see [Uploading Your Application Revision](https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-steps.html#deployment-steps-uploading-your-app) and [Prepare a Revision](https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-prepare-revision.html)\.
 
 **Step 3: Create a build stage**
 
-On the **Step 3: Add build stage** page, do one of the following, and then choose **Next**:
-+ 
-  + Choose **Skip** to skip creating a build stage, and accept the warning message by choosing **Skip**\.
-  + Choose a custom action provider of build services that you want to use, and provide the configuration details for that provider\.
-**Note**  
-The steps for adding a build provider vary by provider\. For an example of how to add Jenkins as a build provider, see [Tutorial: Create a Four\-Stage Pipeline](tutorials-four-stage-pipeline.md)\.
-  + Choose AWS CodeBuild, and then in **Project name**, choose your build project\. If you have already created a build project in AWS CodeBuild, choose it\. Or you can create a build project in AWS CodeBuild and then return to this task\. Follow the instructions in [Create a Pipeline That Uses AWS CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/how-to-create-pipeline.html#pipelines-create-console) in *AWS CodeBuild User Guide*\. 
+This step is optional if you plan to create a deployment stage\.
++ On the **Step 3: Add build stage** page, do one of the following, and then choose **Next**:
+  + Choose **Skip build stage** if you plan to create a deployment stage\.
+  + From **Build provider**, choose a custom action provider of build services that you want to use, and provide the configuration details for that provider\. For an example of how to add Jenkins as a build provider, see [Tutorial: Create a Four\-Stage Pipeline](tutorials-four-stage-pipeline.md)\.
+  + From **Build provider**, choose AWS CodeBuild, and then in **Project name**, choose your build project\. If you have already created a build project in AWS CodeBuild, choose it\. Or you can create a build project in AWS CodeBuild and then return to this task\. Follow the instructions in [Create a Pipeline That Uses AWS CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/how-to-create-pipeline.html#pipelines-create-console) in *AWS CodeBuild User Guide*\. 
 
 **Step 4: Create a deployment stage**
 
-On the **Step 4: Add deploy stage** page, do one of the following, and then choose **Next**:
-+ Choose one of the following:
-  + Choose **Skip** to skip creating a deployment stage, and accept the warning message by choosing **Skip**\.
+This step is optional if you have already created a build stage\.
++ On the **Step 4: Add deploy stage** page, do one of the following, and then choose **Next**:
+  + Choose **Skip deploy stage** if you created a build stage in the previous step\.
 **Note**  
-You can skip adding a deployment provider now only if you chose a build provider in the previous step\.
-  + Choose a custom action that you have created for a deployment provider\.
-  + From **Deploy provider**, choose one of the following default providers:
+This option does not appear if you have already skipped the build stage\. 
+  + In **Deploy provider**, choose a custom action that you have created for a deployment provider\.
+  + In **Deploy provider**, choose one of the following default providers:
     + **AWS CodeDeploy**
 
       In **Application name**, enter or choose the name of an existing AWS CodeDeploy application\. In **Deployment group**, enter the name of a deployment group for the application\. Choose **Next**\. You can also create an application, deployment group, or both in the AWS CodeDeploy console\.
@@ -222,6 +222,21 @@ You can skip adding a deployment provider now only if you chose a build provider
 Make sure your Amazon ECS cluster is configured with two or more instances\. Amazon ECS clusters must contain at least two instances so that one is maintained as the primary instance and another is used to accommodate new deployments\.
 
       For a tutorial about deploying container\-based applications with your pipeline, see [Tutorial: Continuous Deployment with AWS CodePipeline](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-cd-pipeline.html)\.
+    + **Amazon ECS \(Blue/Green\)**
+
+      Enter the AWS CodeDeploy application and deployment group, Amazon ECS task definition, and AppSpec file information, and then choose **Next**\.
+
+      For a tutorial about creating a pipeline for blue\-green deployments to an Amazon ECS cluster with AWS CodeDeploy, see [Tutorial: Create a Pipeline with an Amazon ECR Source and ECS\-to\-CodeDeploy Deployment](tutorials-ecs-ecr-codedeploy.md)\.
+    + **AWS Service Catalog**
+
+      Choose **Enter deployment configuration** if you want to use fields in the console to specify your configuration, or choose **Configuration file** if you have a separate configuration file\. Enter product and configuration information, and then choose **Next**\.
+
+      For a tutorial about deploying product changes to AWS Service Catalog with your pipeline, see [Tutorial: Create a Pipeline That Deploys to AWS Service Catalog](tutorials-S3-servicecatalog.md)\.
+    + **Alexa Skills Kit**
+
+       In **Alexa Skill ID**, enter the skill ID for your Alexa skill\. In **Client ID** and **Client secret**, enter the credentials generated using a Login with Amazon \(LWA\) security profile\. In **Refresh token**, enter the refresh token you generated using the ASK CLI command for retrieving a refresh token\. Choose **Next**\.
+
+      For a tutorial about deploying Alexa skills with your pipeline and generating the LWA credentials, see [Tutorial: Create a Pipeline that Deploys an Amazon Alexa Skill](tutorials-alexa-skills-kit.md)\.
 
 **Step 5: Review the pipeline**
 + On the **Step 5: Review** page, review your pipeline configuration, and then choose **Create pipeline** to create the pipeline or **Previous** to go back and edit your choices\. To exit the wizard without creating a pipeline, choose **Cancel**\.

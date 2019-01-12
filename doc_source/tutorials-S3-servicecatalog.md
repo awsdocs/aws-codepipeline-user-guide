@@ -83,7 +83,7 @@ In this example, you upload the sample AWS CloudFormation template file for an A
    https://<region-URL>/servicecatalog/home?region=<region>#/admin-products?productCreated=prod-example123456&createdProductTitle=my-product
    ```
 **Note**  
-Copy the URL for your product before you navigate away from the page\. Otherwise, you must use the CLI to obtain your product ID\.
+Copy the URL for your product before you navigate away from the page\. Once you navigate away from this page, you must use the CLI to obtain your product ID\.
 
    After a few seconds, your product appears on the **Products** page\. You might need to refresh your browser to see the product in the list\.
 
@@ -95,7 +95,7 @@ Copy the URL for your product before you navigate away from the page\. Otherwise
 
    1. Choose **Getting started**\. Choose **Create pipeline**, and then enter a name for your pipeline\.
 
-   1. In **Service role name**, choose **New service role**\. This creates a service role for AWS CodePipeline to manage permissions to other AWS services\.
+   1. In **Service role**, choose **New service role**\. This creates a service role for AWS CodePipeline to manage permissions to other AWS services\.
 **Note**  
 If you use an AWS CodePipeline service role that was created before October 16 2018, you need to add permissions for AWS Service Catalog\. Open the IAM console, find the role, and then add the following permissions to the role's policy\. For more information, see [Add Permissions for Other AWS Services](how-to-custom-role.md#how-to-update-role-new-services)\.  
 
@@ -133,7 +133,7 @@ If you use an AWS CodePipeline service role that was created before October 16 2
 
    1. Choose **Next**\.
 
-1. In **Add build stage**, choose **Skip**, and then choose **Skip** on the confirmation message\.
+1. In **Add build stage**, choose **Skip build stage**, and then accept the warning message by choosing **Skip** again\.
 
 1. In **Add deploy stage**, complete the following:
 
@@ -268,7 +268,7 @@ In this example, you upload the sample AWS CloudFormation template file for an A
    https://<region-URL>/servicecatalog/home?region=<region>#/admin-products?productCreated=prod-example123456&createdProductTitle=my-product
    ```
 **Note**  
-Copy the URL for your product before navigating away from the creation page\. Otherwise, you will use the CLI to obtain your product ID rather than the console\.
+Copy the URL for your product before you navigate away from the page\. Once you navigate away from this page, you must use the CLI to obtain your product ID\.
 
    After a few seconds, your product appears on the **Products** page\. You might need to refresh your browser to see the product in the list\.
 
@@ -280,7 +280,7 @@ Copy the URL for your product before navigating away from the creation page\. Ot
 
    1. Choose **Getting started**\. Choose **Create pipeline**, and then enter a name for your pipeline\.
 
-   1. In **Service role name**, choose **New service role**\. This creates a service role for AWS CodePipeline to manage permissions to other AWS services\.
+   1. In **Service role**, choose **New service role**\. This creates a service role for AWS CodePipeline to manage permissions to other AWS services\.
 **Note**  
 If you use an AWS CodePipeline service role that was created before October 16 2018, you need to add permissions for AWS Service Catalog\. Open the IAM console, find the role, and then add the following permissions to the role's policy\. For more information, see [Add Permissions for Other AWS Services](how-to-custom-role.md#how-to-update-role-new-services)\.  
 
@@ -318,7 +318,7 @@ If you use an AWS CodePipeline service role that was created before October 16 2
 
    1. Choose **Next**\.
 
-1. In **Add build stage**, choose **Skip**, and then choose **Skip** on the confirmation message\.
+1. In **Add build stage**, choose **Skip build stage**, and then accept the warning message by choosing **Skip** again\.
 
 1. In **Add deploy stage**, complete the following:
 

@@ -134,24 +134,11 @@ In this part of the tutorial, you will create the pipeline using the **Create Pi
 
 1. On the **Step 1: Choose pipeline settings** page, in **Pipeline name**, type the name for your pipeline\.
 
-1. In **Service role**, leave **New service role **selected, and leave **Role name** unchanged\. You can also choose to use an existing service role if you previously created one\.
+1. In **Service role**, do one of the following:
+   + Choose **New service role** to allow AWS CodePipeline to create a new service role in IAM\. In **Role name**, the role and policy name both default to this format: AWSCodePipelineServiceRole\-*region*\-*pipeline\_name*\. For example, this is the service role created for a pipeline named MyPipeline: AWSCodePipelineServiceRole\-eu\-west\-2\-MyPipeline\.
+   + Choose **Existing service role** to use a service role already created in IAM\. In **Role name**, choose your service role from the list\.
 **Note**  
-If you use an AWS CodePipeline service role that was created before July 2018, you need to add permissions for Device Farm\. To do this, open the IAM console, find the role, and then add the following permissions to the role's policy\. For more information, see [Add Permissions for Other AWS Services](how-to-custom-role.md#how-to-update-role-new-services)\.  
-
-   ```
-   {
-        "Effect": "Allow",
-        "Action": [
-           "devicefarm:ListProjects",
-           "devicefarm:ListDevicePools",
-           "devicefarm:GetRun",
-           "devicefarm:GetUpload",
-           "devicefarm:CreateUpload",
-           "devicefarm:ScheduleRun"
-        ],
-        "Resource": "*"
-   }
-   ```
+Depending on when your service role was created, you might need to update its permissions to support additional AWS services\. For information, see [Add Permissions for Other AWS Services](how-to-custom-role.md#how-to-update-role-new-services)\. 
 
 1. In **Artifact location**, do one of the following: 
 

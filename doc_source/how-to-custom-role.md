@@ -130,6 +130,7 @@ The following table shows when support was added for other AWS services\.
 
 | AWS Service | AWS CodePipeline Support Date | 
 | --- | --- | 
+| Amazon ECR | November 27, 2018 | 
 | AWS Service Catalog | October 16, 2018 | 
 | AWS Device Farm | July 19, 2018 | 
 | Amazon ECS | December 12, 2017 | 
@@ -256,6 +257,18 @@ Your service role has a name in a format similar to `oneClick_AWS-CodePipeline-1
        ],
        "Resource": "*"
    }
+   ```
+
+1. For Amazon ECR support, add the following to your policy statement:
+
+   ```
+   {
+       "Action": [
+           "ecr:DescribeImages"
+       ],
+       "Resource": "*",
+       "Effect": "Allow"
+   },
    ```
 
 1. For Amazon ECS, the following are the minimum permissions needed to create pipelines with an Amazon ECS deploy action\.

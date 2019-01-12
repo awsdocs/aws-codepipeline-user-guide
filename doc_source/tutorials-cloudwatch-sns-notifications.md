@@ -19,33 +19,33 @@ In this tutorial, you configure a notification to send an email when a pipeline'
 
 Amazon SNS coordinates use of topics to deliver messages to subscribing endpoints or clients\. Use Amazon SNS to create a notification topic and then subscribe to the topic using your email address\. The Amazon SNS topic will be added as a target to your CloudWatch Events rule\. For more information, see the [Amazon Simple Notification Service Developer Guide](https://docs.aws.amazon.com/sns/latest/dg/) \.
 
-1. Create or identify a topic in Amazon SNS\. AWS CodePipeline will use CloudWatch Events to send notifications to this topic through Amazon SNS\. To create a topic:
+Create or identify a topic in Amazon SNS\. AWS CodePipeline will use CloudWatch Events to send notifications to this topic through Amazon SNS\. To create a topic:
 
-   1. Open the Amazon SNS console at [https://console\.aws\.amazon\.com/sns](https://console.aws.amazon.com/sns)\.
+1. Open the Amazon SNS console at [https://console\.aws\.amazon\.com/sns](https://console.aws.amazon.com/sns)\.
 
-   1. Choose **Create topic**\. 
+1. Choose **Create topic**\. 
 
-   1. In the **Create new topic** dialog box, for **Topic name**, type a name for the topic \(for example, **PipelineNotificationTopic**\)\.   
+1. In the **Create new topic** dialog box, for **Topic name**, type a name for the topic \(for example, **PipelineNotificationTopic**\)\.   
 ![\[Create the notification topic using Amazon SNS.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/tutorial-SNS-topic.png)![\[Create the notification topic using Amazon SNS.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Create the notification topic using Amazon SNS.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
-   1. Choose **Create topic**\.
+1. Choose **Create topic**\.
 
-      For more information, see [Create a Topic](https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html) in the *Amazon SNS Developer Guide*\.
+   For more information, see [Create a Topic](https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html) in the *Amazon SNS Developer Guide*\.
 
-1. Subscribe one or more recipients to the topic to receive email notifications\. To subscribe a recipient to a topic:
+Subscribe one or more recipients to the topic to receive email notifications\. To subscribe a recipient to a topic:
 
-   1. In the Amazon SNS console, from the **Topics** list, select the check box next to your new topic\. Choose **Actions, Subscribe to topic**\.
+1. In the Amazon SNS console, from the **Topics** list, select the check box next to your new topic\. Choose **Actions, Subscribe to topic**\.
 
-   1. In the **Create subscription** dialog box, verify that an ARN appears in **Topic ARN**\.
+1. In the **Create subscription** dialog box, verify that an ARN appears in **Topic ARN**\.
 
-   1. For **Protocol**, choose **Email**\.
+1. For **Protocol**, choose **Email**\.
 
-   1. For **Endpoint**, type the recipient's full email address\. Compare your results to the following:  
+1. For **Endpoint**, type the recipient's full email address\. Compare your results to the following:  
 ![\[Complete the notification creation by subscribing to the topic.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/tutorial-SNS-subscription.png)![\[Complete the notification creation by subscribing to the topic.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Complete the notification creation by subscribing to the topic.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
-   1. Choose **Create Subscription**\.
+1. Choose **Create Subscription**\.
 
-   1. Amazon SNS sends a subscription confirmation email to the recipient\. To receive email notifications, the recipient must choose the **Confirm subscription** link in this email\. After the recipient clicks the link, if successfully subscribed, Amazon SNS displays a confirmation message in the recipient's web browser\.
+1. Amazon SNS sends a subscription confirmation email to the recipient\. To receive email notifications, the recipient must choose the **Confirm subscription** link in this email\. After the recipient clicks the link, if successfully subscribed, Amazon SNS displays a confirmation message in the recipient's web browser\.
 
    For more information, see [Subscribe to a Topic](https://docs.aws.amazon.com/sns/latest/dg/SubscribeTopic.html) in the *Amazon SNS Developer Guide*\.
 
