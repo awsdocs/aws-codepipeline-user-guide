@@ -1,9 +1,3 @@
---------
-
-The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
-
---------
-
 # Use Parameter Store to Track Database Passwords or Third Party API Keys<a name="parameter-store-encryption"></a>
 
 You can use Parameter Store to track and update configuration secrets such as database passwords\. This procedure describes using Parameter Store to manually create a secret parameter\. You can also create automated scripts to use Parameter Store to securely set and manage your passwords and keys automatically\. See an example of build spec automation for AWS CodeDeploy at this [ blog post](https://aws.amazon.com/blogs/mt/use-parameter-store-to-securely-access-secrets-and-config-data-in-aws-codedeploy/)\.

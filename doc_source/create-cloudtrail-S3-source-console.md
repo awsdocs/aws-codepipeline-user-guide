@@ -1,10 +1,4 @@
---------
-
-The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
-
---------
-
-# Create a CloudWatch Events Rule That Starts Your Amazon S3 Pipeline \(Console\)<a name="create-cloudtrail-S3-source-console"></a>
+# Create a CloudWatch Events Rule for an Amazon S3 Source \(Console\)<a name="create-cloudtrail-S3-source-console"></a>
 
 Before you set up a rule in CloudWatch Events, you must create an AWS CloudTrail trail\. For more information, see [Creating a Trail in the Console](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-a-trail-using-the-console-first-time.html)\.
 
@@ -54,7 +48,7 @@ arn:aws:codepipeline:*region*:*account*:*pipeline\-name*
 Sample pipeline ARN:  
 arn:aws:codepipeline:us\-east\-2:80398EXAMPLE:MyFirstPipeline 
 
-1. To create or specify an IAM service role that grants Amazon CloudWatch Events permissions to invoke the target associated with your Amazon CloudWatch Events rule \(in this case, the target is AWS CodePipeline\): 
+1. To create or specify an IAM service role that grants Amazon CloudWatch Events permissions to invoke the target associated with your Amazon CloudWatch Events rule \(in this case, the target is CodePipeline\): 
    + Choose **Create a new role for this specific resource** to create a service role that gives Amazon CloudWatch Events permissions to your start your pipeline executions when triggered\.
    + Choose **Use existing role** to enter a service role that gives Amazon CloudWatch Events permissions to your start your pipeline executions when triggered\.
 

@@ -1,26 +1,20 @@
---------
+# Manage the CodePipeline Service Role<a name="how-to-custom-role"></a>
 
-The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
+Permissions for some aspects of the pipeline execution process are granted to another role type that acts on behalf of CodePipeline, rather than to IAM users\. The **Service role ** is an IAM role that gives CodePipeline permission to use resources in your account\. Service role creation is only required the first time you create a pipeline in CodePipeline\.
 
---------
-
-# Manage the AWS CodePipeline Service Role<a name="how-to-custom-role"></a>
-
-Permissions for some aspects of the pipeline execution process are granted to another role type that acts on behalf of AWS CodePipeline, rather than to IAM users\. The **Service role ** is an IAM role that gives AWS CodePipeline permission to use resources in your account\. Service role creation is only required the first time you create a pipeline in AWS CodePipeline\.
-
-AWS CodePipeline uses this service role when processing revisions through the stages and actions in a pipeline\. That role is configured with one or more policies that control access to the AWS resources used by the pipeline\. You might want to attach additional policies to this role, edit the policy attached to the role, or configure policies for other service roles in AWS\. You might also want to attach a policy to a role when configuring cross\-account access to your pipeline\.
+CodePipeline uses this service role when processing revisions through the stages and actions in a pipeline\. That role is configured with one or more policies that control access to the AWS resources used by the pipeline\. You might want to attach additional policies to this role, edit the policy attached to the role, or configure policies for other service roles in AWS\. You might also want to attach a policy to a role when configuring cross\-account access to your pipeline\.
 
 **Important**  
-Modifying a policy statement or attaching another policy to the role can prevent your pipelines from functioning\. Be sure that you understand the implications before you modify the service role for AWS CodePipeline in any way\. Make sure you test your pipelines after making any changes to the service role\.
+Modifying a policy statement or attaching another policy to the role can prevent your pipelines from functioning\. Be sure that you understand the implications before you modify the service role for CodePipeline in any way\. Make sure you test your pipelines after making any changes to the service role\.
 
 **Topics**
-+ [Review the Default AWS CodePipeline Service Role Policy](#view-default-service-role-policy)
++ [Review the Default CodePipeline Service Role Policy](#view-default-service-role-policy)
 + [Add Permissions for Other AWS Services](#how-to-update-role-new-services)
 + [Remove Permissions for Unused AWS Services](#remove-permissions-from-policy)
 
-## Review the Default AWS CodePipeline Service Role Policy<a name="view-default-service-role-policy"></a>
+## Review the Default CodePipeline Service Role Policy<a name="view-default-service-role-policy"></a>
 
-By default, the policy statement for the IAM service role for AWS CodePipeline, AWS\-CodePipeline\-Service, includes permissions needed for AWS CodePipeline to use other resources in your account\. 
+By default, the policy statement for the IAM service role for CodePipeline, AWS\-CodePipeline\-Service, includes permissions needed for CodePipeline to use other resources in your account\. 
 
 AWS\-CodePipeline\-Service currently includes the following policy statement: 
 
@@ -115,26 +109,26 @@ AWS\-CodePipeline\-Service currently includes the following policy statement:
 ```
 
 **Note**  
-Make sure your service role for AWS CodePipeline includes the `"elasticbeanstalk:DescribeEvents"` action for any pipelines that use AWS Elastic Beanstalk\. Without this permission, AWS Elastic Beanstalk deploy actions hang without failing or indicating an error\.
+Make sure your service role for CodePipeline includes the `"elasticbeanstalk:DescribeEvents"` action for any pipelines that use AWS Elastic Beanstalk\. Without this permission, AWS Elastic Beanstalk deploy actions hang without failing or indicating an error\.
 
 ## Add Permissions for Other AWS Services<a name="how-to-update-role-new-services"></a>
 
 You must update your service role policy statement with permissions for an AWS service not already included in the default service role policy statement before you can use it in your pipelines\.
 
-This is especially important if the service role you use for your pipelines was created before support was added to AWS CodePipeline for an AWS service\.
+This is especially important if the service role you use for your pipelines was created before support was added to CodePipeline for an AWS service\.
 
 The following table shows when support was added for other AWS services\. 
 
 
 ****  
 
-| AWS Service | AWS CodePipeline Support Date | 
+| AWS Service | CodePipeline Support Date | 
 | --- | --- | 
 | Amazon ECR | November 27, 2018 | 
 | AWS Service Catalog | October 16, 2018 | 
 | AWS Device Farm | July 19, 2018 | 
 | Amazon ECS | December 12, 2017 | 
-| AWS CodeCommit | April 18, 2016 | 
+| CodeCommit | April 18, 2016 | 
 | AWS OpsWorks | June 2, 2016 | 
 | AWS CloudFormation | November 3, 2016 | 
 | AWS CodeBuild | December 1, 2016 | 
@@ -149,7 +143,7 @@ To add permissions for an additional supported service, follow these steps:
 **Note**  
 Your service role has a name in a format similar to `oneClick_AWS-CodePipeline-1111222233334`\.
 
-1. Add the required permissions in the **Policy Document** box\. For example, for AWS CodeCommit support, add the following to your policy statement:
+1. Add the required permissions in the **Policy Document** box\. For example, for CodeCommit support, add the following to your policy statement:
 
    ```
    {
@@ -317,7 +311,7 @@ You can edit the service role statement to remove access to resources you do not
 },
 ```
 
-Similarly, if none of your pipelines includes AWS CodeDeploy, you can edit the policy statement to remove the section that grants AWS CodeDeploy resources:
+Similarly, if none of your pipelines includes CodeDeploy, you can edit the policy statement to remove the section that grants CodeDeploy resources:
 
 ```
     {

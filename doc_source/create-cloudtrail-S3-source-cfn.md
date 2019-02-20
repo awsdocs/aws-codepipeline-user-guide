@@ -1,14 +1,8 @@
---------
-
-The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
-
---------
-
-# Create a CloudWatch Events Rule That Starts Your Amazon S3 Pipeline \(AWS CloudFormation Template\)<a name="create-cloudtrail-S3-source-cfn"></a>
+# Create a CloudWatch Events Rule for an Amazon S3 Source \(AWS CloudFormation Template\)<a name="create-cloudtrail-S3-source-cfn"></a>
 
 To use AWS CloudFormation to create a rule, update your template as shown here\.<a name="proc-cfn-event-s3-createrule"></a>
 
-**To create a CloudWatch Events rule with Amazon S3 as the event source and AWS CodePipeline as the target and apply the permissions policy**
+**To create a CloudWatch Events rule with Amazon S3 as the event source and CodePipeline as the target and apply the permissions policy**
 
 1. In the template, under `Resources`, use the `AWS::IAM::Role` AWS CloudFormation resource to configure the IAM role that allows your event to start your pipeline\. This entry creates a role that uses two policies:
    + The first policy allows the role to be assumed\.
@@ -267,6 +261,8 @@ To use AWS CloudFormation to create a rule, update your template as shown here\.
 1. Choose **Execute**\.<a name="proc-cfn-flag-s3"></a>
 
 **To edit your pipeline's PollForSourceChanges parameter**
+**Important**  
+When you create a pipeline with this method, the `PollForSourceChanges` parameter defaults to true if it is not explicitly set to false\. When you add event\-based change detection, you must add the parameter to your output and set it to false to disable polling\. Otherwise, your pipeline starts twice for a single source change\. For details, see [Default Settings for the PollForSourceChanges Parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
 + In the template, change `PollForSourceChanges` to `false`\. If you did not include `PollForSourceChanges` in your pipeline definition, add it and set it to `false`\.
 
   **Why am I making this change?** Changing `PollForSourceChanges` to `false` turns off periodic checks so you can use event\-based change detection only\.

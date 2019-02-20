@@ -1,13 +1,7 @@
---------
-
-The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
-
---------
-
-# Configure Server\-Side Encryption for Artifacts Stored in Amazon S3 for AWS CodePipeline<a name="S3-artifact-encryption"></a>
+# Configure Server\-Side Encryption for Artifacts Stored in Amazon S3 for CodePipeline<a name="S3-artifact-encryption"></a>
 
 There are two ways to configure server\-side encryption for Amazon S3 artifacts:
-+ AWS CodePipeline creates an Amazon S3 artifact bucket and default AWS\-managed SSE\-KMS encryption keys when you create a pipeline using the Create Pipeline wizard\. The master key is encrypted along with object data and managed by AWS\.
++ CodePipeline creates an Amazon S3 artifact bucket and default AWS\-managed SSE\-KMS encryption keys when you create a pipeline using the Create Pipeline wizard\. The master key is encrypted along with object data and managed by AWS\.
 + You can create and manage your own customer\-managed SSE\-KMS keys\.
 
 If you are using the default Amazon S3 key, you cannot change or delete this AWS\-managed key\. If you are using a customer\-managed key in AWS KMS to encrypt or decrypt artifacts in the Amazon S3 bucket, you can change or rotate this key as necessary\.

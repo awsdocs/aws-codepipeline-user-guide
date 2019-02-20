@@ -1,15 +1,11 @@
---------
-
-The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
-
---------
-
-# Working with Stage Transitions in AWS CodePipeline<a name="transitions"></a>
+# Working with Stage Transitions in CodePipeline<a name="transitions"></a>
 
 Transitions are links between pipeline stages that can be disabled or enabled\. They are enabled by default\. When you re\-enable a disabled transition, the latest revision runs through the remaining stages of the pipeline unless more than 30 days have passed\. Pipeline execution won't resume for a transition that has been disabled more than 30 days unless a new change is detected or you manually rerun the pipeline\.
 
+You can use the AWS CodePipeline console or the AWS CLI to disable or enable transitions between stages in a pipeline\.
+
 **Note**  
-You can use an approval action to pause the run of a pipeline until it is manually approved to continue\. For more information, see [Manage Approval Actions in AWS CodePipeline](approvals.md)\. 
+You can use an approval action to pause the run of a pipeline until it is manually approved to continue\. For more information, see [Manage Approval Actions in CodePipeline](approvals.md)\. 
 
 **Topics**
 + [Disable or Enable Transitions \(Console\)](#transitions-disable-enable-console)
@@ -19,7 +15,7 @@ You can use an approval action to pause the run of a pipeline until it is manual
 
 **To disable or enable transitions in a pipeline**
 
-1. Sign in to the AWS Management Console and open the AWS CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
+1. Sign in to the AWS Management Console and open the CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
 
    The names of all pipelines associated with your AWS account are displayed\.
 
@@ -35,7 +31,7 @@ You can use an approval action to pause the run of a pipeline until it is manual
 
 1. Choose the **Enable transition** button next to the arrow\. In the **Enable transition** dialog box, choose **Enable**\. The pipeline immediately enables the transition between the two stages\. If any revisions have been run through the earlier stages after the transition was disabled, in a few moments, the pipeline starts running the latest revision through the stages after the formerly disabled transition\. The pipeline runs the revision through all remaining stages in the pipeline\.
 **Note**  
-It might take a few seconds for changes to appear in the AWS CodePipeline console after you enable the transition\.
+It might take a few seconds for changes to appear in the CodePipeline console after you enable the transition\.
 
 ## Disable or Enable Transitions \(CLI\)<a name="transitions-disable-enable-cli"></a>
 
@@ -53,7 +49,7 @@ To disable a transition between stages by using the AWS CLI, run the disable\-st
 
    The command returns nothing\.
 
-1. To verify the transition has been disabled, either view the pipeline in the AWS CodePipeline console or run the get\-pipeline\-state command\. For more information, see [View Pipeline Details and History \(Console\)](pipelines-view.md#pipelines-view-console) and [View Pipeline Details and History \(CLI\)](pipelines-view.md#pipelines-view-cli)\.
+1. To verify the transition has been disabled, either view the pipeline in the CodePipeline console or run the get\-pipeline\-state command\. For more information, see [View Pipeline Details and History \(Console\)](pipelines-view.md#pipelines-view-console) and [View Pipeline Details and History \(CLI\)](pipelines-view.md#pipelines-view-cli)\.
 
 **To enable a transition**
 
@@ -67,4 +63,4 @@ To disable a transition between stages by using the AWS CLI, run the disable\-st
 
    The command returns nothing\.
 
-1. To verify the transition has been disabled, either view the pipeline in the AWS CodePipeline console or run the get\-pipeline\-state command\. For more information, see [View Pipeline Details and History \(Console\)](pipelines-view.md#pipelines-view-console) and [View Pipeline Details and History \(CLI\)](pipelines-view.md#pipelines-view-cli)\.
+1. To verify the transition has been disabled, either view the pipeline in the CodePipeline console or run the get\-pipeline\-state command\. For more information, see [View Pipeline Details and History \(Console\)](pipelines-view.md#pipelines-view-console) and [View Pipeline Details and History \(CLI\)](pipelines-view.md#pipelines-view-cli)\.

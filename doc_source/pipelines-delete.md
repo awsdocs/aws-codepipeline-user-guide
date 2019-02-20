@@ -1,10 +1,4 @@
---------
-
-The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
-
---------
-
-# Delete a Pipeline in AWS CodePipeline<a name="pipelines-delete"></a>
+# Delete a Pipeline in CodePipeline<a name="pipelines-delete"></a>
 
 You can always edit a pipeline to change its functionality, but you might decide you want to delete it instead\. You can use the AWS CodePipeline console or the delete\-pipeline command in the AWS CLI to delete a pipeline\.
 
@@ -16,7 +10,7 @@ You can always edit a pipeline to change its functionality, but you might decide
 
 **To delete a pipeline**
 
-1. Sign in to the AWS Management Console and open the AWS CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
+1. Sign in to the AWS Management Console and open the CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
 
    The names and status of all pipelines associated with your AWS account are displayed\. 
 
@@ -49,4 +43,4 @@ Deleting a pipeline is irreversible\. There is no confirmation dialog box\. Afte
 
 1. Delete any resources you no longer need\.
 **Note**  
-Deleting a pipeline does not delete the resources used in the pipeline, such as the AWS CodeDeploy or Elastic Beanstalk application you used to deploy your code, or, if you created your pipeline from the AWS CodePipeline console, the Amazon S3 bucket AWS CodePipeline created to store the artifacts of your pipelines\. Make sure that you delete resources that are no longer required so that you are not charged for them in the future\. For example, when you use the console to create a pipeline for the first time, AWS CodePipeline creates one Amazon S3 bucket to store all artifacts for all of your pipelines\. If you have deleted all of your pipelines, follow the steps in [Deleting a Bucket](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/DeletingaBucket.html)\. 
+Deleting a pipeline does not delete the resources used in the pipeline, such as the CodeDeploy or Elastic Beanstalk application you used to deploy your code, or, if you created your pipeline from the CodePipeline console, the Amazon S3 bucket CodePipeline created to store the artifacts of your pipelines\. Make sure that you delete resources that are no longer required so that you are not charged for them in the future\. For example, when you use the console to create a pipeline for the first time, CodePipeline creates one Amazon S3 bucket to store all artifacts for all of your pipelines\. If you have deleted all of your pipelines, follow the steps in [Deleting a Bucket](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/DeletingaBucket.html)\. 

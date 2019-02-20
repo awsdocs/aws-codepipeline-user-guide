@@ -1,10 +1,4 @@
---------
-
-The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
-
---------
-
-# Create and Add a Custom Action in AWS CodePipeline<a name="actions-create-custom-action"></a>
+# Create and Add a Custom Action in CodePipeline<a name="actions-create-custom-action"></a>
 
 AWS CodePipeline includes a number of actions that help you configure build, test, and deploy resources for your automated release process\. If your release process includes activities that are not included in the default actions, such as an internally developed build process or a test suite, you can create a custom action for that purpose and include it in your pipeline\. You can use the AWS CLI to create custom actions in pipelines associated with your AWS account\.
 
@@ -14,7 +8,7 @@ Custom actions fall into the following categories:
 + A test action that configures and runs automated tests
 + An invoke action that runs functions
 
-When you create a custom action, you must also create a job worker that will poll AWS CodePipeline for job requests for this custom action, execute the job, and return the status result to AWS CodePipeline\. This job worker can be located on any computer or resource as long as it has access to the public endpoint for AWS CodePipeline\. To easily manage access and security, consider hosting your job worker on an Amazon EC2 instance\. 
+When you create a custom action, you must also create a job worker that will poll CodePipeline for job requests for this custom action, execute the job, and return the status result to CodePipeline\. This job worker can be located on any computer or resource as long as it has access to the public endpoint for CodePipeline\. To easily manage access and security, consider hosting your job worker on an Amazon EC2 instance\. 
 
 The following diagram shows a high\-level view of a pipeline that includes a custom build action:
 
@@ -23,7 +17,7 @@ The following diagram shows a high\-level view of a pipeline that includes a cus
 When a pipeline includes a custom action as part of a stage, the pipeline will create a job request\. A custom job worker detects that request and performs that job \(in this example, a custom process using third\-party build software\)\. When the action is complete, the job worker returns either a success result or a failure result\. If a success result is received, the pipeline will transition the revision and its artifacts to the next action\. If a failure is returned, the pipeline will not transition the revision to the next action in the pipeline\.
 
 **Note**  
-These instructions assume that you have already completed the steps in [Getting Started with AWS CodePipeline](getting-started-codepipeline.md)\.
+These instructions assume that you have already completed the steps in [Getting Started with CodePipeline](getting-started-codepipeline.md)\.
 
 **Topics**
 + [Create a Custom Action \(CLI\)](#actions-create-custom-action-cli)
@@ -70,13 +64,13 @@ These instructions assume that you have already completed the steps in [Getting 
    + `executionUrlTemplate`: the dynamic link that will be updated with information about the current or most recent run of the action\. When your custom job worker updates the status of a job \(for example, success, failure, or in progress\), it will also provide an `externalExecutionId` that will be used to complete the link\. This link can be used to provide details about the run of an action\. 
 
    For example, when you view the action in the pipeline, you see the following two links:  
-![\[Links in the AWS CodePipeline console lead to more information about the run of a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-calinksexplained.png)![\[Links in the AWS CodePipeline console lead to more information about the run of a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Links in the AWS CodePipeline console lead to more information about the run of a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+![\[Links in the CodePipeline console lead to more information about the run of a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-calinksexplained.png)![\[Links in the CodePipeline console lead to more information about the run of a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Links in the CodePipeline console lead to more information about the run of a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
    ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/number-1.png) This static link appears after you add your custom action and points to the address in `entityUrlTemplate`, which you specify when you create your custom action\.
 
    ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/number-2.png) This dynamic link is updated after every run of the action and points to the address in `executionUrlTemplate`, which you specify when you create your custom action\.
 
-   For more information about these link types, as well as `RevisionURLTemplate` and `ThirdPartyURL`, see [ActionTypeSettings](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_ActionTypeSettings.html) and [CreateCustomActionType](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_CreateCustomActionType.html) in the [AWS CodePipeline API Reference](https://docs.aws.amazon.com/codepipeline/latest/APIReference/)\. For more information about action structure requirements and how to create an action, see [AWS CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
+   For more information about these link types, as well as `RevisionURLTemplate` and `ThirdPartyURL`, see [ActionTypeSettings](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_ActionTypeSettings.html) and [CreateCustomActionType](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_CreateCustomActionType.html) in the [CodePipeline API Reference](https://docs.aws.amazon.com/codepipeline/latest/APIReference/)\. For more information about action structure requirements and how to create an action, see [CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
 
 1. Save the JSON file and give it a name you can easily remember \(for example, *MyCustomAction*\.json\)\.
 
@@ -130,13 +124,13 @@ Be sure to include `file://` before the file name\. It is required in this comma
    }
    ```
 **Note**  
-As part of the output of the create\-custom\-action\-type command, the `id` section includes `"owner": "Custom"`\. AWS CodePipeline automatically assigns `Custom` as the owner of custom action types\. This value can't be assigned or changed when you use the create\-custom\-action\-type command or the update\-pipeline command\.
+As part of the output of the create\-custom\-action\-type command, the `id` section includes `"owner": "Custom"`\. CodePipeline automatically assigns `Custom` as the owner of custom action types\. This value can't be assigned or changed when you use the create\-custom\-action\-type command or the update\-pipeline command\.
 
 ## Create a Job Worker for Your Custom Action<a name="actions-create-custom-action-job-worker"></a>
 
-Custom actions require a job worker that will poll AWS CodePipeline for job requests for the custom action, execute the job, and return the status result to AWS CodePipeline\. The job worker can be located on any computer or resource as long as it has access to the public endpoint for AWS CodePipeline\. 
+Custom actions require a job worker that will poll CodePipeline for job requests for the custom action, execute the job, and return the status result to CodePipeline\. The job worker can be located on any computer or resource as long as it has access to the public endpoint for CodePipeline\. 
 
-There are many ways to design your job worker\. The following sections provide some practical guidance for developing your custom job worker for AWS CodePipeline\.
+There are many ways to design your job worker\. The following sections provide some practical guidance for developing your custom job worker for CodePipeline\.
 
 **Topics**
 + [Choose and Configure a Permissions Management Strategy for Your Job Worker](#actions-create-custom-action-permissions)
@@ -145,9 +139,9 @@ There are many ways to design your job worker\. The following sections provide s
 
 ### Choose and Configure a Permissions Management Strategy for Your Job Worker<a name="actions-create-custom-action-permissions"></a>
 
-To develop a custom job worker for your custom action in AWS CodePipeline, you will need a strategy for the integration of user and permission management\. 
+To develop a custom job worker for your custom action in CodePipeline, you will need a strategy for the integration of user and permission management\. 
 
-The simplest strategy is to add the infrastructure you need for your custom job worker by creating Amazon EC2 instances with an IAM instance role, which allow you to easily scale up the resources you need for your integration\. You can use the built\-in integration with AWS to simplify the interaction between your custom job worker and AWS CodePipeline\. 
+The simplest strategy is to add the infrastructure you need for your custom job worker by creating Amazon EC2 instances with an IAM instance role, which allow you to easily scale up the resources you need for your integration\. You can use the built\-in integration with AWS to simplify the interaction between your custom job worker and CodePipeline\. 
 
 **To set up Amazon EC2 instances**
 
@@ -155,7 +149,7 @@ The simplest strategy is to add the infrastructure you need for your custom job 
 
 1. Get started creating your Amazon EC2 instances\. For information, see [Getting Started with Amazon EC2 Linux Instances](https://docs.aws.amazon.com/AWSEC2/latest/GettingStartedGuide/)\.
 
-Another strategy to consider is using identity federation with IAM to integrate your existing identity provider system and resources\. This strategy is particularly useful if you already have a corporate identity provider or are already configured to support users using web identity providers\. Identity federation allows you to grant secure access to AWS resources, including AWS CodePipeline, without having to create or manage IAM users\. You can leverage features and policies for password security requirements and credential rotation\. You can use sample applications as templates for your own design\. 
+Another strategy to consider is using identity federation with IAM to integrate your existing identity provider system and resources\. This strategy is particularly useful if you already have a corporate identity provider or are already configured to support users using web identity providers\. Identity federation allows you to grant secure access to AWS resources, including CodePipeline, without having to create or manage IAM users\. You can leverage features and policies for password security requirements and credential rotation\. You can use sample applications as templates for your own design\. 
 
 **To set up identity federation**
 
@@ -205,27 +199,27 @@ Consider using the **AWSCodePipelineCustomActionAccess** managed policy for the 
 
 ### Develop a Job Worker for Your Custom Action<a name="actions-create-custom-action-job-worker-workflow"></a>
 
-After you've chosen your permissions management strategy, you should consider how your job worker will interact with AWS CodePipeline\. The following high\-level diagram shows the workflow of a custom action and job worker for a build process\.
+After you've chosen your permissions management strategy, you should consider how your job worker will interact with CodePipeline\. The following high\-level diagram shows the workflow of a custom action and job worker for a build process\.
 
 ![\[The workflow of a custom action and job worker for a build process.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/PipelineCustomAgent.png)![\[The workflow of a custom action and job worker for a build process.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The workflow of a custom action and job worker for a build process.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
-1. Your job worker polls AWS CodePipeline for jobs using `PollForJobs`\.
+1. Your job worker polls CodePipeline for jobs using `PollForJobs`\.
 
-1. When a pipeline is triggered by a change in its source stage \(for example, when a developer commits a change\), the automated release process begins\. The process continues until the stage at which your custom action has been configured\. When it reaches your action in this stage, AWS CodePipeline queues a job\. This job will appear if your job worker calls `PollForJobs` again to get status\. Take the job detail from `PollForJobs` and pass it back to your job worker\. 
+1. When a pipeline is triggered by a change in its source stage \(for example, when a developer commits a change\), the automated release process begins\. The process continues until the stage at which your custom action has been configured\. When it reaches your action in this stage, CodePipeline queues a job\. This job will appear if your job worker calls `PollForJobs` again to get status\. Take the job detail from `PollForJobs` and pass it back to your job worker\. 
 
-1. The job worker calls `AcknowledgeJob` to send AWS CodePipeline a job acknowledgement\. AWS CodePipeline returns an acknowledgement that indicates the job worker should continue the job \(`InProgress`\), or, if you have more than one job worker polling for jobs and another job worker has already claimed the job, an `InvalidNonceException` error response will be returned\. After the `InProgress` acknowledgement, AWS CodePipeline waits for results to be returned\.
+1. The job worker calls `AcknowledgeJob` to send CodePipeline a job acknowledgement\. CodePipeline returns an acknowledgement that indicates the job worker should continue the job \(`InProgress`\), or, if you have more than one job worker polling for jobs and another job worker has already claimed the job, an `InvalidNonceException` error response will be returned\. After the `InProgress` acknowledgement, CodePipeline waits for results to be returned\.
 
 1. The job worker initiates your custom action on the revision, and then your action runs\. Along with any other actions, your custom action returns a result to the job worker\. In the example of a build custom action, the action pulls artifacts from the Amazon S3 bucket, builds them, and pushes successfully built artifacts back to the Amazon S3 bucket\. 
 
 1. While the action is running, the job worker can call `PutJobSuccessResult` with a continuation token \(the serialization of the state of the job generated by the job worker, for example a build identifer in JSON format, or an Amazon S3 object key\), as well as the `ExternalExecutionId` information that will be used to populate the link in `executionUrlTemplate`\.  This will update the console view of the pipeline with a working link to specific action details while it is in progress\. Although not required, it is a best practice because it enables users to view the status of your custom action while it runs\. 
 
-   Once `PutJobSuccessResult` is called, the job is considered complete\. A new job is created in AWS CodePipeline that includes the continuation token\. This job will appear if your job worker calls `PollForJobs` again\. This new job can be used to check on the state of the action, and either returns with a continuation token, or returns without a continuation token once the action is complete\.
+   Once `PutJobSuccessResult` is called, the job is considered complete\. A new job is created in CodePipeline that includes the continuation token\. This job will appear if your job worker calls `PollForJobs` again\. This new job can be used to check on the state of the action, and either returns with a continuation token, or returns without a continuation token once the action is complete\.
 **Note**  
-If your job worker performs all the work for a custom action, you should consider breaking your job worker processing into at least two steps\. The first step establishes the details page for your action\. Once you have created the details page, you can serialize the state of the job worker and return it as a continuation token, subject to size limits \(see [Limits in AWS CodePipeline](limits.md)\)\. For example, you could write the state of the action into the string you use as the continuation token\. The second step \(and subsequent steps\) of your job worker processing perform the actual work of the action\. The final step returns success or failure to AWS CodePipeline, with no continuation token on the final step\.
+If your job worker performs all the work for a custom action, you should consider breaking your job worker processing into at least two steps\. The first step establishes the details page for your action\. Once you have created the details page, you can serialize the state of the job worker and return it as a continuation token, subject to size limits \(see [Limits in AWS CodePipeline](limits.md)\)\. For example, you could write the state of the action into the string you use as the continuation token\. The second step \(and subsequent steps\) of your job worker processing perform the actual work of the action\. The final step returns success or failure to CodePipeline, with no continuation token on the final step\.
 
-   For more information about using the continuation token, see the specifications for `PutJobSuccessResult` in the [AWS CodePipeline API Reference](http://docs.aws.amazon.com/codepipeline/latest/APIReference)\.
+   For more information about using the continuation token, see the specifications for `PutJobSuccessResult` in the [CodePipeline API Reference](http://docs.aws.amazon.com/codepipeline/latest/APIReference)\.
 
-1. Once the custom action completes, the job worker returns the result of the custom action to AWS CodePipeline by calling one of two APIs: 
+1. Once the custom action completes, the job worker returns the result of the custom action to CodePipeline by calling one of two APIs: 
    + `PutJobSuccessResult` without a continuation token, which indicates the custom action ran successfully
    + `PutJobFailureResult`, which indicates the custom action did not run successfully
 
@@ -234,11 +228,11 @@ If your job worker performs all the work for a custom action, you should conside
 ### Custom Job Worker Architecture and Examples<a name="actions-create-custom-action-job-worker-common"></a>
 
 After you have mapped out your high\-level workflow, you can create your job worker\. Although the specifics of your custom action will ultimately determine what is needed for your job worker, most job workers for custom actions include the following functionality:
-+ Polling for jobs from AWS CodePipeline using `PollForJobs`\. 
-+ Acknowledging jobs and returning results to AWS CodePipeline using `AcknowledgeJob`, `PutJobSuccessResult`, and `PutJobFailureResult`\.
++ Polling for jobs from CodePipeline using `PollForJobs`\. 
++ Acknowledging jobs and returning results to CodePipeline using `AcknowledgeJob`, `PutJobSuccessResult`, and `PutJobFailureResult`\.
 + Retrieving artifacts from and/or putting artifacts into the Amazon S3 bucket for the pipeline\. To download artifacts from the Amazon S3 bucket, you must create an Amazon S3 client that uses signature version 4 signing \(Sig V4\)\. Sig V4 is required for SSE\-KMS\.
 
-  To upload artifacts to the Amazon S3 bucket, you must additionally configure the Amazon S3 `[PutObject](https://docs.aws.amazon.com/AmazonS3/latest/API/SOAPPutObject.html)` request to use encryption\. Currently only SSE\-KMS is supported for encryption\. In order to know whether to use the default key or a customer\-managed key to upload artifacts, your custom job worker must look at the [job data](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_JobData.html) and check the [encryption key](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_EncryptionKey.html) property\. If the encryption key property is set, you should use that encryption key ID when configuring SSE\-KMS\. If the key is null, you use the default master key\. AWS CodePipeline uses the default Amazon S3 master key unless otherwise configured\. 
+  To upload artifacts to the Amazon S3 bucket, you must additionally configure the Amazon S3 `[PutObject](https://docs.aws.amazon.com/AmazonS3/latest/API/SOAPPutObject.html)` request to use encryption\. Currently only SSE\-KMS is supported for encryption\. In order to know whether to use the default key or a customer\-managed key to upload artifacts, your custom job worker must look at the [job data](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_JobData.html) and check the [encryption key](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_EncryptionKey.html) property\. If the encryption key property is set, you should use that encryption key ID when configuring SSE\-KMS\. If the key is null, you use the default master key\. CodePipeline uses the default Amazon S3 master key unless otherwise configured\. 
 
   The following sample shows how to create the KMS parameters in Java:
 
@@ -255,10 +249,10 @@ After you have mapped out your high\-level workflow, you can create your job wor
   }
   ```
 
-  For more samples, see [Specifying the AWS Key Management Service in Amazon S3 Using the AWS SDKs](https://docs.aws.amazon.com/AmazonS3/latest/dev/kms-using-sdks.html)\. For more information about the Amazon S3 bucket for AWS CodePipeline, see [AWS CodePipeline Concepts](concepts.md)\.
+  For more samples, see [Specifying the AWS Key Management Service in Amazon S3 Using the AWS SDKs](https://docs.aws.amazon.com/AmazonS3/latest/dev/kms-using-sdks.html)\. For more information about the Amazon S3 bucket for CodePipeline, see [CodePipeline Concepts](concepts.md)\.
 
 A more complex example of a custom job worker is available on GitHub\. This sample is open source and provided as\-is\.
-+ [Sample Job Worker for AWS CodePipeline](https://github.com/awslabs/aws-codepipeline-custom-job-worker): Download the sample from the GitHub repository\.
++ [Sample Job Worker for CodePipeline](https://github.com/awslabs/aws-codepipeline-custom-job-worker): Download the sample from the GitHub repository\.
 
 ## Add a Custom Action to a Pipeline<a name="actions-create-custom-action-add"></a>
 
@@ -273,7 +267,7 @@ You can create a pipeline in the Create Pipeline wizard that includes a custom a
 
 ### Add a Custom Action to a Pipeline \(Console\)<a name="actions-create-custom-action-add-console"></a>
 
-To create a pipeline with your custom action by using the AWS CodePipeline console, follow the steps in [Create a Pipeline in AWS CodePipeline](pipelines-create.md) and choose your custom action from as many stages as you would like to test\. To add your custom action to an existing pipeline by using the AWS CodePipeline console, follow the steps in [Edit a Pipeline in AWS CodePipeline](pipelines-edit.md) and add your custom action to one or more stages in the pipeline\.
+To create a pipeline with your custom action by using the CodePipeline console, follow the steps in [Create a Pipeline in CodePipeline](pipelines-create.md) and choose your custom action from as many stages as you would like to test\. To add your custom action to an existing pipeline by using the CodePipeline console, follow the steps in [Edit a Pipeline in CodePipeline](pipelines-edit.md) and add your custom action to one or more stages in the pipeline\.
 
 ### Add a Custom Action to an Existing Pipeline \(CLI\)<a name="actions-create-custom-action-add-cli"></a>
 
@@ -362,6 +356,6 @@ Be sure to include `file://` before the file name\. It is required in this comma
 
    This command returns the entire structure of the edited pipeline\.
 
-1. Open the AWS CodePipeline console and choose the name of the pipeline you just edited\.
+1. Open the CodePipeline console and choose the name of the pipeline you just edited\.
 
    The pipeline shows your changes\. The next time you make a change to the source location, the pipeline will run that revision through the revised structure of the pipeline\.

@@ -1,25 +1,40 @@
-# Create a CloudWatch Events Rule for a CodeCommit Source \(Console\)<a name="pipelines-trigger-source-repo-changes-console"></a>
+# Create a CloudWatch Events Rule for an Amazon ECR Source \(Console\)<a name="create-cwe-ecr-source-console"></a>
 
-**To create a CloudWatch Events rule for use in CodePipeline operations**
+**To create a CloudWatch Events rule for use in CodePipeline operations \(Amazon ECR source\)**
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
 1. In the navigation pane, choose **Events**\.
 
-1. Choose **Create rule**, and then under **Event source**, from **Service Name**, choose **CodeCommit**\.
+1. Choose **Create rule**, and then under **Event source**, from **Service Name**, choose **EC2 Container Registry**\.
 
-   The service name that you choose owns the event resource\. For example, choose CodeCommit to trigger a pipeline when there are changes to the CodeCommit repository associated with a pipeline\.
+1. In **Event Source**, choose **Event Pattern**\.
 
-1. From **Event Type**, choose **CodeCommit Repository State Change**\.  
-![\[Create repository state change rule\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/test-repoevent-cptarget.png)![\[Create repository state change rule\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Create repository state change rule\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+   Choose **Edit**, and then paste the following event pattern in the **Event Source** window for a `my-image-repo` repository with a tagged image version of `latest`:
 
-1. To make a rule that applies to all repositories, choose **Any resource**\.
+   ```
+   {
+     "source": [
+       "aws.ecr"
+     ],
+     "detail": {
+       "eventName": [
+         "PutImage"
+       ],
+       "requestParameters": {
+         "repositoryName": [
+           "my-image-repo"
+         ],
+         "imageTag": [
+           "latest"
+         ]
+       }
+     }
+   }
+   ```  
+![\[Create repository state change rule\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/ecr-repoevent-cptarget.png)![\[Create repository state change rule\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Create repository state change rule\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
-   To make a rule that applies to one or more repositories, choose **Specific resource\(s\) by ARN**, and then enter the ARN\.
-**Note**  
-You can find the ARN for a CodeCommit repository on the **Settings** page in the CodeCommit console\.
-
-   To specify the branch to associate with the repository, choose **Edit**, and enter the resource type branch and branch name\. Use the event pattern options for `detail`\. The preceding example shows the detail options for a CodeCommit repository branch named `master`\. Choose **Save**\.
+1. Choose **Save**\.
 
    In the **Event Pattern Preview** pane, view the rule\.
 

@@ -1,13 +1,7 @@
---------
-
-The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
-
---------
-
 # Create a CloudWatch Events Rule That Schedules Your Pipeline to Start \(CLI\)<a name="pipelines-trigger-source-schedule-cli"></a>
 
 To use the AWS CLI to create a rule, call the put\-rule command, specifying:
-+ A name that uniquely identifies the rule you are creating\. This name must be unique across all of the pipelines you create with AWS CodePipeline associated with your AWS account\.
++ A name that uniquely identifies the rule you are creating\. This name must be unique across all of the pipelines you create with CodePipeline associated with your AWS account\.
 + The schedule expression for the rule\.
 
 **To create a CloudWatch Events rule with a schedule as the event source**
@@ -22,7 +16,7 @@ To use the AWS CLI to create a rule, call the put\-rule command, specifying:
    aws events put-rule --schedule-expression 'cron(15 10 ? * 6L 2002-2005)' --name MyRule2
    ```
 
-1. Grant permissions for Amazon CloudWatch Events to use AWS CodePipeline to invoke the rule\. For more information, see [Using Resource\-Based Policies for Amazon CloudWatch Events](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/resource-based-policies-cwe.html)\.
+1. Grant permissions for Amazon CloudWatch Events to use CodePipeline to invoke the rule\. For more information, see [Using Resource\-Based Policies for Amazon CloudWatch Events](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/resource-based-policies-cwe.html)\.
 
    1. Use the following sample to create the trust policy to allow Amazon CloudWatch Events to assume the service role\. Name it `trustpolicyforCWE.json`\.
 

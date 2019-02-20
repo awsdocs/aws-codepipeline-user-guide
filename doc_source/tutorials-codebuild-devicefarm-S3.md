@@ -1,20 +1,14 @@
---------
-
-The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
-
---------
-
 # Tutorial: Create a Pipeline That Builds and Tests Your iOS App After a Change in Your Amazon S3 Bucket<a name="tutorials-codebuild-devicefarm-S3"></a>
 
  You can use AWS CodePipeline to easily configure a continuous integration flow in which your app is tested each time the source bucket changes\. This tutorial shows you how to create and configure a pipeline to test your built iOS app from an Amazon S3 bucket\. The pipeline detects the arrival of a saved change through Amazon CloudWatch Events, and then uses [Device Farm](https://docs.aws.amazon.com/devicefarm/latest/developerguide/welcome.html) to test the built application\. 
 
 **Important**  
-Make sure that you create all of the AWS resources for this procedure in the same AWS Region where you create your pipeline\. For example, if you create your pipeline in the US East \(Ohio\) Region, your Amazon S3 bucket or AWS CodeCommit repository, AWS CodeDeploy resources, and Amazon EC2 instance key pair must also be in the US East \(Ohio\) Region\.  
-Later, you can use the AWS CLI to add a cross\-region build, test, or deploy action\.
+Many of the actions you add to your pipeline in this procedure involve AWS resources that you need to create before you create the pipeline\. AWS resources for your source actions must always be created in the same AWS Region where you create your pipeline\. For example, if you create your pipeline in the US East \(Ohio\) Region, your CodeCommit repository must be in the US East \(Ohio\) Region\.   
+You can add cross\-region actions when you create your pipeline\. AWS resources for cross\-region actions must be in the same Region where you plan to execute the action\. For more information about cross\-region actions, see [Add a Cross\-Region Action in CodePipeline](actions-create-cross-region.md)\.
 
 You can try this out using your existing iOS app, or you can use the [sample iOS app](samples/s3-ios-test-1.zip)\.
 
-![\[The Step 2: Source page in the AWS CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-push-build-test-S3.png)![\[The Step 2: Source page in the AWS CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The Step 2: Source page in the AWS CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+![\[The Step 2: Source page in the CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-push-build-test-S3.png)![\[The Step 2: Source page in the CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The Step 2: Source page in the CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
 
 ****  
@@ -24,7 +18,7 @@ You can try this out using your existing iOS app, or you can use the [sample iOS
 | Configure | Add definitions | Upload | Test | Report | 
 | Configure pipeline resources | Add test definitions to your package | Upload \.zip to your bucket | Test output artifact kicked off automatically | View test results | 
 
-## Configure AWS CodePipeline to Use Your Device Farm Tests \(Amazon S3 Example\)<a name="codepipeline-configure-tests-S3"></a>
+## Configure CodePipeline to Use Your Device Farm Tests \(Amazon S3 Example\)<a name="codepipeline-configure-tests-S3"></a>
 
 1. Create or use an Amazon S3 bucket with versioning enabled\. Follow the instructions in [Step 1: Create an Amazon S3 Bucket for Your Application](tutorials-simple-s3.md#s3-create-s3-bucket) to create an Amazon S3 bucket\.
 
@@ -34,13 +28,13 @@ You can try this out using your existing iOS app, or you can use the [sample iOS
 
 1. To create your pipeline and add a source stage, do the following:
 
-   1. Sign in to the AWS Management Console and open the AWS CodePipeline console at [https://console\.aws\.amazon\.com/codepipeline/](https://console.aws.amazon.com/codepipeline/)\.
+   1. Sign in to the AWS Management Console and open the CodePipeline console at [https://console\.aws\.amazon\.com/codepipeline/](https://console.aws.amazon.com/codepipeline/)\.
 
    1. Choose **Create pipeline**\. On the **Step 1: Choose pipeline settings** page, in **Pipeline name**, enter the name for your pipeline\.
 
    1. In **Service role**, leave **New service role** selected, and leave **Role name** unchanged\. You can also choose to use an existing service role, if you have one\.
 **Note**  
-If you use an AWS CodePipeline service role that was created before July 2018, you must add permissions for Device Farm\. To do this, open the IAM console, find the role, and then add the following permissions to the role's policy\. For more information, see [Add Permissions for Other AWS Services](how-to-custom-role.md#how-to-update-role-new-services)\.  
+If you use a CodePipeline service role that was created before July 2018, you must add permissions for Device Farm\. To do this, open the IAM console, find the role, and then add the following permissions to the role's policy\. For more information, see [Add Permissions for Other AWS Services](how-to-custom-role.md#how-to-update-role-new-services)\.  
 
       ```
       {

@@ -1,20 +1,14 @@
---------
-
-The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
-
---------
-
 # Tutorial: Create a Pipeline That Builds and Tests Your Android App When a Commit Is Pushed to Your GitHub Repository<a name="tutorials-codebuild-devicefarm"></a>
 
- You can use AWS CodePipeline to configure a continuous integration flow in which your app is built and tested each time a commit is pushed to its repository\. This tutorial shows how to create and configure a pipeline to build and test your Android app with source code in a GitHub repository\. The pipeline detects the arrival of a new commit through [webhooks that AWS CodePipeline configures for your GitHub repository](https://docs.aws.amazon.com/codepipeline/latest/userguide/pipelines-webhooks-migration.html), and then uses [AWS CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/welcome.html) to build the app and [Device Farm](https://docs.aws.amazon.com/devicefarm/latest/developerguide/welcome.html) to test it\. 
+ You can use AWS CodePipeline to configure a continuous integration flow in which your app is built and tested each time a commit is pushed to its repository\. This tutorial shows how to create and configure a pipeline to build and test your Android app with source code in a GitHub repository\. The pipeline detects the arrival of a new commit through [webhooks that CodePipeline configures for your GitHub repository](https://docs.aws.amazon.com/codepipeline/latest/userguide/pipelines-webhooks-migration.html), and then uses [CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/welcome.html) to build the app and [Device Farm](https://docs.aws.amazon.com/devicefarm/latest/developerguide/welcome.html) to test it\. 
 
 **Important**  
-Make sure that you create all of the AWS resources for this procedure in the same AWS Region where you create your pipeline\. For example, if you create your pipeline in the US East \(Ohio\) Region, your Amazon S3 bucket or AWS CodeCommit repository, AWS CodeDeploy resources, and Amazon EC2 instance key pair must also be in the US East \(Ohio\) Region\.  
-Later, you can use the AWS CLI to add a cross\-region build, test, or deploy action\.
+Many of the actions you add to your pipeline in this procedure involve AWS resources that you need to create before you create the pipeline\. AWS resources for your source actions must always be created in the same AWS Region where you create your pipeline\. For example, if you create your pipeline in the US East \(Ohio\) Region, your CodeCommit repository must be in the US East \(Ohio\) Region\.   
+You can add cross\-region actions when you create your pipeline\. AWS resources for cross\-region actions must be in the same Region where you plan to execute the action\. For more information about cross\-region actions, see [Add a Cross\-Region Action in CodePipeline](actions-create-cross-region.md)\.
 
 You can try this out using your existing Android app and test definitions, or you can use the [sample app and test definitions provided by Device Farm](https://github.com/aws-samples/aws-device-farm-sample-app-for-android)\.
 
-![\[The Step 2: Source page in the AWS CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-push-build-test-GitHub.png)![\[The Step 2: Source page in the AWS CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The Step 2: Source page in the AWS CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+![\[The Step 2: Source page in the CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-push-build-test-GitHub.png)![\[The Step 2: Source page in the CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The Step 2: Source page in the CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
 
 ****  
@@ -24,9 +18,9 @@ You can try this out using your existing Android app and test definitions, or yo
 | Configure | Add definitions | Push | Build and Test | Report | 
 | Configure pipeline resources | Add build and test definitions to your package | Push a package to your repository | App build and test build output artifact kicked off automatically | View test results | 
 
-## Configure AWS CodePipeline to Use Your Device Farm Tests<a name="codepipeline-configure-tests"></a>
+## Configure CodePipeline to Use Your Device Farm Tests<a name="codepipeline-configure-tests"></a>
 
-1. Add and commit a file called [https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html](https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html) in the root of your app code, and push it to your repository\. AWS CodeBuild uses this file to perform commands and access artifacts required to build your app\.
+1. Add and commit a file called [https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html](https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html) in the root of your app code, and push it to your repository\. CodeBuild uses this file to perform commands and access artifacts required to build your app\.
 
    ```
    version: 0.2
@@ -46,9 +40,9 @@ You can try this out using your existing Android app and test definitions, or yo
 
    If you use Device Farm built\-in tests, you can skip this step\.
 
-1. To create your build project in AWS CodeBuild, do the following:
+1. To create your build project in CodeBuild, do the following:
 
-   1. Sign in to the AWS Management Console and open the AWS CodeBuild console\.
+   1. Sign in to the AWS Management Console and open the CodeBuild console\.
 
    1. If a welcome page is displayed, choose **Get started**\.
 
@@ -60,23 +54,23 @@ You can try this out using your existing Android app and test definitions, or yo
 
    1. In **Environment**, choose **Managed image**\. For **Operating system**, choose **Ubuntu**\.
 
-   1. For **Runtime**, choose **Android**\. For **Version**, choose **aws/codebuild/android\-java\-8:26\.1\.1**\. AWS CodeBuild uses this OS image, which has Android Studio installed, to build your app\.
+   1. For **Runtime**, choose **Android**\. For **Version**, choose **aws/codebuild/android\-java\-8:26\.1\.1**\. CodeBuild uses this OS image, which has Android Studio installed, to build your app\.
 
-   1. For **Service role**, choose your AWS CodeBuild service role\.
+   1. For **Service role**, choose your CodeBuild service role\.
 
    1. For **Build specifications**, choose **Use the buildspec\.yml in the source code root directory**\.
 
-   1. Choose **Create build project**\. This creates an AWS CodeBuild project that uses the `buildspec.yml` in your repository for configuration\. The build project uses a service role to manage AWS service permissions\. This step might take a couple of minutes\.
+   1. Choose **Create build project**\. This creates a CodeBuild project that uses the `buildspec.yml` in your repository for configuration\. The build project uses a service role to manage AWS service permissions\. This step might take a couple of minutes\.
 
 1. To create your pipeline and add a source stage, do the following:
 
-   1. Sign in to the AWS Management Console and open the AWS CodePipeline console at [https://console\.aws\.amazon\.com/codepipeline/](https://console.aws.amazon.com/codepipeline/)\.
+   1. Sign in to the AWS Management Console and open the CodePipeline console at [https://console\.aws\.amazon\.com/codepipeline/](https://console.aws.amazon.com/codepipeline/)\.
 
    1. Choose **Create pipeline**\. On the **Step 1: Choose pipeline settings** page, in **Pipeline name**, enter the name for your pipeline\.
 
    1. In **Service role**, leave **New service role** selected, and leave **Role name** unchanged\. You can also choose to use an existing service role, if you have one\.
 **Note**  
-If you use an AWS CodePipeline service role that was created before July 2018, you need to add permissions for Device Farm\. To do this, open the IAM console, find the role, and then add the following permissions to the role's policy\. For more information, see [Add Permissions for Other AWS Services](how-to-custom-role.md#how-to-update-role-new-services)\.  
+If you use a CodePipeline service role that was created before July 2018, you need to add permissions for Device Farm\. To do this, open the IAM console, find the role, and then add the following permissions to the role's policy\. For more information, see [Add Permissions for Other AWS Services](how-to-custom-role.md#how-to-update-role-new-services)\.  
 
       ```
       {
@@ -118,7 +112,7 @@ This is not the source bucket for your pipeline's source code\. This is the arti
 
    1. In **Build provider**, choose **AWS CodeBuild**\.
 
-   1. In **AWS CodeBuild**, choose **Project name**, and then enter a name for your project\.
+   1. In **CodeBuild**, choose **Project name**, and then enter a name for your project\.
 
    1. Choose **Next**\.
 

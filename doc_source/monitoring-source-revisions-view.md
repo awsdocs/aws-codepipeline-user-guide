@@ -1,10 +1,4 @@
---------
-
-The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
-
---------
-
-# View Current Source Revision Details in a Pipeline in AWS CodePipeline<a name="monitoring-source-revisions-view"></a>
+# View Current Source Revision Details in a Pipeline in CodePipeline<a name="monitoring-source-revisions-view"></a>
 
 You can use the AWS CodePipeline console or the AWS CLI to view details about source artifacts \(output artifact that originated in the first stage of a pipeline\) that are used in an execution of a pipeline\. The details include identifiers, such as commit IDs, check\-in comments, time since the artifact was created or updated and, when you use the CLI, version numbers of build actions\. For some revision types, you can view and open the URL of the commit for the artifact version\.
 
@@ -14,18 +8,18 @@ You can use the AWS CodePipeline console or the AWS CLI to view details about so
 
 ## View Current Source Revision Details in a Pipeline \(Console\)<a name="monitoring-source-revisions-view-console"></a>
 
-You can use the AWS CodePipeline console to view information about the most recent source revisions that were included in a pipeline execution\. 
+You can use the CodePipeline console to view information about the most recent source revisions that were included in a pipeline execution\. 
 
 **To view source revisions in a pipeline**
 
-1. Sign in to the AWS Management Console and open the AWS CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
+1. Sign in to the AWS Management Console and open the CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
 
    The names of all pipelines associated with your AWS account will be displayed\. 
 
 1. Choose the name of the pipeline for which you want to view source revision details\. 
 
 1. Locate an action for which you want to view source revision details, and then find the revision information at the bottom of its stage:   
-![\[Information about a revision can be viewed at the bottom of a stage in the AWS CodePipeline console.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/view-changes-console-3.png)![\[Information about a revision can be viewed at the bottom of a stage in the AWS CodePipeline console.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Information about a revision can be viewed at the bottom of a stage in the AWS CodePipeline console.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+![\[Information about a revision can be viewed at the bottom of a stage in the CodePipeline console.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/view-changes-console-3.png)![\[Information about a revision can be viewed at the bottom of a stage in the CodePipeline console.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Information about a revision can be viewed at the bottom of a stage in the CodePipeline console.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
 1. Click in the details area to view more information about the artifact, including the length of time since the artifact was committed\. With the exception of artifacts stored in Amazon S3 buckets, identifiers such as commit IDs in this information detail view are linked to source information pages for the artifacts\.   
 ![\[Click in the details area to view more information about the artifact.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/view-changes-console-4.png)![\[Click in the details area to view more information about the artifact.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Click in the details area to view more information about the artifact.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)

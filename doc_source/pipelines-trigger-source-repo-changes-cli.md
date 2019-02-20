@@ -1,18 +1,12 @@
---------
-
-The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
-
---------
-
-# Create a CloudWatch Events Rule That Starts Your AWS CodeCommit Pipeline \(CLI\)<a name="pipelines-trigger-source-repo-changes-cli"></a>
+# Create a CloudWatch Events Rule for a CodeCommit Source \(CLI\)<a name="pipelines-trigger-source-repo-changes-cli"></a>
 
 Call the put\-rule command, specifying:
-+ A name that uniquely identifies the rule you are creating\. This name must be unique across all of the pipelines you create with AWS CodePipeline associated with your AWS account\.
++ A name that uniquely identifies the rule you are creating\. This name must be unique across all of the pipelines you create with CodePipeline associated with your AWS account\.
 + The event pattern for the source and detail fields used by the rule\. For more information, see [Amazon CloudWatch Events and Event Patterns](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html)\.<a name="proc-cli-event-codecommit"></a>
 
-**To create a CloudWatch Events rule with AWS CodeCommit as the event source and AWS CodePipeline as the target**
+**To create a CloudWatch Events rule with CodeCommit as the event source and CodePipeline as the target**
 
-1. Add permissions for Amazon CloudWatch Events to use AWS CodePipeline to invoke the rule\. For more information, see [Using Resource\-Based Policies for Amazon CloudWatch Events](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/resource-based-policies-cwe.html)\.
+1. Add permissions for Amazon CloudWatch Events to use CodePipeline to invoke the rule\. For more information, see [Using Resource\-Based Policies for Amazon CloudWatch Events](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/resource-based-policies-cwe.html)\.
 
    1. Use the following sample to create the trust policy that allows CloudWatch Events to assume the service role\. Name the trust policy `trustpolicyforCWE.json`\.
 
@@ -74,7 +68,7 @@ Call the put\-rule command, specifying:
    aws events put-rule --name "MyCodeCommitRepoRule" --event-pattern "{\"source\":[\"aws.codecommit\"],\"detail-type\":[\"CodeCommit Repository State Change\"],\"resources\":[\"pipeline-ARN\"],\"detail\":{\"referenceType\":[\"branch\"],\"referenceName \":[\"master\"]}}"
    ```
 
-1. To add AWS CodePipeline as a target, call the put\-targets command and include the following parameters:
+1. To add CodePipeline as a target, call the put\-targets command and include the following parameters:
    + The `--rule` parameter is used with the `rule_name` you created by using put\-rule\. 
    + The `--targets` parameter is used with the list `Id` of the target in the list of targets and the `ARN` of the target pipeline\.
 
@@ -85,6 +79,8 @@ Call the put\-rule command, specifying:
    ```<a name="proc-cli-flag-codecommit"></a>
 
 **To edit your pipeline's PollForSourceChanges parameter**
+**Important**  
+When you create a pipeline with this method, the `PollForSourceChanges` parameter defaults to true if it is not explicitly set to false\. When you add event\-based change detection, you must add the parameter to your output and set it to false to disable polling\. Otherwise, your pipeline starts twice for a single source change\. For details, see [Default Settings for the PollForSourceChanges Parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
 
 1. Run the get\-pipeline command to copy the pipeline structure into a JSON file\. For example, for a pipeline named `MyFirstPipeline`, run the following command: 
 

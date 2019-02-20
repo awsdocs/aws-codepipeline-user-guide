@@ -1,35 +1,129 @@
---------
+# Add a Cross\-Region Action in CodePipeline<a name="actions-create-cross-region"></a>
 
-The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
+AWS CodePipeline includes a number of actions that help you configure build, test, and deploy resources for your automated release process\. You can add actions to your pipeline that are in an AWS Region different from your pipeline\. When an AWS service is the provider for an action, and this action type/provider type are in a different AWS Region from your pipeline, this is a cross\-region action\. 
 
---------
+**Note**  
+Certain action types in CodePipeline may only be available in certain AWS Regions\. Also note that there may AWS Regions where an action type is available, but a specific AWS provider for that action type is not available\.
 
-# Add a Cross\-Region Action in AWS CodePipeline<a name="actions-create-cross-region"></a>
+You can use the console, AWS CLI, or AWS CloudFormation to add cross\-region actions in pipelines\.
 
-AWS CodePipeline includes a number of actions that help you configure build, test, and deploy resources for your automated release process\. You can add build, test, or deploy actions to your pipeline that are in an AWS Region different from your pipeline\. You can use the AWS CLI or AWS CloudFormation to add cross\-region actions in pipelines\.
+If you use the console to create a pipeline or cross\-region actions, default artifact buckets are configured by CodePipeline in the Regions where you have actions\. When you use the AWS CLI, AWS CloudFormation, or an SDK to create a pipeline or cross\-region actions, you provide the artifact bucket for each Region where you have actions\.
 
 You cannot create cross\-region actions for the following action types:
 + Source actions
 + Third\-party actions
 + Custom actions
 
-To create a cross\-region action in a pipeline stage, you add the configuration action along with an optional `region` field\. You must also have already created an artifact bucket in the action's region\. Instead of providing the single\-region pipeline's `artifactStore` parameter, you include a listing of each region's artifact bucket with the `artifactStores` parameter\.
-
-When you create a cross\-region action, AWS CodePipeline performs the following action:
-+ When a pipeline includes a cross\-region action as part of a stage, AWS CodePipeline replicates the source artifacts from the pipeline region to the action's region\.
+When a pipeline includes a cross\-region action as part of a stage, CodePipeline replicates the source artifacts from the pipeline Region to the action's Region\.
 
 **Note**  
-The pipeline region and the region where your CloudWatch Events change detection resources are maintained remain the same\. The region where your pipeline is hosted does not change\.  
-In this walkthrough and its examples, *RegionA* is the region where the pipeline is created\. It has access to the *RegionA* Amazon S3 bucket used to store pipeline artifacts and the service role used by AWS CodePipeline\. *RegionB* is the region where the AWS CodeDeploy application, deployment group, and service role used by AWS CodeDeploy are created\. 
+The pipeline Region and the Region where your CloudWatch Events change detection resources are maintained remain the same\. The Region where your pipeline is hosted does not change\.
 
-## Prerequisites<a name="actions-create-cross-region-prereq"></a>
+## Manage Cross\-Region Actions in a Pipeline \(Console\)<a name="actions-cross-region-console"></a>
+
+You can use the CodePipeline console to add a cross\-region action to an existing pipeline\. To create a new pipeline with cross\-region actions using the Create pipeline wizard, see [Create a Pipeline \(Console\)](pipelines-create.md#pipelines-create-console)\.
+
+In the console, you create a cross\-region action in a pipeline stage by choosing the action provider and the **Region** field, which lists the resources you have created in that region for that provider\. When you add a cross\-region action, CodePipeline uses a separate artifact bucket in the action's region\. For more information about cross\-region artifact buckets, see [CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
+
+### Add a Cross\-Region Action to a Pipeline Stage \(Console\)<a name="actions-cross-region-console-add"></a>
+
+Use the console to add a cross\-region action to a pipeline\.
+
+**Note**  
+If the pipeline is running when changes are saved, that execution does not complete\.
+
+**To add a cross\-region action**
+
+1. Sign in to the console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
+
+1. Select your pipeline, and then choose **Edit**\.
+
+1. At the bottom of the diagram, choose **\+ Add stage** if you are adding a new stage, or choose **Edit stage** if you want to add the action to an existing stage\.
+
+1. On **Edit: <Stage>**, choose **\+ Add action group** to add a serial action\. Or choose **\+ Add action** to add a parallel action\.
+
+1. On the **Edit action** page:
+
+   1. In **Action name**, enter a name for the cross\-region action\.
+
+   1. In **Action provider**, choose the action provider\.
+
+   1. In **Region**, choose the AWS Region where you have created or plan to create the resource for the action\. When the Region is selected, the available resources for that Region are listed for selection\. The **Region** field designates where the AWS resources are created for this action type and provider type\. This field only displays for actions where the action provider is an AWS service\. The **Region** field defaults to the same AWS Region as your pipeline\.  
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/xregion-edit-action.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+
+   1. In **Input artifacts** choose the appropriate input from the previous stage\. For example, if the previous stage is a source stage, choose **SourceArtifact**\.
+
+   1. Complete all the required fields for the action provider you are configuring\.
+
+   1. In **Output artifacts** choose the appropriate output to the next stage\. For example, if the next stage is a deployment stage, choose **BuildArtifact**\.
+
+   1. Choose **Save**\.
+
+1. On **Edit: <Stage>**, choose **Done**\.
+
+1. Choose **Save**\.
+
+### Edit a Cross\-Region Action in a Pipeline Stage \(Console\)<a name="actions-cross-region-console-edit"></a>
+
+Use the console to edit an existing cross\-region action in a pipeline\.
+
+**Note**  
+If the pipeline is running when changes are saved, that execution does not complete\.
+
+**To edit a cross\-region action**
+
+1. Sign in to the console at [http://console.aws.amazon.com/codesuite/codepipeline/home.](http://console.aws.amazon.com/codesuite/codepipeline/home.)
+
+1. Select your pipeline, and then choose **Edit**\.
+
+1. Choose **Edit stage**\.
+
+1. On **Edit: <Stage>**, choose the icon to edit an existing action\.
+
+1. On the **Edit action** page, make changes to the fields, as appropriate\.
+
+1. On **Edit: <Stage>**, choose **Done**\.
+
+1. Choose **Save**\.
+
+### Delete a Cross\-Region Action from a Pipeline Stage \(Console\)<a name="actions-cross-region-console-delete"></a>
+
+Use the console to delete an existing cross\-region action from a pipeline\.
+
+**Note**  
+If the pipeline is running when changes are saved, that execution does not complete\.
+
+**To delete a cross\-region action**
+
+1. Sign in to the console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
+
+1. Select your pipeline, and then choose **Edit**\.
+
+1. Choose **Edit stage**\.
+
+1. On **Edit: <Stage>**, choose the icon to delete an existing action\.
+
+1. On **Edit: <Stage>**, choose **Done**\.
+
+1. Choose **Save**\.
+
+## Add a Cross\-Region Action to a Pipeline \(CLI\)<a name="actions-cross-region-cli"></a>
+
+You can use the AWS CLI to add a cross\-region action to an existing pipeline\.
+
+To create a cross\-region action in a pipeline stage with the AWS CLI, you add the configuration action along with an optional `region` field\. You must also have already created an artifact bucket in the action's region\. Instead of providing the `artifactStore` parameter of the single\-region pipeline, you use the `artifactStores` parameter to include a listing of each Region's artifact bucket\.
+
+**Note**  
+In this walkthrough and its examples, *RegionA* is the Region where the pipeline is created\. It has access to the *RegionA* Amazon S3 bucket used to store pipeline artifacts and the service role used by CodePipeline\. *RegionB* is the region where the CodeDeploy application, deployment group, and service role used by CodeDeploy are created\. 
+
+### Prerequisites<a name="actions-create-cross-region-prereq"></a>
 
 You must have created the following:
-+ A pipeline created in *RegionA*\. 
-+ An Amazon S3 artifact bucket created in *RegionB*\. 
-+ The resources for your action created in *RegionB*, such as your AWS CodeDeploy application and deployment group for a cross\-region deploy action\.
++ A pipeline in *RegionA*\. 
++ An Amazon S3 artifact bucket in *RegionB*\. 
++ The resources for your action, such as your CodeDeploy application and deployment group for a cross\-region deploy action, in *RegionB*\.
 
-## Add a Cross\-Region Action to a Pipeline \(CLI\)<a name="actions-create-cross-region-cli"></a>
+### Add a Cross\-Region Action to a Pipeline \(CLI\)<a name="actions-create-cross-region-cli"></a>
 
 Use the AWS CLI to add a cross\-region action to a pipeline\.
 
@@ -43,7 +137,7 @@ Use the AWS CLI to add a cross\-region action to a pipeline\.
 
    This command returns nothing, but the file you created should appear in the directory where you ran the command\.
 
-1. Add the `region` field to add a new stage with your cross\-region action that includes the region and resources for your action\. The following JSON sample adds a Deploy stage with a cross\-region deploy action where the provider is AWS CodeDeploy, in a new region `us-east-1`\.
+1. Add the `region` field to add a new stage with your cross\-region action that includes the Region and resources for your action\. The following JSON sample adds a Deploy stage with a cross\-region deploy action where the provider is CodeDeploy, in a new region `us-east-1`\.
 
    ```
     {
@@ -72,7 +166,7 @@ Use the AWS CLI to add a cross\-region action to a pipeline\.
                        }
    ```
 
-1. In the pipeline structure, remove the `artifactStore` field and add the `artifactStores` map for your new cross\-region action\. The mapping must include an artifact bucket for the current pipeline region and buckets for any additional regions as follows:
+1. In the pipeline structure, remove the `artifactStore` field and add the `artifactStores` map for your new cross\-region action\. The mapping must include an artifact bucket for the current pipeline Region and buckets for any additional Regions as follows:
 
    ```
    "artifactStores":{  

@@ -1,12 +1,6 @@
---------
-
-The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
-
---------
-
 # Customer Managed Policy Examples<a name="customer-managed-policies"></a>
 
-In this section, you can find example user policies that grant permissions for various AWS CodePipeline actions\. These policies work when you are using the AWS CodePipeline API, AWS SDKs, or the AWS CLI\. When you are using the console, you need to grant additional permissions specific to the console, which is discussed in [Permissions Required to Use the AWS CodePipeline Console](console-permissions.md)\.
+In this section, you can find example user policies that grant permissions for various CodePipeline actions\. These policies work when you are using the CodePipeline API, AWS SDKs, or the AWS CLI\. When you are using the console, you need to grant additional permissions specific to the console, which is discussed in [Permissions Required to Use the CodePipeline Console](console-permissions.md)\.
 
 **Note**  
 All examples use the US West \(Oregon\) Region \(us\-west\-2\) and contain fictitious account IDs\.
@@ -130,7 +124,7 @@ The job worker for a custom action might be configured under a different AWS acc
 
 ## Example 6: Attach or Edit a Policy for Jenkins Integration with AWS CodePipeline<a name="identity-based-policies-example-6"></a>
 
-If you configure a pipeline to use Jenkins for build or test, create a separate IAM user for that integration and attach an IAM policy that has the minimum permissions required for integration between Jenkins and AWS CodePipeline\. This policy is the same as the **AWSCodePipelineCustomActionAccess** managed policy\. The following example shows a policy to attach to an IAM user that will be used for Jenkins integration:
+If you configure a pipeline to use Jenkins for build or test, create a separate IAM user for that integration and attach an IAM policy that has the minimum permissions required for integration between Jenkins and CodePipeline\. This policy is the same as the **AWSCodePipelineCustomActionAccess** managed policy\. The following example shows a policy to attach to an IAM user that will be used for Jenkins integration:
 
 ```
 {
@@ -155,7 +149,7 @@ If you configure a pipeline to use Jenkins for build or test, create a separate 
 
 You can configure access to pipelines for users and groups in another AWS account\. The recommended way of doing so is to create a role in the account where the pipeline was created that allows users from the other AWS account to assume that role and access the pipeline\. For more information, see [Walkthrough: Cross\-Account Access Using Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/walkthru_cross-account-with-roles.html)\.
 
-The following example shows a policy in the 80398EXAMPLE account that allows users to view, but not change, the pipeline named *MyFirstPipeline* in the AWS CodePipeline console\. This policy is based on the **AWSCodePipelineReadOnlyAccess** managed policy, but because it is specific to the *MyFirstPipeline* pipeline, it cannot use the managed policy directly\. If you do not want to restrict the policy to a specific pipeline, strongly consider using one of the managed policies created and maintained by AWS CodePipeline\. For more information, see [Working with Managed Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-using.html)\. You must attach this policy to an IAM role you create for access, for example a role named *CrossAccountPipelineViewers*:
+The following example shows a policy in the 80398EXAMPLE account that allows users to view, but not change, the pipeline named *MyFirstPipeline* in the CodePipeline console\. This policy is based on the **AWSCodePipelineReadOnlyAccess** managed policy, but because it is specific to the *MyFirstPipeline* pipeline, it cannot use the managed policy directly\. If you do not want to restrict the policy to a specific pipeline, strongly consider using one of the managed policies created and maintained by CodePipeline\. For more information, see [Working with Managed Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-using.html)\. You must attach this policy to an IAM role you create for access, for example a role named *CrossAccountPipelineViewers*:
 
 ```
 {
@@ -222,7 +216,7 @@ The following example shows a policy created in the *111111111111* AWS account t
 
 ## Example 8: Use AWS Resources Associated with Another Account in a Pipeline<a name="identity-based-policies-example-8"></a>
 
-You can configure policies that allow a user to create a pipeline that uses resources in another AWS account\. This requires configuring policies and roles in both the account that will create the pipeline \(AccountA\) and the account that created the resources to be used in the pipeline \(AccountB\)\. You must also create a customer\-managed key in AWS Key Management Service to use for cross\-account access\. For more information and step\-by\-step examples, see [Create a Pipeline in AWS CodePipeline That Uses Resources from Another AWS Account](pipelines-create-cross-account.md) and [Security Configuration](security-configuration.md)\.
+You can configure policies that allow a user to create a pipeline that uses resources in another AWS account\. This requires configuring policies and roles in both the account that will create the pipeline \(AccountA\) and the account that created the resources to be used in the pipeline \(AccountB\)\. You must also create a customer\-managed key in AWS Key Management Service to use for cross\-account access\. For more information and step\-by\-step examples, see [Create a Pipeline in CodePipeline That Uses Resources from Another AWS Account](pipelines-create-cross-account.md) and [Security Configuration](security-configuration.md)\.
 
 The following example shows a policy configured by AccountA for an Amazon S3 bucket used to store pipeline artifacts that grants access to AccountB \(where the ARN for AccountB\. In the following example, the ARN is for *AccountB* is *012ID\_ACCOUNT\_B*\. The ARN for the Amazon S3 bucket is *codepipeline\-us\-east\-2\-1234567890*\. Replace these ARNs with the ARN for the account you want to allow access and for the Amazon S3 bucket:
 
@@ -280,7 +274,7 @@ The following example shows a policy configured by AccountA for an Amazon S3 buc
 }
 ```
 
- The following example shows a policy configured by AccountA that allows AccountB to assume a role\. This policy must be applied to the service role for AWS CodePipeline \(*AWS\-CodePipeline\-Service*\)\. For more information about how to apply policies to roles in IAM, see [Modifying a Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-managingrole-editing.html)\. In the following example, *012ID\_ACCOUNT\_B* is the ARN for *AccountB*:
+ The following example shows a policy configured by AccountA that allows AccountB to assume a role\. This policy must be applied to the service role for CodePipeline \(*AWS\-CodePipeline\-Service*\)\. For more information about how to apply policies to roles in IAM, see [Modifying a Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-managingrole-editing.html)\. In the following example, *012ID\_ACCOUNT\_B* is the ARN for *AccountB*:
 
 ```
 {
@@ -295,7 +289,7 @@ The following example shows a policy configured by AccountA for an Amazon S3 buc
 }
 ```
 
-The following example shows a policy configured by AccountB and applied to the [Amazon EC2 instance role](https://docs.aws.amazon.com/codedeploy/latest/userguide//how-to-create-iam-instance-profile.html) for AWS CodeDeploy\. This policy grants access to the Amazon S3 bucket used by AccountA to store pipeline artifacts \(*codepipeline\-us\-east\-2\-1234567890*\):
+The following example shows a policy configured by AccountB and applied to the [Amazon EC2 instance role](https://docs.aws.amazon.com/codedeploy/latest/userguide//how-to-create-iam-instance-profile.html) for CodeDeploy\. This policy grants access to the Amazon S3 bucket used by AccountA to store pipeline artifacts \(*codepipeline\-us\-east\-2\-1234567890*\):
 
 ```
 {
@@ -346,7 +340,7 @@ The following example shows a policy for AWS KMS where ***arn:aws:kms:us\-east\-
 }
 ```
 
-The following example shows an inline policy for an IAM role \(*CrossAccount\_Role*\) created by AccountB that allows access to AWS CodeDeploy actions required by the pipeline in AccountA\.
+The following example shows an inline policy for an IAM role \(*CrossAccount\_Role*\) created by AccountB that allows access to CodeDeploy actions required by the pipeline in AccountA\.
 
 ```
 {

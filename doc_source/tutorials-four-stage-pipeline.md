@@ -1,33 +1,27 @@
---------
-
-The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
-
---------
-
 # Tutorial: Create a Four\-Stage Pipeline<a name="tutorials-four-stage-pipeline"></a>
 
-Now that you've created your first pipeline in [Tutorial: Create a Simple Pipeline \(Amazon S3 Bucket\)](tutorials-simple-s3.md) or [Tutorial: Create a Simple Pipeline \(AWS CodeCommit Repository\)](tutorials-simple-codecommit.md), you can start creating more complex pipelines\. This tutorial will walk you through the creation of a four\-stage pipeline that uses a GitHub repository for your source, a Jenkins build server to build the project, and an AWS CodeDeploy application to deploy the built code to a staging server\. After the pipeline is created, you will edit it to add a stage with a test action to test the code, also using Jenkins\. 
+Now that you've created your first pipeline in [Tutorial: Create a Simple Pipeline \(Amazon S3 Bucket\)](tutorials-simple-s3.md) or [Tutorial: Create a Simple Pipeline \(CodeCommit Repository\)](tutorials-simple-codecommit.md), you can start creating more complex pipelines\. This tutorial will walk you through the creation of a four\-stage pipeline that uses a GitHub repository for your source, a Jenkins build server to build the project, and a CodeDeploy application to deploy the built code to a staging server\. After the pipeline is created, you will edit it to add a stage with a test action to test the code, also using Jenkins\. 
 
 Before you can create this pipeline, you must configure the required resources\. For example, if you want to use a GitHub repository for your source code, you must create the repository before you can add it to a pipeline\. As part of setting up, this tutorial walks you through setting up Jenkins on an Amazon EC2 instance for demonstration purposes\. 
 
 **Important**  
-Make sure that you create all of the AWS resources for this procedure in the same AWS Region where you create your pipeline\. For example, if you create your pipeline in the US East \(Ohio\) Region, your Amazon S3 bucket or AWS CodeCommit repository, AWS CodeDeploy resources, and Amazon EC2 instance key pair must also be in the US East \(Ohio\) Region\.  
-Later, you can use the AWS CLI to add a cross\-region build, test, or deploy action\.
+Many of the actions you add to your pipeline in this procedure involve AWS resources that you need to create before you create the pipeline\. AWS resources for your source actions must always be created in the same AWS Region where you create your pipeline\. For example, if you create your pipeline in the US East \(Ohio\) Region, your CodeCommit repository must be in the US East \(Ohio\) Region\.   
+You can add cross\-region actions when you create your pipeline\. AWS resources for cross\-region actions must be in the same Region where you plan to execute the action\. For more information about cross\-region actions, see [Add a Cross\-Region Action in CodePipeline](actions-create-cross-region.md)\.
 
-Before you begin this tutorial, you should have already completed the general prerequisites in [Getting Started with AWS CodePipeline](getting-started-codepipeline.md)\.
+Before you begin this tutorial, you should have already completed the general prerequisites in [Getting Started with CodePipeline](getting-started-codepipeline.md)\.
 
 **Topics**
 + [Step 1: Set Up Prerequisites](#tutorials-four-stage-pipeline-prerequisites)
-+ [Step 2: Create a Pipeline in AWS CodePipeline](#tutorials-four-stage-pipeline-pipeline-create)
++ [Step 2: Create a Pipeline in CodePipeline](#tutorials-four-stage-pipeline-pipeline-create)
 + [Step 3: Add Another Stage to Your Pipeline](#tutorials-four-stage-pipeline-add-stage)
 + [Step 4: Clean Up Resources](#tutorials-four-stage-pipeline-clean-up)
 
 ## Step 1: Set Up Prerequisites<a name="tutorials-four-stage-pipeline-prerequisites"></a>
 
-To integrate with Jenkins, AWS CodePipeline requires you to install the AWS CodePipeline Plugin for Jenkins on any instance of Jenkins you want to use with AWS CodePipeline\. You should also configure a dedicated IAM user to use for permissions between your Jenkins project and AWS CodePipeline\. The easiest way to integrate Jenkins and AWS CodePipeline is to install Jenkins on an Amazon EC2 instance that uses an IAM instance role that you create for Jenkins integration\. In order for links in the pipeline for Jenkins actions to successfully connect, you must configure proxy and firewall settings on the server or Amazon EC2 instance to allow inbound connections to the port used by your Jenkins project\. Make sure you have configured Jenkins to authenticate users and enforce access control before you allow connections on those ports \(for example, 443 and 8443 if you have secured Jenkins to only use HTTPS connections, or 80 and 8080 if you allow HTTP connections\)\. For more information, see [Securing Jenkins](https://wiki.jenkins.io/display/JENKINS/Securing+Jenkins)\.
+To integrate with Jenkins, AWS CodePipeline requires you to install the CodePipeline Plugin for Jenkins on any instance of Jenkins you want to use with CodePipeline\. You should also configure a dedicated IAM user to use for permissions between your Jenkins project and CodePipeline\. The easiest way to integrate Jenkins and CodePipeline is to install Jenkins on an Amazon EC2 instance that uses an IAM instance role that you create for Jenkins integration\. In order for links in the pipeline for Jenkins actions to successfully connect, you must configure proxy and firewall settings on the server or Amazon EC2 instance to allow inbound connections to the port used by your Jenkins project\. Make sure you have configured Jenkins to authenticate users and enforce access control before you allow connections on those ports \(for example, 443 and 8443 if you have secured Jenkins to only use HTTPS connections, or 80 and 8080 if you allow HTTP connections\)\. For more information, see [Securing Jenkins](https://wiki.jenkins.io/display/JENKINS/Securing+Jenkins)\.
 
 **Note**  
-This tutorial uses a code sample and configures build steps that convert the sample from Haml to HTML\. You can download the open\-source sample code from the GitHub repository by following the steps in this topic\. You will need the entire sample in your GitHub repository, not just the \.zip file\.   
+This tutorial uses a code sample and configures build steps that convert the sample from Haml to HTML\. You can download the open\-source sample code from the GitHub repository by following the steps in [Copy or Clone the Sample into a GitHub Repository](#tutorials-four-stage-pipeline-prerequisites-github)\. You will need the entire sample in your GitHub repository, not just the \.zip file\.   
 This tutorial also assumes that:  
 You are familiar with installing and administering Jenkins and creating Jenkins projects\.
 You have installed Rake and the Haml gem for Ruby on the same computer or instance that hosts your Jenkins project\.
@@ -36,7 +30,7 @@ You have set the required system environment variables so that Rake commands can
 **Topics**
 + [Copy or Clone the Sample into a GitHub Repository](#tutorials-four-stage-pipeline-prerequisites-github)
 + [Create an IAM Role to Use for Jenkins Integration](#tutorials-four-stage-pipeline-prerequisites-jenkins-iam-role)
-+ [Install and Configure Jenkins and the AWS CodePipeline Plugin for Jenkins](#tutorials-four-stage-pipeline-prerequisites-jenkins-configure)
++ [Install and Configure Jenkins and the CodePipeline Plugin for Jenkins](#tutorials-four-stage-pipeline-prerequisites-jenkins-configure)
 
 ### Copy or Clone the Sample into a GitHub Repository<a name="tutorials-four-stage-pipeline-prerequisites-github"></a>
 
@@ -50,7 +44,7 @@ You have set the required system environment variables so that Rake commands can
 
 ### Create an IAM Role to Use for Jenkins Integration<a name="tutorials-four-stage-pipeline-prerequisites-jenkins-iam-role"></a>
 
-As a best practice, consider launching an Amazon EC2 instance to host your Jenkins server and using an IAM role to grant the instance the required permissions for interacting with AWS CodePipeline\.
+As a best practice, consider launching an Amazon EC2 instance to host your Jenkins server and using an IAM role to grant the instance the required permissions for interacting with CodePipeline\.
 
 1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 
@@ -66,21 +60,21 @@ When you create the Amazon EC2 instance where you will install Jenkins, in **Ste
 
 For more information about instance roles and Amazon EC2, see [IAM Roles for Amazon EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html), [Using IAM Roles to Grant Permissions to Applications Running on Amazon EC2 Instances](https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-usingrole-ec2instance.html), and [Creating a Role to Delegate Permissions to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-creatingrole-service.html)\.
 
-### Install and Configure Jenkins and the AWS CodePipeline Plugin for Jenkins<a name="tutorials-four-stage-pipeline-prerequisites-jenkins-configure"></a>
+### Install and Configure Jenkins and the CodePipeline Plugin for Jenkins<a name="tutorials-four-stage-pipeline-prerequisites-jenkins-configure"></a>
 
-**To install Jenkins and the AWS CodePipeline Plugin for Jenkins**
+**To install Jenkins and the CodePipeline Plugin for Jenkins**
 
 1. Create an Amazon EC2 instance where you will install Jenkins, and in **Step 3: Configure Instance Details**, make sure you choose the instance role you created \(for example, *JenkinsAccess*\)\. For more information about creating Amazon EC2 instances, see [Launch an Amazon EC2 Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance_linux.html)\. 
 **Note**  
-If you already have Jenkins resources you want to use, you can do so, but you must create a special IAM user, apply the **AWSCodePipelineCustomActionAccess** managed policy to that user, and then configure and use the access credentials for that user on your Jenkins resource\. If you want to use the Jenkins UI to supply the credentials, configure Jenkins to only allow HTTPS\. For more information, see [Troubleshooting AWS CodePipeline](troubleshooting.md)\.
+If you already have Jenkins resources you want to use, you can do so, but you must create a special IAM user, apply the **AWSCodePipelineCustomActionAccess** managed policy to that user, and then configure and use the access credentials for that user on your Jenkins resource\. If you want to use the Jenkins UI to supply the credentials, configure Jenkins to only allow HTTPS\. For more information, see [Troubleshooting CodePipeline](troubleshooting.md)\.
 
-1. Install Jenkins on the Amazon EC2 instance\. For more information, see the Jenkins documentation for [installing Jenkins](https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins) and [starting and accessing Jenkins](https://wiki.jenkins.io/display/JENKINS/Starting+and+Accessing+Jenkins), as well as [details of integration with Jenkins](integrations-action-type.md#JenkinsInt_2) in [Product and Service Integrations with AWS CodePipeline](integrations.md)\.
+1. Install Jenkins on the Amazon EC2 instance\. For more information, see the Jenkins documentation for [installing Jenkins](https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins) and [starting and accessing Jenkins](https://wiki.jenkins.io/display/JENKINS/Starting+and+Accessing+Jenkins), as well as [details of integration with Jenkins](integrations-action-type.md#JenkinsInt_2) in [Product and Service Integrations with CodePipeline](integrations.md)\.
 
 1. Launch Jenkins, and on the home page, choose **Manage Jenkins**\.
 
 1. On the **Manage Jenkins** page, choose **Manage Plugins**\.
 
-1. Choose the **Available** tab, and in the **Filter** search box, type **AWS CodePipeline**\. Choose **AWS CodePipeline Plugin for Jenkins** from the list and choose **Download now and install after restart**\.
+1. Choose the **Available** tab, and in the **Filter** search box, type **AWS CodePipeline**\. Choose **CodePipeline Plugin for Jenkins** from the list and choose **Download now and install after restart**\.
 
 1. On the **Installing Plugins/Upgrades** page, select **Restart Jenkins when installation is complete and no jobs are running**\.
 
@@ -90,13 +84,13 @@ If you already have Jenkins resources you want to use, you can do so, but you mu
 
 1. In **Item Name**, type a name for the Jenkins project \(for example, *MyDemoProject*\)\. Choose **Freestyle project**, and then choose **OK**\.
 **Note**  
-Make sure the name for your project meets the requirements for AWS CodePipeline\. For more information, see [Limits in AWS CodePipeline](limits.md)\.
+Make sure the name for your project meets the requirements for CodePipeline\. For more information, see [Limits in AWS CodePipeline](limits.md)\.
 
-1. On the configuration page for the project, select the **Execute concurrent builds if necessary** check box\. In **Source Code Management**, choose **AWS CodePipeline**\. If you have installed Jenkins on an Amazon EC2 instance and configured the AWS CLI with the profile for the IAM user you created for integration between AWS CodePipeline and Jenkins, leave all of the other fields empty\.
+1. On the configuration page for the project, select the **Execute concurrent builds if necessary** check box\. In **Source Code Management**, choose **AWS CodePipeline**\. If you have installed Jenkins on an Amazon EC2 instance and configured the AWS CLI with the profile for the IAM user you created for integration between CodePipeline and Jenkins, leave all of the other fields empty\.
 
-1. Choose **Advanced**, and in **Provider**, type a name for the provider of the action as it will appear in AWS CodePipeline \(for example, *MyJenkinsProviderName*\)\. Make sure this name is unique and easy to remember\. You will use it when you add a build action to your pipeline later in this tutorial, and again when you add a test action\.
+1. Choose **Advanced**, and in **Provider**, type a name for the provider of the action as it will appear in CodePipeline \(for example, *MyJenkinsProviderName*\)\. Make sure this name is unique and easy to remember\. You will use it when you add a build action to your pipeline later in this tutorial, and again when you add a test action\.
 **Note**  
-This action name must meet the naming requirements for actions in AWS CodePipeline\. For more information, see [Limits in AWS CodePipeline](limits.md)\.
+This action name must meet the naming requirements for actions in CodePipeline\. For more information, see [Limits in AWS CodePipeline](limits.md)\.
 
 1. In **Build Triggers**, clear any check boxes, and then select **Poll SCM**\. In **Schedule**, type five asterisks separated by spaces, as follows:
 
@@ -104,7 +98,7 @@ This action name must meet the naming requirements for actions in AWS CodePipeli
    * * * * *
    ```
 
-   This polls AWS CodePipeline every minute\. 
+   This polls CodePipeline every minute\. 
 
 1. In **Build**, choose **Add build step**\. Choose **Execute shell** \(Amazon Linux, RHEL, or Ubuntu Server\) **Execute batch command** \(Windows Server\), and then type the following:
 
@@ -118,24 +112,24 @@ Make sure your environment is configured with the variables and settings require
 
 1. Choose **Save** to save your Jenkins project\.
 
-## Step 2: Create a Pipeline in AWS CodePipeline<a name="tutorials-four-stage-pipeline-pipeline-create"></a>
+## Step 2: Create a Pipeline in CodePipeline<a name="tutorials-four-stage-pipeline-pipeline-create"></a>
 
 In this part of the tutorial, you will create the pipeline using the **Create Pipeline** wizard\. 
 
-**To create an AWS CodePipeline automated release process**
+**To create a CodePipeline automated release process**
 
-1. Sign in to the AWS Management Console and open the AWS CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
+1. Sign in to the AWS Management Console and open the CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
 
 1. If necessary, use the region selector to change the region to the same region where your pipeline resources are located\. For example, if you created resources for the previous tutorial in us\-east\-2, make sure the region selector is set to US East \(Ohio\)\.
 
-   For more information about the regions and endpoints available for AWS CodePipeline, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#codepipeline_region)\.
+   For more information about the regions and endpoints available for CodePipeline, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#codepipeline_region)\.
 
 1. On the **Welcome** page, **Getting started** page, or the **Pipelines** page, choose **Create pipeline**\.
 
 1. On the **Step 1: Choose pipeline settings** page, in **Pipeline name**, type the name for your pipeline\.
 
 1. In **Service role**, do one of the following:
-   + Choose **New service role** to allow AWS CodePipeline to create a new service role in IAM\. In **Role name**, the role and policy name both default to this format: AWSCodePipelineServiceRole\-*region*\-*pipeline\_name*\. For example, this is the service role created for a pipeline named MyPipeline: AWSCodePipelineServiceRole\-eu\-west\-2\-MyPipeline\.
+   + Choose **New service role** to allow CodePipeline to create a new service role in IAM\. In **Role name**, the role and policy name both default to this format: AWSCodePipelineServiceRole\-*region*\-*pipeline\_name*\. For example, this is the service role created for a pipeline named MyPipeline: AWSCodePipelineServiceRole\-eu\-west\-2\-MyPipeline\.
    + Choose **Existing service role** to use a service role already created in IAM\. In **Role name**, choose your service role from the list\.
 **Note**  
 Depending on when your service role was created, you might need to update its permissions to support additional AWS services\. For information, see [Add Permissions for Other AWS Services](how-to-custom-role.md#how-to-update-role-new-services)\. 
@@ -154,21 +148,21 @@ This is not the source bucket for your pipeline's source code\. This is the arti
 **Important**  
 Do not provide your AWS credentials on the GitHub website\.
 
-   After you have selected GitHub, a message displays advising that AWS CodePipeline will create a webhook in GitHub for your pipeline\.
+   After you have selected GitHub, a message displays advising that CodePipeline will create a webhook in GitHub for your pipeline\.
 
    After you have connected to GitHub, choose the repository and branch where you pushed the sample you want to use for this tutorial \(aws\-codepipeline\-jenkins\-aws\-codedeploy\_linux\.zip or AWSCodePipeline\-Jenkins\-AWSCodeDeploy\_Windows\.zip\), and then choose **Next**\.
 **Note**  
-In GitHub, there is a limit to the number of OAuth tokens you can use for an application, such as AWS CodePipeline\. If you exceed this limit, retry the connection to allow AWS CodePipeline to reconnect by reusing existing tokens\. For more information, see [To configure a pipeline to use a personal access token from GitHub](troubleshooting.md#troubleshooting-gs2)\.
+In GitHub, there is a limit to the number of OAuth tokens you can use for an application, such as CodePipeline\. If you exceed this limit, retry the connection to allow CodePipeline to reconnect by reusing existing tokens\. For more information, see [To configure a pipeline to use a personal access token from GitHub](troubleshooting.md#troubleshooting-gs2)\.
 
-1. In **Step 3: Add build stage**, choose **Add Jenkins**\. In **Provider name**, type the name of the action you provided in the AWS CodePipeline Plugin for Jenkins \(for example *MyJenkinsProviderName*\)\. This name must exactly match the name in the AWS CodePipeline Plugin for Jenkins\. In **Server URL**, type the URL of the Amazon EC2 instance where Jenkins is installed\. In **Project name**, type the name of the project you created in Jenkins, such as *MyDemoProject*, and then choose **Next**\.
+1. In **Step 3: Add build stage**, choose **Add Jenkins**\. In **Provider name**, type the name of the action you provided in the CodePipeline Plugin for Jenkins \(for example *MyJenkinsProviderName*\)\. This name must exactly match the name in the CodePipeline Plugin for Jenkins\. In **Server URL**, type the URL of the Amazon EC2 instance where Jenkins is installed\. In **Project name**, type the name of the project you created in Jenkins, such as *MyDemoProject*, and then choose **Next**\.
 
-1. In **Step 4: Add deploy stage**, reuse the AWS CodeDeploy application and deployment group you created in [Tutorial: Create a Simple Pipeline \(Amazon S3 Bucket\)](tutorials-simple-s3.md)\. In **Deploy provider**, choose **AWS CodeDeploy**\. In **Application name**, type **CodePipelineDemoApplication**, or choose the refresh button, and then choose the application name from the list\. In **Deployment group**, type **CodePipelineDemoFleet**, or choose it from the list, and then choose **Next**\.
+1. In **Step 4: Add deploy stage**, reuse the CodeDeploy application and deployment group you created in [Tutorial: Create a Simple Pipeline \(Amazon S3 Bucket\)](tutorials-simple-s3.md)\. In **Deploy provider**, choose **CodeDeploy**\. In **Application name**, type **CodePipelineDemoApplication**, or choose the refresh button, and then choose the application name from the list\. In **Deployment group**, type **CodePipelineDemoFleet**, or choose it from the list, and then choose **Next**\.
 **Note**  
-You can use your own AWS CodeDeploy resources or create new ones, but you might incur additional costs\.
+You can use your own CodeDeploy resources or create new ones, but you might incur additional costs\.
 
 1. In **Step 5: Review**, review the information, and then choose **Create pipeline**\.
 
-1. The pipeline automatically starts and runs the sample through the pipeline\. You can view progress and success and failure messages as the pipeline builds the Haml sample to HTML and deploys it a web page to each of the Amazon EC2 instances in the AWS CodeDeploy deployment\.
+1. The pipeline automatically starts and runs the sample through the pipeline\. You can view progress and success and failure messages as the pipeline builds the Haml sample to HTML and deploys it a web page to each of the Amazon EC2 instances in the CodeDeploy deployment\.
 
 ## Step 3: Add Another Stage to Your Pipeline<a name="tutorials-four-stage-pipeline-add-stage"></a>
 
@@ -202,17 +196,17 @@ If you did not want to add another stage to your pipeline, you could add a test 
 
 1.  In **Item Name**, type a name for the Jenkins project \(for example, *MyTestProject*\)\. Choose **Freestyle project**, and then choose **OK**\.
 **Note**  
-Make sure the name for your project meets the AWS CodePipeline requirements\. For more information, see [Limits in AWS CodePipeline](limits.md)\.
+Make sure the name for your project meets the CodePipeline requirements\. For more information, see [Limits in AWS CodePipeline](limits.md)\.
 
-1. On the configuration page for the project, select the **Execute concurrent builds if necessary** check box\. In **Source Code Management**, choose **AWS CodePipeline**\. If you have installed Jenkins on an Amazon EC2 instance and configured the AWS CLI with the profile for the IAM user you created for integration between AWS CodePipeline and Jenkins, leave all the other fields empty\. 
+1. On the configuration page for the project, select the **Execute concurrent builds if necessary** check box\. In **Source Code Management**, choose **AWS CodePipeline**\. If you have installed Jenkins on an Amazon EC2 instance and configured the AWS CLI with the profile for the IAM user you created for integration between CodePipeline and Jenkins, leave all the other fields empty\. 
 **Important**  
-If you are configuring a Jenkins project and it is not installed on an Amazon EC2 instance, or it is installed on an Amazon EC2 instance that is running a Windows operating system, complete the fields as required by your proxy host and port settings, and provide the credentials of the IAM user you configured for integration between Jenkins and AWS CodePipeline\.
+If you are configuring a Jenkins project and it is not installed on an Amazon EC2 instance, or it is installed on an Amazon EC2 instance that is running a Windows operating system, complete the fields as required by your proxy host and port settings, and provide the credentials of the IAM user you configured for integration between Jenkins and CodePipeline\.
 
 1. Choose **Advanced**, and in **Category**, choose **Test**\. 
 
 1. In **Provider**, type the same name you used for the build project \(for example, *MyJenkinsProviderName*\)\. You will use this name when you add the test action to your pipeline later in this tutorial\.
 **Note**  
-This name must meet the AWS CodePipeline naming requirements for actions\. For more information, see [Limits in AWS CodePipeline](limits.md)\.
+This name must meet the CodePipeline naming requirements for actions\. For more information, see [Limits in AWS CodePipeline](limits.md)\.
 
 1. In **Build Triggers**, clear any check boxes, and then select **Poll SCM**\. In **Schedule**, type five asterisks separated by spaces, as follows:
 
@@ -220,7 +214,7 @@ This name must meet the AWS CodePipeline naming requirements for actions\. For m
    * * * * *
    ```
 
-   This polls AWS CodePipeline every minute\. 
+   This polls CodePipeline every minute\. 
 
 1. In **Build**, choose **Add build step**\. If you are deploying to Amazon Linux, RHEL, or Ubuntu Server instances, choose** Execute shell **, and then type the following, where the IP address is the address of the Amazon EC2 instance you copied earlier:
 
@@ -248,7 +242,7 @@ The test assumes a default port of 80\. If you want to specify a different port,
 
 **To add a stage to your pipeline that includes the Jenkins test action**
 
-1. Sign in to the AWS Management Console and open the AWS CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
+1. Sign in to the AWS Management Console and open the CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
 
 1. In **Name**, choose the name of the pipeline you created, MySecondPipeline\. 
 
@@ -256,11 +250,11 @@ The test assumes a default port of 80\. If you want to specify a different port,
 
 1. On the **Edit** page, choose **\+ Stage** to add a stage immediately after the Staging stage\. 
 
-1. In the name field for the new stage, type a name \(for example, **Testing**\), and then choose **\+ Action**\. 
+1. In the name field for the new stage, type a name \(for example, **Testing**\), and then choose **\+ Add action group**\. 
 
-1. In the **Action category** drop\-down list, choose **Test**\. In **Action name**, type *MyJenkinsTest\-Action*\. In **Test provider**, choose the provider name you specified in Jenkins \(for example, *MyJenkinsProviderName*\)\. In **Project name**, type the name of the project you created in Jenkins \(for example, *MyTestProject*\)\. In **Input artifacts**, choose the artifact from the Jenkins build whose default name is *MyBuiltApp*, and then choose **Add action**\.
+1. In **Action name**, type *MyJenkinsTest\-Action*\. In **Test provider**, choose the provider name you specified in Jenkins \(for example, *MyJenkinsProviderName*\)\. In **Project name**, type the name of the project you created in Jenkins \(for example, *MyTestProject*\)\. In **Input artifacts**, choose the artifact from the Jenkins build whose default name is *MyBuiltApp*, and then choose **Save**\.
 
-   For more information about input and output artifacts and the structure of pipelines, see [AWS CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
+   For more information about input and output artifacts and the structure of pipelines, see [CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
 
 1. On the **Edit** page, choose **Save pipeline changes**\. In the **Save pipeline changes** dialog box, choose **Save and continue**\.
 
@@ -270,7 +264,7 @@ The test assumes a default port of 80\. If you want to specify a different port,
 
 ## Step 4: Clean Up Resources<a name="tutorials-four-stage-pipeline-clean-up"></a>
 
-After you complete this tutorial, you should delete the pipeline and the resources it uses so you will not be charged for continued use of those resources\. If you do not intend to keep using AWS CodePipeline, delete the pipeline, then the AWS CodeDeploy application and its associated Amazon EC2 instances, and finally, the Amazon S3 bucket used to store artifacts\. You should also consider whether to delete other resources, such as the GitHub repository, if you do not intend to keep using them\.
+After you complete this tutorial, you should delete the pipeline and the resources it uses so you will not be charged for continued use of those resources\. If you do not intend to keep using CodePipeline, delete the pipeline, then the CodeDeploy application and its associated Amazon EC2 instances, and finally, the Amazon S3 bucket used to store artifacts\. You should also consider whether to delete other resources, such as the GitHub repository, if you do not intend to keep using them\.
 
 **To clean up the resources used in this tutorial**
 
@@ -282,10 +276,10 @@ After you complete this tutorial, you should delete the pipeline and the resourc
 
    This command returns nothing\.
 
-1. To clean up your AWS CodeDeploy resources, follow the instructions in [Cleaning Up](http://docs.aws.amazon.com/codedeploy/latest/userguide/getting-started-walkthrough.html#getting-started-walkthrough-clean-up)\.
+1. To clean up your CodeDeploy resources, follow the instructions in [Cleaning Up](http://docs.aws.amazon.com/codedeploy/latest/userguide/getting-started-walkthrough.html#getting-started-walkthrough-clean-up)\.
 
 1. To clean up your instance resources, delete the Amazon EC2 instance where you installed Jenkins\. For more information, see [Clean Up Your Instance and Volume](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide//ec2-clean-up-your-instance.html)\.
 
-1. If you do not intend to create more pipelines or use AWS CodePipeline again, delete the Amazon S3 bucket used to store artifacts for your pipeline\. To delete the bucket, follow the instructions in [Deleting a Bucket](http://docs.aws.amazon.com/AmazonS3/latest/UG/DeletingaBucket.html)\.
+1. If you do not intend to create more pipelines or use CodePipeline again, delete the Amazon S3 bucket used to store artifacts for your pipeline\. To delete the bucket, follow the instructions in [Deleting a Bucket](http://docs.aws.amazon.com/AmazonS3/latest/UG/DeletingaBucket.html)\.
 
 1. If you do not intend to use the other resources for this pipeline again, consider deleting them by following the guidance for that particular resource\. For example, if you want to delete the GitHub repository, follow the instructions in [Deleting a repository](https://help.github.com/articles/deleting-a-repository/) on the GitHub website\.

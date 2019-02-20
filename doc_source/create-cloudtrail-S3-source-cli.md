@@ -1,10 +1,4 @@
---------
-
-The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
-
---------
-
-# Create a CloudWatch Events Rule That Starts Your Amazon S3 Pipeline \(CLI\)<a name="create-cloudtrail-S3-source-cli"></a><a name="proc-cli-event-s3-createtrail"></a>
+# Create a CloudWatch Events Rule for an Amazon S3 Source \(CLI\)<a name="create-cloudtrail-S3-source-cli"></a><a name="proc-cli-event-s3-createtrail"></a>
 
 **To create an AWS CloudTrail trail and enable logging**
 
@@ -48,9 +42,9 @@ For more information, see [Creating a Trail with the AWS Command Line Interface]
    aws cloudtrail put-event-selectors --trail-name my-trail --event-selectors '[{ "ReadWriteType": "WriteOnly", "IncludeManagementEvents":false, "DataResources": [{ "Type": "AWS::S3::Object", "Values": ["arn:aws:s3:::myBucket/myFolder/file.zip"] }] }]'
    ```<a name="proc-cli-event-s3-createrule"></a>
 
-**To create a CloudWatch Events rule with Amazon S3 as the event source and AWS CodePipeline as the target and apply the permissions policy**
+**To create a CloudWatch Events rule with Amazon S3 as the event source and CodePipeline as the target and apply the permissions policy**
 
-1. Grant permissions for Amazon CloudWatch Events to use AWS CodePipeline to invoke the rule\. For more information, see [Using Resource\-Based Policies for Amazon CloudWatch Events](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/resource-based-policies-cwe.html)\.
+1. Grant permissions for Amazon CloudWatch Events to use CodePipeline to invoke the rule\. For more information, see [Using Resource\-Based Policies for Amazon CloudWatch Events](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/resource-based-policies-cwe.html)\.
 
    1. Use the following sample to create the trust policy to allow CloudWatch Events to assume the service role\. Name it `trustpolicyforCWE.json`\.
 
@@ -110,7 +104,7 @@ For more information, see [Creating a Trail with the AWS Command Line Interface]
    aws events put-rule --name "MyS3SourceRule" --event-pattern "{\"source\":[\"aws.s3\"],\"detail-type\":[\"AWS API Call via CloudTrail\"],\"detail\":{\"eventSource\":[\"s3.amazonaws.com\"],\"eventName\":[\"PutObject\",\"CompleteMultiPartUpload\"],\"resources\":{\"ARN\":[\"arn:aws:s3:::myBucket/myFolder/file.zip\"]}}}
    ```
 
-1. To add AWS CodePipeline as a target, call the put\-targets command and include the `--rule` and `--targets` parameters\.
+1. To add CodePipeline as a target, call the put\-targets command and include the `--rule` and `--targets` parameters\.
 
    The following command specifies that for the rule named `MyS3SourceRule`, the target `Id` is composed of the number one, indicating that in a list of targets for the rule, this is target 1\. The command also specifies an example `ARN` for the pipeline\. The pipeline starts when something changes in the repository\.
 
@@ -119,6 +113,8 @@ For more information, see [Creating a Trail with the AWS Command Line Interface]
    ```<a name="proc-cli-flag-s3"></a>
 
 **To edit your pipeline's PollForSourceChanges parameter**
+**Important**  
+When you create a pipeline with this method, the `PollForSourceChanges` parameter defaults to true if it is not explicitly set to false\. When you add event\-based change detection, you must add the parameter to your output and set it to false to disable polling\. Otherwise, your pipeline starts twice for a single source change\. For details, see [Default Settings for the PollForSourceChanges Parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
 
 1. Run the get\-pipeline command to copy the pipeline structure into a JSON file\. For example, for a pipeline named `MyFirstPipeline`, run the following command: 
 

@@ -1,12 +1,6 @@
---------
-
-The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
-
---------
-
 # Tutorial: Set Up a CloudWatch Events Rule to Receive Email Notifications for Pipeline State Changes<a name="tutorials-cloudwatch-sns-notifications"></a>
 
-After you set up a pipeline, you can set up a CloudWatch Events rule to send notifications whenever there are changes to the execution state of your pipelines, or in the stages or actions in your pipelines\. For more information on using CloudWatch Events to set up notifications for pipeline state changes, see [Detect and React to Changes in Pipeline State with Amazon CloudWatch Events](detect-state-changes-cloudwatch-events.md)\.
+After you set up a pipeline in AWS CodePipeline, you can set up a CloudWatch Events rule to send notifications whenever there are changes to the execution state of your pipelines, or in the stages or actions in your pipelines\. For more information on using CloudWatch Events to set up notifications for pipeline state changes, see [Detect and React to Changes in Pipeline State with Amazon CloudWatch Events](detect-state-changes-cloudwatch-events.md)\.
 
 In this tutorial, you configure a notification to send an email when a pipeline's state changes to FAILED\. This tutorial uses an input transformer method when creating the CloudWatch Events rule\. It transforms the message schema details to deliver the message in human\-readable text\.
 
@@ -19,7 +13,7 @@ In this tutorial, you configure a notification to send an email when a pipeline'
 
 Amazon SNS coordinates use of topics to deliver messages to subscribing endpoints or clients\. Use Amazon SNS to create a notification topic and then subscribe to the topic using your email address\. The Amazon SNS topic will be added as a target to your CloudWatch Events rule\. For more information, see the [Amazon Simple Notification Service Developer Guide](https://docs.aws.amazon.com/sns/latest/dg/) \.
 
-Create or identify a topic in Amazon SNS\. AWS CodePipeline will use CloudWatch Events to send notifications to this topic through Amazon SNS\. To create a topic:
+Create or identify a topic in Amazon SNS\. CodePipeline will use CloudWatch Events to send notifications to this topic through Amazon SNS\. To create a topic:
 
 1. Open the Amazon SNS console at [https://console\.aws\.amazon\.com/sns](https://console.aws.amazon.com/sns)\.
 
@@ -51,7 +45,7 @@ Subscribe one or more recipients to the topic to receive email notifications\. T
 
 ## Step 2: Create a Rule and Add the SNS Topic as the Target<a name="create-notification-rule"></a>
 
-Create a CloudWatch Events notification rule with AWS CodePipeline as the event source\.
+Create a CloudWatch Events notification rule with CodePipeline as the event source\.
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
@@ -88,7 +82,7 @@ Create a CloudWatch Events notification rule with AWS CodePipeline as the event 
 
 1. Choose **Create rule**\. 
 
-1. Confirm that AWS CodePipeline is now sending build notifications\. For example, check to see if the build notification emails are now in your inbox\.
+1. Confirm that CodePipeline is now sending build notifications\. For example, check to see if the build notification emails are now in your inbox\.
 
 1. To change a rule's behavior, in the CloudWatch console, choose the rule, and then choose **Actions**, **Edit**\. Edit the rule, choose **Configure details**, and then choose **Update rule**\.
 

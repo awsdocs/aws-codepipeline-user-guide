@@ -1,17 +1,11 @@
---------
+# CodePipeline Permissions Reference<a name="permissions-reference"></a>
 
-The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
+When you are setting up [Access Control with IAM Policies](access-control.md) and writing permissions policies that you can attach to an IAM identity \(identity\-based policies\), you can use the following table as a reference\. The table lists each CodePipeline API operation and the corresponding actions for which you can grant permissions to perform the action\. You specify the actions in the policy's `Action` field, and you specify a wildcard character \(\*\) as the resource value in the policy's `Resource` field\.
 
---------
-
-# AWS CodePipeline Permissions Reference<a name="permissions-reference"></a>
-
-When you are setting up [Access Control with IAM Policies](access-control.md) and writing permissions policies that you can attach to an IAM identity \(identity\-based policies\), you can use the following table as a reference\. The table lists each AWS CodePipeline API operation and the corresponding actions for which you can grant permissions to perform the action\. You specify the actions in the policy's `Action` field, and you specify a wildcard character \(\*\) as the resource value in the policy's `Resource` field\.
-
-You can use AWS\-wide condition keys in your AWS CodePipeline policies to express conditions\. For a complete list of AWS\-wide keys, see [Available Keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#AvailableKeys) in the *IAM User Guide*\.
+You can use AWS\-wide condition keys in your CodePipeline policies to express conditions\. For a complete list of AWS\-wide keys, see [Available Keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#AvailableKeys) in the *IAM User Guide*\.
 
 **Note**  
-To specify an action, use the `codepipeline:` prefix followed by the API operation name\. For example: `codepipeline:GetPipeline`, `codepipeline:CreatePipeline`, or `codepipeline:*` \(for all AWS CodePipeline actions\)\.
+To specify an action, use the `codepipeline:` prefix followed by the API operation name\. For example: `codepipeline:GetPipeline`, `codepipeline:CreatePipeline`, or `codepipeline:*` \(for all CodePipeline actions\)\.
 
 To specify multiple actions in a single statement, separate them with commas as follows:
 
@@ -25,18 +19,18 @@ You can also specify multiple actions using wildcards\. For example, you can spe
 "Action": "codepipeline:Get*"
 ```
 
-To specify all AWS CodePipeline API actions, use the \* wildcard as follows:
+To specify all CodePipeline API actions, use the \* wildcard as follows:
 
 ```
 "Action": "codepipeline:*"
 ```
 
-The actions you can specify in an IAM policy for use with AWS CodePipeline are listed below\.
+The actions you can specify in an IAM policy for use with CodePipeline are listed below\.
 
 
-**AWS CodePipeline API Operations and Required Permissions for Actions**  
+**CodePipeline API Operations and Required Permissions for Actions**  
 
-| AWS CodePipeline API Operations | Required Permissions \(API Actions\) | 
+| CodePipeline API Operations | Required Permissions \(API Actions\) | 
 | --- | --- | 
 |  [AcknowledgeJob](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_AcknowledgeJob.html)  |  `codepipeline:AcknowledgeJob` Required to view information about a specified job and whether that job has been received by the job worker\. Only used for custom actions\.  | 
 |  [AcknowledgeThirdPartyJob](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_AcknowledgeThirdPartyJob.html)  |  `codepipeline:AcknowledgeThirdPartyJob` Required to confirm a job worker has received the specified job\. Only used for partner actions\.  | 

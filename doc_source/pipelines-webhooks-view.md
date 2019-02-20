@@ -1,9 +1,3 @@
---------
-
-The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
-
---------
-
 # List Webhooks in Your Account<a name="pipelines-webhooks-view"></a>
 
 You can use the AWS CLI to list webhooks in your account\.

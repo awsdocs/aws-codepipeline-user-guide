@@ -1,22 +1,16 @@
---------
-
-The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
-
---------
-
 # Tutorial: Create a Pipeline That Deploys to AWS Service Catalog<a name="tutorials-S3-servicecatalog"></a>
 
-AWS Service Catalog enables you to create and provision products based on AWS CloudFormation templates\. This tutorial shows you how to create and configure a pipeline to deploy your product template to AWS Service Catalog and deliver changes you have made in your source repository \(already created in GitHub, AWS CodeCommit, or Amazon S3\)\.
+AWS Service Catalog enables you to create and provision products based on AWS CloudFormation templates\. This tutorial shows you how to create and configure a pipeline to deploy your product template to AWS Service Catalog and deliver changes you have made in your source repository \(already created in GitHub, CodeCommit, or Amazon S3\)\.
 
 First, you create a product in AWS Service Catalog, and then you create a pipeline in AWS CodePipeline\. This tutorial provides two options for setting up the deployment configuration:
-+ Create a product in AWS Service Catalog and upload a template file to your source repository\. Provide product version and deployment configuration in the AWS CodePipeline console \(without a separate configuration file\)\. See [Option 1: Deploy to AWS Service Catalog Without a Configuration File](#tutorials-S3-servicecatalog-ex1-configure)\.
++ Create a product in AWS Service Catalog and upload a template file to your source repository\. Provide product version and deployment configuration in the CodePipeline console \(without a separate configuration file\)\. See [Option 1: Deploy to AWS Service Catalog Without a Configuration File](#tutorials-S3-servicecatalog-ex1-configure)\.
 **Note**  
 The template file can be created in YAML or JSON format\.
 + Create a product in AWS Service Catalog and upload a template file to your source repository\. Provide product version and deployment configuration in a separate configuration file\. See [Option 2: Deploy to AWS Service Catalog Using a Configuration File](#tutorials-S3-servicecatalog-ex2-configure)\.
 
 ## Option 1: Deploy to AWS Service Catalog Without a Configuration File<a name="tutorials-S3-servicecatalog-ex1-configure"></a>
 
-In this example, you upload the sample AWS CloudFormation template file for an Amazon S3 bucket, and then create your product in AWS Service Catalog\. Next, you create your pipeline and specify deployment configuration in the AWS CodePipeline console\.
+In this example, you upload the sample AWS CloudFormation template file for an Amazon S3 bucket, and then create your product in AWS Service Catalog\. Next, you create your pipeline and specify deployment configuration in the CodePipeline console\.
 
 ### Step 1: Upload Sample Template File to Source Repository<a name="tutorials-S3-servicecatalog-configure"></a>
 
@@ -75,7 +69,7 @@ In this example, you upload the sample AWS CloudFormation template file for an A
 
 1. On the **Review** page, verify that the information is correct, and then choose **Confirm and upload**\. 
 
-1. On the **Products** page, in the browser, copy the URL of your new product\. This contains the product ID\. Copy and retain this product ID\. You use it when you create your pipeline in AWS CodePipeline\.
+1. On the **Products** page, in the browser, copy the URL of your new product\. This contains the product ID\. Copy and retain this product ID\. You use it when you create your pipeline in CodePipeline\.
 
    Here is the URL for a product named `my-product`\. To extract the product ID, copy the value between the equals sign \(`=`\) and the ampersand \(`&`\)\. In this example, the product ID is `prod-example123456`\.
 
@@ -91,13 +85,13 @@ Copy the URL for your product before you navigate away from the page\. Once you 
 
 1. To name your pipeline and select parameters for your pipeline, do the following:
 
-   1. Sign in to the AWS Management Console and open the AWS CodePipeline console at [https://console\.aws\.amazon\.com/codepipeline/](https://console.aws.amazon.com/codepipeline/)\.
+   1. Sign in to the AWS Management Console and open the CodePipeline console at [https://console\.aws\.amazon\.com/codepipeline/](https://console.aws.amazon.com/codepipeline/)\.
 
    1. Choose **Getting started**\. Choose **Create pipeline**, and then enter a name for your pipeline\.
 
-   1. In **Service role**, choose **New service role**\. This creates a service role for AWS CodePipeline to manage permissions to other AWS services\.
+   1. In **Service role**, choose **New service role**\. This creates a service role for CodePipeline to manage permissions to other AWS services\.
 **Note**  
-If you use an AWS CodePipeline service role that was created before October 16 2018, you need to add permissions for AWS Service Catalog\. Open the IAM console, find the role, and then add the following permissions to the role's policy\. For more information, see [Add Permissions for Other AWS Services](how-to-custom-role.md#how-to-update-role-new-services)\.  
+If you use a CodePipeline service role that was created before October 16 2018, you need to add permissions for AWS Service Catalog\. Open the IAM console, find the role, and then add the following permissions to the role's policy\. For more information, see [Add Permissions for Other AWS Services](how-to-custom-role.md#how-to-update-role-new-services)\.  
 
       ```
        "Statement": [
@@ -164,7 +158,7 @@ If you use an AWS CodePipeline service role that was created before October 16 2
 
 ### Step 4: Push a Change and Verify Your Product in AWS Service Catalog<a name="tutorials-S3-servicecatalog-change"></a>
 
-1. View your pipeline in the AWS CodePipeline console, and on your source stage, choose **Details**\. Your source AWS CodeCommit repository opens in the console\. Choose **Edit**, and make a change in the file \(for example, to the description\)\. 
+1. View your pipeline in the CodePipeline console, and on your source stage, choose **Details**\. Your source AWS CodeCommit repository opens in the console\. Choose **Edit**, and make a change in the file \(for example, to the description\)\. 
 
    ```
    "Description": "Name of Amazon S3 bucket to hold and version website content"
@@ -260,7 +254,7 @@ In this example, you upload the sample AWS CloudFormation template file for an A
 
 1. On the **Review** page, verify that the information is correct, and then choose **Confirm and upload**\. 
 
-1. On the **Products** page, in the browser, copy the URL of your new product\. This contains the product ID\. Copy and retain this product ID\. You use when you create your pipeline in AWS CodePipeline\.
+1. On the **Products** page, in the browser, copy the URL of your new product\. This contains the product ID\. Copy and retain this product ID\. You use when you create your pipeline in CodePipeline\.
 
    Here is the URLfor a product named `my-product`\. To extract the product ID, copy the value between the equals sign \(`=`\) and the ampersand \(`&`\)\. In this example, the product ID is `prod-example123456`\. 
 
@@ -276,13 +270,13 @@ Copy the URL for your product before you navigate away from the page\. Once you 
 
 1. To name your pipeline and select parameters for your pipeline, do the following:
 
-   1. Sign in to the AWS Management Console and open the AWS CodePipeline console at [https://console\.aws\.amazon\.com/codepipeline/](https://console.aws.amazon.com/codepipeline/)\.
+   1. Sign in to the AWS Management Console and open the CodePipeline console at [https://console\.aws\.amazon\.com/codepipeline/](https://console.aws.amazon.com/codepipeline/)\.
 
    1. Choose **Getting started**\. Choose **Create pipeline**, and then enter a name for your pipeline\.
 
-   1. In **Service role**, choose **New service role**\. This creates a service role for AWS CodePipeline to manage permissions to other AWS services\.
+   1. In **Service role**, choose **New service role**\. This creates a service role for CodePipeline to manage permissions to other AWS services\.
 **Note**  
-If you use an AWS CodePipeline service role that was created before October 16 2018, you need to add permissions for AWS Service Catalog\. Open the IAM console, find the role, and then add the following permissions to the role's policy\. For more information, see [Add Permissions for Other AWS Services](how-to-custom-role.md#how-to-update-role-new-services)\.  
+If you use a CodePipeline service role that was created before October 16 2018, you need to add permissions for AWS Service Catalog\. Open the IAM console, find the role, and then add the following permissions to the role's policy\. For more information, see [Add Permissions for Other AWS Services](how-to-custom-role.md#how-to-update-role-new-services)\.  
 
       ```
        "Statement": [
@@ -312,7 +306,7 @@ If you use an AWS CodePipeline service role that was created before October 16 2
 
 1. To add a source stage, do the following:
 
-   1. In **Source provider**, choose AWS CodeCommit\.
+   1. In **Source provider**, choose **AWS CodeCommit**\.
 
    1. In **Repository name** and **Branch name**, enter the repository and branch you want to use for your source action\.
 
@@ -343,7 +337,7 @@ If you use an AWS CodePipeline service role that was created before October 16 2
 
 ### Step 5: Push a Change and Verify Your Product in Service Catalog<a name="tutorials-S3-servicecatalog-change2"></a>
 
-1. View your pipeline in the AWS CodePipeline console, and on the source stage, choose **Details**\. Your source AWS CodeCommit repository opens in the console\. Choose **Edit**, and then make a change in the file \(for example, to the description\)\.
+1. View your pipeline in the CodePipeline console, and on the source stage, choose **Details**\. Your source AWS CodeCommit repository opens in the console\. Choose **Edit**, and then make a change in the file \(for example, to the description\)\.
 
    ```
    "Description": "Name of Amazon S3 bucket to hold and version website content"

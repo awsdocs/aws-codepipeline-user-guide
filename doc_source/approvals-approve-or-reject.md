@@ -1,10 +1,4 @@
---------
-
-The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
-
---------
-
-# Approve or Reject an Approval Action in AWS CodePipeline<a name="approvals-approve-or-reject"></a>
+# Approve or Reject an Approval Action in CodePipeline<a name="approvals-approve-or-reject"></a>
 
 When a pipeline includes an approval action, the pipeline execution stops at the point where the action has been added\. The pipeline won't resume unless someone manually approves the action\. If an approver rejects the action, or if no approval response is received within seven days of the pipeline stopping for the approval action, the pipeline status becomes "Failed\."
 
@@ -16,7 +10,7 @@ If the person who added the approval action to the pipeline configured notificat
 
 If you receive a notification that includes a direct link to an approval action, choose the **Approve or reject** link, sign in to the console, and then continue with step 7 here\. Otherwise, follow all of these steps\.
 
-1. Open the AWS CodePipeline console at [https://console\.aws\.amazon\.com/codepipeline/](https://console.aws.amazon.com/codepipeline/)\.
+1. Open the CodePipeline console at [https://console\.aws\.amazon\.com/codepipeline/](https://console.aws.amazon.com/codepipeline/)\.
 
 1. On the **All Pipelines** page, choose the name of the pipeline\.
 

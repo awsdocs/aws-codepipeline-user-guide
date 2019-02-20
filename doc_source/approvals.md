@@ -1,10 +1,4 @@
---------
-
-The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
-
---------
-
-# Manage Approval Actions in AWS CodePipeline<a name="approvals"></a>
+# Manage Approval Actions in CodePipeline<a name="approvals"></a>
 
 In AWS CodePipeline, you can add an approval action to a stage in a pipeline at the point where you want the pipeline execution to stop so that someone with the required AWS Identity and Access Management permissions can approve or reject the action\. 
 
@@ -15,9 +9,9 @@ You might use manual approvals for these reasons:
 + You want someone to perform manual quality assurance testing on the latest version of an application, or to confirm the integrity of a build artifact, before it is released\.
 + You want someone to review new or updated text before it is published to a company website\.
 
-## Configuration Options for Manual Approval Actions in AWS CodePipeline<a name="approvals-configuration-options"></a>
+## Configuration Options for Manual Approval Actions in CodePipeline<a name="approvals-configuration-options"></a>
 
-AWS CodePipeline provides three configuration options you can use to tell approvers about the approval action\. 
+CodePipeline provides three configuration options you can use to tell approvers about the approval action\. 
 
 **Publish Approval Notifications** You can configure an approval action to publish a message to an Amazon Simple Notification Service topic when the pipeline stops at the action\. Amazon SNS delivers the message to every endpoint subscribed to the topic\. You must use a topic created in the same AWS region as the pipeline that will include the approval action\. When you create a topic, we recommend you give it a name that will identify its purpose, in formats such as `MyFirstPipeline-us-east-2-approval`\. 
 
@@ -29,7 +23,7 @@ When you publish approval notifications to Amazon SNS topics, you can choose fro
 + [Sending Amazon SNS Messages to HTTP/HTTPS Endpoints](https://docs.aws.amazon.com/sns/latest/dg/SendMessageToHttp.html)
 + [Invoking Lambda Functions Using Amazon SNS Notifications](https://docs.aws.amazon.com/sns/latest/dg/sns-lambda.html)
 
-For the structure of the JSON data generated for an approval action notification, see [JSON Data Format for Manual Approval Notifications in AWS CodePipeline](approvals-json-format.md)\.
+For the structure of the JSON data generated for an approval action notification, see [JSON Data Format for Manual Approval Notifications in CodePipeline](approvals-json-format.md)\.
 
 **Specify a URL for Review** As part of the configuration of the approval action, you can specify a URL to be reviewed\. The URL might be a link to a web application you want approvers to test or a page with more information about your approval request\. The URL is included in the notification that is published to the Amazon SNS topic\. Approvers can use the console or CLI to view it\. 
 
@@ -37,13 +31,13 @@ For the structure of the JSON data generated for an approval action notification
 
 **No Configuration Options** You can also choose not to configure any of these three options\. You might not need them if, for example, you can notify someone directly that the action is ready for their review, or you simply want the pipeline to stop until you decide to approve the action yourself\. 
 
-## Setup and Workflow Overview for Approval Actions in AWS CodePipeline<a name="approvals-overview"></a>
+## Setup and Workflow Overview for Approval Actions in CodePipeline<a name="approvals-overview"></a>
 
 The following is an overview for setting up and using manual approvals\. 
 
 1. You grant the IAM permissions required for approving or rejecting approval actions to one or more IAM users in your organization\. 
 
-1. \(Optional\) If you are using Amazon SNS notifications, you ensure that the service role you use in your AWS CodePipeline operations has permission to access Amazon SNS resources\. 
+1. \(Optional\) If you are using Amazon SNS notifications, you ensure that the service role you use in your CodePipeline operations has permission to access Amazon SNS resources\. 
 
 1. \(Optional\) If you are using Amazon SNS notifications, you create an Amazon SNS topic and add one or more subscribers or endpoints to it\. 
 

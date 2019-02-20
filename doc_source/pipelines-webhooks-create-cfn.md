@@ -1,14 +1,10 @@
---------
-
-The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
-
---------
-
-# Create a Webhook That Starts Your GitHub Pipeline \(AWS CloudFormation Template\)<a name="pipelines-webhooks-create-cfn"></a>
+# Create a Webhook for a GitHub Source \(AWS CloudFormation Template\)<a name="pipelines-webhooks-create-cfn"></a>
 
 To use AWS CloudFormation to create a webhook, update your template as described here\.<a name="proc-cfn-webhook-github"></a>
 
 **To add parameters and create a webhook in your template**
+**Note**  
+When you use the CLI or AWS CloudFormation to create a pipeline and add a webhook, you must disable periodic checks\. To disable periodic checks, you must explicitly add the `PollForSourceChanges` parameter and set it to false, as detailed in the final procedure below\. Otherwise, the default for a CLI or AWS CloudFormation pipeline is that `PollForSourceChanges` defaults to true and does not display in the pipeline structure output\. For more information about PollForSourceChanges defaults, see [Default Settings for the PollForSourceChanges Parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
 
 1. In the template, under `Resources`, add your parameters:
 
@@ -142,6 +138,8 @@ The `TargetAction` you specify must match the `Name` property of the source acti
 1. Choose **Execute**\.<a name="proc-cfn-flag-github"></a>
 
 **To edit your pipeline's PollForSourceChanges parameter**
+**Important**  
+When you create a pipeline with this method, the `PollForSourceChanges` parameter defaults to true if it is not explicitly set to false\. When you add event\-based change detection, you must add the parameter to your output and set it to false to disable polling\. Otherwise, your pipeline starts twice for a single source change\. For details, see [Default Settings for the PollForSourceChanges Parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
 + In the template, change `PollForSourceChanges` to `false`\. If you did not include `PollForSourceChanges` in your pipeline definition, add it and set it to false\.
 
   **Why am I making this change? ** Changing this parameter to `false` turns off periodic checks so you can use event\-based change detection only\.

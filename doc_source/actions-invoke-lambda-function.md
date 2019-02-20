@@ -1,10 +1,4 @@
---------
-
-The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
-
---------
-
-# Invoke an AWS Lambda Function in a Pipeline in AWS CodePipeline<a name="actions-invoke-lambda-function"></a>
+# Invoke an AWS Lambda Function in a Pipeline in CodePipeline<a name="actions-invoke-lambda-function"></a>
 
 [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/) is a compute service that lets you run code without provisioning or managing servers\. You can create Lambda functions and add them as actions in your pipelines\. Because Lambda allows you to write functions to perform almost any task, you can customize the way your pipeline works\. 
 
@@ -21,18 +15,18 @@ Here are some ways Lambda functions can be used in pipelines:
 
 This topic assumes you are familiar with AWS CodePipeline and AWS Lambda and know how to create pipelines, functions, and the IAM policies and roles on which they depend\. This topic shows you how to:
 + Create a Lambda function that tests whether a webpage was deployed successfully\.
-+ Configure the AWS CodePipeline and Lambda execution roles and the permissions required to run the function as part of the pipeline\.
++ Configure the CodePipeline and Lambda execution roles and the permissions required to run the function as part of the pipeline\.
 + Edit a pipeline to add the Lambda function as an action\. 
 + Test the action by manually releasing a change\.
 
-This topic includes sample functions to demonstrate the flexibility of working with Lambda functions in AWS CodePipeline: 
+This topic includes sample functions to demonstrate the flexibility of working with Lambda functions in CodePipeline: 
 + [Basic Lambda function](#LambdaSample1)
-  + Creating a basic Lambda function to use with AWS CodePipeline\.
-  + Returning success or failure results to AWS CodePipeline in the **Details** link for the action\.
+  + Creating a basic Lambda function to use with CodePipeline\.
+  + Returning success or failure results to CodePipeline in the **Details** link for the action\.
 + [Sample Python Function That Uses an AWS CloudFormation Template ](#actions-invoke-lambda-function-samples-python-cloudformation)
   + Using JSON\-encoded user parameters to pass multiple configuration values to the function \(`get_user_params`\)\.
   + Interacting with \.zip artifacts in an artifact bucket \(`get_template`\)\.
-  + Using a continuation token to monitor a long\-running asynchronous process \(`continue_job_later`\)\. This allows the action to continue and the function to succeed even if it exceeds a fifteen\-minute runtime \(a limitation in Lambda\)\.
+  + Using a continuation token to monitor a long\-running asynchronous process \(`continue_job_later`\)\. This allows the action to continue and the function to succeed even if it exceeds a five\-minute runtime \(a limitation in Lambda\)\.
 
 Each sample function includes information about the permissions you must add to the role\. For information about limits in AWS Lambda, see [Limits](https://docs.aws.amazon.com/lambda/latest/dg/limits.html) in the *AWS Lambda Developer Guide*\.
 
@@ -42,7 +36,7 @@ The sample code, roles, and policies included in this topic are examples only, a
 **Topics**
 + [Step 1: Create a Pipeline](#actions-invoke-lambda-function-create-test-pipeline)
 + [Step 2: Create the Lambda Function](#actions-invoke-lambda-function-create-function)
-+ [Step 3: Add the Lambda Function to a Pipeline in the AWS CodePipeline Console](#actions-invoke-lambda-function-add-action)
++ [Step 3: Add the Lambda Function to a Pipeline in the CodePipeline Console](#actions-invoke-lambda-function-add-action)
 + [Step 4: Test the Pipeline with the Lambda function](#actions-invoke-lambda-function-test-function)
 + [Step 5: Next Steps](#actions-invoke-lambda-function-next-steps)
 + [Example JSON Event](#actions-invoke-lambda-function-json-event-example)
@@ -50,21 +44,21 @@ The sample code, roles, and policies included in this topic are examples only, a
 
 ## Step 1: Create a Pipeline<a name="actions-invoke-lambda-function-create-test-pipeline"></a>
 
-In this step, you create a pipeline to which you later add the Lambda function\. This is the same pipeline you created in [AWS CodePipeline Tutorials](tutorials.md)\. If that pipeline is still configured for your account and is in the same region where you plan to create the Lambda function, you can skip this step\.
+In this step, you create a pipeline to which you later add the Lambda function\. This is the same pipeline you created in [CodePipeline Tutorials](tutorials.md)\. If that pipeline is still configured for your account and is in the same region where you plan to create the Lambda function, you can skip this step\.
 
 **Important**  
 You must create the pipeline and all of its resources in the same region where you create the Lambda function\.
 
 **To create the pipeline**
 
-1. Follow the first three steps in [Tutorial: Create a Simple Pipeline \(Amazon S3 Bucket\)](tutorials-simple-s3.md) to create an Amazon S3 bucket, AWS CodeDeploy resources, and a two\-stage pipeline\. Choose the Amazon Linux option for your instance types\. You can use any name you want for the pipeline, but the steps in this topic use MyLambdaTestPipeline\. 
+1. Follow the first three steps in [Tutorial: Create a Simple Pipeline \(Amazon S3 Bucket\)](tutorials-simple-s3.md) to create an Amazon S3 bucket, CodeDeploy resources, and a two\-stage pipeline\. Choose the Amazon Linux option for your instance types\. You can use any name you want for the pipeline, but the steps in this topic use MyLambdaTestPipeline\. 
 
-1. On the status page for your pipeline, in the AWS CodeDeploy action, choose **Details**\. On the deployment details page for the deployment group, choose an instance ID from the list\. 
+1. On the status page for your pipeline, in the CodeDeploy action, choose **Details**\. On the deployment details page for the deployment group, choose an instance ID from the list\. 
 
 1. In the Amazon EC2 console, on the **Description** tab for the instance, copy the IP address in **Public IP** \(for example, **192\.0\.2\.4**\)\. You use this address as the target of the function in AWS Lambda\.
 
 **Note**  
-The default service role for AWS CodePipeline, AWS\-CodePipeline\-Service, includes the Lambda permissions required to invoke the function, so you do not have to create an additional invocation policy or role\. However, if you have modified the default service role or selected a different one, make sure the policy for the role allows the `lambda:InvokeFunction` and `lambda:ListFunctions` permissions\. Otherwise, pipelines that include Lambda actions fail\.
+The default service role for CodePipeline, AWS\-CodePipeline\-Service, includes the Lambda permissions required to invoke the function, so you do not have to create an additional invocation policy or role\. However, if you have modified the default service role or selected a different one, make sure the policy for the role allows the `lambda:InvokeFunction` and `lambda:ListFunctions` permissions\. Otherwise, pipelines that include Lambda actions fail\.
 
 ## Step 2: Create the Lambda Function<a name="actions-invoke-lambda-function-create-function"></a>
 
@@ -105,7 +99,7 @@ In this step, you create a Lambda function that makes an HTTP request and checks
 
    Choose **Create Policy**\.
 **Note**  
-These are the minimum permissions required for a Lambda function to interoperate with AWS CodePipeline and Amazon CloudWatch\. If you want to expand this policy to allow functions that interact with other AWS resources, you should modify this policy to allow the actions required by those Lambda functions\.
+These are the minimum permissions required for a Lambda function to interoperate with CodePipeline and Amazon CloudWatch\. If you want to expand this policy to allow functions that interact with other AWS resources, you should modify this policy to allow the actions required by those Lambda functions\.
 
 1. On the policy dashboard page, choose **Roles**, and then choose **Create role**\.
 
@@ -115,7 +109,7 @@ These are the minimum permissions required for a Lambda function to interoperate
 
 1. On the **Review** page, in **Role name**, enter the name, and then choose **Create role**\.<a name="LambdaSample1"></a>
 
-**To create the sample Lambda function to use with AWS CodePipeline**
+**To create the sample Lambda function to use with CodePipeline**
 
 1. Sign in to the AWS Management Console and open the AWS Lambda console at [https://console\.aws\.amazon\.com/lambda/](https://console.aws.amazon.com/lambda/)\.
 
@@ -125,7 +119,7 @@ If you see a **Welcome** page instead of the **Lambda** page, choose **Get Start
 
 1. On the **Create function** page, choose **Author from scratch**\. In **Name**, enter a name for your Lambda function \(for example, **MyLambdaFunctionForAWSCodePipeline**\)\. In **Description**, enter an optional description for the function \(for example, **A sample test to check whether the website responds with a 200 \(OK\) and contains a specific word on the page**\)\. In **Runtime**, choose **Node\.js 6\.10**, and then copy the following code into the **Function code** box:
 **Note**  
-The event object, under the CodePipeline\.job key, contains the [job details](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_JobDetails.html)\. For a full example of the JSON event AWS CodePipeline returns to Lambda, see [Example JSON Event](#actions-invoke-lambda-function-json-event-example)\.
+The event object, under the CodePipeline\.job key, contains the [job details](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_JobDetails.html)\. For a full example of the JSON event CodePipeline returns to Lambda, see [Example JSON Event](#actions-invoke-lambda-function-json-event-example)\.
 
    ```
    var assert = require('assert');
@@ -233,19 +227,19 @@ The event object, under the CodePipeline\.job key, contains the [job details](ht
 
 1. Choose **Save**\.
 
-## Step 3: Add the Lambda Function to a Pipeline in the AWS CodePipeline Console<a name="actions-invoke-lambda-function-add-action"></a>
+## Step 3: Add the Lambda Function to a Pipeline in the CodePipeline Console<a name="actions-invoke-lambda-function-add-action"></a>
 
 In this step, you add a new stage to your pipeline, and then add a Lambda action that calls your function to that stage\.
 
 **To add a stage**
 
-1. Sign in to the AWS Management Console and open the AWS CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
+1. Sign in to the AWS Management Console and open the CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
 
 1. On the **Welcome** page, choose the pipeline you created\.
 
 1. On the pipeline view page, choose **Edit**\.
 
-1. On the **Edit** page, choose **\+ Add stage** to add a stage after the deployment stage with the AWS CodeDeploy action\. Enter a name for the stage \(for example, **LambdaStage**\), and choose **Add stage**\.
+1. On the **Edit** page, choose **\+ Add stage** to add a stage after the deployment stage with the CodeDeploy action\. Enter a name for the stage \(for example, **LambdaStage**\), and choose **Add stage**\.
 **Note**  
 You can also choose to add your Lambda action to an existing stage\. For demonstration purposes, we are adding the Lambda function as the only action in a stage to allow you to easily view its progress as artifacts progress through a pipeline\.
 
@@ -275,11 +269,11 @@ Now that you've successfully created a Lambda function and added it as an action
 
 ![\[An AWS Lambda action running through a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-lambda-action-add-2-inprog-pol.png)![\[An AWS Lambda action running through a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[An AWS Lambda action running through a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
-After you have finished experimenting with the Lambda function, consider removing it from your pipeline, deleting it from AWS Lambda, and deleting the role from IAM to avoid possible charges\. For more information, see [Edit a Pipeline in AWS CodePipeline](pipelines-edit.md), [Delete a Pipeline in AWS CodePipeline](pipelines-delete.md), and [Deleting Roles or Instance Profiles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_manage_delete.html)\.
+After you have finished experimenting with the Lambda function, consider removing it from your pipeline, deleting it from AWS Lambda, and deleting the role from IAM to avoid possible charges\. For more information, see [Edit a Pipeline in CodePipeline](pipelines-edit.md), [Delete a Pipeline in CodePipeline](pipelines-delete.md), and [Deleting Roles or Instance Profiles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_manage_delete.html)\.
 
 ## Example JSON Event<a name="actions-invoke-lambda-function-json-event-example"></a>
 
-The following example shows a sample JSON event sent to Lambda by AWS CodePipeline\. The structure of this event is similar to the response to the `[GetJobDetails API](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_GetJobDetails.html)`, but without the `actionTypeId` and `pipelineContext` data types\. Two action configuration details, `FunctionName` and `UserParameters`, are included in both the JSON event and the response to the `GetJobDetails` API\. The values in *red italic text* are examples or explanations, not real values\. 
+The following example shows a sample JSON event sent to Lambda by CodePipeline\. The structure of this event is similar to the response to the `[GetJobDetails API](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_GetJobDetails.html)`, but without the `actionTypeId` and `pipelineContext` data types\. Two action configuration details, `FunctionName` and `UserParameters`, are included in both the JSON event and the response to the `GetJobDetails` API\. The values in *red italic text* are examples or explanations, not real values\. 
 
 ```
 {
@@ -334,7 +328,7 @@ The following example shows a sample JSON event sent to Lambda by AWS CodePipeli
 
 ## Additional Sample Functions<a name="actions-invoke-lambda-function-samples"></a>
 
-The following sample Lambda functions demonstrate additional functionality you can use for your pipelines in AWS CodePipeline\. To use these functions, you might have to modify the policy for the Lambda execution role, as noted in the introduction for each sample\.
+The following sample Lambda functions demonstrate additional functionality you can use for your pipelines in CodePipeline\. To use these functions, you might have to modify the policy for the Lambda execution role, as noted in the introduction for each sample\.
 
 **Topics**
 + [Sample Python Function That Uses an AWS CloudFormation Template](#actions-invoke-lambda-function-samples-python-cloudformation)
@@ -350,7 +344,7 @@ This sample demonstrates:
 + The interaction with \.zip artifacts in an artifact bucket \(`get_template`\)\.
 + The use of a continuation token to monitor a long\-running asynchronous process \(`continue_job_later`\)\. This allows the action to continue and the function to succeed even if it exceeds a fifteen\-minute runtime \(a limitation in Lambda\)\.
 
-To use this sample Lambda function, the policy for the Lambda execution role must have `Allow` permissions in AWS CloudFormation, Amazon S3, and AWS CodePipeline, as shown in this sample policy:
+To use this sample Lambda function, the policy for the Lambda execution role must have `Allow` permissions in AWS CloudFormation, Amazon S3, and CodePipeline, as shown in this sample policy:
 
 ```
 {
@@ -413,7 +407,7 @@ To create the AWS CloudFormation template, open any plain\-text editor and copy 
 }
 ```
 
-Save this as a JSON file with the name **template\.json** in a directory named **template\-package**\. Create a compressed \(\.zip\) file of this directory and file named **template\-package\.zip**, and upload the compressed file to a versioned Amazon S3 bucket\. If you already have a bucket configured for your pipeline, you can use it\. Next, edit your pipeline to add a source action that retrieves the \.zip file\. Name the output for this action *MyTemplate*\. For more information, see [Edit a Pipeline in AWS CodePipeline](pipelines-edit.md)\.
+Save this as a JSON file with the name **template\.json** in a directory named **template\-package**\. Create a compressed \(\.zip\) file of this directory and file named **template\-package\.zip**, and upload the compressed file to a versioned Amazon S3 bucket\. If you already have a bucket configured for your pipeline, you can use it\. Next, edit your pipeline to add a source action that retrieves the \.zip file\. Name the output for this action *MyTemplate*\. For more information, see [Edit a Pipeline in CodePipeline](pipelines-edit.md)\.
 
 **Note**  
 The sample Lambda function expects these file names and compressed structure\. However, you can substitute your own AWS CloudFormation template for this sample\. If you use your own template, make sure you modify the policy for the Lambda execution role to allow any additional functionality required by your AWS CloudFormation template\.
@@ -813,7 +807,7 @@ The sample Lambda function expects these file names and compressed structure\. H
 
 1. Save the function\.
 
-1. From the AWS CodePipeline console, edit the pipeline to add the function as an action in a stage in your pipeline\. In **UserParameters**, you must provide a JSON string with three parameters:
+1. From the CodePipeline console, edit the pipeline to add the function as an action in a stage in your pipeline\. In **UserParameters**, you must provide a JSON string with three parameters:
    + Stack name
    + AWS CloudFormation template name and path to the file
    + Application name\. 

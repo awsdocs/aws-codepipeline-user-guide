@@ -1,34 +1,28 @@
---------
-
-The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
-
---------
-
 # Tutorial: Create a Pipeline with an Amazon ECR Source and ECS\-to\-CodeDeploy Deployment<a name="tutorials-ecs-ecr-codedeploy"></a>
 
-In this tutorial, you configure a pipeline that continuously delivers your container applications using AWS resources that support Docker images\. The completed pipeline detects changes to your image, which is stored in the Amazon ECR image repository, and uses AWS CodeDeploy to route and deploy traffic to an Amazon ECS cluster and load balancer\. AWS CodeDeploy uses a listener to reroute traffic to the port of the updated container specified in the AppSpec file\. The pipeline is also configured to use an AWS CodeCommit source location where your Amazon ECS task definition is stored\. In this tutorial, you configure each of these AWS resources and then create your pipeline with stages that contain actions for each resource\.
+In this tutorial, you configure a pipeline in AWS CodePipeline that continuously delivers your container applications using AWS resources that support Docker images\. The completed pipeline detects changes to your image, which is stored in the Amazon ECR image repository, and uses CodeDeploy to route and deploy traffic to an Amazon ECS cluster and load balancer\. CodeDeploy uses a listener to reroute traffic to the port of the updated container specified in the AppSpec file\. The pipeline is also configured to use a CodeCommit source location where your Amazon ECS task definition is stored\. In this tutorial, you configure each of these AWS resources and then create your pipeline with stages that contain actions for each resource\.
 
 The artifacts you set up in your pipeline source repositories become the input and output artifacts used between stages\. The source stage creates output artifacts that you then select as input artifacts for your deployment stage\. This flow uses the following artifacts: 
 + A Docker image file that specifies the container name and repository URI of your Amazon ECR image repository\.
 + An Amazon ECS task definition that lists your Docker image name, container name, Amazon ECS service name, and load balancer configuration\.
-+ An AWS CodeDeploy AppSpec file that specifies the name of the Amazon ECS task definition file, the name of the updated application's container, and the container port where AWS CodeDeploy reroutes production traffic\. It can also specify optional network configuration and Lambda functions you can run during deployment lifecycle event hooks\.
++ A CodeDeploy AppSpec file that specifies the name of the Amazon ECS task definition file, the name of the updated application's container, and the container port where CodeDeploy reroutes production traffic\. It can also specify optional network configuration and Lambda functions you can run during deployment lifecycle event hooks\.
 
 When you create or edit your pipeline and update or specify source artifacts for your deployment stage, make sure to point to the source artifacts with the latest name and version you want to use\. After you set up your pipeline, as you make changes to your image or task definition, you might need to update your source artifact files in your repositories and then edit the deployment stage in your pipeline\.
 
 **Topics**
 + [Prerequisites](#tutorials-ecs-ecr-codedeploy-prereq)
 + [Step 1: Create Image and Push to Amazon ECR Repository](#tutorials-ecs-ecr-codedeploy-imagerepository)
-+ [Step 2: Create Task Definition Source Files and Push to AWS CodeCommit Repository](#tutorials-ecs-ecr-codedeploy-taskdefinition)
++ [Step 2: Create Task Definition Source Files and Push to CodeCommit Repository](#tutorials-ecs-ecr-codedeploy-taskdefinition)
 + [Step 3: Create Your Application Load Balancer and Target Groups](#tutorials-ecs-ecr-codedeploy-loadbal)
 + [Step 4: Create Your Amazon ECS Cluster and Service](#tutorials-ecs-ecr-codedeploy-cluster)
-+ [Step 5: Create Your AWS CodeDeploy Application and Deployment Group \(ECS Compute Platform\)](#tutorials-ecs-ecr-codedeploy-deployment)
++ [Step 5: Create Your CodeDeploy Application and Deployment Group \(ECS Compute Platform\)](#tutorials-ecs-ecr-codedeploy-deployment)
 + [Step 6: Create Your Pipeline](#tutorials-ecs-ecr-codedeploy-pipeline)
 + [Step 7: Make a Change to Your Pipeline and Verify Deployment](#tutorials-ecs-ecr-codedeploy-update)
 
 ## Prerequisites<a name="tutorials-ecs-ecr-codedeploy-prereq"></a>
 
 You must have already created the following resources:
-+ An AWS CodeCommit repository\. You can use the AWS CodeCommit repository you created in [Tutorial: Create a Simple Pipeline \(AWS CodeCommit Repository\)](tutorials-simple-codecommit.md)\.
++ A CodeCommit repository\. You can use the AWS CodeCommit repository you created in [Tutorial: Create a Simple Pipeline \(CodeCommit Repository\)](tutorials-simple-codecommit.md)\.
 + Launch an Amazon EC2 Linux instance and install Docker to create an image as shown in this tutorial\. If you already have an image you want to use, you can skip this prerequisite\.
 + Use the Amazon EC2 console to create an Application Load Balancer or a Network Load Balancer\. The load balancer must use a VPC with two public subnets in different Availability Zones \(the default VPC can be used\)\. Configure one target group for your load balancer \(with IP configuration\)\. For instructions, see [Target Groups for Your Network Load Balancers](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html)\.
 
@@ -97,9 +91,9 @@ If you already have an image you want to use, you can skip this step\.
    docker push aws_account_id.dkr.ecr.us-east-1.amazonaws.com/nginx:latest
    ```
 
-## Step 2: Create Task Definition Source Files and Push to AWS CodeCommit Repository<a name="tutorials-ecs-ecr-codedeploy-taskdefinition"></a>
+## Step 2: Create Task Definition Source Files and Push to CodeCommit Repository<a name="tutorials-ecs-ecr-codedeploy-taskdefinition"></a>
 
-In this section, you create a task definition JSON file and register it with Amazon ECS\. You then create an AppSpec file for AWS CodeDeploy and use your Git client to push the files to your AWS CodeCommit repository\.
+In this section, you create a task definition JSON file and register it with Amazon ECS\. You then create an AppSpec file for CodeDeploy and use your Git client to push the files to your CodeCommit repository\.
 
 **To create a task definition for your image**
 
@@ -170,7 +164,7 @@ Make sure that the execution role specified in the task definition contains the 
    ```
 
 **To create an AppSpec file**
-+ The AppSpec file is used for AWS CodeDeploy deployments\. The file, which includes optional fields, uses this format: 
++ The AppSpec file is used for CodeDeploy deployments\. The file, which includes optional fields, uses this format: 
 
   ```
   version: 0.0
@@ -201,7 +195,7 @@ Make sure that the execution role specified in the task definition contains the 
   ```
   ```
 
-  For more information about the AppSpec file, including examples, see [AWS CodeDeploy AppSpec File Reference](https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file.html)\.
+  For more information about the AppSpec file, including examples, see [CodeDeploy AppSpec File Reference](https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file.html)\.
 
   Create a file named `appspec.yaml` with the following contents\. For `TaskDefinition`, do not change the `<TASK_DEFINITION>` placeholder text\. This value is updated when your pipeline runs\.
 
@@ -217,9 +211,9 @@ Make sure that the execution role specified in the task definition contains the 
             ContainerPort: 80
   ```
 
-**To push files to your AWS CodeCommit repository**
+**To push files to your CodeCommit repository**
 
-1. Push or upload the files to your AWS CodeCommit repository\. These files are the source artifact created by the pipeline creation wizard for your deployment action in AWS CodePipeline\. Your files should look like this in your local directory:
+1. Push or upload the files to your CodeCommit repository\. These files are the source artifact created by the pipeline creation wizard for your deployment action in CodePipeline\. Your files should look like this in your local directory:
 
    ```
    /tmp
@@ -251,15 +245,15 @@ Make sure that the execution role specified in the task definition contains the 
          git commit -m "Added task definition files"
          ```
 
-      1. Run the following command to push the files from your local repo to your AWS CodeCommit repository:
+      1. Run the following command to push the files from your local repo to your CodeCommit repository:
 
          ```
          git push
          ```
 
-   1. To use the AWS CodeCommit console to upload your files: 
+   1. To use the CodeCommit console to upload your files: 
 
-      1. Open the AWS CodeCommit console, and choose your repository from the **Repositories** list\.
+      1. Open the CodeCommit console, and choose your repository from the **Repositories** list\.
 
       1. Choose **Add file**, and then choose **Upload file**\. 
 
@@ -357,7 +351,7 @@ You must have two target groups created for your load balancer in order for your
 
 ## Step 4: Create Your Amazon ECS Cluster and Service<a name="tutorials-ecs-ecr-codedeploy-cluster"></a>
 
-In this section, you create an Amazon ECS cluster and service where AWS CodeDeploy routes traffic during deployment \(to an Amazon ECS cluster rather than EC2 instances\)\. To create your Amazon ECS service, you must use the subnet names and target group value you created with your load balancer to create your service\. 
+In this section, you create an Amazon ECS cluster and service where CodeDeploy routes traffic during deployment \(to an Amazon ECS cluster rather than EC2 instances\)\. To create your Amazon ECS service, you must use the subnet names and target group value you created with your load balancer to create your service\. 
 
 **To create an Amazon ECS cluster**
 
@@ -431,13 +425,13 @@ Be sure to include `file://` before the file name\. It is required in this comma
    aws ecs describe-services --cluster cluster-name --services service-name
    ```
 
-## Step 5: Create Your AWS CodeDeploy Application and Deployment Group \(ECS Compute Platform\)<a name="tutorials-ecs-ecr-codedeploy-deployment"></a>
+## Step 5: Create Your CodeDeploy Application and Deployment Group \(ECS Compute Platform\)<a name="tutorials-ecs-ecr-codedeploy-deployment"></a>
 
-Create an AWS CodeDeploy application and deployment group\. 
+Create a CodeDeploy application and deployment group\. 
 
-**To create an AWS CodeDeploy application**
+**To create a CodeDeploy application**
 
-1. Open the AWS CodeDeploy console and choose **Create application**\.
+1. Open the CodeDeploy console and choose **Create application**\.
 
 1. In **Application name**, enter the name you want to use\.
 
@@ -445,13 +439,13 @@ Create an AWS CodeDeploy application and deployment group\.
 
 1. Choose **Create application**\.
 
-**To create an AWS CodeDeploy deployment group**
+**To create a CodeDeploy deployment group**
 
 1. On your application page's **Deployment groups** tab, choose **Create deployment group**\.
 
 1. In **Deployment group name**, enter a name that describes the deployment group\.
 
-1. In **Service role**, choose a service role that grants AWS CodeDeploy access to Amazon ECS\.
+1. In **Service role**, choose a service role that grants CodeDeploy access to Amazon ECS\.
 
 1. In **Environment configuration**, choose your Amazon ECS cluster name and service name\.
 
@@ -468,20 +462,20 @@ Create an AWS CodeDeploy application and deployment group\.
 ## Step 6: Create Your Pipeline<a name="tutorials-ecs-ecr-codedeploy-pipeline"></a>
 
 In this section, you create a pipeline with the following actions:
-+ An AWS CodeCommit action where the source artifacts are the task definition and the AppSpec file\.
++ A CodeCommit action where the source artifacts are the task definition and the AppSpec file\.
 + A source stage with an Amazon ECR source action where the source artifact is the image file\.
-+ A deployment stage with an Amazon ECS deploy action where the deployment runs with an AWS CodeDeploy application and deployment group\.
++ A deployment stage with an Amazon ECS deploy action where the deployment runs with a CodeDeploy application and deployment group\.
 
 **To create a two\-stage pipeline with the wizard**
 
-1. Sign in to the AWS Management Console and open the AWS CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
+1. Sign in to the AWS Management Console and open the CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
 
 1. On the **Welcome** page, **Getting started** page, or the **Pipelines** page, choose **Create pipeline**\.
 
 1. In **Step 1: Choose pipeline settings**, in **Pipeline name**, enter **MyImagePipeline**\.
 
 1. In **Service role**, do one of the following:
-   + Choose **New service role** to allow AWS CodePipeline to create a new service role in IAM\. In **Role name**, the role and policy name both default to this format: AWSCodePipelineServiceRole\-*region*\-*pipeline\_name*\. For example, this is the service role created for this tutorial: AWSCodePipelineServiceRole\-eu\-west\-2\-MyImagePipeline\.
+   + Choose **New service role** to allow CodePipeline to create a new service role in IAM\. In **Role name**, the role and policy name both default to this format: AWSCodePipelineServiceRole\-*region*\-*pipeline\_name*\. For example, this is the service role created for this tutorial: AWSCodePipelineServiceRole\-eu\-west\-2\-MyImagePipeline\.
    + Choose **Existing service role** to use a service role already created in IAM\. In **Role name**, choose your service role from the list\.
 **Note**  
 Depending on when your service role was created, you might need to update its permissions to support additional AWS services\. For information, see [Add Permissions for Other AWS Services](how-to-custom-role.md#how-to-update-role-new-services)\. 
@@ -496,7 +490,7 @@ This is not the source bucket for your pipeline's source code\. This is the arti
 
    Choose **Next**\.
 
-1. In **Step 2: Add source stage**, in **Source provider**, choose AWS CodeCommit\. In **Repository name**, choose the name of the AWS CodeCommit repository you created in [Step 1: Create an AWS CodeCommit Repository and Local Repo](tutorials-simple-codecommit.md#codecommit-create-repository)\. In **Branch name**, choose the name of the branch that contains your latest code update\. Unless you created a different branch on your own, only `master` is available\. 
+1. In **Step 2: Add source stage**, in **Source provider**, choose **AWS CodeCommit**\. In **Repository name**, choose the name of the CodeCommit repository you created in [Step 1: Create a CodeCommit Repository and Local Repo](tutorials-simple-codecommit.md#codecommit-create-repository)\. In **Branch name**, choose the name of the branch that contains your latest code update\. Unless you created a different branch on your own, only `master` is available\. 
 
    After you select the repository name and branch, a message shows the Amazon CloudWatch Events rule to be created for this pipeline\. 
 
@@ -529,7 +523,7 @@ View your pipeline and add an Amazon ECR source action to your pipeline\.
 
 1. In the source stage, choose **Edit stage**\.
 
-1. Add a parallel action by choosing **\+ Add action** next to your AWS CodeCommit source action\.
+1. Add a parallel action by choosing **\+ Add action** next to your CodeCommit source action\.
 
 1. In **Action name**, enter a name \(for example, **Image**\)\. 
 

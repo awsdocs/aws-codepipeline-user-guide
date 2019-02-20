@@ -1,10 +1,4 @@
---------
-
-The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
-
---------
-
-# View Pipeline Details and History in AWS CodePipeline<a name="pipelines-view"></a>
+# View Pipeline Details and History in CodePipeline<a name="pipelines-view"></a>
 
 You can use the AWS CodePipeline console or the AWS CLI to view details about pipelines associated with your AWS account\. 
 
@@ -14,14 +8,14 @@ You can use the AWS CodePipeline console or the AWS CLI to view details about pi
 
 ## View Pipeline Details and History \(Console\)<a name="pipelines-view-console"></a>
 
-You can use the AWS CodePipeline console to view a list of all of the pipelines in your account\. You can also view details for each pipeline, including when actions last ran in the pipeline, whether a transition between stages is enabled or disabled, whether any actions have failed, and other information\. You can also view a history page that shows details for all pipeline executions for which history has been recorded\. Execution history is limited to the past 12 months\. 
+You can use the CodePipeline console to view a list of all of the pipelines in your account\. You can also view details for each pipeline, including when actions last ran in the pipeline, whether a transition between stages is enabled or disabled, whether any actions have failed, and other information\. You can also view a history page that shows details for all pipeline executions for which history has been recorded\. Execution history is limited to the past 12 months\. 
 
 **Note**  
 After an hour, the detailed view of a pipeline stops refreshing automatically in your browser\. To view current information, refresh the page\.
 
 **To view a pipeline**
 
-1. Sign in to the AWS Management Console and open the AWS CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
+1. Sign in to the AWS Management Console and open the CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
 
    The names and creation date of all pipelines associated with your AWS account are displayed, along with links to view execution history\.
 
@@ -40,19 +34,19 @@ After an hour, the detailed view of a pipeline stops refreshing automatically in
 
    The graphical view also displays the following information about actions in each stage:
    + The name of the action\.
-   + The provider of the action, such as AWS CodeDeploy\.
+   + The provider of the action, such as CodeDeploy\.
    + When the action was last run\.
    + Whether the action succeeded or failed\.
    + Links to other details about the last run of the action, where available\.
-   + Details about the source revisions that are running through the latest pipeline execution in the stage or, for AWS CodeDeploy deployments, the latest source revisions that were deployed to target instances\.
+   + Details about the source revisions that are running through the latest pipeline execution in the stage or, for CodeDeploy deployments, the latest source revisions that were deployed to target instances\.
 
 1. To see the configuration details for an action in a stage of a pipeline, choose the information icon next to the action\.
 
-1. To view the details of the provider of the action, choose the provider\. For example, in the preceding example pipeline, if you choose AWS CodeDeploy in either the Staging or Production stages the AWS CodeDeploy console page for the deployment group configured for that stage is displayed\.
+1. To view the details of the provider of the action, choose the provider\. For example, in the preceding example pipeline, if you choose CodeDeploy in either the Staging or Production stages the CodeDeploy console page for the deployment group configured for that stage is displayed\.
 
 1. To see the progress details for an action in a stage, choose **Details** when it is displayed next to an action in progress \(indicated by an **In Progress** message\)\. If the action is in progress, you see the incremental progress and the steps or actions as they occur\. 
 **Note**  
-Details are available for source actions that retrieve content from GitHub repositories, but not those that retrieve content from Amazon S3 buckets or AWS CodeCommit repositories\.
+Details are available for source actions that retrieve content from GitHub repositories, but not those that retrieve content from Amazon S3 buckets or CodeCommit repositories\.
 
 1. To approve or reject actions that have been configured for manual approval, choose **Review**\.
 
@@ -60,7 +54,7 @@ Details are available for source actions that retrieve content from GitHub repos
 
 1. To get more information about errors or failures for a completed action in a stage, choose **Details**\. Details from the last time the action ran, including the results of that action \(**Succeeded** or **Failed**\) are displayed\.
 
-1. To view details about source artifacts \(output artifact that originated in the first stage of a pipeline\) that are used the latest pipeline execution for a stage, click in the details information area at the bottom of the stage\. You can view details about identifiers, such as commit IDs, check\-in comments, and the time since the artifact was created or updated\. For more information, see [View Current Source Revision Details in a Pipeline in AWS CodePipeline](monitoring-source-revisions-view.md)\.
+1. To view details about source artifacts \(output artifact that originated in the first stage of a pipeline\) that are used the latest pipeline execution for a stage, click in the details information area at the bottom of the stage\. You can view details about identifiers, such as commit IDs, check\-in comments, and the time since the artifact was created or updated\. For more information, see [View Current Source Revision Details in a Pipeline in CodePipeline](monitoring-source-revisions-view.md)\.
 
 1. To view details about the most recent executions for the pipeline, choose **View history**\. For past executions, you can view revision details associated with source artifacts, such as execution IDs, status, start and end times, duration, and commit IDs and messages\.
 

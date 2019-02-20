@@ -1,10 +1,4 @@
---------
-
-The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
-
---------
-
-# Retry a Failed Action in AWS CodePipeline<a name="actions-retry"></a>
+# Retry a Failed Action in CodePipeline<a name="actions-retry"></a>
 
 In AWS CodePipeline, an action is a task performed on an artifact in a stage\. If an action or a set of parallel actions is not completed successfully, the pipeline stops running\. 
 
@@ -28,7 +22,7 @@ Another retry attempt in the stage is already in progress\.
 
 ****
 
-1. Sign in to the AWS Management Console and open the AWS CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
+1. Sign in to the AWS Management Console and open the CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
 
    The names of all pipelines associated with your AWS account are displayed\.
 
@@ -108,4 +102,4 @@ Be sure to include `file://` before the file name\. It is required in this comma
    aws codepipeline retry-stage-execution --cli-input-json file://retry-failed-actions.json
    ```
 
-1. To view the results of the retry attempt, either open the AWS CodePipeline console and choose the pipeline that contains the actions that failed, or use the get\-pipeline\-state command again\. For more information, see [View Pipeline Details and History in AWS CodePipeline](pipelines-view.md)\. 
+1. To view the results of the retry attempt, either open the CodePipeline console and choose the pipeline that contains the actions that failed, or use the get\-pipeline\-state command again\. For more information, see [View Pipeline Details and History in CodePipeline](pipelines-view.md)\. 

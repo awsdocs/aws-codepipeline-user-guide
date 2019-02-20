@@ -1,10 +1,4 @@
---------
-
-The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
-
---------
-
-# Delete the Webhook for Your GitHub Pipeline<a name="pipelines-webhooks-delete"></a>
+# Delete the Webhook for Your GitHub Source<a name="pipelines-webhooks-delete"></a>
 
 To use the AWS CLI to delete a webhook:
 

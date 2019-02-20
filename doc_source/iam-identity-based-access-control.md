@@ -1,17 +1,11 @@
---------
-
-The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find many of the concepts and basic procedures in this guide still apply\. To access help in the new console, choose the information icon\.
-
---------
-
-# Using Identity\-Based Policies \(IAM Policies\) for AWS CodePipeline<a name="iam-identity-based-access-control"></a>
+# Using Identity\-Based Policies \(IAM Policies\) for CodePipeline<a name="iam-identity-based-access-control"></a>
 
 This topic provides examples of identity\-based policies that demonstrate how an account administrator can attach permissions policies to IAM identities \(that is, users, groups, and roles\)\.
 
 **Important**  
-We recommend that you first review the introductory topics that explain the basic concepts and options available to manage access to your AWS CodePipeline resources\. For more information, see [Overview of Managing Access Permissions to Your AWS CodePipeline Resources](iam-access-control-identity-based.md)
+We recommend that you first review the introductory topics that explain the basic concepts and options available to manage access to your CodePipeline resources\. For more information, see [Overview of Managing Access Permissions to Your CodePipeline Resources](iam-access-control-identity-based.md)
 
-The following sections provide instructions for working with IAM policies specific to AWS CodePipeline\. 
+The following sections provide instructions for working with IAM policies specific to CodePipeline\. 
 
 The following shows an example of a permissions policy that allows a user to enable and disable all stage transitions in the pipeline named **MyFirstPipeline** in the us\-west\-2 region:
 
