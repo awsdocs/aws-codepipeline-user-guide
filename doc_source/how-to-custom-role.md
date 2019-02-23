@@ -16,6 +16,10 @@ Modifying a policy statement or attaching another policy to the role can prevent
 
 By default, the policy statement for the IAM service role for CodePipeline, AWS\-CodePipeline\-Service, includes permissions needed for CodePipeline to use other resources in your account\. 
 
+**Note**  
+In the console, service roles created before September 2018 are created with the name "oneClick\_AWS\-CodePipeline\-Service\_*ID\-Number*"\.  
+Service roles created after September 2018 use the service role name format "AWSCodePipelineServiceRole\-*Region*\-*Pipeline\_Name*"\. For example, for a pipeline named MyFirstPipeline created in the console in eu\-west\-2, the service role named "AWSCodePipelineServiceRole\-eu\-west\-2\-MyFirstPipeline" is created\.
+
 AWS\-CodePipeline\-Service currently includes the following policy statement: 
 
 ```
@@ -23,26 +27,36 @@ AWS\-CodePipeline\-Service currently includes the following policy statement:
     "Statement": [
         {
             "Action": [
-                "s3:GetObject",
-                "s3:GetObjectVersion",
-                "s3:GetBucketVersioning"
+                "iam:PassRole"
+            ],
+            "Resource": "*",
+            "Effect": "Allow",
+            "Condition": {
+                "StringEqualsIfExists": {
+                    "iam:PassedToService": [
+                        "cloudformation.amazonaws.com",
+                        "elasticbeanstalk.amazonaws.com",
+                        "ec2.amazonaws.com",
+                        "ecs-tasks.amazonaws.com"
+                    ]
+                }
+            }
+        },
+        {
+            "Action": [
+                "codecommit:CancelUploadArchive",
+                "codecommit:GetBranch",
+                "codecommit:GetCommit",
+                "codecommit:GetUploadArchiveStatus",
+                "codecommit:UploadArchive"
             ],
             "Resource": "*",
             "Effect": "Allow"
         },
         {
             "Action": [
-                "s3:PutObject"
-            ],
-            "Resource": [
-                "arn:aws:s3:::codepipeline*",
-                "arn:aws:s3:::elasticbeanstalk*"
-            ],
-            "Effect": "Allow"
-        },
-        {
-            "Action": [
                 "codedeploy:CreateDeployment",
+                "codedeploy:GetApplication",
                 "codedeploy:GetApplicationRevision",
                 "codedeploy:GetDeployment",
                 "codedeploy:GetDeploymentConfig",
@@ -53,55 +67,103 @@ AWS\-CodePipeline\-Service currently includes the following policy statement:
         },
         {
             "Action": [
-                "elasticbeanstalk:CreateApplicationVersion",
-                "elasticbeanstalk:DescribeApplicationVersions",
-                "elasticbeanstalk:DescribeEnvironments",
-                "elasticbeanstalk:DescribeEvents",
-                "elasticbeanstalk:UpdateEnvironment",
-                "autoscaling:DescribeAutoScalingGroups",
-                "autoscaling:DescribeLaunchConfigurations",
-                "autoscaling:DescribeScalingActivities",
-                "autoscaling:ResumeProcesses",
-                "autoscaling:SuspendProcesses",
-                "cloudformation:GetTemplate",
-                "cloudformation:DescribeStackResource",
-                "cloudformation:DescribeStackResources",
-                "cloudformation:DescribeStackEvents",
+                "elasticbeanstalk:*",
+                "ec2:*",
+                "elasticloadbalancing:*",
+                "autoscaling:*",
+                "cloudwatch:*",
+                "s3:*",
+                "sns:*",
+                "cloudformation:*",
+                "rds:*",
+                "sqs:*",
+                "ecs:*"
+            ],
+            "Resource": "*",
+            "Effect": "Allow"
+        },
+        {
+            "Action": [
+                "lambda:InvokeFunction",
+                "lambda:ListFunctions"
+            ],
+            "Resource": "*",
+            "Effect": "Allow"
+        },
+        {
+            "Action": [
+                "opsworks:CreateDeployment",
+                "opsworks:DescribeApps",
+                "opsworks:DescribeCommands",
+                "opsworks:DescribeDeployments",
+                "opsworks:DescribeInstances",
+                "opsworks:DescribeStacks",
+                "opsworks:UpdateApp",
+                "opsworks:UpdateStack"
+            ],
+            "Resource": "*",
+            "Effect": "Allow"
+        },
+        {
+            "Action": [
+                "cloudformation:CreateStack",
+                "cloudformation:DeleteStack",
                 "cloudformation:DescribeStacks",
                 "cloudformation:UpdateStack",
-                "ec2:DescribeInstances",
-                "ec2:DescribeImages",
-                "ec2:DescribeAddresses",
-                "ec2:DescribeSubnets",
-                "ec2:DescribeVpcs",
-                "ec2:DescribeSecurityGroups",
-                "ec2:DescribeKeyPairs",
-                "elasticloadbalancing:DescribeLoadBalancers",
-                "rds:DescribeDBInstances",
-                "rds:DescribeOrderableDBInstanceOptions",
-                "sns:ListSubscriptionsByTopic"
+                "cloudformation:CreateChangeSet",
+                "cloudformation:DeleteChangeSet",
+                "cloudformation:DescribeChangeSet",
+                "cloudformation:ExecuteChangeSet",
+                "cloudformation:SetStackPolicy",
+                "cloudformation:ValidateTemplate"
             ],
             "Resource": "*",
             "Effect": "Allow"
         },
         {
             "Action": [
-                "lambda:invokefunction",
-                "lambda:listfunctions"
+                "codebuild:BatchGetBuilds",
+                "codebuild:StartBuild"
             ],
             "Resource": "*",
             "Effect": "Allow"
         },
         {
+            "Effect": "Allow",
             "Action": [
-                "s3:ListBucket",
-                "s3:GetBucketPolicy",
-                "s3:GetObjectAcl",
-                "s3:PutObjectAcl",
-                "s3:DeleteObject"
+                "devicefarm:ListProjects",
+                "devicefarm:ListDevicePools",
+                "devicefarm:GetRun",
+                "devicefarm:GetUpload",
+                "devicefarm:CreateUpload",
+                "devicefarm:ScheduleRun"
             ],
-            "Resource": "arn:aws:s3:::elasticbeanstalk*",
-            "Effect": "Allow"
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "servicecatalog:ListProvisioningArtifacts",
+                "servicecatalog:CreateProvisioningArtifact",
+                "servicecatalog:DescribeProvisioningArtifact",
+                "servicecatalog:DeleteProvisioningArtifact",
+                "servicecatalog:UpdateProduct"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "cloudformation:ValidateTemplate"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ecr:DescribeImages"
+            ],
+            "Resource": "*"
         }
     ],
     "Version": "2012-10-17"

@@ -1,4 +1,4 @@
-# Tutorial: Create a Pipeline That Builds and Tests Your iOS App After a Change in Your Amazon S3 Bucket<a name="tutorials-codebuild-devicefarm-S3"></a>
+# Tutorial: Create a Pipeline That Tests Your iOS App After a Change in Your Amazon S3 Bucket<a name="tutorials-codebuild-devicefarm-S3"></a>
 
  You can use AWS CodePipeline to easily configure a continuous integration flow in which your app is tested each time the source bucket changes\. This tutorial shows you how to create and configure a pipeline to test your built iOS app from an Amazon S3 bucket\. The pipeline detects the arrival of a saved change through Amazon CloudWatch Events, and then uses [Device Farm](https://docs.aws.amazon.com/devicefarm/latest/developerguide/welcome.html) to test the built application\. 
 
@@ -81,55 +81,51 @@ This is not the source bucket for your pipeline's source code\. This is the arti
 
    1. Choose **Next**\.
 
-   1. On the **Step 4: Add deploy stage** page, choose **Skip deploy stage**, and then accept the warning message by choosing **Skip** again\. Choose **Next**\.
+   1. On the **Step 4: Add deploy stage** page, choose **Skip deploy stage**, and then accept the warning message by choosing **Skip** again\.
 
    1. On **Step 5: Review**, choose **Create pipeline**\. You should see a diagram that shows the source and build stages\.  
 ![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-view-pipeline-S3.png)
 
 1. Add a Device Farm test action to your pipeline as follows:
 
-   1. In the upper left, choose **Edit**\. 
+   1. In the upper right, choose **Edit**\. 
 
-   1. Choose the **X** icon to delete the build stage\. This deletes the placeholder stage now that you no longer need it for pipeline creation\.
+   1. Choose **Edit stage**\. Choose **Delete**\. This deletes the placeholder stage now that you no longer need it for pipeline creation\.
 
    1. At the bottom of the diagram, choose **\+ Add stage**\.
 
-   1. Enter a stage name, and then choose **\+ Add action group**\.
+   1. In Stage name, enter a name for the stage, such as Test, and then choose **Add stage**\.
 
-   1. In **Action name**, enter a name\. 
+   1. Choose **\+ Add action group**\.
 
-   1. In **Test provider**, choose **AWS Device Farm**\.
+   1. In **Action name**, enter a name, such as DeviceFarmTest\.
 
-   1. In **Action Name**, enter a name and from **Test provider**, choose **AWS Device Farm**\.  
-![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-add-action.png)
+   1. In **Action provider**, choose **AWS Device Farm**\. Allow **Region** to default to the pipeline Region\.
 
-   1. In **Project name**, choose your existing Device Farm project or choose **Create a new project**\. 
+   1. In **Input artifacts**, choose the input artifact that matches the output artifact of the stage that comes before the test stage, such as `SourceArtifact`\. 
 
-   1. In **Device pool**, choose your existing device pool or choose **Create a new device pool**\. If you create a device pool, you must select a set of test devices\.
+      In the AWS CodePipeline console, you can find the name of the output artifact for each stage by hovering over the information icon in the pipeline diagram\. If your pipeline tests your app directly from the **Source** stage, choose **SourceArtifact**\. If the pipeline includes a **Build** stage, choose **BuildArtifact**\.
 
-   1. In **App type**, choose **iOS**\.  
+   1. In **ProjectId**, choose your Device Farm project ID\. 
+
+   1. In **DevicePoolArn**, enter the ARN for the device pool\.
+
+   1. In **AppType**, enter **iOS**\.  
 ![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-choose-test-provider-S3.png)
 
-   1. In **App file path**, enter the path of the compiled app package\. The path is relative to the root of the input artifact for the test stage\. Typically, this path is similar to `ios-test.ipa`\.
+   1. In **App**, enter the path of the compiled app package\. The path is relative to the root of the input artifact for the test stage\. Typically, this path is similar to `ios-test.ipa`\.
 
-   1. In **Test type**, do one of the following:
-      + If you're using one of the built\-in Device Farm tests, choose the type of test configured in your Device Farm project\.
-      + If you aren't using one of the built\-in Device Farm tests, choose your type of test, and then in **Test file path**, enter the path of the test definition file\. The path is relative to the root of the input artifact for your test\.   
-![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-test-type.png)
+   1. In **TestType**, do one of the following:
+      + If you're using one of the built\-in Device Farm tests, enter the type of test configured in your Device Farm project, such as BUILTIN\_FUZZ\. In **FuzzEventCount**, enter a time in milliseconds, such as 6000\. In **FuzzEventThrottle**, enter a time in milliseconds, such as 50\.
+      + If you aren't using one of the built\-in Device Farm tests, enter your type of test, and then in **Test**, enter the path of the test definition file\. The path is relative to the root of the input artifact for your test\. 
 
    1. In the remaining fields, provide the configuration that is appropriate for your test and application type\.
 
-   1. \(Optional\) In **Advanced**, provide configuration information for your test run\.  
-![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-advanced.png)
+   1. \(Optional\) In **Advanced**, provide configuration information for your test run\.
 
-   1. In **Input artifacts**, choose **MyApp**\.
+   1. Choose **Save**\.
 
-      In the AWS CodePipeline console, you can find the name of the output artifact for each stage by hovering over the information icon in the pipeline diagram\. Because your pipeline tests your app directly from the **Source** stage, choose **MyApp**\.  
-![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-output-artifact-S3.png)
+   1. On the stage you are editing, choose **Done**\. In the AWS CodePipeline pane, choose **Save**, and then choose **Save** on the warning message\.
 
-   1. At the bottom of the panel, choose **Add Action**\.
-
-   1. In the AWS CodePipeline pane, choose **Save pipeline change**, and then choose **Save change**\. View your updated pipeline\.  
+   1. To submit your changes and start a pipeline execution, choose **Release change**, and then choose **Release**\.  
 ![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-ios-final-view-pipeline.png)
-
-   1. To submit your changes and start a pipeline build, choose **Release change**, and then choose **Release**\.

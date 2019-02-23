@@ -265,7 +265,11 @@ For more information about pipeline structure, see [CodePipeline Pipeline Struct
 
 To create a JSON file, use the sample pipeline JSON file, edit it, and then call that file when you run the create\-pipeline command\.
 
-You need the ARN of the service role you created for CodePipeline in [Getting Started with CodePipeline](getting-started-codepipeline.md) and the name of an Amazon S3 bucket where artifacts for the pipeline are stored\. This bucket must be in the same Region as the pipeline\. You use the ARN and bucket name when you run the create\-pipeline command\. Unlike the console, running the create\-pipeline command in the AWS CLI does not create an Amazon S3 bucket for storing artifacts\. The bucket must already exist\.
+**Prerequisites:**
+
+You need the ARN of the service role you created for CodePipeline in [Getting Started with CodePipeline](getting-started-codepipeline.md)\. You use the CodePipeline service role ARN in the pipeline JSON file when you run the create\-pipeline command\. For more information about creating a service role, see [Create the CodePipeline Service Role](pipelines-create-service-role.md)\. Unlike the console, running the create\-pipeline command in the AWS CLI does not have the option to create the CodePipeline service role for you\. The service role must already exist\.
+
+You need the name of an Amazon S3 bucket where artifacts for the pipeline are stored\. This bucket must be in the same Region as the pipeline\. You use the bucket name in the pipeline JSON file when you run the create\-pipeline command\. Unlike the console, running the create\-pipeline command in the AWS CLI does not create an Amazon S3 bucket for storing artifacts\. The bucket must already exist\.
 
 **Note**  
 You can also use the get\-pipeline command to get a copy of the JSON structure of that pipeline, and then modify that structure in a plain\-text editor\.

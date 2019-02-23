@@ -18,3 +18,4 @@ For more information about pipelines, see [CodePipeline Concepts](concepts.md), 
 + [View Execution History](pipelines-view-history.md)
 + [Create a Pipeline That Uses Resources from Another Account](pipelines-create-cross-account.md)
 + [Edit a Pipeline for Push Events](update-change-detection.md)
++ [Create the CodePipeline Service Role](pipelines-create-service-role.md)

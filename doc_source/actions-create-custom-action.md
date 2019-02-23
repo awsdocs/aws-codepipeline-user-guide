@@ -159,7 +159,6 @@ Another strategy to consider is using identity federation with IAM to integrate 
 
 1. Review code examples of identity federation relevant to your infrastructure, such as:
    + [Identity Federation Sample Application for an Active Directory Use Case](http://aws.amazon.com/code/1288653099190193)
-   + [Mobile Application Identity Federation with Amazon Cognito](https://github.com/awslabs/aws-sdk-android-samples/tree/master/CognitoSyncDemo)
 
 1. Get started configuring identity federation\. For information, see [Identity Providers and Federation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers.html) in *IAM User Guide*\.
 

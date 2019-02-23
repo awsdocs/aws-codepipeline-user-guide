@@ -28,8 +28,7 @@ You must have created the following resources to use with the AWS CloudFormation
 
    1. In **BetaFleet**, enter the name of your CodeDeploy deployment group\.
 
-   1. In **SourceObjectKey**, accept the default for the sample application's zip file\. You upload this file to your bucket as soon as the template creates it\.  
-![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/create-stack-s3-pipeline.png)
+   1. In **SourceObjectKey**, accept the default for the sample application's zip file\. You upload this file to your bucket as soon as the template creates it\.
 
 1. Choose **Next**\. Accept the defaults on the following page, and then choose **Next**\.
 
@@ -74,8 +73,7 @@ You must have created the following resources to use with the AWS CloudFormation
 
 1. In **Stack name**, enter a name for your resource stack\. Parameters specified by the sample template are displayed\. Enter the following parameters: 
 
-   1. In **SourceObjectKey**, accept the default for the sample application's zip file\.  
-![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/create-stack-s3-cloudtrail.png)
+   1. In **SourceObjectKey**, accept the default for the sample application's zip file\.
 
 1. Choose **Next**\. Accept the defaults on the following page, and then choose **Next**\.
 

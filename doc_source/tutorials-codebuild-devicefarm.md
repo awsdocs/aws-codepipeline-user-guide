@@ -40,28 +40,6 @@ You can try this out using your existing Android app and test definitions, or yo
 
    If you use Device Farm built\-in tests, you can skip this step\.
 
-1. To create your build project in CodeBuild, do the following:
-
-   1. Sign in to the AWS Management Console and open the CodeBuild console\.
-
-   1. If a welcome page is displayed, choose **Get started**\.
-
-      If a welcome page is not displayed, on the navigation pane, choose **Build projects**, and then choose **Create build project**\.
-
-   1. In **Project name**, enter a name for this build project\.
-
-   1. In **Source provider**, choose **AWS CodePipeline**\.
-
-   1. In **Environment**, choose **Managed image**\. For **Operating system**, choose **Ubuntu**\.
-
-   1. For **Runtime**, choose **Android**\. For **Version**, choose **aws/codebuild/android\-java\-8:26\.1\.1**\. CodeBuild uses this OS image, which has Android Studio installed, to build your app\.
-
-   1. For **Service role**, choose your CodeBuild service role\.
-
-   1. For **Build specifications**, choose **Use the buildspec\.yml in the source code root directory**\.
-
-   1. Choose **Create build project**\. This creates a CodeBuild project that uses the `buildspec.yml` in your repository for configuration\. The build project uses a service role to manage AWS service permissions\. This step might take a couple of minutes\.
-
 1. To create your pipeline and add a source stage, do the following:
 
    1. Sign in to the AWS Management Console and open the CodePipeline console at [https://console\.aws\.amazon\.com/codepipeline/](https://console.aws.amazon.com/codepipeline/)\.
@@ -108,59 +86,67 @@ This is not the source bucket for your pipeline's source code\. This is the arti
 
    1. Choose **Next**\.
 
-1. In **Build**, add a build stage:
+1. In **Add build stage**, add a build stage:
 
-   1. In **Build provider**, choose **AWS CodeBuild**\.
+   1. In **Build provider**, choose **AWS CodeBuild**\. Allow **Region** to default to the pipeline Region\.
 
-   1. In **CodeBuild**, choose **Project name**, and then enter a name for your project\.
+   1. Choose **Create project**\.
+
+   1. In **Project name**, enter a name for this build project\.
+
+   1. In **Environment image**, choose **Managed image**\. For **Operating system**, choose **Ubuntu**\.
+
+   1. For **Runtime**, choose **Android**\. For **Runtime version**, choose **aws/codebuild/android\-java\-8:26\.1\.1**\. CodeBuild uses this OS image, which has Android Studio installed, to build your app\.
+
+   1. For **Service role**, choose your existing CodeBuild service role or create a new one\.
+
+   1. For **Build specifications**, choose **Use a buildspec file**\.
+
+   1. Choose **Continue to CodePipeline**\. This returns to the CodePipeline console and creates a CodeBuild project that uses the `buildspec.yml` in your repository for configuration\. The build project uses a service role to manage AWS service permissions\. This step might take a couple of minutes\.
 
    1. Choose **Next**\.
 
-   1. On the **Step 4: Add deploy stage** page, choose **Skip deploy stage**, and then accept the warning message by choosing **Skip** again\. Choose **Next**\.
+1. On the **Step 4: Add deploy stage** page, choose **Skip deploy stage**, and then accept the warning message by choosing **Skip** again\. Choose **Next**\.
 
-   1. On **Step 5: Review**, choose **Create pipeline**\. You should see a diagram that shows the source and build stages\.  
+1. On **Step 5: Review**, choose **Create pipeline**\. You should see a diagram that shows the source and build stages\.  
 ![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-view-pipeline.png)
 
 1. Add a Device Farm test action to your pipeline:
 
-   1. In the upper left, choose **Edit**\.
+   1. In the upper right, choose **Edit**\.
 
-   1. At the bottom of the diagram, choose **\+ Add stage**\.
+   1. At the bottom of the diagram, choose **\+ Add stage**\. In **Stage name**, enter a name, such as Test\.
 
-   1. Enter a stage name, and then choose **\+ Add action group**\.
+   1. Choose **\+ Add action group**\.
 
    1. In **Action name**, enter a name\. 
 
-   1. In **Action provider**, choose **AWS Device Farm**\.  
-![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-add-action-pol.png)
+   1. In **Action provider**, choose **AWS Device Farm**\. Allow **Region** to default to the pipeline Region\.
 
-   1. In **ProjectId**, choose your existing Device Farm project or choose **Create a new project**\. 
+   1. In **Input artifacts**, choose the input artifact that matches the output artifact of the stage that comes before the test stage, such as `BuildArtifact`\. 
 
-   1. In **DevicePoolArn**, choose your existing device pool\. If you create a device pool, you must select a set of test devices\.
+      In the AWS CodePipeline console, you can find the name of the output artifact for each stage by hovering over the information icon in the pipeline diagram\. If your pipeline tests your app directly from the **Source** stage, choose **SourceArtifact**\. If the pipeline includes a **Build** stage, choose **BuildArtifact**\.
 
-   1. In **App type**, choose **Android**\.  
+   1. In **ProjectId**, enter your Device Farm project ID\. 
+
+   1. In **DevicePoolArn**, enter the ARN for the device pool\.
+
+   1. In **AppType**, enter **Android**\.  
 ![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-choose-test-provider.png)
 
-   1. In **App file path**, enter the path of the compiled app package\. The path is relative to the root of the input artifact for the test stage\. Typically, this path is similar to `app-release.apk`\.
+   1. In **App**, enter the path of the compiled app package\. The path is relative to the root of the input artifact for the test stage\. Typically, this path is similar to `app-release.apk`\.
 
-   1. In **Test type**, do one of the following:
-      + If you're using one of the built\-in Device Farm tests, choose the type of test configured in your Device Farm project\.
-      + If you aren't using one of the built\-in Device Farm tests, choose your type of test, and then in **Test file path**, enter the path of the test definition file\. The path is relative to the root of the input artifact for your test\.   
-![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-test-type.png)
+   1. In **TestType**, do one of the following:
+      + If you're using one of the built\-in Device Farm tests, enter the type of test configured in your Device Farm project, such as BUILTIN\_FUZZ\. In **FuzzEventCount**, enter a time in milliseconds, such as 6000\. In **FuzzEventThrottle**, enter a time in milliseconds, such as 50\.
+      + If you aren't using one of the built\-in Device Farm tests, enter your type of test, and then in **Test**, enter the path of the test definition file\. The path is relative to the root of the input artifact for your test\.
 
    1. In the remaining fields, provide the configuration that is appropriate for your test and application type\.
 
-   1. \(Optional\) In **Advanced**, provide configuration information for your test run\.  
-![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-advanced.png)
+   1. \(Optional\) In **Advanced**, provide configuration information for your test run\.
 
-   1. In **Input artifacts**, choose the input artifact that matches the output artifact of the stage that comes before the test stage\.   
-![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-input-artifact.png)
+   1. Choose **Save**\.
 
-      In the AWS CodePipeline console, you can find the name of the output artifact for each stage by hovering over the information icon in the pipeline diagram\. If your pipeline tests your app directly from the **Source** stage, choose **MyApp**\. If the pipeline includes a **Build** stage, choose **MyAppBuild**\.  
-![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-output-artifact.png)
+   1. On the stage you are editing, choose **Done**\. In the AWS CodePipeline pane, choose **Save**, and then choose **Save** on the warning message\.
 
-   1. At the bottom of the panel, choose **Add Action**\.
-
-   1. In the AWS CodePipeline pane, choose **Save pipeline change**, and then choose **Save change**\.
-
-   1. To submit your changes and start a pipeline build, choose **Release change**, and then choose **Release**\.
+   1. To submit your changes and start a pipeline build, choose **Release change**, and then choose **Release**\.  
+![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-android-final-view-pipeline.png)
