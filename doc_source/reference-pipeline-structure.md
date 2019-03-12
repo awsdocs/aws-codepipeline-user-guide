@@ -351,7 +351,8 @@ The following example shows a valid configuration for an Amazon ECS and CodeDepl
   "Image1ContainerName": "IMAGE1_NAME",
   "": "taskdef.json",
   "AppSpecTemplateArtifact": "SourceArtifact",
-  "AppSpecTemplatePath": "appspec.yaml"
+  "AppSpecTemplatePath": "appspec.yaml",
+  "TaskDefinitionTemplatePath": "pathname"
 }
 ```
 

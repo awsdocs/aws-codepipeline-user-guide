@@ -16,11 +16,13 @@ Amazon VPC is an AWS service that you can use to launch AWS resources in a virtu
 
 The endpoint is prepopulated with the region you specified when you signed in to AWS\. If you sign in to another region, the VPC endpoint is updated with the new region\.
 
-Although the following services integrate with CodePipeline, they are not supported for Amazon VPC:
+The following services integrate with CodePipeline, but they must communicate with the internet:
 + CodeCommit, which might be a source repository\.
 + GitHub webhooks\.
++ Active Directory\.
+
+The following services are enabled for VPC support, but they must communicate with the internet, and cannot be connected to CodePipeline using VPC endpoints:
 + Amazon ECR, which might be used with a custom Docker image\.
-+ Active Directory\. 
 + Amazon CloudWatch Events and Amazon CloudWatch Logs\. 
 
 ## Troubleshooting Your VPC Setup<a name="troubleshooting-vpc"></a>

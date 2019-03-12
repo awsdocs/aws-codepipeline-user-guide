@@ -38,6 +38,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Tutorial: Create a Pipeline with an Amazon ECR Source and ECS-to-CodeDeploy Deployment](tutorials-ecs-ecr-codedeploy.md)
    + [Tutorial: Create a Pipeline That Deploys an Amazon Alexa Skill](tutorials-alexa-skills-kit.md)
    + [Tutorial: Create a Pipeline That Uses Amazon S3 as a Deployment Provider](tutorials-s3deploy.md)
+   + [Tutorial: Create a Pipeline That Publishes Your Serverless Application to the AWS Serverless Application Repository](tutorials-serverlessrepo-auto-publish.md)
 + [CodePipeline Best Practices and Use Cases](best-practices.md)
 + [Use CodePipeline with Amazon Virtual Private Cloud](vpc-support.md)
 + [Working with Pipelines in CodePipeline](pipelines.md)

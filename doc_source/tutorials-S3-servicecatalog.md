@@ -45,7 +45,7 @@ In this example, you upload the sample AWS CloudFormation template file for an A
 
 1. As an IT administrator, sign in to the AWS Service Catalog console, go to the **Products** page, and then choose **Upload new product**\.
 
-1. On the **Upload new product **page, complete the following:
+1. On the **Upload new product** page, complete the following:
 
    1. In **Product name**, enter the name you want to use for your new product\.
 
@@ -67,7 +67,7 @@ In this example, you upload the sample AWS CloudFormation template file for an A
 
    1. Choose **Next**\.
 
-1. On the **Review** page, verify that the information is correct, and then choose **Confirm and upload**\. 
+1. On the **Review** page, verify that the information is correct, and then choose **Create**\. 
 
 1. On the **Products** page, in the browser, copy the URL of your new product\. This contains the product ID\. Copy and retain this product ID\. You use it when you create your pipeline in CodePipeline\.
 
@@ -133,7 +133,7 @@ If you use a CodePipeline service role that was created before October 16 2018, 
 
    1. In **Deploy provider**, choose **AWS Service Catalog**\.
 
-   1. For deployment consiguration, choose **Provide deploy configuration in the console**\.  
+   1. For deployment configuration, choose **Enter deployment configuration**\.  
 ![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/deploy-servicecatalog-nofile.png)
 
    1. In **Product ID**, paste the product ID you copied from the AWS Service Catalog console\.
@@ -217,7 +217,7 @@ In this example, you upload the sample AWS CloudFormation template file for an A
        "ProductVersionDescription": "MyProductVersionDescription",
        "ProductType": "CLOUD_FORMATION_TEMPLATE",
        "Properties": {
-           "TemplateFilePath": "/sample_template.json"
+           "TemplateFilePath": "/S3_template.json"
        }
    }
    ```
@@ -234,7 +234,7 @@ In this example, you upload the sample AWS CloudFormation template file for an A
 
    1. In **Product name**, enter the name you want to use for your new product\.
 
-   1. In **Decription**, enter the product catalog description\. This description appears in the product listing to help the user choose the correct product\. 
+   1. In **Description**, enter the product catalog description\. This description appears in the product listing to help the user choose the correct product\. 
 
    1. In **Provided by**, enter the name of your IT department or administrator\.
 
@@ -256,7 +256,7 @@ In this example, you upload the sample AWS CloudFormation template file for an A
 
 1. On the **Products** page, in the browser, copy the URL of your new product\. This contains the product ID\. Copy and retain this product ID\. You use when you create your pipeline in CodePipeline\.
 
-   Here is the URLfor a product named `my-product`\. To extract the product ID, copy the value between the equals sign \(`=`\) and the ampersand \(`&`\)\. In this example, the product ID is `prod-example123456`\. 
+   Here is the URL for a product named `my-product`\. To extract the product ID, copy the value between the equals sign \(`=`\) and the ampersand \(`&`\)\. In this example, the product ID is `prod-example123456`\. 
 
    ```
    https://<region-URL>/servicecatalog/home?region=<region>#/admin-products?productCreated=prod-example123456&createdProductTitle=my-product
