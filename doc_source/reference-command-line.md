@@ -21,7 +21,7 @@ To begin learning how to use the commands in the CodePipeline extension to the A
 + [Create a Pipeline \(CLI\)](pipelines-create.md#pipelines-create-cli)
 + [Delete a Pipeline \(CLI\)](pipelines-delete.md#pipelines-delete-cli)
 + [Disable or Enable Transitions \(CLI\)](transitions.md#transitions-disable-enable-cli)
-+ [View Pipeline Details and History \(CLI\)](pipelines-view.md#pipelines-view-cli)
++ [View Pipeline Details and History \(CLI\)](pipelines-view-cli.md)
 + [Retry Failed Actions \(CLI\)](actions-retry.md#actions-retry-cli)
 + [Start a Pipeline Manually \(CLI\)](pipelines-rerun-manually.md#pipelines-rerun-manually-cli)>
 + [Edit a Pipeline \(AWS CLI\)](pipelines-edit.md#pipelines-edit-cli)

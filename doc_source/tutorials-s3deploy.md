@@ -271,7 +271,7 @@ For more information, see [A Quick Look at Input and Output Artifacts](welcome.m
 
    1. In **Environment**, choose **Managed image**\. For **Operating system**, choose **Ubuntu**\.
 
-   1. For **Runtime**, choose **Node\.js**\. For **Runtime version**, choose **aws/codebuild/nodejs:10\.14\.1**\.
+   1. For **Runtime**, choose **Standard**\. For **Runtime version**, choose **aws/codebuild/standard:1\.0**\.
 
    1. In **Image version**, choose **Always use the latest image for this runtime version**\.
 

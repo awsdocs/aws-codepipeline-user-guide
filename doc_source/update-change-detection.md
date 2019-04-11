@@ -365,7 +365,7 @@ For more information, see [Creating a Trail with the AWS Command Line Interface]
    The following sample command uses `--event-pattern` to create a rule named `MyS3SourceRule`\.
 
    ```
-   aws events put-rule --name "MyS3SourceRule" --event-pattern "{\"source\":[\"aws.s3\"],\"detail-type\":[\"AWS API Call via CloudTrail\"],\"detail\":{\"eventSource\":[\"s3.amazonaws.com\"],\"eventName\":[\"PutObject\",\"CompleteMultiPartUpload\"],\"resources\":{\"ARN\":[\"arn:aws:s3:::myBucket/myFolder/file.zip\"]}}}
+   aws events put-rule --name "MyS3SourceRule" --event-pattern "{\"source\":[\"aws.s3\"],\"detail-type\":[\"AWS API Call via CloudTrail\"],\"detail\":{\"eventSource\":[\"s3.amazonaws.com\"],\"eventName\":[\"CopyObject\",\"PutObject\",\"CompleteMultiPartUpload\"],\"requestParameters\":{\"bucketName\":[\"my-bucket\"],\"key\":[\"my-key\"]}}}
    ```
 
 1. To add CodePipeline as a target, call the put\-targets command and include the `--rule` and `--targets` parameters\.
@@ -677,50 +677,50 @@ Resources:
 #### [ JSON ]
 
    ```
-           "AmazonCloudWatchEventRole": {
-               "Type": "AWS::IAM::Role",
-               "Properties": {
-                   "AssumeRolePolicyDocument": {
-                       "Version": "2012-10-17",
-                       "Statement": [
-                           {
-                               "Effect": "Allow",
-                               "Principal": {
-                                   "Service": [
-                                       "events.amazonaws.com"
-                                   ]
-                               },
-                               "Action": "sts:AssumeRole"
-                           }
-                       ]
-                   },
-                   "Path": "/",
-                   "Policies": [
+   "AmazonCloudWatchEventRole": {
+     "Type": "AWS::IAM::Role", 
+     "Properties": {
+       "AssumeRolePolicyDocument": {
+         "Version": "2012-10-17",
+         "Statement": [
+           {
+             "Effect": "Allow",
+             "Principal": {
+               "Service": [
+                 "events.amazonaws.com"
+               ]
+             },
+             "Action": "sts:AssumeRole"
+           }
+         ]
+       },
+       "Path": "/",
+       "Policies": [
+         {
+           "PolicyName": "cwe-pipeline-execution",
+           "PolicyDocument": {
+             "Version": "2012-10-17",
+             "Statement": [
+               {
+                 "Effect": "Allow",
+                 "Action": "codepipeline:StartPipelineExecution",
+                 "Resource": {
+                   "Fn::Join": [
+                     "",
+                     [
+                       "arn:aws:codepipeline:",
                        {
-                           "PolicyName": "cwe-pipeline-execution",
-                           "PolicyDocument": {
-                               "Version": "2012-10-17",
-                               "Statement": [
-                                   {
-                                       "Effect": "Allow",
-                                       "Action": "codepipeline:StartPipelineExecution",
-                                       "Resource": {
-                                           "Fn::Join": [
-                                               "",
-                                               [
-                                                   "arn:aws:codepipeline:",
-                                                   {
-                                                       "Ref": "AWS::Region"
-                                                   },
-                                                   ":",
-                                                   {
-                                                       "Ref": "AWS::AccountId"
-                                                   },
-                                                   ":",
-                                                   {
-                                                       "Ref": "AppPipeline"
-                                                   }
-                                               ]
+                         "Ref": "AWS::Region"
+                       },
+                       ":",
+                       {
+                         "Ref": "AWS::AccountId"
+                       },
+                       ":",
+                       {
+                         "Ref": "AppPipeline"
+                       }
+                     ]
    
    ...
    ```
@@ -765,82 +765,82 @@ Resources:
 #### [ JSON ]
 
    ```
-           "AmazonCloudWatchEventRule": {
-               "Type": "AWS::Events::Rule",
-               "Properties": {
-                   "EventPattern": {
-                       "source": [
-                           "aws.codecommit"
-                       ],
-                       "detail-type": [
-                           "CodeCommit Repository State Change"
-                       ],
-                       "resources": [
-                           {
-                               "Fn::Join": [
-                                   "",
-                                   [
-                                       "arn:aws:codecommit:",
-                                       {
-                                           "Ref": "AWS::Region"
-                                       },
-                                       ":",
-                                       {
-                                           "Ref": "AWS::AccountId"
-                                       },
-                                       ":",
-                                       {
-                                           "Ref": "RepositoryName"
-                                       }
-                                   ]
-                               ]
-                           }
-                       ],
-                       "detail": {
-                           "event": [
-                               "referenceCreated",
-                               "referenceUpdated"
-                           ],
-                           "referenceType": [
-                               "branch"
-                           ],
-                           "referenceName": [
-                               "master"
-                           ]
-                       }
-                   },
-                   "Targets": [
-                       {
-                           "Arn": {
-                               "Fn::Join": [
-                                   "",
-                                   [
-                                       "arn:aws:codepipeline:",
-                                       {
-                                           "Ref": "AWS::Region"
-                                       },
-                                       ":",
-                                       {
-                                           "Ref": "AWS::AccountId"
-                                       },
-                                       ":",
-                                       {
-                                           "Ref": "AppPipeline"
-                                       }
-                                   ]
-                               ]
-                           },
-                           "RoleArn": {
-                               "Fn::GetAtt": [
-                                   "AmazonCloudWatchEventRole",
-                                   "Arn"
-                               ]
-                           },
-                           "Id": "codepipeline-AppPipeline"
-                       }
-                   ]
-               }
+   "AmazonCloudWatchEventRule": {
+     "Type": "AWS::Events::Rule",
+     "Properties": {
+       "EventPattern": {
+         "source": [
+           "aws.codecommit"
+         ],
+         "detail-type": [
+           "CodeCommit Repository State Change"
+         ],
+         "resources": [
+           {
+             "Fn::Join": [
+               "",
+               [
+                 "arn:aws:codecommit:",
+                 {
+                   "Ref": "AWS::Region"
+                 },
+                 ":",
+                 {
+                   "Ref": "AWS::AccountId"
+                 },
+                 ":",
+                 {
+                   "Ref": "RepositoryName"
+                 }
+               ]
+             ]
+           }
+         ],
+         "detail": {
+           "event": [
+             "referenceCreated",
+             "referenceUpdated"
+           ],
+           "referenceType": [
+             "branch"
+           ],
+           "referenceName": [
+             "master"
+           ]
+         }
+       },
+       "Targets": [
+         {
+           "Arn": {
+             "Fn::Join": [
+               "",
+               [
+                 "arn:aws:codepipeline:",
+                 {
+                   "Ref": "AWS::Region"
+                 },
+                 ":",
+                 {
+                   "Ref": "AWS::AccountId"
+                 },
+                 ":",
+                 {
+                   "Ref": "AppPipeline"
+                 }
+               ]
+             ]
            },
+           "RoleArn": {
+             "Fn::GetAtt": [
+               "AmazonCloudWatchEventRole",
+               "Arn"
+             ]
+           },
+           "Id": "codepipeline-AppPipeline"
+         }
+       ]
+     }
+   },
    ```
 
 ------
@@ -887,34 +887,34 @@ In many cases, the `PollForSourceChanges` parameter defaults to true when you cr
 
   ```
   {
-                          "Name": "Source",
-                          "Actions": [
-                              {
-                                  "Name": "SourceAction",
-                                  "ActionTypeId": {
-                                      "Category": "Source",
-                                      "Owner": "AWS",
-                                      "Version": 1,
-                                      "Provider": "CodeCommit"
-                                  },
-                                  "OutputArtifacts": [
-                                      {
-                                          "Name": "SourceOutput"
-                                      }
-                                  ],
-                                  "Configuration": {
-                                      "BranchName": {
-                                          "Ref": "BranchName"
-                                      },
-                                      "RepositoryName": {
-                                          "Ref": "RepositoryName"
-                                      },
-                                      "PollForSourceChanges": false
-                                  },
-                                  "RunOrder": 1
-                              }
-                          ]
-                      },
+    "Name": "Source", 
+    "Actions": [
+      {
+        "Name": "SourceAction",
+        "ActionTypeId": {
+          "Category": "Source",
+          "Owner": "AWS",
+          "Version": 1,
+          "Provider": "CodeCommit"
+        },
+        "OutputArtifacts": [
+          {
+            "Name": "SourceOutput"
+          }
+        ],
+        "Configuration": {
+          "BranchName": {
+            "Ref": "BranchName"
+          },
+          "RepositoryName": {
+            "Ref": "RepositoryName"
+          },
+          "PollForSourceChanges": false
+        },
+        "RunOrder": 1
+      }
+    ]
+  },
   ```
 
 ------
@@ -1314,59 +1314,58 @@ The `Configuration` property in the source stage called `PollForSourceChanges`\.
 #### [ JSON ]
 
    ```
-           "AmazonCloudWatchEventRole": {
-               "Type": "AWS::IAM::Role",
-               "Properties": {
-                   "AssumeRolePolicyDocument": {
-                       "Version": "2012-10-17",
-                       "Statement": [
-                           {
-                               "Effect": "Allow",
-                               "Principal": {
-                                   "Service": [
-                                       "events.amazonaws.com"
-                                   ]
-                               },
-                               "Action": "sts:AssumeRole"
-                           }
+     "AmazonCloudWatchEventRole": {
+       "Type": "AWS::IAM::Role",
+       "Properties": {
+         "AssumeRolePolicyDocument": {
+           "Version": "2012-10-17",
+           "Statement": [
+             {
+               "Effect": "Allow",
+               "Principal": {
+                 "Service": [
+                   "events.amazonaws.com"
+                 ]
+               },
+               "Action": "sts:AssumeRole"
+             }
+           ]
+         },
+         "Path": "/",
+         "Policies": [
+           {
+             "PolicyName": "cwe-pipeline-execution",
+             "PolicyDocument": {
+               "Version": "2012-10-17",
+               "Statement": [
+                 {
+                   "Effect": "Allow",
+                   "Action": "codepipeline:StartPipelineExecution",
+                   "Resource": {
+                     "Fn::Join": [
+                       "",
+                       [
+                         "arn:aws:codepipeline:",
+                         {
+                           "Ref": "AWS::Region"
+                         },
+                         ":",
+                         {
+                           "Ref": "AWS::AccountId"
+                         },
+                         ":",
+                         {
+                           "Ref": "AppPipeline"
+                         }
                        ]
-                   },
-                   "Path": "/",
-                   "Policies": [
-                       {
-                           "PolicyName": "cwe-pipeline-execution",
-                           "PolicyDocument": {
-                               "Version": "2012-10-17",
-                               "Statement": [
-                                   {
-                                       "Effect": "Allow",
-                                       "Action": "codepipeline:StartPipelineExecution",
-                                       "Resource": {
-                                           "Fn::Join": [
-                                               "",
-                                               [
-                                                   "arn:aws:codepipeline:",
-                                                   {
-                                                       "Ref": "AWS::Region"
-                                                   },
-                                                   ":",
-                                                   {
-                                                       "Ref": "AWS::AccountId"
-                                                   },
-                                                   ":",
-                                                   {
-                                                       "Ref": "AppPipeline"
-                                                   }
-                                               ]
-                                           ]
-   
+                     ]
    
    ...
    ```
 
 ------
 
-1. Use the `AWS::Events::Rule` AWS CloudFormation resource to add a CloudWatch Events rule\. This event pattern creates an event that monitors `PutObject` and `CompleteMultipartUpload` on your Amazon S3 source bucket\. In addition, include a target of your pipeline\. When `PutObject` or `CompleteMultipartUpload` occurs, this rule invokes `StartPipelineExecution` on your target pipeline\.
+1. Use the `AWS::Events::Rule` AWS CloudFormation resource to add a CloudWatch Events rule\. This event pattern creates an event that monitors `CopyObject`, `PutObject` and `CompleteMultipartUpload` on your Amazon S3 source bucket\. In addition, include a target of your pipeline\. When `CopyObject`, `PutObject`, or `CompleteMultipartUpload` occurs, this rule invokes `StartPipelineExecution` on your target pipeline\.
 
    **Why am I making this change?** Adding the `AWS::Events::Rule` resource enables AWS CloudFormation to create the event\. This resource is added to your AWS CloudFormation stack\.
 
@@ -1386,11 +1385,14 @@ The `Configuration` property in the source stage called `PollForSourceChanges`\.
              eventSource:
                - s3.amazonaws.com
              eventName:
+               - CopyObject
                - PutObject
                - CompleteMultipartUpload
-             resources:
-               ARN:
-                 - !Join [ '', [ !GetAtt SourceBucket.Arn, '/', !Ref SourceObjectKey ] ]
+             requestParameters:
+               bucketName:
+                 - !Ref SourceBucket
+               key:
+                 - !Ref SourceObjectKey
          Targets:
            -
              Arn:
@@ -1406,81 +1408,72 @@ The `Configuration` property in the source stage called `PollForSourceChanges`\.
 #### [ JSON ]
 
    ```
-           "AmazonCloudWatchEventRule": {
-               "Type": "AWS::Events::Rule",
-               "Properties": {
-                   "EventPattern": {
-                       "source": [
-                           "aws.s3"
-                       ],
-                       "detail-type": [
-                           "AWS API Call via CloudTrail"
-                       ],
-                       "detail": {
-                           "eventSource": [
-                               "s3.amazonaws.com"
-                           ],
-                           "eventName": [
-                               "PutObject",
-                               "CompleteMultipartUpload"
-                           ],
-                           "resources": {
-                               "ARN": [
-                                   {
-                                       "Fn::Join": [
-                                           "",
-                                           [
-                                               {
-                                                   "Fn::GetAtt": [
-                                                       "SourceBucket",
-                                                       "Arn"
-                                                   ]
-                                               },
-                                               "/",
-                                               {
-                                                   "Ref": "SourceObjectKey"
-                                               }
-                                           ]
-                                       ]
-                                   }
-                               ]
-                           }
-                       }
-                   },
-                   "Targets": [
-                       {
-                           "Arn": {
-                               "Fn::Join": [
-                                   "",
-                                   [
-                                       "arn:aws:codepipeline:",
-                                       {
-                                           "Ref": "AWS::Region"
-                                       },
-                                       ":",
-                                       {
-                                           "Ref": "AWS::AccountId"
-                                       },
-                                       ":",
-                                       {
-                                           "Ref": "AppPipeline"
-                                       }
-                                   ]
-                               ]
-                           },
-                           "RoleArn": {
-                               "Fn::GetAtt": [
-                                   "AmazonCloudWatchEventRole",
-                                   "Arn"
-                               ]
-                           },
-                           "Id": "codepipeline-AppPipeline"
-                       }
-                   ]
-               }
+     "AmazonCloudWatchEventRule": {
+       "Type": "AWS::Events::Rule",
+       "Properties": {
+         "EventPattern": {
+           "source": [
+             "aws.s3"
+           ],
+           "detail-type": [
+             "AWS API Call via CloudTrail"
+           ],
+           "detail": {
+             "eventSource": [
+               "s3.amazonaws.com"
+             ],
+             "eventName": [
+               "CopyObject",
+               "PutObject",
+               "CompleteMultipartUpload"
+             ],
+             "requestParameters": {
+               "bucketName": [
+                 {
+                   "Ref": "SourceBucket"
+                 }
+               ],
+               "key": [
+                 {
+                   "Ref": "SourceObjectKey"
+                 }
+               ]
+             }
            }
-       },
-   
+         },
+         "Targets": [
+           {
+             "Arn": {
+               "Fn::Join": [
+                 "",
+                 [
+                   "arn:aws:codepipeline:",
+                   {
+                     "Ref": "AWS::Region"
+                   },
+                   ":",
+                   {
+                     "Ref": "AWS::AccountId"
+                   },
+                   ":",
+                   {
+                     "Ref": "AppPipeline"
+                   }
+                 ]
+               ]
+             },
+             "RoleArn": {
+               "Fn::GetAtt": [
+                 "AmazonCloudWatchEventRole",
+                 "Arn"
+               ]
+             },
+             "Id": "codepipeline-AppPipeline"
+           }
+         ]
+       }
+     }
+   },
    
    ...
    ```
@@ -1505,15 +1498,14 @@ The `Configuration` property in the source stage called `PollForSourceChanges`\.
 #### [ JSON ]
 
    ```
-       "Outputs" : {
-           "SourceBucketARN" : {
-               "Description" : "S3 bucket ARN that Cloudtrail will use",
-               "Value" : { "Fn::GetAtt": ["SourceBucket", "Arn"] },
-               "Export" : {
-                   "Name" : "SourceBucketARN"
-               }
-           }
-   
+     "Outputs" : {
+       "SourceBucketARN" : {
+         "Description" : "S3 bucket ARN that Cloudtrail will use",
+         "Value" : { "Fn::GetAtt": ["SourceBucket", "Arn"] },
+         "Export" : {
+           "Name" : "SourceBucketARN"
+         }
+       }
    
    ...
    ```
@@ -1561,31 +1553,30 @@ When you create a pipeline with this method, the `PollForSourceChanges` paramete
 #### [ JSON ]
 
   ```
-   
-                   {
-                                  "Name": "SourceAction",
-                                  "ActionTypeId": {
-                                      "Category": "Source",
-                                      "Owner": "AWS",
-                                      "Version": 1,
-                                      "Provider": "S3"
-                                  },
-                                  "OutputArtifacts": [
-                                      {
-                                          "Name": "SourceOutput"
-                                      }
-                                  ],
-                                  "Configuration": {
-                                      "S3Bucket": {
-                                          "Ref": "SourceBucket"
-                                      },
-                                      "S3ObjectKey": {
-                                          "Ref": "SourceObjectKey"
-                                      },
-                                      "PollForSourceChanges": false
-                                  },
-                                  "RunOrder": 1
-                              }
+   {
+      "Name": "SourceAction",
+      "ActionTypeId": {
+        "Category": "Source",
+        "Owner": "AWS",
+        "Version": 1,
+        "Provider": "S3"
+      },
+      "OutputArtifacts": [
+        {
+          "Name": "SourceOutput"
+        }
+      ],
+      "Configuration": {
+        "S3Bucket": {
+          "Ref": "SourceBucket"
+        },
+        "S3ObjectKey": {
+          "Ref": "SourceObjectKey"
+        },
+        "PollForSourceChanges": false
+      },
+      "RunOrder": 1
+    }
   ```
 
 ------<a name="proc-cfn-event-s3-createtrail"></a>
@@ -1667,123 +1658,122 @@ When you create a pipeline with this method, the `PollForSourceChanges` paramete
 
   ```
   {
-      "Parameters": {
-          "SourceObjectKey": {
-              "Description": "S3 source artifact",
-              "Type": "String",
-              "Default": "SampleApp_Linux.zip"
-          }
-      },
-      "Resources": {
-          "AWSCloudTrailBucket": {
-              "Type": "AWS::S3::Bucket",
-              "DeletionPolicy": "Retain"
-          },
-          "AWSCloudTrailBucketPolicy": {
-              "Type": "AWS::S3::BucketPolicy",
-              "Properties": {
-                  "Bucket": {
-                      "Ref": "AWSCloudTrailBucket"
-                  },
-                  "PolicyDocument": {
-                      "Version": "2012-10-17",
-                      "Statement": [
-                          {
-                              "Sid": "AWSCloudTrailAclCheck",
-                              "Effect": "Allow",
-                              "Principal": {
-                                  "Service": [
-                                      "cloudtrail.amazonaws.com"
-                                  ]
-                              },
-                              "Action": "s3:GetBucketAcl",
-                              "Resource": {
-                                  "Fn::GetAtt": [
-                                      "AWSCloudTrailBucket",
-                                      "Arn"
-                                  ]
-                              }
-                          },
-                          {
-                              "Sid": "AWSCloudTrailWrite",
-                              "Effect": "Allow",
-                              "Principal": {
-                                  "Service": [
-                                      "cloudtrail.amazonaws.com"
-                                  ]
-                              },
-                              "Action": "s3:PutObject",
-                              "Resource": {
-                                  "Fn::Join": [
-                                      "",
-                                      [
-                                          {
-                                              "Fn::GetAtt": [
-                                                  "AWSCloudTrailBucket",
-                                                  "Arn"
-                                              ]
-                                          },
-                                          "/AWSLogs/",
-                                          {
-                                              "Ref": "AWS::AccountId"
-                                          },
-                                          "/*"
-                                      ]
-                                  ]
-                              },
-                              "Condition": {
-                                  "StringEquals": {
-                                      "s3:x-amz-acl": "bucket-owner-full-control"
-                                  }
-                              }
-                          }
-                      ]
-                  }
-              }
-          },
-          "AwsCloudTrail": {
-              "DependsOn": [
-                  "AWSCloudTrailBucketPolicy"
-              ],
-              "Type": "AWS::CloudTrail::Trail",
-              "Properties": {
-                  "S3BucketName": {
-                      "Ref": "AWSCloudTrailBucket"
-                  },
-                  "EventSelectors": [
-                      {
-                          "DataResources": [
-                              {
-                                  "Type": "AWS::S3::Object",
-                                  "Values": [
-                                      {
-                                          "Fn::Join": [
-                                              "",
-                                              [
-                                                  {
-                                                      "Fn::ImportValue": "SourceBucketARN"
-                                                  },
-                                                  "/",
-                                                  {
-                                                      "Ref": "SourceObjectKey"
-                                                  }
-                                              ]
-                                          ]
-                                      }
-                                  ]
-                              }
-                          ],
-                          "ReadWriteType": "WriteOnly"
-                      }
-                  ],
-                  "IncludeGlobalServiceEvents": true,
-                  "IsLogging": true,
-                  "IsMultiRegionTrail": true
-              }
-          }
+    "Parameters": {
+      "SourceObjectKey": {
+        "Description": "S3 source artifact",
+        "Type": "String",
+        "Default": "SampleApp_Linux.zip"
       }
+    },
+    "Resources": {
+      "AWSCloudTrailBucket": {
+        "Type": "AWS::S3::Bucket",
+          "DeletionPolicy": "Retain"
+      },
+      "AWSCloudTrailBucketPolicy": {
+        "Type": "AWS::S3::BucketPolicy",
+        "Properties": {
+          "Bucket": {
+            "Ref": "AWSCloudTrailBucket"
+          },
+          "PolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Sid": "AWSCloudTrailAclCheck",
+                "Effect": "Allow",
+                "Principal": {
+                  "Service": [
+                    "cloudtrail.amazonaws.com"
+                  ]
+                },
+                "Action": "s3:GetBucketAcl",
+                "Resource": {
+                  "Fn::GetAtt": [
+                    "AWSCloudTrailBucket",
+                    "Arn"
+                  ]
+                }
+              },
+              {
+                "Sid": "AWSCloudTrailWrite",
+                "Effect": "Allow",
+                "Principal": {
+                  "Service": [
+                    "cloudtrail.amazonaws.com"
+                  ]
+                },
+                "Action": "s3:PutObject",
+                "Resource": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "AWSCloudTrailBucket",
+                          "Arn"
+                        ]
+                      },
+                      "/AWSLogs/",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      "/*"
+                    ]
+                  ]
+                },
+                "Condition": {
+                  "StringEquals": {
+                    "s3:x-amz-acl": "bucket-owner-full-control"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "AwsCloudTrail": {
+        "DependsOn": [
+          "AWSCloudTrailBucketPolicy"
+        ],
+        "Type": "AWS::CloudTrail::Trail",
+        "Properties": {
+          "S3BucketName": {
+            "Ref": "AWSCloudTrailBucket"
+          },
+          "EventSelectors": [
+            {
+              "DataResources": [
+                {
+                  "Type": "AWS::S3::Object",
+                  "Values": [
+                    {
+                      "Fn::Join": [
+                        "",
+                        [
+                          {
+                            "Fn::ImportValue": "SourceBucketARN"
+                          },
+                          "/",
+                          {
+                            "Ref": "SourceObjectKey"
+                          }
+                        ]
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "ReadWriteType": "WriteOnly"
+            }
+          ],
+          "IncludeGlobalServiceEvents": true,
+          "IsLogging": true,
+          "IsMultiRegionTrail": true
+        }
+      }
+    }
   }
-  
   
   ...
   ```
@@ -2538,24 +2528,23 @@ When you use the CLI or AWS CloudFormation to create a pipeline and add a webhoo
 
    ```
    {
-       "Parameters": {
-           "BranchName": {
-               "Description": "GitHub branch name",
-               "Type": "String",
-               "Default": "master"
-           },
-           "GitHubOwner": {
-               "Type": "String"
-           },
-           "GitHubSecret": {
-               "Type": "String",
-               "NoEcho": true
-           },
-           "GitHubOAuthToken": {
-               "Type": "String",
-               "NoEcho": true
-           },
-   
+     "Parameters": {
+       "BranchName": {
+         "Description": "GitHub branch name",
+           "Type": "String",
+             "Default": "master"
+       },
+       "GitHubOwner": {
+         "Type": "String"
+       },
+       "GitHubSecret": {
+         "Type": "String",
+         "NoEcho": true
+       },
+       "GitHubOAuthToken": {
+         "Type": "String",
+         "NoEcho": true
+       },
    
    ...
    ```
@@ -2600,36 +2589,35 @@ The `TargetAction` you specify must match the `Name` property of the source acti
 #### [ JSON ]
 
    ```
-           "AppPipelineWebhook": {
-               "Type": "AWS::CodePipeline::Webhook",
-               "Properties": {
-                   "Authentication": "GITHUB_HMAC",
-                   "AuthenticationConfiguration": {
-                       "SecretToken": {
-                           "Ref": "GitHubSecret"
-                       }
-                   },
-                   "Filters": [
-                       {
-                           "JsonPath": "$.ref",
-                           "MatchEquals": "refs/heads/{Branch}"
-                       }
-                   ],
-                   "TargetPipeline": {
-                       "Ref": "AppPipeline"
-                   },
-                   "TargetAction": "SourceAction",
-                   "Name": "AppPipelineWebhook",
-                   "TargetPipelineVersion": {
-                       "Fn::GetAtt": [
-                           "AppPipeline",
-                           "Version"
-                       ]
-                   },
-                   "RegisterWithThirdParty": true
-               }
-           },
-   
+     "AppPipelineWebhook": {
+       "Type": "AWS::CodePipeline::Webhook",
+       "Properties": {
+         "Authentication": "GITHUB_HMAC",
+         "AuthenticationConfiguration": {
+           "SecretToken": {
+             "Ref": "GitHubSecret"
+           }
+         },
+         "Filters": [
+           {
+             "JsonPath": "$.ref",
+             "MatchEquals": "refs/heads/{Branch}"
+           }
+         ],
+         "TargetPipeline": {
+           "Ref": "AppPipeline"
+         },
+         "TargetAction": "SourceAction",
+         "Name": "AppPipelineWebhook",
+         "TargetPipelineVersion": {
+           "Fn::GetAtt": [
+             "AppPipeline",
+             "Version"
+           ]
+         },
+         "RegisterWithThirdParty": true
+       }
+     },
    
    ...
    ```
@@ -2680,38 +2668,38 @@ When you create a pipeline with this method, the `PollForSourceChanges` paramete
 
   ```
    {
-                          "Name": "Source",
-                          "Actions": [
-                              {
-                                  "Name": "SourceAction",
-                                  "ActionTypeId": {
-                                      "Category": "Source",
-                                      "Owner": "ThirdParty",
-                                      "Version": 1,
-                                      "Provider": "GitHub"
-                                  },
-                                  "OutputArtifacts": [
-                                      {
-                                          "Name": "SourceOutput"
-                                      }
-                                  ],
-                                  "Configuration": {
-                                      "Owner": {
-                                          "Ref": "GitHubOwner"
-                                      },
-                                      "Repo": {
-                                          "Ref": "RepositoryName"
-                                      },
-                                      "Branch": {
-                                          "Ref": "BranchName"
-                                      },
-                                      "OAuthToken": {
-                                          "Ref": "GitHubOAuthToken"
-                                      },
-                                      "PollForSourceChanges": false
-                                  },
-                                  "RunOrder": 1
-                              }
+      "Name": "Source",
+      "Actions": [
+        {
+          "Name": "SourceAction",
+          "ActionTypeId": {
+            "Category": "Source",
+            "Owner": "ThirdParty",
+            "Version": 1,
+            "Provider": "GitHub"
+          },
+          "OutputArtifacts": [
+            {
+              "Name": "SourceOutput"
+            }
+          ],
+          "Configuration": {
+            "Owner": {
+              "Ref": "GitHubOwner"
+            },
+            "Repo": {
+              "Ref": "RepositoryName"
+            },
+            "Branch": {
+              "Ref": "BranchName"
+            },
+            "OAuthToken": {
+              "Ref": "GitHubOAuthToken"
+            },
+            "PollForSourceChanges": false
+          },
+          "RunOrder": 1
+        }
   ```
 
 ------

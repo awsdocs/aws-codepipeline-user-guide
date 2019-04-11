@@ -264,6 +264,7 @@ The following example shows the action configuration returned for a source actio
 
 ```
 "configuration": {
+  "ImageTag": "latest",
   "RepositoryName": "my-image-repo"
 },
 ```

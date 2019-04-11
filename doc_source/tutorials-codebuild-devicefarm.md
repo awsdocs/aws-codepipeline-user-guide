@@ -97,7 +97,9 @@ For more information, see [A Quick Look at Input and Output Artifacts](welcome.m
 
    1. In **Environment image**, choose **Managed image**\. For **Operating system**, choose **Ubuntu**\.
 
-   1. For **Runtime**, choose **Android**\. For **Runtime version**, choose **aws/codebuild/android\-java\-8:26\.1\.1**\. CodeBuild uses this OS image, which has Android Studio installed, to build your app\.
+   1. For **Runtime**, choose **Standard**\. For **Runtime version**, choose **aws/codebuild/standard:1\.0**\.
+
+      CodeBuild uses this OS image, which has Android Studio installed, to build your app\.
 
    1. For **Service role**, choose your existing CodeBuild service role or create a new one\.
 

@@ -134,9 +134,11 @@ For the purposes of this tutorial, you can use the following unrestricted policy
 
 1. Leave the rest of the items on the **Step 3: Configure Instance Details** page unchanged\. Choose **Next: Add Storage**, leave the **Step 4: Add Storage** page unchanged, and then choose **Next: Add Tags**\.
 
-1. On the **Add Tags** page, with **Name** displayed in the **Key** box, type `MyCodePipelineDotNetDemo` in the **Value** box, and then choose **Next: Configure Security Group**\.
+1. On the **Add Tags** page, with **Name** displayed in the **Key** box, type `MyCodePipelineDemo` in the **Value** box, and then choose **Next: Configure Security Group**\.
 **Important**  
 The **Key** and **Value** boxes are case\-sensitive\.
+
+1. On the **Configure Security Group** page, allow port 80 communication so you can access the public instance endpoint\.
 
 1. Choose **Review and Launch**\.
 

@@ -34,4 +34,4 @@ By default, a pipeline starts automatically when it is created and any time a ch
    }
    ```
 **Note**  
-After you have started the pipeline, you can monitor its progress in the CodePipeline console or by running the get\-pipeline\-state command\. For more information, see [View Pipeline Details and History \(Console\)](pipelines-view.md#pipelines-view-console) and [View Pipeline Details and History \(CLI\)](pipelines-view.md#pipelines-view-cli)\.
+After you have started the pipeline, you can monitor its progress in the CodePipeline console or by running the get\-pipeline\-state command\. For more information, see [View Pipeline Details and History \(Console\)](pipelines-view-console.md) and [View Pipeline Details and History \(CLI\)](pipelines-view-cli.md)\.

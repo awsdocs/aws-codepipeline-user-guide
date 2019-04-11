@@ -111,9 +111,9 @@ To use AWS CloudFormation to create a rule, use the template snippet as shown he
              eventName:
                - PutImage
              requestParameters:
-               - repositoryName
+               repositoryName:
                  - my-image-repo
-               - imageTag
+               imageTag:
                  - latest
          Targets:
            -
@@ -139,10 +139,10 @@ To use AWS CloudFormation to create a rule, use the template snippet as shown he
                        "eventName": [
                            "PutImage"
                        ],
-                       "requestParameters": [
-                           "repositoryName - my-image-repo",
-                           "imageTag - latest"
-                       ]
+                       "requestParameters": {
+                           "repositoryName": [ "my-image-repo" ],
+                           "imageTag": [ "latest" ]
+                       }
                    }
                },
                "Targets": [

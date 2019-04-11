@@ -13,6 +13,7 @@ The following information might help you troubleshoot common issues in AWS CodeP
 + [Deployment Error: A ZIP file that contains a WAR file is deployed successfully to AWS Elastic Beanstalk, but the application URL reports a 404 Not Found error](#troubleshooting-aeb2)
 + [File permissions are not retained on source files from GitHub when ZIP does not preserve external attributes](#troubleshooting-file-permissions)
 + [The console I'm viewing doesn't seem to match the procedures in this guide](#troubleshooting-console)
++ [Pipeline artifact folder names appear to be truncated](#troubleshooting-truncated-artifacts)
 + [Need Help with a Different Issue?](#troubleshooting-other)
 
 ## Pipeline Error: A pipeline configured with AWS Elastic Beanstalk returns an error message: "Deployment failed\. The provided role does not have sufficient permissions: Service:AmazonElasticLoadBalancing"<a name="troubleshooting-aeb1"></a>
@@ -190,6 +191,14 @@ To use the CodePipeline console to confirm the name of the build input artifact,
 **Problem:** When you view the content in this user guide, the procedures and images show a console that does not look like the one you are using\.
 
 **Possible fixes:** The new console design is the default experience, but if you chose to use the prior version of the console at some point, that choice will persist in subsequent sessions\. The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find minor discrepancies, but the concepts and basic procedures in this guide still apply\.
+
+## Pipeline artifact folder names appear to be truncated<a name="troubleshooting-truncated-artifacts"></a>
+
+**Problem:** When you view pipeline artifact names in CodePipeline, the names appear to be truncated\. This can make the names appear to be similar or seem to no longer contain the entire pipeline name\.
+
+**Explanation:** CodePipeline truncates artifact names to ensure that the full Amazon S3 path does not exceed policy size limits when CodePipeline generates temporary credentials for job workers\.
+
+Even though the artifact name appears to be truncated, CodePipeline maps to the artifact bucket in a way that is not affected by artifacts with truncated names\. The pipeline can function normally\. This is not an issue with the folder or artifacts\. There is a 100\-character limit to pipeline names\. Although the artifact folder name might appear to be shortened, it is still unique for your pipeline\.
 
 ## Need Help with a Different Issue?<a name="troubleshooting-other"></a>
 

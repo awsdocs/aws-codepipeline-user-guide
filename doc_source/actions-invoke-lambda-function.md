@@ -248,7 +248,7 @@ You can also choose to add your Lambda action to an existing stage\. For demonst
 **Note**  
 This topic uses an IP address, but in a real\-world scenario, you could provide your registered website name instead \(for example, **http://*www\.example\.com***\)\. For more information about event data and handlers in AWS Lambda, see [Programming Model](https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html) in the *AWS Lambda Developer Guide*\.
 
-1. On the **Edit** page, choose **Save pipeline changes**\.
+1. On the **Edit action** page, choose **Save**\.
 
 ## Step 4: Test the Pipeline with the Lambda function<a name="actions-invoke-lambda-function-test-function"></a>
 
@@ -320,7 +320,11 @@ The following example shows a sample JSON event sent to Lambda by CodePipeline\.
  3rrszlaEXAMPLE=",
                 "accessKeyId": "AKIAIOSFODNN7EXAMPLE"
             },
-            "continuationToken": "A continuation token if continuing job"
+            "continuationToken": "A continuation token if continuing job",
+            "encryptionKey": { 
+              "id": "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab",
+              "type": "KMS"
+            }
         }
     }
 }

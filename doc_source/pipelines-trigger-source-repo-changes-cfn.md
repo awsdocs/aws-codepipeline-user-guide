@@ -43,50 +43,50 @@ To use AWS CloudFormation to create a rule, update your template as shown here\.
 #### [ JSON ]
 
    ```
-           "AmazonCloudWatchEventRole": {
-               "Type": "AWS::IAM::Role",
-               "Properties": {
-                   "AssumeRolePolicyDocument": {
-                       "Version": "2012-10-17",
-                       "Statement": [
-                           {
-                               "Effect": "Allow",
-                               "Principal": {
-                                   "Service": [
-                                       "events.amazonaws.com"
-                                   ]
-                               },
-                               "Action": "sts:AssumeRole"
-                           }
-                       ]
-                   },
-                   "Path": "/",
-                   "Policies": [
+   "AmazonCloudWatchEventRole": {
+     "Type": "AWS::IAM::Role", 
+     "Properties": {
+       "AssumeRolePolicyDocument": {
+         "Version": "2012-10-17",
+         "Statement": [
+           {
+             "Effect": "Allow",
+             "Principal": {
+               "Service": [
+                 "events.amazonaws.com"
+               ]
+             },
+             "Action": "sts:AssumeRole"
+           }
+         ]
+       },
+       "Path": "/",
+       "Policies": [
+         {
+           "PolicyName": "cwe-pipeline-execution",
+           "PolicyDocument": {
+             "Version": "2012-10-17",
+             "Statement": [
+               {
+                 "Effect": "Allow",
+                 "Action": "codepipeline:StartPipelineExecution",
+                 "Resource": {
+                   "Fn::Join": [
+                     "",
+                     [
+                       "arn:aws:codepipeline:",
                        {
-                           "PolicyName": "cwe-pipeline-execution",
-                           "PolicyDocument": {
-                               "Version": "2012-10-17",
-                               "Statement": [
-                                   {
-                                       "Effect": "Allow",
-                                       "Action": "codepipeline:StartPipelineExecution",
-                                       "Resource": {
-                                           "Fn::Join": [
-                                               "",
-                                               [
-                                                   "arn:aws:codepipeline:",
-                                                   {
-                                                       "Ref": "AWS::Region"
-                                                   },
-                                                   ":",
-                                                   {
-                                                       "Ref": "AWS::AccountId"
-                                                   },
-                                                   ":",
-                                                   {
-                                                       "Ref": "AppPipeline"
-                                                   }
-                                               ]
+                         "Ref": "AWS::Region"
+                       },
+                       ":",
+                       {
+                         "Ref": "AWS::AccountId"
+                       },
+                       ":",
+                       {
+                         "Ref": "AppPipeline"
+                       }
+                     ]
    
    ...
    ```
@@ -131,82 +131,82 @@ To use AWS CloudFormation to create a rule, update your template as shown here\.
 #### [ JSON ]
 
    ```
-           "AmazonCloudWatchEventRule": {
-               "Type": "AWS::Events::Rule",
-               "Properties": {
-                   "EventPattern": {
-                       "source": [
-                           "aws.codecommit"
-                       ],
-                       "detail-type": [
-                           "CodeCommit Repository State Change"
-                       ],
-                       "resources": [
-                           {
-                               "Fn::Join": [
-                                   "",
-                                   [
-                                       "arn:aws:codecommit:",
-                                       {
-                                           "Ref": "AWS::Region"
-                                       },
-                                       ":",
-                                       {
-                                           "Ref": "AWS::AccountId"
-                                       },
-                                       ":",
-                                       {
-                                           "Ref": "RepositoryName"
-                                       }
-                                   ]
-                               ]
-                           }
-                       ],
-                       "detail": {
-                           "event": [
-                               "referenceCreated",
-                               "referenceUpdated"
-                           ],
-                           "referenceType": [
-                               "branch"
-                           ],
-                           "referenceName": [
-                               "master"
-                           ]
-                       }
-                   },
-                   "Targets": [
-                       {
-                           "Arn": {
-                               "Fn::Join": [
-                                   "",
-                                   [
-                                       "arn:aws:codepipeline:",
-                                       {
-                                           "Ref": "AWS::Region"
-                                       },
-                                       ":",
-                                       {
-                                           "Ref": "AWS::AccountId"
-                                       },
-                                       ":",
-                                       {
-                                           "Ref": "AppPipeline"
-                                       }
-                                   ]
-                               ]
-                           },
-                           "RoleArn": {
-                               "Fn::GetAtt": [
-                                   "AmazonCloudWatchEventRole",
-                                   "Arn"
-                               ]
-                           },
-                           "Id": "codepipeline-AppPipeline"
-                       }
-                   ]
-               }
+   "AmazonCloudWatchEventRule": {
+     "Type": "AWS::Events::Rule",
+     "Properties": {
+       "EventPattern": {
+         "source": [
+           "aws.codecommit"
+         ],
+         "detail-type": [
+           "CodeCommit Repository State Change"
+         ],
+         "resources": [
+           {
+             "Fn::Join": [
+               "",
+               [
+                 "arn:aws:codecommit:",
+                 {
+                   "Ref": "AWS::Region"
+                 },
+                 ":",
+                 {
+                   "Ref": "AWS::AccountId"
+                 },
+                 ":",
+                 {
+                   "Ref": "RepositoryName"
+                 }
+               ]
+             ]
+           }
+         ],
+         "detail": {
+           "event": [
+             "referenceCreated",
+             "referenceUpdated"
+           ],
+           "referenceType": [
+             "branch"
+           ],
+           "referenceName": [
+             "master"
+           ]
+         }
+       },
+       "Targets": [
+         {
+           "Arn": {
+             "Fn::Join": [
+               "",
+               [
+                 "arn:aws:codepipeline:",
+                 {
+                   "Ref": "AWS::Region"
+                 },
+                 ":",
+                 {
+                   "Ref": "AWS::AccountId"
+                 },
+                 ":",
+                 {
+                   "Ref": "AppPipeline"
+                 }
+               ]
+             ]
            },
+           "RoleArn": {
+             "Fn::GetAtt": [
+               "AmazonCloudWatchEventRole",
+               "Arn"
+             ]
+           },
+           "Id": "codepipeline-AppPipeline"
+         }
+       ]
+     }
+   },
    ```
 
 ------
@@ -253,34 +253,34 @@ In many cases, the `PollForSourceChanges` parameter defaults to true when you cr
 
   ```
   {
-                          "Name": "Source",
-                          "Actions": [
-                              {
-                                  "Name": "SourceAction",
-                                  "ActionTypeId": {
-                                      "Category": "Source",
-                                      "Owner": "AWS",
-                                      "Version": 1,
-                                      "Provider": "CodeCommit"
-                                  },
-                                  "OutputArtifacts": [
-                                      {
-                                          "Name": "SourceOutput"
-                                      }
-                                  ],
-                                  "Configuration": {
-                                      "BranchName": {
-                                          "Ref": "BranchName"
-                                      },
-                                      "RepositoryName": {
-                                          "Ref": "RepositoryName"
-                                      },
-                                      "PollForSourceChanges": false
-                                  },
-                                  "RunOrder": 1
-                              }
-                          ]
-                      },
+    "Name": "Source", 
+    "Actions": [
+      {
+        "Name": "SourceAction",
+        "ActionTypeId": {
+          "Category": "Source",
+          "Owner": "AWS",
+          "Version": 1,
+          "Provider": "CodeCommit"
+        },
+        "OutputArtifacts": [
+          {
+            "Name": "SourceOutput"
+          }
+        ],
+        "Configuration": {
+          "BranchName": {
+            "Ref": "BranchName"
+          },
+          "RepositoryName": {
+            "Ref": "RepositoryName"
+          },
+          "PollForSourceChanges": false
+        },
+        "RunOrder": 1
+      }
+    ]
+  },
   ```
 
 ------

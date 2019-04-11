@@ -31,24 +31,23 @@ When you use the CLI or AWS CloudFormation to create a pipeline and add a webhoo
 
    ```
    {
-       "Parameters": {
-           "BranchName": {
-               "Description": "GitHub branch name",
-               "Type": "String",
-               "Default": "master"
-           },
-           "GitHubOwner": {
-               "Type": "String"
-           },
-           "GitHubSecret": {
-               "Type": "String",
-               "NoEcho": true
-           },
-           "GitHubOAuthToken": {
-               "Type": "String",
-               "NoEcho": true
-           },
-   
+     "Parameters": {
+       "BranchName": {
+         "Description": "GitHub branch name",
+           "Type": "String",
+             "Default": "master"
+       },
+       "GitHubOwner": {
+         "Type": "String"
+       },
+       "GitHubSecret": {
+         "Type": "String",
+         "NoEcho": true
+       },
+       "GitHubOAuthToken": {
+         "Type": "String",
+         "NoEcho": true
+       },
    
    ...
    ```
@@ -93,36 +92,35 @@ The `TargetAction` you specify must match the `Name` property of the source acti
 #### [ JSON ]
 
    ```
-           "AppPipelineWebhook": {
-               "Type": "AWS::CodePipeline::Webhook",
-               "Properties": {
-                   "Authentication": "GITHUB_HMAC",
-                   "AuthenticationConfiguration": {
-                       "SecretToken": {
-                           "Ref": "GitHubSecret"
-                       }
-                   },
-                   "Filters": [
-                       {
-                           "JsonPath": "$.ref",
-                           "MatchEquals": "refs/heads/{Branch}"
-                       }
-                   ],
-                   "TargetPipeline": {
-                       "Ref": "AppPipeline"
-                   },
-                   "TargetAction": "SourceAction",
-                   "Name": "AppPipelineWebhook",
-                   "TargetPipelineVersion": {
-                       "Fn::GetAtt": [
-                           "AppPipeline",
-                           "Version"
-                       ]
-                   },
-                   "RegisterWithThirdParty": true
-               }
-           },
-   
+     "AppPipelineWebhook": {
+       "Type": "AWS::CodePipeline::Webhook",
+       "Properties": {
+         "Authentication": "GITHUB_HMAC",
+         "AuthenticationConfiguration": {
+           "SecretToken": {
+             "Ref": "GitHubSecret"
+           }
+         },
+         "Filters": [
+           {
+             "JsonPath": "$.ref",
+             "MatchEquals": "refs/heads/{Branch}"
+           }
+         ],
+         "TargetPipeline": {
+           "Ref": "AppPipeline"
+         },
+         "TargetAction": "SourceAction",
+         "Name": "AppPipelineWebhook",
+         "TargetPipelineVersion": {
+           "Fn::GetAtt": [
+             "AppPipeline",
+             "Version"
+           ]
+         },
+         "RegisterWithThirdParty": true
+       }
+     },
    
    ...
    ```
@@ -173,38 +171,38 @@ When you create a pipeline with this method, the `PollForSourceChanges` paramete
 
   ```
    {
-                          "Name": "Source",
-                          "Actions": [
-                              {
-                                  "Name": "SourceAction",
-                                  "ActionTypeId": {
-                                      "Category": "Source",
-                                      "Owner": "ThirdParty",
-                                      "Version": 1,
-                                      "Provider": "GitHub"
-                                  },
-                                  "OutputArtifacts": [
-                                      {
-                                          "Name": "SourceOutput"
-                                      }
-                                  ],
-                                  "Configuration": {
-                                      "Owner": {
-                                          "Ref": "GitHubOwner"
-                                      },
-                                      "Repo": {
-                                          "Ref": "RepositoryName"
-                                      },
-                                      "Branch": {
-                                          "Ref": "BranchName"
-                                      },
-                                      "OAuthToken": {
-                                          "Ref": "GitHubOAuthToken"
-                                      },
-                                      "PollForSourceChanges": false
-                                  },
-                                  "RunOrder": 1
-                              }
+      "Name": "Source",
+      "Actions": [
+        {
+          "Name": "SourceAction",
+          "ActionTypeId": {
+            "Category": "Source",
+            "Owner": "ThirdParty",
+            "Version": 1,
+            "Provider": "GitHub"
+          },
+          "OutputArtifacts": [
+            {
+              "Name": "SourceOutput"
+            }
+          ],
+          "Configuration": {
+            "Owner": {
+              "Ref": "GitHubOwner"
+            },
+            "Repo": {
+              "Ref": "RepositoryName"
+            },
+            "Branch": {
+              "Ref": "BranchName"
+            },
+            "OAuthToken": {
+              "Ref": "GitHubOAuthToken"
+            },
+            "PollForSourceChanges": false
+          },
+          "RunOrder": 1
+        }
   ```
 
 ------
