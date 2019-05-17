@@ -14,6 +14,7 @@ For information about the AWS services and partner products and services you can
 
 **Topics**
 + [Create a Custom Action for a Pipeline](actions-create-custom-action.md)
++ [Tag a Custom Action in CodePipeline](customactions-tag.md)
 + [Invoke a Lambda Function in a Pipeline](actions-invoke-lambda-function.md)
 + [Retry a Failed Action](actions-retry.md)
 + [Manage Approval Actions in Pipelines](approvals.md)

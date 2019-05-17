@@ -29,30 +29,6 @@ As you build your rule, the **Event Pattern Preview** pane in the console \(or t
 }
 ```
 
-The following is a sample CodeCommit event pattern in the **Event** window for a `MyTestRepo` repository with a branch named `master`:
-
-```
-{
-  "source": [
-    "aws.codecommit"
-  ],
-  "detail-type": [
-    "CodeCommit Repository State Change"
-  ],
-  "resources": [
-    "arn:aws:codecommit:us-west-2:80398EXAMPLE:MyTestRepo"
-  ],
-  "detail": {
-    "referenceType": [
-      "branch"
-    ],
-    "referenceName": [
-      "master"
-    ]
-  }
-}
-```
-
 The event pattern uses these fields:
 + `source:` should contain `aws.codecommit` as the event source\. 
 + `detail-type:` displays the available event type \(`CodeCommit Repository State Change`\)\.

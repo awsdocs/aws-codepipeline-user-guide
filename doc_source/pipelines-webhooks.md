@@ -9,5 +9,6 @@ When you use the console to create or edit a pipeline that has a GitHub source, 
 + [List Webhooks in Your Account](pipelines-webhooks-view.md)
 + [Edit the Webhook for Your GitHub Source](pipelines-webhooks-update.title.md)
 + [Delete the Webhook for Your GitHub Source](pipelines-webhooks-delete.md)
++ [Tag a Webhook in CodePipeline](tag-webhooks.md)
 + [Create a Webhook for a GitHub Source \(AWS CloudFormation Template\)](pipelines-webhooks-create-cfn.md)
 + [Configure Your Pipelines to Use Webhooks for Change Detection \(GitHub Source\)](pipelines-webhooks-migration.md)

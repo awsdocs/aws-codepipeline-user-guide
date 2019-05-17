@@ -2,11 +2,11 @@
 
 AWS CodePipeline includes a number of actions that help you configure build, test, and deploy resources for your automated release process\. If your release process includes activities that are not included in the default actions, such as an internally developed build process or a test suite, you can create a custom action for that purpose and include it in your pipeline\. You can use the AWS CLI to create custom actions in pipelines associated with your AWS account\.
 
-Custom actions fall into the following categories:
-+ A build action that builds or transforms the items
-+ A deploy action that deploys items to one or more servers, websites, or repositories
-+ A test action that configures and runs automated tests
-+ An invoke action that runs functions
+You can create custom actions for the following AWS CodePipeline action categories:
++ A custom build action that builds or transforms the items
++ A custom deploy action that deploys items to one or more servers, websites, or repositories
++ A custom test action that configures and runs automated tests
++ A custom invoke action that runs functions
 
 When you create a custom action, you must also create a job worker that will poll CodePipeline for job requests for this custom action, execute the job, and return the status result to CodePipeline\. This job worker can be located on any computer or resource as long as it has access to the public endpoint for CodePipeline\. To easily manage access and security, consider hosting your job worker on an Amazon EC2 instance\. 
 
@@ -20,13 +20,13 @@ When a pipeline includes a custom action as part of a stage, the pipeline will c
 These instructions assume that you have already completed the steps in [Getting Started with CodePipeline](getting-started-codepipeline.md)\.
 
 **Topics**
-+ [Create a Custom Action \(CLI\)](#actions-create-custom-action-cli)
++ [Create a Custom Action](#actions-create-custom-action-cli)
 + [Create a Job Worker for Your Custom Action](#actions-create-custom-action-job-worker)
 + [Add a Custom Action to a Pipeline](#actions-create-custom-action-add)
 
-## Create a Custom Action \(CLI\)<a name="actions-create-custom-action-cli"></a>
+## Create a Custom Action<a name="actions-create-custom-action-cli"></a>
 
-**Create a custom action with the AWS CLI**
+**To create a custom action with the AWS CLI**
 
 1. Open a text editor and create a JSON file for your custom action that includes the action category, the action provider, and any settings required by your custom action\. For example, to create a custom build action that requires only one property, your JSON file might look like this:
 
@@ -55,11 +55,17 @@ These instructions assume that you have already completed the steps in [Getting 
        "outputArtifactDetails": {
            "maximumCount": integer,
            "minimumCount": integer
-       }
+       },
+       "tags": [{
+         "key": "Project",
+         "value": "ProjectA"
+       }]
    }
    ```
 
-   You'll notice that there are two properties included in the JSON file, `entityUrlTemplate` and `executionUrlTemplate`\. You can refer to a name in the configuration properties of the custom action within the URL templates by following the format of `{Config:name}`, as long as the configuration property is both required and not secret\. For example, in the sample above, the `entityUrlTemplate` value refers to the configuration property *ProjectName*\.
+   This example adds tagging to the custom action by including the `Project` tag key and `ProjectA` value on the custom action\. For more information about tagging resources in CodePipeline, see [Tagging Resources](tag-resources.md)\.
+
+   There are two properties included in the JSON file, `entityUrlTemplate` and `executionUrlTemplate`\. You can refer to a name in the configuration properties of the custom action within the URL templates by following the format of `{Config:name}`, as long as the configuration property is both required and not secret\. For example, in the sample above, the `entityUrlTemplate` value refers to the configuration property *ProjectName*\.
    + `entityUrlTemplate`: the static link that provides information about the service provider for the action\. In the example, the build system includes a static link to each build project\. The link format will vary, depending on your build provider \(or, if you are creating a different action type, such as test, other service provider\)\. You must provide this link format so that when the custom action is added, the user can choose this link to open a browser to a page on your website that provides the specifics for the build project \(or test environment\)\.
    + `executionUrlTemplate`: the dynamic link that will be updated with information about the current or most recent run of the action\. When your custom job worker updates the status of a job \(for example, success, failure, or in progress\), it will also provide an `externalExecutionId` that will be used to complete the link\. This link can be used to provide details about the run of an action\. 
 

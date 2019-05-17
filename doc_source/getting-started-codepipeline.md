@@ -1,5 +1,13 @@
 # Getting Started with CodePipeline<a name="getting-started-codepipeline"></a>
 
+If you are new to CodePipeline, you can follow the tutorials in this guide after following the steps in this chapter to get set up\.
+
+The CodePipeline console includes helpful information in a collapsible panel that you can open from the information icon or any **Info** link on the page\. \(![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/console-info-icon.png)\)\. You can close this panel at any time\.
+
+![\[Viewing additional guidance in the console\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-guidance-open.png)
+
+The CodePipeline console also provides a way to quickly search for your resources, such as repositories, build projects, deployment applications, and pipelines\. Choose **Go to resource** or press the `/` key, and then type the name of the resource\. Any matches appear in the list\. Searches are case insensitive\. You only see resources that you have permissions to view\. For more information, see [Viewing Resources in the Console](access-control.md#console-resources)\. 
+
 Before you can use AWS CodePipeline for the first time, you must complete the following steps\.
 
 **Topics**

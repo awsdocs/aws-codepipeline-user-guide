@@ -19,7 +19,33 @@
 **Note**  
 You can find the ARN for a CodeCommit repository on the **Settings** page in the CodeCommit console\.
 
-   To specify the branch to associate with the repository, choose **Edit**, and enter the resource type branch and branch name\. Use the event pattern options for `detail`\. The preceding example shows the detail options for a CodeCommit repository branch named `master`\. Choose **Save**\.
+   To specify the branch to associate with the repository, choose **Edit**, and enter the resource type branch and branch name\. Use the event pattern options for `detail`\. The preceding example shows the detail options for a CodeCommit repository branch named `master`\.
+
+   The following is a sample CodeCommit event pattern in the **Event** window for a `MyTestRepo` repository with a branch named `master`:
+
+   ```
+   {
+     "source": [
+       "aws.codecommit"
+     ],
+     "detail-type": [
+       "CodeCommit Repository State Change"
+     ],
+     "resources": [
+       "arn:aws:codecommit:us-west-2:80398EXAMPLE:MyTestRepo"
+     ],
+     "detail": {
+       "referenceType": [
+         "branch"
+       ],
+       "referenceName": [
+         "master"
+       ]
+     }
+   }
+   ```
+
+   Choose **Save**\.
 
    In the **Event Pattern Preview** pane, view the rule\.
 

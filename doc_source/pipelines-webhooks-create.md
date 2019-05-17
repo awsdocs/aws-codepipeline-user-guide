@@ -59,9 +59,15 @@ When you use the CLI or AWS CloudFormation to create a pipeline and add a webhoo
                ]
            },
            "arn": "arn:aws:codepipeline:eu-central-1:ACCOUNT_ID:webhook:my-webhook"
-       }
+       },
+       "tags": [{
+         "key": "Project",
+         "value": "ProjectA"
+       }]
    }
    ```
+
+   This example adds tagging to the webhook by including the `Project` tag key and `ProjectA` value on the webhook\. For more information about tagging resources in CodePipeline, see [Tagging Resources](tag-resources.md)\.
 
 1. Call the register\-webhook\-with\-third\-party command and include the `--webhook-name` parameter\.
 

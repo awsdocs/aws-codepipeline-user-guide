@@ -17,7 +17,7 @@ aws codepipeline command-name help
 ```
 
 To begin learning how to use the commands in the CodePipeline extension to the AWS CLI, go to one or more of the following sections:
-+ [Create a Custom Action \(CLI\)](actions-create-custom-action.md#actions-create-custom-action-cli)
++ [Create a Custom Action](actions-create-custom-action.md#actions-create-custom-action-cli)
 + [Create a Pipeline \(CLI\)](pipelines-create.md#pipelines-create-cli)
 + [Delete a Pipeline \(CLI\)](pipelines-delete.md#pipelines-delete-cli)
 + [Disable or Enable Transitions \(CLI\)](transitions.md#transitions-disable-enable-cli)

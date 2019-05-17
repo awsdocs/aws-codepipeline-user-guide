@@ -50,6 +50,7 @@ The actions you can specify in an IAM policy for use with CodePipeline are liste
 |  [ListActionTypes](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_ListActionTypes.html)  |  `codepipeline:ListActionTypes` Required to generate a summary of all AWS CodePipeline action types associated with your account\.  | 
 |  [ListPipelineExecutions](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_ListPipelineExecutions.html)  |  `codepipeline:ListPipelineExecutions` Required to generate a summary of the most recent executions for a pipeline\.  | 
 |  [ListPipelines](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_ListPipelines.html)  |  `codepipeline:ListPipelines` Required to generate a summary of all of the pipelines associated with your account\.  | 
+| ListTagsForResource |  `codepipeline:ListTagsForResource` Required to list tags for a specified resource\.  | 
 | [ListWebhooks](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_ListWebhooks.html) |  `codepipeline:ListWebhooks` Required to list all of the webhooks in the account for that region\.  | 
 |  [PollForJobs](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_PollForJobs.html)  |  `codepipeline:PollForJobs` Required to get a listing of all the webhooks in this region for this account\.  | 
 |  [PollForThirdPartyJobs](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_PollForThirdPartyJobs.html)  |  `codepipeline:PollForThirdPartyJobs` Required to determine whether there are any third party jobs for a job worker to act on\. Only used for partner actions\.  | 
@@ -61,7 +62,8 @@ The actions you can specify in an IAM policy for use with CodePipeline are liste
 |  [PutThirdPartyJobSuccessResult](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_PutThirdPartyJobSuccessResult.html)  |  `codepipeline:PutThirdPartyJobSuccessResult` Required to report the success of a third party job as returned to the pipeline by a job worker\. Only used for partner actions\.   | 
 |  [PutWebhook](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_PutWebhook.html)  |  `codepipeline:PutWebhook` Required to create a webhook\.  | 
 |  [RegisterWebhookWithThirdParty](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_RegisterWebhookWithThirdParty.html)  |  `codepipeline:RegisterWebhookWithThirdParty` After a webhook is created, required to configure supported third parties to call the generated webhook URL\.  | 
-|  |  | 
 |  [RetryStageExecution](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_RetryStageExecution.html)  |  `codepipeline:RetryStageExecution` Required to resume the pipeline execution by retrying the last failed actions in a stage\.  | 
 |  [StartPipelineExecution](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_StartPipelineExecution.html)  |  `codepipeline:StartPipelineExecution` Required to start the specified pipeline\. Specifically, it begins processing the latest commit to the source location specified as part of the pipeline\.  | 
+| TagResource |  `codepipeline:TagResource` Required to tag the specified resource\.  | 
+| UntagResource |  `codepipeline:UntagResource` Required to untag the specified resource\.  | 
 |  [UpdatePipeline](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_UpdatePipeline.html)  |  `codepipeline:UpdatePipeline` Required to update a specified pipeline with edits or changes to its structure\.  | 

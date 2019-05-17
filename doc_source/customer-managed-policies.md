@@ -182,7 +182,7 @@ The following example shows a policy in the 80398EXAMPLE account that allows use
 }
 ```
 
-Once you create this policy, create the IAM role in the 80398EXAMPLE account and attach the policy to that role\. In the role's trust relationships, you must add the AWS account that will assume this role\. The following example shows a policy that allows users from the *111111111111* AWS account to assume roles defined in the 80398EXAMPLE account:
+After you create this policy, create the IAM role in the 80398EXAMPLE account and attach the policy to that role\. In the role's trust relationships, you must add the AWS account that will assume this role\. The following example shows a policy that allows users from the *111111111111* AWS account to assume roles defined in the 80398EXAMPLE account:
 
 ```
 {

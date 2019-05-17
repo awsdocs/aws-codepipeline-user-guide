@@ -82,10 +82,10 @@ Do not use the **Clone or download** or **Download ZIP** buttons in the GitHub r
 
 ## Step 2: Create Amazon EC2 Windows Instances and Install the CodeDeploy Agent<a name="S3-create-instances"></a>
 
-In this step, you create the Windows Server Amazon EC2 instances to which you will deploy a sample application\. As part of this process, you install the CodeDeploy agent on the instances\. The CodeDeploy agent is a software package that enables an instance to be used in CodeDeploy deployments\.
-
 **Note**  
 This tutorial provides sample steps for creating Amazon EC2 Windows instances\. For sample steps to create Amazon EC2 Linux instances, see Step 3: Create an Amazon EC2 Linux Instance and Install the CodeDeploy Agent in [Tutorial: Create a Simple Pipeline \(CodeCommit Repository\)](tutorials-simple-codecommit.md)\.
+
+In this step, you create the Windows Server Amazon EC2 instances to which you will deploy a sample application\. As part of this process, you install the CodeDeploy agent on the instances\. The CodeDeploy agent is a software package that enables an instance to be used in CodeDeploy deployments\.
 
 **To launch instances**
 

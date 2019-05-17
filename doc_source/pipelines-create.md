@@ -4,7 +4,7 @@ You can use the AWS CodePipeline console or the AWS CLI to create a pipeline\. P
 
 You can add actions to your pipeline that are in an AWS Region different from your pipeline\. When an AWS service is the provider for an action, and this action type/provider type are in a different AWS Region from your pipeline, this is a cross\-region action\. For more information about cross\-region actions, see [Add a Cross\-Region Action in CodePipeline](actions-create-cross-region.md)\.
 
-You can also create pipelines that build and deploy container\-based applications by using Amazon ECS as the deployment provider\. Before you create a pipeline that deploys container\-based applications with Amazon ECS, you must create an image definitions file\.
+You can also create pipelines that build and deploy container\-based applications by using Amazon ECS as the deployment provider\. Before you create a pipeline that deploys container\-based applications with Amazon ECS, you must create an image definitions file as described in [Image Definitions File Reference](file-reference.md)\.
 
 CodePipeline uses change detection methods to start your pipeline when a source code change is pushed\. These detection methods are based on source type:
 + CodePipeline uses Amazon CloudWatch Events to detect changes in your CodeCommit source repository and branch or your Amazon S3 source bucket\.
@@ -14,83 +14,10 @@ CodePipeline uses change detection methods to start your pipeline when a source 
 When you use the console to create or edit a pipeline, the change detection resources are created for you\. If you use the AWS CLI to create the pipeline, you must create the additional resources yourself\. For more information, see [ Use CloudWatch Events to Start a Pipeline \(CodeCommit Source\)](triggering.md)\.
 
 **Topics**
-+ [Create an Image Definitions File for Deploying Container\-Based Applications](#pipelines-create-image-definitions)
 + [Create a Pipeline \(Console\)](#pipelines-create-console)
 + [Create a Pipeline \(CLI\)](#pipelines-create-cli)
 
-## Create an Image Definitions File for Deploying Container\-Based Applications<a name="pipelines-create-image-definitions"></a>
-
-An image definitions document is a JSON file that describes your Amazon ECS container name and the image and tag\. If you are deploying container\-based applications, you must generate an image definitions file to provide the CodePipeline job worker with the Amazon ECS container and image identification to use for your pipeline’s deployment stage\.
-+ The maximum file size limit for the image definitions file is 100 KB\.
-+ You must generate the image definitions file so that it is ingested as an input artifact for the deploy action\.
-
-The image definitions file provides the container name and image URI\. It must be constructed with the following set of key\-value pairs\.
-
-
-**Create the image definitions file as a source or build artifact for container\-based deployments**  
-
-| Key | Value | 
-| --- | --- | 
-| name | container\_name | 
-| imageURI | image\_URI | 
-
-Here is the JSON structure, where the container name is `sample-app`, the image URI is `ecs-repo`, and the tag is `latest`:
-
-```
-[
-    {
-        "name": "sample-app",
-        "imageUri": "11111EXAMPLE.dkr.ecr.us-west-2.amazonaws.com/ecs-repo:latest"
-    }
-]
-```
-
-You can also construct the image definitions file to list multiple container\-image pairs\. 
-
-JSON structure:
-
-```
-[
-    {
-        "name": "simple-app",
-        "imageUri": "httpd:2.4"
-    },
-    {
-        "name": "simple-app-1",
-        "imageUri": "mysql"
-    },
-    {
-        "name": "simple-app-2",
-        "imageUri": "java1.8"
-    }
-]
-```
-
-Before you create your pipeline, use the following steps to set up the image definitions file\.
-
-1. As part of planning the container\-based application deployment for your pipeline, plan the source stage and the build stage, if applicable\.
-
-1. Choose one of the following:
-
-   1.  If your pipeline has skipped the build stage, you must manually create the JSON file and upload it to your source repository so the source action can provide the artifact\. Create the file using a text editor, and name the file or use the default `imagedefinitions.json` file name\. Push the image definitions file to your source repository\.
-**Note**  
-If your source repository is an Amazon S3 bucket, remember to zip the JSON file\.
-
-   1. If your pipeline has a build stage, add a command to your build spec file that outputs the image definitions file in your source repository during the build phase\. The following example uses the printf command to create an imagedefinitions\.json file\. List this command in the `post_build` section of the buildspec\.yml file:
-
-      ```
-      printf '[{"name":"container_name","imageUri":"image_URI"}]' >
-      imagedefinitions.json
-      ```
-
-      You must include the image definitions file as an output artifact in the buildspec\.yml file\.
-
-1. When you create your pipeline in the console, you must enter the image definitions file name into the **Image Filename** field on the **Deploy** page of the **Create Pipeline** wizard\.
-
-For a step\-by\-step tutorial for creating a pipeline that uses Amazon ECS as the deployment provider, see [Tutorial: Continuous Deployment with CodePipeline](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-cd-pipeline.html)\.
-
 **Topics**
-+ [Create an Image Definitions File for Deploying Container\-Based Applications](#pipelines-create-image-definitions)
 + [Create a Pipeline \(Console\)](#pipelines-create-console)
 + [Create a Pipeline \(CLI\)](#pipelines-create-cli)
 
@@ -171,7 +98,9 @@ In GitHub, there is a limit to the number of OAuth tokens you can use for an app
     + In **Image tag**, specify the image name and version, if different from LATEST\.
     + In **Output artifacts**, choose the output artifact default, such as MyApp, that contains the image name and repository URI information you want the next stage to use\.
 
-      For a tutorial about creating a pipeline for Amazon ECS blue\-green deployments with an Amazon ECR source stage, see [Tutorial: Create a Pipeline with an Amazon ECR Source and ECS\-to\-CodeDeploy Deployment](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/tutorials-ecs-ecr-codedeploy.html)\.
+      For a tutorial about creating a pipeline for Amazon ECS with CodeDeploy blue\-green deployments that includes an Amazon ECR source stage, see [Tutorial: Create a Pipeline with an Amazon ECR Source and ECS\-to\-CodeDeploy Deployment](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/tutorials-ecs-ecr-codedeploy.html)\.
+
+    When you include an Amazon ECR source stage in your pipeline, the source action generates an `imageDetail.json` file as an output artifact when you commit a change\. For information about the `imageDetail.json` file, see [imageDetail\.json File for Amazon ECS Blue/Green Deployment Actions](file-reference.md#file-reference-ecs-bluegreen)\.
 **Note**  
 The object and file type must be compatible with the deployment system you plan to use \(for example, Elastic Beanstalk or CodeDeploy\)\. Supported file types might include \.zip, \.tar, and \.tgz files\. For more information about the supported container types for Elastic Beanstalk, see [Customizing and Configuring Elastic Beanstalk Environments](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/customize-containers.html) and [Supported Platforms](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html)\. For more information about deploying revisions with CodeDeploy, see [Uploading Your Application Revision](https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-steps.html#deployment-steps-uploading-your-app) and [Prepare a Revision](https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-prepare-revision.html)\.
 
@@ -220,7 +149,11 @@ This option does not appear if you have already skipped the build stage\.
       For information about integrating AWS CloudFormation capabilities into a pipeline in CodePipeline, see [Continuous Delivery with CodePipeline](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline.html) in the *AWS CloudFormation User Guide*\.
     + **Amazon ECS**
 
-       In **Cluster name**, enter or choose the name of an existing Amazon ECS cluster\. In **Service name**, enter or choose the name of the service running on the cluster\. You can also create a cluster and service\. In **Image filename**, enter the name of the image definitions file that describes your service's container and image\. Choose **Next**\.
+      In **Cluster name**, enter or choose the name of an existing Amazon ECS cluster\. In **Service name**, enter or choose the name of the service running on the cluster\. You can also create a cluster and service\. In **Image filename**, enter the name of the image definitions file that describes your service's container and image\.
+**Note**  
+The Amazon ECS deployment action requires an `imagedefinitions.json` file as an input to the deployment action\. The default ﬁle name for the ﬁle is imagedefinitions\.json\. If you choose to use a diﬀerent ﬁle name, you must provide it when you create the pipeline deployment stage\. For more information, see [imageDefinitions\.json File for Amazon ECS Standard Deployment Actions](file-reference.md#pipelines-create-image-definitions)\.
+
+      Choose **Next**\.
 **Note**  
 Make sure your Amazon ECS cluster is configured with two or more instances\. Amazon ECS clusters must contain at least two instances so that one is maintained as the primary instance and another is used to accommodate new deployments\.
 
@@ -228,6 +161,8 @@ Make sure your Amazon ECS cluster is configured with two or more instances\. Ama
     + **Amazon ECS \(Blue/Green\)**
 
       Enter the CodeDeploy application and deployment group, Amazon ECS task definition, and AppSpec file information, and then choose **Next**\.
+**Note**  
+The **Amazon ECS \(Blue/Green\)** action requires an imageDetail\.json file as an input artifact to the deploy action\. Because the Amazon ECR source action creates this file, pipelines with an Amazon ECR source action do not need to provide an `imageDetail.json` file\. For more information, see [imageDetail\.json File for Amazon ECS Blue/Green Deployment Actions](file-reference.md#file-reference-ecs-bluegreen)\.
 
       For a tutorial about creating a pipeline for blue\-green deployments to an Amazon ECS cluster with CodeDeploy, see [Tutorial: Create a Pipeline with an Amazon ECR Source and ECS\-to\-CodeDeploy Deployment](tutorials-ecs-ecr-codedeploy.md)\.
     + **AWS Service Catalog**
@@ -286,6 +221,7 @@ You can also use the get\-pipeline command to get a copy of the JSON structure o
    + The source location for your code\.
    + The deployment provider\.
    + How you want your code deployed\.
+   + The tags for your pipeline\.
 
    The following two\-stage sample pipeline structure highlights the values you should consider changing for your pipeline\. Your pipeline likely contains more than two stages:
 
@@ -357,9 +293,15 @@ You can also use the get\-pipeline command to get a copy of the JSON structure o
            "pipelineArn": "arn:aws:codepipeline:us-east-2:80398EXAMPLE:MyFirstPipeline",
            "updated": 1501626591.112,
            "created": 1501626591.112
-       }
+       },
+       "tags": [{
+         "key": "Project",
+         "value": "ProjectA"
+       }]
    }
    ```
+
+   This example adds tagging to the pipeline by including the `Project` tag key and `ProjectA` value on the pipeline\. For more information about tagging resources in CodePipeline, see [Tagging Resources](tag-resources.md)\.
 
    Make sure the `PollForSourceChanges` parameter in your JSON file is set as follows: 
 

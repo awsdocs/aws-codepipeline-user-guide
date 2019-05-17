@@ -4,7 +4,7 @@ The advantage of using tokens instead of passwords in a script is that tokens ca
 
 For more information, see [Creating a personal access token for the command line](https://help.github.com/articles/creating-an-access-token-for-command-line-use/) on the GitHub website\. 
 
-Once you have regenerated a new personal access token, you can rotate it by using the CLI or API or by using AWS CloudFormation and calling `UpdatePipeline`\.
+After you have regenerated a new personal access token, you can rotate it by using the CLI or API or by using AWS CloudFormation and calling `UpdatePipeline`\.
 
 **Note**  
  You might have to update other applications if they are using the same personal access token\. As a security best practice, do not share a single token across multiple applications\. Create a new personal access token for each application\.
