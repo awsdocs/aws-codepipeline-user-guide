@@ -130,6 +130,8 @@ For the purposes of this tutorial, you can use the following unrestricted policy
    </powershell>
    ```
 
+   *bucket\-name* is the name of the Amazon S3 bucket that contains the CodeDeploy Resource Kit files for your region\. For example, for the US West \(Oregon\) Region, replace *bucket\-name* with `aws-codedeploy-uswest-2`\. For a list of bucket names, see [Resource Kit Bucket Names by Region](https://docs.aws.amazon.com/codedeploy/latest/userguide/resource-kit.html#resource-kit-bucket-names)\.
+
    This code installs the CodeDeploy agent on your instance as it is created\. This script is written for Windows instances only\.
 
 1. Leave the rest of the items on the **Step 3: Configure Instance Details** page unchanged\. Choose **Next: Add Storage**, leave the **Step 4: Add Storage** page unchanged, and then choose **Next: Add Tags**\.
@@ -407,7 +409,7 @@ You can pipe the JSON directly into a file with the get\-pipeline command as fol
 
 1. Copy the **Staging** stage section and paste it after the first two stages\. Because it is a deploy stage, just like the **Staging** stage, you use it as a template for the third stage\. 
 
-1. Change the name of the stage and the deployment group details, and then save the file\. 
+1. Change the name of the stage and the deployment group details\. 
 
    The following example shows the JSON you add to the pipeline\.json file after the **Staging** stage\. Edit the emphasized elements with new values\. Remember to include a comma to separate the **Staging** and **Production** stage definitions\.
 
@@ -439,6 +441,20 @@ You can pipe the JSON directly into a file with the get\-pipeline command as fol
        ]
    }
    ```
+
+1. If you are working with the pipeline structure retrieved using the get\-pipeline command, you must remove the `metadata` lines from the JSON file\. Otherwise, the update\-pipeline command cannot use it\. Remove the `"metadata": { }` lines and the `"created"`, `"pipelineARN"`, and `"updated"` fields\.
+
+   For example, remove the following lines from the structure:
+
+   ```
+   "metadata": {  
+     "pipelineArn": "arn:aws:codepipeline:region:account-ID:pipeline-name",
+     "created": "date",
+     "updated": "date"
+     }
+   ```
+
+   Save the file\.
 
 1. Run the update\-pipeline command, specifying the pipeline JSON file, similar to the following:
 

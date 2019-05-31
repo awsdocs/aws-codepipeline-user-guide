@@ -17,10 +17,6 @@ When you use the console to create or edit a pipeline, the change detection reso
 + [Create a Pipeline \(Console\)](#pipelines-create-console)
 + [Create a Pipeline \(CLI\)](#pipelines-create-cli)
 
-**Topics**
-+ [Create a Pipeline \(Console\)](#pipelines-create-console)
-+ [Create a Pipeline \(CLI\)](#pipelines-create-cli)
-
 ## Create a Pipeline \(Console\)<a name="pipelines-create-console"></a>
 
 To create a pipeline in the console, you must provide the source file location and information about the providers you will use for your actions\.
@@ -75,7 +71,7 @@ Do not provide your AWS credentials\.
     1. If this is your first time connecting to GitHub from CodePipeline for this Region, you are asked to authorize application access to your account\. Review the permissions required for integration, and then, if you want to continue, choose **Authorize application**\. When you connect to GitHub in the console, the following resources are created for you:
        + CodePipeline uses an OAuth token to create an authorized application that is managed by CodePipeline\.
 **Note**  
-In GitHub, there is a limit to the number of OAuth tokens you can use for an application, such as CodePipeline\. If you exceed this limit, retry the connection to allow CodePipeline to reconnect by reusing existing tokens\. For more information, see [To configure a pipeline to use a personal access token from GitHub](troubleshooting.md#troubleshooting-gs2)\.
+In GitHub, there is a limit to the number of OAuth tokens you can use for an application, such as CodePipeline\. If you exceed this limit, retry the connection to allow CodePipeline to reconnect by reusing existing tokens\. For more information, see [](troubleshooting.md#troubleshooting-gs2)\.
        + CodePipeline creates a webhook in GitHub to detect source changes and then start your pipeline when a change occurs\. In addition to the webhook, CodePipeline:
          + Randomly generates a secret and uses it to authorize the connection to GitHub\.
          + Generates the webhook URL using the public endpoint for the Region and registers it with GitHub\. This subscribes the URL to receive repository events\.

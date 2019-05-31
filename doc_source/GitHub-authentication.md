@@ -6,4 +6,5 @@ CodePipeline uses GitHub OAuth tokens and personal access tokens to access your 
 
 **Topics**
 + [View Your Authorized OAuth Apps](GitHub-view-oauth-token.md)
-+ [Use GitHub and the CodePipeline CLI to Create and Rotate Your GitHub Personal Access Token on a Regular Basis](GitHub-rotate-personal-token-CLI.md)
++ [Configure Your Pipeline to Use a Personal Access Token \(GitHub and CLI\)](GitHub-create-personal-token-CLI.md)
++ [Rotate Your GitHub Personal Access Token on a Regular Basis \(GitHub and CLI\)](GitHub-rotate-personal-token-CLI.md)

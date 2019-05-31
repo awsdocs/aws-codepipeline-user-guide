@@ -8,7 +8,7 @@ The following information might help you troubleshoot common issues in AWS CodeP
 + [Pipeline Error: A source action returns the insufficient permissions message: "Could not access the CodeCommit repository `repository-name`\. Make sure that the pipeline IAM role has sufficient permissions to access the repository\."](#troubleshooting-service-role-permissions)
 + [Pipeline Error: A Jenkins build or test action runs for a long time and then fails due to lack of credentials or permissions](#troubleshooting-jen1)
 + [Pipeline Error: My GitHub source stage contains Git submodules, but CodePipeline doesn't initialize them](#troubleshooting-gs1)
-+ [Pipeline Error: I receive a pipeline error that includes the following message: "PermissionError: Could not access the GitHub repository"](#troubleshooting-gs2)
++ [Pipeline Error: I receive a pipeline error that says: "Could not access the GitHub repository" or "Unable to connect to the GitHub repository"](#troubleshooting-gs2)
 + [Pipeline Error: A pipeline created in one AWS region using a bucket created in another AWS region returns an "InternalError" with the code "JobFailed"](#troubleshooting-reg-1)
 + [Deployment Error: A ZIP file that contains a WAR file is deployed successfully to AWS Elastic Beanstalk, but the application URL reports a 404 Not Found error](#troubleshooting-aeb2)
 + [File permissions are not retained on source files from GitHub when ZIP does not preserve external attributes](#troubleshooting-file-permissions)
@@ -77,62 +77,29 @@ If you are using an IAM user, make sure the AWS profile configured on the instan
 
 **Possible fixes:** Consider cloning the GitHub repository directly as part of a separate script\. For example, you could include a clone action in a Jenkins script\.
 
-## Pipeline Error: I receive a pipeline error that includes the following message: "PermissionError: Could not access the GitHub repository"<a name="troubleshooting-gs2"></a>
+## Pipeline Error: I receive a pipeline error that says: "Could not access the GitHub repository" or "Unable to connect to the GitHub repository"<a name="troubleshooting-gs2"></a>
 
-**Problem:** CodePipeline uses OAuth tokens to integrate with GitHub\. You might have revoked the permissions of the OAuth token for CodePipeline\. Additionally, the number of tokens is limited \(see [the GitHub documentation](https://developer.github.com/v3/oauth/) for details\)\. If CodePipeline reaches that limit, older tokens will stop working, and actions in pipelines that rely upon that token will fail\.
+**Problem:** CodePipeline uses OAuth tokens to integrate with GitHub\. When you create a pipeline with a GitHub source provider, CodePipeline manages your GitHub credentials by creating a default OAuth token\. When your pipeline connects to the repository, it uses GitHub credentials to connect to GitHub\. The OAuth token credentials are managed by CodePipeline\. You do not view or manage the token in any way\. The other type of credentials you can use to connect to GitHub are personal access tokens, which are created by you instead of by OAuth apps\. Personal access tokens are managed by you and not by CodePipeline\.
 
-**Possible fixes:** Check to see if the permission for CodePipeline has been revoked\. Sign in to GitHub, go to **Applications**, and choose **Authorized OAuth Apps**\. If you do not see CodePipeline in the list, open the CodePipeline console, edit the pipeline, and choose **Connect to GitHub** to restore the authorization\.
+If these permissions have been revoked or otherwise disabled, then the pipeline fails when it cannot use the GitHub token to connect to the repository\.
 
-If CodePipeline is present in the list of authorized applications for GitHub, you might have exceeded the allowed number of tokens\. To fix this issue, you can manually configure one OAuth token as a personal access token, and then configure all pipelines in your AWS account to use that token\.
+It is a security best practice to rotate your personal access token on a regular basis\. For more information, see [Rotate Your GitHub Personal Access Token on a Regular Basis \(GitHub and CLI\)](GitHub-rotate-personal-token-CLI.md)\.
 
-It is a security best practice to rotate your personal access token on a regular basis\. For more information, see [Use GitHub and the CodePipeline CLI to Create and Rotate Your GitHub Personal Access Token on a Regular Basis](GitHub-rotate-personal-token-CLI.md)\.<a name="acp-github-manual-token"></a>
+**Possible fixes:** 
 
-**To configure a pipeline to use a personal access token from GitHub**
+ If CodePipeline is unable to connect to the GitHub repository, there are two troubleshooting options: 
++ You might simply need to reconnect your pipeline to the repository manually\. You might have revoked the permissions of the OAuth token for CodePipeline and they just need to be restored\. To do this, see the steps below\.
++ You might need to change your default OAuth token to a personal access token\. The number of OAuth tokens is limited\. For more information, see [the GitHub documentation](https://developer.github.com/v3/oauth/)\. If CodePipeline reaches that limit, older tokens stop working, and actions in pipelines that rely on that token fail\.
 
-1. Sign in to your GitHub account and follow the instructions in the [GitHub documentation for creating a personal access token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/)\. Make sure the token is configured to have the following GitHub scopes: `admin:repo_hook` and `repo`\. Copy the token\.
+1. Check to see if the permissions for CodePipeline have been revoked\. For the steps to check the **Authorized OAuth Apps** list in GitHub, see [View Your Authorized OAuth Apps](GitHub-view-oauth-token.md)\. If you do not see CodePipeline in the list, you must use the console to reconnect your pipeline to GitHub\.
 
-1. At a terminal \(Linux, macOS, or Unix\) or command prompt \(Windows\), run the get\-pipeline command on the pipeline where you want to change the OAuth token, and then copy the output of the command to a JSON file\. For example, for a pipeline named MyFirstPipeline, you would type something similar to the following:
+   1. Open your pipeline in the console and choose **Edit**\. On the source stage that contains your GitHub source action, choose **Edit stage**\.
 
-   ```
-   aws codepipeline get-pipeline --name MyFirstPipeline >pipeline.json
-   ```
+   1. On the GitHub source action, choose the edit icon\.
 
-   The output of the command is sent to the *pipeline\.json* file\.
+   1. On the **Edit action** page, choose **Connect to GitHub** to restore the authorization\. If prompted, you might need to re\-enter the **Repository** and **Branch** for your action\. Choose **Done**\. Choose **Done** on the stage editing page, and then choose **Save** on the pipeline editing page\. Run the pipeline\.
 
-1. Open the file in a plain\-text editor and edit the value in the `OAuthTokenField` of your GitHub action\. Replace the asterisks \(\*\*\*\*\) with the token you copied from GitHub\. For example:
-
-   ```
-   "configuration": {
-                               "Owner": "MyGitHubUserName", 
-                               "Repo": "test-repo", 
-                               "Branch": "master", 
-                               "OAuthToken": "Replace the **** with your personal access token"
-                           },
-   ```
-
-1. If you are working with the pipeline structure retrieved using the `get-pipeline` command, you must modify the structure in the JSON file by removing the `metadata` lines from the file, or the `update-pipeline` command will not be able to use it\. Remove the section from the pipeline structure in the JSON file \(the "metadata": \{ \} lines and the "created," "pipelineARN," and "updated" fields within\)\.
-
-   For example, remove the following lines from the structure: 
-
-   ```
-   "metadata": {  
-     "pipelineArn": "arn:aws:codepipeline:region:account-ID:pipeline-name",
-     "created": "date",
-     "updated": "date"
-     }
-   ```
-
-1. Save the file, and then run the update\-pipeline with the `--cli-input-json` parameter to specify the JSON file you just edited\. For example, to update a pipeline named MyFirstPipeline, you would type something similar to the following:
-**Important**  
-Be sure to include `file://` before the file name\. It is required in this command\.
-
-   ```
-   aws codepipeline update-pipeline --cli-input-json file://pipeline.json
-   ```
-
-1. Repeat steps 2 through 4 for every pipeline that contains a GitHub action\.
-
-1. When you have finished updating your pipelines, delete the \.json files used to update those pipelines\.
+1. If this does not correct the error but you can see CodePipeline in the **Authorized OAuth Apps** list in GitHub, you might have exceeded the allowed number of tokens\. To fix this issue, you can manually configure one OAuth token as a personal access token, and then configure all pipelines in your AWS account to use that token\. For more information, see [Configure Your Pipeline to Use a Personal Access Token \(GitHub and CLI\)](GitHub-create-personal-token-CLI.md)\.
 
 ## Pipeline Error: A pipeline created in one AWS region using a bucket created in another AWS region returns an "InternalError" with the code "JobFailed"<a name="troubleshooting-reg-1"></a>
 

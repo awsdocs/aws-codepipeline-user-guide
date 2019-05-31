@@ -67,6 +67,8 @@ Call the put\-rule command, specifying:
    ```
    aws events put-rule --name "MyECRRepoRule" --event-pattern "{\"source\":[\"aws.ecr\"],\"detail\":{\"eventName\":[\"PutImage\"],\"requestParameters\":{\"repositoryName\":[\"my-image-repo\"],\"imageTag\":[\"latest\"]}}}"
    ```
+**Note**  
+The put\-rule command above can use either the `aws.ecr` or `ecr.amazonaws.com` service name in the `source` field\.
 
 1. To add CodePipeline as a target, call the put\-targets command and include the following parameters:
    + The `--rule` parameter is used with the `rule_name` you created by using put\-rule\.

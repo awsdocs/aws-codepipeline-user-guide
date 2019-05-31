@@ -8,4 +8,4 @@ This section describes security configuration based on best practices for the fo
 **Topics**
 + [Configure Server\-Side Encryption for Artifacts Stored in Amazon S3 for CodePipeline](S3-artifact-encryption.md)
 + [Configure GitHub Authentication](GitHub-authentication.md)
-+ [Use Parameter Store to Track Database Passwords or Third Party API Keys](parameter-store-encryption.md)
++ [Use Parameter Store to Track Database Passwords or Third\-Party API Keys](parameter-store-encryption.md)

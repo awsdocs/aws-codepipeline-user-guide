@@ -268,7 +268,9 @@ In this section, you create an Amazon EC2 application load balancer\. You use th
 
 1. Verify the default VPC to use\. In the navigation pane, choose **Your VPCs**\. Note which VPC shows **Yes** in the **Default VPC** column\. This is the default VPC\. It contains default subnets for you to select\.
 
-1. Choose **Subnets**\. Choose two subnets that show **Yes** in the **Default subnet** column\. Make a note of the subnet IDs\.
+1. Choose **Subnets**\. Choose two subnets that show **Yes** in the **Default subnet** column\. 
+**Note**  
+Make note of your subnet IDs for use later in this tutorial\.
 
 1. Choose the subnets, and then choose the **Description** tab\. Verify that the subnets you want to use are in different Availability Zones\.
 
@@ -348,7 +350,7 @@ You must have two target groups created for your load balancer in order for your
 
 ## Step 4: Create Your Amazon ECS Cluster and Service<a name="tutorials-ecs-ecr-codedeploy-cluster"></a>
 
-In this section, you create an Amazon ECS cluster and service where CodeDeploy routes traffic during deployment \(to an Amazon ECS cluster rather than EC2 instances\)\. To create your Amazon ECS service, you must use the subnet names and target group value you created with your load balancer to create your service\. 
+In this section, you create an Amazon ECS cluster and service where CodeDeploy routes traffic during deployment \(to an Amazon ECS cluster rather than EC2 instances\)\. To create your Amazon ECS service, you must use the subnet names, security group, and target group value you created with your load balancer to create your service\.
 
 **To create an Amazon ECS cluster**
 
@@ -360,7 +362,7 @@ In this section, you create an Amazon ECS cluster and service where CodeDeploy r
 
 1. Choose the **Networking only** cluster template that uses AWS Fargate, and then choose **Next step**\.
 
-1. Enter a cluster name and anything else on the **Configure cluster** page, and then choose **Create**\.
+1. Enter a cluster name on the **Configure cluster** page\. You can add an optional tag for your resource\. Choose **Create**\.
 
 **To create an Amazon ECS service**
 
@@ -368,7 +370,7 @@ Use the AWS CLI to create your service in Amazon ECS\.
 
 1. Create a JSON file and name it `create-service.json`\. Paste the following into the JSON file\.
 
-   For the `taskDefinition` field, when you register a task definition in Amazon ECS, you give it a family\. This is similar to a name for multiple versions of the task definition, specified with a revision number\. In this example, use "ecs\-demo:1" for the family and revision number in your file\.
+   For the `taskDefinition` field, when you register a task definition in Amazon ECS, you give it a family\. This is similar to a name for multiple versions of the task definition, specified with a revision number\. In this example, use "ecs\-demo:1" for the family and revision number in your file\. Use the subnet names, security group, and target group value you created with your load balancer in [Step 3: Create Your Application Load Balancer and Target Groups ](#tutorials-ecs-ecr-codedeploy-loadbal)\.
 **Note**  
 You need to include your target group ARN in this file\. Open the Amazon EC2 console and from the navigation pane, under **LOAD BALANCING**, choose **Target Groups**\. Choose your first target group\. Copy your ARN from the **Description** tab\.
 
@@ -409,6 +411,8 @@ You need to include your target group ARN in this file\. Open the Amazon EC2 con
 Be sure to include `file://` before the file name\. It is required in this command\.
 
    This example creates a service named `my-service`\.
+**Note**  
+This example command creates a service named my\-service\. If you already have a service with this name, the command returns an error\.
 
    ```
    aws ecs create-service --service-name my-service --cli-input-json file://create-service.json
@@ -490,8 +494,6 @@ For more information, see [A Quick Look at Input and Output Artifacts](welcome.m
 
 1. In **Step 2: Add source stage**, in **Source provider**, choose **AWS CodeCommit**\. In **Repository name**, choose the name of the CodeCommit repository you created in [Step 1: Create a CodeCommit Repository and Local Repo](tutorials-simple-codecommit.md#codecommit-create-repository)\. In **Branch name**, choose the name of the branch that contains your latest code update\. Unless you created a different branch on your own, only `master` is available\. 
 
-   After you select the repository name and branch, a message shows the Amazon CloudWatch Events rule to be created for this pipeline\. 
-
    Choose **Next**\.
 
 1. In **Step 3: Add build stage**, choose **Skip build stage**, and then accept the warning message by choosing **Skip** again\. Choose **Next**\.
@@ -534,7 +536,7 @@ View your pipeline and add an Amazon ECR source action to your pipeline\.
 
 1. In **Output artifacts**, choose the output artifact default \(for example, `MyImage`\) that contains the image name and repository URI information you want the next stage to use\.
 
-1. Choose **Save**\.
+1. Choose **Save** on the action screen\. Choose **Done** on the stage screen\. Choose **Save** on the pipeline\. A message shows the Amazon CloudWatch Events rule to be created for the Amazon ECR source action\.
 
 **To wire your source artifacts to the Deploy action**
 
