@@ -172,7 +172,7 @@ Use the AWS CLI to add a cross\-region action to a pipeline\.
    "artifactStores":{  
       "RegionA":{  
          "encryptionKey":{  
-            "id":"ID",
+            "id":"ID-A",
             "type":"KMS"
          },
          "location":"Location1",
@@ -180,7 +180,7 @@ Use the AWS CLI to add a cross\-region action to a pipeline\.
       },
       "RegionB":{  
          "encryptionKey":{  
-            "id":"ID",
+            "id":"ID-B",
             "type":"KMS"
          },
          "location":"Location2",
