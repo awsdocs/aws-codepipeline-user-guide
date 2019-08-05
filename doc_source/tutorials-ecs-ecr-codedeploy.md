@@ -428,7 +428,7 @@ This example command creates a service named my\-service\. If you already have a
 
 ## Step 5: Create Your CodeDeploy Application and Deployment Group \(ECS Compute Platform\)<a name="tutorials-ecs-ecr-codedeploy-deployment"></a>
 
-When you create a CodeDeploy application and deployment groupment for the Amazon ECS compute platform, the application is used during a deployment to reference the correct deployment group, target groups, listeners, and traffic rerouting behavior\.
+When you create a CodeDeploy application and deployment group for the Amazon ECS compute platform, the application is used during a deployment to reference the correct deployment group, target groups, listeners, and traffic rerouting behavior\.
 
 **To create a CodeDeploy application**
 
