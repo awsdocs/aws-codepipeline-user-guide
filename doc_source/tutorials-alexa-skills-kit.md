@@ -24,7 +24,7 @@ In this section, you create a security profile to use with Login With Amazon \(L
 
 In this section, you create and push your Alexa skill source files to the repository that the pipeline uses for your source stage\. For the skill you have created in the Amazon developer console, you produce and push the following: 
 + A `skill.json` file\.
-+ An `interactionModel` folder\.
++ An `interactionModel/custom` folder\.
 
 **To create source files for your skill**
 
@@ -42,13 +42,13 @@ In this section, you create and push your Alexa skill source files to the reposi
    ask api get-skill -s skill-ID > skill.json
    ```
 
-1. \(Optional\) Create an `interactionModel` folder\.
+1. \(Optional\) Create an `interactionModel/custom` folder\.
 
    Use this command to generate the interaction model file within the folder\. For locale, this tutorial uses en\-US as the locale in the filename\.
 
    ```
    ask api get-model --skill-id skill-ID --locale locale >
-       ./interactionModel/locale.json
+       ./interactionModel/custom/locale.json
    ```
 
 **To push files to your CodeCommit repository**
@@ -58,7 +58,8 @@ In this section, you create and push your Alexa skill source files to the reposi
    ```
    skill.json
    /interactionModel
-     |en-US.json
+     /custom
+       |en-US.json
    ```
 
 1. Choose the method you want to use to upload your files:
