@@ -114,7 +114,7 @@ It is a security best practice to rotate your personal access token on a regular
 **Possible fixes:** AWS Elastic Beanstalk can unpack a ZIP file, but not a WAR file contained in a ZIP file\. Instead of specifying a WAR file in your `buildspec.yml` file, specify a folder that contains the content to be deployed\. For example:
 
 ```
-version: 0.1
+version: 0.2
 
 phases:
   post_build:
