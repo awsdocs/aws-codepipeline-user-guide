@@ -12,7 +12,6 @@ The following information might help you troubleshoot common issues in AWS CodeP
 + [Pipeline Error: A pipeline created in one AWS region using a bucket created in another AWS region returns an "InternalError" with the code "JobFailed"](#troubleshooting-reg-1)
 + [Deployment Error: A ZIP file that contains a WAR file is deployed successfully to AWS Elastic Beanstalk, but the application URL reports a 404 Not Found error](#troubleshooting-aeb2)
 + [File permissions are not retained on source files from GitHub when ZIP does not preserve external attributes](#troubleshooting-file-permissions)
-+ [The console I'm viewing doesn't seem to match the procedures in this guide](#troubleshooting-console)
 + [Pipeline artifact folder names appear to be truncated](#troubleshooting-truncated-artifacts)
 + [Need Help with a Different Issue?](#troubleshooting-other)
 
@@ -97,7 +96,10 @@ It is a security best practice to rotate your personal access token on a regular
 
    1. On the GitHub source action, choose the edit icon\.
 
-   1. On the **Edit action** page, choose **Connect to GitHub** to restore the authorization\. If prompted, you might need to re\-enter the **Repository** and **Branch** for your action\. Choose **Done**\. Choose **Done** on the stage editing page, and then choose **Save** on the pipeline editing page\. Run the pipeline\.
+   1. On the **Edit action** page, choose **Connect to GitHub** to restore the authorization\.   
+![\[A pipeline contains stages that contain actions, separated by transitions that can be disabled and enabled.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/button-connect-to-github.png)![\[A pipeline contains stages that contain actions, separated by transitions that can be disabled and enabled.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[A pipeline contains stages that contain actions, separated by transitions that can be disabled and enabled.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+
+      If prompted, you might need to re\-enter the **Repository** and **Branch** for your action\. Choose **Done**\. Choose **Done** on the stage editing page, and then choose **Save** on the pipeline editing page\. Run the pipeline\.
 
 1. If this does not correct the error but you can see CodePipeline in the **Authorized OAuth Apps** list in GitHub, you might have exceeded the allowed number of tokens\. To fix this issue, you can manually configure one OAuth token as a personal access token, and then configure all pipelines in your AWS account to use that token\. For more information, see [Configure Your Pipeline to Use a Personal Access Token \(GitHub and CLI\)](GitHub-create-personal-token-CLI.md)\.
 
@@ -152,12 +154,6 @@ artifacts:
 
 **Note**  
 To use the CodePipeline console to confirm the name of the build input artifact, display the pipeline and then, in the **Build** action, rest your mouse pointer on the tooltip\. Make a note of the value for **Input artifact** \(for example, **MyApp**\)\. To use the AWS CLI to get the name of the S3 artifact bucket, run the AWS CodePipeline `get-pipeline` command\. The output contains an `artifactStore` object with a `location` field that displays the name of the bucket\.
-
-## The console I'm viewing doesn't seem to match the procedures in this guide<a name="troubleshooting-console"></a>
-
-**Problem:** When you view the content in this user guide, the procedures and images show a console that does not look like the one you are using\.
-
-**Possible fixes:** The new console design is the default experience, but if you chose to use the prior version of the console at some point, that choice will persist in subsequent sessions\. The procedures in this guide support the new console design\. If you choose to use the older version of the console, you will find minor discrepancies, but the concepts and basic procedures in this guide still apply\.
 
 ## Pipeline artifact folder names appear to be truncated<a name="troubleshooting-truncated-artifacts"></a>
 

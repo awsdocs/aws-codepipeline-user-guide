@@ -28,7 +28,7 @@ You can use the console to add tags to an existing pipeline\.
 
 1. From the navigation pane, choose **Settings**\.
 
-1. Under **Tags**, choose **Edit**\.
+1. Under **Pipeline tags**, choose **Edit**\.
 
 1. In the **Key** and **Value** fields, enter a key pair for each set of tags you want to add\. \(The **Value** field is optional\.\) For example, in **Key**, enter **Project**\. In **Value**, enter **ProjectA**\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/pipeline-tags-edit-console.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
@@ -48,7 +48,7 @@ You can use the console to list tags for existing pipelines\.
 
 1. From the navigation pane, choose **Settings**\.
 
-1. Under **Tags**, view the tags for the pipeline under the **Key** and **Value** columns\.
+1. Under **Pipeline tags**, view the tags for the pipeline under the **Key** and **Value** columns\.
 
 ### Edit Tags for a Pipeline \(Console\)<a name="pipelines-tag-update-console"></a>
 
@@ -60,7 +60,7 @@ You can use the console to edit tags that have been added to pipelines\.
 
 1. From the navigation pane, choose **Settings**\.
 
-1. Under **Tags**, choose **Edit**\.
+1. Under **Pipeline tags**, choose **Edit**\.
 
 1. In the **Key** and **Value** fields, update the values in each field as needed\. For example, for the **Project** key, in **Value**, change **ProjectA** to **ProjectB**\.
 
@@ -76,7 +76,7 @@ You can use the console to delete tags from pipelines\. When you remove tags fro
 
 1. From the navigation pane, choose **Settings**\.
 
-1. Under **Tags**, choose **Edit**\.
+1. Under **Pipeline tags**, choose **Edit**\.
 
 1. Next to the key and value for each tag you want to delete, choose **Remove tag**\.
 

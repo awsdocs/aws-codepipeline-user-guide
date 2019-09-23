@@ -9,12 +9,15 @@ You can use the console, AWS CLI, or AWS CloudFormation to add cross\-region act
 
 If you use the console to create a pipeline or cross\-region actions, default artifact buckets are configured by CodePipeline in the Regions where you have actions\. When you use the AWS CLI, AWS CloudFormation, or an SDK to create a pipeline or cross\-region actions, you provide the artifact bucket for each Region where you have actions\.
 
+**Note**  
+You must create the artifact bucket and encryption key in the same AWS Region as the cross\-region action and in the same account as your pipeline\.
+
 You cannot create cross\-region actions for the following action types:
 + Source actions
 + Third\-party actions
 + Custom actions
 
-When a pipeline includes a cross\-region action as part of a stage, CodePipeline replicates the source artifacts from the pipeline Region to the action's Region\.
+When a pipeline includes a cross\-region action as part of a stage, CodePipeline replicates only the input artifacts of the cross\-region action from the pipeline Region to the action's Region\.
 
 **Note**  
 The pipeline Region and the Region where your CloudWatch Events change detection resources are maintained remain the same\. The Region where your pipeline is hosted does not change\.
@@ -166,7 +169,7 @@ Use the AWS CLI to add a cross\-region action to a pipeline\.
                        }
    ```
 
-1. In the pipeline structure, remove the `artifactStore` field and add the `artifactStores` map for your new cross\-region action\. The mapping must include an artifact bucket for the current pipeline Region and buckets for any additional Regions as follows:
+1. In the pipeline structure, remove the `artifactStore` field and add the `artifactStores` map for your new cross\-region action\. The mapping must include an entry for each AWS Region in which you have actions\. For each entry in the mapping, the resources must be in the respective AWS Region\. In the example below, `ID-A` is the encryption key ID for *RegionA*, and `ID-B` is the encryption key ID for *RegionB*\.
 
    ```
    "artifactStores":{  
@@ -189,7 +192,7 @@ Use the AWS CLI to add a cross\-region action to a pipeline\.
    }
    ```
 
-   The following JSON example shows the *RegionA* bucket as `us-west-2` and adds the new *RegionB* bucket, `us-east-1`:
+   The following JSON example shows the us\-west\-2 bucket as `my-storage-bucket` and adds the new us\-east\-1 bucket named `my-storage-bucket-us-east-1`\.
 
    ```
            "artifactStores": {
@@ -399,6 +402,6 @@ You can use AWS CloudFormation to add a cross\-region action to an existing pipe
 
 1. Choose your stack, and then choose **Create Change Set for Current Stack**\. 
 
-1. Upload the template, and then view the changes listed in AWS CloudFormation\. These are the changes to be made to the stack\. You should see your new resources in the list\. 
+1. Upload the template, and then view the changes listed in AWS CloudFormation\. These are the changes to be made to the stack\. You should see your new resources in the list\.
 
 1. Choose **Execute**\.

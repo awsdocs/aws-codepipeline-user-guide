@@ -8,10 +8,10 @@ AWS CodePipeline job workers for container actions, such as an Amazon ECR source
   + Amazon ECR source actions generate an `imageDetail.json` file that is provided as an output from the source action\.
 
 **Topics**
-+ [imageDefinitions\.json File for Amazon ECS Standard Deployment Actions](#pipelines-create-image-definitions)
++ [imagedefinitions\.json File for Amazon ECS Standard Deployment Actions](#pipelines-create-image-definitions)
 + [imageDetail\.json File for Amazon ECS Blue/Green Deployment Actions](#file-reference-ecs-bluegreen)
 
-## imageDefinitions\.json File for Amazon ECS Standard Deployment Actions<a name="pipelines-create-image-definitions"></a>
+## imagedefinitions\.json File for Amazon ECS Standard Deployment Actions<a name="pipelines-create-image-definitions"></a>
 
 An image definitions document is a JSON file that describes your Amazon ECS container name and the image and tag\. If you are deploying container\-based applications, you must generate an image definitions file to provide the CodePipeline job worker with the Amazon ECS container and image identification to retrieve from the repository, such as Docker Hub\.
 
@@ -28,7 +28,7 @@ The `imagedefinitions.json` file provides the container name and image URI\. It 
 | Key | Value | 
 | --- | --- | 
 | name | container\_name | 
-| imageURI | image\_URI | 
+| imageUri | imageUri | 
 
 Here is the JSON structure, where the container name is `sample-app`, the image URI is `ecs-repo`, and the tag is `latest`:
 
@@ -92,11 +92,16 @@ An `imageDetail.json` document is a JSON file that describes your Amazon ECS ima
 **Note**  
 The name of the file must be `imageDetail.json`\.
 
-You must create the `imageDetail.json` file as a source or build artifact so that it is an input artifact for the deploy action\.
-
+You must create the `imageDetail.json` file as a source or build artifact so that it is an input artifact for the deploy action\. You can use one of these methods to provide the `imageDetail.json` file in the pipeline: 
++ Include the `imageDetail.json` file in your source location so that it is provided in the pipeline as input to your Amazon ECS blue/green deployment action\.
 **Note**  
-Amazon ECR source actions automatically generate an `imageDetail.json` file as an input artifact to the next action\.  
-Because the ECR source action creates this file, pipelines with an ECR source action do not need to provide an `imageDetail.json` file\. 
+If your source repository is an Amazon S3 bucket, remember to zip the JSON file\.
++ Amazon ECR source actions automatically generate an `imageDetail.json` file as an input artifact to the next action\.
+**Note**  
+Because the Amazon ECR source action creates this file, pipelines with an Amazon ECR source action do not need to manually provide an `imageDetail.json` file\.   
+For a tutorial about creating a pipeline that includes an Amazon ECR source stage, see [Tutorial: Create a Pipeline with an Amazon ECR Source and ECS\-to\-CodeDeploy Deployment](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/tutorials-ecs-ecr-codedeploy.html)\.
+
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/imageDetail_file_diagram.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
 The `imageDetail.json` file provides the image URI\. It must be constructed with the following key\-value pair\.
 
@@ -157,8 +162,6 @@ Before you create your pipeline, use the following steps to set up the `imageDet
 1. Choose one of the following:
 
    1.  If your pipeline has skipped the build stage, you must manually create the JSON file and upload it to your source repository, such as CodeCommit, so the source action can provide the artifact\. Create the file using a text editor, and name the file or use the default `imageDetail.json` file name\. Push the `imageDetail.json` file to your source repository\.
-**Note**  
-If your source repository is an Amazon S3 bucket, remember to zip the JSON file\.
 
    1. If your pipeline has a build stage, perform the following:
 

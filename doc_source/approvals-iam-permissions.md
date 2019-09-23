@@ -31,17 +31,15 @@ Make sure you are signed in to the AWS Management Console with the same account 
 
 1. Browse to and choose the user or group you want to change\. 
 
-1. On the summary page, choose the **Permissions** tab, and expand the **Inline Policies** section\.
-
 1. Do one of the following:
-   + If you chose **Groups**, now choose **Create Group Policy**\. If you chose **Users**, now choose **Create User Policy**\.
-   + If no inline policies have been created yet, choose **click here**\.
+   + If you chose **Groups**, choose the **Permissions** tab, and expand **Inline Policies**\. If no inline policies have been created yet, choose **click here**\.
 
-1. Choose **Custom Policy**, and then choose **Select**\. 
+     Choose **Custom Policy**, and then choose **Select**\. 
 
-1. Type a name for this policy in **Policy Name**\.
+     In **Policy Name**, enter a name for this policy\. Continue to the next step to paste the policy in the **Policy Document** box\.
+   + If you chose **Users**, choose the **Permissions** tab, and choose **Add inline policy**\. Choose the **JSON** tab\. Continue to the next step to paste the policy\.
 
-1. Specify the individual resources an IAM user can access\. For example, the following policy grants users the authority to approve or reject only the action named `MyApprovalAction` in the `MyFirstPipeline` pipeline in the US East \(Ohio\) Region \(us\-east\-2\):
+1. Paste the policy into the policy box\. Specify the individual resources an IAM user can access\. For example, the following policy grants users the authority to approve or reject only the action named `MyApprovalAction` in the `MyFirstPipeline` pipeline in the US East \(Ohio\) Region \(us\-east\-2\):
 
    ```
    {
@@ -78,6 +76,8 @@ Make sure you are signed in to the AWS Management Console with the same account 
 **Note**  
 The `codepipeline:ListPipelines` permission is required only if IAM users need to access the CodePipeline dashboard to view this list of pipelines\. If console access is not required, you can omit `codepipeline:ListPipelines`\.
 
-1. Choose **Validate Policy**\. Correct any errors displayed in a red box at the top of the page\. 
+1. Do one of the following:
+   + If you chose **Groups**, choose **Validate Policy**\. Correct any errors displayed in a red box at the top of the page\. Choose **Apply Policy**\.
+   + If you chose **Users**, choose **Review policy**\.
 
-1. When you are satisfied with the policy, choose **Apply Policy**\.
+     In **Name**, enter a name for this policy\. Choose **Create policy**\.

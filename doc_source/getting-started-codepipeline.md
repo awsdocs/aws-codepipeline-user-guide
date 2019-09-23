@@ -30,6 +30,12 @@ Create an IAM user or use an existing one in your AWS account\. Make sure that y
 
 You must give the IAM user permissions to interact with CodePipeline\. The quickest way to do this is to apply the **AWSCodePipelineFullAccess** managed policy to the IAM user\. 
 
+**Note**  
+The **AWSCodePipelineFullAccess** policy includes permissions that allow the console user to pass an IAM role to CodePipeline or other AWS services\. This allows the service to assume the role and perform actions on your behalf\. When you attach the policy to a user, role, or group, the `iam:PassRole` permissions are applied\. Make sure the policy is only applied to trusted users\. When users with these permissions use the console to create or edit a pipeline, the following choices are available:  
+Create a CodePipeline service role or choose an existing one and pass the role to CodePipeline
+Might choose to create a CloudWatch Events rule for change detection and pass the CloudWatch Events service role to CloudWatch Events 
+For more information, see [Granting a User Permissions to Pass a Role to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html)\.
+
 **To grant permissions to an IAM user using the AWS Management Console**
 
 1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.

@@ -6,6 +6,9 @@ AWS CodePipeline supports full, end\-to\-end continuous delivery, which includes
 
 Initially, only polling was supported\. Events are now the default and recommended way to start your pipeline when there’s a code change\.
 
+**Important**  
+You must explicitly set the `PollForSourceChanges` parameter to *false* within your Source action’s configuration to stop a pipeline from polling\. As a result, it is possible to erroneously configure a pipeline with both event\-based change detection *and* polling by, for example, configuring a CloudWatch Events rule and also omitting the `PollForSourceChanges` parameter\. This results in duplicate pipeline executions, and the pipeline is counted toward the limit on total number of polling pipelines, which by default is much lower than event\-based pipelines\.
+
 There are some important advantages to using push events instead of polling:
 + On average, events are significantly faster\. Events should start your pipeline almost immediately, as opposed to polling, which requires waiting for the next periodic check\.
 + Higher limits\. Compared to pipelines that poll for changes, CodePipeline can support far more event\-based pipelines\.
@@ -2506,8 +2509,14 @@ Resources:
 ------<a name="proc-cfn-webhook-github"></a>
 
 **To add parameters and create a webhook in your template**
+
+We strongly recommend that you use AWS Secrets Manager to store your credentials\. If you use Secrets Manager, you must have secrets in your secrets manager\. For more information, see [ Using Dynamic References to Specify Template Values](https://alpha-docs-aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html#dynamic-references-secretsmanager)\. 
+**Important**  
+When passing secret parameters, do not enter the value directly into the template\. The value is rendered as plain text and is readable\. For security purposes, do not use plain text in your CloudFormation template to store your credentials\.
+
+When you use the CLI or AWS CloudFormation to create a pipeline and add a webhook, you must disable periodic checks\.
 **Note**  
-When you use the CLI or AWS CloudFormation to create a pipeline and add a webhook, you must disable periodic checks\. To disable periodic checks, you must explicitly add the `PollForSourceChanges` parameter and set it to false, as detailed in the final procedure below\. Otherwise, the default for a CLI or AWS CloudFormation pipeline is that `PollForSourceChanges` defaults to true and does not display in the pipeline structure output\. For more information about PollForSourceChanges defaults, see [Default Settings for the PollForSourceChanges Parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
+To disable periodic checks, you must explicitly add the `PollForSourceChanges` parameter and set it to false, as detailed in the final procedure below\. Otherwise, the default for a CLI or AWS CloudFormation pipeline is that `PollForSourceChanges` defaults to true and does not display in the pipeline structure output\. For more information about PollForSourceChanges defaults, see [Default Settings for the PollForSourceChanges Parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
 
 1. In the template, under `Resources`, add your parameters:
 

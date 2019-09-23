@@ -4,8 +4,9 @@ Permissions for some aspects of the pipeline execution process are granted to an
 
 CodePipeline uses this service role when processing revisions through the stages and actions in a pipeline\. That role is configured with one or more policies that control access to the AWS resources used by the pipeline\. You might want to attach additional policies to this role, edit the policy attached to the role, or configure policies for other service roles in AWS\. You might also want to attach a policy to a role when configuring cross\-account access to your pipeline\.
 
-**Important**  
-Modifying a policy statement or attaching another policy to the role can prevent your pipelines from functioning\. Be sure that you understand the implications before you modify the service role for CodePipeline in any way\. Make sure you test your pipelines after making any changes to the service role\.
+**Warning**  
+ The default CodePipeline service role policy enables broad permissions to many integrated AWS Services\. You can edit the service role statement to remove access to resources you do not use\. When you create IAM policies, follow the standard security advice of granting least privilege—that is, granting only the permissions required to perform a task\. To learn more, see [Remove Permissions for Unused AWS Services](#remove-permissions-from-policy)\.  
+When scoping down permissions, keep in mind that modifying a policy statement or attaching another policy to the role can prevent your pipelines from functioning\. Make sure you test your pipelines after making any changes to the service role\.
 
 **Topics**
 + [Review the Default CodePipeline Service Role Policy](#view-default-service-role-policy)

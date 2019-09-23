@@ -1,6 +1,6 @@
 # Example 1: Create an AWS CodeCommit Pipeline with AWS CloudFormation<a name="tutorials-cloudformation-codecommit"></a>
 
-You use a sample template file to create your resource stack, which includes your artifact store, pipeline, and change\-detection resources, such as your Amazon CloudWatch Events rule\. The pipeline is a two\-stage pipeline with an AWS CodeCommit source stage and a CodeDeploy deployment stage\.
+This walkthrough shows you how to use the AWS CloudFormation console to create infrastructure that includes a pipeline connected to a CodeCommit source repository\. In this tutorial, you use the provided sample template file to create your resource stack, which includes your artifact store, pipeline, and change\-detection resources, such as your Amazon CloudWatch Events rule\. After you create your resource stack in AWS CloudFormation, you can view your pipeline in the AWS CodePipeline console\. The pipeline is a two\-stage pipeline with a CodeCommit source stage and a CodeDeploy deployment stage\.
 
 **Prerequisites:**
 

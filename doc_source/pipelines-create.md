@@ -147,7 +147,7 @@ This option does not appear if you have already skipped the build stage\.
 
       In **Cluster name**, enter or choose the name of an existing Amazon ECS cluster\. In **Service name**, enter or choose the name of the service running on the cluster\. You can also create a cluster and service\. In **Image filename**, enter the name of the image definitions file that describes your service's container and image\.
 **Note**  
-The Amazon ECS deployment action requires an `imagedefinitions.json` file as an input to the deployment action\. The default ﬁle name for the ﬁle is imagedefinitions\.json\. If you choose to use a diﬀerent ﬁle name, you must provide it when you create the pipeline deployment stage\. For more information, see [imageDefinitions\.json File for Amazon ECS Standard Deployment Actions](file-reference.md#pipelines-create-image-definitions)\.
+The Amazon ECS deployment action requires an `imagedefinitions.json` file as an input to the deployment action\. The default ﬁle name for the ﬁle is imagedefinitions\.json\. If you choose to use a diﬀerent ﬁle name, you must provide it when you create the pipeline deployment stage\. For more information, see [imagedefinitions\.json File for Amazon ECS Standard Deployment Actions](file-reference.md#pipelines-create-image-definitions)\.
 
       Choose **Next**\.
 **Note**  
@@ -176,6 +176,19 @@ The **Amazon ECS \(Blue/Green\)** action requires an imageDetail\.json file as a
       In **Bucket**, enter the name of the Amazon S3 bucket you want to use\. Choose **Extract file before deploy** if the input artifact to your deploy stage is a ZIP file\. If **Extract file before deploy** is selected, you may optionally enter a value for **Deployment path** to which your ZIP file will be unzipped\. If it is not selected, you are required to to enter a value in **S3 object key**\.
 **Note**  
 Most source and build stage output artifacts will be zipped\. All pipeline source providers except Amazon S3 will zip your source files before providing them as the input artifact to the next action\.
+
+      \(Optional\) In **Canned ACL**, enter the [canned ACL](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl) to apply to the object deployed to Amazon S3\.
+**Note**  
+Applying a canned ACL overwrites any existing ACL applied to the object\.
+
+      \(Optional\) In **Cache control**, specify the cache control parameters for requests to download objects from the bucket\. For a list of valid values, see the [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9) header field for HTTP operations\. To enter multiple values in **Cache control**, use a comma between each value\. You can add a space after each comma \(optional\), as shown in this example\.  
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/cache_control_values.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+
+      If accessed using the CLI, the example entry above displays in the pipeline structure as follows:
+
+      ```
+      "CacheControl": "public, max-age=0, no-transform"
+      ```
 
       Choose **Next**\.
 

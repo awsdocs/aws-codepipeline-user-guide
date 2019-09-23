@@ -25,6 +25,8 @@ In this section, you create a security profile to use with Login With Amazon \(L
 In this section, you create and push your Alexa skill source files to the repository that the pipeline uses for your source stage\. For the skill you have created in the Amazon developer console, you produce and push the following: 
 + A `skill.json` file\.
 + An `interactionModel/custom` folder\.
+**Note**  
+This directory structure complies with Alexa Skills Kit skill package format requirements, as outlined in [https://developer.amazon.com/docs/smapi/skill-package-api-reference.html#skill-package-format](https://developer.amazon.com/docs/smapi/skill-package-api-reference.html#skill-package-format)\. If your directory structure does not use the correct skill package format, changes do not successfully deploy to the Alexa Skills Kit console\.
 
 **To create source files for your skill**
 
@@ -156,7 +158,7 @@ For more information, see [A Quick Look at Input and Output Artifacts](welcome.m
 
    Choose **Next**\.
 
-1. In **Step 2: Add source stage**, in **Source provider**, choose **AWS CodeCommit**\. In **Repository name**, choose the name of the CodeCommit repository you created in [Step 1: Create a CodeCommit Repository and Local Repo](tutorials-simple-codecommit.md#codecommit-create-repository)\. In **Branch name**, choose the name of the branch that contains your latest code update\. Unless you created a different branch on your own, only `master` is available\. 
+1. In **Step 2: Add source stage**, in **Source provider**, choose **AWS CodeCommit**\. In **Repository name**, choose the name of the CodeCommit repository you created in [Step 1: Create a CodeCommit Repository](tutorials-simple-codecommit.md#codecommit-create-repository)\. In **Branch name**, choose the name of the branch that contains your latest code update\. Unless you created a different branch on your own, only `master` is available\. 
 
    After you select the repository name and branch, a message shows the Amazon CloudWatch Events rule to be created for this pipeline\. 
 
@@ -184,6 +186,6 @@ For more information, see [A Quick Look at Input and Output Artifacts](welcome.m
 1. In **Step 5: Review**, review the information, and then choose **Create pipeline**\.  
 ![\[The completed pipeline for an Alexa Skills Kit action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/alexa-deploy-pipeline.png)![\[The completed pipeline for an Alexa Skills Kit action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The completed pipeline for an Alexa Skills Kit action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
-## Step 5: Make a Change to Any Source File and Verify Deployment<a name="tutorials-ecs-ecr-codedeploy-update"></a>
+## Step 5: Make a Change to Any Source File and Verify Deployment<a name="tutorials-alexa-skills-kit-update"></a>
 
 Make a change to your skill and then push the change to your repository\. This triggers your pipeline to run\. Verify that your skill is updated in the [Alexa Skills Kit developer console](https://developer.amazon.com/alexa/console/ask)\.

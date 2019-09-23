@@ -3,7 +3,7 @@
 You can configure your pipeline to use a personal access token to connect to GitHub\. The advantage of using tokens instead of passwords in a script is that tokens can be revoked or rotated\. You can also grant specific privileges and permissions to a personal access token\. Each personal access token is associated at the pipeline, rather than account, level\.
 
 **Note**  
- You might have to update other applications if they are using the same personal access token\. As a security best practice, do not share a single token across multiple applications\. Create a personal access token for each application\. For more information, see [Creating a personal access token for the command line](https://help.github.com/articles/creating-an-access-token-for-command-line-use/) on the GitHub website\.
+You might have to update other applications if they are using the same personal access token\. As a security best practice, do not share a single token across multiple applications\. Create a personal access token for each application\. For more information, see [Creating a personal access token for the command line](https://help.github.com/articles/creating-an-access-token-for-command-line-use/) on the GitHub website\.
 
 Use these steps to create a GitHub personal access token and then update the pipeline structure with the new token\.
 

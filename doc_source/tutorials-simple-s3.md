@@ -301,9 +301,17 @@ In this part of the tutorial, you create a second deployment group, but deploy t
 
 1. On the **Create deployment group** page, in **Deployment group name**, enter a name for the second deployment group \(for example, **CodePipelineProductionFleet**\)\.
 
-1. Choose **In\-place deployment**\.
+1. In **Service Role**, choose the same CodeDeploy service role you used for the initial deployment \(not the CodePipeline service role\)\.
 
-1. In **Key**, enter **Name**, but in **Value**, choose **CodePipelineDemo** from the list\. Leave the default configuration for **Deployment configuration**\. In **Service role ARN**, choose the same CodeDeploy service role you used for the initial deployment \(not the CodePipeline service role\), and then choose **Create deployment group**\.
+1. Under **Deployment type**, choose **In\-place**\.
+
+1. Under **Environment configuration**, choose **Amazon EC2 Instances**\. Choose **Name** in the **Key** box, and in the **Value** box, choose `MyCodePipelineDemo` from the list\. Leave the default configuration for **Deployment settings**\. 
+
+1. Under **Deployment configuration**, choose `CodeDeployDefault.OneAtaTime`\.
+
+1. Under **Load Balancer**, clear **Enable load balancing**\.
+
+1.  Choose **Create deployment group**\.
 
 ### Add the Deployment Group as Another Stage in Your Pipeline<a name="s3-add-stage-part-2"></a>
 

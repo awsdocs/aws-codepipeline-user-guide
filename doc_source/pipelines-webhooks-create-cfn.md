@@ -3,8 +3,14 @@
 To use AWS CloudFormation to create a webhook, update your template as described here\.<a name="proc-cfn-webhook-github"></a>
 
 **To add parameters and create a webhook in your template**
+
+We strongly recommend that you use AWS Secrets Manager to store your credentials\. If you use Secrets Manager, you must have secrets in your secrets manager\. For more information, see [ Using Dynamic References to Specify Template Values](https://alpha-docs-aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html#dynamic-references-secretsmanager)\. 
+**Important**  
+When passing secret parameters, do not enter the value directly into the template\. The value is rendered as plain text and is readable\. For security purposes, do not use plain text in your CloudFormation template to store your credentials\.
+
+When you use the CLI or AWS CloudFormation to create a pipeline and add a webhook, you must disable periodic checks\.
 **Note**  
-When you use the CLI or AWS CloudFormation to create a pipeline and add a webhook, you must disable periodic checks\. To disable periodic checks, you must explicitly add the `PollForSourceChanges` parameter and set it to false, as detailed in the final procedure below\. Otherwise, the default for a CLI or AWS CloudFormation pipeline is that `PollForSourceChanges` defaults to true and does not display in the pipeline structure output\. For more information about PollForSourceChanges defaults, see [Default Settings for the PollForSourceChanges Parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
+To disable periodic checks, you must explicitly add the `PollForSourceChanges` parameter and set it to false, as detailed in the final procedure below\. Otherwise, the default for a CLI or AWS CloudFormation pipeline is that `PollForSourceChanges` defaults to true and does not display in the pipeline structure output\. For more information about PollForSourceChanges defaults, see [Default Settings for the PollForSourceChanges Parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
 
 1. In the template, under `Resources`, add your parameters:
 

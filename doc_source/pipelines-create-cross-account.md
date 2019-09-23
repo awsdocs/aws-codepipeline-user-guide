@@ -1,9 +1,22 @@
 # Create a Pipeline in CodePipeline That Uses Resources from Another AWS Account<a name="pipelines-create-cross-account"></a>
 
-You might want to create a pipeline that uses resources created or managed by another AWS account\. For example, you might want to use one account for your pipeline and another for your CodeDeploy resources\. To do so, you must create a AWS Key Management Service \(AWS KMS\) key to use, add the key to the pipeline, and set up account policies and roles to enable cross\-account access\.
+You might want to create a pipeline that uses resources created or managed by another AWS account\. For example, you might want to use one account for your pipeline and another for your CodeDeploy resources\. 
 
 **Note**  
-Source actions cannot use Amazon S3 buckets from other AWS accounts\.
+When you create a pipeline with actions from multiple accounts, you must configure your actions so that they can still access artifacts within the limitations of cross\-account pipelines\. The following limitations apply to cross\-account actions:  
+In general, an action can only consume an artifact if:  
+The action is in the same account as the pipeline account OR
+The artifact was created in the pipeline account for an action in another account OR 
+The artifact was produced by a previous action in the same account as the action
+In other words, you cannot pass an artifact from one account to another if neither account is the pipeline account\.
+Cross\-account actions are not supported for the following action types:  
+Jenkins build actions
+CodeBuild build or test actions
+
+For this example, you must create an AWS Key Management Service \(AWS KMS\) key to use, add the key to the pipeline, and set up account policies and roles to enable cross\-account access\. For an AWS KMS key, you can use the key ID, the key ARN, or the alias ARN\. 
+
+**Note**  
+Aliases are recognized only in the account that created the customer master key \(CMK\)\. For cross\-account actions, you can only use the key ID or key ARN to identify the key\.
 
 In this walkthrough and its examples, *AccountA* is the account originally used to create the pipeline\. It has access to the Amazon S3 bucket used to store pipeline artifacts and the service role used by AWS CodePipeline\. *AccountB* is the account originally used to create the CodeDeploy application, deployment group, and service role used by CodeDeploy\. 
 

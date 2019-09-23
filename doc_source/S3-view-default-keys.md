@@ -4,12 +4,10 @@ When you use the Create Pipeline wizard to create your first pipeline, an Amazon
 
 To view information about your default AWS KMS key, do the following:
 
-1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
+1. Sign in to the AWS Management Console and open the AWS Key Management Service \(AWS KMS\) console at [https://console\.aws\.amazon\.com/kms](https://console.aws.amazon.com/kms)\.
 
-1. In the service navigation pane, choose **Encryption Keys**\. \(If a welcome page appears, choose **Get Started Now**\.\)
+1. To change the AWS Region, use the Region selector in the upper\-right corner of the page\.
 
-1. In **Filter**, choose the region for your pipeline\. For example, if the pipeline was created in `us-east-2`, make sure the filter is set to US East \(Ohio\)\.
-
-   For more information about the regions and endpoints available for CodePipeline, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#codepipeline_region)\.
+1. To view the keys in your account that AWS creates and manages for you, in the navigation pane, choose **AWS managed keys**\. \(If a welcome page appears, choose **Create a key**, and then choose **AWS managed keys**\.\)
 
 1. In the list of encryption keys, choose the key with the alias used for your pipeline \(by default, **aws/s3**\)\. Basic information about the key will be displayed\.

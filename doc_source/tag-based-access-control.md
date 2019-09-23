@@ -13,6 +13,9 @@ For the complete syntax and semantics of tag condition keys, see [Controlling Ac
 
 The following examples demonstrate how to specify tag conditions in policies for CodePipeline users\.
 
+**Note**  
+As you review the following examples, be aware that tag\-based access control for `iam:PassRole` is not currently supported\. You cannot limit permissions to pass a role based on tags attached to that role using the ResourceTag/key\-name condition key\. For more information, see [Controlling Access to Resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html#access_tags_control-resources)\.
+
 **Example 1: Limit actions based on tags in the request**  
 The CodePipeline **CodePipelineFullAccess** managed user policy gives users unlimited permission to perform any CodePipeline action on any resource\.  
 The following policy limits this power and denies unauthorized users permission to create pipelines for specific projects\. To do that, it denies the `CreatePipeline` action if the request specifies a tag named `Project` with one of the values `ProjectA` or `ProjectB`\. \(The `aws:RequestTag` condition key is used to control which tags can be passed in an IAM request\.\) In addition, the policy prevents these unauthorized users from tampering with the resources by using the `aws:TagKeys` condition key to not allow tag modification actions to include these same tag values or to completely remove the `Project` tag\. A customer's administrator must attach this IAM policy to unauthorized IAM users, in addition to the managed user policy\.  

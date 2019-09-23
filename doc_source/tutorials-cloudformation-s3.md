@@ -1,6 +1,6 @@
 # Example 2: Create an Amazon S3 Pipeline with AWS CloudFormation<a name="tutorials-cloudformation-s3"></a>
 
-You use a sample template file to create your resource stack, which includes your source bucket, artifact store, pipeline, and change\-detection resources, such as your Amazon CloudWatch Events rule\. The pipeline is a two\-stage pipeline with an Amazon S3 source stage and a CodeDeploy deployment stage\.
+This walkthrough shows you how to use the AWS CloudFormation console to create infrastructure that includes a pipeline connected to an Amazon S3 source bucket\. In this tutorial, you use the provided sample template file to create your resource stack, which includes your source bucket, artifact store, pipeline, and change\-detection resources, such as your Amazon CloudWatch Events rule and CloudTrail trail\. After you create your resource stack in AWS CloudFormation, you can view your pipeline in the AWS CodePipeline console\. The pipeline is a two\-stage pipeline with an Amazon S3 source stage and a CodeDeploy deployment stage\.
 
 **Prerequisites:**
 

@@ -103,7 +103,7 @@ For more information, see [A Quick Look at Input and Output Artifacts](welcome.m
 
    Choose **Next**\.
 
-1. In **Step 2: Add source stage**, in **Source provider**, choose **AWS CodeCommit**\. In **Repository name**, choose the name of the CodeCommit repository you created in [Step 1: Create a CodeCommit Repository and Local Repo](tutorials-simple-codecommit.md#codecommit-create-repository)\. In **Branch name**, choose the name of the branch that contains your latest code update\. Unless you created a different branch on your own, only `master` is available\. 
+1. In **Step 2: Add source stage**, in **Source provider**, choose **AWS CodeCommit**\. In **Repository name**, choose the name of the CodeCommit repository you created in [Step 1: Create a CodeCommit Repository](tutorials-simple-codecommit.md#codecommit-create-repository)\. In **Branch name**, choose the name of the branch that contains your latest code update\. Unless you created a different branch on your own, only `master` is available\. 
 
    After you select the repository name and branch, the Amazon CloudWatch Events rule to be created for this pipeline is displayed\. 
 
@@ -125,6 +125,10 @@ The deployment fails if you do not select **Extract file before deploy**\.This i
 
       When **Extract file before deploy** is selected, **Deployment path** is displayed\. Enter the name of the path you want to use\. This creates a folder structure in Amazon S3 to which the files are extracted\. For this tutorial, leave this field blank\.  
 ![\[The Step 4: Deploy page for an S3 deploy action with an AWS CodeCommit source\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/tutorial-s3deploy-stage-codecommit.png)![\[The Step 4: Deploy page for an S3 deploy action with an AWS CodeCommit source\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The Step 4: Deploy page for an S3 deploy action with an AWS CodeCommit source\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+
+   1. \(Optional\) In **Canned ACL**, you can apply a set of predefined grants, known as a [canned ACL](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl), to the uploaded artifacts\. 
+
+   1. \(Optional\) In **Cache control**, enter the caching parameters\. You can set this to control caching behavior for requests/responses\. For valid values, see the [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9) header field for HTTP operations\.
 
    1. Choose **Next**\.
 
@@ -295,6 +299,10 @@ For more information, see [A Quick Look at Input and Output Artifacts](welcome.m
 
       This creates a `js-application` folder in Amazon S3 to which the files are extracted\. In this folder, the `{datetime}` variable creates a timestamp on each output file when your pipeline runs\.  
 ![\[The Step 4: Deploy page for an Amazon S3 deploy action with an Amazon S3 source\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/tutorial-s3deploy-stage-s3source.png)![\[The Step 4: Deploy page for an Amazon S3 deploy action with an Amazon S3 source\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The Step 4: Deploy page for an Amazon S3 deploy action with an Amazon S3 source\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+
+   1. \(Optional\) In **Canned ACL**, you can apply a set of predefined grants, known as a [canned ACL](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl), to the uploaded artifacts\. 
+
+   1. \(Optional\) In **Cache control**, enter the caching parameters\. You can set this to control caching behavior for requests/responses\. For valid values, see the [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9) header field for HTTP operations\.
 
    1. Choose **Next**\.
 

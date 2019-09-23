@@ -253,7 +253,9 @@ The test assumes a default port of 80\. If you want to specify a different port,
 
 1. In the name field for the new stage, type a name \(for example, **Testing**\), and then choose **\+ Add action group**\. 
 
-1. In **Action name**, type *MyJenkinsTest\-Action*\. In **Test provider**, choose the provider name you specified in Jenkins \(for example, *MyJenkinsProviderName*\)\. In **Project name**, type the name of the project you created in Jenkins \(for example, *MyTestProject*\)\. In **Input artifacts**, choose the artifact from the Jenkins build whose default name is *MyBuiltApp*, and then choose **Save**\.
+1. In **Action name**, type *MyJenkinsTest\-Action*\. In **Test provider**, choose the provider name you specified in Jenkins \(for example, *MyJenkinsProviderName*\)\. In **Project name**, type the name of the project you created in Jenkins \(for example, *MyTestProject*\)\. In **Input artifacts**, choose the artifact from the Jenkins build whose default name is *BuildArtifact*, and then choose **Save**\.
+**Note**  
+Because the Jenkins test action operates on the application built in the Jenkins build step, use the build artifact for the input artifact to the test action\.
 
    For more information about input and output artifacts and the structure of pipelines, see [CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
 

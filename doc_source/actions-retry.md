@@ -1,8 +1,10 @@
 # Retry a Failed Action in CodePipeline<a name="actions-retry"></a>
 
-In AWS CodePipeline, an action is a task performed on an artifact in a stage\. If an action or a set of parallel actions is not completed successfully, the pipeline stops running\. 
+In AWS CodePipeline, an action is a task performed on an artifact in a stage\. If an action \(or a set of parallel actions\) is not completed successfully, the action fails\. You can use the CLI to manually retry the failed action before the stage completes \(while other actions are still in progress\)\. If a stage completes with one or more failed actions, the stage fails, and the pipeline execution does not transition to the next stage in the pipeline\.
 
-You can retry the latest failed actions in a stage without having to run a pipeline again from the beginning\. If you are using the console to view a pipeline, a **Retry** button will appear on the stage where the failed actions can be retried\. 
+You can retry the latest failed actions in a stage without having to run a pipeline again from the beginning\. You do this by retrying the stage that contains the actions\. You can retry a stage immediately after any of actions fail\. All actions that are still in progress continue their work, and failed actions are triggered once again\.
+
+If you are using the console to view a pipeline, a **Retry** button appears on the stage where the failed actions can be retried\. 
 
 ![\[A stage that contains one or more failed actions displays a Retry button\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/actions-retry-button.png)![\[A stage that contains one or more failed actions displays a Retry button\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[A stage that contains one or more failed actions displays a Retry button\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
@@ -11,7 +13,6 @@ If you are using the AWS CLI, you can use the get\-pipeline\-state command to de
 **Note**  
 In the following cases, you may not be able to retry actions:  
 The overall pipeline structure changed after an action failed\.
-One or more actions in the stage are still in progress\.
 Another retry attempt in the stage is already in progress\.
 
 **Topics**
@@ -36,9 +37,35 @@ To identify which actions in the stage can be retried, hover over the **Retry** 
 
 ## Retry Failed Actions \(CLI\)<a name="actions-retry-cli"></a>
 
-****
+**Option 1: Retry failed actions using parameters for the CLI command**
 
-To use the AWS CLI to retry failed actions, you first create a JSON file that identifies the pipeline, the stage that contains the failed actions, and the latest pipeline execution in that stage\. You then run the retry\-stage\-execution command with the `--cli-input-json` parameter\. To retrieve the details you need for the JSON file, it's easiest to use the get\-pipeline\-state command\.
+To use the AWS CLI to retry failed actions, you run the retry\-stage\-execution command with the following parameters: 
+
+```
+--pipeline-name <value>
+--stage-name <value>
+--pipeline-execution-id <value>
+--retry-mode <value>
+```
+**Note**  
+The only value you can use for `retry-mode` is `FAILED_ACTIONS`\.
++ At a terminal \(Linux, macOS, or Unix\) or command prompt \(Windows\), run the [https://docs.aws.amazon.com/cli/latest/reference/codepipeline/get-pipeline-state.html](https://docs.aws.amazon.com/cli/latest/reference/codepipeline/get-pipeline-state.html) command, as shown in the following example for a pipeline named `MyPipeline`\.
+
+  ```
+  aws codepipeline retry-stage-execution --pipeline-name MyPipeline --stage-name Deploy --pipeline-execution-id b59babff-5f34-EXAMPLE --retry-mode FAILED_ACTIONS
+  ```
+
+  The output returns the execution ID:
+
+  ```
+  {
+      "pipelineExecutionId": "b59babff-5f34-EXAMPLE"
+  }
+  ```
+
+**Option 2: Retry failed actions using a JSON input file for the CLI command**
+
+You can also run the command with a JSON input file\. You first create a JSON file that identifies the pipeline, the stage that contains the failed actions, and the latest pipeline execution in that stage\. You then run the retry\-stage\-execution command with the `--cli-input-json` parameter\. To retrieve the details you need for the JSON file, it's easiest to use the get\-pipeline\-state command\.
 
 1. At a terminal \(Linux, macOS, or Unix\) or command prompt \(Windows\), run the [https://docs.aws.amazon.com/cli/latest/reference/codepipeline/get-pipeline-state.html](https://docs.aws.amazon.com/cli/latest/reference/codepipeline/get-pipeline-state.html) command on a pipeline\. For example, for a pipeline named MyFirstPipeline, you would type something similar to the following:
 
