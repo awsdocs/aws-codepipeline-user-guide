@@ -130,7 +130,7 @@ For the purposes of this tutorial, you can use the following unrestricted policy
    </powershell>
    ```
 
-   *bucket\-name* is the name of the Amazon S3 bucket that contains the CodeDeploy Resource Kit files for your region\. For example, for the US West \(Oregon\) Region, replace *bucket\-name* with `aws-codedeploy-uswest-2`\. For a list of bucket names, see [Resource Kit Bucket Names by Region](https://docs.aws.amazon.com/codedeploy/latest/userguide/resource-kit.html#resource-kit-bucket-names)\.
+   *bucket\-name* is the name of the Amazon S3 bucket that contains the CodeDeploy Resource Kit files for your region\. For example, for the US West \(Oregon\) Region, replace *bucket\-name* with `aws-codedeploy-us-west-2`\. For a list of bucket names, see [Resource Kit Bucket Names by Region](https://docs.aws.amazon.com/codedeploy/latest/userguide/resource-kit.html#resource-kit-bucket-names)\.
 
    This code installs the CodeDeploy agent on your instance as it is created\. This script is written for Windows instances only\.
 
