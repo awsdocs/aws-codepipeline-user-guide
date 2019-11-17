@@ -110,20 +110,21 @@ An action has the following high\-level structure:
                         An input artifact structure, if supported for the action category
                     ],
                    "name": "ActionName",
-                   "region": "Region",  
-                    "actionTypeId": {
+                   "region": "Region", 
+                   "namespace": "source_namespace", 
+                   "actionTypeId": {
                         "category": "An action category",
                         "owner": "AWS",
                         "version": "1"
                         "provider": "A provider type for the action category",
-                    },
-                    "outputArtifacts": [
+                   },
+                   "outputArtifacts": [
                         An output artifact structure, if supported for the action category
-                    ],
-                    "configuration": {
+                   ],
+                   "configuration": {
                         Configuration details appropriate to the provider type
-                    },
-                    "runOrder": A positive integer that indicates the run order within the stage,
+                   },
+                   "runOrder": A positive integer that indicates the run order within the stage,
                 }
             ]
 ```
@@ -157,10 +158,11 @@ The action structure has the following requirements:
   The following illustration provides an example of input and output artifacts in actions in a pipeline:  
 ![\[An example of input and output artifacts in actions in a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-artifactsexplained.png)![\[An example of input and output artifacts in actions in a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[An example of input and output artifacts in actions in a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 + Output artifact names must be unique in a pipeline\. For example, a pipeline can include one action that has an output artifact named `"MyApp"` and another action that has an output artifact named `"MyBuiltApp"`\. However, a pipeline cannot include two actions that both have an output artifact named `"MyApp"`\.
-+ Cross\-region actions use the `Region` field to designate the AWS Region where the actions is to be created\. The AWS resources created for this action must be created in the same Region provided in the `Region` field\. You cannot create cross\-region actions for the following actions types:
++ Cross\-region actions use the `Region` field to designate the AWS Region where the actions is to be created\. The AWS resources created for this action must be created in the same Region provided in the `region` field\. You cannot create cross\-region actions for the following action types:
   + Source actions
   + Actions by third\-party providers
   + Actions by custom providers
++ Actions can be configured with variables\. You use the `namespace` field to set the namespace and variable information for execution variables\. For reference information about execution variables and action output variables, see [Variables](reference-variables.md)\.
 + If an action contains a parameter whose value is secret, such as the OAuth token for a GitHub source action, the value of that parameter is masked in the JSON by a series of four asterisks \(\*\*\*\*\)\. The actual value is stored, and as long as you do not edit that value, or change the name of the action or the name of the stage where that action runs, you do not have to supply that value when editing the JSON using the AWS CLI or CodePipeline API\. However, if you change the name of the action, or the name of the stage in which the action runs, the value of any secret parameters is lost\. You must manually type the values for any secret parameters in the JSON, or the action fails the next time the pipeline runs\. 
 + For all currently supported action types, the only valid version string is "1"\.
 + For all currently supported action types, the only valid owner string is "AWS", "ThirdParty", or "Custom"\. For more information, see the [CodePipeline API Reference](http://docs.aws.amazon.com/codepipeline/latest/APIReference)\.

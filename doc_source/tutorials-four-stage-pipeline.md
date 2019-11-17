@@ -48,13 +48,13 @@ As a best practice, consider launching an Amazon EC2 instance to host your Jenki
 
 1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 
-1. In the IAM console, in the navigation pane, choose **Roles**, and then choose **Create new role**\.
+1. In the IAM console, in the navigation pane, choose **Roles**, and then choose **Create role**\.
 
-1.  On the **Select role type** page, with **AWS Service Role** selected, next to **Amazon EC2**, choose **Select**\.
+1. Under **Select type of trusted entity**, choose **AWS service**\. Under **Choose the service that will use this role**, choose **EC2**\. Under **Select your use case**, choose **EC2**\. 
 
-1. On the **Attach Policy** page, select the **AWSCodePipelineCustomActionAccess** managed policy, and then choose **Next Step**\. 
+1. Choose Next: Permissions\. On the **Attach permissions policies** page, select the **AWSCodePipelineCustomActionAccess** managed policy, and then choose **Next: Tags**\. Choose **Next: Review**\.
 
-1. On the **Set role name and review** page, in the **Role name** box, type the name of the role you will create specifically for Jenkins integration \(for example *JenkinsAccess*\), and then choose **Create role**\.
+1. On the **Review** page, in **Role name**, type the name of the role to create specifically for Jenkins integration \(for example *JenkinsAccess*\), and then choose **Create role**\.
 
 When you create the Amazon EC2 instance where you will install Jenkins, in **Step 3: Configure Instance Details**, make sure you choose the instance role \(for example, *JenkinsAccess*\)\.
 
@@ -141,7 +141,7 @@ Depending on when your service role was created, you might need to update its pe
    1. Choose **Custom location** if you already have an existing artifact store you have created, such as an Amazon S3 artifact bucket, in the same region as your pipeline\.
 **Note**  
 This is not the source bucket for your source code\. This is the artifact store for your pipeline\. A separate artifact store, such as an Amazon S3 bucket, is required for each pipeline\. When you create or edit a pipeline, you must have an artifact bucket in the pipeline Region, and then you must have one artifact bucket per AWS Region where you are running an action\.  
-For more information, see [A Quick Look at Input and Output Artifacts](welcome.md#welcome-introducing-artifacts) and [CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
+For more information, see [Input and Output Artifacts](welcome-introducing-artifacts.md) and [CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
 
 1. Choose **Next**\.
 
@@ -249,11 +249,11 @@ The test assumes a default port of 80\. If you want to specify a different port,
 
 1. On the pipeline details page, choose **Edit**\. 
 
-1. On the **Edit** page, choose **\+ Stage** to add a stage immediately after the Staging stage\. 
+1. On the **Edit** page, choose **\+ Stage** to add a stage immediately after the Build stage\. 
 
 1. In the name field for the new stage, type a name \(for example, **Testing**\), and then choose **\+ Add action group**\. 
 
-1. In **Action name**, type *MyJenkinsTest\-Action*\. In **Test provider**, choose the provider name you specified in Jenkins \(for example, *MyJenkinsProviderName*\)\. In **Project name**, type the name of the project you created in Jenkins \(for example, *MyTestProject*\)\. In **Input artifacts**, choose the artifact from the Jenkins build whose default name is *BuildArtifact*, and then choose **Save**\.
+1. In **Action name**, type *MyJenkinsTest\-Action*\. In **Test provider**, choose the provider name you specified in Jenkins \(for example, *MyJenkinsProviderName*\)\. In **Project name**, type the name of the project you created in Jenkins \(for example, *MyTestProject*\)\. In **Input artifacts**, choose the artifact from the Jenkins build whose default name is *BuildArtifact*, and then choose **Done**\.
 **Note**  
 Because the Jenkins test action operates on the application built in the Jenkins build step, use the build artifact for the input artifact to the test action\.
 

@@ -1,4 +1,4 @@
-# CloudFormation<a name="action-reference-CloudFormation"></a>
+# AWS CloudFormation<a name="action-reference-CloudFormation"></a>
 
 Executes an operation on a AWS CloudFormation stack\. A stack is a collection of AWS resources that you can manage as a single unit\. The resources in a stack are defined by the stack's AWS CloudFormation template\. A change set creates a comparison that can be viewed without altering the original stack\. For information about the types of AWS CloudFormation actions that can be performed on stacks and change sets, see the `ActionMode` parameter\.
 

@@ -77,8 +77,11 @@ You can use the console to view the history of executions in a pipeline, includi
 
 1. Choose **View history**\.
 
-1. View the status, source revisions, and change details related to each execution for your pipeline\.  
+1. View the status, source revisions, change details, and triggers related to each execution for your pipeline\.  
 ![\[View execution history.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/view-execution-history.png)![\[View execution history.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[View execution history.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+
+1. Choose an execution\. The detail view shows execution details, the **Timeline** tab, and the **Visualization** tab\.  
+![\[View execution details.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/view-execution-detail.png)![\[View execution details.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[View execution details.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
 ## View Execution Status \(Console\)<a name="pipelines-executions-status-console"></a>
 
@@ -91,9 +94,8 @@ The following are valid states for pipelines, stages, and actions:
 
 | Pipeline State | Description | 
 | --- | --- | 
-| STARTED | The pipeline execution is currently running\. | 
+| INPROGRESS | The pipeline execution is currently running\. | 
 | SUCCEEDED | The pipeline execution was completed successfully\. | 
-| RESUMED | A failed pipeline execution has been retried in response to the RetryStageExecution API call\. | 
 | FAILED | The pipeline execution was not completed successfully\. | 
 | SUPERSEDED |  While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution advanced and continued through the pipeline instead\.  | 
 
@@ -102,9 +104,8 @@ The following are valid states for pipelines, stages, and actions:
 
 | Stage State | Description | 
 | --- | --- | 
-| STARTED | The stage is currently running\. | 
+| INPROGRESS | The stage is currently running\. | 
 | SUCCEEDED | The stage was completed successfully\. | 
-| RESUMED | A failed stage has been retried in response to the RetryStageExecution API call\. | 
 | FAILED | The stage was not completed successfully\. | 
 
 
@@ -112,7 +113,7 @@ The following are valid states for pipelines, stages, and actions:
 
 | Action State | Description | 
 | --- | --- | 
-| STARTED | The action is currently running\. | 
+| INPROGRESS | The action is currently running\. | 
 | SUCCEEDED | The action was completed successfully\. | 
 | FAILED | For Approval actions, the FAILED state means the action was either rejected by the reviewer or failed due to an incorrect action configuration\. | 
 
@@ -129,12 +130,12 @@ You can view details about source artifacts \(output artifact that originated in
 
 1. Choose the name of the pipeline for which you want to view source revision details, Do one of the following: 
    + Choose **View history**\. In **Source revisions**, the source change for each execution is listed\.  
-![\[Information about a revision can be viewed on the execution history page\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/source-rev-s3.png)![\[Information about a revision can be viewed on the execution history page\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Information about a revision can be viewed on the execution history page\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+![\[Information about a revision can be viewed on the execution history page\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/view-execution-history.png)![\[Information about a revision can be viewed on the execution history page\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Information about a revision can be viewed on the execution history page\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
    + Locate an action for which you want to view source revision details, and then find the revision information at the bottom of its stage:   
 ![\[Information about a revision can be viewed at the bottom of a stage in the CodePipeline console.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/view-changes-console-3.png)![\[Information about a revision can be viewed at the bottom of a stage in the CodePipeline console.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Information about a revision can be viewed at the bottom of a stage in the CodePipeline console.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
-     Click in the details area to view more information about the artifact, including the length of time since the artifact was committed\. With the exception of artifacts stored in Amazon S3 buckets, identifiers such as commit IDs in this information detail view are linked to source information pages for the artifacts\.   
-![\[Click in the details area to view more information about the artifact.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/view-changes-console-4.png)![\[Click in the details area to view more information about the artifact.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Click in the details area to view more information about the artifact.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+     Choose **View current revisions** to view source information\. With the exception of artifacts stored in Amazon S3 buckets, identifiers such as commit IDs in this information detail view are linked to source information pages for the artifacts\.   
+![\[View source revisions.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/view-changes-console-4.png)![\[View source revisions.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[View source revisions.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
 ## View Action Executions \(Console\)<a name="pipelines-action-executions-console"></a>
 

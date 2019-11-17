@@ -19,3 +19,4 @@ For information about the AWS services and partner products and services you can
 + [Retry a Failed Action](actions-retry.md)
 + [Manage Approval Actions in Pipelines](approvals.md)
 + [Add a Cross\-Region Action to a Pipeline](actions-create-cross-region.md)
++ [Working with Variables](actions-variables.md)

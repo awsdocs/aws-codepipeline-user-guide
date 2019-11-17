@@ -2,6 +2,9 @@
 
 AWS Service Catalog enables you to create and provision products based on AWS CloudFormation templates\. This tutorial shows you how to create and configure a pipeline to deploy your product template to AWS Service Catalog and deliver changes you have made in your source repository \(already created in GitHub, CodeCommit, or Amazon S3\)\.
 
+**Note**  
+When Amazon S3 is the source provider for your pipeline, you must upload to your bucket all source files packaged as a single \.zip file\. Otherwise, the source action fails\.
+
 First, you create a product in AWS Service Catalog, and then you create a pipeline in AWS CodePipeline\. This tutorial provides two options for setting up the deployment configuration:
 + Create a product in AWS Service Catalog and upload a template file to your source repository\. Provide product version and deployment configuration in the CodePipeline console \(without a separate configuration file\)\. See [Option 1: Deploy to AWS Service Catalog Without a Configuration File](#tutorials-S3-servicecatalog-ex1-configure)\.
 **Note**  

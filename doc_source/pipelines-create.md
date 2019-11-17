@@ -1,8 +1,8 @@
 # Create a Pipeline in CodePipeline<a name="pipelines-create"></a>
 
-You can use the AWS CodePipeline console or the AWS CLI to create a pipeline\. Pipelines must have at least two stages\. The first stage of a pipeline is required to be a source stage, and the pipeline is required to additionally have at least one other stage that is a build or deployment stage\.
+You can use the AWS CodePipeline console or the AWS CLI to create a pipeline\. Pipelines must have at least two stages\. The first stage of a pipeline must be a source stage\. The pipeline must have at least one other stage that is a build or deployment stage\.
 
-You can add actions to your pipeline that are in an AWS Region different from your pipeline\. When an AWS service is the provider for an action, and this action type/provider type are in a different AWS Region from your pipeline, this is a cross\-region action\. For more information about cross\-region actions, see [Add a Cross\-Region Action in CodePipeline](actions-create-cross-region.md)\.
+You can add actions to your pipeline that are in an AWS Region different from your pipeline\. A cross\-region action is one in which an AWS service is the provider for an action and the action type or provider type are in an AWS Region different from your pipeline\. For more information, see [Add a Cross\-Region Action in CodePipeline](actions-create-cross-region.md)\.
 
 You can also create pipelines that build and deploy container\-based applications by using Amazon ECS as the deployment provider\. Before you create a pipeline that deploys container\-based applications with Amazon ECS, you must create an image definitions file as described in [Image Definitions File Reference](file-reference.md)\.
 
@@ -56,7 +56,7 @@ Depending on when your service role was created, you might need to update its pe
    1. Choose **Custom location** if you already have an artifact store, such as an Amazon S3 artifact bucket, in the same Region as your pipeline\.
 **Note**  
 This is not the source bucket for your source code\. This is the artifact store for your pipeline\. A separate artifact store, such as an Amazon S3 bucket, is required for each pipeline\. When you create or edit a pipeline, you must have an artifact bucket in the pipeline Region, and then you must have one artifact bucket per AWS Region where you are running an action\.  
-For more information, see [A Quick Look at Input and Output Artifacts](welcome.md#welcome-introducing-artifacts) and [CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
+For more information, see [Input and Output Artifacts](welcome-introducing-artifacts.md) and [CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
 
 1.  Choose **Next**\.
 
@@ -64,9 +64,9 @@ For more information, see [A Quick Look at Input and Output Artifacts](welcome.m
 + On the **Step 2: Add source stage** page, in **Source provider**, choose the type of repository where your source code is stored, specify its required options, and then choose **Next step**\.
   + For **GitHub**: 
 
-    1. Choose **Connect to GitHub**\. If you are prompted to sign in, provide your GitHub credentials\. 
+    1. Choose **Connect to GitHub**\. If you are prompted to sign in, enter your GitHub credentials\. 
 **Important**  
-Do not provide your AWS credentials\.
+Do not enter your AWS credentials\.
 
     1. If this is your first time connecting to GitHub from CodePipeline for this Region, you are asked to authorize application access to your account\. Review the permissions required for integration, and then, if you want to continue, choose **Authorize application**\. When you connect to GitHub in the console, the following resources are created for you:
        + CodePipeline uses an OAuth token to create an authorized application that is managed by CodePipeline\.
@@ -84,6 +84,8 @@ In GitHub, there is a limit to the number of OAuth tokens you can use for an app
        ```
         s3://bucketName/folderName/objectName
        ```
+**Note**  
+When Amazon S3 is the source provider for your pipeline, you must upload to your bucket all source files packaged as a single \.zip file\. Otherwise, the source action fails\.
 
     1. After you choose the Amazon S3 source bucket, CodePipeline creates the Amazon CloudWatch Events rule and the AWS CloudTrail trail to be created for this pipeline\. Accept the defaults under **Change detection options**\. This allows CodePipeline to use Amazon CloudWatch Events and AWS CloudTrail to detect changes for your new pipeline\. Choose **Next**\.
   + For **AWS CodeCommit**:
@@ -105,12 +107,19 @@ The object and file type must be compatible with the deployment system you plan 
 This step is optional if you plan to create a deployment stage\.
 + On the **Step 3: Add build stage** page, do one of the following, and then choose **Next**: 
   + Choose **Skip build stage** if you plan to create a deployment stage\.
-  + From **Build provider**, choose a custom action provider of build services that you want to use, and provide the configuration details for that provider\. For an example of how to add Jenkins as a build provider, see [Tutorial: Create a Four\-Stage Pipeline](tutorials-four-stage-pipeline.md)\.
+  + From **Build provider**, choose a custom action provider of build services, and provide the configuration details for that provider\. For an example of how to add Jenkins as a build provider, see [Tutorial: Create a Four\-Stage Pipeline](tutorials-four-stage-pipeline.md)\.
   + From **Build provider**, choose **AWS CodeBuild**\. 
 
-    In **Region**, choose the AWS Region where the resource is created or where you plan to create it\. The **Region** field designates where the AWS resources are created for this action type and provider type\. This field only displays for actions where the action provider is an AWS service\. The **Region** field defaults to the same AWS Region as your pipeline\.
+    In **Region**, choose the AWS Region where the resource exists\. The **Region** field designates where the AWS resources are created for this action type and provider type\. This field is displayed only for actions where the action provider is an AWS service\. The **Region** field defaults to the same AWS Region as your pipeline\.
 
-    In **Project name**, choose your build project\. If you have already created a build project in CodeBuild, choose it\. Or you can create a build project in CodeBuild and then return to this task\. Follow the instructions in [Create a Pipeline That Uses CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/how-to-create-pipeline.html#pipelines-create-console) in the *CodeBuild User Guide*\. 
+    In **Project name**, choose your build project\. If you have already created a build project in CodeBuild, choose it\. Or you can create a build project in CodeBuild and then return to this task\. Follow the instructions in [Create a Pipeline That Uses CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/how-to-create-pipeline.html#pipelines-create-console) in the *CodeBuild User Guide*\.
+
+    To add CodeBuild environment variables to your build action, choose **Add environment variable**\. Each variable is made up of three entries:
+    + In **Name**, enter the name or key of the environment variable\.
+    + In **Value**, enter the value of the environment variable\. If you choose **Parameter** for the variable type, make sure this value is the name of a parameter you have already stored in AWS Systems Manager Parameter Store\.
+**Note**  
+We strongly discourage the use of environment variables to store sensitive values, especially AWS secret key IDs and secret access keys\. When you use the CodeBuild console or AWS CLI, environment variables are displayed in plain text\. For sensitive values, we recommend that you use the **Parameter** type instead\. 
+    + \(Optional\) In **Type**, enter the type of environment variable\. Valid values are **Plaintext** or **Parameter**\. The default is **Plaintext**\.
 
 **Step 4: Create a deployment stage**
 
@@ -184,7 +193,7 @@ Applying a canned ACL overwrites any existing ACL applied to the object\.
       \(Optional\) In **Cache control**, specify the cache control parameters for requests to download objects from the bucket\. For a list of valid values, see the [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9) header field for HTTP operations\. To enter multiple values in **Cache control**, use a comma between each value\. You can add a space after each comma \(optional\), as shown in this example\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/cache_control_values.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
-      If accessed using the CLI, the example entry above displays in the pipeline structure as follows:
+      The preceding example entry is displayed in the CLI as follows:
 
       ```
       "CacheControl": "public, max-age=0, no-transform"

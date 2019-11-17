@@ -19,3 +19,4 @@ For more information about pipelines, see [CodePipeline Concepts](concepts.md), 
 + [Edit a Pipeline for Push Events](update-change-detection.md)
 + [Create the CodePipeline Service Role](pipelines-create-service-role.md)
 + [Tag a Pipeline](pipelines-tag.md)
++ [Create a Notification Rule](notification-rule-create.md)

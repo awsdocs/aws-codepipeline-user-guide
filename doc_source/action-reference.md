@@ -10,6 +10,10 @@ Each action provider in CodePipeline uses a set of required and optional configu
 This section is updated periodically with more action providers\. Reference information is currently available for the following action providers:
 
 **Topics**
-+ [CodeBuild](action-reference-CodeBuild.md)
-+ [CloudFormation](action-reference-CloudFormation.md)
-+ [Lambda](action-reference-Lambda.md)
++ [AWS CloudFormation](action-reference-CloudFormation.md)
++ [AWS CodeBuild](action-reference-CodeBuild.md)
++ [CodeCommit](action-reference-CodeCommit.md)
++ [GitHub](action-reference-GitHub.md)
++ [Amazon ECR](action-reference-ECR.md)
++ [AWS Lambda](action-reference-Lambda.md)
++ [Amazon S3](action-reference-S3.md)

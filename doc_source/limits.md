@@ -2,6 +2,9 @@
 
 The following table lists current limits in AWS CodePipeline\. For information about structural requirements, see [CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\. For information about limits that can be changed, see [AWS Service Limits](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_codepipeline)\.
 
+**Note**  
+Limits that appear in both this table and in the [AWS Service Limits](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_codepipeline) table are configurable limits\. All other limits in this table are not configurable\.
+
 
 |  |  | 
 | --- |--- |

@@ -1,4 +1,4 @@
-# Lambda<a name="action-reference-Lambda"></a>
+# AWS Lambda<a name="action-reference-Lambda"></a>
 
 Allows you to execute a Lambda function as an action in your pipeline\. Using the event object that is an input to this function, the function has access to the action configuration, input artifact locations, output artifact locations, and other information required to access the artifacts\. For an example event passed to a Lambda invoke function, see [Example JSON Event](#action-reference-Lambda-event)\. As part of the implementation of the Lambda function, there must be a call to either the `[PutJobSuccessResult API](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_PutJobSuccessResult.html)` or `[PutJobFailureResult API](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_PutJobFailureResult.html)`\. Otherwise, the execution of this action hangs until the action times out\. If you specify output artifacts for the action, they must be uploaded to the S3 bucket as part of the function implementation\.
 
@@ -25,6 +25,12 @@ A string that can be processed as input by the Lambda function\.
 ## Output Artifacts<a name="action-reference-Lambda-output"></a>
 + **Number of Artifacts:** `0 to 5` 
 + **Description:** The set of artifacts produced as output by the Lambda function\.
+
+## Output Variables<a name="action-reference-Lambda-variables"></a>
+
+This action will produce as variables all key\-value pairs that are included in the `outputVariables` section of the [PutJobSuccessResult API](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_PutJobSuccessResult.html) request\.
+
+For more information about variables in CodePipeline, see [Variables](reference-variables.md)\.
 
 ## Example Action Configuration<a name="action-reference-Lambda-example"></a>
 

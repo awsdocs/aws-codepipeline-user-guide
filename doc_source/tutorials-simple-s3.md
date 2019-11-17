@@ -4,11 +4,14 @@ The easiest way to create a pipeline is to use the **Create pipeline** wizard in
 
 In this walkthrough, you create a two\-stage pipeline that uses a versioned Amazon S3 bucket and CodeDeploy to release a sample application\. 
 
+**Note**  
+When Amazon S3 is the source provider for your pipeline, you must upload to your bucket all source files packaged as a single \.zip file\. Otherwise, the source action fails\.
+
+After you create this simple pipeline, you add another stage and then disable and enable the transition between stages\.
+
 **Important**  
 Many of the actions you add to your pipeline in this procedure involve AWS resources that you need to create before you create the pipeline\. AWS resources for your source actions must always be created in the same AWS Region where you create your pipeline\. For example, if you create your pipeline in the US East \(Ohio\) Region, your CodeCommit repository must be in the US East \(Ohio\) Region\.   
 You can add cross\-region actions when you create your pipeline\. AWS resources for cross\-region actions must be in the same AWS Region where you plan to execute the action\. For more information about cross\-region actions, see [Add a Cross\-Region Action in CodePipeline](actions-create-cross-region.md)\.
-
-After you create this simple pipeline, you add another stage and then disable and enable the transition between stages\.
 
 Not what you're looking for? To create a simple pipeline using a CodeCommit branch as a code repository, see [Tutorial: Create a Simple Pipeline \(CodeCommit Repository\)](tutorials-simple-codecommit.md)\.
 
@@ -130,7 +133,7 @@ For the purposes of this tutorial, you can use the following unrestricted policy
    </powershell>
    ```
 
-   *bucket\-name* is the name of the Amazon S3 bucket that contains the CodeDeploy Resource Kit files for your region\. For example, for the US West \(Oregon\) Region, replace *bucket\-name* with `aws-codedeploy-uswest-2`\. For a list of bucket names, see [Resource Kit Bucket Names by Region](https://docs.aws.amazon.com/codedeploy/latest/userguide/resource-kit.html#resource-kit-bucket-names)\.
+   *bucket\-name* is the name of the Amazon S3 bucket that contains the CodeDeploy Resource Kit files for your region\. For example, for the US West \(Oregon\) Region, replace *bucket\-name* with `aws-codedeploy-us-west-2`\. For a list of bucket names, see [Resource Kit Bucket Names by Region](https://docs.aws.amazon.com/codedeploy/latest/userguide/resource-kit.html#resource-kit-bucket-names)\.
 
    This code installs the CodeDeploy agent on your instance as it is created\. This script is written for Windows instances only\.
 
@@ -219,7 +222,7 @@ Depending on when your service role was created, you might need to update its pe
    1. Choose **Custom location** if you already have an existing artifact store you have created, such as an Amazon S3 artifact bucket, in the same region as your pipeline\.
 **Note**  
 This is not the source bucket for your source code\. This is the artifact store for your pipeline\. A separate artifact store, such as an Amazon S3 bucket, is required for each pipeline\. When you create or edit a pipeline, you must have an artifact bucket in the pipeline Region, and then you must have one artifact bucket per AWS Region where you are running an action\.  
-For more information, see [A Quick Look at Input and Output Artifacts](welcome.md#welcome-introducing-artifacts) and [CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
+For more information, see [Input and Output Artifacts](welcome-introducing-artifacts.md) and [CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
 
    Choose **Next**\.
 
