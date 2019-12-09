@@ -21,6 +21,9 @@ Create a `buildspec.yml` file with the following contents, and add it to your se
 ```
 version: 0.2
 phases:
+  install:
+    runtime-versions:
+        python: 3.8
   build:
     commands:
       - pip install --upgrade pip
