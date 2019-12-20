@@ -74,7 +74,7 @@ The put\-rule command above can use either the `aws.ecr` or `ecr.amazonaws.com` 
    + The `--rule` parameter is used with the `rule_name` you created by using put\-rule\.
    + The `--targets` parameter is used with the list `Id` of the target in the list of targets and the `ARN` of the target pipeline\.
 
-   The following sample command specifies that for the rule called `MyECRRepoRule`, the target `Id` is composed of the number one, indicating that in a list of targets for the rule, this is target 1\. The sample command also specifies an example `ARN` for the pipeline\. The pipeline starts when something changes in the repository\.
+   The following sample command specifies that for the rule called `MyECRRepoRule`, the target `Id` is composed of the number one, indicating that in a list of targets for the rule, this is target 1\. The sample command also specifies an example `Arn` for the pipeline and the example `RoleArn` for the rule\. The pipeline starts when something changes in the repository\.
 
    ```
    aws events put-targets --rule MyECRRepoRule --targets Id=1,Arn=arn:aws:codepipeline:us-west-2:80398EXAMPLE:TestPipeline,RoleArn=arn:aws:iam::80398EXAMPLE:role/Role-for-MyRule

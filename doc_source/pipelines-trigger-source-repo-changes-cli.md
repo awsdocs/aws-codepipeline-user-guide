@@ -65,7 +65,7 @@ Call the put\-rule command, specifying:
    The following sample command uses `--event-pattern` to create a rule called `MyCodeCommitRepoRule`\.
 
    ```
-   aws events put-rule --name "MyCodeCommitRepoRule" --event-pattern "{\"source\":[\"aws.codecommit\"],\"detail-type\":[\"CodeCommit Repository State Change\"],\"resources\":[\"pipeline-ARN\"],\"detail\":{\"referenceType\":[\"branch\"],\"referenceName \":[\"master\"]}}"
+   aws events put-rule --name "MyCodeCommitRepoRule" --event-pattern "{\"source\":[\"aws.codecommit\"],\"detail-type\":[\"CodeCommit Repository State Change\"],\"resources\":[\"repository-ARN\"],\"detail\":{\"referenceType\":[\"branch\"],\"referenceName\":[\"master\"]}}"
    ```
 
 1. To add CodePipeline as a target, call the put\-targets command and include the following parameters:

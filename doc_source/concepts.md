@@ -18,6 +18,8 @@ The following terms are used in CodePipeline:
   + [Superseded Executions](#concepts-superseded)
 + [Transitions](#concepts-transitions)
 + [Artifacts](#concepts-artifacts)
++ [Artifacts](#concepts-artifacts)
++ [Artifacts](#concepts-artifacts)
 
 ### Pipelines<a name="concepts-pipelines"></a>
 

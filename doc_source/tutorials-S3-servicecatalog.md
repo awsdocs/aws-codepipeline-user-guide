@@ -94,7 +94,7 @@ Copy the URL for your product before you navigate away from the page\. Once you 
 
    1. In **Service role**, choose **New service role**\. This creates a service role for CodePipeline to manage permissions to other AWS services\.
 **Note**  
-If you use a CodePipeline service role that was created before October 16 2018, you need to add permissions for AWS Service Catalog\. Open the IAM console, find the role, and then add the following permissions to the role's policy\. For more information, see [Add Permissions for Other AWS Services](how-to-custom-role.md#how-to-update-role-new-services)\.  
+If you use a CodePipeline service role that was created before October 16 2018, you need to add permissions for AWS Service Catalog\. Open the IAM console, find the role, and then add the following permissions to the role's policy\. For more information, see [Add Permissions to the CodePipeline Service Role](security-iam.md#how-to-update-role-new-services)\.  
 
       ```
        "Statement": [
@@ -279,7 +279,7 @@ Copy the URL for your product before you navigate away from the page\. Once you 
 
    1. In **Service role**, choose **New service role**\. This creates a service role for CodePipeline to manage permissions to other AWS services\.
 **Note**  
-If you use a CodePipeline service role that was created before October 16 2018, you need to add permissions for AWS Service Catalog\. Open the IAM console, find the role, and then add the following permissions to the role's policy\. For more information, see [Add Permissions for Other AWS Services](how-to-custom-role.md#how-to-update-role-new-services)\.  
+If you use a CodePipeline service role that was created before October 16 2018, you need to add permissions for AWS Service Catalog\. Open the IAM console, find the role, and then add the following permissions to the role's policy\. For more information, see [Add Permissions to the CodePipeline Service Role](security-iam.md#how-to-update-role-new-services)\.  
 
       ```
        "Statement": [

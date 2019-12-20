@@ -218,9 +218,9 @@ A [https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-groups.htm
 
 1. Under **Deployment configuration**, choose `CodeDeployDefault.OneAtaTime`\.
 
-1. Under **Load Balancer**, clear **Enable load balancing**\.
+1. Under **Load Balancer**, clear **Enable load balancing**\. You do not need to set up a load balancer or choose a target group for this example\.
 
-1. Expand the **Advanced** section\. Under **Alarms**, choose **Ignore alarm configuration**\.
+1. Expand the **Advanced** section\. Under **Alarms**, if any alarms are listed, choose **Ignore alarm configuration**\.
 
 1. Choose **Create deployment group**\.
 
@@ -289,8 +289,8 @@ Your pipeline is configured to run whenever code changes are made to your CodeCo
 1. Change directories to your local repo:
 
    ```
-   (For Linux, macOS, or Unix) cd /tmp/my-demo-repo
-   (For Windows) cd c:\temp\my-demo-repo
+   (For Linux, macOS, or Unix) cd /tmp/MyDemoRepo
+   (For Windows) cd c:\temp\MyDemoRepo
    ```
 
 1. Use a text editor to modify the `index.html` file:

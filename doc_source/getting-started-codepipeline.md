@@ -6,7 +6,7 @@ The CodePipeline console includes helpful information in a collapsible panel tha
 
 ![\[Viewing additional guidance in the console\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-guidance-open.png)
 
-The CodePipeline console also provides a way to quickly search for your resources, such as repositories, build projects, deployment applications, and pipelines\. Choose **Go to resource** or press the `/` key, and then type the name of the resource\. Any matches appear in the list\. Searches are case insensitive\. You only see resources that you have permissions to view\. For more information, see [Viewing Resources in the Console](access-control.md#console-resources)\. 
+The CodePipeline console also provides a way to quickly search for your resources, such as repositories, build projects, deployment applications, and pipelines\. Choose **Go to resource** or press the `/` key, and then type the name of the resource\. Any matches appear in the list\. Searches are case insensitive\. You only see resources that you have permissions to view\. For more information, see [Viewing Resources in the Console](security_iam_id-based-policy-examples.md#security-iam-resources-console)\. 
 
 Before you can use AWS CodePipeline for the first time, you must complete the following steps\.
 
@@ -28,10 +28,10 @@ Create an IAM user or use an existing one in your AWS account\. Make sure that y
 
 ## Step 3: Use an IAM Managed Policy to Assign CodePipeline Permissions to the IAM User<a name="assign-permissions"></a>
 
-You must give the IAM user permissions to interact with CodePipeline\. The quickest way to do this is to apply the **AWSCodePipelineFullAccess** managed policy to the IAM user\. 
+You must give the IAM user permissions to interact with CodePipeline\. The quickest way to do this is to apply the `AWSCodePipelineFullAccess` managed policy to the IAM user\. 
 
 **Note**  
-The **AWSCodePipelineFullAccess** policy includes permissions that allow the console user to pass an IAM role to CodePipeline or other AWS services\. This allows the service to assume the role and perform actions on your behalf\. When you attach the policy to a user, role, or group, the `iam:PassRole` permissions are applied\. Make sure the policy is only applied to trusted users\. When users with these permissions use the console to create or edit a pipeline, the following choices are available:  
+The `AWSCodePipelineFullAccess` policy includes permissions that allow the console user to pass an IAM role to CodePipeline or other AWS services\. This allows the service to assume the role and perform actions on your behalf\. When you attach the policy to a user, role, or group, the `iam:PassRole` permissions are applied\. Make sure the policy is only applied to trusted users\. When users with these permissions use the console to create or edit a pipeline, the following choices are available:  
 Create a CodePipeline service role or choose an existing one and pass the role to CodePipeline
 Might choose to create a CloudWatch Events rule for change detection and pass the CloudWatch Events service role to CloudWatch Events 
 For more information, see [Granting a User Permissions to Pass a Role to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html)\.
@@ -40,13 +40,13 @@ For more information, see [Granting a User Permissions to Pass a Role to an AWS 
 
 1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 
-1. In the IAM console, in the navigation pane, choose **Policies**, and then choose the **AWSCodePipelineFullAccess** managed policy from the list of policies\.
+1. In the IAM console, in the navigation pane, choose **Policies**, and then choose the `AWSCodePipelineFullAccess` managed policy from the list of policies\.
 
 1. On the **Policy Details** page, choose the **Attached Entities** tab, and then choose **Attach**\.
 
 1. On the **Attach Policy** page, select the check box next to the IAM users or groups, and then choose **Attach Policy**\.
 **Note**  
-The **AWSCodePipelineFullAccess** policy provides access to all CodePipeline actions and resources that the IAM user has access to, as well as all possible actions when creating stages in a pipeline, such as creating stages that include CodeDeploy, Elastic Beanstalk, or Amazon S3\. As a best practice, you should grant individuals only the permissions they need to perform their duties\. For more information about how to restrict IAM users to a limited set of CodePipeline actions and resources, see [Remove Permissions for Unused AWS Services](how-to-custom-role.md#remove-permissions-from-policy)\.
+The `AWSCodePipelineFullAccess` policy provides access to all CodePipeline actions and resources that the IAM user has access to, as well as all possible actions when creating stages in a pipeline, such as creating stages that include CodeDeploy, Elastic Beanstalk, or Amazon S3\. As a best practice, you should grant individuals only the permissions they need to perform their duties\. For more information about how to restrict IAM users to a limited set of CodePipeline actions and resources, see [Remove Permissions from the CodePipeline Service Role](security-iam.md#remove-permissions-from-policy)\.
 
 ## Step 4: Install the AWS CLI<a name="install-cli"></a>
 
@@ -74,7 +74,7 @@ CodePipeline works only with AWS CLI versions 1\.7\.38 and later\. To determine 
    ```
 **Note**  
 For more information about IAM, access keys, and secret keys, see [Managing Access Keys for IAM Users](https://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingCredentials.html) and [How Do I Get Credentials?](https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_Introduction.html#IAM_SecurityCredentials)\.   
-For more information about the regions and endpoints available for CodePipeline, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#codepipeline_region)\.
+For more information about the Regions and endpoints available for CodePipeline, see [AWS CodePipeline Endpoints and Quotas](https://docs.aws.amazon.com/general/latest/gr/rande.html#codepipeline_region)\.
 
 ## Step 5: Open the Console for CodePipeline<a name="open-codepipeline-console"></a>
 + Sign in to the AWS Management Console and open the CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.

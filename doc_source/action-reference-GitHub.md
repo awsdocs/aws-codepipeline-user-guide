@@ -165,7 +165,7 @@ The first time you use the console to add a GitHub repository to a pipeline, you
 
 When you use the CLI or an AWS CloudFormation template, you must provide the value for a personal access token that you have already created in GitHub\.
 
-To view the CodePipeline OAuth applications for your pipeline, see [View Your Authorized OAuth Apps](GitHub-view-oauth-token.md)\.
+To view the CodePipeline OAuth applications for your pipeline, see [View Your Authorized OAuth Apps](GitHub-authentication.md#GitHub-view-oauth-token)\.
 
 To create and manage GitHub personal access tokens, see [Configure Your Pipeline to Use a Personal Access Token \(GitHub and CLI\)](GitHub-create-personal-token-CLI.md)\.
 

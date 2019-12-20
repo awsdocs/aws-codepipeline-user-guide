@@ -11,7 +11,7 @@ After you create this simple pipeline, you add another stage and then disable an
 
 **Important**  
 Many of the actions you add to your pipeline in this procedure involve AWS resources that you need to create before you create the pipeline\. AWS resources for your source actions must always be created in the same AWS Region where you create your pipeline\. For example, if you create your pipeline in the US East \(Ohio\) Region, your CodeCommit repository must be in the US East \(Ohio\) Region\.   
-You can add cross\-region actions when you create your pipeline\. AWS resources for cross\-region actions must be in the same AWS Region where you plan to execute the action\. For more information about cross\-region actions, see [Add a Cross\-Region Action in CodePipeline](actions-create-cross-region.md)\.
+You can add cross\-region actions when you create your pipeline\. AWS resources for cross\-region actions must be in the same AWS Region where you plan to execute the action\. For more information, see [Add a Cross\-Region Action in CodePipeline](actions-create-cross-region.md)\.
 
 Not what you're looking for? To create a simple pipeline using a CodeCommit branch as a code repository, see [Tutorial: Create a Simple Pipeline \(CodeCommit Repository\)](tutorials-simple-codecommit.md)\.
 
@@ -189,7 +189,7 @@ You must choose the same value for the **Name** key here that you assigned to yo
 
 1. Under **Deployment configuration**, choose `CodeDeployDefault.OneAtaTime`\.
 
-1. Under **Load Balancer**, clear **Enable load balancing**\.
+1. Under **Load Balancer**, clear **Enable load balancing**\. You do not need to set up a load balancer or choose a target group for this example\.
 
 1. Expand the **Advanced** section\. Under **Alarms**, choose **Ignore alarm configuration**\.
 
@@ -213,7 +213,7 @@ If you choose another name for your pipeline, be sure to use that name instead o
    + Choose **New service role** to allow CodePipeline to create a new service role in IAM\. In **Role name**, the role and policy name both default to this format: AWSCodePipelineServiceRole\-*region*\-*pipeline\_name*\. For example, this is the service role created for this tutorial: AWSCodePipelineServiceRole\-eu\-west\-2\-MyFirstPipeline\.
    + Choose **Existing service role** to use a service role already created in IAM\. In **Role name**, choose your service role from the list\.
 **Note**  
-Depending on when your service role was created, you might need to update its permissions to support additional AWS services\. For information, see [Add Permissions for Other AWS Services](how-to-custom-role.md#how-to-update-role-new-services)\. 
+Depending on when your service role was created, you might need to update its permissions to support additional AWS services\. For information, see [Add Permissions to the CodePipeline Service Role](security-iam.md#how-to-update-role-new-services)\. 
 
 1. In **Artifact location**, do one of the following: 
 
@@ -221,7 +221,7 @@ Depending on when your service role was created, you might need to update its pe
 
    1. Choose **Custom location** if you already have an existing artifact store you have created, such as an Amazon S3 artifact bucket, in the same region as your pipeline\.
 **Note**  
-This is not the source bucket for your source code\. This is the artifact store for your pipeline\. A separate artifact store, such as an Amazon S3 bucket, is required for each pipeline\. When you create or edit a pipeline, you must have an artifact bucket in the pipeline Region, and then you must have one artifact bucket per AWS Region where you are running an action\.  
+This is not the source bucket for your source code\. This is the artifact store for your pipeline\. A separate artifact store, such as an S3 bucket, is required for each pipeline\. When you create or edit a pipeline, you must have an artifact bucket in the pipeline Region and one artifact bucket per AWS Region where you are running an action\.  
 For more information, see [Input and Output Artifacts](welcome-introducing-artifacts.md) and [CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
 
    Choose **Next**\.

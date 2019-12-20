@@ -34,7 +34,7 @@ Before you set up a rule in CloudWatch Events, you must create an AWS CloudTrail
 
 1. From **Event Type**, choose **Object Level Operations**\.
 
-1. Choose **Specific operation\(s\)**, and then choose **CompleteMultiPartUpload**, **CopyObject**, and **PutObject**\.
+1. Choose **Specific operation\(s\)**, and then choose **CompleteMultipartUpload**, **CopyObject**, and **PutObject**\.
 
    Above the **Event Pattern Preview** pane, choose **Edit**\. Edit the event pattern to add the bucket name and encryption key as `requestParameters`, as shown in this example for a bucket named `my-bucket`\. When you use the **Edit** window to specify resources, your rule is updated to use a custom event pattern\.  
 ![\[S3 source state change rule\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/cloudwatch-rule-event-pattern-S3-source.png)![\[S3 source state change rule\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[S3 source state change rule\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
@@ -55,7 +55,7 @@ Before you set up a rule in CloudWatch Events, you must create an AWS CloudTrail
            ],
            "eventName": [
                "CopyObject",
-               "CompleteMultiPartUpload",
+               "CompleteMultipartUpload",
                "PutObject"
            ],
            "requestParameters": {

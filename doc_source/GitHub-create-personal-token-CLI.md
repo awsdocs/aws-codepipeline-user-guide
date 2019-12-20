@@ -5,7 +5,7 @@ You can configure your pipeline to use a personal access token to connect to Git
 **Note**  
 You might have to update other applications if they are using the same personal access token\. As a security best practice, do not share a single token across multiple applications\. Create a personal access token for each application\. For more information, see [Creating a personal access token for the command line](https://help.github.com/articles/creating-an-access-token-for-command-line-use/) on the GitHub website\.
 
-Use these steps to create a GitHub personal access token and then update the pipeline structure with the new token\.
+**To create a GitHub personal access token and then update the pipeline structure with the new token**
 
 1. In GitHub, from the drop\-down option on your profile photo, choose **Settings**\.
 
@@ -20,7 +20,7 @@ Use these steps to create a GitHub personal access token and then update the pip
 
 1. Next to the generated token, choose the copy icon\.
 **Note**  
-Make sure you copy your generated token at this time\. You cannot view the token after you close this page\.
+Make sure you copy your generated token now\. You cannot view the token after you close this page\.
 
 1. At a terminal \(Linux, macOS, or Unix\) or command prompt \(Windows\), run the get\-pipeline command on the pipeline where you want to change the OAuth token, and then copy the output of the command to a JSON file\. For example, for a pipeline named MyFirstPipeline, you would type something similar to the following:
 
@@ -28,7 +28,7 @@ Make sure you copy your generated token at this time\. You cannot view the token
    aws codepipeline get-pipeline --name MyFirstPipeline >pipeline.json
    ```
 
-   The output of the command is sent to the *pipeline\.json* file\.
+   The output of the command is sent to the `pipeline.json` file\.
 
 1. Open the file in a plain\-text editor and edit the value in the `OAuthTokenField` of your GitHub action\. Replace the asterisks \(\*\*\*\*\) with the token you copied from GitHub\. For example:
 
@@ -41,7 +41,7 @@ Make sure you copy your generated token at this time\. You cannot view the token
        }
    ```
 
-1. If you are working with the pipeline structure retrieved using the `get-pipeline` command, you must modify the structure in the JSON file by removing the `metadata` lines from the file, or the `update-pipeline` command will not be able to use it\. Remove the section from the pipeline structure in the JSON file \(the "metadata": \{ \} lines and the "created," "pipelineARN," and "updated" fields within\)\.
+1. If you are working with the pipeline structure retrieved using the `get-pipeline` command, you must modify the structure in the JSON file by removing the `metadata` lines from the file\. Otherwise, the `update-pipeline` command cannot use it\. Remove the section from the pipeline structure in the JSON file \(the `"metadata": { }` lines and the `"created"`, `"pipelineARN"`, and `"updated"` fields\)\.
 
    For example, remove the following lines from the structure: 
 

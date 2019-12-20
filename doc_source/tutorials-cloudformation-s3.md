@@ -6,9 +6,9 @@ This walkthrough shows you how to use the AWS CloudFormation console to create i
 
 You must have created the following resources to use with the AWS CloudFormation sample template:
 + You must have created a CodeDeploy application and deployment group\. You can use the CodeDeploy resources you created in [Tutorial: Create a Simple Pipeline \(CodeCommit Repository\)](tutorials-simple-codecommit.md)\.
-+ Download the sample AWS CloudFormation template files for creating a pipeline with an Amazon S3 source: 
-  + Download the sample template for your pipeline in [YAML](samples/codepipeline-s3-events-yaml.zip) or [JSON](samples/codepipeline-s3-events-json.zip) format\.
-  + Download the sample template for your CloudTrail bucket and trail in [YAML](samples/codepipeline-s3-cloudtrail-yaml.zip) and [JSON](samples/codepipeline-s3-cloudtrail-json.zip)\.
++ Choose the following links to download the sample AWS CloudFormation template files for creating a pipeline with an Amazon S3 source: 
+  + Download the sample template for your pipeline: [YAML](samples/codepipeline-s3-events-yaml.zip) \| [JSON](samples/codepipeline-s3-events-json.zip)
+  + Download the sample template for your CloudTrail bucket and trail: [YAML](samples/codepipeline-s3-cloudtrail-yaml.zip) \| [JSON](samples/codepipeline-s3-cloudtrail-json.zip)
   + Unzip the files and place them on your local computer\.
 + Download the sample application based on the instances you created in your deployment group:
   + If you want to use CodeDeploy to deploy to Amazon Linux instances, use the sample availble from [https://github.com/awslabs/aws-codepipeline-s3-aws-codedeploy_linux](https://github.com/awslabs/aws-codepipeline-s3-aws-codedeploy_linux)\.

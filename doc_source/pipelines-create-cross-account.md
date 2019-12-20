@@ -45,7 +45,7 @@ For *AccountB* to allow access to its resources to a pipeline created in *Accoun
 Customer\-managed keys are specific to a region, as are all AWS KMS keys\. You must create your customer\-managed AWS KMS key in the same region where the pipeline was created \(for example, `us-east-2`\)\.
 
 **Note**  
-For more information about the regions and endpoints available for CodePipeline, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#codepipeline_region)\.
+For more information about the Regions and endpoints available for CodePipeline, see [AWS CodePipeline Endpoints and Quotas](https://docs.aws.amazon.com/general/latest/gr/rande.html#codepipeline_region)\.
 
 **To create a customer\-managed key in AWS KMS**
 

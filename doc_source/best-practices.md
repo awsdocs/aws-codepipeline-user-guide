@@ -14,9 +14,7 @@ Use the best practices outlined in these sections when using CodePipeline\.
 
 ### Security Best Practices for CodePipeline Resources<a name="best-practices-security"></a>
 
-You use encryption and authentication for the source repositories that connect to your pipelines\. These are the CodePipeline best practices for security:
-+ If you create a pipeline that uses an Amazon S3 source bucket, configure server\-side encryption for artifacts stored in Amazon S3 for CodePipeline by managing AWS KMS\-managed keys \(SSE\-KMS\), as described in [Configure Server\-Side Encryption for Artifacts Stored in Amazon S3 for CodePipeline](S3-artifact-encryption.md)\.
-+ If you create a pipeline that uses a GitHub source repository, configure GitHub authentication\. You can use an AWS\-managed OAuth token or a customer\-managed personal access token, as described in [Configure GitHub Authentication](GitHub-authentication.md)\.
+You use encryption and authentication for the source repositories that connect to your pipelines\. For CodePipeline best practices for security, see [Security Best Practices](security-best-practices.md)\.
 
 ### Monitoring and Logging Best Practices for CodePipeline Resources<a name="best-practices-monitoring"></a>
 

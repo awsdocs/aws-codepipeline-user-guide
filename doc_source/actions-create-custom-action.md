@@ -200,7 +200,7 @@ The following is an example policy you might create for use with your custom job
 ```
 
 **Note**  
-Consider using the **AWSCodePipelineCustomActionAccess** managed policy for the IAM user\.
+Consider using the `AWSCodePipelineCustomActionAccess` managed policy for the IAM user\.
 
 ### Develop a Job Worker for Your Custom Action<a name="actions-create-custom-action-job-worker-workflow"></a>
 

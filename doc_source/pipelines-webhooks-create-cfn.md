@@ -4,7 +4,7 @@ To use AWS CloudFormation to create a webhook, update your template as described
 
 **To add parameters and create a webhook in your template**
 
-We strongly recommend that you use AWS Secrets Manager to store your credentials\. If you use Secrets Manager, you must have secrets in your secrets manager\. For more information, see [ Using Dynamic References to Specify Template Values](https://alpha-docs-aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html#dynamic-references-secretsmanager)\. 
+We strongly recommend that you use AWS Secrets Manager to store your credentials\. If you use Secrets Manager, you must have already configured and stored your secret parameters in Secrets Manager\. For more information, see [ Using Dynamic References to Specify Template Values](https://alpha-docs-aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html#dynamic-references-secretsmanager)\. 
 **Important**  
 When passing secret parameters, do not enter the value directly into the template\. The value is rendered as plain text and is readable\. For security purposes, do not use plain text in your CloudFormation template to store your credentials\.
 

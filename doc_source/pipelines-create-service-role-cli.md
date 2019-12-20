@@ -2,7 +2,7 @@
 
 Before you create a pipeline with the AWS CLI or AWS CloudFormation, create a CodePipeline service role for your pipeline\.
 
-1. Use the IAM console or the AWS CLI to create a role with the policy detailed in [Review the Default CodePipeline Service Role Policy](how-to-custom-role.md#view-default-service-role-policy)\. The policy name format is normally the same as the role name format\.
+1. Use the IAM console or the AWS CLI to create a role and attach the service role policy\. To view the default service role policy, use the procedure in [Create the CodePipeline Service Role \(Console\)](pipelines-create-service-role-console.md) to create the service role and view the default policy in the IAM console\. The policy name format is normally the same as the role name format\.
 
 1. Use the service role ARN when you create your pipeline with the AWS CLI or AWS CloudFormation\. 
 

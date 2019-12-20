@@ -1,12 +1,12 @@
 # Tutorial: Create a Pipeline That Uses Amazon S3 as a Deployment Provider<a name="tutorials-s3deploy"></a>
 
-In this tutorial, you configure a pipeline that continuously delivers files using Amazon S3 as the deployment action provider in your deployment stage\. The completed pipeline detects changes when you make a change to the source files in your source repository\. The pipeline then uses Amazon S3 to deploy the files to your bucket\. This tutorial provides two options:
+In this tutorial, you configure a pipeline that continuously delivers files using Amazon S3 as the deployment action provider in your deployment stage\. The completed pipeline detects changes when you make a change to the source files in your source repository\. The pipeline then uses Amazon S3 to deploy the files to your bucket\. Each time you modify, add, or delete your website files in your source location, the deployment creates the website with your latest files\. This tutorial provides two options:
 + Create a pipeline that deploys a static website to your Amazon S3 public bucket\. This example creates a pipeline with an AWS CodeCommit source action and an Amazon S3 deployment action\. See [Option 1: Deploy Static Website Files to Amazon S3](#tutorials-s3deploy-acc)\.
 + Create a pipeline that compiles sample TypeScript code into JavaScript and deploys the CodeBuild output artifact to your Amazon S3 bucket for archive\. This example creates a pipeline with an Amazon S3 source action, a CodeBuild build action, and an Amazon S3 deployment action\. See [Option 2: Deploy Built Archive Files to Amazon S3 from an Amazon S3 Source Bucket](#tutorials-s3deploy-s3source)\.
 
 **Important**  
 Many of the actions you add to your pipeline in this procedure involve AWS resources that you need to create before you create the pipeline\. AWS resources for your source actions must always be created in the same AWS Region where you create your pipeline\. For example, if you create your pipeline in the US East \(Ohio\) Region, your CodeCommit repository must be in the US East \(Ohio\) Region\.   
-You can add cross\-region actions when you create your pipeline\. AWS resources for cross\-region actions must be in the same AWS Region where you plan to execute the action\. For more information about cross\-region actions, see [Add a Cross\-Region Action in CodePipeline](actions-create-cross-region.md)\.
+You can add cross\-region actions when you create your pipeline\. AWS resources for cross\-region actions must be in the same AWS Region where you plan to execute the action\. For more information, see [Add a Cross\-Region Action in CodePipeline](actions-create-cross-region.md)\.
 
 ## Option 1: Deploy Static Website Files to Amazon S3<a name="tutorials-s3deploy-acc"></a>
 
@@ -90,7 +90,7 @@ In this section, you create a pipeline with the following actions:
    + Choose **New service role** to allow CodePipeline to create a service role in IAM\. In **Role name**, the role and policy name both default to this format: `AWSCodePipelineServiceRole-region-pipeline_name`\. For example, the service role created for this tutorial is `AWSCodePipelineServiceRole-eu-west-2-MyS3DeployPipeline`\.
    + Choose **Existing service role**\. In **Role name**, choose your service role from the list\.
 **Note**  
-Depending on when your service role was created, you might need to update its permissions to support other AWS services\. For information, see [Add Permissions for Other AWS Services](how-to-custom-role.md#how-to-update-role-new-services)\. 
+Depending on when your service role was created, you might need to update its permissions to support other AWS services\. For information, see [Add Permissions to the CodePipeline Service Role](security-iam.md#how-to-update-role-new-services)\. 
 
 1. In **Artifact store**: 
 
@@ -98,7 +98,7 @@ Depending on when your service role was created, you might need to update its pe
 
    1. Choose **Custom location** if you already have an artifact store, such as an Amazon S3 artifact bucket, in the same region as your pipeline\.
 **Note**  
-This is not the source bucket for your source code\. This is the artifact store for your pipeline\. A separate artifact store, such as an Amazon S3 bucket, is required for each pipeline\. When you create or edit a pipeline, you must have an artifact bucket in the pipeline Region, and then you must have one artifact bucket per AWS Region where you are running an action\.  
+This is not the source bucket for your source code\. This is the artifact store for your pipeline\. A separate artifact store, such as an S3 bucket, is required for each pipeline\. When you create or edit a pipeline, you must have an artifact bucket in the pipeline Region and one artifact bucket per AWS Region where you are running an action\.  
 For more information, see [Input and Output Artifacts](welcome-introducing-artifacts.md) and [CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
 
    Choose **Next**\.
@@ -248,7 +248,7 @@ In this section, you create a pipeline with the following actions:
    + Choose **New service role** to allow CodePipeline to create a service role in IAM\. In **Role name**, the role and policy name both default to this format: `AWSCodePipelineServiceRole-region-pipeline_name`\. For example, the service role created for this tutorial is `AWSCodePipelineServiceRole-eu-west-2-MyS3DeployPipeline`\.
    + Choose **Existing service role**\. In **Role name**, choose your service role from the list\.
 **Note**  
-Depending on when your service role was created, you might need to update its permissions to support other AWS services\. For information, see [Add Permissions for Other AWS Services](how-to-custom-role.md#how-to-update-role-new-services)\. 
+Depending on when your service role was created, you might need to update its permissions to support other AWS services\. For information, see [Add Permissions to the CodePipeline Service Role](security-iam.md#how-to-update-role-new-services)\. 
 
 1. In **Artifact store**:
 
@@ -256,7 +256,7 @@ Depending on when your service role was created, you might need to update its pe
 
    1. Choose **Custom location** if you already have an artifact store, such as an Amazon S3 artifact bucket, in the same region as your pipeline\.
 **Note**  
-This is not the source bucket for your source code\. This is the artifact store for your pipeline\. A separate artifact store, such as an Amazon S3 bucket, is required for each pipeline\. When you create or edit a pipeline, you must have an artifact bucket in the pipeline Region, and then you must have one artifact bucket per AWS Region where you are running an action\.  
+This is not the source bucket for your source code\. This is the artifact store for your pipeline\. A separate artifact store, such as an S3 bucket, is required for each pipeline\. When you create or edit a pipeline, you must have an artifact bucket in the pipeline Region and one artifact bucket per AWS Region where you are running an action\.  
 For more information, see [Input and Output Artifacts](welcome-introducing-artifacts.md) and [CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
 
    Choose **Next**\.

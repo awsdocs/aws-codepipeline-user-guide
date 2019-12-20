@@ -6,7 +6,7 @@ Before you can create this pipeline, you must configure the required resources\.
 
 **Important**  
 Many of the actions you add to your pipeline in this procedure involve AWS resources that you need to create before you create the pipeline\. AWS resources for your source actions must always be created in the same AWS Region where you create your pipeline\. For example, if you create your pipeline in the US East \(Ohio\) Region, your CodeCommit repository must be in the US East \(Ohio\) Region\.   
-You can add cross\-region actions when you create your pipeline\. AWS resources for cross\-region actions must be in the same AWS Region where you plan to execute the action\. For more information about cross\-region actions, see [Add a Cross\-Region Action in CodePipeline](actions-create-cross-region.md)\.
+You can add cross\-region actions when you create your pipeline\. AWS resources for cross\-region actions must be in the same AWS Region where you plan to execute the action\. For more information, see [Add a Cross\-Region Action in CodePipeline](actions-create-cross-region.md)\.
 
 Before you begin this tutorial, you should have already completed the general prerequisites in [Getting Started with CodePipeline](getting-started-codepipeline.md)\.
 
@@ -52,7 +52,7 @@ As a best practice, consider launching an Amazon EC2 instance to host your Jenki
 
 1. Under **Select type of trusted entity**, choose **AWS service**\. Under **Choose the service that will use this role**, choose **EC2**\. Under **Select your use case**, choose **EC2**\. 
 
-1. Choose Next: Permissions\. On the **Attach permissions policies** page, select the **AWSCodePipelineCustomActionAccess** managed policy, and then choose **Next: Tags**\. Choose **Next: Review**\.
+1. Choose Next: Permissions\. On the **Attach permissions policies** page, select the `AWSCodePipelineCustomActionAccess` managed policy, and then choose **Next: Tags**\. Choose **Next: Review**\.
 
 1. On the **Review** page, in **Role name**, type the name of the role to create specifically for Jenkins integration \(for example *JenkinsAccess*\), and then choose **Create role**\.
 
@@ -66,7 +66,7 @@ For more information about instance roles and Amazon EC2, see [IAM Roles for Ama
 
 1. Create an Amazon EC2 instance where you will install Jenkins, and in **Step 3: Configure Instance Details**, make sure you choose the instance role you created \(for example, *JenkinsAccess*\)\. For more information about creating Amazon EC2 instances, see [Launch an Amazon EC2 Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance_linux.html)\. 
 **Note**  
-If you already have Jenkins resources you want to use, you can do so, but you must create a special IAM user, apply the **AWSCodePipelineCustomActionAccess** managed policy to that user, and then configure and use the access credentials for that user on your Jenkins resource\. If you want to use the Jenkins UI to supply the credentials, configure Jenkins to only allow HTTPS\. For more information, see [Troubleshooting CodePipeline](troubleshooting.md)\.
+If you already have Jenkins resources you want to use, you can do so, but you must create a special IAM user, apply the `AWSCodePipelineCustomActionAccess` managed policy to that user, and then configure and use the access credentials for that user on your Jenkins resource\. If you want to use the Jenkins UI to supply the credentials, configure Jenkins to only allow HTTPS\. For more information, see [Troubleshooting CodePipeline](troubleshooting.md)\.
 
 1. Install Jenkins on the Amazon EC2 instance\. For more information, see the Jenkins documentation for [installing Jenkins](https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins) and [starting and accessing Jenkins](https://wiki.jenkins.io/display/JENKINS/Starting+and+Accessing+Jenkins), as well as [details of integration with Jenkins](integrations-action-type.md#JenkinsInt_2) in [Product and Service Integrations with CodePipeline](integrations.md)\.
 
@@ -122,7 +122,7 @@ In this part of the tutorial, you will create the pipeline using the **Create Pi
 
 1. If necessary, use the region selector to change the region to the same region where your pipeline resources are located\. For example, if you created resources for the previous tutorial in us\-east\-2, make sure the region selector is set to US East \(Ohio\)\.
 
-   For more information about the regions and endpoints available for CodePipeline, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#codepipeline_region)\.
+   For more information about the Regions and endpoints available for CodePipeline, see [AWS CodePipeline Endpoints and Quotas](https://docs.aws.amazon.com/general/latest/gr/rande.html#codepipeline_region)\.
 
 1. On the **Welcome** page, **Getting started** page, or the **Pipelines** page, choose **Create pipeline**\.
 
@@ -132,7 +132,7 @@ In this part of the tutorial, you will create the pipeline using the **Create Pi
    + Choose **New service role** to allow CodePipeline to create a new service role in IAM\. In **Role name**, the role and policy name both default to this format: AWSCodePipelineServiceRole\-*region*\-*pipeline\_name*\. For example, this is the service role created for a pipeline named MyPipeline: AWSCodePipelineServiceRole\-eu\-west\-2\-MyPipeline\.
    + Choose **Existing service role** to use a service role already created in IAM\. In **Role name**, choose your service role from the list\.
 **Note**  
-Depending on when your service role was created, you might need to update its permissions to support additional AWS services\. For information, see [Add Permissions for Other AWS Services](how-to-custom-role.md#how-to-update-role-new-services)\. 
+Depending on when your service role was created, you might need to update its permissions to support additional AWS services\. For information, see [Add Permissions to the CodePipeline Service Role](security-iam.md#how-to-update-role-new-services)\. 
 
 1. In **Artifact location**, do one of the following: 
 
@@ -140,7 +140,7 @@ Depending on when your service role was created, you might need to update its pe
 
    1. Choose **Custom location** if you already have an existing artifact store you have created, such as an Amazon S3 artifact bucket, in the same region as your pipeline\.
 **Note**  
-This is not the source bucket for your source code\. This is the artifact store for your pipeline\. A separate artifact store, such as an Amazon S3 bucket, is required for each pipeline\. When you create or edit a pipeline, you must have an artifact bucket in the pipeline Region, and then you must have one artifact bucket per AWS Region where you are running an action\.  
+This is not the source bucket for your source code\. This is the artifact store for your pipeline\. A separate artifact store, such as an S3 bucket, is required for each pipeline\. When you create or edit a pipeline, you must have an artifact bucket in the pipeline Region and one artifact bucket per AWS Region where you are running an action\.  
 For more information, see [Input and Output Artifacts](welcome-introducing-artifacts.md) and [CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
 
 1. Choose **Next**\.

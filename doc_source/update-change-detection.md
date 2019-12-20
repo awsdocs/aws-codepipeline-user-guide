@@ -245,7 +245,7 @@ The update\-pipeline command stops the pipeline\. If a revision is being run thr
    The following sample command uses `--event-pattern` to create a rule called `MyCodeCommitRepoRule`\.
 
    ```
-   aws events put-rule --name "MyCodeCommitRepoRule" --event-pattern "{\"source\":[\"aws.codecommit\"],\"detail-type\":[\"CodeCommit Repository State Change\"],\"resources\":[\"pipeline-ARN\"],\"detail\":{\"referenceType\":[\"branch\"],\"referenceName \":[\"master\"]}}"
+   aws events put-rule --name "MyCodeCommitRepoRule" --event-pattern "{\"source\":[\"aws.codecommit\"],\"detail-type\":[\"CodeCommit Repository State Change\"],\"resources\":[\"repository-ARN\"],\"detail\":{\"referenceType\":[\"branch\"],\"referenceName\":[\"master\"]}}"
    ```
 
 1. To add CodePipeline as a target, call the put\-targets command and include the following parameters:
@@ -368,7 +368,7 @@ For more information, see [Creating a Trail with the AWS Command Line Interface]
    The following sample command uses `--event-pattern` to create a rule named `MyS3SourceRule`\.
 
    ```
-   aws events put-rule --name "MyS3SourceRule" --event-pattern "{\"source\":[\"aws.s3\"],\"detail-type\":[\"AWS API Call via CloudTrail\"],\"detail\":{\"eventSource\":[\"s3.amazonaws.com\"],\"eventName\":[\"CopyObject\",\"PutObject\",\"CompleteMultiPartUpload\"],\"requestParameters\":{\"bucketName\":[\"my-bucket\"],\"key\":[\"my-key\"]}}}
+   aws events put-rule --name "MyS3SourceRule" --event-pattern "{\"source\":[\"aws.s3\"],\"detail-type\":[\"AWS API Call via CloudTrail\"],\"detail\":{\"eventSource\":[\"s3.amazonaws.com\"],\"eventName\":[\"CopyObject\",\"PutObject\",\"CompleteMultipartUpload\"],\"requestParameters\":{\"bucketName\":[\"my-bucket\"],\"key\":[\"my-key\"]}}}
    ```
 
 1. To add CodePipeline as a target, call the put\-targets command and include the `--rule` and `--targets` parameters\.
@@ -2510,7 +2510,7 @@ Resources:
 
 **To add parameters and create a webhook in your template**
 
-We strongly recommend that you use AWS Secrets Manager to store your credentials\. If you use Secrets Manager, you must have secrets in your secrets manager\. For more information, see [ Using Dynamic References to Specify Template Values](https://alpha-docs-aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html#dynamic-references-secretsmanager)\. 
+We strongly recommend that you use AWS Secrets Manager to store your credentials\. If you use Secrets Manager, you must have already configured and stored your secret parameters in Secrets Manager\. For more information, see [ Using Dynamic References to Specify Template Values](https://alpha-docs-aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html#dynamic-references-secretsmanager)\. 
 **Important**  
 When passing secret parameters, do not enter the value directly into the template\. The value is rendered as plain text and is readable\. For security purposes, do not use plain text in your CloudFormation template to store your credentials\.
 

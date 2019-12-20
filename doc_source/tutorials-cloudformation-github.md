@@ -6,7 +6,9 @@ This walkthrough shows you how to use the AWS CloudFormation console to create i
 
 You must have created the following resources to use with the AWS CloudFormation sample template:
 + A CodeDeploy application and deployment group\. You can use the CodeDeploy resources you created in [Tutorial: Create a Simple Pipeline \(CodeCommit Repository\)](tutorials-simple-codecommit.md)\.
-+ Download the sample AWS CloudFormation template file for creating a pipeline\. You can download the sample template in [YAML](samples/codepipeline-github-events-yaml.zip) or [JSON](samples/codepipeline-github-events-json.zip) format\. Unzip the file and place it on your local computer\.
++ Choose one of these links to download the sample AWS CloudFormation template file for creating a pipeline: [YAML](samples/codepipeline-github-events-yaml.zip) \| [JSON](samples/codepipeline-github-events-json.zip)
+
+  Unzip the file and place it on your local computer\.
 + Download the [SampleApp\_Linux\.zip](samples/SampleApp_Linux.zip)\.
 + The GitHub repository and branch you want to use for your source\.
 + A personal access key for your GitHub repository\. This is used to provide an OAuth token for connection to your repository\.
