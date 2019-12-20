@@ -80,6 +80,8 @@ This property is required for the following action modes:
 + CHANGE\_SET\_REPLACE
 For all other action modes, this property is ignored\.
 
+Note that AWS CloudFormation template file containing the template body has a minimum length of 1 byte and a maximum length of 51,200 bytes. Please refer to [AWS CloudFormation Limits](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html) for more information.
+
 **OutputFileName**  
 Required: No  
 Use `OutputFileName` to specify an output file name, such as `CreateStackOutput.json`, that CodePipeline adds to the pipeline output artifact for this action\. The JSON file contains the contents of the `Outputs` section from the AWS CloudFormation stack\.  
