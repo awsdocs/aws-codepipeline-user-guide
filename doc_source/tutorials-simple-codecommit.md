@@ -361,7 +361,7 @@ Your pipeline is configured to run whenever code changes are made to your CodeCo
    The updated webpage is displayed:  
 ![\[The updated sample webpage application that was pushed to your CodeCommit repository.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-demo-success-message-codecommit.png)![\[The updated sample webpage application that was pushed to your CodeCommit repository.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The updated sample webpage application that was pushed to your CodeCommit repository.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
-## Step 8: Clean Up Resources<a name="codecommit-clean-up"></a>
+## Step 7: Clean Up Resources<a name="codecommit-clean-up"></a>
 
 You can use some of the resources you created in this tutorial for other tutorials in this guide\. For example, you can reuse the CodeDeploy application and deployment\. However, after you complete this and any other tutorials, you should delete the pipeline and the resources it uses so that you are not charged for the continued use of those resources\. First, delete the pipeline, then the CodeDeploy application and its associated Amazon EC2 instance, and finally, the CodeCommit repository\.
 
@@ -373,7 +373,7 @@ You can use some of the resources you created in this tutorial for other tutoria
 
 1. To delete the CodeCommit repository, follow the instructions in [Delete a CodeCommit Repository](https://docs.aws.amazon.com/codecommit/latest/userguide/how-to-delete-repository.html)\.
 
-## Step 7: Further Reading<a name="codecommit-optional-tasks"></a>
+## Step 8: Further Reading<a name="codecommit-optional-tasks"></a>
 
 Learn more about how CodePipeline works:
 + For more information about stages, actions, and how pipelines work, see [CodePipeline Concepts](concepts.md)\.
