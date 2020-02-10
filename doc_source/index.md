@@ -1,7 +1,7 @@
 # CodePipeline User Guide
 
 -----
-*****Copyright &copy; 2019 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; 2020 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -37,7 +37,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Tutorial: Create a Four-Stage Pipeline](tutorials-four-stage-pipeline.md)
    + [Tutorial: Set Up a CloudWatch Events Rule to Receive Email Notifications for Pipeline State Changes](tutorials-cloudwatch-sns-notifications.md)
    + [Tutorial: Create a Pipeline That Builds and Tests Your Android App When a Commit Is Pushed to Your GitHub Repository](tutorials-codebuild-devicefarm.md)
-   + [Tutorial: Create a Pipeline That Tests Your iOS App After a Change in Your Amazon S3 Bucket](tutorials-codebuild-devicefarm-S3.md)
+   + [Tutorial: Create a Pipeline That Tests Your iOS App After a Change in Your S3 Bucket](tutorials-codebuild-devicefarm-S3.md)
    + [Tutorial: Create a Pipeline That Deploys to AWS Service Catalog](tutorials-S3-servicecatalog.md)
    + [Tutorial: Create a Pipeline with AWS CloudFormation](tutorials-cloudformation.md)
       + [Example 1: Create an AWS CodeCommit Pipeline with AWS CloudFormation](tutorials-cloudformation-codecommit.md)
@@ -77,6 +77,7 @@ Amazon's trademarks and trade dress may not be used in
       + [Use Periodic Checks to Start a Pipeline](run-automatically-polling.md)
       + [Start a Pipeline Manually in AWS CodePipeline](pipelines-rerun-manually.md)
       + [Use Amazon CloudWatch Events to Start a Pipeline on a Schedule](pipelines-trigger-source-schedule.md)
+   + [Stop a Pipeline Execution in CodePipeline](pipelines-stop.md)
    + [Create a Pipeline in CodePipeline](pipelines-create.md)
    + [Edit a Pipeline in CodePipeline](pipelines-edit.md)
    + [View Pipeline Details and History in CodePipeline](pipelines-view.md)
@@ -132,13 +133,13 @@ Amazon's trademarks and trade dress may not be used in
    + [AWS CloudFormation](action-reference-CloudFormation.md)
    + [AWS CodeBuild](action-reference-CodeBuild.md)
    + [CodeCommit](action-reference-CodeCommit.md)
-   + [CodestarConnectionSource](action-reference-CodestarConnectionSource.md)
+   + [CodeStarSourceConnection](action-reference-CodestarConnectionSource.md)
    + [GitHub](action-reference-GitHub.md)
    + [Amazon ECR](action-reference-ECR.md)
    + [AWS Lambda](action-reference-Lambda.md)
    + [Amazon S3](action-reference-S3.md)
 + [Image Definitions File Reference](file-reference.md)
 + [Variables](reference-variables.md)
-+ [Limits in AWS CodePipeline](limits.md)
++ [Quotas in AWS CodePipeline](limits.md)
 + [AWS CodePipeline User Guide Document History](history.md)
 + [AWS Glossary](glossary.md)

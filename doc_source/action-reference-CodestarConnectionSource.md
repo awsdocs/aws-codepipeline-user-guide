@@ -1,19 +1,19 @@
-# CodestarConnectionSource<a name="action-reference-CodestarConnectionSource"></a>
+# CodeStarSourceConnection<a name="action-reference-CodestarConnectionSource"></a>
 
 
 |  | 
 | --- |
 | The connections feature is in preview release for AWS CodePipeline and is subject to change\. | 
 
-Triggers a pipeline when a new commit is made on a third\-party source code repository\. The source action retrieves code changes when a pipeline is manually executed or when a webhook event is sent from the source provider\. Currently, Bitbucket Cloud is the only connection type supported by the `CodestarConnectionSource` action\.
+Triggers a pipeline when a new commit is made on a third\-party source code repository\. The source action retrieves code changes when a pipeline is manually executed or when a webhook event is sent from the source provider\. Currently, Bitbucket Cloud is the only connection type supported by the `CodeStarSourceConnection` action\.
 
 After a code change is detected, you have the following options for passing the code to subsequent actions:
-+ Like other existing CodePipeline source actions, `CodestarConnectionSource` can output a ZIP file with a shallow copy of your commit\.
-+ `CodestarConnectionSource` can also be configured to output a URL reference to the repo for subsequent actions\.
++ Like other existing CodePipeline source actions, `CodeStarSourceConnection` can output a ZIP file with a shallow copy of your commit\.
++ `CodeStarSourceConnection` can also be configured to output a URL reference to the repo for subsequent actions\.
 
   Currently, the git URL reference can only be used by downstream CodeBuild actions to clone the repo and associated Git metadata\. Attempting to pass a Git URL reference to non\-CodeBuild actions results in an error\.
 
-CodePipeline prompts you to add an Bitbucket Cloud app to your repo when you create a connection\. If you use the console to create or edit your pipeline, CodePipeline creates a Bitbucket webhook that starts your pipeline when a change occurs in the repository\. You must have already created your Bitbucket account and repository before you can connect through the `CodestarConnectionSource` action\. Use your Bitbucket account when you create a connection so that CodePipeline can use the Bitbucket repository for source stages in pipelines\.
+CodePipeline prompts you to add an Bitbucket Cloud app to your repo when you create a connection\. If you use the console to create or edit your pipeline, CodePipeline creates a Bitbucket webhook that starts your pipeline when a change occurs in the repository\. You must have already created your Bitbucket account and repository before you can connect through the `CodeStarSourceConnection` action\. Use your Bitbucket account when you create a connection so that CodePipeline can use the Bitbucket repository for source stages in pipelines\.
 
 For more infomation, see [how Bitbucket apps work](https://confluence.atlassian.com/bitbucket/bitbucket-cloud-add-ons-780871938.html) in the Bitbucket developer documentation 
 
@@ -58,7 +58,7 @@ The `CODEBUILD_CLONE_REF` option can only be used by CodeBuild downstream action
 
 ## Output Artifacts<a name="action-reference-CodestarConnectionSource-output"></a>
 + **Number of Artifacts:** `1` 
-+ **Description:** The artifacts generated from the repository are the output artifacts for the `CodestarConnectionSource` action\. The source code commit ID is displayed in CodePipeline as the source revision for the triggered pipeline execution\. You can configure the output artifact of this action in:
++ **Description:** The artifacts generated from the repository are the output artifacts for the `CodeStarSourceConnection` action\. The source code commit ID is displayed in CodePipeline as the source revision for the triggered pipeline execution\. You can configure the output artifact of this action in:
   + A ZIP file that contains the contents of the configured repository and branch at the commit specified as the source revision for the pipeline execution\.
   + A JSON file that contains a URL reference to the repository so that downstream actions can perform Git commands directly\.
 **Important**  
@@ -129,6 +129,9 @@ actions:
 The first time you use the console to add a new connection to a Bitbucket repository, you must authorize CodePipeline access to your repositories\. You choose or create an installation app that helps you connect to the account where you have created your third\-party code repository\.
 
  When you use the AWS CLI or an AWS CloudFormation template, you must provide the connection ARN of a Bitbucket connection that has already gone through the installation handshake\. Otherwise, the pipeline is not triggered\.
+
+**Note**  
+Most source actions in CodePipeline, such as GitHub, require either a configured change detection resource \(such as a webhook or CloudWatch Events rule\) or use the option to poll the repository for source changes\. For pipelines with a Bitbucket Cloud source action, you do not have to set up a webhook or default to polling\. The connections action manages your source change detection for you\. 
 
 ## See Also<a name="action-reference-CodestarConnectionSource-links"></a>
 

@@ -1,6 +1,6 @@
 # CodePipeline Pipeline Structure Reference<a name="reference-pipeline-structure"></a>
 
-By default, any pipeline you successfully create in AWS CodePipeline has a valid structure\. However, if you manually create or edit a JSON file to create a pipeline or update a pipeline from the AWS CLI, you might inadvertently create a structure that is not valid\. The following reference can help you better understand the requirements for your pipeline structure and how to troubleshoot issues\. See the constraints in [Limits in AWS CodePipeline](limits.md), which apply to all pipelines\. 
+By default, any pipeline you successfully create in AWS CodePipeline has a valid structure\. However, if you manually create or edit a JSON file to create a pipeline or update a pipeline from the AWS CLI, you might inadvertently create a structure that is not valid\. The following reference can help you better understand the requirements for your pipeline structure and how to troubleshoot issues\. See the constraints in [Quotas in AWS CodePipeline](limits.md), which apply to all pipelines\. 
 
 **Topics**
 + [Valid Action Types and Providers in CodePipeline](#actions-valid-providers)
@@ -174,9 +174,6 @@ The numbering of serial actions do not have to be in strict sequence\. For examp
 + When you use an Amazon S3 bucket as a deployment location, you also specify an object key\. An object key can be a file name \(object\) or a combination of a prefix \(folder path\) and file name\. You can use variables to specify the location name you want the pipeline to use\. Amazon S3 deployment actions support the use of the following variables in Amazon S3 object keys\.  
 **Using variables in Amazon S3**    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html)
-+ Depending on the action type, you can have the following number of input and output artifacts:  
-**Action Type Constraints for Artifacts**    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html)
 + These are the valid `actionTypeId` categories for CodePipeline:
   + `Source`
   + `Build`
@@ -200,8 +197,39 @@ The numbering of serial actions do not have to be in strict sequence\. For examp
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html)
 
 **Topics**
++ [Number of Input and Output Artifacts for Each Action Type](#reference-action-artifacts)
 + [Default Settings for the PollForSourceChanges Parameter](#PollForSourceChanges-defaults)
 + [Configuration Details by Provider Type](#structure-configuration-examples)
+
+### Number of Input and Output Artifacts for Each Action Type<a name="reference-action-artifacts"></a>
+
+Depending on the action type, you can have the following number of input and output artifacts:
+
+
+**Action Type Constraints for Artifacts**  
+
+| Owner | Type of Action | Provider | Valid Number of Input Artifacts | Valid Number of Output Artifacts | 
+| --- | --- | --- | --- | --- | 
+| AWS | Source | Amazon S3 | 0 | 1 | 
+| AWS | Source | CodeCommit | 0 | 1 | 
+| AWS | Source | Amazon ECR | 0 | 1 | 
+| ThirdParty | Source | GitHub | 0 | 1 | 
+| AWS | Build | CodeBuild | 1 to 5 | 0 to 5 | 
+| AWS | Test | CodeBuild | 1 to 5 | 0 to 5 | 
+| AWS | Test | AWS Device Farm | 1 | 0 | 
+| AWS | Approval | Manual | 0 | 0 | 
+| AWS | Deploy | Amazon S3 | 1 | 0 | 
+| AWS | Deploy | AWS CloudFormation | 0 to 10 | 0 to 1 | 
+| AWS | Deploy | CodeDeploy | 1 | 0 | 
+| AWS | Deploy | AWS Elastic Beanstalk | 1 | 0 | 
+| AWS | Deploy | AWS OpsWorks Stacks | 1 | 0 | 
+| AWS | Deploy | Amazon ECS | 1 | 0 | 
+| AWS | Deploy | AWS Service Catalog | 1 | 0 | 
+| AWS | Invoke | AWS Lambda | 0 to 5 | 0 to 5 | 
+| ThirdParty | Deploy | Alexa Skills Kit | 1 to 2 | 0 | 
+| Custom | Build | Jenkins | 0 to 5 | 0 to 5 | 
+| Custom | Test | Jenkins | 0 to 5 | 0 to 5 | 
+| Custom | Any supported category | As specified in the custom action | 0 to 5 | 0 to 5 | 
 
 ### Default Settings for the PollForSourceChanges Parameter<a name="PollForSourceChanges-defaults"></a>
 
@@ -210,7 +238,7 @@ The `PollForSourceChanges` parameter default is determined by the method used to
 + Create change detection resources \(CloudWatch Events rule or webhook, as applicable\)\.
 + Set the `PollForSourceChanges` parameter to false\.
 **Note**  
-If you create a CloudWatch Events rule or webhook, you must set the parameter to false to avoid trigering the pipeline more than once\.
+If you create a CloudWatch Events rule or webhook, you must set the parameter to false to avoid triggering the pipeline more than once\.
 
   The `PollForSourceChanges` parameter is not used for Amazon ECR source actions\.
 +   

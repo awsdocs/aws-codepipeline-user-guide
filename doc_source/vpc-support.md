@@ -8,7 +8,7 @@ Amazon VPC is an AWS service that you can use to launch AWS resources in a virtu
 + Route tables
 + Network gateways
 
-*Interface VPC endpoints* are powered by AWS PrivateLink, an AWS technology that facilitates private communication between AWS services using an elastic network interface with private IP addresses\. To connect your VPC to CodePipeline, you define an interface VPC endpoint for CodePipeline\. This type of endpoint makes it possible for you to connect your VPC to AWS services\. The endpoint provides reliable, scalable connectivity to CodePipeline without requiring an internet gateway, network address translation \(NAT\) instance, or VPN connection\. For information about setting up a VPC, see the [VPC User Guide](https://docs.aws.amazon.com/vpc/latest/userguide//VPC_Introduction.html)\.
+*Interface VPC endpoints* are powered by AWS PrivateLink, an AWS technology that facilitates private communication between AWS services using an elastic network interface with private IP addresses\. To connect your VPC to CodePipeline, you define an interface VPC endpoint for CodePipeline\. This type of endpoint makes it possible for you to connect your VPC to AWS services\. The endpoint provides reliable, scalable connectivity to CodePipeline without requiring an internet gateway, network address translation \(NAT\) instance, or VPN connection\. For information about setting up a VPC, see the [VPC User Guide](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Introduction.html)\.
 
 ## Create a VPC Endpoint for CodePipeline<a name="use-vpc-endpoints-with-codepipeline"></a>
 
@@ -29,16 +29,16 @@ The following services are enabled for VPC support, but they must communicate wi
 
 When troubleshooting VPC issues, use the information that appears in internet connectivity error messages to help you identify, diagnose, and address issues\.
 
-1. [Make sure that your internet gateway is attached to your VPC](https://docs.aws.amazon.com/vpc/latest/userguide//VPC_Internet_Gateway.html#Add_IGW_Attach_Gateway)\.
+1. [Make sure that your internet gateway is attached to your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#Add_IGW_Attach_Gateway)\.
 
-1. [Make sure that the route table for your public subnet points to the internet gateway](https://docs.aws.amazon.com/vpc/latest/userguide//VPC_Route_Tables.html#route-tables-internet-gateway)\.
+1. [Make sure that the route table for your public subnet points to the internet gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html#route-tables-internet-gateway)\.
 
-1. [Make sure that your network ACLs allow traffic to flow](https://docs.aws.amazon.com/vpc/latest/userguide//VPC_ACLs.html#ACLRules)\.
+1. [Make sure that your network ACLs allow traffic to flow](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html#ACLRules)\.
 
-1. [Make sure that your security groups allow traffic to flow](https://docs.aws.amazon.com/vpc/latest/userguide//VPC_SecurityGroups.html#SecurityGroupRules)\.
+1. [Make sure that your security groups allow traffic to flow](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules)\.
 
-1. [Troubleshoot your NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide//vpc-nat-gateway.html#nat-gateway-troubleshooting)\.
+1. [Troubleshoot your NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-troubleshooting)\.
 
-1. [Make sure that the route table for private subnets points to the NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide//VPC_Route_Tables.html#route-tables-nat)\.
+1. [Make sure that the route table for private subnets points to the NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html#route-tables-nat)\.
 
 1. Make sure that the service role used by CodePipeline has the appropriate permissions\. For example, if CodePipeline does not have the Amazon EC2 permissions required to work with an Amazon VPC, you might receive an error that says, "Unexpected EC2 error: UnauthorizedOperation\."

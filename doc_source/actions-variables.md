@@ -11,6 +11,7 @@ For reference information about variables, an example workflow, and a list of ac
 **Topics**
 + [Configure Actions for Variables](#actions-variables-create)
 + [View Output Variables](#actions-variables-view)
++ [Example: Use Variables in Manual Approvals](#actions-variables-examples-approvals)
 
 ## Configure Actions for Variables<a name="actions-variables-create"></a>
 
@@ -232,3 +233,23 @@ You can use the list\-action\-executions command to view variables for an action
        ]
    },
    ```
+
+## Example: Use Variables in Manual Approvals<a name="actions-variables-examples-approvals"></a>
+
+When you specify a namespace for an action, and that action produces output variables, you can add a manual approval that displays variables in the approval message\. This example shows you how to add variable syntax to a manual approval message\.
+
+****
+
+1. Sign in to the AWS Management Console and open the CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
+
+   The names of all pipelines associated with your AWS account are displayed\. Choose the pipeline you want to add the approval to\.
+
+1. To edit your pipeline, choose **Edit**\. Add a manual approval after the source action\. In **Action name**, enter the name of the approval action\.
+
+1. In **Action provider**, choose **Manual approval**\.
+
+1. In **URL for review** and **Comments**, add the variable syntax for `CommitId` and `CommitMessage` as shown\. Make sure you use the namespace assigned to your source action\. For example, the variable syntax for a CodeCommit action with the default namespace `SourceVariables` is `#{SourceVariables.CommitId}`\.  
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/variable-manual-approval.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+
+1. After the pipeline runs successfully, you can view the variable values in the approval message\.  
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/variable-manual-approval-commitURL.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)

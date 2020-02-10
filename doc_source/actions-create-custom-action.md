@@ -172,7 +172,7 @@ A third strategy to consider is to create an IAM user to use under your AWS acco
 
 **To set up an IAM user**
 
-1. Learn more about IAM best practices and use cases in [IAM Best Practices and Use Cases](https://docs.aws.amazon.com/IAM/latest/UserGuide//IAMBestPracticesAndUseCases.html)\.
+1. Learn more about IAM best practices and use cases in [IAM Best Practices and Use Cases](https://docs.aws.amazon.com/IAM/latest/UserGuide/IAMBestPracticesAndUseCases.html)\.
 
 1. Get started creating IAM users by following the steps in [Creating an IAM User in Your AWS Account](https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_SettingUpUser.html)\.
 
@@ -220,7 +220,7 @@ After you've chosen your permissions management strategy, you should consider ho
 
    Once `PutJobSuccessResult` is called, the job is considered complete\. A new job is created in CodePipeline that includes the continuation token\. This job will appear if your job worker calls `PollForJobs` again\. This new job can be used to check on the state of the action, and either returns with a continuation token, or returns without a continuation token once the action is complete\.
 **Note**  
-If your job worker performs all the work for a custom action, you should consider breaking your job worker processing into at least two steps\. The first step establishes the details page for your action\. Once you have created the details page, you can serialize the state of the job worker and return it as a continuation token, subject to size limits \(see [Limits in AWS CodePipeline](limits.md)\)\. For example, you could write the state of the action into the string you use as the continuation token\. The second step \(and subsequent steps\) of your job worker processing perform the actual work of the action\. The final step returns success or failure to CodePipeline, with no continuation token on the final step\.
+If your job worker performs all the work for a custom action, you should consider breaking your job worker processing into at least two steps\. The first step establishes the details page for your action\. Once you have created the details page, you can serialize the state of the job worker and return it as a continuation token, subject to size limits \(see [Quotas in AWS CodePipeline](limits.md)\)\. For example, you could write the state of the action into the string you use as the continuation token\. The second step \(and subsequent steps\) of your job worker processing perform the actual work of the action\. The final step returns success or failure to CodePipeline, with no continuation token on the final step\.
 
    For more information about using the continuation token, see the specifications for `PutJobSuccessResult` in the [CodePipeline API Reference](http://docs.aws.amazon.com/codepipeline/latest/APIReference)\.
 

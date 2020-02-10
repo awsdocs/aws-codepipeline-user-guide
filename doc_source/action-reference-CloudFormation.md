@@ -79,7 +79,7 @@ This property is required for the following action modes:
 + REPLACE\_ON\_FAILURE
 + CHANGE\_SET\_REPLACE
 For all other action modes, this property is ignored\.  
-The AWS CloudFormation template file containing the template body has a minimum length of 1 byte and a maximum length of 512 MB\. For AWS CloudFormation deployment actions in CodePipeline, the maximum input artifact size is always 256 MB\. For more information, see [Limits in AWS CodePipeline](limits.md) and [AWS CloudFormation Limits](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html)\.
+The AWS CloudFormation template file containing the template body has a minimum length of 1 byte and a maximum length of 512 MB\. For AWS CloudFormation deployment actions in CodePipeline, the maximum input artifact size is always 256 MB\. For more information, see [Quotas in AWS CodePipeline](limits.md) and [AWS CloudFormation Limits](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html)\.
 
 **OutputFileName**  
 Required: No  

@@ -94,28 +94,33 @@ The following are valid states for pipelines, stages, and actions:
 
 | Pipeline State | Description | 
 | --- | --- | 
-| INPROGRESS | The pipeline execution is currently running\. | 
-| SUCCEEDED | The pipeline execution was completed successfully\. | 
-| FAILED | The pipeline execution was not completed successfully\. | 
-| SUPERSEDED |  While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution advanced and continued through the pipeline instead\.  | 
+| InProgress | The pipeline execution is currently running\. | 
+| Stopping | The pipeline execution is stopping due to a request to either stop and wait or stop and abandon the pipeline execution\. | 
+| Stopped | The stopping process is complete, and the pipeline execution is stopped\. | 
+| Succeeded | The pipeline execution was completed successfully\. | 
+| Superseded | While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution advanced and continued through the pipeline instead\. | 
+| Failed | The pipeline execution was not completed successfully\. | 
 
 
 **Stage\-level states**  
 
 | Stage State | Description | 
 | --- | --- | 
-| INPROGRESS | The stage is currently running\. | 
-| SUCCEEDED | The stage was completed successfully\. | 
-| FAILED | The stage was not completed successfully\. | 
+| InProgress | The stage is currently running\. | 
+| Stopping | The stage execution is stopping due to a request to either stop and wait or stop and abandon the pipeline execution\. | 
+| Stopped | The stopping process is complete, and the stage execution is stopped\. | 
+| Succeeded | The stage was completed successfully\. | 
+| Failed | The stage was not completed successfully\. | 
 
 
 **Action\-level states**  
 
 | Action State | Description | 
 | --- | --- | 
-| INPROGRESS | The action is currently running\. | 
-| SUCCEEDED | The action was completed successfully\. | 
-| FAILED | For Approval actions, the FAILED state means the action was either rejected by the reviewer or failed due to an incorrect action configuration\. | 
+| InProgress | The action is currently running\. | 
+| Abandoned | The action is abandoned due to a request to stop and abandon the pipeline execution\. | 
+| Succeeded | The action was completed successfully\. | 
+| Failed | For approval actions, the FAILED state means the action was either rejected by the reviewer or failed due to an incorrect action configuration\. | 
 
 ## View Pipeline Execution Source Revisions \(Console\)<a name="pipelines-source-revisions-console"></a>
 

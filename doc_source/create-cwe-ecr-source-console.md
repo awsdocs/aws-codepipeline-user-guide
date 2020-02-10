@@ -10,29 +10,34 @@
 
 1. In **Event Source**, choose **Event Pattern**\.
 
-   Choose **Edit**, and then paste the following event pattern in the **Event Source** window for a `my-image-repo` repository with a tagged image version of `latest`:
+   Choose **Edit**, and then paste the following example event pattern in the **Event Source** window for a `cwe-test` repository with an image tag of `cli-testing`:
 
    ```
    {
-     "source": [
-       "aws.ecr"
-     ],
-     "detail": {
-       "eventName": [
-         "PutImage"
+       "detail-type": [
+           "ECR Image Action"
        ],
-       "requestParameters": {
-         "repositoryName": [
-           "my-image-repo"
-         ],
-         "imageTag": [
-           "latest"
-         ]
+       "source": [
+           "aws.ecr"
+       ],
+       "detail": {
+           "action-type": [
+               "PUSH"
+           ],
+           "image-tag": [
+               "latest"
+           ],
+           "repository-name": [
+               "cwe-test"
+           ],
+           "result": [
+               "SUCCESS"
+           ]
        }
-     }
    }
-   ```  
-![\[Create repository state change rule\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/ecr-repoevent-cptarget.png)![\[Create repository state change rule\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Create repository state change rule\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+   ```
+**Note**  
+To view the full event pattern supported for Amazon ECR events, see [Amazon ECR Events and EventBridge](https://docs.aws.amazon.com/AmazonECR/latest/userguide/ecr-eventbridge.html) or [Amazon Elastic Container Registry Events](https://docs.aws.amazon.com/eventbridge/latest/userguide/event-types.html#ecr-event-types)\.
 
 1. Choose **Save**\.
 

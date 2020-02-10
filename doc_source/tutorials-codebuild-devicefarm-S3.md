@@ -1,6 +1,6 @@
-# Tutorial: Create a Pipeline That Tests Your iOS App After a Change in Your Amazon S3 Bucket<a name="tutorials-codebuild-devicefarm-S3"></a>
+# Tutorial: Create a Pipeline That Tests Your iOS App After a Change in Your S3 Bucket<a name="tutorials-codebuild-devicefarm-S3"></a>
 
- You can use AWS CodePipeline to easily configure a continuous integration flow in which your app is tested each time the source bucket changes\. This tutorial shows you how to create and configure a pipeline to test your built iOS app from an Amazon S3 bucket\. The pipeline detects the arrival of a saved change through Amazon CloudWatch Events, and then uses [Device Farm](https://docs.aws.amazon.com/devicefarm/latest/developerguide/welcome.html) to test the built application\. 
+ You can use AWS CodePipeline to easily configure a continuous integration flow in which your app is tested each time the source bucket changes\. This tutorial shows you how to create and configure a pipeline to test your built iOS app from an S3 bucket\. The pipeline detects the arrival of a saved change through Amazon CloudWatch Events, and then uses [Device Farm](https://docs.aws.amazon.com/devicefarm/latest/developerguide/welcome.html) to test the built application\. 
 
 **Important**  
 Many of the actions you add to your pipeline in this procedure involve AWS resources that you need to create before you create the pipeline\. AWS resources for your source actions must always be created in the same AWS Region where you create your pipeline\. For example, if you create your pipeline in the US East \(Ohio\) Region, your CodeCommit repository must be in the US East \(Ohio\) Region\.   
@@ -21,9 +21,23 @@ When Amazon S3 is the source provider for your pipeline, you must upload to your
 | Configure | Add definitions | Upload | Test | Report | 
 | Configure pipeline resources | Add test definitions to your package | Upload \.zip to your bucket | Test output artifact kicked off automatically | View test results | 
 
+**Before you begin**
+
+1. Sign in to the AWS Device Farm console and choose **Create a new project**\.
+
+1. Choose your project\. In the browser, copy the URL of your new project\. The URL contains the project ID\.
+
+1. Copy and retain this project ID\. You use it when you create your pipeline in CodePipeline\.
+
+   Here is an example URL for a project\. To extract the project ID, copy the value after `projects/`\. In this example, the project ID is `eec4905f-98f8-40aa-9afc-4c1cfexample`\.
+
+   ```
+   https://<region-URL>/devicefarm/home?region=us-west-2#/projects/eec4905f-98f8-40aa-9afc-4c1cfexample/runs
+   ```
+
 ## Configure CodePipeline to Use Your Device Farm Tests \(Amazon S3 Example\)<a name="codepipeline-configure-tests-S3"></a>
 
-1. Create or use an Amazon S3 bucket with versioning enabled\. Follow the instructions in [Step 1: Create an Amazon S3 Bucket for Your Application](tutorials-simple-s3.md#s3-create-s3-bucket) to create an Amazon S3 bucket\.
+1. Create or use an S3 bucket with versioning enabled\. Follow the instructions in [Step 1: Create an Amazon S3 Bucket for Your Application](tutorials-simple-s3.md#s3-create-s3-bucket) to create an S3 bucket\.
 
 1. In the Amazon S3 console for your bucket, choose **Upload**, and follow the instructions to upload your \.zip file\.
 
@@ -56,9 +70,9 @@ If you use a CodePipeline service role that was created before July 2018, you mu
 
    1. In **Artifact location**, do one of the following: 
 
-      1. Choose **Default location** to use the default artifact store, such as the Amazon S3 artifact bucket designated as the default, for your pipeline in the region you have selected for your pipeline\.
+      1. Choose **Default location** to use the default artifact store, such as the S3 artifact bucket designated as the default, for your pipeline in the region you have selected for your pipeline\.
 
-      1. Choose **Custom location** if you already have an existing artifact store you have created, such as an Amazon S3 artifact bucket, in the same region as your pipeline\.
+      1. Choose **Custom location** if you already have an existing artifact store you have created, such as an S3 artifact bucket, in the same region as your pipeline\.
 **Note**  
 This is not the source bucket for your source code\. This is the artifact store for your pipeline\. A separate artifact store, such as an S3 bucket, is required for each pipeline\. When you create or edit a pipeline, you must have an artifact bucket in the pipeline Region and one artifact bucket per AWS Region where you are running an action\.  
 For more information, see [Input and Output Artifacts](welcome-introducing-artifacts.md) and [CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
@@ -110,18 +124,31 @@ For more information, see [Input and Output Artifacts](welcome-introducing-artif
 
       In the AWS CodePipeline console, you can find the name of the output artifact for each stage by hovering over the information icon in the pipeline diagram\. If your pipeline tests your app directly from the **Source** stage, choose **SourceArtifact**\. If the pipeline includes a **Build** stage, choose **BuildArtifact**\.
 
-   1. In **ProjectId**, choose your Device Farm project ID\. 
+   1. In **ProjectId**, choose your Device Farm project ID\. Use the steps at the start of this tutorial to retrieve your project ID\.
 
    1. In **DevicePoolArn**, enter the ARN for the device pool\.
 
    1. In **AppType**, enter **iOS**\.  
 ![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-choose-test-provider-S3.png)
 
+      The following is a list of valid values for **AppType**:
+      + **iOS**
+      + **Android**
+      + **Web**
+
    1. In **App**, enter the path of the compiled app package\. The path is relative to the root of the input artifact for the test stage\. Typically, this path is similar to `ios-test.ipa`\.
 
    1. In **TestType**, do one of the following:
       + If you're using one of the built\-in Device Farm tests, enter the type of test configured in your Device Farm project, such as BUILTIN\_FUZZ\. In **FuzzEventCount**, enter a time in milliseconds, such as 6000\. In **FuzzEventThrottle**, enter a time in milliseconds, such as 50\.
       + If you aren't using one of the built\-in Device Farm tests, enter your type of test, and then in **Test**, enter the path of the test definition file\. The path is relative to the root of the input artifact for your test\. 
+
+      The following is a list of valid values for **TestType**:
+      + **CALABASH**
+      + **INSTRUMENTATION**
+      + **UIAUTOMATION**
+      + **UIAUTOMATOR**
+      + **XCTEST**
+      + **XCTEST\_UI**
 
    1. In the remaining fields, provide the configuration that is appropriate for your test and application type\.
 

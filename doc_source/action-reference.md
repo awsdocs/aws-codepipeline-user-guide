@@ -13,7 +13,7 @@ This section is updated periodically with more action providers\. Reference info
 + [AWS CloudFormation](action-reference-CloudFormation.md)
 + [AWS CodeBuild](action-reference-CodeBuild.md)
 + [AWS CodeCommit](action-reference-CodeCommit.md)
-+ [CodestarConnectionSource](action-reference-CodestarConnectionSource.md)
++ [CodeStarSourceConnection](action-reference-CodestarConnectionSource.md)
 + [GitHub](action-reference-GitHub.md)
 + [Amazon ECR](action-reference-ECR.md)
 + [AWS Lambda](action-reference-Lambda.md)

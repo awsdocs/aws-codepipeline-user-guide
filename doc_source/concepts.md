@@ -14,12 +14,13 @@ The following terms are used in CodePipeline:
   + [Stages](#concepts-stages)
   + [Actions](#concepts-actions)
 + [Pipeline Executions](#concepts-executions)
+  + [Stopped Executions](#concepts-executions-stopped)
   + [Failed Executions](#concepts-failed)
   + [Superseded Executions](#concepts-superseded)
++ [Action Executions](#concepts-action-executions)
 + [Transitions](#concepts-transitions)
 + [Artifacts](#concepts-artifacts)
-+ [Artifacts](#concepts-artifacts)
-+ [Artifacts](#concepts-artifacts)
++ [Source Revisions](#concepts-source-revisions)
 
 ### Pipelines<a name="concepts-pipelines"></a>
 
@@ -33,15 +34,25 @@ A stage is a logical unit you can use to isolate an environment and to limit the
 
 An *action* is a set of operations performed on application code and configured so that the actions run in the pipeline at a specified point\. This can include things like a source action from a code change, an action for deploying the application to instances, and so on\. For example, a deployment stage might contain a deployment action that deploys code to a compute service like Amazon EC2 or AWS Lambda\.
 
-For a list of available actions, see [Valid Action Types and Providers in CodePipeline ](reference-pipeline-structure.md#actions-valid-providers)\.
+Valid CodePipeline action types are `source`, `build`, `test`, `deploy`, `approval`, and `invoke`\. For a list of action providers, see [Valid Action Types and Providers in CodePipeline ](reference-pipeline-structure.md#actions-valid-providers)\.
 
 ### Pipeline Executions<a name="concepts-executions"></a>
 
 An *execution* is a set of changes released by a pipeline\. Each pipeline execution is unique and has its own ID\. An execution corresponds to a set of changes, such as a merged commit or a manual release of the latest commit\. Two executions can release the same set of changes at different times\.
 
-While a pipeline can process multiple executions at the same time, a pipeline stage processes only one execution at a time\. To do this, a stage is locked while it processes an execution\. Two executions can't occupy the same stage at the same time\.
+While a pipeline can process multiple executions at the same time, a pipeline stage processes only one execution at a time\. To do this, a stage is locked while it processes an execution\. Two pipeline executions can't occupy the same stage at the same time\.
 
-Pipeline executions traverse pipeline stages in order\. Valid statuses for pipelines are `InProgress`, `Succeeded`, `Superseded`, and `Failed`\. An execution with a `Failed` or `Superseded` status does not continue through the pipeline and cannot be retried\.
+Pipeline executions traverse pipeline stages in order\. Valid statuses for pipelines are `InProgress`, `Stopping`, `Stopped`, `Succeeded`, `Superseded`, and `Failed`\. An execution with a `Failed` or `Superseded` status does not continue through the pipeline and cannot be retried\.
+
+#### Stopped Executions<a name="concepts-executions-stopped"></a>
+
+The pipeline execution can be stopped manually so that the in\-progress pipeline execution does not continue through the pipeline\. If stopped manually, a pipeline execution shows a `Stopping` status until it is completely stopped\. Then it shows a `Stopped` status\. A `Stopped` pipeline execution can be retried\.
+
+There are two ways to stop a pipeline execution:
++ **Stop and wait**
++ **Stop and abandon**
+
+For information about use cases for stopping an execution and sequence details for these options, see [How Pipeline Executions Are Stopped](concepts-how-it-works.md#concepts-how-it-works-stopping)\.
 
 #### Failed Executions<a name="concepts-failed"></a>
 
@@ -73,4 +84,4 @@ Actions pass output to another action for further processing using the pipeline 
 
 ### Source Revisions<a name="concepts-source-revisions"></a>
 
-When you make a source code change, a new version is created\. A *source revision* is the version of a source change that triggers a pipeline execution\. An execution processes that source revision only\. For GitHub and CodeCommit repositories, this is the commit\. For Amazon S3 buckets or actions, this is the object version\.
+When you make a source code change, a new version is created\. A *source revision* is the version of a source change that triggers a pipeline execution\. An execution processes that source revision only\. For GitHub and CodeCommit repositories, this is the commit\. For S3 buckets or actions, this is the object version\.

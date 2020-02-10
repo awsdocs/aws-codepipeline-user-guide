@@ -207,7 +207,7 @@ In this part of the tutorial, you create the pipeline\. The sample runs automati
 
 1. In **Step 1: Choose pipeline settings**, in **Pipeline name**, enter **MyFirstPipeline**\. 
 **Note**  
-If you choose another name for your pipeline, be sure to use that name instead of *MyFirstPipeline* for the rest of this tutorial\. After you create a pipeline, you cannot change its name\. Pipeline names are subject to some limitations\. For more information, see [Limits in AWS CodePipeline](limits.md)\. 
+If you choose another name for your pipeline, be sure to use that name instead of *MyFirstPipeline* for the rest of this tutorial\. After you create a pipeline, you cannot change its name\. Pipeline names are subject to some limitations\. For more information, see [Quotas in AWS CodePipeline](limits.md)\. 
 
 1. In **Service role**, do one of the following:
    + Choose **New service role** to allow CodePipeline to create a new service role in IAM\. In **Role name**, the role and policy name both default to this format: AWSCodePipelineServiceRole\-*region*\-*pipeline\_name*\. For example, this is the service role created for this tutorial: AWSCodePipelineServiceRole\-eu\-west\-2\-MyFirstPipeline\.

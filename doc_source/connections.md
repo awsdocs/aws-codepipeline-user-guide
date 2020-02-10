@@ -11,7 +11,7 @@ When you create a connection, the console provides a wizard you can use to insta
 
 Currently, Bitbucket is the only supported connection provider\.
 
-For more information about connections, see the [AWS CodeStar API Reference](https://docs.aws.amazon.com/codestar-connections/latest/APIReference/Welcome.html)\. For more information about the Bitbucket source action, see [CodestarConnectionSource](action-reference-CodestarConnectionSource.md)\.
+For more information about connections, see the [AWS CodeStar API Reference](https://docs.aws.amazon.com/codestar-connections/latest/APIReference/Welcome.html)\. For more information about the Bitbucket source action, see [CodeStarSourceConnection](action-reference-CodestarConnectionSource.md)\.
 
 **Topics**
 + [Connect to Bitbucket](connections-create.md)

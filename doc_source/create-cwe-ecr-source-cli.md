@@ -60,15 +60,15 @@ Call the put\-rule command, specifying:
 
 1. Call the put\-rule command and include the `--name` and `--event-pattern` parameters\.
 
-   **Why am I making this change?** This command enables AWS CloudFormation to create the event\.
+   **Why am I making this change?** We must create an event with a rule that specifies how an image push must be made, and a target that names the pipeline to be triggered by the event\.
 
    The following sample command uses `--event-pattern` to create a rule called `MyECRRepoRule`\.
 
    ```
-   aws events put-rule --name "MyECRRepoRule" --event-pattern "{\"source\":[\"aws.ecr\"],\"detail\":{\"eventName\":[\"PutImage\"],\"requestParameters\":{\"repositoryName\":[\"my-image-repo\"],\"imageTag\":[\"latest\"]}}}"
+   aws events put-rule --name "MyECRRepoRule" --event-pattern "{\"detail-type\":[\"ECR Image Action\"],\"source\":[\"aws.ecr\"],\"detail\":{\"action-type\":[\"PUSH\"],\"image-tag\":[\"latest\"],\"repository-name\":[\"cwe-test\"],\"result\":[\"SUCCESS\"]}}}"
    ```
 **Note**  
-The put\-rule command above can use either the `aws.ecr` or `ecr.amazonaws.com` service name in the `source` field\.
+To view the full event pattern supported for Amazon ECR events, see [Amazon ECR Events and EventBridge](https://docs.aws.amazon.com/AmazonECR/latest/userguide/ecr-eventbridge.html) or [Amazon Elastic Container Registry Events](https://docs.aws.amazon.com/eventbridge/latest/userguide/event-types.html#ecr-event-types)\.
 
 1. To add CodePipeline as a target, call the put\-targets command and include the following parameters:
    + The `--rule` parameter is used with the `rule_name` you created by using put\-rule\.

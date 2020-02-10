@@ -29,8 +29,8 @@ For *AccountA* to edit a pipeline to use the CodeDeploy application created by *
 
 For *AccountB* to allow access to its resources to a pipeline created in *AccountA*, *AccountB* must:
 + Request the ARN or account ID of *AccountA* \(in this walkthrough, the *AccountA* ID is *012ID\_ACCOUNT\_A*\)\.
-+ Create a policy applied to the [Amazon EC2 instance role](https://docs.aws.amazon.com/codedeploy/latest/userguide//how-to-create-iam-instance-profile.html) configured for CodeDeploy that allows access to the Amazon S3 bucket \(*codepipeline\-us\-east\-2\-1234567890*\)\.
-+ Create a policy applied to the [Amazon EC2 instance role](https://docs.aws.amazon.com/codedeploy/latest/userguide//how-to-create-iam-instance-profile.html) configured for CodeDeploy that allows access to the AWS KMS customer\-managed key used to encrypt the pipeline artifacts in *AccountA*\.
++ Create a policy applied to the [Amazon EC2 instance role](https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-create-iam-instance-profile.html) configured for CodeDeploy that allows access to the Amazon S3 bucket \(*codepipeline\-us\-east\-2\-1234567890*\)\.
++ Create a policy applied to the [Amazon EC2 instance role](https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-create-iam-instance-profile.html) configured for CodeDeploy that allows access to the AWS KMS customer\-managed key used to encrypt the pipeline artifacts in *AccountA*\.
 + Configure and attach an IAM role \(*CrossAccount\_Role*\) with a trust relationship policy that allows *AccountA* to assume the role\.
 + Create a policy that allows access to the deployment resources required by the pipeline and attach it to *CrossAccount\_Role*\.
 + Create a policy that allows access to the Amazon S3 bucket \(*codepipeline\-us\-east\-2\-1234567890*\) and attach it to *CrossAccount\_Role*\.
@@ -89,7 +89,7 @@ To create a pipeline that uses CodeDeploy resources associated with another AWS 
 
 1. In the properties pane, expand **Permissions**, and then choose **Add bucket policy**\.
 **Note**  
-If a policy is already attached to your Amazon S3 bucket, choose **Edit bucket policy**\. You can then add the statements in the following example to the existing policy\. To add a new policy, choose the link, and follow the instructions in the AWS Policy Generator\. For more information, see [Overview of IAM Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide//policies_overview.html)\. 
+If a policy is already attached to your Amazon S3 bucket, choose **Edit bucket policy**\. You can then add the statements in the following example to the existing policy\. To add a new policy, choose the link, and follow the instructions in the AWS Policy Generator\. For more information, see [Overview of IAM Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/policies_overview.html)\. 
 
 1. In the **Bucket Policy Editor** window, type the following policy\. This will allow *AccountB* access to the pipeline artifacts, and will give *AccountB* the ability to add output artifacts if an action, such as a custom source or build action, creates them\. 
 
@@ -188,7 +188,7 @@ If you have not previously created any role policies, **Create Role Policy** wil
 
 ### Configure Policies and Roles in the Account That Owns the AWS Resource \(*AccountB*\)<a name="pipelines-create-cross-account-setup-accountb"></a>
 
-When you create an application, deployment, and deployment group in CodeDeploy, you also create an [Amazon EC2 instance role](https://docs.aws.amazon.com/codedeploy/latest/userguide//how-to-create-iam-instance-profile.html)\. \(This role is created for you if you use the Run Deployment Walkthrough wizard, but you can also create it manually\.\) For a pipeline created in *AccountA* to use CodeDeploy resources created in *AccountB*, you must: 
+When you create an application, deployment, and deployment group in CodeDeploy, you also create an [Amazon EC2 instance role](https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-create-iam-instance-profile.html)\. \(This role is created for you if you use the Run Deployment Walkthrough wizard, but you can also create it manually\.\) For a pipeline created in *AccountA* to use CodeDeploy resources created in *AccountB*, you must: 
 + Configure a policy for the instance role that allows it to access the Amazon S3 bucket where pipeline artifacts are stored\.
 + Create a second role in *AccountB* configured for cross\-account access\.
 
@@ -202,7 +202,7 @@ These policies are specific to setting up CodeDeploy resources to be used in a p
 
 1. In **Dashboard**, choose **Roles**\.
 
-1. In the list of roles, under **Role Name**, choose the name of the service role used as the Amazon EC2 instance role for the CodeDeploy application\. This role name can vary, and more than one instance role can be used by a deployment group\. For more information, see [Create an IAM Instance Profile for your Amazon EC2 Instances](https://docs.aws.amazon.com/codedeploy/latest/userguide//how-to-create-iam-instance-profile.html)\. 
+1. In the list of roles, under **Role Name**, choose the name of the service role used as the Amazon EC2 instance role for the CodeDeploy application\. This role name can vary, and more than one instance role can be used by a deployment group\. For more information, see [Create an IAM Instance Profile for your Amazon EC2 Instances](https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-create-iam-instance-profile.html)\. 
 
 1. On the **Summary** page, on the **Permissions** tab, expand **Inline Policies**, and then choose **Create Role Policy**\.
 
@@ -273,7 +273,7 @@ Now create an IAM role to use for cross\-account access, and configure it so tha
 
 **To configure the cross\-account role in IAM**
 
-1. Sign in to the AWS Management Console with *AccountB* and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
+1. Sign in to the AWS Management Console with *AccountB* and open the IAM console at [https://console\.aws\.amazon\.com/iam](https://console.aws.amazon.com/iam)\.
 
 1. In **Dashboard**, choose **Roles**, and then choose **Create New Role**\.
 

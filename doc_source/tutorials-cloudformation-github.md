@@ -2,6 +2,11 @@
 
 This walkthrough shows you how to use the AWS CloudFormation console to create infrastructure that includes a pipeline connected to a GitHub source repository\. In this tutorial, you use the provided sample template file to create your resource stack, which includes your artifact store, pipeline, and change\-detection resource \(your webhook\)\. After you create your resource stack in AWS CloudFormation, you can view your pipeline in the AWS CodePipeline console\. The pipeline is a two\-stage pipeline with a GitHub source stage and a CodeDeploy deployment stage\.
 
+We strongly recommend that you use AWS Secrets Manager to store your credentials\. If you use Secrets Manager, you must have already configured and stored your secret parameters in Secrets Manager\. This example uses dynamic references to AWS Secrets Manager for the GitHub credentials for your webhook\. For more information, see [ Using Dynamic References to Specify Template Values](https://alpha-docs-aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html#dynamic-references-secretsmanager)\. 
+
+**Important**  
+When passing secret parameters, do not enter the value directly into the template\. The value is rendered as plaintext and is therefore readable\. For security reasons, do not use plaintext in your AWS CloudFormation template to store your credentials\.
+
 **Prerequisites:**
 
 You must have created the following resources to use with the AWS CloudFormation sample template:
@@ -13,7 +18,7 @@ You must have created the following resources to use with the AWS CloudFormation
 + The GitHub repository and branch you want to use for your source\.
 + A personal access key for your GitHub repository\. This is used to provide an OAuth token for connection to your repository\.
 
-1. Unzip the files from [SampleApp\_Linux\.zip](https://s3.amazonaws.com/aws-codedeploy-us-east-1/samples/latest/SampleApp_Linux.zip) and upload the files to your GitHub repository\. You must upload the unzipped files to the root directory of your repository\.
+1. Unzip the files from [SampleApp\_Linux\.zip](samples/SampleApp_Linux.zip) and upload the files to your GitHub repository\. You must upload the unzipped files to the root directory of your repository\.
 
 1. Open the AWS CloudFormation console and choose **Create Stack**\.
 

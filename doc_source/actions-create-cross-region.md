@@ -346,7 +346,7 @@ You can use AWS CloudFormation to add a cross\-region action to an existing pipe
                      Type: String
    ```
 
-1. Under `Mappings`, add the region map\. Under the `Pipeline` resource, under the `artifactStore` field, add the `artifactStores` map for your new cross\-region action as follows:
+1. Under `Mappings`, add the region map as shown in this example for a mapping named `SecondRegionMap` that maps values for the keys `RegionA` and `RegionB`\. Under the `Pipeline` resource, under the `artifactStore` field, add the `artifactStores` map for your new cross\-region action as follows:
 
    ```
    Mappings:

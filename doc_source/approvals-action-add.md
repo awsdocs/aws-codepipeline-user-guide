@@ -19,11 +19,11 @@ You can use the CodePipeline console to add an approval action to an existing Co
 
 1. On the pipeline details page, choose **Edit**\.
 
-1. If you want to add an approval action to a new stage, choose **\+Add stage** at the point in the pipeline where you want to add an approval request, and enter a name for the stage\. 
+1. If you want to add an approval action to a new stage, choose **\+ Add stage** at the point in the pipeline where you want to add an approval request, and enter a name for the stage\. On the **Add stage** page, in **Stage name**, enter your new stage name\. For example, add a new stage and name it `Manual_Approval`\.
 
    If you want to add an approval action to an existing stage, choose **Edit stage**\. 
 
-1. Choose **\+ Add action group**\.
+1. In the stage where you want to add the approval action, choose **\+ Add action group**\.
 
 1. On the **Edit action** page, do the following:
 

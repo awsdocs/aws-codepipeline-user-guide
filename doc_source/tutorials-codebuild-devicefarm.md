@@ -18,6 +18,20 @@ You can try this out using your existing Android app and test definitions, or yo
 | Configure | Add definitions | Push | Build and Test | Report | 
 | Configure pipeline resources | Add build and test definitions to your package | Push a package to your repository | App build and test build output artifact kicked off automatically | View test results | 
 
+**Before you begin**
+
+1. Sign in to the AWS Device Farm console and choose **Create a new project**\.
+
+1. Choose your project\. In the browser, copy the URL of your new project\. The URL contains the project ID\. 
+
+1. Copy and retain this project ID\. You use it when you create your pipeline in CodePipeline\.
+
+   Here is an example URL for a project\. To extract the project ID, copy the value after `projects/`\. In this example, the project ID is `eec4905f-98f8-40aa-9afc-4c1cfexample`\.
+
+   ```
+   https://<region-URL>/devicefarm/home?region=us-west-2#/projects/eec4905f-98f8-40aa-9afc-4c1cfexample/runs
+   ```
+
 ## Configure CodePipeline to Use Your Device Farm Tests<a name="codepipeline-configure-tests"></a>
 
 1. Add and commit a file called [https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html](https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html) in the root of your app code, and push it to your repository\. CodeBuild uses this file to perform commands and access artifacts required to build your app\.
@@ -67,9 +81,9 @@ If you use a CodePipeline service role that was created before July 2018, you ne
 
    1. In **Artifact location**, do one of the following: 
 
-      1. Choose **Default location** to use the default artifact store, such as the Amazon S3 artifact bucket designated as the default, for your pipeline in the region you have selected for your pipeline\.
+      1. Choose **Default location** to use the default artifact store, such as the S3 artifact bucket designated as the default, for your pipeline in the region you have selected for your pipeline\.
 
-      1. Choose **Custom location** if you already have an existing artifact store you have created, such as an Amazon S3 artifact bucket, in the same region as your pipeline\.
+      1. Choose **Custom location** if you already have an existing artifact store you have created, such as an S3 artifact bucket, in the same Region as your pipeline\.
 **Note**  
 This is not the source bucket for your source code\. This is the artifact store for your pipeline\. A separate artifact store, such as an S3 bucket, is required for each pipeline\. When you create or edit a pipeline, you must have an artifact bucket in the pipeline Region and one artifact bucket per AWS Region where you are running an action\.  
 For more information, see [Input and Output Artifacts](welcome-introducing-artifacts.md) and [CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
@@ -130,18 +144,31 @@ For more information, see [Input and Output Artifacts](welcome-introducing-artif
 
       In the AWS CodePipeline console, you can find the name of the output artifact for each stage by hovering over the information icon in the pipeline diagram\. If your pipeline tests your app directly from the **Source** stage, choose **SourceArtifact**\. If the pipeline includes a **Build** stage, choose **BuildArtifact**\.
 
-   1. In **ProjectId**, enter your Device Farm project ID\. 
+   1. In **ProjectId**, enter your Device Farm project ID\. Use the steps at the start of this tutorial to retrieve your project ID\.
 
    1. In **DevicePoolArn**, enter the ARN for the device pool\.
 
    1. In **AppType**, enter **Android**\.  
 ![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-choose-test-provider.png)
 
+      The following is a list of valid values for **AppType**:
+      + **iOS**
+      + **Android**
+      + **Web**
+
    1. In **App**, enter the path of the compiled app package\. The path is relative to the root of the input artifact for the test stage\. Typically, this path is similar to `app-release.apk`\.
 
    1. In **TestType**, do one of the following:
       + If you're using one of the built\-in Device Farm tests, enter the type of test configured in your Device Farm project, such as BUILTIN\_FUZZ\. In **FuzzEventCount**, enter a time in milliseconds, such as 6000\. In **FuzzEventThrottle**, enter a time in milliseconds, such as 50\.
       + If you aren't using one of the built\-in Device Farm tests, enter your type of test, and then in **Test**, enter the path of the test definition file\. The path is relative to the root of the input artifact for your test\.
+
+      The following is a list of valid values for **TestType**:
+      + **CALABASH**
+      + **INSTRUMENTATION**
+      + **UIAUTOMATION**
+      + **UIAUTOMATOR**
+      + **XCTEST**
+      + **XCTEST\_UI**
 
    1. In the remaining fields, provide the configuration that is appropriate for your test and application type\.
 

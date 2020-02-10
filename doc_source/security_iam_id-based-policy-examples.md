@@ -673,7 +673,7 @@ The following example shows a policy configured by AccountA for an S3 bucket use
 }
 ```
 
-The following example shows a policy configured by AccountB and applied to the [EC2 instance role](https://docs.aws.amazon.com/codedeploy/latest/userguide//how-to-create-iam-instance-profile.html) for CodeDeploy\. This policy grants access to the S3 bucket used by AccountA to store pipeline artifacts \(*codepipeline\-us\-east\-2\-1234567890*\):
+The following example shows a policy configured by AccountB and applied to the [EC2 instance role](https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-create-iam-instance-profile.html) for CodeDeploy\. This policy grants access to the S3 bucket used by AccountA to store pipeline artifacts \(*codepipeline\-us\-east\-2\-1234567890*\):
 
 ```
 {

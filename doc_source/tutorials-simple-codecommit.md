@@ -48,9 +48,9 @@ In this step, you set up a local repository to connect to your remote CodeCommit
 
 In this step, you download code for a sample application that was created for a CodeDeploy sample walkthrough, and add it to your CodeCommit repository\.
 
-1. Download the following file: [SampleApp\_Linux\.zip](https://s3.amazonaws.com/aws-codedeploy-us-east-1/samples/latest/SampleApp_Linux.zip)
+1. Download the following file: [SampleApp\_Linux\.zip](samples/SampleApp_Linux.zip)
 
-1. Unzip the files from [SampleApp\_Linux\.zip](https://s3.amazonaws.com/aws-codedeploy-us-east-1/samples/latest/SampleApp_Linux.zip) into the local directory you created earlier \(for example, `/tmp/MyDemoRepo` or `c:\temp\MyDemoRepo`\)\.
+1. Unzip the files from [SampleApp\_Linux\.zip](samples/SampleApp_Linux.zip) into the local directory you created earlier \(for example, `/tmp/MyDemoRepo` or `c:\temp\MyDemoRepo`\)\.
 
    Be sure to place the files directly into your local repository\. Do not include a `SampleApp_Linux` folder\. On your local Linux, macOS, or Unix machine, for example, your directory and file hierarchy should look like this:
 

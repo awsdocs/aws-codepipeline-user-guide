@@ -4,9 +4,9 @@ To use AWS CloudFormation to create a webhook, update your template as described
 
 **To add parameters and create a webhook in your template**
 
-We strongly recommend that you use AWS Secrets Manager to store your credentials\. If you use Secrets Manager, you must have already configured and stored your secret parameters in Secrets Manager\. For more information, see [ Using Dynamic References to Specify Template Values](https://alpha-docs-aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html#dynamic-references-secretsmanager)\. 
+We strongly recommend that you use AWS Secrets Manager to store your credentials\. If you use Secrets Manager, you must have already configured and stored your secret parameters in Secrets Manager\. This example uses dynamic references to AWS Secrets Manager for the GitHub credentials for your webhook\. For more information, see [ Using Dynamic References to Specify Template Values](https://alpha-docs-aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html#dynamic-references-secretsmanager)\. 
 **Important**  
-When passing secret parameters, do not enter the value directly into the template\. The value is rendered as plain text and is readable\. For security purposes, do not use plain text in your CloudFormation template to store your credentials\.
+When passing secret parameters, do not enter the value directly into the template\. The value is rendered as plaintext and is therefore readable\. For security reasons, do not use plaintext in your AWS CloudFormation template to store your credentials\.
 
 When you use the CLI or AWS CloudFormation to create a pipeline and add a webhook, you must disable periodic checks\.
 **Note**  
@@ -21,13 +21,6 @@ To disable periodic checks, you must explicitly add the `PollForSourceChanges` p
    Parameters:
            GitHubOwner:
              Type: String
-           GitHubSecret:
-             Type: String
-             NoEcho: true
-           GitHubOAuthToken:
-             Type: String
-             NoEcho: true
-   
    
    ...
    ```
@@ -46,14 +39,7 @@ To disable periodic checks, you must explicitly add the `PollForSourceChanges` p
        "GitHubOwner": {
          "Type": "String"
        },
-       "GitHubSecret": {
-         "Type": "String",
-         "NoEcho": true
-       },
-       "GitHubOAuthToken": {
-         "Type": "String",
-         "NoEcho": true
-       },
+   
    
    ...
    ```
@@ -79,7 +65,7 @@ The `TargetAction` you specify must match the `Name` property of the source acti
        Properties:
          Authentication: GITHUB_HMAC
          AuthenticationConfiguration:
-           SecretToken: !Ref GitHubSecret
+           SecretToken: {{resolve:secretsmanager:MyGitHubSecret:SecretString:token}}
          Filters:
            - 
              JsonPath: "$.ref"
@@ -103,9 +89,7 @@ The `TargetAction` you specify must match the `Name` property of the source acti
        "Properties": {
          "Authentication": "GITHUB_HMAC",
          "AuthenticationConfiguration": {
-           "SecretToken": {
-             "Ref": "GitHubSecret"
-           }
+           "SecretToken": "{{resolve:secretsmanager:MyGitHubSecret:SecretString:token}}"
          },
          "Filters": [
            {
@@ -167,7 +151,7 @@ When you create a pipeline with this method, the `PollForSourceChanges` paramete
                   Owner: !Ref GitHubOwner
                   Repo: !Ref RepositoryName
                   Branch: !Ref BranchName
-                  OAuthToken: !Ref GitHubOAuthToken
+                  OAuthToken: {{resolve:secretsmanager:MyGitHubSecret:SecretString:token}}
                   PollForSourceChanges: false
                 RunOrder: 1
   ```
@@ -202,9 +186,7 @@ When you create a pipeline with this method, the `PollForSourceChanges` paramete
             "Branch": {
               "Ref": "BranchName"
             },
-            "OAuthToken": {
-              "Ref": "GitHubOAuthToken"
-            },
+            "OAuthToken": "{{resolve:secretsmanager:MyGitHubSecret:SecretString:token}}",
             "PollForSourceChanges": false
           },
           "RunOrder": 1

@@ -8,7 +8,7 @@ Some action providers produce a defined set of variables\. You choose from defau
 
 **Variable Limits**
 
-For limit information, see [Limits in AWS CodePipeline](limits.md)\.
+For limit information, see [Quotas in AWS CodePipeline](limits.md)\.
 
 **Topics**
 + [Concepts](#reference-variables-concepts)

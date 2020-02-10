@@ -84,13 +84,13 @@ If you already have Jenkins resources you want to use, you can do so, but you mu
 
 1. In **Item Name**, type a name for the Jenkins project \(for example, *MyDemoProject*\)\. Choose **Freestyle project**, and then choose **OK**\.
 **Note**  
-Make sure the name for your project meets the requirements for CodePipeline\. For more information, see [Limits in AWS CodePipeline](limits.md)\.
+Make sure the name for your project meets the requirements for CodePipeline\. For more information, see [Quotas in AWS CodePipeline](limits.md)\.
 
 1. On the configuration page for the project, select the **Execute concurrent builds if necessary** check box\. In **Source Code Management**, choose **AWS CodePipeline**\. If you have installed Jenkins on an Amazon EC2 instance and configured the AWS CLI with the profile for the IAM user you created for integration between CodePipeline and Jenkins, leave all of the other fields empty\.
 
 1. Choose **Advanced**, and in **Provider**, type a name for the provider of the action as it will appear in CodePipeline \(for example, *MyJenkinsProviderName*\)\. Make sure this name is unique and easy to remember\. You will use it when you add a build action to your pipeline later in this tutorial, and again when you add a test action\.
 **Note**  
-This action name must meet the naming requirements for actions in CodePipeline\. For more information, see [Limits in AWS CodePipeline](limits.md)\.
+This action name must meet the naming requirements for actions in CodePipeline\. For more information, see [Quotas in AWS CodePipeline](limits.md)\.
 
 1. In **Build Triggers**, clear any check boxes, and then select **Poll SCM**\. In **Schedule**, type five asterisks separated by spaces, as follows:
 
@@ -197,7 +197,7 @@ If you did not want to add another stage to your pipeline, you could add a test 
 
 1.  In **Item Name**, type a name for the Jenkins project \(for example, *MyTestProject*\)\. Choose **Freestyle project**, and then choose **OK**\.
 **Note**  
-Make sure the name for your project meets the CodePipeline requirements\. For more information, see [Limits in AWS CodePipeline](limits.md)\.
+Make sure the name for your project meets the CodePipeline requirements\. For more information, see [Quotas in AWS CodePipeline](limits.md)\.
 
 1. On the configuration page for the project, select the **Execute concurrent builds if necessary** check box\. In **Source Code Management**, choose **AWS CodePipeline**\. If you have installed Jenkins on an Amazon EC2 instance and configured the AWS CLI with the profile for the IAM user you created for integration between CodePipeline and Jenkins, leave all the other fields empty\. 
 **Important**  
@@ -207,7 +207,7 @@ If you are configuring a Jenkins project and it is not installed on an Amazon EC
 
 1. In **Provider**, type the same name you used for the build project \(for example, *MyJenkinsProviderName*\)\. You will use this name when you add the test action to your pipeline later in this tutorial\.
 **Note**  
-This name must meet the CodePipeline naming requirements for actions\. For more information, see [Limits in AWS CodePipeline](limits.md)\.
+This name must meet the CodePipeline naming requirements for actions\. For more information, see [Quotas in AWS CodePipeline](limits.md)\.
 
 1. In **Build Triggers**, clear any check boxes, and then select **Poll SCM**\. In **Schedule**, type five asterisks separated by spaces, as follows:
 
@@ -281,7 +281,7 @@ After you complete this tutorial, you should delete the pipeline and the resourc
 
 1. To clean up your CodeDeploy resources, follow the instructions in [Cleaning Up](http://docs.aws.amazon.com/codedeploy/latest/userguide/getting-started-walkthrough.html#getting-started-walkthrough-clean-up)\.
 
-1. To clean up your instance resources, delete the Amazon EC2 instance where you installed Jenkins\. For more information, see [Clean Up Your Instance and Volume](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide//ec2-clean-up-your-instance.html)\.
+1. To clean up your instance resources, delete the Amazon EC2 instance where you installed Jenkins\. For more information, see [Clean Up Your Instance and Volume](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-clean-up-your-instance.html)\.
 
 1. If you do not intend to create more pipelines or use CodePipeline again, delete the Amazon S3 bucket used to store artifacts for your pipeline\. To delete the bucket, follow the instructions in [Deleting a Bucket](http://docs.aws.amazon.com/AmazonS3/latest/UG/DeletingaBucket.html)\.
 

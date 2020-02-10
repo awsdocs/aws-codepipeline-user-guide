@@ -8,7 +8,7 @@ To use AWS CloudFormation to create a rule, use the template snippet as shown he
    + The first policy allows the role to be assumed\.
    + The second policy provides permissions to start the pipeline\.
 
-   **Why am I making this change?** Adding the `AWS::IAM::Role` resource enables AWS CloudFormation to create permissions for CloudWatch Events\. This resource is added to your AWS CloudFormation stack\.
+   **Why am I making this change?** We must create a role that can be assumed by CloudWatch Events to start an execution in our pipeline\.
 
 ------
 #### [ YAML ]
@@ -95,32 +95,38 @@ To use AWS CloudFormation to create a rule, use the template snippet as shown he
 
 1. In the template, under `Resources`, use the `AWS::Events::Rule` AWS CloudFormation resource to add a CloudWatch Events rule for the Amazon ECR source\. This event pattern creates an event that monitors push changes to your repository When CloudWatch Events detects a repository state change, the rule invokes `StartPipelineExecution` on your target pipeline\.
 
-   **Why am I making this change? ** Adding the `AWS::Events::Rule` resource enables AWS CloudFormation to create the event\. This resource is added to your AWS CloudFormation stack\. This snippet uses an image named `my-image-repo` with a tag of `latest`\.
+   **Why am I making this change? ** We must create an event with a rule that specifies how an image push must be made, and a target that names the pipeline to be triggered by the event\.
+
+   This snippet uses an image named `cwe-test` with a tag of `latest`\.
 
 ------
 #### [ YAML ]
 
    ```
-     AmazonCloudWatchEventRule:
-       Type: AWS::Events::Rule
-       Properties:
-         EventPattern:
-           source:
-             - aws.ecr
-           detail:
-             eventName:
-               - PutImage
-             requestParameters:
-               repositoryName:
-                 - my-image-repo
-               imageTag:
-                 - latest
-         Targets:
-           -
-             Arn: 
-               !Join [ '', [ 'arn:aws:codepipeline:', !Ref 'AWS::Region', ':', !Ref 'AWS::AccountId', ':', !Ref AppPipeline ] ]
-             RoleArn: !GetAtt AmazonCloudWatchEventRole.Arn
-             Id: codepipeline-AppPipeline
+   AmazonCloudWatchEventRule:
+     Type: 'AWS::Events::Rule'
+     Properties:
+       EventPattern:
+         detail:
+           action-type: PUSH
+           image-tag: latest
+           repository-name: cwe-test
+           result: SUCCESS
+         detail-type: ECR Image Action
+         source: aws.ecr
+       Targets:
+         - Arn: !Join 
+             - ''
+             - - 'arn:aws:codepipeline:'
+               - !Ref 'AWS::Region'
+               - ':'
+               - !Ref 'AWS::AccountId'
+               - ':'
+               - !Ref AppPipeline
+           RoleArn: !GetAtt 
+             - AmazonCloudWatchEventRole
+             - Arn
+           Id: codepipeline-AppPipeline
    ```
 
 ------
@@ -132,18 +138,14 @@ To use AWS CloudFormation to create a rule, use the template snippet as shown he
            "Type": "AWS::Events::Rule",
            "Properties": {
                "EventPattern": {
-                   "source": [
-                       "aws.ecr"
-                   ],
                    "detail": {
-                       "eventName": [
-                           "PutImage"
-                       ],
-                       "requestParameters": {
-                           "repositoryName": [ "my-image-repo" ],
-                           "imageTag": [ "latest" ]
-                       }
-                   }
+                       "action-type": "PUSH",
+                       "image-tag": "latest",
+                       "repository-name": "cwe-test",
+                       "result": "SUCCESS"
+                   },
+                   "detail-type": "ECR Image Action",
+                   "source": "aws.ecr",
                },
                "Targets": [
                    {
@@ -181,6 +183,8 @@ To use AWS CloudFormation to create a rule, use the template snippet as shown he
    ```
 
 ------
+**Note**  
+To view the full event pattern supported for Amazon ECR events, see [Amazon ECR Events and EventBridge](https://docs.aws.amazon.com/AmazonECR/latest/userguide/ecr-eventbridge.html) or [Amazon Elastic Container Registry Events](https://docs.aws.amazon.com/eventbridge/latest/userguide/event-types.html#ecr-event-types)\.
 
 1. Save the updated template to your local computer, and then open the AWS CloudFormation console\.
 

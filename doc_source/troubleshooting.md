@@ -13,6 +13,7 @@ The following information might help you troubleshoot common issues in AWS CodeP
 + [Deployment Error: A ZIP file that contains a WAR file is deployed successfully to AWS Elastic Beanstalk, but the application URL reports a 404 Not Found error](#troubleshooting-aeb2)
 + [Pipeline artifact folder names appear to be truncated](#troubleshooting-truncated-artifacts)
 + [Add GitClone permissions for connections](#codebuild-role-connections)
++ [Pipeline Error: A deployment with the CodeDeployToECS action returns an error message: "Exception while trying to read the task definition artifact file from: <source artifact name>"](#troubleshooting-ecstocodedeploy-size)
 + [Need Help with a Different Issue?](#troubleshooting-other)
 
 ## Pipeline Error: A pipeline configured with AWS Elastic Beanstalk returns an error message: "Deployment failed\. The provided role does not have sufficient permissions: Service:AmazonElasticLoadBalancing"<a name="troubleshooting-aeb1"></a>
@@ -172,11 +173,21 @@ To add permissions to your CodeBuild service role policy, you create a customer\
 1. Return to the page where you were attaching permissions, refresh the policy list, and select the policy you just created\. Choose **Attach policies**\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/gitclone-role-policy-attach.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
+## Pipeline Error: A deployment with the CodeDeployToECS action returns an error message: "Exception while trying to read the task definition artifact file from: <source artifact name>"<a name="troubleshooting-ecstocodedeploy-size"></a>
+
+**Problem:** 
+
+The maximum artifact ZIP size in the CodePipeline deploy action to ECS through CodeDeploy \(the `CodeDeployToECS` action\) is 3 MB\. The following error message is returned when artifact sizes exceed 3 MB: 
+
+Exception while trying to read the task definition artifact file from: <source artifact name>
+
+**Possible fixes:** Create an artifact with a compressed size less than 3 MB\.
+
 ## Need Help with a Different Issue?<a name="troubleshooting-other"></a>
 
 Try these other resources:
 + Contact [AWS Support](https://aws.amazon.com/contact-us/)\.
-+ Ask a question in the [CodePipeline forum](https://forums.aws.amazon.com//forum.jspa?forumID=197)\.
-+ [Request a quota increase](https://console.aws.amazon.com/support/home#/case/create%3FissueType=service-limit-increase)\. For more information, see [Limits in AWS CodePipeline](limits.md)\.
++ Ask a question in the [CodePipeline forum](https://forums.aws.amazon.com/forum.jspa?forumID=197)\.
++ [Request a quota increase](https://console.aws.amazon.com/support/home#/case/create%3FissueType=service-limit-increase)\. For more information, see [Quotas in AWS CodePipeline](limits.md)\.
 **Note**  
 It can take up to two weeks to process requests for a quota increase\.
