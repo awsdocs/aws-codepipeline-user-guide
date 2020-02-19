@@ -108,12 +108,12 @@ To use AWS CloudFormation to create a rule, use the template snippet as shown he
      Properties:
        EventPattern:
          detail:
-           action-type: PUSH
-           image-tag: latest
-           repository-name: cwe-test
-           result: SUCCESS
-         detail-type: ECR Image Action
-         source: aws.ecr
+           action-type: [PUSH]
+           image-tag: [latest]
+           repository-name: [cwe-test]
+           result: [SUCCESS]
+         detail-type: [ECR Image Action]
+         source: [aws.ecr]
        Targets:
          - Arn: !Join 
              - ''
@@ -139,13 +139,13 @@ To use AWS CloudFormation to create a rule, use the template snippet as shown he
            "Properties": {
                "EventPattern": {
                    "detail": {
-                       "action-type": "PUSH",
-                       "image-tag": "latest",
-                       "repository-name": "cwe-test",
-                       "result": "SUCCESS"
+                       "action-type": ["PUSH"],
+                       "image-tag": ["latest"],
+                       "repository-name": ["cwe-test"],
+                       "result": ["SUCCESS"]
                    },
-                   "detail-type": "ECR Image Action",
-                   "source": "aws.ecr",
+                   "detail-type": ["ECR Image Action"],
+                   "source": ["aws.ecr"],
                },
                "Targets": [
                    {
