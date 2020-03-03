@@ -13,9 +13,9 @@ After a code change is detected, you have the following options for passing the 
 
   Currently, the git URL reference can only be used by downstream CodeBuild actions to clone the repo and associated Git metadata\. Attempting to pass a Git URL reference to non\-CodeBuild actions results in an error\.
 
-CodePipeline prompts you to add an Bitbucket Cloud app to your repo when you create a connection\. If you use the console to create or edit your pipeline, CodePipeline creates a Bitbucket webhook that starts your pipeline when a change occurs in the repository\. You must have already created your Bitbucket account and repository before you can connect through the `CodeStarSourceConnection` action\. Use your Bitbucket account when you create a connection so that CodePipeline can use the Bitbucket repository for source stages in pipelines\.
+CodePipeline prompts you to add a Bitbucket Cloud app to your repo when you create a connection\. If you use the console to create or edit your pipeline, CodePipeline creates a Bitbucket webhook that starts your pipeline when a change occurs in the repository\. You must have already created your Bitbucket account and repository before you can connect through the `CodeStarSourceConnection` action\. Use your Bitbucket account when you create a connection so that CodePipeline can use the Bitbucket repository for source stages in pipelines\.
 
-For more infomation, see [how Bitbucket apps work](https://confluence.atlassian.com/bitbucket/bitbucket-cloud-add-ons-780871938.html) in the Bitbucket developer documentation 
+For more information, see [how Bitbucket apps work](https://confluence.atlassian.com/bitbucket/bitbucket-cloud-add-ons-780871938.html) in the Bitbucket developer documentation 
 
 **Topics**
 + [Action Type](#action-reference-CodestarConnectionSource-type)
