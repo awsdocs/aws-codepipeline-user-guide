@@ -81,22 +81,22 @@ For more information about the difference between an author and a committer in G
 #### [ YAML ]
 
 ```
-actions:
-  - outputArtifacts:
-      - name: Artifact_MyWebsiteStack
-    inputArtifacts: []
-    name: source
-    configuration:
+Actions:
+  - OutputArtifacts:
+      - Name: Artifact_MyWebsiteStack
+    InputArtifacts: []
+    Name: source
+    Configuration:
       RepositoryName: MyWebsite
       BranchName: mainline
       PollForSourceChanges: 'false'
-    runOrder: 1
-    actionTypeId:
-      version: '1'
-      provider: CodeCommit
-      category: Source
-      owner: AWS
-  name: Source
+    RunOrder: 1
+    ActionTypeId:
+      Version: '1'
+      Provider: CodeCommit
+      Category: Source
+      Owner: AWS
+  Name: Source
 ```
 
 ------
@@ -104,30 +104,30 @@ actions:
 
 ```
 {
-    "actions": [
+    "Actions": [
         {
-            "outputArtifacts": [
+            "OutputArtifacts": [
                 {
-                    "name": "Artifact_MyWebsiteStack"
+                    "Name": "Artifact_MyWebsiteStack"
                 }
             ],
-            "inputArtifacts": [],
-            "name": "source",
-            "configuration": {
+            "InputArtifacts": [],
+            "Name": "source",
+            "Configuration": {
                 "RepositoryName": "MyWebsite",
                 "BranchName": "mainline",
                 "PollForSourceChanges": "false"
             },
-            "runOrder": 1,
-            "actionTypeId": {
-                "version": "1",
-                "provider": "CodeCommit",
-                "category": "Source",
-                "owner": "AWS"
+            "RunOrder": 1,
+            "ActionTypeId": {
+                "Version": "1",
+                "Provider": "CodeCommit",
+                "Category": "Source",
+                "Owner": "AWS"
             }
         }
     ],
-    "name": "Source"
+    "Name": "Source"
 },
 ```
 

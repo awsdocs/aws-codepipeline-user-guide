@@ -2,6 +2,9 @@
 
 After you use the AWS CLI to manually create a webhook, you must register the webhook in GitHub\. A designated AWS endpoint is used for the webhook and is supplied by the put\-webhook command\.
 
+**Important**  
+If you use the console to create or edit your pipeline, your webhook is created for you\.
+
 To use the AWS CLI to create a webhook, call the put\-webhook command and supply the following:
 + A name that uniquely identifies the webhook\. This name must be unique within the region of the account for the pipeline\.
 + A secret in the JSON file to be used for GitHub authorization\.<a name="proc-cli-gh-webhook"></a>

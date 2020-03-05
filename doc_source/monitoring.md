@@ -15,4 +15,5 @@ You can use the following tools to monitor your CodePipeline pipelines and their
 
 **Topics**
 + [Detect and React to Changes in Pipeline State with CloudWatch Events](detect-state-changes-cloudwatch-events.md)
++ [Events Placeholder Bucket Reference](reference-ct-placeholder-buckets.md)
 + [Logging API Calls with AWS CloudTrail](monitoring-cloudtrail-logs.md)

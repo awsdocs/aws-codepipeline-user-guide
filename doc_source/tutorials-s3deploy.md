@@ -1,8 +1,8 @@
 # Tutorial: Create a Pipeline That Uses Amazon S3 as a Deployment Provider<a name="tutorials-s3deploy"></a>
 
 In this tutorial, you configure a pipeline that continuously delivers files using Amazon S3 as the deployment action provider in your deployment stage\. The completed pipeline detects changes when you make a change to the source files in your source repository\. The pipeline then uses Amazon S3 to deploy the files to your bucket\. Each time you modify, add, or delete your website files in your source location, the deployment creates the website with your latest files\. This tutorial provides two options:
-+ Create a pipeline that deploys a static website to your Amazon S3 public bucket\. This example creates a pipeline with an AWS CodeCommit source action and an Amazon S3 deployment action\. See [Option 1: Deploy Static Website Files to Amazon S3](#tutorials-s3deploy-acc)\.
-+ Create a pipeline that compiles sample TypeScript code into JavaScript and deploys the CodeBuild output artifact to your Amazon S3 bucket for archive\. This example creates a pipeline with an Amazon S3 source action, a CodeBuild build action, and an Amazon S3 deployment action\. See [Option 2: Deploy Built Archive Files to Amazon S3 from an Amazon S3 Source Bucket](#tutorials-s3deploy-s3source)\.
++ Create a pipeline that deploys a static website to your S3 public bucket\. This example creates a pipeline with an AWS CodeCommit source action and an Amazon S3 deployment action\. See [Option 1: Deploy Static Website Files to Amazon S3](#tutorials-s3deploy-acc)\.
++ Create a pipeline that compiles sample TypeScript code into JavaScript and deploys the CodeBuild output artifact to your S3 bucket for archive\. This example creates a pipeline with an Amazon S3 source action, a CodeBuild build action, and an Amazon S3 deployment action\. See [Option 2: Deploy Built Archive Files to Amazon S3 from an S3 Source Bucket](#tutorials-s3deploy-s3source)\.
 
 **Important**  
 Many of the actions you add to your pipeline in this procedure involve AWS resources that you need to create before you create the pipeline\. AWS resources for your source actions must always be created in the same AWS Region where you create your pipeline\. For example, if you create your pipeline in the US East \(Ohio\) Region, your CodeCommit repository must be in the US East \(Ohio\) Region\.   
@@ -20,9 +20,9 @@ You must already have the following:
   + An `index.html` file
   + A `main.css` file
   + A `graphic.jpg` file
-+ An Amazon S3 bucket configured for website hosting\. See [Hosting a Static Website on Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html)\. Make sure you create your bucket in the same region as the pipeline\.
++ An S3 bucket configured for website hosting\. See [Hosting a Static Website on Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html)\. Make sure you create your bucket in the same region as the pipeline\.
 **Note**  
-To host a website, your bucket must have public read access, which gives everyone read access\. With the exception of website hosting, you should keep the default access settings that block public access to Amazon S3 buckets\.
+To host a website, your bucket must have public read access, which gives everyone read access\. With the exception of website hosting, you should keep the default access settings that block public access to S3 buckets\.
 
 ### Step 1: Push Source Files to Your CodeCommit Repository<a name="tutorials-s3deploy-acc-push"></a>
 
@@ -86,22 +86,9 @@ In this section, you create a pipeline with the following actions:
 
 1. In **Step 1: Choose pipeline settings**, in **Pipeline name**, enter **MyS3DeployPipeline**\.
 
-1. In **Service role**, do one of the following:
-   + Choose **New service role** to allow CodePipeline to create a service role in IAM\. In **Role name**, the role and policy name both default to this format: `AWSCodePipelineServiceRole-region-pipeline_name`\. For example, the service role created for this tutorial is `AWSCodePipelineServiceRole-eu-west-2-MyS3DeployPipeline`\.
-   + Choose **Existing service role**\. In **Role name**, choose your service role from the list\.
-**Note**  
-Depending on when your service role was created, you might need to update its permissions to support other AWS services\. For information, see [Add Permissions to the CodePipeline Service Role](security-iam.md#how-to-update-role-new-services)\. 
+1. In **Service role**, choose **New service role** to allow CodePipeline to create a service role in IAM\.
 
-1. In **Artifact store**: 
-
-   1. Choose **Default location** to use the default artifact store, such as the Amazon S3 artifact bucket designated as the default, for your pipeline in the region you have selected for your pipeline\.
-
-   1. Choose **Custom location** if you already have an artifact store, such as an Amazon S3 artifact bucket, in the same region as your pipeline\.
-**Note**  
-This is not the source bucket for your source code\. This is the artifact store for your pipeline\. A separate artifact store, such as an S3 bucket, is required for each pipeline\. When you create or edit a pipeline, you must have an artifact bucket in the pipeline Region and one artifact bucket per AWS Region where you are running an action\.  
-For more information, see [Input and Output Artifacts](welcome-introducing-artifacts.md) and [CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
-
-   Choose **Next**\.
+1. Leave the settings under **Advanced settings** at their defaults, and then choose **Next**\.
 
 1. In **Step 2: Add source stage**, in **Source provider**, choose **AWS CodeCommit**\. In **Repository name**, choose the name of the CodeCommit repository you created in [Step 1: Create a CodeCommit Repository](tutorials-simple-codecommit.md#codecommit-create-repository)\. In **Branch name**, choose the name of the branch that contains your latest code update\. Unless you created a different branch on your own, only `master` is available\. 
 
@@ -154,19 +141,19 @@ The deployment fails if you do not select **Extract file before deploy**\.This i
 
 Make a change to your source files and then push the change to your repository\. This triggers your pipeline to run\. Verify that your website is updated\.
 
-## Option 2: Deploy Built Archive Files to Amazon S3 from an Amazon S3 Source Bucket<a name="tutorials-s3deploy-s3source"></a>
+## Option 2: Deploy Built Archive Files to Amazon S3 from an S3 Source Bucket<a name="tutorials-s3deploy-s3source"></a>
 
-In this option, the build commands in your build stage compile TypeScript code into JavaScript code and deploy the output to your Amazon S3 target bucket under a separate timestamped folder\. First, you create TypeScript code and a buildspec\.yml file\. After you combine the source files in a ZIP file, you upload the source ZIP file to your Amazon S3 source bucket, and use a CodeBuild stage to deploy a built application ZIP file to your Amazon S3 target bucket\. The compiled code is retained as an archive in your target bucket\.
+In this option, the build commands in your build stage compile TypeScript code into JavaScript code and deploy the output to your S3 target bucket under a separate timestamped folder\. First, you create TypeScript code and a buildspec\.yml file\. After you combine the source files in a ZIP file, you upload the source ZIP file to your S3 source bucket, and use a CodeBuild stage to deploy a built application ZIP file to your S3 target bucket\. The compiled code is retained as an archive in your target bucket\.
 
 ### Prerequisites<a name="tutorials-s3deploy-s3source-prereq"></a>
 
 You must already have the following:
-+ An Amazon S3 source bucket\. You can use the bucket you created in [Tutorial: Create a Simple Pipeline \(Amazon S3 Bucket\)](tutorials-simple-s3.md)\.
-+ An Amazon S3 target bucket\. See [Hosting a Static Website on Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html)\. Make sure you create your bucket in the same AWS Region as the pipeline you want to create\.
++ An S3 source bucket\. You can use the bucket you created in [Tutorial: Create a Simple Pipeline \(S3 Bucket\)](tutorials-simple-s3.md)\.
++ An S3 target bucket\. See [Hosting a Static Website on Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html)\. Make sure you create your bucket in the same AWS Region as the pipeline you want to create\.
 **Note**  
 This example demonstrates deploying files to a private bucket\. Do not enable your target bucket for website hosting or attach any policies that make the bucket public\.
 
-### Step 1: Create and Upload Source Files to Your Amazon S3 Source Bucket<a name="tutorials-s3deploy-s3source-upload"></a>
+### Step 1: Create and Upload Source Files to Your S3 Source Bucket<a name="tutorials-s3deploy-s3source-upload"></a>
 
 In this section, you create and upload your source files to the bucket that the pipeline uses for your source stage\. This section provides instructions for creating the following source files:
 + A `buildspec.yml` file, which is used for CodeBuild build projects\.
@@ -211,7 +198,7 @@ In this section, you create and upload your source files to the bucket that the 
   greet(greeting);
   ```
 
-**To upload files to your Amazon S3 source bucket**
+**To upload files to your S3 source bucket**
 
 1. Your files should look like this in your local directory:
 
@@ -244,24 +231,11 @@ In this section, you create a pipeline with the following actions:
 
 1. In **Step 1: Choose pipeline settings**, in **Pipeline name**, enter **MyS3DeployPipeline**\.
 
-1. In **Service role**, do one of the following:
-   + Choose **New service role** to allow CodePipeline to create a service role in IAM\. In **Role name**, the role and policy name both default to this format: `AWSCodePipelineServiceRole-region-pipeline_name`\. For example, the service role created for this tutorial is `AWSCodePipelineServiceRole-eu-west-2-MyS3DeployPipeline`\.
-   + Choose **Existing service role**\. In **Role name**, choose your service role from the list\.
-**Note**  
-Depending on when your service role was created, you might need to update its permissions to support other AWS services\. For information, see [Add Permissions to the CodePipeline Service Role](security-iam.md#how-to-update-role-new-services)\. 
+1. In **Service role**, choose **New service role** to allow CodePipeline to create a service role in IAM\.
 
-1. In **Artifact store**:
+1. Leave the settings under **Advanced settings** at their defaults, and then choose **Next**\.
 
-   1. Choose **Default location** to use the default artifact store, such as the Amazon S3 artifact bucket designated as the default, for your pipeline in the region you have selected for your pipeline\.
-
-   1. Choose **Custom location** if you already have an artifact store, such as an Amazon S3 artifact bucket, in the same region as your pipeline\.
-**Note**  
-This is not the source bucket for your source code\. This is the artifact store for your pipeline\. A separate artifact store, such as an S3 bucket, is required for each pipeline\. When you create or edit a pipeline, you must have an artifact bucket in the pipeline Region and one artifact bucket per AWS Region where you are running an action\.  
-For more information, see [Input and Output Artifacts](welcome-introducing-artifacts.md) and [CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
-
-   Choose **Next**\.
-
-1. In **Step 2: Add source stage**, in **Source provider**, choose **Amazon S3**\. In **Bucket**, choose the name of your source bucket\. In **S3 object key**, enter the name of your source ZIP file\.
+1. In **Step 2: Add source stage**, in **Source provider**, choose **Amazon S3**\. In **Bucket**, choose the name of your source bucket\. In **S3 object key**, enter the name of your source ZIP file\. Make sure you include the \.zip file extension\.
 
    Choose **Next**\.
 
@@ -291,11 +265,11 @@ For more information, see [Input and Output Artifacts](welcome-introducing-artif
 
    1. In **Deploy provider**, choose **Amazon S3**\. 
 
-   1. In **Bucket**, enter the name of your Amazon S3 target bucket\.
+   1. In **Bucket**, enter the name of your S3 target bucket\.
 
    1. Make sure that **Extract file before deploy** is cleared\.
 
-      When **Extract file before deploy** is cleared, **S3 object key** is displayed\. Enter the name of the path you want to use and the file name for your output file as follows: `js-application/{datetime}.zip`\.
+      When **Extract file before deploy** is cleared, **S3 object key** is displayed\. Enter the name of the path you want to use: `js-application/{datetime}.zip`\.
 
       This creates a `js-application` folder in Amazon S3 to which the files are extracted\. In this folder, the `{datetime}` variable creates a timestamp on each output file when your pipeline runs\.  
 ![\[The Step 4: Deploy page for an Amazon S3 deploy action with an Amazon S3 source\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/tutorial-s3deploy-stage-s3source.png)![\[The Step 4: Deploy page for an Amazon S3 deploy action with an Amazon S3 source\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The Step 4: Deploy page for an Amazon S3 deploy action with an Amazon S3 source\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)

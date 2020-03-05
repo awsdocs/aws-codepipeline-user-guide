@@ -2,7 +2,9 @@
 
 In this tutorial, you configure a pipeline in AWS CodePipeline that deploys container applications using a blue/green deployment that supports Docker images\. In a blue/green deployment, you can launch the new version of your application alongside the old version and test the new version before you reroute traffic\. You can also monitor the deployment process and rapidly rollback if there is an issue\.
 
-The completed pipeline detects changes to your image, which is stored in the Amazon ECR image repository, and uses CodeDeploy to route and deploy traffic to an Amazon ECS cluster and load balancer\. CodeDeploy uses a listener to reroute traffic to the port of the updated container specified in the AppSpec file\. The pipeline is also configured to use a CodeCommit source location where your Amazon ECS task definition is stored\. In this tutorial, you configure each of these AWS resources and then create your pipeline with stages that contain actions for each resource\.
+The completed pipeline detects changes to your image, which is stored in the Amazon ECR image repository, and uses CodeDeploy to route and deploy traffic to an Amazon ECS cluster and load balancer\. CodeDeploy uses a listener to reroute traffic to the port of the updated container specified in the AppSpec file\. For information about how the load balancer, production listener, target groups, and your Amazon ECS application are used in a blue/green deployment, see [Tutorial: Deploy an Amazon ECS Service](https://docs.aws.amazon.com/codedeploy/latest/userguide/tutorial-ecs-deployment.html)\.
+
+The pipeline is also configured to use a CodeCommit source location where your Amazon ECS task definition is stored\. In this tutorial, you configure each of these AWS resources and then create your pipeline with stages that contain actions for each resource\.
 
 Your continuous delivery pipeline will automatically build and deploy container images whenever source code is changed or a new base image is uploaded to Amazon ECR\.
 
@@ -105,7 +107,7 @@ In this section, you create a task definition JSON file and register it with Ama
 
 1. Create a file named `taskdef.json` with the following contents\. For `image`, enter your image name, such as nginx\. This value is updated when your pipeline runs\.
 **Note**  
-Make sure that the execution role specified in the task definition contains the AmazonECSTaskExecutionRolePolicy\. For more information, see [Amazon ECS Task Execution IAM Role](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html)\.
+Make sure that the execution role specified in the task definition contains the `AmazonECSTaskExecutionRolePolicy`\. For more information, see [Amazon ECS Task Execution IAM Role](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html) in the *Amazon ECS Developer Guide*\.
 
    ```
    {
@@ -279,7 +281,7 @@ In this section, you create an Amazon EC2 application load balancer\. You use th
 
 1. Choose **Subnets**\. Choose two subnets that show **Yes** in the **Default subnet** column\. 
 **Note**  
-Make note of your subnet IDs for use later in this tutorial\.
+Make a note of your subnet IDs\. You need them later in this tutorial\.
 
 1. Choose the subnets, and then choose the **Description** tab\. Verify that the subnets you want to use are in different Availability Zones\.
 
@@ -303,11 +305,11 @@ Make note of your subnet IDs for use later in this tutorial\.
 
 1. Configure two listener ports for your load balancer:
 
-   1. Under **Load Balancer Protocol**, choose **HTTP**\. **Under Load Balancer Port**, enter **80**\.
+   1. Under **Load Balancer Protocol**, choose **HTTP**\. Under **Load Balancer Port**, enter **80**\.
 
    1. Choose **Add listener**\.
 
-   1. Under **Load Balancer Protocol** for the second listener, choose **HTTP**\. **Under Load Balancer Port**, enter **8080**\.
+   1. Under **Load Balancer Protocol** for the second listener, choose **HTTP**\. Under **Load Balancer Port**, enter **8080**\.
 
 1. Under **Availability Zones**, in **VPC**, choose the default VPC\. Next, choose the two default subnets you want to use\.
 
@@ -487,22 +489,9 @@ In this section, you create a pipeline with the following actions:
 
 1. In **Step 1: Choose pipeline settings**, in **Pipeline name**, enter **MyImagePipeline**\.
 
-1. In **Service role**, do one of the following:
-   + Choose **New service role** to allow CodePipeline to create a new service role in IAM\. In **Role name**, the role and policy name both default to this format: AWSCodePipelineServiceRole\-*region*\-*pipeline\_name*\. For example, this is the service role created for this tutorial: AWSCodePipelineServiceRole\-eu\-west\-2\-MyImagePipeline\.
-   + Choose **Existing service role** to use a service role already created in IAM\. In **Role name**, choose your service role from the list\.
-**Note**  
-Depending on when your service role was created, you might need to update its permissions to support additional AWS services\. For information, see [Add Permissions to the CodePipeline Service Role](security-iam.md#how-to-update-role-new-services)\. 
+1. In **Service role**, choose **New service role** to allow CodePipeline to create a service role in IAM\.
 
-1. In **Artifact store**: 
-
-   1. Choose **Default location** to use the default artifact store, such as the Amazon S3 artifact bucket designated as the default, for your pipeline in the region you have selected for your pipeline\.
-
-   1. Choose **Custom location** if you already have an artifact store, such as an Amazon S3 artifact bucket, in the same region as your pipeline\.
-**Note**  
-This is not the source bucket for your source code\. This is the artifact store for your pipeline\. A separate artifact store, such as an S3 bucket, is required for each pipeline\. When you create or edit a pipeline, you must have an artifact bucket in the pipeline Region and one artifact bucket per AWS Region where you are running an action\.  
-For more information, see [Input and Output Artifacts](welcome-introducing-artifacts.md) and [CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
-
-   Choose **Next**\.
+1. Leave the settings under **Advanced settings** at their defaults, and then choose **Next**\.
 
 1. In **Step 2: Add source stage**, in **Source provider**, choose **AWS CodeCommit**\. In **Repository name**, choose the name of the CodeCommit repository you created in [Step 1: Create a CodeCommit Repository](tutorials-simple-codecommit.md#codecommit-create-repository)\. In **Branch name**, choose the name of the branch that contains your latest code update\. Unless you created a different branch on your own, only `master` is available\. 
 

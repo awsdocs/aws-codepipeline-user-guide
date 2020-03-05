@@ -15,6 +15,9 @@ CodePipeline uses webhooks to manage change detection for your pipeline\.
 
 To create a connection to a third\-party source provider in the console, you must provide the source file location and information about the repository\.
 
+**Note**  
+Bitbucket connections only provide access to repositories owned by the Bitbucket account that was used to create the connection\.
+
 **Step 1: Create your pipeline and choose your connection**
 
 1. Sign in to the AWS Management Console and open the CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
@@ -31,20 +34,28 @@ After you create a pipeline, you cannot change its name\. For information about 
 
 1. In **Service role**, do one of the following:
    + Choose **New service role** to allow CodePipeline to create a service role in IAM\. In **Role name**, the role and policy name both default to this format: `AWSCodePipelineServiceRole-region-pipeline_name`\. For example, this is the service role for a pipeline named `MyPipeline`: `AWSCodePipelineServiceRole-eu-west-2-MyPipeline`\.
-   + Choose **Existing service role** to use a service role already created in IAM\. In **Role name**, choose your service role from the list\.
+   + Choose **Existing service role** to use a service role already created in IAM\. In **Role ARN**, choose your service role ARN from the list\.
 **Note**  
-Depending on when your service role was created, you might need to update its permissions to support other AWS services\. For information, see [Add Permissions to the CodePipeline Service Role](security-iam.md#how-to-update-role-new-services)\. 
+Depending on when your service role was created, you might need to update its permissions to support AWS CodeStar connections\. For instructions, see [Add Permissions to the CodePipeline Service Role](security-iam.md#how-to-update-role-new-services)\. 
 
    For more information about the service role and its policy statement, see [Manage the CodePipeline Service Role](security-iam.md#how-to-custom-role)\.
 
+1. \(Optional\) Expand **Advanced settings**\.
+
 1. In **Artifact store**, do one of the following: 
 
-   1. Choose **Default location** to use the default artifact store in the AWS Region you have selected for your pipeline\. This can be the S3 artifact bucket designated as the default\.
+   1. Choose **Default location** to use the default artifact store, such as the S3 artifact bucket designated as the default, for your pipeline in the AWS Region you have selected for your pipeline\.
 
-   1. Choose **Custom location** if you already have an artifact store, such as an S3 artifact bucket, in the same Region as your pipeline\.
+   1. Choose **Custom location** if you already have an artifact store, such as an S3 artifact bucket, in the same Region as your pipeline\. In **Bucket**, choose the bucket name\.
 **Note**  
 This is not the source bucket for your source code\. This is the artifact store for your pipeline\. A separate artifact store, such as an S3 bucket, is required for each pipeline\. When you create or edit a pipeline, you must have an artifact bucket in the pipeline Region and one artifact bucket per AWS Region where you are running an action\.  
 For more information, see [Input and Output Artifacts](welcome-introducing-artifacts.md) and [CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
+
+1. In **Encryption key**, do one of the following: 
+
+   1. To use the CodePipeline default AWS\-managed AWS KMS customer master key \(CMK\) to encrypt the data in the pipeline artifact store \(S3 bucket\), choose **Default AWS Managed Key**\.
+
+   1. To use your CMK to encrypt the data in the pipeline artifact store \(S3 bucket\), choose **Customer Managed Key**\. In **KMS customer master key**, choose the key ID, key ARN, or alias ARN\.
 
 1.  Choose **Next**\.
 

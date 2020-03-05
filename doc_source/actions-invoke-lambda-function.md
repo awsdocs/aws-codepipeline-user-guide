@@ -48,7 +48,7 @@ In this step, you create a pipeline to which you later add the Lambda function\.
 
 **To create the pipeline**
 
-1. Follow the first three steps in [Tutorial: Create a Simple Pipeline \(Amazon S3 Bucket\)](tutorials-simple-s3.md) to create an Amazon S3 bucket, CodeDeploy resources, and a two\-stage pipeline\. Choose the Amazon Linux option for your instance types\. You can use any name you want for the pipeline, but the steps in this topic use MyLambdaTestPipeline\. 
+1. Follow the first three steps in [Tutorial: Create a Simple Pipeline \(S3 Bucket\)](tutorials-simple-s3.md) to create an Amazon S3 bucket, CodeDeploy resources, and a two\-stage pipeline\. Choose the Amazon Linux option for your instance types\. You can use any name you want for the pipeline, but the steps in this topic use MyLambdaTestPipeline\. 
 
 1. On the status page for your pipeline, in the CodeDeploy action, choose **Details**\. On the deployment details page for the deployment group, choose an instance ID from the list\. 
 

@@ -19,7 +19,13 @@ The following are the valid action categories in CodePipeline:
 + Approval
 + Invoke
 
-Each action category has a designated set of providers\. This table lists valid providers by action type\.
+Each action category has a designated set of providers\. Each action provider, such as Amazon S3, has a provider name, such as `S3`, that must be used in the `Provider` field in the action category in your pipeline structure\. 
+
+There are three valid values for the `Owner` field in the action category section in your pipeline structure: `AWS`, `ThirdParty`, and `Custom`\.
+
+To find the provider name and owner information for your action provider, see [Action Structure Reference](action-reference.md) or [Number of Input and Output Artifacts for Each Action Type](#reference-action-artifacts)\.
+
+This table lists valid providers by action type\.
 
 
 **Valid Action Providers by Action Type**  

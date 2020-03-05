@@ -100,24 +100,24 @@ For more information about the difference between an author and a committer in G
 #### [ YAML ]
 
 ```
-name: Source
-actions:
-  - inputArtifacts: []
-    actionTypeId:
-      version: '1'
-      owner: ThirdParty
-      category: Source
-      provider: GitHub
-    outputArtifacts:
-      - name: SourceArtifact
-    runOrder: 1
-    configuration:
+Name: Source
+Actions:
+  - InputArtifacts: []
+    ActionTypeId:
+      Version: '1'
+      Owner: ThirdParty
+      Category: Source
+      Provider: GitHub
+    OutputArtifacts:
+      - Name: SourceArtifact
+    RunOrder: 1
+    Configuration:
       Owner: MyGitHubAccountName
       Repo: MyGitHubRepositoryName
       PollForSourceChanges: 'false'
       Branch: master
       OAuthToken: '****'
-    name: ApplicationSource
+    Name: ApplicationSource
 ```
 
 ------
@@ -125,31 +125,30 @@ actions:
 
 ```
 {
-
-    "name": "Source",
-    "actions": [
+    "Name": "Source",
+    "Actions": [
         {
-            "inputArtifacts": [],
-            "actionTypeId": {
-                "version": "1",
-                "owner": "ThirdParty",
-                "category": "Source",
-                "provider": "GitHub"
+            "InputArtifacts": [],
+            "ActionTypeId": {
+                "Version": "1",
+                "Owner": "ThirdParty",
+                "Category": "Source",
+                "Provider": "GitHub"
             },
-            "outputArtifacts": [
+            "OutputArtifacts": [
                 {
-                    "name": "SourceArtifact"
+                    "Name": "SourceArtifact"
                 }
             ],
-            "runOrder": 1,
-            "configuration": {
+            "RunOrder": 1,
+            "Configuration": {
                 "Owner": "MyGitHubAccountName",
                 "Repo": "MyGitHubRepositoryName",
                 "PollForSourceChanges": "false",
                 "Branch": "master",
                 "OAuthToken": "****"
             },
-            "name": "ApplicationSource"
+            "Name": "ApplicationSource"
         }
     ]
 },

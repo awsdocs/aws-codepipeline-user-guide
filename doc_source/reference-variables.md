@@ -10,6 +10,9 @@ Some action providers produce a defined set of variables\. You choose from defau
 
 For limit information, see [Quotas in AWS CodePipeline](limits.md)\.
 
+**Note**  
+When you enter output variable syntax in the action configuration fields, do not exceed the 1000\-character limit for the configuration fields\. A validation error is returned when this limit is exceeded\.
+
 **Topics**
 + [Concepts](#reference-variables-concepts)
 + [Configuring Variables](#reference-variables-workflow)

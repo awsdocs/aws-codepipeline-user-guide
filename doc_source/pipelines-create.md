@@ -7,7 +7,7 @@ You can add actions to your pipeline that are in an AWS Region different from yo
 You can also create pipelines that build and deploy container\-based applications by using Amazon ECS as the deployment provider\. Before you create a pipeline that deploys container\-based applications with Amazon ECS, you must create an image definitions file as described in [Image Definitions File Reference](file-reference.md)\.
 
 CodePipeline uses change detection methods to start your pipeline when a source code change is pushed\. These detection methods are based on source type:
-+ CodePipeline uses Amazon CloudWatch Events to detect changes in your CodeCommit source repository and branch or your Amazon S3 source bucket\.
++ CodePipeline uses Amazon CloudWatch Events to detect changes in your CodeCommit source repository and branch or your S3 source bucket\.
 + CodePipeline uses webhooks to detect changes in your GitHub source repository and branch\. A webhook is an HTTP notification that detects events in an external tool and connects those external events to a pipeline\.
 
 **Note**  
@@ -43,20 +43,28 @@ After you create a pipeline, you cannot change its name\. For information about 
 
 1. In **Service role**, do one of the following:
    + Choose **New service role** to allow CodePipeline to create a new service role in IAM\. In **Role name**, the role and policy name both default to this format: AWSCodePipelineServiceRole\-*region*\-*pipeline\_name*\. For example, this is the service role created for a pipeline named MyPipeline: AWSCodePipelineServiceRole\-eu\-west\-2\-MyPipeline\.
-   + Choose **Existing service role** to use a service role already created in IAM\. In **Role name**, choose your service role from the list\.
+   + Choose **Existing service role** to use a service role already created in IAM\. In **Role ARN**, choose your service role ARN from the list\.
 **Note**  
 Depending on when your service role was created, you might need to update its permissions to support additional AWS services\. For information, see [Add Permissions to the CodePipeline Service Role](security-iam.md#how-to-update-role-new-services)\. 
 
    For more information about the service role and its policy statement, see [Manage the CodePipeline Service Role](security-iam.md#how-to-custom-role)\.
 
+1. \(Optional\) Expand **Advanced settings**\.
+
 1. In **Artifact store**, do one of the following: 
 
-   1. Choose **Default location** to use the default artifact store, such as the Amazon S3 artifact bucket designated as the default, for your pipeline in the AWS Region you have selected for your pipeline\.
+   1. Choose **Default location** to use the default artifact store, such as the S3 artifact bucket designated as the default, for your pipeline in the AWS Region you have selected for your pipeline\.
 
-   1. Choose **Custom location** if you already have an artifact store, such as an Amazon S3 artifact bucket, in the same Region as your pipeline\.
+   1. Choose **Custom location** if you already have an artifact store, such as an S3 artifact bucket, in the same Region as your pipeline\. In **Bucket**, choose the bucket name\.
 **Note**  
 This is not the source bucket for your source code\. This is the artifact store for your pipeline\. A separate artifact store, such as an S3 bucket, is required for each pipeline\. When you create or edit a pipeline, you must have an artifact bucket in the pipeline Region and one artifact bucket per AWS Region where you are running an action\.  
 For more information, see [Input and Output Artifacts](welcome-introducing-artifacts.md) and [CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
+
+1. In **Encryption key**, do one of the following: 
+
+   1. To use the CodePipeline default AWS\-managed AWS KMS customer master key \(CMK\) to encrypt the data in the pipeline artifact store \(S3 bucket\), choose **Default AWS Managed Key**\.
+
+   1. To use your CMK to encrypt the data in the pipeline artifact store \(S3 bucket\), choose **Customer Managed Key**\. In **KMS customer master key**, choose the key ID, key ARN, or alias ARN\.
 
 1.  Choose **Next**\.
 
@@ -79,7 +87,7 @@ In GitHub, there is a limit to the number of OAuth tokens you can use for an app
     1. Choose the GitHub repository you want to use as the source location for your pipeline\. In **Branch**, from the drop\-down list, choose the branch you want to use\.
   + For **Amazon S3**: 
 
-    1. In **Amazon S3 location**, provide the Amazon S3 bucket name and path to the object in a bucket with versioning enabled\. The format of the bucket name and path looks like this:
+    1. In **Amazon S3 location**, provide the S3 bucket name and path to the object in a bucket with versioning enabled\. The format of the bucket name and path looks like this:
 
        ```
         s3://bucketName/folderName/objectName
@@ -87,7 +95,7 @@ In GitHub, there is a limit to the number of OAuth tokens you can use for an app
 **Note**  
 When Amazon S3 is the source provider for your pipeline, you must upload to your bucket all source files packaged as a single \.zip file\. Otherwise, the source action fails\.
 
-    1. After you choose the Amazon S3 source bucket, CodePipeline creates the Amazon CloudWatch Events rule and the AWS CloudTrail trail to be created for this pipeline\. Accept the defaults under **Change detection options**\. This allows CodePipeline to use Amazon CloudWatch Events and AWS CloudTrail to detect changes for your new pipeline\. Choose **Next**\.
+    1. After you choose the S3 source bucket, CodePipeline creates the Amazon CloudWatch Events rule and the AWS CloudTrail trail to be created for this pipeline\. Accept the defaults under **Change detection options**\. This allows CodePipeline to use Amazon CloudWatch Events and AWS CloudTrail to detect changes for your new pipeline\. Choose **Next**\.
   + For **AWS CodeCommit**:
     + In **Repository name**, choose the name of the CodeCommit repository you want to use as the source location for your pipeline\. In **Branch name**, from the drop\-down list, choose the branch you want to use\.
     + After you choose the CodeCommit repository name and branch, a message is displayed in **Change detection options** showing the Amazon CloudWatch Events rule to be created for this pipeline\. Accept the defaults under **Change detection options**\. This allows CodePipeline to use Amazon CloudWatch Events to detect changes for your new pipeline\.
@@ -182,9 +190,9 @@ The **Amazon ECS \(Blue/Green\)** action requires an imageDetail\.json file as a
       For a tutorial about deploying Alexa skills with your pipeline and generating the LWA credentials, see [Tutorial: Create a Pipeline That Deploys an Amazon Alexa Skill](tutorials-alexa-skills-kit.md)\.
     + **Amazon S3**
 
-      In **Bucket**, enter the name of the Amazon S3 bucket you want to use\. Choose **Extract file before deploy** if the input artifact to your deploy stage is a ZIP file\. If **Extract file before deploy** is selected, you may optionally enter a value for **Deployment path** to which your ZIP file will be unzipped\. If it is not selected, you are required to to enter a value in **S3 object key**\.
+      In **Bucket**, enter the name of the S3 bucket you want to use\. Choose **Extract file before deploy** if the input artifact to your deploy stage is a ZIP file\. If **Extract file before deploy** is selected, you may optionally enter a value for **Deployment path** to which your ZIP file will be unzipped\. If it is not selected, you are required to to enter a value in **S3 object key**\.
 **Note**  
-Most source and build stage output artifacts will be zipped\. All pipeline source providers except Amazon S3 will zip your source files before providing them as the input artifact to the next action\.
+Most source and build stage output artifacts are zipped\. All pipeline source providers except Amazon S3 zip your source files before providing them as the input artifact to the next action\.
 
       \(Optional\) In **Canned ACL**, enter the [canned ACL](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl) to apply to the object deployed to Amazon S3\.
 **Note**  
@@ -223,7 +231,7 @@ To create a JSON file, use the sample pipeline JSON file, edit it, and then call
 
 You need the ARN of the service role you created for CodePipeline in [Getting Started with CodePipeline](getting-started-codepipeline.md)\. You use the CodePipeline service role ARN in the pipeline JSON file when you run the create\-pipeline command\. For more information about creating a service role, see [Create the CodePipeline Service Role](pipelines-create-service-role.md)\. Unlike the console, running the create\-pipeline command in the AWS CLI does not have the option to create the CodePipeline service role for you\. The service role must already exist\.
 
-You need the name of an Amazon S3 bucket where artifacts for the pipeline are stored\. This bucket must be in the same Region as the pipeline\. You use the bucket name in the pipeline JSON file when you run the create\-pipeline command\. Unlike the console, running the create\-pipeline command in the AWS CLI does not create an Amazon S3 bucket for storing artifacts\. The bucket must already exist\.
+You need the name of an S3 bucket where artifacts for the pipeline are stored\. This bucket must be in the same Region as the pipeline\. You use the bucket name in the pipeline JSON file when you run the create\-pipeline command\. Unlike the console, running the create\-pipeline command in the AWS CLI does not create an S3 bucket for storing artifacts\. The bucket must already exist\.
 
 **Note**  
 You can also use the get\-pipeline command to get a copy of the JSON structure of that pipeline, and then modify that structure in a plain\-text editor\.
@@ -235,7 +243,7 @@ You can also use the get\-pipeline command to get a copy of the JSON structure o
 1. At a terminal \(Linux, macOS, or Unix\) or command prompt \(Windows\), create a new text file in a local directory\.
 
 1. Open the file in a plain\-text editor and edit the values to reflect the structure you want to create\. At a minimum, you must change the name of the pipeline\. You should also consider whether you want to change:
-   + The Amazon S3 bucket where artifacts for this pipeline are stored\.
+   + The S3 bucket where artifacts for this pipeline are stored\.
    + The source location for your code\.
    + The deployment provider\.
    + How you want your code deployed\.
@@ -327,7 +335,7 @@ You can also use the get\-pipeline command to get a copy of the JSON structure o
                    "PollForSourceChanges": "false",
    ```
 
-   CodePipeline uses Amazon CloudWatch Events to detect changes in your CodeCommit source repository and branch or your Amazon S3 source bucket\. CodePipeline uses webhooks to detect changes in your GitHub source repository and branch\. The next step includes instructions to manually create these resources for your pipeline\. Setting the flag to `false` disables periodic checks, which are not necessary when you are using the recommended change detection methods\. 
+   CodePipeline uses Amazon CloudWatch Events to detect changes in your CodeCommit source repository and branch or your S3 source bucket\. CodePipeline uses webhooks to detect changes in your GitHub source repository and branch\. The next step includes instructions to manually create these resources for your pipeline\. Setting the flag to `false` disables periodic checks, which are not necessary when you are using the recommended change detection methods\. 
 
 1. To create a build, test, or deploy action in a Region different from your pipeline, you must add the following to your pipeline structure\. For instructions, see [Add a Cross\-Region Action in CodePipeline](actions-create-cross-region.md)\.
    + Add the `Region` parameter to your action's pipeline structure\.

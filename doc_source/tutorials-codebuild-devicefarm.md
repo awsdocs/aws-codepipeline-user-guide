@@ -79,16 +79,7 @@ If you use a CodePipeline service role that was created before July 2018, you ne
       }
       ```
 
-   1. In **Artifact location**, do one of the following: 
-
-      1. Choose **Default location** to use the default artifact store, such as the S3 artifact bucket designated as the default, for your pipeline in the region you have selected for your pipeline\.
-
-      1. Choose **Custom location** if you already have an existing artifact store you have created, such as an S3 artifact bucket, in the same Region as your pipeline\.
-**Note**  
-This is not the source bucket for your source code\. This is the artifact store for your pipeline\. A separate artifact store, such as an S3 bucket, is required for each pipeline\. When you create or edit a pipeline, you must have an artifact bucket in the pipeline Region and one artifact bucket per AWS Region where you are running an action\.  
-For more information, see [Input and Output Artifacts](welcome-introducing-artifacts.md) and [CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
-
-   1. Choose **Next**\.
+   1. Leave the settings under **Advanced settings** at their defaults, and then choose **Next**\.
 
    1. On the **Step 2: Add source stage** page, in **Source provider**, choose **GitHub**, and then choose **Connect to GitHub**\.
 

@@ -16,7 +16,7 @@ In this tutorial, we assume the following\.
 
 ## Step 1: Create a buildspec\.yml File<a name="serverlessrepo-auto-publish-create-buildspec"></a>
 
-Create a `buildspec.yml` file with the following contents, and add it to your serverless application's GitHub repository\. Replace *template\.yml* with your application's AWS SAM template and *bucketname* with the Amazon S3 bucket where your packaged application is stored\.
+Create a `buildspec.yml` file with the following contents, and add it to your serverless application's GitHub repository\. Replace *template\.yml* with your application's AWS SAM template and *bucketname* with the S3 bucket where your packaged application is stored\.
 
 ```
 version: 0.2
@@ -45,14 +45,9 @@ Follow these steps to create your pipeline in the AWS Region where you want to p
 
 1. Choose **Create pipeline**\. On the **Choose pipeline settings** page, in **Pipeline name**, enter the name for your pipeline\.
 
-1. In **Service role**, leave **New service role** selected, and leave **Role name** unchanged\.
+1. In **Service role**, choose **New service role** to allow CodePipeline to create a service role in IAM\.
 
-1. In **Artifact store**, choose **Default location**\. The default artifact store, such as the Amazon S3 artifact bucket designated as the default, is used for your pipeline in the AWS Region you have selected\.
-**Note**  
-This is not the source bucket for your source code\. This is the artifact store for your pipeline\. A separate artifact store, such as an S3 bucket, is required for each pipeline\. When you create or edit a pipeline, you must have an artifact bucket in the pipeline Region and one artifact bucket per AWS Region where you are running an action\.  
-For more information, see [Input and Output Artifacts](welcome-introducing-artifacts.md) and [CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
-
-1. Choose **Next**\.
+1. Leave the settings under **Advanced settings** at their defaults, and then choose **Next**\.
 
 1. On the **Add source stage** page, in **Source provider**, choose **GitHub**, and then choose **Connect to GitHub**\.
 
@@ -88,7 +83,7 @@ For more information, see [Input and Output Artifacts](welcome-introducing-artif
 
 1. Choose **Create pipeline**\. You should see a diagram that shows the source and build stages\.
 
-1. Grant the CodeBuild service role permission to access the Amazon S3 bucket where your packaged application is stored\.
+1. Grant the CodeBuild service role permission to access the S3 bucket where your packaged application is stored\.
 
    1. In the **Build** stage of your new pipeline, choose **CodeBuild**\.
 
@@ -100,7 +95,7 @@ For more information, see [Input and Output Artifacts](welcome-introducing-artif
 
    1. Choose **JSON**\.
 
-   1. Add a new policy statement with the following contents\. The statement allows CodeBuild to put objects into the Amazon S3 bucket where your packaged application is stored\. Replace *bucketname* with the name of your Amazon S3 bucket\.
+   1. Add a new policy statement with the following contents\. The statement allows CodeBuild to put objects into the S3 bucket where your packaged application is stored\. Replace *bucketname* with the name of your S3 bucket\.
 
       ```
               {

@@ -127,6 +127,7 @@ The following table shows when support was added for other AWS services\.
 
 | AWS Service | CodePipeline Support Date | 
 | --- | --- | 
+| AWS CodeStar Connections | December 18, 2019 | 
 | Amazon ECR | November 27, 2018 | 
 | AWS Service Catalog | October 16, 2018 | 
 | AWS Device Farm | July 19, 2018 | 
@@ -146,7 +147,11 @@ Follow these steps to add permissions for a supported service:
 **Note**  
 Your service role has a name in a format similar to `oneClick_AWS-CodePipeline-1111222233334`\.
 
-1. Add the required permissions in the **Policy Document** box\. For example, for CodeCommit support, add the following to your policy statement:
+1. Add the required permissions in the **Policy Document** box\. 
+**Note**  
+When you create IAM policies, follow the standard security advice of granting least privilege—that is, granting only the permissions required to perform a task\. Some API calls support resource\-based permissions and allow access to be limited\. For example, in this case, to limit permissions when calling `DescribeTasks` and `ListTasks`, you can replace the wildcard character \(\*\) with a resource ARN or with a wildcard character \(\*\) in a resource ARN\.
+
+   For example, for CodeCommit support, add the following to your policy statement:
 
    ```
    {
@@ -284,7 +289,19 @@ Your service role has a name in a format similar to `oneClick_AWS-CodePipeline-1
        "Effect": "Allow"
    },
    ```
-**Note**  
-When you create IAM policies, follow the standard security advice of granting least privilege—that is, granting only the permissions required to perform a task\. Some API calls support resource\-based permissions and allow access to be limited\. For example, in this case, to limit permissions when calling `DescribeTasks` and `ListTasks`, you can replace the wildcard character \(\*\) with a resource ARN or with a wildcard character \(\*\) in a resource ARN\.
+
+1. For AWS CodeStar connections, the following permission is required to create pipelines with a source that uses a connection, such as Bitbucket\.
+
+   ```
+   {
+       "Action": [
+           "codestar-connections:UseConnection"
+       ],
+       "Resource": "*",
+       "Effect": "Allow"
+   },
+   ```
+
+   For more information about the IAM permissions for connections, see [IAM Permissions Reference for Connections](connections-permissions.md)\.
 
 1. Choose **Validate Policy** to ensure the policy contains no errors\. When the policy is error\-free, choose **Apply Policy**\.

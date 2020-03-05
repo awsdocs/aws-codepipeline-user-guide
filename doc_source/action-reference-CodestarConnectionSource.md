@@ -15,7 +15,10 @@ After a code change is detected, you have the following options for passing the 
 
 CodePipeline prompts you to add a Bitbucket Cloud app to your repo when you create a connection\. If you use the console to create or edit your pipeline, CodePipeline creates a Bitbucket webhook that starts your pipeline when a change occurs in the repository\. You must have already created your Bitbucket account and repository before you can connect through the `CodeStarSourceConnection` action\. Use your Bitbucket account when you create a connection so that CodePipeline can use the Bitbucket repository for source stages in pipelines\.
 
-For more information, see [how Bitbucket apps work](https://confluence.atlassian.com/bitbucket/bitbucket-cloud-add-ons-780871938.html) in the Bitbucket developer documentation 
+For more information, see [Bitbucket Cloud apps](https://confluence.atlassian.com/bitbucket/bitbucket-cloud-add-ons-780871938.html) in the Bitbucket developer documentation\.
+
+**Note**  
+To create or attach a policy to your IAM user or role with the permissions required to use AWS CodeStar connections, see [IAM Permissions Reference for Connections](connections-permissions.md)\. Depending on when your CodePipeline service role was created, you might need to update its permissions to support AWS CodeStar connections\. For instructions, see [Add Permissions to the CodePipeline Service Role](security-iam.md#how-to-update-role-new-services)\.
 
 **Topics**
 + [Action Type](#action-reference-CodestarConnectionSource-type)
@@ -70,23 +73,23 @@ This option can only be used by CodeBuild downstream actions\.
 #### [ YAML ]
 
 ```
-name: Source
-actions:
-  - inputArtifacts: []
-    actionTypeId:
-      version: '1'
-      owner: AWS
-      category: Source
-      provider: CodeStarSourceConnection
-    outputArtifacts:
-      - name: SourceArtifact
-    runOrder: 1
-    configuration:
+Name: Source
+Actions:
+  - InputArtifacts: []
+    ActionTypeId:
+      Version: '1'
+      Owner: AWS
+      Category: Source
+      Provider: CodeStarSourceConnection
+    OutputArtifacts:
+      - Name: SourceArtifact
+    RunOrder: 1
+    Configuration:
       ConnectionArn: "arn:aws:codestar-connections:region:account-id:connection/connection-id"
       FullRepositoryId: "some-user/my-repo"
       BranchName: "master"
       OutputArtifactFormat: "CODE_ZIP"
-    name: ApplicationSource
+    Name: ApplicationSource
 ```
 
 ------
@@ -94,29 +97,29 @@ actions:
 
 ```
 {
-    "name": "Source",
-    "actions": [
+    "Name": "Source",
+    "Actions": [
         {
-            "inputArtifacts": [],
-            "actionTypeId": {
-                "version": "1",
-                "owner": "AWS",
-                "category": "Source",
-                "provider": "CodeStarSourceConnection"
+            "InputArtifacts": [],
+            "ActionTypeId": {
+                "Version": "1",
+                "Owner": "AWS",
+                "Category": "Source",
+                "Provider": "CodeStarSourceConnection"
             },
-            "outputArtifacts": [
+            "OutputArtifacts": [
                 {
-                    "name": "SourceArtifact"
+                    "Name": "SourceArtifact"
                 }
             ],
-            "runOrder": 1,
-            "configuration": {
+            "RunOrder": 1,
+            "Configuration": {
                 "ConnectionArn": "arn:aws:codestar-connections:region:account-id:connection/connection-id",
                 "FullRepositoryId": "some-user/my-repo",
                 "BranchName": "master",
                 "OutputArtifactFormat": "CODE_ZIP"
             },
-            "name": "ApplicationSource"
+            "Name": "ApplicationSource"
         }
     ]
 },

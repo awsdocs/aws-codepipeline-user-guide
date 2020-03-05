@@ -145,7 +145,7 @@ To use AWS CloudFormation to create a rule, use the template snippet as shown he
                        "result": ["SUCCESS"]
                    },
                    "detail-type": ["ECR Image Action"],
-                   "source": ["aws.ecr"],
+                   "source": ["aws.ecr"]
                },
                "Targets": [
                    {

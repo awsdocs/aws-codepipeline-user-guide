@@ -10,7 +10,7 @@ In Amazon CloudWatch Events, you create a rule to detect and react to changes in
 
 1. Add CodePipeline as the target\. 
 
-1. Grant Amazon CloudWatch Events permissions to start the pipeline\.
+1. Grant permissions to Amazon CloudWatch Events to start the pipeline\.
 
 As you build your rule, the **Event Pattern Preview** pane in the console \(or the `--event-pattern` output in the AWS CLI\) displays the event fields, in JSON format\. The following sample CodeCommit event pattern uses this JSON structure:
 
@@ -39,4 +39,3 @@ The event pattern uses these fields:
 + [Create a CloudWatch Events Rule for a CodeCommit Source \(Console\)](pipelines-trigger-source-repo-changes-console.md)
 + [Create a CloudWatch Events Rule for a CodeCommit Source \(CLI\)](pipelines-trigger-source-repo-changes-cli.md)
 + [Create a CloudWatch Events Rule for a CodeCommit Source \(AWS CloudFormation Template\)](pipelines-trigger-source-repo-changes-cfn.md)
-+ [Configure Your Pipelines to Use Amazon CloudWatch Events for Change Detection \(CodeCommit Source\)](trigger-codecommit-migration-cwe.md)

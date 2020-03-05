@@ -1,6 +1,6 @@
 # DevOps Pipeline Example<a name="concepts-devops-example"></a>
 
-As an example of a DevOps pipeline, a two\-stage pipeline might have a source stage called **Source** and a second stage called **Beta**\. In this example, the pipeline is updating the application with the latest changes and continuously deploying the latest result\. Before it deploys the latest application, the pipeline builds and tests the web application\. In this example, a group of developers have set up an infrastructure template and the source code for a web application in a GitHub repository called MyRepository\.
+As an example of a DevOps pipeline, a two\-stage pipeline might have a source stage called **Source** and a second stage called **Prod**\. In this example, the pipeline is updating the application with the latest changes and continuously deploying the latest result\. Before it deploys the latest application, the pipeline builds and tests the web application\. In this example, a group of developers have set up an infrastructure template and the source code for a web application in a GitHub repository called MyRepository\.
 
 ![\[A pipeline with sample stages and actions.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/pipeline-elements-workflow-application.png)![\[A pipeline with sample stages and actions.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[A pipeline with sample stages and actions.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 

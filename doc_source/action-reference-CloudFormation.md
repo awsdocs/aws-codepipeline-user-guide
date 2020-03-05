@@ -122,14 +122,14 @@ The template configuration filename follows this format:
 #### [ YAML ]
 
 ```
-name: ExecuteChangeSet
-actionTypeId:
-  category: Deploy
-  owner: AWS
-  provider: CloudFormation
-  version: '1'
-runOrder: 2
-configuration:
+Name: ExecuteChangeSet
+ActionTypeId:
+  Category: Deploy
+  Owner: AWS
+  Provider: CloudFormation
+  Version: '1'
+RunOrder: 2
+Configuration:
   ActionMode: CHANGE_SET_EXECUTE
   Capabilities: CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND
   ChangeSetName: pipeline-changeset
@@ -138,9 +138,9 @@ configuration:
   StackName: my-project--lambda
   TemplateConfiguration: 'my-project--BuildArtifact::template-configuration.json'
   TemplatePath: 'my-project--BuildArtifact::template-export.yml'
-outputArtifacts: []
-inputArtifacts:
-  - name: my-project-BuildArtifact
+OutputArtifacts: []
+InputArtifacts:
+  - Name: my-project-BuildArtifact
 ```
 
 ------
@@ -148,15 +148,15 @@ inputArtifacts:
 
 ```
 {
-    "name": "ExecuteChangeSet",
-    "actionTypeId": {
-        "category": "Deploy",
-        "owner": "AWS",
-        "provider": "CloudFormation",
-        "version": "1"
+    "Name": "ExecuteChangeSet",
+    "ActionTypeId": {
+        "Category": "Deploy",
+        "Owner": "AWS",
+        "Provider": "CloudFormation",
+        "Version": "1"
     },
-    "runOrder": 2,
-    "configuration": {
+    "RunOrder": 2,
+    "Configuration": {
         "ActionMode": "CHANGE_SET_EXECUTE",
         "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
         "ChangeSetName": "pipeline-changeset",
@@ -166,10 +166,10 @@ inputArtifacts:
         "TemplateConfiguration": "my-project--BuildArtifact::template-configuration.json",
         "TemplatePath": "my-project--BuildArtifact::template-export.yml"
     },
-    "outputArtifacts": [],
-    "inputArtifacts": [
+    "OutputArtifacts": [],
+    "InputArtifacts": [
         {
-             "name": "my-project-BuildArtifact"
+             "Name": "my-project-BuildArtifact"
         }
     ]
 },

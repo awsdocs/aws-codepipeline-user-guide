@@ -2,6 +2,9 @@
 
 Before you set up a rule in CloudWatch Events, you must create an AWS CloudTrail trail\. For more information, see [Creating a Trail in the Console](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-a-trail-using-the-console-first-time.html)\.
 
+**Important**  
+If you use the console to create or edit your pipeline, your CloudWatch Events rule and AWS CloudTrail trail are created for you\.
+
 **To create a trail**
 
 1. Open the AWS CloudTrail console\.

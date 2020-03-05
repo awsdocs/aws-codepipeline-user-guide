@@ -5,7 +5,7 @@ After you complete the steps in [Getting Started with CodePipeline](getting-star
 
 |  |  | 
 | --- |--- |
-| I want to create a two\-stage pipeline that uses CodeDeploy to deploy a sample application from an Amazon S3 bucket to Amazon EC2 instances running Amazon Linux\. After using the wizard to create my pipeline, I want to add a third stage\. | See [Tutorial: Create a Simple Pipeline \(Amazon S3 Bucket\)](tutorials-simple-s3.md)\. | 
+| I want to create a two\-stage pipeline that uses CodeDeploy to deploy a sample application from an Amazon S3 bucket to Amazon EC2 instances running Amazon Linux\. After using the wizard to create my pipeline, I want to add a third stage\. | See [Tutorial: Create a Simple Pipeline \(S3 Bucket\)](tutorials-simple-s3.md)\. | 
 | I want to create a two\-stage pipeline that uses CodeDeploy to deploy a sample application from a CodeCommit repository to an Amazon EC2 instance running Amazon Linux\. | See [Tutorial: Create a Simple Pipeline \(CodeCommit Repository\)](tutorials-simple-codecommit.md)\. | 
 | I want to add a build stage to the three\-stage pipeline I created in the first tutorial\. The new stage uses Jenkins to build my application\. | See [Tutorial: Create a Four\-Stage Pipeline](tutorials-four-stage-pipeline.md)\. | 
 | I want to set up a CloudWatch Events rule that sends notifications whenever there are changes to the execution state of my pipeline, stage, or action\. | See [Tutorial: Set Up a CloudWatch Events Rule to Receive Email Notifications for Pipeline State Changes](tutorials-cloudwatch-sns-notifications.md)\. | 

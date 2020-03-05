@@ -38,21 +38,21 @@ For more information about variables in CodePipeline, see [Variables](reference-
 #### [ YAML ]
 
 ```
-name: Lambda
-actions:
-  - name: Lambda
-    actionTypeId:
-      category: Invoke
-      owner: AWS
-      provider: Lambda
-      version: '1'
-    runOrder: 1
-    configuration:
+Name: Lambda
+Actions:
+  - Name: Lambda
+    ActionTypeId:
+      Category: Invoke
+      Owner: AWS
+      Provider: Lambda
+      Version: '1'
+    RunOrder: 1
+    Configuration:
       FunctionName: myLambdaFunction
       UserParameters: 'http://192.0.2.4'
-    outputArtifacts: []
-    inputArtifacts: []
-    region: us-west-2
+    OutputArtifacts: []
+    InputArtifacts: []
+    Region: us-west-2
 ```
 
 ------
@@ -60,24 +60,24 @@ actions:
 
 ```
 {
-    "name": "Lambda",
-    "actions": [
+    "Name": "Lambda",
+    "Actions": [
         {
-            "name": "Lambda",
-            "actionTypeId": {
-                "category": "Invoke",
-                "owner": "AWS",
-                "provider": "Lambda",
-                "version": "1"
+            "Name": "Lambda",
+            "ActionTypeId": {
+                "Category": "Invoke",
+                "Owner": "AWS",
+                "Provider": "Lambda",
+                "Version": "1"
             },
-            "runOrder": 1,
-            "configuration": {
+            "RunOrder": 1,
+            "Configuration": {
                 "FunctionName": "myLambdaFunction",
                 "UserParameters": "http://192.0.2.4"
             },
-            "outputArtifacts": [],
-            "inputArtifacts": [],
-            "region": "us-west-2"
+            "OutputArtifacts": [],
+            "InputArtifacts": [],
+            "Region": "us-west-2"
         }
     ]
 },

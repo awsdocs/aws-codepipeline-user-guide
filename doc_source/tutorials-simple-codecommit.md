@@ -93,9 +93,9 @@ In this step, you download code for a sample application that was created for a 
 
 1. The files you downloaded and added to your local repo have now been added to the `master` branch in your CodeCommit `MyDemoRepo` repository and are ready to be included in a pipeline\.
 
-## Step 3: Create an Amazon EC2 Linux Instance and Install the CodeDeploy Agent<a name="codecommit-create-deployment"></a>
+## Step 3: Create an EC2 Linux Instance and Install the CodeDeploy Agent<a name="codecommit-create-deployment"></a>
 
-In this step, you create the Amazon EC2 instance where you deploy a sample application\. As part of this process, you install the CodeDeploy agent on the Amazon EC2 instance\. The CodeDeploy agent is a software package that enables an instance to be used in CodeDeploy deployments\. You also attach an IAM role to the instance \(known as an *instance role*\) to allow it to fetch files that the CodeDeploy agent uses to deploy your application\.
+In this step, you create the EC2 instance where you deploy a sample application\. As part of this process, you install the CodeDeploy agent on the EC2 instance\. The CodeDeploy agent is a software package that enables an instance to be used in CodeDeploy deployments\. You also attach an IAM role to the instance \(known as an *instance role*\) to allow it to fetch files that the CodeDeploy agent uses to deploy your application\.
 
 **To create an instance role**
 
@@ -139,7 +139,7 @@ In this step, you create the Amazon EC2 instance where you deploy a sample appli
    ./install auto
    ```
 **Note**  
-For an example that runs these commands with elevated privileges \(sudo commands\), see the CodeDeploy agent reference in [https://docs.aws.amazon.com/codedeploy/latest/userguide/codedeploy-agent-operations-install-linux.html](https://docs.aws.amazon.com/codedeploy/latest/userguide/codedeploy-agent-operations-install-linux.html)\.
+For an example that runs these commands with elevated privileges \(sudo commands\), see the CodeDeploy agent reference in [Install or reinstall the CodeDeploy agent for Amazon Linux or RHEL](https://docs.aws.amazon.com/codedeploy/latest/userguide/codedeploy-agent-operations-install-linux.html) in the *AWS CodeDeploy User Guide*\.
 
    This code installs the CodeDeploy agent on your instance as it is created\.
 
@@ -156,7 +156,7 @@ For an example that runs these commands with elevated privileges \(sudo commands
 
 1. On the **Review Instance Launch** page, choose **Launch**, and then do one of the following when prompted for a key pair:
    + If you already have a key pair to use with Amazon EC2 instances, select **Choose an existing key pair**, and then select your key pair\.
-   + If you have not created a key pair yet, select **Create a new key pair**, enter a name for the key pair, and then choose **Download Key Pair**\. This is your only chance to save the private key file\. Be sure to download it\. Save the private key file in a safe place\. You must provide the name of your key pair when you launch an instance\. You must provide the corresponding private key each time you connect to the instance\. For more information, see [Amazon EC2 Key Pairs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)\.
+   + If you have not created a key pair yet, select **Create a new key pair**, enter a name for the key pair, and then choose **Download Key Pair**\. This is your only chance to save the private key file\. Be sure to download it\. Save the private key file in a safe place\. You must provide the name of your key pair when you launch an instance\. You must provide the corresponding private key each time you connect to the instance\. For more information, see [Amazon EC2 Key Pairs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html) in the *Amazon EC2 User Guide*\. 
 **Warning**  
 If you select **Proceed without a key pair**, you won't be able to use SSH to connect to the instance if you need to troubleshoot issues with the CodeDeploy agent\.
 
@@ -240,7 +240,7 @@ You're now ready to create and run your first pipeline\. In this step, you creat
 
 1. In **Service role**, choose **New service role** to allow CodePipeline to create a service role in IAM\.
 
-1. In **Artifact store**, choose **Default location**, and then choose **Next**\.
+1. Leave the settings under **Advanced settings** at their defaults, and then choose **Next**\.
 
 1. In **Step 2: Add source stage**, in **Source provider**, choose **AWS CodeCommit**\. In **Repository name**, choose the name of the CodeCommit repository you created in [Step 1: Create a CodeCommit Repository](#codecommit-create-repository)\. In **Branch name**, choose `master`, and then choose **Next step**\.  
 ![\[The Step 2: Source page in the CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-wizard-source-codecommit-pol.png)![\[The Step 2: Source page in the CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The Step 2: Source page in the CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
@@ -260,7 +260,7 @@ In this tutorial, you are deploying code that requires no build service, so you 
 
 1. In **Step 5: Review**, review the information, and then choose **Create pipeline**\.
 
-1. The pipeline starts running after it is created\. It downloads the code from your CodeCommit repository and creates a CodeDeploy deployment to your Amazon EC2 instance\. You can view progress and success and failure messages as the CodePipeline sample deploys the webpage to the Amazon EC2 instance in the CodeDeploy deployment\.  
+1. The pipeline starts running after it is created\. It downloads the code from your CodeCommit repository and creates a CodeDeploy deployment to your EC2 instance\. You can view progress and success and failure messages as the CodePipeline sample deploys the webpage to the Amazon EC2 instance in the CodeDeploy deployment\.  
 ![\[A view of a pipeline starting to run in the CodePipeline console.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-firstpipeline-codecommit-pol.png)![\[A view of a pipeline starting to run in the CodePipeline console.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[A view of a pipeline starting to run in the CodePipeline console.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
 Congratulations\! You just created a simple pipeline in CodePipeline\. 

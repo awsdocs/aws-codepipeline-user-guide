@@ -38,7 +38,8 @@ Each object has three parts, all of which are strings:
 + `value`: The value of the environment variable\. When using the PARAMETER\_STORE type, this value must be the name of a parameter you have already stored in AWS Systems Manager Parameter Store\.
 **Note**  
 We strongly discourage the use of environment variables to store sensitive values, especially AWS secret key IDs and secret access keys\. When you use the CodeBuild console or AWS CLI, environment variables are displayed in plain text\. For sensitive values, we recommend that you use the PARAMETER\_STORE type instead\. 
-+ type: \(Optional\) The type of environment variable\. Valid values are PARAMETER\_STORE or PLAINTEXT\. When not specified, this defaults to PLAINTEXT\.
++ `type`: \(Optional\) The type of environment variable\. Valid values are PARAMETER\_STORE or PLAINTEXT\. When not specified, this defaults to PLAINTEXT\.
+When you enter the `name`, `value`, and `type` for your environment variables configuration, especially if the environment variable contains CodePipeline output variable syntax, do not exceed the 1000\-character limit for the configuration’s value field\. A validation error is returned when this limit is exceeded\.
 For more information, see [ EnvironmentVariable](https://docs.aws.amazon.com/codebuild/latest/APIReference/API_EnvironmentVariable.html)\.
 
 ## Input Artifacts<a name="action-reference-CodeBuild-input"></a>
@@ -67,24 +68,24 @@ For more information about variables in CodePipeline, see [Variables](reference-
 #### [ YAML ]
 
 ```
-name: Build
-actions:
-  - name: PackageExport
-    actionTypeId:
-      category: Build
-      owner: AWS
-      provider: CodeBuild
-      version: '1'
-    runOrder: 1
-    configuration:
+Name: Build
+Actions:
+  - Name: PackageExport
+    ActionTypeId:
+      Category: Build
+      Owner: AWS
+      Provider: CodeBuild
+      Version: '1'
+    RunOrder: 1
+    Configuration:
       ProjectName: my-build-project
       PrimarySource: MyApplicationSource1
       EnvironmentVariables: '[{"name":"TEST_VARIABLE","value":"TEST_VALUE","type":"PLAINTEXT"},{"name":"ParamStoreTest","value":"PARAMETER_NAME","type":"PARAMETER_STORE"}]'
-    outputArtifacts:
-      - name: MyPipeline-BuildArtifact
-    inputArtifacts:
-      - name: MyApplicationSource1
-      - name: MyApplicationSource2
+    OutputArtifacts:
+      - Name: MyPipeline-BuildArtifact
+    InputArtifacts:
+      - Name: MyApplicationSource1
+      - Name: MyApplicationSource2
 ```
 
 ------
@@ -92,33 +93,33 @@ actions:
 
 ```
 {
-    "name": "Build",
-    "actions": [
+    "Name": "Build",
+    "Actions": [
         {
-            "name": "PackageExport",
-            "actionTypeId": {
-                "category": "Build",
-                "owner": "AWS",
-                "provider": "CodeBuild",
-                "version": "1"
+            "Name": "PackageExport",
+            "ActionTypeId": {
+                "Category": "Build",
+                "Owner": "AWS",
+                "Provider": "CodeBuild",
+                "Version": "1"
             },
-            "runOrder": 1,
-            "configuration": {
+            "RunOrder": 1,
+            "Configuration": {
                 "ProjectName": "my-build-project",
                 "PrimarySource": "MyApplicationSource1",
                 "EnvironmentVariables": "[{\"name\":\"TEST_VARIABLE\",\"value\":\"TEST_VALUE\",\"type\":\"PLAINTEXT\"},{\"name\":\"ParamStoreTest\",\"value\":\"PARAMETER_NAME\",\"type\":\"PARAMETER_STORE\"}]"
             },
-            "outputArtifacts": [
+            "OutputArtifacts": [
                 {
-                    "name": "MyPipeline-BuildArtifact"
+                    "Name": "MyPipeline-BuildArtifact"
                 }
             ],
-            "inputArtifacts": [
+            "InputArtifacts": [
                 {
-                    "name": "MyApplicationSource1"
+                    "Name": "MyApplicationSource1"
                 },
                 {
-                    "name": "MyApplicationSource2"
+                    "Name": "MyApplicationSource2"
                 }
             ]
         }

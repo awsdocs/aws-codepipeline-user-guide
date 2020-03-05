@@ -66,22 +66,22 @@ The URI for the image\.
 #### [ YAML ]
 
 ```
-name: Source
-actions:
-  - inputArtifacts: []
-    actionTypeId:
-      version: '1'
-      owner: AWS
-      category: Source
-      provider: ECR
-    outputArtifacts:
-      - name: SourceArtifact
-    runOrder: 1
-    configuration:
+Name: Source
+Actions:
+  - InputArtifacts: []
+    ActionTypeId:
+      Version: '1'
+      Owner: AWS
+      Category: Source
+      Provider: ECR
+    OutputArtifacts:
+      - Name: SourceArtifact
+    RunOrder: 1
+    Configuration:
       ImageTag: latest
       RepositoryName: my-image-repo
 
-    name: ImageSource
+    Name: ImageSource
 ```
 
 ------
@@ -89,27 +89,27 @@ actions:
 
 ```
 {
-    "name": "Source",
-    "actions": [
+    "Name": "Source",
+    "Actions": [
         {
-            "inputArtifacts": [],
-            "actionTypeId": {
-                "version": "1",
-                "owner": "AWS",
-                "category": "Source",
-                "provider": "ECR"
+            "InputArtifacts": [],
+            "ActionTypeId": {
+                "Version": "1",
+                "Owner": "AWS",
+                "Category": "Source",
+                "Provider": "ECR"
             },
-            "outputArtifacts": [
+            "OutputArtifacts": [
                 {
-                    "name": "SourceArtifact"
+                    "Name": "SourceArtifact"
                 }
             ],
-            "runOrder": 1,
-            "configuration": {
+            "RunOrder": 1,
+            "Configuration": {
                 "ImageTag": "latest",
                 "RepositoryName": "my-image-repo"
             },
-            "name": "ImageSource"
+            "Name": "ImageSource"
         }
     ]
 },

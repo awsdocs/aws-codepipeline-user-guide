@@ -70,23 +70,23 @@ The version ID for the version of the object related to the source change that t
 #### [ YAML ]
 
 ```
-name: Source
-actions:
-  - runOrder: 1
-    outputArtifacts:
-      - name: SourceArtifact
-    actionTypeId:
-      provider: S3
-      owner: AWS
-      version: '1'
-      category: Source
-    region: us-west-2
-    name: Source
-    configuration:
+Name: Source
+Actions:
+  - RunOrder: 1
+    OutputArtifacts:
+      - Name: SourceArtifact
+    ActionTypeId:
+      Provider: S3
+      Owner: AWS
+      Version: '1'
+      Category: Source
+    Region: us-west-2
+    Name: Source
+    Configuration:
       S3Bucket: my-bucket-oregon
       S3ObjectKey: my-application.zip
       PollForSourceChanges: 'false'
-    inputArtifacts: []
+    InputArtifacts: []
 ```
 
 ------
@@ -94,29 +94,29 @@ actions:
 
 ```
 {
-    "name": "Source",
-    "actions": [
+    "Name": "Source",
+    "Actions": [
         {
-            "runOrder": 1,
-            "outputArtifacts": [
+            "RunOrder": 1,
+            "OutputArtifacts": [
                 {
-                    "name": "SourceArtifact"
+                    "Name": "SourceArtifact"
                 }
             ],
-            "actionTypeId": {
-                "provider": "S3",
-                "owner": "AWS",
-                "version": "1",
-                "category": "Source"
+            "ActionTypeId": {
+                "Provider": "S3",
+                "Owner": "AWS",
+                "Version": "1",
+                "Category": "Source"
             },
-            "region": "us-west-2",
-            "name": "Source",
-            "configuration": {
+            "Region": "us-west-2",
+            "Name": "Source",
+            "Configuration": {
                 "S3Bucket": "my-bucket-oregon",
                 "S3ObjectKey": "my-application.zip",
                 "PollForSourceChanges": "false"
             },
-            "inputArtifacts": []
+            "InputArtifacts": []
         }
     ]
 },
@@ -127,4 +127,4 @@ actions:
 ## See Also<a name="action-reference-S3-links"></a>
 
 The following related resources can help you as you work with this action\.
-+ [Tutorial: Create a Simple Pipeline \(Amazon S3 Bucket\)](tutorials-simple-s3.md) – This tutorial provides a sample app spec file and sample CodeDeploy application and deployment group\. Use this tutorial to create a pipeline with an Amazon S3 source that deploys to Amazon EC2 instances\.
++ [Tutorial: Create a Simple Pipeline \(S3 Bucket\)](tutorials-simple-s3.md) – This tutorial provides a sample app spec file and sample CodeDeploy application and deployment group\. Use this tutorial to create a pipeline with an Amazon S3 source that deploys to Amazon EC2 instances\.

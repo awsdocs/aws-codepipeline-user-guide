@@ -1,5 +1,8 @@
 # Create a CloudWatch Events Rule for a CodeCommit Source \(Console\)<a name="pipelines-trigger-source-repo-changes-console"></a>
 
+**Important**  
+If you use the console to create or edit your pipeline, your CloudWatch Events rule is created for you\.
+
 **To create a CloudWatch Events rule for use in CodePipeline operations**
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.

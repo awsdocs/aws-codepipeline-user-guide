@@ -40,7 +40,7 @@ When you choose to stop and wait, the selected execution continues until in\-pro
 
 When you choose to stop and abandon, the selected execution does not wait for in\-progress actions to complete\. The actions are abandoned\. For example, the following pipeline execution was stopped and abandoned while the build action was in progress\.
 
-1. XXXIn the pipeline view, the success banner message is displayed, the build action shows a status of **In progress**, and the pipeline execution shows a status of **Stopping**\.  
+1. In the pipeline view, the success banner message is displayed, the build action shows a status of **In progress**, and the pipeline execution shows a status of **Stopping**\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/stop-exec-abandon-vis-1.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
 1. After the pipeline execution stops, the build action shows a status of **Abandoned**, and the pipeline execution shows a status of **Stopped**\. Subsequent actions do not start\. The **Retry** button is enabled\.  

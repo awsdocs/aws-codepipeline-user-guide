@@ -419,7 +419,19 @@ You cannot use the CodePipeline console to create or edit a pipeline that uses r
 **Note**  
 This is not the JSON for the entire pipeline, just the structure for the action in a stage\.
 
-1. Save the file\.
+1. You must remove the `metadata` lines from the file so the update\-pipeline command can use it\. Remove the section from the pipeline structure in the JSON file \(the `"metadata": { }` lines and the `"created"`, `"pipelineARN"`, and `"updated"` fields\)\.
+
+   For example, remove the following lines from the structure: 
+
+   ```
+   "metadata": {  
+     "pipelineArn": "arn:aws:codepipeline:region:account-ID:pipeline-name",
+     "created": "date",
+     "updated": "date"
+     }
+   ```
+
+   Save the file\.
 
 1.  To apply your changes, run the update\-pipeline command, specifying the pipeline JSON file, similar to the following:
 **Important**  

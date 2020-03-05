@@ -61,7 +61,7 @@ When you create a pipeline, CodePipeline integrates with AWS products and servic
 + A deploy action stage with a default name of “Staging\.”
 
 You can use the tutorials in this guide to create pipelines and specify stages:
-+ The steps in [Tutorial: Create a Simple Pipeline \(Amazon S3 Bucket\)](tutorials-simple-s3.md) help you use the wizard to create a pipeline with two default stages: “Source” and “Staging”, where your Amazon S3 repository is the source provider\. This tutorial creates a pipeline that uses AWS CodeDeploy to deploy a sample application from an Amazon S3 bucket to Amazon EC2 instances running Amazon Linux\.
++ The steps in [Tutorial: Create a Simple Pipeline \(S3 Bucket\)](tutorials-simple-s3.md) help you use the wizard to create a pipeline with two default stages: “Source” and “Staging”, where your Amazon S3 repository is the source provider\. This tutorial creates a pipeline that uses AWS CodeDeploy to deploy a sample application from an Amazon S3 bucket to Amazon EC2 instances running Amazon Linux\.
 + The steps in [Tutorial: Create a Simple Pipeline \(CodeCommit Repository\)](tutorials-simple-codecommit.md) help you use the wizard to create a pipeline with a “Source” stage that uses your AWS CodeCommit repository as the source provider\. This tutorial creates a pipeline that uses AWS CodeDeploy to deploy a sample application from an AWS CodeCommit repository to an Amazon EC2 instance running Amazon Linux\.
 
 ### Use CodePipeline with Third\-party Action Providers \(GitHub and Jenkins\)<a name="use-cases-thirdparty"></a>

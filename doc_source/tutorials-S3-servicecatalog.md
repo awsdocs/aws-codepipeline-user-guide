@@ -13,7 +13,7 @@ The template file can be created in YAML or JSON format\.
 
 ## Option 1: Deploy to AWS Service Catalog Without a Configuration File<a name="tutorials-S3-servicecatalog-ex1-configure"></a>
 
-In this example, you upload the sample AWS CloudFormation template file for an Amazon S3 bucket, and then create your product in AWS Service Catalog\. Next, you create your pipeline and specify deployment configuration in the CodePipeline console\.
+In this example, you upload the sample AWS CloudFormation template file for an S3 bucket, and then create your product in AWS Service Catalog\. Next, you create your pipeline and specify deployment configuration in the CodePipeline console\.
 
 ### Step 1: Upload Sample Template File to Source Repository<a name="tutorials-S3-servicecatalog-configure"></a>
 
@@ -40,7 +40,7 @@ In this example, you upload the sample AWS CloudFormation template file for an A
    }
    ```
 
-   This template allows AWS CloudFormation to create an Amazon S3 bucket that can be used by AWS Service Catalog\.
+   This template allows AWS CloudFormation to create an S3 bucket that can be used by AWS Service Catalog\.
 
 1. Upload the `S3_template.json` file to your AWS CodeCommit repository\.
 
@@ -64,7 +64,7 @@ In this example, you upload the sample AWS CloudFormation template file for an A
 
    1. Choose **Upload a template file**\. Browse for your `S3_template.json` file and upload it\.
 
-   1. In **Version title**, enter the name of the product version \(for example, "devops S3 v2"\)\.
+   1. In **Version title**, enter the name of the product version \(for example, **devops S3 v2**\)\.
 
    1. In **Description**, enter details that distinguish this version from other versions\.
 
@@ -92,35 +92,9 @@ Copy the URL for your product before you navigate away from the page\. Once you 
 
    1. Choose **Getting started**\. Choose **Create pipeline**, and then enter a name for your pipeline\.
 
-   1. In **Service role**, choose **New service role**\. This creates a service role for CodePipeline to manage permissions to other AWS services\.
-**Note**  
-If you use a CodePipeline service role that was created before October 16 2018, you need to add permissions for AWS Service Catalog\. Open the IAM console, find the role, and then add the following permissions to the role's policy\. For more information, see [Add Permissions to the CodePipeline Service Role](security-iam.md#how-to-update-role-new-services)\.  
+   1. In **Service role**, choose **New service role** to allow CodePipeline to create a service role in IAM\.
 
-      ```
-       "Statement": [
-              {
-                  "Effect": "Allow",
-                  "Action": [
-                      "servicecatalog:ListProvisioningArtifacts",
-                      "servicecatalog:CreateProvisioningArtifact",
-                      "servicecatalog:DescribeProvisioningArtifact",
-                      "servicecatalog:DeleteProvisioningArtifact”,
-                      “servicecatalog:UpdateProduct”
-                  ],
-                  "Resource": "*"
-              },
-              {
-                  "Effect": "Allow",
-                  "Action": [
-                      "cloudformation:ValidateTemplate"
-                  ],
-                  "Resource": "*"
-              }
-      ```
-
-   1. In **Artifact store**, choose **Default location**\. This uses the default Amazon S3 artifact bucket for this region\.
-
-   1. Choose **Next**\.
+   1. Leave the settings under **Advanced settings** at their defaults, and then choose **Next**\.
 
 1. To add a source stage, do the following:
 
@@ -174,7 +148,7 @@ If you use a CodePipeline service role that was created before October 16 2018, 
 
 ## Option 2: Deploy to AWS Service Catalog Using a Configuration File<a name="tutorials-S3-servicecatalog-ex2-configure"></a>
 
-In this example, you upload the sample AWS CloudFormation template file for an Amazon S3 bucket, and then create your product in AWS Service Catalog\. You also upload a separate configuration file that specifies your deployment configuration\. Next, you create your pipeline and specify the location of your configuration file\.
+In this example, you upload the sample AWS CloudFormation template file for an S3 bucket, and then create your product in AWS Service Catalog\. You also upload a separate configuration file that specifies your deployment configuration\. Next, you create your pipeline and specify the location of your configuration file\.
 
 ### Step 1: Upload Sample Template File to Source Repository<a name="tutorials-S3-servicecatalog-upload2"></a>
 
@@ -201,7 +175,7 @@ In this example, you upload the sample AWS CloudFormation template file for an A
    }
    ```
 
-   This template allows AWS CloudFormation to create an Amazon S3 bucket that can be used by AWS Service Catalog\.
+   This template allows AWS CloudFormation to create an S3 bucket that can be used by AWS Service Catalog\.
 
 1. Upload the `S3_template.json` file to your AWS CodeCommit repository\.
 
@@ -277,35 +251,9 @@ Copy the URL for your product before you navigate away from the page\. Once you 
 
    1. Choose **Getting started**\. Choose **Create pipeline**, and then enter a name for your pipeline\.
 
-   1. In **Service role**, choose **New service role**\. This creates a service role for CodePipeline to manage permissions to other AWS services\.
-**Note**  
-If you use a CodePipeline service role that was created before October 16 2018, you need to add permissions for AWS Service Catalog\. Open the IAM console, find the role, and then add the following permissions to the role's policy\. For more information, see [Add Permissions to the CodePipeline Service Role](security-iam.md#how-to-update-role-new-services)\.  
+   1. In **Service role**, choose **New service role** to allow CodePipeline to create a service role in IAM\.
 
-      ```
-       "Statement": [
-              {
-                  "Effect": "Allow",
-                  "Action": [
-                      "servicecatalog:ListProvisioningArtifacts",
-                      "servicecatalog:CreateProvisioningArtifact",
-                      "servicecatalog:DescribeProvisioningArtifact",
-                      "servicecatalog:DeleteProvisioningArtifact”,
-                      “servicecatalog:UpdateProduct”
-                  ],
-                  "Resource": "*"
-              },
-              {
-                  "Effect": "Allow",
-                  "Action": [
-                      "cloudformation:ValidateTemplate"
-                  ],
-                  "Resource": "*"
-              }
-      ```
-
-   1. In **Artifact store**, choose **Default location**\. This uses the default Amazon S3 artifact bucket for this region\.
-
-   1. Choose **Next**\.
+   1. Leave the settings under **Advanced settings** at their defaults, and then choose **Next**\.
 
 1. To add a source stage, do the following:
 
