@@ -11,7 +11,6 @@ The artifact was produced by a previous action in the same account as the action
 In other words, you cannot pass an artifact from one account to another if neither account is the pipeline account\.
 Cross\-account actions are not supported for the following action types:  
 Jenkins build actions
-CodeBuild build or test actions
 
 For this example, you must create an AWS Key Management Service \(AWS KMS\) key to use, add the key to the pipeline, and set up account policies and roles to enable cross\-account access\. For an AWS KMS key, you can use the key ID, the key ARN, or the alias ARN\. 
 
