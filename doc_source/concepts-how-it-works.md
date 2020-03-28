@@ -51,7 +51,7 @@ When you choose to stop and abandon, the selected execution does not wait for in
 
 **Use cases for stopping a pipeline execution**
 
-We recommend that you use the stop the wait option to stop a pipeline execution\. This option is safer because it avoids possible failed or out\-of\-sequence tasks in your pipeline\. When an action is abandoned in CodePipeline, the action provider continues any tasks related to the action\. In the case of an AWS CloudFormation action, the deployment action in the pipeline is abandoned, but the stack update might continue and result in a failed update\. 
+We recommend that you use the stop and wait option to stop a pipeline execution\. This option is safer because it avoids possible failed or out\-of\-sequence tasks in your pipeline\. When an action is abandoned in CodePipeline, the action provider continues any tasks related to the action\. In the case of an AWS CloudFormation action, the deployment action in the pipeline is abandoned, but the stack update might continue and result in a failed update\. 
 
 As an example of abandoned actions that can result in out\-of\-sequence tasks, if you are deploying a large file \(1GB\) through an S3 deployment action, and you choose to stop and abandon the action while the deployment is already in progress, the action is abandoned in CodePipeline, but continues in Amazon S3\. Amazon S3 does not encounter any instruction to cancel the upload\. Next, if you start a new pipeline execution with a very small file, there are now two deployments in progress\. Because the file size of the new execution is small, the new deployment completes while the old deployment is still uploading\. When the old deployment completes, the new file is overwritten by the old file\.
 
