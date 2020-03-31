@@ -378,4 +378,4 @@ You can use some of the resources you created in this tutorial for other tutoria
 Learn more about how CodePipeline works:
 + For more information about stages, actions, and how pipelines work, see [CodePipeline Concepts](concepts.md)\.
 + For information about the actions you can perform using CodePipeline, see [Integrations with CodePipeline Action Types](integrations-action-type.md)\.
-+ Try this more advanced tutorial, [Tutorial: Create a Four\-Stage Pipeline](tutorials-four-stage-pipeline.md)\. It creates a multi\-stage pipeline that includes a step that builds code before it's deployed\.
++ Try this more advanced tutorial, [Tutorial: Create a Four\-Stage Pipeline](tutorials-four-stage-pipeline.md)\. It creates a multi\-stage pipeline that includes a step that builds code before it's deployed\. birds
