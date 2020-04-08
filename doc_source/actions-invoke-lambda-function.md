@@ -163,7 +163,7 @@ The event object, under the CodePipeline\.job key, contains the [job details](ht
                failureDetails: {
                    message: JSON.stringify(message),
                    type: 'JobFailed',
-                   externalExecutionId: context.invokeid
+                   externalExecutionId: context.awsRequestId
                }
            };
            codepipeline.putJobFailureResult(params, function(err, data) {
