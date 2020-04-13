@@ -58,14 +58,14 @@ Call the put\-rule command, specifying:
       aws iam put-role-policy --role-name Role-for-MyRule --policy-name CodePipeline-Permissions-Policy-For-CWE --policy-document file://permissionspolicyforCWE.json
       ```
 
-1. Call the put\-rule command and include the `--name` and `--event-pattern` parameters\.
+1. Call the put\-rule command and include the `--name`, `--event-pattern`, and `--role-arn` parameters\.
 
    **Why am I making this change?** We must create an event with a rule that specifies how an image push must be made, and a target that names the pipeline to be triggered by the event\.
 
-   The following sample command uses `--event-pattern` to create a rule called `MyECRRepoRule`\.
+   The following sample command creates a rule called `MyECRRepoRule`\.
 
    ```
-   aws events put-rule --name "MyECRRepoRule" --event-pattern "{\"detail-type\":[\"ECR Image Action\"],\"source\":[\"aws.ecr\"],\"detail\":{\"action-type\":[\"PUSH\"],\"image-tag\":[\"latest\"],\"repository-name\":[\"cwe-test\"],\"result\":[\"SUCCESS\"]}}}"
+   aws events put-rule --name "MyECRRepoRule" --event-pattern "{\"detail-type\":[\"ECR Image Action\"],\"source\":[\"aws.ecr\"],\"detail\":{\"action-type\":[\"PUSH\"],\"image-tag\":[\"latest\"],\"repository-name\":[\"cwe-test\"],\"result\":[\"SUCCESS\"]}}}" --role-arn "arn:aws:iam::ACCOUNT_ID:role/Role-for-MyRule"
    ```
 **Note**  
 To view the full event pattern supported for Amazon ECR events, see [Amazon ECR Events and EventBridge](https://docs.aws.amazon.com/AmazonECR/latest/userguide/ecr-eventbridge.html) or [Amazon Elastic Container Registry Events](https://docs.aws.amazon.com/eventbridge/latest/userguide/event-types.html#ecr-event-types)\.

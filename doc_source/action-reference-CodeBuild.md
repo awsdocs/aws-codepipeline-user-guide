@@ -35,10 +35,10 @@ Required: No
 The value of this parameter is used to set environment variables for the CodeBuild action in your pipeline\. The value for the `EnvironmentVariables` parameter takes the form of a JSON array of environment variable objects\. See the example parameter in [Action Declaration \(CodeBuild Example\)](#action-reference-CodeBuild-example)\.  
 Each object has three parts, all of which are strings:  
 + `name`: The name or key of the environment variable\. 
-+ `value`: The value of the environment variable\. When using the PARAMETER\_STORE type, this value must be the name of a parameter you have already stored in AWS Systems Manager Parameter Store\.
++ `value`: The value of the environment variable\. When using the `PARAMETER_STORE` or `SECRETS_MANAGER` type, this value must be the name of a parameter you have already stored in AWS Systems Manager Parameter Store or a secret you have already stored in AWS Secrets Manager, respectively\.
 **Note**  
-We strongly discourage the use of environment variables to store sensitive values, especially AWS secret key IDs and secret access keys\. When you use the CodeBuild console or AWS CLI, environment variables are displayed in plain text\. For sensitive values, we recommend that you use the PARAMETER\_STORE type instead\. 
-+ `type`: \(Optional\) The type of environment variable\. Valid values are PARAMETER\_STORE, SECRETS\_MANAGER or PLAINTEXT\. When not specified, this defaults to PLAINTEXT\.
+We strongly discourage the use of environment variables to store sensitive values, especially AWS secret key IDs and secret access keys\. When you use the CodeBuild console or AWS CLI, environment variables are displayed in plain text\. For sensitive values, we recommend that you use the `SECRETS_MANAGER` type instead\. 
++ `type`: \(Optional\) The type of environment variable\. Valid values are `PARAMETER_STORE`, `SECRETS_MANAGER`, or `PLAINTEXT`\. When not specified, this defaults to `PLAINTEXT`\.
 When you enter the `name`, `value`, and `type` for your environment variables configuration, especially if the environment variable contains CodePipeline output variable syntax, do not exceed the 1000\-character limit for the configuration’s value field\. A validation error is returned when this limit is exceeded\.
 For more information, see [ EnvironmentVariable](https://docs.aws.amazon.com/codebuild/latest/APIReference/API_EnvironmentVariable.html)\.
 

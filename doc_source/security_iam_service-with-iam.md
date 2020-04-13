@@ -61,7 +61,7 @@ In CodePipeline, the primary resource is a pipeline\. In a policy, you use an Am
 **Note**  
 Most services in AWS treat a colon \(:\) or a forward slash \(/\) as the same character in ARNs\. However, CodePipeline uses an exact match in event patterns and rules\. Be sure to use the correct ARN characters when creating event patterns so that they match the ARN syntax in the pipeline you want to match\.
 
-In CodePipeline, there are API calls that support resource\-level permissions\. Resource\-level permissions indicate whether an API call can specify a resource ARN, or whether the API call can only specify all resources using the wildcard\. See [Supported Resource\-Level Permissions for CodePipeline API Calls](#iam-actions-resource-level) for a detailed description of resource\-level permissions and a listing of the CodePipeline API calls that support resource\-level permissions\.
+In CodePipeline, there are API calls that support resource\-level permissions\. Resource\-level permissions indicate whether an API call can specify a resource ARN, or whether the API call can only specify all resources using the wildcard\. See [CodePipeline Permissions Reference](permissions-reference.md) for a detailed description of resource\-level permissions and a listing of the CodePipeline API calls that support resource\-level permissions\.
 
 For example, you can indicate a specific pipeline \(*myPipeline*\) in your statement using its ARN as follows:
 
@@ -91,17 +91,6 @@ Some CodePipeline API calls accept multiple resources \(for example, `GetPipelin
 ```
 
 CodePipeline provides a set of operations to work with the CodePipeline resources\. For a list of available operations, see [CodePipeline Permissions Reference](permissions-reference.md)\.
-
-#### Supported Resource\-Level Permissions for CodePipeline API Calls<a name="iam-actions-resource-level"></a>
-
-*Resource\-level permissions* are those that allow you to specify which resources users are allowed to perform actions on\. AWS CodePipeline provides partial support for resource\-level permissions\. This means that for some AWS CodePipeline API calls, you can control when users are allowed to use those actions based on conditions that must be met, or which resources users are allowed to use\. For example, you can grant users permission to list pipeline execution information, but only for a specific pipeline or pipelines\.
-
-The following table describes the AWS CodePipeline API calls that currently support resource\-level permissions, as well as the supported resources, resource ARNs, and condition keys for each action\. 
-
-**Note**  
-AWS CodePipeline API calls that are not listed in this table do not support resource\-level permissions\. If an AWS CodePipeline API call does not support resource\-level permissions, you can grant users permission to use it, but you have to specify a \* for the resource element of your policy statement\. 
-
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/security_iam_service-with-iam.html)
 
 ### Condition Keys<a name="security_iam_service-with-iam-id-based-policies-conditionkeys"></a>
 

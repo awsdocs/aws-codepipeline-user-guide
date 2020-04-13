@@ -1,19 +1,11 @@
-# Use Parameter Store to Track Database Passwords or Third Party API Keys<a name="parameter-store-encryption"></a>
+# Use AWS Secrets Manager to Track Database Passwords or Third\-Party API Keys<a name="parameter-store-encryption"></a>
 
-You can use Parameter Store to track and update configuration secrets such as database passwords\. This procedure shows you how to use Parameter Store to create a secret parameter\. You can also create automated scripts to use Parameter Store to securely set and manage your passwords and keys automatically\. For an example of build spec automation for CodeDeploy, see [Use Parameter Store to Securely Access Secrets and Config Data in AWS CodeDeploy](https://aws.amazon.com/blogs/mt/use-parameter-store-to-securely-access-secrets-and-config-data-in-aws-codedeploy/) on the AWS Management and Governance Blog\.
+We recommend that you use AWS Secrets Manager to rotate, manage, and retrieve database credentials, API keys, and other **secrets** throughout their lifecycle\. Secrets Manager enables you to replace hardcoded credentials in your code \(including passwords\) with an API call to Secrets Manager to retrieve the secret programmatically\. For more information, see [What Is AWS Secrets Manager?](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) in the *AWS Secrets Manager User Guide*\.
 
-**To create a parameter in Parameter Store**
+For pipelines where you pass parameters that are secrets \(such as OAuth credentials\) in an AWS CloudFormation template, you should include dynamic references in your template that access the secrets you have stored in Secrets Manager\. For the reference ID pattern and examples, see [Secrets Manager Secrets](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html#dynamic-references-secretsmanager) in the *AWS CloudFormation User Guide*\. For an example that uses dynamic references in a template snippet for GitHub webhook in a pipeline, see [Webhook Resource Configuration](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-webhook.html#aws-resource-codepipeline-webhook--examples)\.
 
-1. Sign in to your AWS account and go to the Amazon EC2 console\.
+### See Also<a name="w31aac37c16c21c15c11"></a>
 
-1. Under **Systems Manager Shared Resources**, choose **Parameter Store**\.
-
-1. Choose **Get Started Now** or **Create Parameter** and enter the following information:
-
-   1. In **Name**, enter a name for your parameter\.
-
-   1. Under **Type**, choose **Secure String**\. Your default AWS KMS key will be used to encrypt sensitive data\.
-
-   1. Paste the parameter in **Value**\.
-
-1. Choose **Create Parameter**\. The Parameter Store console opens and you can see your newly created parameter\.
+The following related resources can help you as you work with managing secrets\.
++ Secrets Manager can rotate database credentials automatically, such as for rotation of Amazon RDS secrets\. For more information, see [Rotating Your AWS Secrets Manager Secrets](https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html) in the *AWS Secrets Manager User Guide*\.
++ To view instructions for adding Secrets Manager dynamic references to your AWS CloudFormation templates, see [https://aws.amazon.com/blogs/security/how-to-create-and-retrieve-secrets-managed-in-aws-secrets-manager-using-aws-cloudformation-template/](https://aws.amazon.com/blogs/security/how-to-create-and-retrieve-secrets-managed-in-aws-secrets-manager-using-aws-cloudformation-template/)\. 

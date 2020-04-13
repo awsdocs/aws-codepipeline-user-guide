@@ -96,12 +96,13 @@ For more information, see [Creating a Trail with the AWS Command Line Interface]
       aws iam put-role-policy --role-name Role-for-MyRule --policy-name CodePipeline-Permissions-Policy-For-CWE --policy-document file://permissionspolicyforCWE.json
       ```
 
-1. Call the put\-rule command and include the `--name` and `--event-pattern` parameters\.
+1. Call the put\-rule command and include the `--name`, `--event-pattern`, and `--role-arn` parameters\.
 
-   The following sample command uses `--event-pattern` to create a rule named `MyS3SourceRule`\.
+   The following sample command creates a rule named `MyS3SourceRule`\.
 
    ```
    aws events put-rule --name "MyS3SourceRule" --event-pattern "{\"source\":[\"aws.s3\"],\"detail-type\":[\"AWS API Call via CloudTrail\"],\"detail\":{\"eventSource\":[\"s3.amazonaws.com\"],\"eventName\":[\"CopyObject\",\"PutObject\",\"CompleteMultipartUpload\"],\"requestParameters\":{\"bucketName\":[\"my-bucket\"],\"key\":[\"my-key\"]}}}
+    --role-arn "arn:aws:iam::ACCOUNT_ID:role/Role-for-MyRule"
    ```
 
 1. To add CodePipeline as a target, call the put\-targets command and include the `--rule` and `--targets` parameters\.

@@ -28,7 +28,7 @@ A *pipeline* is a workflow construct that describes how software changes go thro
 
 #### Stages<a name="concepts-stages"></a>
 
-A stage is a logical unit you can use to isolate an environment and to limit the number of concurrent changes in that environment\. Each stage contains actions that are performed on the application [artifacts](#concepts-artifacts)\. Your source code is an example of an artifact\. A stage might be a build stage, where the source code is built and tests are run\. It can also be a deployment stage, where code is deployed to runtime environments\. Each stage is made up of a series of serial or parallel *actions*\.
+A stage is a logical unit you can use to isolate an environment and to limit the number of concurrent changes in that environment\. Each stage contains actions that are performed on the application [artifacts](https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-artifacts)\. Your source code is an example of an artifact\. A stage might be a build stage, where the source code is built and tests are run\. It can also be a deployment stage, where code is deployed to runtime environments\. Each stage is made up of a series of serial or parallel *actions*\.
 
 #### Actions<a name="concepts-actions"></a>
 
@@ -68,7 +68,7 @@ For more information about superseded executions and locked stages, see [How Exe
 
 ### Action Executions<a name="concepts-action-executions"></a>
 
-An *action execution* is the process of completing a configured action that operates on designated [artifacts]()\. These can be input artifacts, output artifacts, or both\. For example, a build action might run build commands on an input artifact, such as compiling application source code\. Action execution details include an action execution ID, the related pipeline execution source trigger, and the input and output artifacts for the action\. Valid statuses for actions are `InProgress`, `Succeeded`, and `Failed`\.
+An *action execution* is the process of completing a configured action that operates on designated [artifacts](https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-artifacts)\. These can be input artifacts, output artifacts, or both\. For example, a build action might run build commands on an input artifact, such as compiling application source code\. Action execution details include an action execution ID, the related pipeline execution source trigger, and the input and output artifacts for the action\. Valid statuses for actions are `InProgress`, `Succeeded`, and `Failed`\.
 
 ### Transitions<a name="concepts-transitions"></a>
 

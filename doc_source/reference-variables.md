@@ -6,6 +6,8 @@ Variables allow you to configure your pipeline actions with values that are dete
 
 Some action providers produce a defined set of variables\. You choose from default variable keys for that action provider, such as commit ID\.
 
+To see step\-by\-step examples of using output variables, see [Tutorial: Use Lambda Output Variables in a Pipeline](tutorials-lambda-variables.md) and [Example: Use Variables in Manual Approvals](actions-variables.md#actions-variables-examples-approvals)\.
+
 **Variable Limits**
 
 For limit information, see [Quotas in AWS CodePipeline](limits.md)\.

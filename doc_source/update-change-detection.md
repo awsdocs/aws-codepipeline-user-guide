@@ -238,14 +238,14 @@ The update\-pipeline command stops the pipeline\. If a revision is being run thr
       aws iam put-role-policy --role-name Role-for-MyRule --policy-name CodePipeline-Permissions-Policy-For-CWE --policy-document file://permissionspolicyforCWE.json
       ```
 
-1. Call the put\-rule command and include the `--name` and `--event-pattern` parameters\.
+1. Call the put\-rule command and include the `--name`, `--event-pattern` , and`--role-arn` parameters\.
 
    **Why am I making this change?** This command enables AWS CloudFormation to create the event\.
 
-   The following sample command uses `--event-pattern` to create a rule called `MyCodeCommitRepoRule`\.
+   The following sample command creates a rule called `MyCodeCommitRepoRule`\.
 
    ```
-   aws events put-rule --name "MyCodeCommitRepoRule" --event-pattern "{\"source\":[\"aws.codecommit\"],\"detail-type\":[\"CodeCommit Repository State Change\"],\"resources\":[\"repository-ARN\"],\"detail\":{\"referenceType\":[\"branch\"],\"referenceName\":[\"master\"]}}"
+   aws events put-rule --name "MyCodeCommitRepoRule" --event-pattern "{\"source\":[\"aws.codecommit\"],\"detail-type\":[\"CodeCommit Repository State Change\"],\"resources\":[\"repository-ARN\"],\"detail\":{\"referenceType\":[\"branch\"],\"referenceName\":[\"master\"]}}" --role-arn "arn:aws:iam::ACCOUNT_ID:role/Role-for-MyRule"
    ```
 
 1. To add CodePipeline as a target, call the put\-targets command and include the following parameters:
@@ -363,12 +363,13 @@ For more information, see [Creating a Trail with the AWS Command Line Interface]
       aws iam put-role-policy --role-name Role-for-MyRule --policy-name CodePipeline-Permissions-Policy-For-CWE --policy-document file://permissionspolicyforCWE.json
       ```
 
-1. Call the put\-rule command and include the `--name` and `--event-pattern` parameters\.
+1. Call the put\-rule command and include the `--name`, `--event-pattern`, and `--role-arn` parameters\.
 
-   The following sample command uses `--event-pattern` to create a rule named `MyS3SourceRule`\.
+   The following sample command creates a rule named `MyS3SourceRule`\.
 
    ```
    aws events put-rule --name "MyS3SourceRule" --event-pattern "{\"source\":[\"aws.s3\"],\"detail-type\":[\"AWS API Call via CloudTrail\"],\"detail\":{\"eventSource\":[\"s3.amazonaws.com\"],\"eventName\":[\"CopyObject\",\"PutObject\",\"CompleteMultipartUpload\"],\"requestParameters\":{\"bucketName\":[\"my-bucket\"],\"key\":[\"my-key\"]}}}
+    --role-arn "arn:aws:iam::ACCOUNT_ID:role/Role-for-MyRule"
    ```
 
 1. To add CodePipeline as a target, call the put\-targets command and include the `--rule` and `--targets` parameters\.
@@ -1601,7 +1602,7 @@ When you create a pipeline with this method, the `PollForSourceChanges` paramete
   ```
   ###################################################################################
   # Prerequisites: 
-  #   - S3 SoureBucket and SourceObjectKey must exist
+  #   - S3 SourceBucket and SourceObjectKey must exist
   ###################################################################################
   
   Parameters:
@@ -2507,7 +2508,7 @@ Resources:
 
 **To add parameters and create a webhook in your template**
 
-We strongly recommend that you use AWS Secrets Manager to store your credentials\. If you use Secrets Manager, you must have already configured and stored your secret parameters in Secrets Manager\. This example uses dynamic references to AWS Secrets Manager for the GitHub credentials for your webhook\. For more information, see [ Using Dynamic References to Specify Template Values](https://alpha-docs-aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html#dynamic-references-secretsmanager)\. 
+We strongly recommend that you use AWS Secrets Manager to store your credentials\. If you use Secrets Manager, you must have already configured and stored your secret parameters in Secrets Manager\. This example uses dynamic references to AWS Secrets Manager for the GitHub credentials for your webhook\. For more information, see [ Using Dynamic References to Specify Template Values](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html#dynamic-references-secretsmanager)\. 
 **Important**  
 When passing secret parameters, do not enter the value directly into the template\. The value is rendered as plaintext and is therefore readable\. For security reasons, do not use plaintext in your AWS CloudFormation template to store your credentials\.
 

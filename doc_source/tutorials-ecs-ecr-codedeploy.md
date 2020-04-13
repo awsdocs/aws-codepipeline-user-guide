@@ -85,13 +85,11 @@ If you already have an image you want to use, you can skip this step\.
    docker tag nginx:latest aws_account_id.dkr.ecr.us-east-1.amazonaws.com/nginx:latest
    ```
 
-1. Run the aws ecr get\-login \-\-no\-include\-email command in parentheses to get the docker login authentication command string for your registry\.
+1. Run the aws ecr get\-login\-password command, as shown in this example for the `us-west-2` region\.
 
    ```
-   $(aws ecr get-login --no-include-email)
+   aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/nginx
    ```
-
-   The authorization token command is run in memory \(not exposed in the output\) and completes the login\.
 
 1. Push the image to Amazon ECR using the `repositoryUri` from the earlier step\.
 
@@ -460,13 +458,25 @@ When you create a CodeDeploy application and deployment group for the Amazon ECS
 
 1. In **Deployment group name**, enter a name that describes the deployment group\.
 
-1. In **Service role**, choose a service role that grants CodeDeploy access to Amazon ECS\.
+1. In **Service role**, choose a service role that grants CodeDeploy access to Amazon ECS\. To create a new service role, follow these steps:
+
+   1. Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\)\.
+
+   1. From the console dashboard, choose **Roles**\.
+
+   1. Choose **Create role**\.
+
+   1. Under **Select type of trusted entity**, select **AWS service**\. Under **Choose a use case**, select **CodeDeploy**\. Under **Select your use case**, select **CodeDeploy \- ECS**\. Choose **Next: Permissions**\. The `AWSCodeDeployRoleForECS` managed policy is already attached to the role\.
+
+   1. Choose **Next: Tags**, and **Next: Review**\.
+
+   1. Enter a name for the role \(for example, **CodeDeployECSRole**\), and then choose **Create role**\.
 
 1. In **Environment configuration**, choose your Amazon ECS cluster name and service name\.
 
 1. From **Load balancers**, choose the name of the load balancer that serves traffic to your Amazon ECS service\.
 
-1. From **Production listener port**, choose the port and protocol for the listener that serves production traﬃc to your Amazon ECS service\.
+1. From **Production listener port**, choose the port and protocol for the listener that serves production traﬃc to your Amazon ECS service\. From **Test listener port**, choose the port and protocol for the test listener\.
 
 1. From **Target group 1 name** and **Target group 2 name**, choose the target groups used to route traffic during your deployment\. Make sure that these are the target groups you created for your load balancer\.
 

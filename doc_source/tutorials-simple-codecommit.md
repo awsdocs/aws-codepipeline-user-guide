@@ -105,7 +105,7 @@ In this step, you create the EC2 instance where you deploy a sample application\
 
 1. Choose **Create role**\.
 
-1. Under **Choose the service that will use this role**, select **EC2**, and then choose **Next: Permissions**\.
+1. Under **Select type of trusted entity**, select **AWS service**\. Under **Choose a use case**, select **EC2**, and then choose **Next: Permissions**\.
 
 1. Search for and select the policy named **AmazonEC2RoleforAWSCodeDeploy**, and then choose **Next: Tags**\.
 
@@ -115,9 +115,9 @@ In this step, you create the EC2 instance where you deploy a sample application\
 
 1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
 
-1. From the console dashboard, choose **Launch Instance**\.
+1. From the console dashboard, choose **Launch instance**, and select **Launch instance** from the options that pop up\.
 
-1. On **Step 1: Choose an Amazon Machine Image \(AMI\)**, locate **Amazon Linux 2 AMI \(HVM\)**, and then choose **Select**\. \(This AMI is labeled "Free tier eligible" and can be found at the top of the list\.\)
+1. On **Step 1: Choose an Amazon Machine Image \(AMI\)**, locate **Amazon Linux 2 AMI \(HVM\), SSD Volume Type**, and then choose **Select**\. \(This AMI is labeled "Free tier eligible" and can be found at the top of the list\.\)
 
 1. On the **Step 2: Choose an Instance Type** page, choose the free tier eligible `t2.micro` type as the hardware configuration for your instance, and then choose **Next: Configure Instance Details**\.
 
@@ -145,7 +145,7 @@ For an example that runs these commands with elevated privileges \(sudo commands
 
 1. Leave the rest of the items on the **Step 3: Configure Instance Details** page unchanged\. Choose **Next: Add Storage**, leave the **Step 4: Add Storage** page unchanged, and then choose **Next: Add Tags**\.
 
-1. Choose **Add Tag**\. In **Key**, enter **MyCodePipelineDemo**, and then choose **Next: Configure Security Group**\. Later, you create a CodeDeploy application that deploys the sample application to this instance\. CodeDeploy selects instances to deploy based on the tags that are attached to instances\.
+1. Choose **Add Tag**\. In **Key**, enter **Name**, and in **Value**, enter **MyCodePipelineDemo**\. Choose **Next: Configure Security Group**\. Later, you create a CodeDeploy application that deploys the sample application to this instance\. CodeDeploy selects instances to deploy based on the tags that are attached to instances\.
 
 1. On the **Step 6: Configure Security Group** page, do the following: 
    + Next to **Assign a security group**, choose **Create a new security group**\.
@@ -158,7 +158,7 @@ For an example that runs these commands with elevated privileges \(sudo commands
    + If you already have a key pair to use with Amazon EC2 instances, select **Choose an existing key pair**, and then select your key pair\.
    + If you have not created a key pair yet, select **Create a new key pair**, enter a name for the key pair, and then choose **Download Key Pair**\. This is your only chance to save the private key file\. Be sure to download it\. Save the private key file in a safe place\. You must provide the name of your key pair when you launch an instance\. You must provide the corresponding private key each time you connect to the instance\. For more information, see [Amazon EC2 Key Pairs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html) in the *Amazon EC2 User Guide*\. 
 **Warning**  
-If you select **Proceed without a key pair**, you won't be able to use SSH to connect to the instance if you need to troubleshoot issues with the CodeDeploy agent\.
+You can select **Proceed without a key pair**, but you won't be able to use SSH to connect to the instance if you need to troubleshoot issues with the CodeDeploy agent\.
 
    When you are ready, select the acknowledgement check box, and then choose **Launch Instances**\. 
 
@@ -182,9 +182,9 @@ First, you create a role that allows CodeDeploy to perform deployments\. Then, y
 
 1. Choose **Create role**\.
 
-1. Under **Choose the service that will use this role**, choose **CodeDeploy**\. Under **Select your use case** , choose **CodeDeploy**\.
+1. Under **Select type of trusted entity**, select **AWS service**\. Under **Choose a use case**, select **CodeDeploy**, and then choose **Next: Permissions**\. The `AWSCodeDeployRole` managed policy is already attached to the role\.
 
-1. Choose **Next: Permissions**, **Next: Tags**, and **Next: Review**\.
+1. Choose **Next: Tags**, and **Next: Review**\.
 
 1. Enter a name for the role \(for example, **CodeDeployRole**\), and then choose **Create role**\.
 

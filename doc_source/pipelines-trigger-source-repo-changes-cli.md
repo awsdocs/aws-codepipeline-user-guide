@@ -58,14 +58,14 @@ Call the put\-rule command, specifying:
       aws iam put-role-policy --role-name Role-for-MyRule --policy-name CodePipeline-Permissions-Policy-For-CWE --policy-document file://permissionspolicyforCWE.json
       ```
 
-1. Call the put\-rule command and include the `--name` and `--event-pattern` parameters\.
+1. Call the put\-rule command and include the `--name`, `--event-pattern` , and`--role-arn` parameters\.
 
    **Why am I making this change?** This command enables AWS CloudFormation to create the event\.
 
-   The following sample command uses `--event-pattern` to create a rule called `MyCodeCommitRepoRule`\.
+   The following sample command creates a rule called `MyCodeCommitRepoRule`\.
 
    ```
-   aws events put-rule --name "MyCodeCommitRepoRule" --event-pattern "{\"source\":[\"aws.codecommit\"],\"detail-type\":[\"CodeCommit Repository State Change\"],\"resources\":[\"repository-ARN\"],\"detail\":{\"referenceType\":[\"branch\"],\"referenceName\":[\"master\"]}}"
+   aws events put-rule --name "MyCodeCommitRepoRule" --event-pattern "{\"source\":[\"aws.codecommit\"],\"detail-type\":[\"CodeCommit Repository State Change\"],\"resources\":[\"repository-ARN\"],\"detail\":{\"referenceType\":[\"branch\"],\"referenceName\":[\"master\"]}}" --role-arn "arn:aws:iam::ACCOUNT_ID:role/Role-for-MyRule"
    ```
 
 1. To add CodePipeline as a target, call the put\-targets command and include the following parameters:

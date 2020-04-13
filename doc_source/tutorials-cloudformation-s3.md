@@ -4,17 +4,15 @@ This walkthrough shows you how to use the AWS CloudFormation console to create i
 
 **Prerequisites:**
 
-You must have created the following resources to use with the AWS CloudFormation sample template:
-+ You must have created a CodeDeploy application and deployment group\. You can use the CodeDeploy resources you created in [Tutorial: Create a Simple Pipeline \(CodeCommit Repository\)](tutorials-simple-codecommit.md)\.
+You must have the following resources to use with the AWS CloudFormation sample template:
++ You must have created the Amazon EC2 instances, where you installed the CodeDeploy agent on the instances\. You must have created a CodeDeploy application and deployment group\. Use the Amazon EC2 and CodeDeploy resources you created in [Tutorial: Create a Simple Pipeline \(CodeCommit Repository\)](tutorials-simple-codecommit.md)\.
 + Choose the following links to download the sample AWS CloudFormation template files for creating a pipeline with an Amazon S3 source: 
   + Download the sample template for your pipeline: [YAML](samples/codepipeline-s3-events-yaml.zip) \| [JSON](samples/codepipeline-s3-events-json.zip)
   + Download the sample template for your CloudTrail bucket and trail: [YAML](samples/codepipeline-s3-cloudtrail-yaml.zip) \| [JSON](samples/codepipeline-s3-cloudtrail-json.zip)
   + Unzip the files and place them on your local computer\.
-+ Download the sample application based on the instances you created in your deployment group:
-  + If you want to use CodeDeploy to deploy to Amazon Linux instances, use the sample availble from [https://github.com/awslabs/aws-codepipeline-s3-aws-codedeploy_linux](https://github.com/awslabs/aws-codepipeline-s3-aws-codedeploy_linux)\.
-  + If you want to use CodeDeploy to deploy to Windows Server instances, use the sample available from : [https://github\.com/awslabs/AWSCodePipeline\-S3\-AWSCodeDeploy\_Windows](https://github.com/awslabs/AWSCodePipeline-S3-AWSCodeDeploy_Windows)\.
++ Download the sample application from [SampleApp\_Linux\.zip](samples/SampleApp_Linux.zip)\.
 
-  Save the zip file on your local computer\. You upload the zip file after the stack is created\.
+  Save the \.zip file on your local computer\. You upload the \.zip file after the stack is created\.
 
 **Create your pipeline in AWS CloudFormation**
 
@@ -24,11 +22,11 @@ You must have created the following resources to use with the AWS CloudFormation
 
 1. In **Stack name**, enter a name for your pipeline\. Parameters specified by the sample template are displayed\. Enter the following parameters: 
 
-   1. In **ApplicationName**, enter the name of your CodeDeploy application\.
+   1. In **ApplicationName**, enter the name of your CodeDeploy application\. You can replace the `DemoApplication` default name
 
-   1. In **BetaFleet**, enter the name of your CodeDeploy deployment group\.
+   1. In **BetaFleet**, enter the name of your CodeDeploy deployment group\. You can replace the `DemoFleet` default name\.
 
-   1. In **SourceObjectKey**, accept the default for the sample application's zip file\. You upload this file to your bucket as soon as the template creates it\.
+   1. In **SourceObjectKey**, enter `SampleApp_Linux.zip`\. You upload this file to your bucket after the template creates the bucket and pipeline\.
 
 1. Choose **Next**\. Accept the defaults on the following page, and then choose **Next**\.
 
@@ -55,9 +53,13 @@ You must have created the following resources to use with the AWS CloudFormation
    }
    ```
 
-1. In the Amazon S3 console for your bucket, choose **Upload**, and follow the instructions to upload your \.zip file\.
+1. In AWS CloudFormation, in the **Resources** tab for your stack, view the resources that were created for your stack\. 
 
-   Your sample application must remain packaged in a \.zip file\.
+   Choose the S3 bucket with a `sourcebucket` label in the name, such as `s3-cfn-codepipeline-sourcebucket-y04EXAMPLE.` Do not choose the pipeline artifact bucket\.
+
+   The source bucket is empty because the resource is newly created by AWS CloudFormation\. Open the Amazon S3 console and locate your `sourcebucket` bucket\. Choose **Upload**, and follow the instructions to upload your `SampleApp_Linux.zip` \.zip file\.
+**Note**  
+When Amazon S3 is the source provider for your pipeline, you must upload to your bucket all source files packaged as a single \.zip file\. Otherwise, the source action fails\.
 
 1. Sign in to the AWS Management Console and open the CodePipeline console at [https://console\.aws\.amazon\.com/codepipeline/](https://console.aws.amazon.com/codepipeline/)\.
 

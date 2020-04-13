@@ -43,9 +43,9 @@ CodePipeline only supports symmetric customer master keys \(CMKs\)\. Do not use 
 This section describes data protection configuration for the following:
 + S3 artifacts server\-side encryption \(SSE\)\.
 + GitHub personal access tokens\.
-+ Configuration parameter tracking in Parameter Store\.
++ Secret parameter tracking in AWS Secrets Manager\.
 
 **Topics**
 + [Configure Server\-Side Encryption for Artifacts Stored in Amazon S3 for CodePipeline](S3-artifact-encryption.md)
 + [Configure GitHub Authentication](GitHub-authentication.md)
-+ [Use Parameter Store to Track Database Passwords or Third Party API Keys](parameter-store-encryption.md)
++ [Use AWS Secrets Manager to Track Database Passwords or Third\-Party API Keys](parameter-store-encryption.md)

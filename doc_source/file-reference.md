@@ -20,7 +20,7 @@ The default file name for the file is `imagedefinitions.json`\. If you choose to
 
 Create the `imagedefinitions.json` file with the following considerations:
 + The maximum file size limit for the image definitions file is 100 KB\.
-+ You must create the file as a source or build artifact so that it is an input artifact for the deploy action\.
++ You must create the file as a source or build artifact so that it is an input artifact for the deploy action\. In other words, make sure that the file is either uploaded to your source location, such as your CodeCommit repository, or generated as a built output artifact\.
 
 The `imagedefinitions.json` file provides the container name and image URI\. It must be constructed with the following set of key\-value pairs\.
 

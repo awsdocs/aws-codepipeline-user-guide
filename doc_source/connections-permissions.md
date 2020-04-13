@@ -14,9 +14,19 @@ The following IAM operations are supported in the AWS CLI and SDKs to create, up
 ```
 codestar-connections:CreateConnection
 codestar-connections:DeleteConnection
-codestar-connections:GetConnections
+codestar-connections:GetConnection
 codestar-connections:ListConnections
 ```
+
+These operations support the following condition keys:
+
+
+| Action | Condition keys | 
+| --- | --- | 
+|  `codestar-connections:CreateConnection`  |  `codestar-connections:ProviderType`  | 
+|  codestar\-connections:DeleteConnection | N/A | 
+| codestar\-connections:GetConnection | N/A | 
+| codestar\-connections:ListConnections | codestar\-connections:ProviderTypeFilter | 
 
 ## Permissions for the Connection Handshake<a name="connections-permissions-actions-handshake"></a>
 
@@ -29,6 +39,17 @@ codestar-connections:StartOAuthHandshake
 codestar-connections:UpdateConnectionInstallation
 codestar-connections:GetIndividualAccessToken
 ```
+
+These operations support the following condition keys:
+
+
+| Action | Condition keys | 
+| --- | --- | 
+|  `codestar-connections:ListInstallationTargets`  |  N/A  | 
+|  codestar\-connections:GetInstallationUrl | codestar\-connections:ProviderType | 
+|  codestar\-connections:StartOAuthHandshake | codestar\-connections:ProviderType | 
+| codestar\-connections:UpdateConnectionInstallation | codestar\-connections:InstallationId | 
+|  codestar\-connections:GetIndividualAccessToken | codestar\-connections:ProviderType | 
 
 ## Passing a Connection to a Service<a name="connections-passconnection"></a>
 
@@ -49,9 +70,12 @@ This operation also supports the following condition key:
 When a service like CodePipeline uses a connection, the service role must have the `codestar-connections:UseConnection` permission for a given connection\.
 
 This operation also supports the following condition keys:
++ `codestar-connections:BranchName`
 + `codestar-connections:FullRepositoryId`
-+ `codestar-connections:ProviderActionType`
++ `codestar-connections:OwnerId`
 + `codestar-connections:ProviderAction`
++ `codestar-connections:ProviderPermissionsRequired`
++ `codestar-connections:RepositoryName`
 
 
 **Supported values for condition keys**  

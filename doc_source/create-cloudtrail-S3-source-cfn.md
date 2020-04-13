@@ -324,7 +324,7 @@ When you create a pipeline with this method, the `PollForSourceChanges` paramete
   ```
   ###################################################################################
   # Prerequisites: 
-  #   - S3 SoureBucket and SourceObjectKey must exist
+  #   - S3 SourceBucket and SourceObjectKey must exist
   ###################################################################################
   
   Parameters:

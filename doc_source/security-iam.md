@@ -128,6 +128,7 @@ The following table shows when support was added for other AWS services\.
 | AWS Service | CodePipeline Support Date | 
 | --- | --- | 
 | AWS CodeStar Connections | December 18, 2019 | 
+| The CodeDeployToECS action | November 27, 2018 | 
 | Amazon ECR | November 27, 2018 | 
 | AWS Service Catalog | October 16, 2018 | 
 | AWS Device Farm | July 19, 2018 | 
@@ -149,7 +150,7 @@ Your service role has a name in a format similar to `oneClick_AWS-CodePipeline-1
 
 1. Add the required permissions in the **Policy Document** box\. 
 **Note**  
-When you create IAM policies, follow the standard security advice of granting least privilege—that is, granting only the permissions required to perform a task\. Some API calls support resource\-based permissions and allow access to be limited\. For example, in this case, to limit permissions when calling `DescribeTasks` and `ListTasks`, you can replace the wildcard character \(\*\) with a resource ARN or with a wildcard character \(\*\) in a resource ARN\.
+When you create IAM policies, follow the standard security advice of granting least privilege—that is, granting only the permissions required to perform a task\. Some API calls support resource\-based permissions and allow access to be limited\. For example, in this case, to limit permissions when calling `DescribeTasks` and `ListTasks`, you can replace the wildcard character \(\*\) with a resource ARN or with a resource ARN that contains a wildcard character \(\*\)\.
 
    For example, for CodeCommit support, add the following to your policy statement:
 
@@ -284,6 +285,25 @@ When you create IAM policies, follow the standard security advice of granting le
            "ecs:ListTasks",
            "ecs:RegisterTaskDefinition",
            "ecs:UpdateService"
+       ],
+       "Resource": "*",
+       "Effect": "Allow"
+   },
+   ```
+
+1. For the `CodeDeployToECS` action \(blue/green deployments\), the following are the minimum permissions needed to create pipelines with a CodeDeploy to Amazon ECS blue/green deployment action\.
+
+   ```
+   {
+       "Action": [
+           "codedeploy:CreateDeployment",
+           "codedeploy:GetDeployment",
+           "codedeploy:GetApplication",
+           "codedeploy:GetApplicationRevision",
+           "codedeploy:RegisterApplicationRevision",
+           "codedeploy:GetDeploymentConfig",
+           "ecs:RegisterTaskDefinition",
+           "iam:PassRole"
        ],
        "Resource": "*",
        "Effect": "Allow"

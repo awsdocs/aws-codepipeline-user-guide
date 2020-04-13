@@ -43,15 +43,15 @@ You can store your source files or applications in any versioned location\. In t
 **Note**  
 Because all bucket names in Amazon S3 must be unique, use one of your own, not the name shown in the example\. You can change the example name just by adding the date to it\. Make a note of this name because you need it for the rest of this tutorial\.
 
-   In **Region**, choose the Region where you intend to create your pipeline, such as **US West \(Oregon\)**, and then choose **Next**\.
+   In **Region**, choose the Region where you intend to create your pipeline, such as **US West \(Oregon\)**, and then choose **Create bucket**\.
 
-1. On the **Configure options** tab, in **Versioning**, select **Keep all versions of an object in the same bucket**, and then choose **Next**\.
+1. After the bucket is created, a success banner displays\. Choose **Go to bucket details**\.
+
+1. On the **Properties** tab, choose  **Versioning**\. Choose **Enable versioning**, and then choose **Save**\.
 
    When versioning is enabled, Amazon S3 saves every version of every object in the bucket\.
 
-1. On the **Set permissions** tab, accept the default permissions to allow your account read/write access on objects, and choose **Next**\. For more information about S3 bucket and object permissions, see [Specifying Permissions in a Policy](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html)\.
-
-1. Choose **Create bucket**\.
+1. On the **Permissions** tab, leave the defaults\. For more information about S3 bucket and object permissions, see [Specifying Permissions in a Policy](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html)\.
 
 1. Next, download a sample from a GitHub repository and save it into a folder or directory on your local computer\.
 **Important**  
@@ -90,9 +90,9 @@ In this step, you create the Windows Server Amazon EC2 instances to which you wi
 
 1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
 
-1. From the console dashboard, choose **Launch Instance**\.
+1. From the console dashboard, choose **Launch instance**, and select **Launch instance** from the options that pop up\.
 
-1. On the **Step 1: Choose an Amazon Machine Image \(AMI\)** page, locate the row for the HVM edition of the **Microsoft Windows Server 2016 Base**, and then choose **Select**\. \(This AMI is labeled "Free tier eligible" and can be found at the top of the list\.\)
+1. On the **Step 1: Choose an Amazon Machine Image \(AMI\)** page, locate  the **Microsoft Windows Server 2019 Base** option, and then choose **Select**\. \(This AMI is labeled "Free tier eligible" and can be found at the top of the list\.\)
 
 1. On the **Step 2: Choose an Instance Type** page, choose the free tier eligible `t2.micro` type as the hardware configuration for your instance, and then choose **Next: Configure Instance Details**\.
 
@@ -119,7 +119,7 @@ For the purposes of this tutorial, you can use the following unrestricted policy
      }
      ```
 
-1. On the **Step 3: Configure Instance Details** page, expand **Advanced Details**, and in **User data**, with **As text** selected, enter the following:
+1. Expand **Advanced Details**, and in **User data**, with **As text** selected, enter the following:
 
    ```
    <powershell>  
@@ -135,7 +135,7 @@ For the purposes of this tutorial, you can use the following unrestricted policy
 
 1. Leave the rest of the items on the **Step 3: Configure Instance Details** page unchanged\. Choose **Next: Add Storage**, leave the **Step 4: Add Storage** page unchanged, and then choose **Next: Add Tags**\.
 
-1. On the **Add Tags** page, with **Name** displayed in the **Key** field, enter `MyCodePipelineDemo` in the **Value** field, and then choose **Next: Configure Security Group**\.
+1. On the **Add Tags** page, choose **Add Tag**\. Enter **Name**in the **Key** field, enter `MyCodePipelineDemo` in the **Value** field, and then choose **Next: Configure Security Group**\.
 **Important**  
 The **Key** and **Value** boxes are case sensitive\.
 
@@ -143,7 +143,13 @@ The **Key** and **Value** boxes are case sensitive\.
 
 1. Choose **Review and Launch**\.
 
-1. On the **Review Instance Launch** page, choose **Launch**\.
+1. On the **Review Instance Launch** page, choose **Launch**, and then do one of the following when prompted for a key pair:
+   + If you already have a key pair to use with Amazon EC2 instances, select **Choose an existing key pair**, and then select your key pair\.
+   + If you have not created a key pair yet, select **Create a new key pair**, enter a name for the key pair, and then choose **Download Key Pair**\. This is your only chance to save the private key file\. Be sure to download it\. Save the private key file in a safe place\. You must provide the name of your key pair when you launch an instance\. You must provide the corresponding private key each time you connect to the instance\. For more information, see [Amazon EC2 Key Pairs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html) in the *Amazon EC2 User Guide*\. 
+**Warning**  
+You can select **Proceed without a key pair**, but you won't be able to use SSH to connect to the instance if you need to troubleshoot issues with the CodeDeploy agent\.
+
+   When you are ready, select the acknowledgement check box, and then choose **Launch Instances**\. 
 
 1. Choose **View Instances** to close the confirmation page and return to the console\.
 

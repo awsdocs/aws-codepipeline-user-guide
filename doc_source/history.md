@@ -2,10 +2,11 @@
 
 The following table describes the important changes in each release of the CodePipeline User Guide\. For notification about updates to this documentation, you can subscribe to an RSS feed\. 
 + **API version:** 2015\-07\-09
-+ **Latest documentation update:** February 28, 2020
++ **Latest documentation update:** March 31, 2020
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [The quotas topic shows which CodePipeline service quotas are configurable](#history) | The CodePipeline quotas topic has been reformatted\. The documentation shows which service quotas are configurable and which quotas are non\-configurable\. See [Quotas in AWS CodePipeline](https://docs.aws.amazon.com/codepipeline/latest/userguide/limits.html)\. | March 12, 2020 | 
 | [The Amazon ECS deployment action timeout is configurable](#history) | The Amazon ECS deployment action timeout is configurable up to one hour \(the default timeout\)\. See [Quotas in AWS CodePipeline](https://docs.aws.amazon.com/codepipeline/latest/userguide/limits.html)\. | February 5, 2020 | 
 | [New topics describe how you can stop a pipeline execution](#history) | You can stop a pipeline execution in CodePipeline\. You can either specify that the execution stops after in\-progress actions are allowed to complete, or you can specify to stop the execution immediately and abandon in\-progress actions\. See [How Pipeline Executions Are Stopped](https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html#concepts-how-it-works-stopping) and [Stop a Pipeline Execution in CodePipeline](https://docs.aws.amazon.com/codepipeline/latest/userguide/pipelines-stop.html)\. | January 21, 2020 | 
 | [CodePipeline supports connections](#history) | You can use connections to configure AWS resources to interact with external code repositories\. Each connection is a resource that can be used by services such as CodePipeline to connect to a third\-party repository, such as Bitbucket\. For more information, see [Working with Connections in CodePipeline](https://docs.aws.amazon.com/codepipeline/latest/userguide/connections.html)\. | December 18, 2019 | 
