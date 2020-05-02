@@ -1,4 +1,9 @@
 # Integration Examples: Blog Posts<a name="integrations-community-blogposts"></a>
++ [How to deploy from GitHub to EC2 with CodePipeline](https://seanjziegler.com/deploying-code-from-github-to-aws-ec2-with-codepipeline/)
+
+  Learn how to setup CodePipeline from scratch to deploy dev, test, and prod branches to seperate deployment groups. Learn how to use and configure roles, CodeDeploy Agent, CodeDeploy, along with CodePipeline.
+
+  *Published April 2020*
 + [Implementing DevSecOps Using CodePipeline](https://aws.amazon.com/blogs/devops/implementing-devsecops-using-aws-codepipeline/)
 
   Learn how to use a CI/CD pipeline in CodePipeline to automate preventive and detective security controls\. This post covers how to use a pipeline to create a simple security group and perform security checks during the source, test, and production stages to improve the security posture of your AWS accounts\.
