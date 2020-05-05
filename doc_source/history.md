@@ -2,7 +2,7 @@
 
 The following table describes the important changes in each release of the CodePipeline User Guide\. For notification about updates to this documentation, you can subscribe to an RSS feed\. 
 + **API version:** 2015\-07\-09
-+ **Latest documentation update:** March 31, 2020
++ **Latest documentation update:** April 22, 2020
 
 | Change | Description | Date | 
 | --- |--- |--- |

@@ -21,7 +21,7 @@ Amazon S3 supports bucket policies that you can use if you require server\-side 
             "Effect": "Deny",
             "Principal": "*",
             "Action": "s3:PutObject",
-            "Resource": "arn:aws:s3:::codepipeline-us-west-2-890506445442/*",
+            "Resource": "arn:aws:s3:::codepipeline-us-west-2-89050EXAMPLE/*",
             "Condition": {
                 "StringNotEquals": {
                     "s3:x-amz-server-side-encryption": "aws:kms"
@@ -33,7 +33,7 @@ Amazon S3 supports bucket policies that you can use if you require server\-side 
             "Effect": "Deny",
             "Principal": "*",
             "Action": "s3:*",
-            "Resource": "arn:aws:s3:::codepipeline-us-west-2-890506445442/*",
+            "Resource": "arn:aws:s3:::codepipeline-us-west-2-89050EXAMPLE/*",
             "Condition": {
                 "Bool": {
                     "aws:SecureTransport": "false"

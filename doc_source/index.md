@@ -150,4 +150,4 @@ Amazon's trademarks and trade dress may not be used in
 + [Update Polling Pipelines to the Recommended Change Detection Method](trigger-S3-migration-cwe.md)
 + [Quotas in AWS CodePipeline](limits.md)
 + [AWS CodePipeline User Guide Document History](history.md)
-+ [AWS Glossary](glossary.md)
++ [AWS glossary](glossary.md)

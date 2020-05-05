@@ -47,7 +47,7 @@ Because all bucket names in Amazon S3 must be unique, use one of your own, not t
 
 1. After the bucket is created, a success banner displays\. Choose **Go to bucket details**\.
 
-1. On the **Properties** tab, choose  **Versioning**\. Choose **Enable versioning**, and then choose **Save**\.
+1. On the **Properties** tab, choose **Versioning**\. Choose **Enable versioning**, and then choose **Save**\.
 
    When versioning is enabled, Amazon S3 saves every version of every object in the bucket\.
 
@@ -92,7 +92,7 @@ In this step, you create the Windows Server Amazon EC2 instances to which you wi
 
 1. From the console dashboard, choose **Launch instance**, and select **Launch instance** from the options that pop up\.
 
-1. On the **Step 1: Choose an Amazon Machine Image \(AMI\)** page, locate  the **Microsoft Windows Server 2019 Base** option, and then choose **Select**\. \(This AMI is labeled "Free tier eligible" and can be found at the top of the list\.\)
+1. On the **Step 1: Choose an Amazon Machine Image \(AMI\)** page, locate the **Microsoft Windows Server 2019 Base** option, and then choose **Select**\. \(This AMI is labeled "Free tier eligible" and can be found at the top of the list\.\)
 
 1. On the **Step 2: Choose an Instance Type** page, choose the free tier eligible `t2.micro` type as the hardware configuration for your instance, and then choose **Next: Configure Instance Details**\.
 
@@ -101,19 +101,22 @@ In this step, you create the Windows Server Amazon EC2 instances to which you wi
    + In **Auto\-assign Public IP**, choose **Enable**\.
    + In **IAM role**, choose an IAM role that has been configured for use as an IAM instance profile for use with CodeDeploy\. If you do not have an IAM instance profile, choose **Create new IAM role** and follow the instructions in [Create an IAM Instance Profile for Your Amazon EC2 Instances](https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-create-iam-instance-profile.html)\.
 **Note**  
-For the purposes of this tutorial, you can use the following unrestricted policy in your IAM instance profile for CodeDeploy\. For pipelines you use in your development workflows, you might create a more restrictive bucket policy\.  
+We recommend that you restrict this policy to only those Amazon S3 buckets your Amazon EC2 instances must access\. If you plan to upload applications to your bucket, include your bucket name in the policy\. Make sure to give access to the Amazon S3 buckets that contain the CodeDeploy agent \(see the following step for CodeDeploy agent information\)\. Otherwise, an error might occur when the CodeDeploy agent is installed or updated on the instances\. If you plan to To grant the IAM instance profile access to the `us-west-2` CodeDeploy resource kit bucket in Amazon S3, use the following policy example:  
 
      ```
      {
        "Version": "2012-10-17",
        "Statement": [
          {
+           "Effect": "Allow",
            "Action": [
              "s3:Get*",
              "s3:List*"
            ],
-           "Effect": "Allow",
-           "Resource": "*"
+           "Resource": [
+             "arn:aws:s3:::replace-with-your-s3-bucket-name/*",
+             "arn:aws:s3:::aws-codedeploy-us-west-2/*"
+           ]
          }
        ]
      }
@@ -135,7 +138,7 @@ For the purposes of this tutorial, you can use the following unrestricted policy
 
 1. Leave the rest of the items on the **Step 3: Configure Instance Details** page unchanged\. Choose **Next: Add Storage**, leave the **Step 4: Add Storage** page unchanged, and then choose **Next: Add Tags**\.
 
-1. On the **Add Tags** page, choose **Add Tag**\. Enter **Name**in the **Key** field, enter `MyCodePipelineDemo` in the **Value** field, and then choose **Next: Configure Security Group**\.
+1. On the **Add Tags** page, choose **Add Tag**\. Enter **Name** in the **Key** field, enter `MyCodePipelineDemo` in the **Value** field, and then choose **Next: Configure Security Group**\.
 **Important**  
 The **Key** and **Value** boxes are case sensitive\.
 
@@ -236,7 +239,7 @@ Depending on when your service role was created, you might need to update its pe
 **Note**  
 You can configure a build action with a provider such as CodeBuild, which is a fully managed build service in the cloud\. You can also configure a build action that uses a provider with a build server or system, such as Jenkins\. You can walk through the steps for setting up build resources and creating a pipeline that uses those resources in the next tutorial, [Tutorial: Create a Four\-Stage Pipeline](tutorials-four-stage-pipeline.md)\.
 
-1. In **Step 4: Add deploy stage**, in **Deploy provider**, choose **AWS CodeDeploy**\. The **Region** field defaults to the same AWS Region as your pipeline\. In **Application name**, enter `MyDemoApplication`, or choose the **Refresh** button, and then choose the application name from the list\. In **Deployment group**, enter **CodePipelineDemoFleet**, or choose it from the list, and then choose **Next**\.   
+1. In **Step 4: Add deploy stage**, in **Deploy provider**, choose **AWS CodeDeploy**\. The **Region** field defaults to the same AWS Region as your pipeline\. In **Application name**, enter `MyDemoApplication`, or choose the **Refresh** button, and then choose the application name from the list\. In **Deployment group**, enter **MyDemoDeploymentGroup**, or choose it from the list, and then choose **Next**\.   
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-wizard-deploy-pol.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 **Note**  
 The name Deploy is the name given by default to the stage created in the **Step 4: Add deploy stage** step, just as Source is the name given to the first stage of the pipeline\. 
