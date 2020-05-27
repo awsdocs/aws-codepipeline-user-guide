@@ -4,6 +4,9 @@ After you set up a pipeline in AWS CodePipeline, you can set up a CloudWatch Eve
 
 In this tutorial, you configure a notification to send an email when a pipeline's state changes to FAILED\. This tutorial uses an input transformer method when creating the CloudWatch Events rule\. It transforms the message schema details to deliver the message in human\-readable text\.
 
+**Note**  
+As you create the resources for this tutorial, such as the Amazon SNS notification and the CloudWatch Events rule, make sure the resources are created in the same AWS Region as your pipeline\.
+
 **Topics**
 + [Step 1: Set Up an Email Notification Using Amazon SNS](#create-filter-for-target)
 + [Step 2: Create a Rule and Add the SNS Topic as the Target](#create-notification-rule)
@@ -57,6 +60,27 @@ Create a CloudWatch Events notification rule with CodePipeline as the event sour
 
 1. Choose **Edit** to open the JSON editor for the **Event Pattern Preview** pane\. Add the **pipeline** parameter with the name of your pipeline as shown in the following example for a pipeline named "myPipeline\."  
 ![\[A pipeline name can be edited manually in the JSON structure for the rule.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/cloudwatch-rule-event-pattern.png)![\[A pipeline name can be edited manually in the JSON structure for the rule.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[A pipeline name can be edited manually in the JSON structure for the rule.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+
+   You can copy the event pattern here and paste it into the console:
+
+   ```
+   {
+     "source": [
+       "aws.codepipeline"
+     ],
+     "detail-type": [
+       "CodePipeline Pipeline Execution State Change"
+     ],
+     "detail": {
+       "state": [
+         "FAILED"
+       ],
+       "pipeline": [
+         "myPipeline"
+       ]
+     }
+   }
+   ```
 
 1. For **Targets**, choose **Add target**\. 
 

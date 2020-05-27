@@ -86,11 +86,11 @@ The pipeline structure has the following requirements:
           "artifactStores": {
               "us-east-1": {
                   "type": "S3",
-                  "location": "The name of the Amazon S3 bucket automatically generated as the default when you use the console, such as codepipeline-us-east-2-1234567890, or any Amazon S3 bucket you provision for this purpose"
+                  "location": "S3 artifact bucket name, such as codepipeline-us-east-1-1234567890"
               },
               "us-west-2": {
                   "type": "S3",
-                  "location": "The name of the Amazon S3 bucket automatically generated as the default when you use the console, such as codepipeline-us-east-2-1234567890, or any Amazon S3 bucket you provision for this purpose"
+                  "location": "S3 artifact bucket name, such as codepipeline-us-west-2-1234567890"
               }
           },
           "stages": [

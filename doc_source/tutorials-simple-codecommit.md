@@ -154,11 +154,9 @@ For an example that runs these commands with elevated privileges \(sudo commands
 
 1. Choose **Review and Launch**\.
 
-1. On the **Review Instance Launch** page, choose **Launch**, and then do one of the following when prompted for a key pair:
-   + If you already have a key pair to use with Amazon EC2 instances, select **Choose an existing key pair**, and then select your key pair\.
-   + If you have not created a key pair yet, select **Create a new key pair**, enter a name for the key pair, and then choose **Download Key Pair**\. This is your only chance to save the private key file\. Be sure to download it\. Save the private key file in a safe place\. You must provide the name of your key pair when you launch an instance\. You must provide the corresponding private key each time you connect to the instance\. For more information, see [Amazon EC2 Key Pairs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html) in the *Amazon EC2 User Guide*\. 
-**Warning**  
-You can select **Proceed without a key pair**, but you won't be able to use SSH to connect to the instance if you need to troubleshoot issues with the CodeDeploy agent\.
+1. On the **Review Instance Launch** page, choose **Launch**\. When prompted for a key pair, choose **Proceed without a key pair**\.
+**Note**  
+For the purposes of this tutorial, you can proceed without a key pair\. To use SSH to connect to your instances, create or use a key pair\.
 
    When you are ready, select the acknowledgement check box, and then choose **Launch Instances**\. 
 
@@ -196,7 +194,7 @@ First, you create a role that allows CodeDeploy to perform deployments\. Then, y
 
 1. Choose **Create application**\.
 
-1. Leave **Custom application** selected\. In **Application name**, enter **MyDemoApplication**\. 
+1. In **Application name**, enter **MyDemoApplication**\. 
 
 1. In **Compute Platform**, choose **EC2/On\-premises**\.
 
@@ -214,7 +212,7 @@ A [https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-groups.htm
 
 1. Under **Deployment type**, choose **In\-place**\.
 
-1. Under **Environment configuration**, choose **Amazon EC2 Instances**\. In the **Key** field, enter the tag key you used to tag the instance \(for example, **MyCodePipelineDemo**\)\.
+1. Under **Environment configuration**, choose **Amazon EC2 Instances**\. In the **Key** field, enter the name you used to tag the instance \(for example, **MyCodePipelineDemo**\)\.
 
 1. Under **Deployment configuration**, choose `CodeDeployDefault.OneAtaTime`\.
 
@@ -271,9 +269,9 @@ Next, you verify the results\.
 
 1. View the initial progress of the pipeline\. The status of each stage changes from **No executions yet** to **In Progress**, and then to either **Succeeded** or **Failed**\. The pipeline should complete the first run within a few minutes\.
 
-1. After **Succeeded** is displayed for the pipeline status, in the status area for the **Staging** stage, choose **Details**\. This opens the CodeDeploy console\. If **Succeeded** is not displayed see [Troubleshooting CodePipeline](troubleshooting.md)\.
+1. After **Succeeded** is displayed for the pipeline status, in the status area for the **Deploy** stage, choose **AWS CodeDeploy**\. This opens the CodeDeploy console\. If **Succeeded** is not displayed see [Troubleshooting CodePipeline](troubleshooting.md)\.
 
-1. Choose your application in the list\. On the **Deployment group** tab, under **Deployment lifecycle events**, choose the instance ID\. This opens the EC2 console\.
+1.  On the **Deployments** tab, choose the deployment ID\. On the page for the deployment, under **Deployment lifecycle events**, choose the instance ID\. This opens the EC2 console\.
 
 1. On the **Description** tab, in **Public DNS**, copy the address \(for example, `ec2-192-0-2-1.us-west-2.compute.amazonaws.com`\), and then paste it into the address bar of your web browser\.
 

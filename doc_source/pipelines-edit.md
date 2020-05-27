@@ -41,7 +41,7 @@ You can use the CodePipeline console to add, edit, or remove stages in a pipelin
      + For a GitHub source, the following are added for the pipeline:
        + CodePipeline uses an OAuth token to create an authorized application that is managed by CodePipeline\.
 **Note**  
-In GitHub, there is a limit to the number of OAuth tokens you can use for an application, such as CodePipeline\. If you exceed this limit, retry the connection to allow CodePipeline to reconnect by reusing existing tokens\. For more information, see [](troubleshooting.md#troubleshooting-gs2)\.
+In GitHub, there is a limit to the number of OAuth tokens you can use for an application, such as CodePipeline\. If you exceed this limit, retry the connection to allow CodePipeline to reconnect by reusing existing tokens\. For more information, see [Pipeline Error: I receive a pipeline error that says: "Could not access the GitHub repository" or "Unable to connect to the GitHub repository"](troubleshooting.md#troubleshooting-gs2)\.
        + CodePipeline creates a webhook in GitHub to detect source changes and then start your pipeline when a change occurs\. CodePipeline creates the following along with the webhook:
          + A secret is randomly generated and used to authorize the connection to GitHub\.
          + The webhook URL is generated using the public endpoint for the Region\.

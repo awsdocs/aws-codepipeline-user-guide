@@ -2,21 +2,12 @@
 
 The easiest way to create a pipeline is to use the **Create pipeline** wizard in the AWS CodePipeline console\. 
 
-In this walkthrough, you create a two\-stage pipeline that uses a versioned S3 bucket and CodeDeploy to release a sample application\. 
+In this tutorial, you create a two\-stage pipeline that uses a versioned S3 bucket and CodeDeploy to release a sample application\. 
 
 **Note**  
-When Amazon S3 is the source provider for your pipeline, you must upload to your bucket all source files packaged as a single \.zip file\. Otherwise, the source action fails\.
+When Amazon S3 is the source provider for your pipeline, you may zip your source file or files into a single \.zip and upload the \.zip to your source bucket\. You may also upload a single unzipped file; however, downstream actions that expect a \.zip file will fail\.
 
 After you create this simple pipeline, you add another stage and then disable and enable the transition between stages\.
-
-**Important**  
-Many of the actions you add to your pipeline in this procedure involve AWS resources that you need to create before you create the pipeline\. AWS resources for your source actions must always be created in the same AWS Region where you create your pipeline\. For example, if you create your pipeline in the US East \(Ohio\) Region, your CodeCommit repository must be in the US East \(Ohio\) Region\.   
-You can add cross\-region actions when you create your pipeline\. AWS resources for cross\-region actions must be in the same AWS Region where you plan to execute the action\. For more information, see [Add a Cross\-Region Action in CodePipeline](actions-create-cross-region.md)\.
-
-Not what you're looking for? To create a simple pipeline using a CodeCommit branch as a code repository, see [Tutorial: Create a Simple Pipeline \(CodeCommit Repository\)](tutorials-simple-codecommit.md)\.
-
-**Note**  
-For pipelines with an Amazon S3 source, an Amazon CloudWatch Events rule detects source changes and then starts your pipeline when changes occur\. When you use the console to create or change a pipeline, the rule and all associated resources are created for you\. If you create or change an Amazon S3 pipeline in the CLI or AWS CloudFormation, you must create the Amazon CloudWatch Events rule, IAM role, and AWS CloudTrail trail manually\.
 
 Before you begin, you should complete the prerequisites in [Getting Started with CodePipeline](getting-started-codepipeline.md)\.
 
@@ -25,8 +16,8 @@ Before you begin, you should complete the prerequisites in [Getting Started with
 + [Step 2: Create Amazon EC2 Windows Instances and Install the CodeDeploy Agent](#S3-create-instances)
 + [Step 3: Create an Application in CodeDeploy](#S3-create-deployment)
 + [Step 4: Create Your First Pipeline in CodePipeline](#s3-create-pipeline)
-+ [Step 5: Add Another Stage to Your Pipeline](#s3-add-stage)
-+ [Step 6: Disable and Enable Transitions Between Stages in CodePipeline](#s3-configure-transitions)
++ [\(Optional\) Step 5: Add Another Stage to Your Pipeline](#s3-add-stage)
++ [\(Optional\) Step 6: Disable and Enable Transitions Between Stages in CodePipeline](#s3-configure-transitions)
 + [Step 7: Clean Up Resources](#s3-clean-up)
 
 ## Step 1: Create an S3 Bucket for Your Application<a name="s3-create-s3-bucket"></a>
@@ -53,23 +44,13 @@ Because all bucket names in Amazon S3 must be unique, use one of your own, not t
 
 1. On the **Permissions** tab, leave the defaults\. For more information about S3 bucket and object permissions, see [Specifying Permissions in a Policy](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html)\.
 
-1. Next, download a sample from a GitHub repository and save it into a folder or directory on your local computer\.
-**Important**  
-Do not use the **Clone or download** or **Download ZIP** buttons in the GitHub repositories\. This creates a nested folder structure that does not work with CodeDeploy\.
+1. Next, download a sample and save it into a folder or directory on your local computer\.
 
-   1. Open the GitHub repository that hosts the sample\.
-      + If you want to deploy to Amazon Linux instances using CodeDeploy, use the sample in [https://github.com/awslabs/aws-codepipeline-s3-aws-codedeploy_linux](https://github.com/awslabs/aws-codepipeline-s3-aws-codedeploy_linux)\.
-      + If you want to deploy to Windows Server instances using CodeDeploy, use the sample in [https://github\.com/awslabs/AWSCodePipeline\-S3\-AWSCodeDeploy\_Windows](https://github.com/awslabs/AWSCodePipeline-S3-AWSCodeDeploy_Windows)\.
+   1. Choose one of the following\. Choose `SampleApp_Windows.zip` if you want to follow the steps in this tutorial for Windows Server instances\.
+      + If you want to deploy to Amazon Linux instances using CodeDeploy, download the sample application here: [SampleApp\_Linux\.zip](samples/SampleApp_Linux.zip)\.
+      + If you want to deploy to Windows Server instances using CodeDeploy, download the sample application here: [SampleApp\_Windows\.zip](samples/SampleApp_Windows.zip)\.
 
-   1. Choose the **dist** folder\.
-
-   1. Choose the file name\.
-      + If you want to deploy to Amazon Linux instances, use `aws-codepipeline-s3-aws-codedeploy_linux.zip`\.
-      + If you want to deploy to Windows Server instances, use `AWSCodePipeline-S3-AWSCodeDeploy_Windows.zip`\.
-
-   1. Choose **View Raw**, and then save the sample file to your local computer\. 
-
-      Download the compressed \(zipped\) file\. Do not unzip the file\.
+   1. Download the compressed \(zipped\) file\. Do not unzip the file\.
 
 1. In the Amazon S3 console, for your bucket, upload the file: 
 
@@ -82,9 +63,23 @@ Do not use the **Clone or download** or **Download ZIP** buttons in the GitHub r
 ## Step 2: Create Amazon EC2 Windows Instances and Install the CodeDeploy Agent<a name="S3-create-instances"></a>
 
 **Note**  
-This tutorial provides sample steps for creating Amazon EC2 Windows instances\. For sample steps to create Amazon EC2 Linux instances, see Step 3: Create an Amazon EC2 Linux Instance and Install the CodeDeploy Agent in [Tutorial: Create a Simple Pipeline \(CodeCommit Repository\)](tutorials-simple-codecommit.md)\.
+This tutorial provides sample steps for creating Amazon EC2 Windows instances\. For sample steps to create Amazon EC2 Linux instances, see  [Step 3: Create an EC2 Linux Instance and Install the CodeDeploy Agent](tutorials-simple-codecommit.md#codecommit-create-deployment)\. When prompted for the number of instances to create, specify **2** instances\.
 
 In this step, you create the Windows Server Amazon EC2 instances to which you will deploy a sample application\. As part of this process, you install the CodeDeploy agent on the instances\. The CodeDeploy agent is a software package that enables an instance to be used in CodeDeploy deployments\.
+
+**To create an instance role**
+
+1. Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\)\.
+
+1. From the console dashboard, choose **Roles**\.
+
+1. Choose **Create role**\.
+
+1. Under **Select type of trusted entity**, select **AWS service**\. Under **Choose a use case**, select **EC2**, and then choose **Next: Permissions**\.
+
+1. Search for and select the policy named **AmazonEC2RoleforAWSCodeDeploy**, and then choose **Next: Tags**\.
+
+1. Choose **Next: Review**\. Enter a name for the role \(for example, **EC2InstanceRole**\), and then choose **Create role**\.
 
 **To launch instances**
 
@@ -99,28 +94,7 @@ In this step, you create the Windows Server Amazon EC2 instances to which you wi
 1. On the **Step 3: Configure Instance Details** page, do the following:
    + In **Number of instances**, enter `2`\.
    + In **Auto\-assign Public IP**, choose **Enable**\.
-   + In **IAM role**, choose an IAM role that has been configured for use as an IAM instance profile for use with CodeDeploy\. If you do not have an IAM instance profile, choose **Create new IAM role** and follow the instructions in [Create an IAM Instance Profile for Your Amazon EC2 Instances](https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-create-iam-instance-profile.html)\.
-**Note**  
-We recommend that you restrict this policy to only those Amazon S3 buckets your Amazon EC2 instances must access\. If you plan to upload applications to your bucket, include your bucket name in the policy\. Make sure to give access to the Amazon S3 buckets that contain the CodeDeploy agent \(see the following step for CodeDeploy agent information\)\. Otherwise, an error might occur when the CodeDeploy agent is installed or updated on the instances\. If you plan to To grant the IAM instance profile access to the `us-west-2` CodeDeploy resource kit bucket in Amazon S3, use the following policy example:  
-
-     ```
-     {
-       "Version": "2012-10-17",
-       "Statement": [
-         {
-           "Effect": "Allow",
-           "Action": [
-             "s3:Get*",
-             "s3:List*"
-           ],
-           "Resource": [
-             "arn:aws:s3:::replace-with-your-s3-bucket-name/*",
-             "arn:aws:s3:::aws-codedeploy-us-west-2/*"
-           ]
-         }
-       ]
-     }
-     ```
+   + In **IAM role**, choose the IAM role you created in the previous procedure \(for example, **EC2InstanceRole**\)\.
 
 1. Expand **Advanced Details**, and in **User data**, with **As text** selected, enter the following:
 
@@ -146,11 +120,9 @@ The **Key** and **Value** boxes are case sensitive\.
 
 1. Choose **Review and Launch**\.
 
-1. On the **Review Instance Launch** page, choose **Launch**, and then do one of the following when prompted for a key pair:
-   + If you already have a key pair to use with Amazon EC2 instances, select **Choose an existing key pair**, and then select your key pair\.
-   + If you have not created a key pair yet, select **Create a new key pair**, enter a name for the key pair, and then choose **Download Key Pair**\. This is your only chance to save the private key file\. Be sure to download it\. Save the private key file in a safe place\. You must provide the name of your key pair when you launch an instance\. You must provide the corresponding private key each time you connect to the instance\. For more information, see [Amazon EC2 Key Pairs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html) in the *Amazon EC2 User Guide*\. 
-**Warning**  
-You can select **Proceed without a key pair**, but you won't be able to use SSH to connect to the instance if you need to troubleshoot issues with the CodeDeploy agent\.
+1. On the **Review Instance Launch** page, choose **Launch**\. When prompted for a key pair, choose **Proceed without a key pair**\.
+**Note**  
+For the purposes of this tutorial, you can proceed without a key pair\. To use SSH to connect to your instances, create or use a key pair\.
 
    When you are ready, select the acknowledgement check box, and then choose **Launch Instances**\. 
 
@@ -172,7 +144,7 @@ In CodeDeploy, an *application* is an identifier, in the form of a name, for the
 
 1. Choose **Create application**\.
 
-1. Leave **Custom application** selected\. In **Application name**, enter `MyDemoApplication`\. 
+1. In **Application name**, enter `MyDemoApplication`\. 
 
 1. In **Compute Platform**, choose **EC2/On\-premises**\.
 
@@ -184,19 +156,19 @@ In CodeDeploy, an *application* is an identifier, in the form of a name, for the
 
 1. In **Deployment group name**, enter **MyDemoDeploymentGroup**\.
 
-1. In **Service Role**, choose a service role that trusts AWS CodeDeploy with, at minimum, the trust and permissions described in [Create a Service Role for CodeDeploy](https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-create-service-role.html)\. To get the service role ARN, see [Get the Service Role ARN \(Console\)](https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-create-service-role.html#how-to-create-service-role-get-role-console)\.
+1. In **Service Role**, choose a service role that trusts AWS CodeDeploy with, at minimum, the trust and permissions described in [Create a Service Role for CodeDeploy](https://docs.aws.amazon.com/codedeploy/latest/userguide/getting-started-create-service-role.html)\. To get the service role ARN, see [Get the Service Role ARN \(Console\)](https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-create-service-role.html#getting-started-get-service-role-console)\.
 
 1. Under **Deployment type**, choose **In\-place**\.
 
 1. Under **Environment configuration**, choose **Amazon EC2 Instances**\. Choose **Name** in the **Key** field, and in the **Value** field, enter **MyCodePipelineDemo**\. 
 **Important**  
-You must choose the same value for the **Name** key here that you assigned to your EC2 instance when you created it\. If you tagged your instance with something other than **MyCodePipelineDemo**, be sure to use it here\.
+You must choose the same value for the **Name** key here that you assigned to your EC2 instances when you created them\. If you tagged your instances with something other than **MyCodePipelineDemo**, be sure to use it here\.
 
 1. Under **Deployment configuration**, choose `CodeDeployDefault.OneAtaTime`\.
 
 1. Under **Load Balancer**, clear **Enable load balancing**\. You do not need to set up a load balancer or choose a target group for this example\.
 
-1. Expand the **Advanced** section\. Under **Alarms**, choose **Ignore alarm configuration**\.
+1. In the **Advanced** section, leave the defaults\.
 
 1. Choose **Create deployment group**\.
 
@@ -217,15 +189,13 @@ If you choose another name for your pipeline, be sure to use that name instead o
 1. In **Service role**, do one of the following:
    + Choose **New service role** to allow CodePipeline to create a new service role in IAM\. In **Role name**, the role and policy name both default to this format: AWSCodePipelineServiceRole\-*region*\-*pipeline\_name*\. For example, this is the service role created for this tutorial: AWSCodePipelineServiceRole\-eu\-west\-2\-MyFirstPipeline\.
    + Choose **Existing service role** to use a service role already created in IAM\. In **Role name**, choose your service role from the list\.
-**Note**  
-Depending on when your service role was created, you might need to update its permissions to support additional AWS services\. For information, see [Add Permissions to the CodePipeline Service Role](security-iam.md#how-to-update-role-new-services)\. 
 
 1. Leave the settings under **Advanced settings** at their defaults, and then choose **Next**\.
 
-1. In **Step 2: Add source stage**, in **Source provider**, choose **Amazon S3**\. In **Bucket**, enter the name of the S3 bucket you created in [Step 1: Create an S3 Bucket for Your Application](#s3-create-s3-bucket)\. In **S3 object key**, enter the object key with or without a file path, and remember to include the file extension\. For example, if you named your downloaded ZIP file `SampleApp_Linux.zip`, enter the sample file name as shown in this example:
+1. In **Step 2: Add source stage**, in **Source provider**, choose **Amazon S3**\. In **Bucket**, enter the name of the S3 bucket you created in [Step 1: Create an S3 Bucket for Your Application](#s3-create-s3-bucket)\. In **S3 object key**, enter the object key with or without a file path, and remember to include the file extension\. For example, for `SampleApp_Windows.zip`, enter the sample file name as shown in this example:
 
    ```
-   SampleApp_Linux.zip
+   SampleApp_Windows.zip
    ```
 
    Choose **Next step**\.  
@@ -236,8 +206,6 @@ Depending on when your service role was created, you might need to update its pe
     Choose **Next**\.
 
 1. In **Step 3: Add build stage**, choose **Skip build stage**, and then accept the warning message by choosing **Skip** again\. Choose **Next**\.
-**Note**  
-You can configure a build action with a provider such as CodeBuild, which is a fully managed build service in the cloud\. You can also configure a build action that uses a provider with a build server or system, such as Jenkins\. You can walk through the steps for setting up build resources and creating a pipeline that uses those resources in the next tutorial, [Tutorial: Create a Four\-Stage Pipeline](tutorials-four-stage-pipeline.md)\.
 
 1. In **Step 4: Add deploy stage**, in **Deploy provider**, choose **AWS CodeDeploy**\. The **Region** field defaults to the same AWS Region as your pipeline\. In **Application name**, enter `MyDemoApplication`, or choose the **Refresh** button, and then choose the application name from the list\. In **Deployment group**, enter **MyDemoDeploymentGroup**, or choose it from the list, and then choose **Next**\.   
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-wizard-deploy-pol.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
@@ -258,9 +226,9 @@ Now, verify the results\.
 
 1. View the initial progress of the pipeline\. The status of each stage changes from **No executions yet** to **In Progress**, and then to either **Succeeded** or **Failed**\. The pipeline should complete the first run within a few minutes\.
 
-1. After **Succeeded** is displayed for the action status, in the status area for the **Staging** stage, choose **Details**\. This opens the AWS CodeDeploy console\.
+1. After **Succeeded** is displayed for the action status, in the status area for the **Deploy** stage, choose **Details**\. This opens the AWS CodeDeploy console\.
 
-1. In the **Deployment group** tab, under **Deployment lifecycle events**, choose the instance ID\. This opens the EC2 console\.
+1. In the **Deployment group** tab, under **Deployment lifecycle events**, choose an instance ID\. This opens the EC2 console\.
 
 1. On the **Description** tab, in **Public DNS**, copy the address, and then paste it into the address bar of your web browser\. View the index page for the sample application you uploaded to your S3 bucket\.
 
@@ -269,7 +237,7 @@ Now, verify the results\.
 
 For more information about stages, actions, and how pipelines work, see [CodePipeline Concepts](concepts.md)\.
 
-## Step 5: Add Another Stage to Your Pipeline<a name="s3-add-stage"></a>
+## \(Optional\) Step 5: Add Another Stage to Your Pipeline<a name="s3-add-stage"></a>
 
 Now add another stage in the pipeline to deploy from staging servers to production servers using CodeDeploy\. First, you create another deployment group in the CodePipelineDemoApplication in CodeDeploy\. Then you add a stage that includes an action that uses this deployment group\. To add another stage, you use the CodePipeline console or the AWS CLI to retrieve and manually edit the structure of the pipeline in a JSON file, and then run the update\-pipeline command to update the pipeline with your changes\.
 
@@ -404,11 +372,11 @@ You can pipe the JSON directly into a file with the get\-pipeline command as fol
    aws codepipeline get-pipeline --name MyFirstPipeline >pipeline.json
    ```
 
-1. Copy the **Staging** stage section and paste it after the first two stages\. Because it is a deploy stage, just like the **Staging** stage, you use it as a template for the third stage\. 
+1. Copy the **Deploy** stage section and paste it after the first two stages\. Because it is a deploy stage, just like the **Deploy** stage, you use it as a template for the third stage\. 
 
 1. Change the name of the stage and the deployment group details\. 
 
-   The following example shows the JSON you add to the pipeline\.json file after the **Staging** stage\. Edit the emphasized elements with new values\. Remember to include a comma to separate the **Staging** and **Production** stage definitions\.
+   The following example shows the JSON you add to the pipeline\.json file after the **Deploy** stage\. Edit the emphasized elements with new values\. Remember to include a comma to separate the **Deploy** and **Production** stage definitions\.
 
    ```
    ,
@@ -480,7 +448,7 @@ Be sure to include `file://` before the file name\. It is required in this comma
 **Note**  
 This failure is by design, to demonstrate what happens when there is a failure in a pipeline stage\.
 
-## Step 6: Disable and Enable Transitions Between Stages in CodePipeline<a name="s3-configure-transitions"></a>
+## \(Optional\) Step 6: Disable and Enable Transitions Between Stages in CodePipeline<a name="s3-configure-transitions"></a>
 
 You can enable or disable the transition between stages in a pipeline\. Disabling the transition between stages allows you to manually control transitions between one stage and another\. For example, you might want to run the first two stages of a pipeline, but disable transitions to the third stage until you are ready to deploy to production, or while you troubleshoot a problem or failure with that stage\.
 
@@ -488,7 +456,7 @@ You can enable or disable the transition between stages in a pipeline\. Disablin
 
 1. Open the CodePipeline console and choose **MyFirstPipeline** from the list of pipelines\.
 
-1. On the details page for the pipeline, choose the **Disable transition** button between the second stage \(**Staging**\) and the third stage that you added in the previous section \(**Production**\)\.
+1. On the details page for the pipeline, choose the **Disable transition** button between the second stage \(**Deploy**\) and the third stage that you added in the previous section \(**Production**\)\.
 
 1. In **Disable transition**, enter a reason for disabling the transition between the stages, and then choose **Disable**\.
 
@@ -505,12 +473,14 @@ If you want this third stage to succeed, edit the CodePipelineProductionFleet de
 
 ## Step 7: Clean Up Resources<a name="s3-clean-up"></a>
 
-You can use some of the resources you created in this tutorial for the [Tutorial: Create a Four\-Stage Pipeline](tutorials-four-stage-pipeline.md)\. For example, you can reuse the CodeDeploy application and deployment\. However, after you complete this and any other tutorials, you should delete the pipeline and the resources it uses, so that you are not charged for the continued use of those resources\. First, delete the pipeline, then the CodeDeploy application and its associated EC2 instances, and finally, the S3 bucket\.
+You can use some of the resources you created in this tutorial for the [Tutorial: Create a Four\-Stage Pipeline](tutorials-four-stage-pipeline.md)\. For example, you can reuse the CodeDeploy application and deployment\. You can configure a build action with a provider such as CodeBuild, which is a fully managed build service in the cloud\. You can also configure a build action that uses a provider with a build server or system, such as Jenkins\.
+
+However, after you complete this and any other tutorials, you should delete the pipeline and the resources it uses, so that you are not charged for the continued use of those resources\. First, delete the pipeline, then the CodeDeploy application and its associated EC2 instances, and finally, the S3 bucket\.
 
 **To clean up the resources used in this tutorial**
 
 1. To clean up your CodePipeline resources, follow the instructions in [Delete a Pipeline in AWS CodePipeline](pipelines-delete.md)\.
 
-1. To clean up your CodeDeploy resources, follow the instructions in [Clean Up Deployment Walkthrough Resources](https://docs.aws.amazon.com/codedeploy/latest/userguide/tutorials-wordpress-clean-up.html#tutorials-wordpress-clean-up-console)\.
+1. To clean up your CodeDeploy resources, follow the instructions in [To clean up resources \(console\)](https://docs.aws.amazon.com/codedeploy/latest/userguide/tutorials-wordpress-clean-up.html#tutorials-wordpress-clean-up-console)\.
 
 1. To delete the S3 bucket, follow the instructions in [Deleting or Emptying an S3 Bucket](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/DeletingaBucket.html)\. If you do not intend to create more pipelines, delete the S3 bucket created for storing your pipeline artifacts\. For more information about this bucket, see [CodePipeline Concepts](concepts.md)\.

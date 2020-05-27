@@ -9,18 +9,24 @@ You can use the AWS CodePipeline console to create a connection to a third\-part
 + You must have created an account with the provider of the third\-party repository, such as Bitbucket\.
 + You must have already created a third\-party code repository, such as a Bitbucket repository\.
 
-When you configure a CodePipeline action, you can choose existing connections created in any AWS Region\.
-
-CodePipeline uses webhooks to manage change detection for your pipeline\.
-
-To create a connection to a third\-party source provider in the console, you must provide the source file location and information about the repository\.
-
 **Note**  
 Bitbucket connections only provide access to repositories owned by the Bitbucket account that was used to create the connection\.
 
-**Step 1: Create your pipeline and choose your connection**
+**Topics**
++ [Create a Connection \(Console\)](#connections-create-console)
++ [Create a Connection \(CLI\)](#connections-create-cli)
 
-1. Sign in to the AWS Management Console and open the CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
+## Create a Connection \(Console\)<a name="connections-create-console"></a>
+
+You use the console to create a connection by using one of the following methods:
++ Use the **Create Pipeline** wizard or the **Edit action** page in the CodePipeline console\. Note that when you configure a CodePipeline action, you can choose existing connections or create a new connection\.
++ Associate your Bitbucket repository to your feedback and analysis tools in [Amazon CodeGuru Reviewer](Amazon CodeGuru Reviewer User Guidewelcome.html)\.
+
+This example shows the flow to create connections as part of the **Create Pipeline** wizard in CodePipeline\. To create a connection to a third\-party source provider in the console, you must provide the source file location and information about the repository\.
+
+**Step 1: Create your pipeline and connection**
+
+1. Sign in to the CodePipeline console\.
 
 1. On the **Welcome** page, choose **Create pipeline**\. 
 
@@ -33,27 +39,22 @@ Bitbucket connections only provide access to repositories owned by the Bitbucket
 After you create a pipeline, you cannot change its name\. For information about other limitations, see [Quotas in AWS CodePipeline](limits.md)\.
 
 1. In **Service role**, do one of the following:
-   + Choose **New service role** to allow CodePipeline to create a service role in IAM\. In **Role name**, the role and policy name both default to this format: `AWSCodePipelineServiceRole-region-pipeline_name`\. For example, this is the service role for a pipeline named `MyPipeline`: `AWSCodePipelineServiceRole-eu-west-2-MyPipeline`\.
-   + Choose **Existing service role** to use a service role already created in IAM\. In **Role ARN**, choose your service role ARN from the list\.
+   + To allow CodePipeline to create a service role in AWS Identity and Access Management \(IAM\), choose **New service role**\. In **Role name**, the role and policy name both default to this format: `AWSCodePipelineServiceRole-region-pipeline_name`\. For example, this is the service role for a pipeline named `MyPipeline`: `AWSCodePipelineServiceRole-us-west-2-MyPipeline`\.
+   + To use a service role that is already created in IAM, choose **Existing service role**\. In **Role ARN**, choose your service role Amazon Resource Name \(ARN\) from the list\.
 **Note**  
-Depending on when your service role was created, you might need to update its permissions to support AWS CodeStar connections\. For instructions, see [Add Permissions to the CodePipeline Service Role](security-iam.md#how-to-update-role-new-services)\. 
-
-   For more information about the service role and its policy statement, see [Manage the CodePipeline Service Role](security-iam.md#how-to-custom-role)\.
+Depending on when your service role was created, you might need to update its permissions to support AWS CodeStar connections\. For instructions for the CodePipeline service role, see [Update the CodePipeline Service Role](https://docs.aws.amazon.com/codepipeline/latest/userguide/security-iam.html#how-to-update-role-new-services)\. 
 
 1. \(Optional\) Expand **Advanced settings**\.
 
 1. In **Artifact store**, do one of the following: 
 
-   1. Choose **Default location** to use the default artifact store, such as the S3 artifact bucket designated as the default, for your pipeline in the AWS Region you have selected for your pipeline\.
+   1. To use the default artifact store, such as the Amazon Simple Storage Service \(Amazon S3\) artifact bucket designated as the default, for your pipeline in the AWS Region you selected for your pipeline, choose **Default location**\.
 
-   1. Choose **Custom location** if you already have an artifact store, such as an S3 artifact bucket, in the same Region as your pipeline\. In **Bucket**, choose the bucket name\.
-**Note**  
-This is not the source bucket for your source code\. This is the artifact store for your pipeline\. A separate artifact store, such as an S3 bucket, is required for each pipeline\. When you create or edit a pipeline, you must have an artifact bucket in the pipeline Region and one artifact bucket per AWS Region where you are running an action\.  
-For more information, see [Input and Output Artifacts](welcome-introducing-artifacts.md) and [CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
+   1. If you already have an artifact store, such as an S3 artifact bucket, in the same Region as your pipeline, choose **Custom location**\. In **Bucket**, choose the bucket name\.
 
 1. In **Encryption key**, do one of the following: 
 
-   1. To use the CodePipeline default AWS\-managed AWS KMS customer master key \(CMK\) to encrypt the data in the pipeline artifact store \(S3 bucket\), choose **Default AWS Managed Key**\.
+   1. To use the CodePipeline default AWS managed AWS KMS customer master key \(CMK\) to encrypt the data in the pipeline artifact store \(S3 bucket\), choose **Default AWS Managed Key**\.
 
    1. To use your CMK to encrypt the data in the pipeline artifact store \(S3 bucket\), choose **Customer Managed Key**\. In **KMS customer master key**, choose the key ID, key ARN, or alias ARN\.
 
@@ -62,17 +63,17 @@ For more information, see [Input and Output Artifacts](welcome-introducing-artif
 **Step 2: Create a source stage**
 
 1. On the **Step 2: Add source stage** page, in **Source provider**, choose **Bitbucket Cloud**\.  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/bitbucket-add-source.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+![\[Console screenshot showing the Add source stage dialog box with Bitbucket Cloud chosen as the source provider.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/bitbucket-add-source.png)![\[Console screenshot showing the Add source stage dialog box with Bitbucket Cloud chosen as the source provider.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing the Add source stage dialog box with Bitbucket Cloud chosen as the source provider.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
-1. Under **Connection**, choose an existing connection or choose **Connect to Bitbucket Cloud** to create one\. 
+1. Under **Connection**, choose an existing connection, or choose **Connect to Bitbucket Cloud** to create one\. 
 
-1. On the **Create connection to Bitbucket Cloud** page, in **Connection name**, enter the name for the connection you want to create\. The name helps you identify this connection later\.
+1. On the **Connect to Bitbucket Cloud** page, in **Connection name**, enter the name for the connection that you want to create\. The name helps you identify this connection later\.
 
    Under **Bitbucket Cloud apps**, choose an app installation or choose **Install a new app** to create one\.   
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/newreview-source-wizard-bitbucket.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+![\[Console screenshot showing the Connect to Bitbucket Cloud dialog box, with the install new app button.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/newreview-source-wizard-bitbucket.png)![\[Console screenshot showing the Connect to Bitbucket Cloud dialog box, with the install new app button.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing the Connect to Bitbucket Cloud dialog box, with the install new app button.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
 1. On the app installation page, a message shows that the AWS CodeStar app is trying to connect to your Bitbucket account\. Choose **Grant access**\.  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/bitbucket-access-popup.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+![\[Console screenshot showing AWS CodeStar requests access.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/bitbucket-access-popup.png)![\[Console screenshot showing AWS CodeStar requests access.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing AWS CodeStar requests access.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
 1. The connection ID for your new installation is displayed\. Choose **Complete connection**\. 
 
@@ -86,8 +87,35 @@ For more information, see [Input and Output Artifacts](welcome-introducing-artif
 
 1. Finish creating your next stage with the wizard\.
 
-**Review the pipeline**
+**To review the pipeline**
 
-1. On the **Step 5: Review** page, review your pipeline configuration, and then choose **Create pipeline** to create the pipeline or **Previous** to go back and edit your choices\.
+1. On the **Step 5: Review** page, review your pipeline configuration\. Choose **Create pipeline** to create the pipeline, or choose **Previous** to go back and edit your choices\.
 
 1.  To exit the wizard without creating a pipeline, choose **Cancel**\.
+
+## Create a Connection \(CLI\)<a name="connections-create-cli"></a>
+
+You can use the AWS Command Line Interface \(AWS CLI\) to create a connection\. 
+
+To do this, use the create\-connection command\. 
+
+**Important**  
+A connection created through the AWS CLI or AWS CloudFormation is in `PENDING` status by default\. After you create a connection with the CLI or AWS CloudFormation, use the console to edit the connection to make its status `AVAILABLE`\.
+
+**To create a connection**
+
+1. Open a terminal \(Linux, macOS, or Unix\) or command prompt \(Windows\)\. Use the AWS CLI to run the create\-connection command, specifying the `--provider-type` and `--connection-name` for your connection\. In this example, the third\-party provider name is `Bitbucket` and the specified connection name is `MyConnection`\.
+
+   ```
+   aws codestar-connections create-connection --provider-type Bitbucket --connection-name MyConnection
+   ```
+
+   If successful, this command returns the connection ARN information similar to the following\.
+
+   ```
+   {
+       "ConnectionArn": "arn:aws:codestar-connections:us-west-2:account_id:connection/aEXAMPLE-8aad-4d5d-8878-dfcab0bc441f"
+   }
+   ```
+
+1. Use the console to complete the connection\. For more information, see [Update a Pending Connection](connections-update.md)\.

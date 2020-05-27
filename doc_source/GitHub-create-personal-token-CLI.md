@@ -30,14 +30,16 @@ Make sure you copy your generated token now\. You cannot view the token after yo
 
    The output of the command is sent to the `pipeline.json` file\.
 
-1. Open the file in a plain\-text editor and edit the value in the `OAuthTokenField` of your GitHub action\. Replace the asterisks \(\*\*\*\*\) with the token you copied from GitHub\. For example:
+1. Open the file in a plain\-text editor and edit the value in the `OAuthTokenField` of your GitHub action\. Replace the asterisks \(\*\*\*\*\) with the token you copied from GitHub\.In the `OAuthToken` field, for a personal access token with the value `111222333444555666777888EXAMPLE`, use the following example:
+
+   :
 
    ```
    "configuration": {
            "Owner": "MyGitHubUserName",
            "Repo": "test-repo",
            "Branch": "master",
-           "OAuthToken": "Replace the **** with your personal access token"
+           "OAuthToken": "111222333444555666777888EXAMPLE"
        }
    ```
 

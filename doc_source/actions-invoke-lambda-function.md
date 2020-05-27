@@ -6,7 +6,6 @@
 Creating and running Lambda functions might result in charges to your AWS account\. For more information, see [Pricing](http://aws.amazon.com/lambda/pricing/)\.
 
 Here are some ways Lambda functions can be used in pipelines:
-+ To roll out changes to your environment by applying or updating an AWS CloudFormation template\. 
 + To create resources on demand in one stage of a pipeline using AWS CloudFormation and delete them in another stage\.
 + To deploy application versions with zero downtime in AWS Elastic Beanstalk with a Lambda function that swaps CNAME values\.
 + To deploy to Amazon ECS Docker instances\.
@@ -345,6 +344,9 @@ The following sample Lambda functions demonstrate additional functionality you c
 The following sample shows a function that creates or updates a stack based on a supplied AWS CloudFormation template\. The template creates an Amazon S3 bucket\. It is for demonstration purposes only, to minimize costs\. Ideally, you should delete the stack before you upload anything to the bucket\. If you upload files to the bucket, you cannot delete the bucket when you delete the stack\. You must manually delete everything in the bucket before you can delete the bucket itself\. 
 
 This Python sample assumes you have a pipeline that uses an Amazon S3 bucket as a source action, or that you have access to a versioned Amazon S3 bucket you can use with the pipeline\. You create the AWS CloudFormation template, compress it, and upload it to that bucket as a \.zip file\. You must then add a source action to your pipeline that retrieves this \.zip file from the bucket\.
+
+**Note**  
+When Amazon S3 is the source provider for your pipeline, you may zip your source file or files into a single \.zip and upload the \.zip to your source bucket\. You may also upload a single unzipped file; however, downstream actions that expect a \.zip file will fail\.
 
 This sample demonstrates:
 + The use of JSON\-encoded user parameters to pass multiple configuration values to the function \(`get_user_params`\)\.

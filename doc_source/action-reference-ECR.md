@@ -23,13 +23,14 @@ You must have already created an Amazon ECR repository and pushed an image befor
 
 ## Configuration Parameters<a name="action-reference-ECR-config"></a>
 
-**ImageTag**  
-Required: Yes  
-The tag used for the image\.
-
 **RepositoryName**  
 Required: Yes  
 The name of the Amazon ECR repository where the image was pushed\.
+
+**ImageTag**  
+Required: No  
+The tag used for the image\.  
+If a value for `ImageTag` is not specified, the value defaults to `latest`\.
 
 ## Input Artifacts<a name="action-reference-ECR-input"></a>
 + **Number of Artifacts:** `0`

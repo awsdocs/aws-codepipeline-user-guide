@@ -20,5 +20,7 @@ To create or attach a policy to your IAM user or role with the permissions requi
 
 **Topics**
 + [Connect to Bitbucket](connections-create.md)
++ [Update a Pending Connection](connections-update.md)
 + [List Connections](connections-list.md)
 + [Delete a Connection](connections-delete.md)
++ [Tag Connections Resources](connections-tag.md)

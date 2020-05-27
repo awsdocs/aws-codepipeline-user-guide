@@ -9,6 +9,9 @@ If you use the console to create or edit your pipeline, CodePipeline creates a C
 
 You must have already created an Amazon S3 source bucket and uploaded the source files as a single ZIP file before you connect the pipeline through an Amazon S3 action\.
 
+**Note**  
+When Amazon S3 is the source provider for your pipeline, you may zip your source file or files into a single \.zip and upload the \.zip to your source bucket\. You may also upload a single unzipped file; however, downstream actions that expect a \.zip file will fail\.
+
 **Topics**
 + [Action Type](#action-reference-S3-type)
 + [Configuration Parameters](#action-reference-S3-config)

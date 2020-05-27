@@ -140,7 +140,7 @@ Do not provide your AWS credentials on the GitHub website\.
 
    After you have connected to GitHub, choose the repository and branch where you pushed the sample you want to use for this tutorial \(aws\-codepipeline\-jenkins\-aws\-codedeploy\_linux\.zip or AWSCodePipeline\-Jenkins\-AWSCodeDeploy\_Windows\.zip\), and then choose **Next**\.
 **Note**  
-In GitHub, there is a limit to the number of OAuth tokens you can use for an application, such as CodePipeline\. If you exceed this limit, retry the connection to allow CodePipeline to reconnect by reusing existing tokens\. For more information, see [](troubleshooting.md#troubleshooting-gs2)\.
+In GitHub, there is a limit to the number of OAuth tokens you can use for an application, such as CodePipeline\. If you exceed this limit, retry the connection to allow CodePipeline to reconnect by reusing existing tokens\. For more information, see [Pipeline Error: I receive a pipeline error that says: "Could not access the GitHub repository" or "Unable to connect to the GitHub repository"](troubleshooting.md#troubleshooting-gs2)\.
 
 1. In **Step 3: Add build stage**, choose **Add Jenkins**\. In **Provider name**, enter the name of the action you provided in the CodePipeline Plugin for Jenkins \(for example *MyJenkinsProviderName*\)\. This name must exactly match the name in the CodePipeline Plugin for Jenkins\. In **Server URL**, enter the URL of the EC2 instance where Jenkins is installed\. In **Project name**, enter the name of the project you created in Jenkins, such as *MyDemoProject*, and then choose **Next**\.
 

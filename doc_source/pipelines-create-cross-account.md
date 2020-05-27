@@ -43,26 +43,21 @@ For *AccountB* to allow access to its resources to a pipeline created in *Accoun
 
 Customer\-managed keys are specific to a region, as are all AWS KMS keys\. You must create your customer\-managed AWS KMS key in the same region where the pipeline was created \(for example, `us-east-2`\)\.
 
-**Note**  
-For more information about the Regions and endpoints available for CodePipeline, see [AWS CodePipeline Endpoints and Quotas](https://docs.aws.amazon.com/general/latest/gr/rande.html#codepipeline_region)\.
-
 **To create a customer\-managed key in AWS KMS**
 
-1. Sign in to the AWS Management Console with *AccountA* and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
+1. Sign in to the AWS Management Console with *AccountA* and open the AWS KMS console\.
 
-1. In **Dashboard**, choose **Encryption keys**\.
+1. On the left, choose **Customer managed keys**\.
 
-1. In **Encryption keys**, in **Filter**, make sure the region selected is the same as the region where the pipeline was created, and then choose **Create key**\. 
+1. Choose **Create key**\. In **Configure key**, leave the **Symmetric** default selected and choose **Next**\.
 
-   For example, if the pipeline was created in us\-east\-2, make sure the filter is set to US East \(Ohio\)\.
+1. In **Alias**, type an alias to use for this key \(for example, *PipelineName\-Key*\)\. Optionally, provide a description and tags for this key, and then choose **Next**\.
 
-1. In **Alias**, type an alias to use for this key \(for example, *PipelineName\-Key*\)\. Optionally, provide a description for this key, and then choose **Next Step**\.
+1. In **Define Key Administrative Permissions**, choose your IAM user and any other users or groups you want to act as administrators for this key, and then choose **Next**\.
 
-1. In **Define Key Administrative Permissions**, choose your IAM user and any other users or groups you want to act as administrators for this key, and then choose **Next Step**\.
+1. In **Define Key Usage Permissions**, under **This Account**, select the name of the service role for the pipeline \(for example, AWS\-CodePipeline\-Service\)\. Under **Other AWS accounts**, choose **Add another AWS account**\. Type the account ID for *AccountB* to complete the ARN, and then choose **Next**\.
 
-1. In **Define Key Usage Permissions**, under **This Account**, select the name of the service role for the pipeline \(for example, AWS\-CodePipeline\-Service\)\. Under **External Accounts**, choose **Add an External Account**\. Type the account ID for *AccountB* to complete the ARN, and then choose **Next Step**\.
-
-1. In **Preview Key Policy**, review the policy, and then choose **Finish**\.
+1. In **Review and edit key policy**, review the policy, and then choose **Finish**\.
 
 1. From the list of keys, choose the alias of your key and copy its ARN \(for example, ***arn:aws:kms:us\-east\-2:012ID\_ACCOUNT\_A:key/2222222\-3333333\-4444\-556677EXAMPLE***\)\. You will need this when you edit your pipeline and configure policies\.
 
