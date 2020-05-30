@@ -14,6 +14,7 @@ You must have created the following resources to use with the AWS CloudFormation
 + Choose one of these links to download the sample AWS CloudFormation template file for creating a pipeline: [YAML](samples/codepipeline-github-events-yaml.zip) \| [JSON](samples/codepipeline-github-events-json.zip)
 
   Unzip the file and place it on your local computer\.
++ The sample templates in the bullet above are configured to use a GitHub secret token with this dynamic reference to the stored token in AWS Secrets Manager: `{{resolve:secretsmanager:MyGitHubSecret:SecretString:token}}`\. You must create a GitHub token and store it in Secrets Manager in order to use the dynamic reference in the template for your `OAuthToken` and `SecretToken` fields\.
 + Download the [SampleApp\_Linux\.zip](samples/SampleApp_Linux.zip)\.
 + The GitHub repository and branch you want to use for your source\.
 + A personal access key for your GitHub repository\. This is used to provide an OAuth token for connection to your repository\.

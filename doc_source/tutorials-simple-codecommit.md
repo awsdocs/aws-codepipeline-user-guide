@@ -109,7 +109,11 @@ In this step, you create the EC2 instance where you deploy a sample application\
 
 1. Search for and select the policy named **AmazonEC2RoleforAWSCodeDeploy**, and then choose **Next: Tags**\.
 
-1. Choose **Next: Review**\. Enter a name for the role \(for example, **EC2InstanceRole**\), and then choose **Create role**\.
+1. Choose **Next: Review**\. Enter a name for the role \(for example, **EC2InstanceRole**\)\.
+**Note**  
+Make a note of your role name for the next step\. You choose this role when you are creating your instance\.
+
+   Choose **Create role**\.
 
 **To launch an instance**
 
@@ -125,25 +129,25 @@ In this step, you create the EC2 instance where you deploy a sample application\
    + In **Number of instances**, enter `1`\.
    + In **Auto\-assign Public IP**, choose **Enable**\.
    + In **IAM role**, choose the IAM role you created in the previous procedure \(for example, **EC2InstanceRole**\)\.
+   + Expand **Advanced Details**, and in the **User data** field, enter the following:
 
-1. Expand **Advanced Details**, and in the **User data** field, enter the following:
-
-   ```
-   #!/bin/bash
-   yum -y update
-   yum install -y ruby
-   yum install -y aws-cli
-   cd /home/ec2-user
-   aws s3 cp s3://aws-codedeploy-us-east-2/latest/install . --region us-east-2
-   chmod +x ./install
-   ./install auto
-   ```
+     ```
+     #!/bin/bash
+     yum -y update
+     yum install -y ruby
+     yum install -y aws-cli
+     cd /home/ec2-user
+     aws s3 cp s3://aws-codedeploy-us-east-2/latest/install . --region us-east-2
+     chmod +x ./install
+     ./install auto
+     ```
 **Note**  
 For an example that runs these commands with elevated privileges \(sudo commands\), see the CodeDeploy agent reference in [Install or reinstall the CodeDeploy agent for Amazon Linux or RHEL](https://docs.aws.amazon.com/codedeploy/latest/userguide/codedeploy-agent-operations-install-linux.html) in the *AWS CodeDeploy User Guide*\.
 
-   This code installs the CodeDeploy agent on your instance as it is created\.
+     This code installs the CodeDeploy agent on your instance as it is created\.
+   + Leave the rest of the items on the **Step 3: Configure Instance Details** page unchanged\. Choose **Next: Add Storage**\.
 
-1. Leave the rest of the items on the **Step 3: Configure Instance Details** page unchanged\. Choose **Next: Add Storage**, leave the **Step 4: Add Storage** page unchanged, and then choose **Next: Add Tags**\.
+1. Leave the **Step 4: Add Storage** page unchanged, and then choose **Next: Add Tags**\.
 
 1. Choose **Add Tag**\. In **Key**, enter **Name**, and in **Value**, enter **MyCodePipelineDemo**\. Choose **Next: Configure Security Group**\. Later, you create a CodeDeploy application that deploys the sample application to this instance\. CodeDeploy selects instances to deploy based on the tags that are attached to instances\.
 

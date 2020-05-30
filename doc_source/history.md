@@ -2,10 +2,11 @@
 
 The following table describes the important changes in each release of the CodePipeline User Guide\. For notification about updates to this documentation, you can subscribe to an RSS feed\.
 + **API version:** 2015\-07\-09
-+ **Latest documentation update:** May 22, 2020
++ **Latest documentation update:** May 28, 2020
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [AWS CodePipeline now supports AWS Step Functions invoke actions](#history) | You can now create a pipeline in CodePipeline that uses AWS Step Functions as the invoke action provider\. A new tutorial, [Tutorial: Use an AWS Step Functions Invoke Action in a Pipeline](https://docs.aws.amazon.com/codepipeline/latest/userguide/tutorials-step-functions.html), provides steps for starting a state machine execution from your pipeline\. The [AWS Step Functions Action Structure Reference](https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-StepFunctions.html) topic has also been added\. | May 28, 2020 | 
 | [View, list, and update connections](#history) | You can list, delete, and update connections in the console\. See [List Connections in CodePipeline](https://docs.aws.amazon.com/codepipeline/latest/userguide/connections-list.html)\. | May 21, 2020 | 
 | [Connections support tagging connections resources in the CLI](#history) | The connections resources now support tagging in the AWS CLI\. Connections now integrate with AWS CodeGuru\. See [IAM Permissions Reference for Connections](https://docs.aws.amazon.com/codepipeline/latest/userguide/connections-permissions.html)\. | May 6, 2020 | 
 | [The quotas topic shows which CodePipeline service quotas are configurable](#history) | The CodePipeline quotas topic has been reformatted\. The documentation shows which service quotas are configurable and which quotas are non\-configurable\. See [Quotas in AWS CodePipeline](https://docs.aws.amazon.com/codepipeline/latest/userguide/limits.html)\. | March 12, 2020 | 

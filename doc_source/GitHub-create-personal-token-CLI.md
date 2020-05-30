@@ -30,9 +30,9 @@ Make sure you copy your generated token now\. You cannot view the token after yo
 
    The output of the command is sent to the `pipeline.json` file\.
 
-1. Open the file in a plain\-text editor and edit the value in the `OAuthTokenField` of your GitHub action\. Replace the asterisks \(\*\*\*\*\) with the token you copied from GitHub\.In the `OAuthToken` field, for a personal access token with the value `111222333444555666777888EXAMPLE`, use the following example:
+1. Open the file in a plain\-text editor and edit the value in the `OAuthTokenField` of your GitHub action\.
 
-   :
+   When you use the AWS CLI to create the pipeline, you can pass your GitHub personal access token in this field\. Replace the asterisks \(\*\*\*\*\) with the token you copied from GitHub\. When you run `get-pipeline` to view the action configuration, the four\-asterisk mask is displayed for this value\. For example, for a personal access token with the value `111222333444555666777888EXAMPLE`:
 
    ```
    "configuration": {
@@ -42,6 +42,8 @@ Make sure you copy your generated token now\. You cannot view the token after yo
            "OAuthToken": "111222333444555666777888EXAMPLE"
        }
    ```
+**Note**  
+When you use an AWS CloudFormation template to create the pipeline, you must first store the token as a secret in AWS Secrets Manager\. You include the value for this field as a dynamic reference to the stored secret in Secrets Manager\. For an example, see [GitHub](action-reference-GitHub.md)\.
 
 1. If you are working with the pipeline structure retrieved using the `get-pipeline` command, you must modify the structure in the JSON file by removing the `metadata` lines from the file\. Otherwise, the `update-pipeline` command cannot use it\. Remove the section from the pipeline structure in the JSON file \(the `"metadata": { }` lines and the `"created"`, `"pipelineARN"`, and `"updated"` fields\)\.
 

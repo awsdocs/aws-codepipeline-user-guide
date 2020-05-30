@@ -127,6 +127,7 @@ The following table shows when support was added for other AWS services\.
 
 | AWS Service | CodePipeline Support Date | 
 | --- | --- | 
+| AWS Step Functions | May 27, 2020 | 
 | AWS CodeStar Connections | December 18, 2019 | 
 | The CodeDeployToECS action | November 27, 2018 | 
 | Amazon ECR | November 27, 2018 | 
@@ -323,5 +324,19 @@ When you create IAM policies, follow the standard security advice of granting le
    ```
 
    For more information about the IAM permissions for connections, see [IAM Permissions Reference for Connections](connections-permissions.md)\.
+
+1. For the `StepFunctions` action, the following are the minimum permissions needed to create pipelines with a Step Functions invoke action\.
+
+   ```
+   {
+       "Action": [
+           "states:DescribeStateMachine",
+           "states:DescribeExecution",
+           "states:StartExecution"
+       ],
+       "Resource": "*",
+       "Effect": "Allow"
+   },
+   ```
 
 1. Choose **Validate Policy** to ensure the policy contains no errors\. When the policy is error\-free, choose **Apply Policy**\.

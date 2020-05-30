@@ -18,3 +18,4 @@ This section is updated periodically with more action providers\. Reference info
 + [Amazon ECR](action-reference-ECR.md)
 + [AWS Lambda](action-reference-Lambda.md)
 + [Amazon S3](action-reference-S3.md)
++ [AWS Step Functions](action-reference-StepFunctions.md)

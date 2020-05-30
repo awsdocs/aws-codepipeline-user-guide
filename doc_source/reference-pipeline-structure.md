@@ -169,7 +169,6 @@ The action structure has the following requirements:
   + Actions by third\-party providers
   + Actions by custom providers
 + Actions can be configured with variables\. You use the `namespace` field to set the namespace and variable information for execution variables\. For reference information about execution variables and action output variables, see [Variables](reference-variables.md)\.
-+ If an action contains a parameter whose value is secret, such as the OAuth token for a GitHub source action, the value of that parameter is masked in the JSON by a series of four asterisks \(\*\*\*\*\)\. The actual value is stored, and as long as you do not edit that value, or change the name of the action or the name of the stage where that action runs, you do not have to supply that value when editing the JSON using the AWS CLI or CodePipeline API\. However, if you change the name of the action, or the name of the stage in which the action runs, the value of any secret parameters is lost\. You must manually type the values for any secret parameters in the JSON, or the action fails the next time the pipeline runs\. 
 + For all currently supported action types, the only valid version string is "1"\.
 + For all currently supported action types, the only valid owner string is "AWS", "ThirdParty", or "Custom"\. For more information, see the [CodePipeline API Reference](http://docs.aws.amazon.com/codepipeline/latest/APIReference)\.
 + The default `runOrder` value for an action is 1\. The value must be a positive integer \(natural number\)\. You cannot use fractions, decimals, negative numbers, or zero\. To specify a serial sequence of actions, use the smallest number for the first action and larger numbers for each of the rest of the actions in sequence\. To specify parallel actions, use the same integer for each action you want to run in parallel\. 
@@ -254,37 +253,6 @@ If you create a CloudWatch Events rule or webhook, you must set the parameter to
 ### Configuration Details by Provider Type<a name="structure-configuration-examples"></a>
 
 This section lists valid `configuration` parameters for each action provider\.
-
-The following example shows a valid action configuration for a source action that uses Amazon S3:
-
-```
-"configuration": {
-  "S3Bucket": "awscodepipeline-demobucket-example-date",
-  "S3ObjectKey": "CodePipelineDemoApplication.zip",
-  "PollForSourceChanges": "false"
-}
-```
-
-The following example shows the action configuration returned for a source action that uses GitHub:
-
-```
-"configuration": {
-  "Owner": "MyGitHubAccountName",
-  "Repo": "MyGitHubRepositoryName",
-  "PollForSourceChanges": "false",
-  "Branch": "master",
-  "OAuthToken": "****"
-},
-```
-
-The following example shows the action configuration returned for a source action that uses Amazon ECR:
-
-```
-"configuration": {
-  "ImageTag": "latest",
-  "RepositoryName": "my-image-repo"
-},
-```
 
 The following example shows a valid configuration for a deploy action that uses Amazon ECS:
 

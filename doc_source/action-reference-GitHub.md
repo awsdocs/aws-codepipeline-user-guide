@@ -44,7 +44,8 @@ The name of the branch where source changes are to be detected\.
 Required: Yes  
 Represents the GitHub authentication token that allows CodePipeline to perform operations on your GitHub repository\. The entry is always displayed as a mask of four asterisks\. It represents one of the following values:  
 + When you use the console to create the pipeline, CodePipeline uses an OAuth token to register the GitHub connection\.
-+ When you use the AWS CLI or AWS CloudFormation to create the pipeline, you can pass a GitHub personal access token in this field\. When you run `get-pipeline` to view the action configruation, the four\-asterisk mask is displayed for this value, no matter how many digits you entered for the personal access token\.
++ When you use the AWS CLI to create the pipeline, you can pass your GitHub personal access token in this field\. Replace the asterisks \(\*\*\*\*\) with your personal access token copied from GitHub\. When you run `get-pipeline` to view the action configuration, the four\-asterisk mask is displayed for this value\.
++ When you use an AWS CloudFormation template to create the pipeline, you must first store the token as a secret in AWS Secrets Manager\. You include the value for this field as a dynamic reference to the stored secret in Secrets Manager, such as `{{resolve:secretsmanager:MyGitHubSecret:SecretString:token}}`\.
 For more information about GitHub authentication tokens for your pipeline, see [Connecting to GitHub \(OAuth\)](#action-reference-GitHub-auth)\. For more information about GitHub scopes, see the [GitHub Developer API Reference](https://developer.github.com/v3/oauth/#scopes) on the GitHub website\.
 
 **PollForSourceChanges**  
@@ -116,7 +117,7 @@ Actions:
       Repo: MyGitHubRepositoryName
       PollForSourceChanges: 'false'
       Branch: master
-      OAuthToken: '****'
+      OAuthToken: '{{resolve:secretsmanager:MyGitHubSecret:SecretString:token}}'
     Name: ApplicationSource
 ```
 
@@ -146,7 +147,7 @@ Actions:
                 "Repo": "MyGitHubRepositoryName",
                 "PollForSourceChanges": "false",
                 "Branch": "master",
-                "OAuthToken": "****"
+                "OAuthToken": "{{resolve:secretsmanager:MyGitHubSecret:SecretString:token}}"
             },
             "Name": "ApplicationSource"
         }

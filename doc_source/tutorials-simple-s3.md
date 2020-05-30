@@ -79,7 +79,11 @@ In this step, you create the Windows Server Amazon EC2 instances to which you wi
 
 1. Search for and select the policy named **AmazonEC2RoleforAWSCodeDeploy**, and then choose **Next: Tags**\.
 
-1. Choose **Next: Review**\. Enter a name for the role \(for example, **EC2InstanceRole**\), and then choose **Create role**\.
+1. Choose **Next: Review**\. Enter a name for the role \(for example, **EC2InstanceRole**\)\.
+**Note**  
+Make a note of your role name for the next step\. You choose this role when you are creating your instance\.
+
+   Choose **Create role**\.
 
 **To launch instances**
 
@@ -95,22 +99,22 @@ In this step, you create the Windows Server Amazon EC2 instances to which you wi
    + In **Number of instances**, enter `2`\.
    + In **Auto\-assign Public IP**, choose **Enable**\.
    + In **IAM role**, choose the IAM role you created in the previous procedure \(for example, **EC2InstanceRole**\)\.
+   + Expand **Advanced Details**, and in **User data**, with **As text** selected, enter the following:
 
-1. Expand **Advanced Details**, and in **User data**, with **As text** selected, enter the following:
+     ```
+     <powershell>  
+     New-Item -Path c:\temp -ItemType "directory" -Force
+     powershell.exe -Command Read-S3Object -BucketName bucket-name/latest -Key codedeploy-agent.msi -File c:\temp\codedeploy-agent.msi
+     Start-Process -Wait -FilePath c:\temp\codedeploy-agent.msi -WindowStyle Hidden
+     </powershell>
+     ```
 
-   ```
-   <powershell>  
-   New-Item -Path c:\temp -ItemType "directory" -Force
-   powershell.exe -Command Read-S3Object -BucketName bucket-name/latest -Key codedeploy-agent.msi -File c:\temp\codedeploy-agent.msi
-   Start-Process -Wait -FilePath c:\temp\codedeploy-agent.msi -WindowStyle Hidden
-   </powershell>
-   ```
+     *bucket\-name* is the name of the S3 bucket that contains the CodeDeploy Resource Kit files for your Region\. For example, for the US West \(Oregon\) Region, replace *bucket\-name* with `aws-codedeploy-us-west-2`\. For a list of bucket names, see [Resource Kit Bucket Names by Region](https://docs.aws.amazon.com/codedeploy/latest/userguide/resource-kit.html#resource-kit-bucket-names)\.
 
-   *bucket\-name* is the name of the S3 bucket that contains the CodeDeploy Resource Kit files for your Region\. For example, for the US West \(Oregon\) Region, replace *bucket\-name* with `aws-codedeploy-us-west-2`\. For a list of bucket names, see [Resource Kit Bucket Names by Region](https://docs.aws.amazon.com/codedeploy/latest/userguide/resource-kit.html#resource-kit-bucket-names)\.
+     This code installs the CodeDeploy agent on your instance as it is created\. This script is written for Windows instances only\.
+   + Leave the rest of the items on the **Step 3: Configure Instance Details** page unchanged\. Choose **Next: Add Storage**\.
 
-   This code installs the CodeDeploy agent on your instance as it is created\. This script is written for Windows instances only\.
-
-1. Leave the rest of the items on the **Step 3: Configure Instance Details** page unchanged\. Choose **Next: Add Storage**, leave the **Step 4: Add Storage** page unchanged, and then choose **Next: Add Tags**\.
+1. Leave the **Step 4: Add Storage** page unchanged, and then choose **Next: Add Tags**\.
 
 1. On the **Add Tags** page, choose **Add Tag**\. Enter **Name** in the **Key** field, enter `MyCodePipelineDemo` in the **Value** field, and then choose **Next: Configure Security Group**\.
 **Important**  
