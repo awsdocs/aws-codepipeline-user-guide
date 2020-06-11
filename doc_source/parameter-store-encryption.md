@@ -4,7 +4,7 @@ We recommend that you use AWS Secrets Manager to rotate, manage, and retrieve da
 
 For pipelines where you pass parameters that are secrets \(such as OAuth credentials\) in an AWS CloudFormation template, you should include dynamic references in your template that access the secrets you have stored in Secrets Manager\. For the reference ID pattern and examples, see [Secrets Manager Secrets](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html#dynamic-references-secretsmanager) in the *AWS CloudFormation User Guide*\. For an example that uses dynamic references in a template snippet for GitHub webhook in a pipeline, see [Webhook Resource Configuration](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-webhook.html#aws-resource-codepipeline-webhook--examples)\.
 
-### See Also<a name="w31aac39c16c21c15c11"></a>
+### See Also<a name="w29aac39c16c21c15c11"></a>
 
 The following related resources can help you as you work with managing secrets\.
 + Secrets Manager can rotate database credentials automatically, such as for rotation of Amazon RDS secrets\. For more information, see [Rotating Your AWS Secrets Manager Secrets](https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html) in the *AWS Secrets Manager User Guide*\.

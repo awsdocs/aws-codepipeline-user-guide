@@ -1,6 +1,6 @@
 # Use CodePipeline with Amazon Virtual Private Cloud<a name="vpc-support"></a>
 
-AWS CodePipeline now supports [Amazon Virtual Private Cloud \(Amazon VPC\)](https://aws.amazon.com/vpc/) endpoints powered by [AWS PrivateLink](https://aws.amazon.com/about-aws/whats-new/2017/11/introducing-aws-privatelink-for-aws-services/)\. This means you can connect directly to CodePipeline through a private endpoint in your VPC, keeping all traffic inside your VPC and the AWS network\. Previously, applications running inside a VPC required internet access to connect to CodePipeline\.
+AWS CodePipeline now supports [Amazon Virtual Private Cloud \(Amazon VPC\)](https://aws.amazon.com/vpc/) endpoints powered by [AWS PrivateLink](https://aws.amazon.com/about-aws/whats-new/2017/11/introducing-aws-privatelink-for-aws-services/)\. This means you can connect directly to CodePipeline through a private endpoint in your VPC, keeping all traffic inside your VPC and the AWS network\.
 
 Amazon VPC is an AWS service that you can use to launch AWS resources in a virtual network that you define\. With a VPC, you have control over your network settings, such as:
 + IP address range
@@ -10,20 +10,35 @@ Amazon VPC is an AWS service that you can use to launch AWS resources in a virtu
 
 *Interface VPC endpoints* are powered by AWS PrivateLink, an AWS technology that facilitates private communication between AWS services using an elastic network interface with private IP addresses\. To connect your VPC to CodePipeline, you define an interface VPC endpoint for CodePipeline\. This type of endpoint makes it possible for you to connect your VPC to AWS services\. The endpoint provides reliable, scalable connectivity to CodePipeline without requiring an internet gateway, network address translation \(NAT\) instance, or VPN connection\. For information about setting up a VPC, see the [VPC User Guide](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Introduction.html)\.
 
+## Availability<a name="vpc-support-availability"></a>
+
+CodePipeline currently supports VPC endpoints in the following AWS Regions:
++ US East \(Ohio\)
++ US East \(N\. Virginia\)
++ US West \(N\. California\)
++ US West \(Oregon\)
++ Canada \(Central\)
++ Europe \(Stockholm\)
++ Europe \(Ireland\)
++ Europe \(London\)
++ Europe \(Paris\)
++ Europe \(Frankfurt\)
++ Asia Pacific \(Mumbai\)
++ Asia Pacific \(Tokyo\)
++ Asia Pacific \(Seoul\)
++ Asia Pacific \(Singapore\)
++ Asia Pacific \(Sydney\)
++ South America \(São Paulo\)
++ AWS GovCloud \(US\-West\)
+
 ## Create a VPC Endpoint for CodePipeline<a name="use-vpc-endpoints-with-codepipeline"></a>
 
- You can use the Amazon VPC console to create the **com\.amazonaws\.*region*\.codepipeline** VPC endpoint\. In the console, *region* is the region identifier for an AWS Region supported by CodePipeline, such as `us-east-2` for the US East \(Ohio\) Region\. For more information, see [Creating an Interface Endpoint](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint) in the *Amazon VPC User Guide*\. For a list of supported regions, see the [ CodePipeline regions and endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#codebuild_region) in the * AWS General Reference*\. 
+ You can use the Amazon VPC console to create the **com\.amazonaws\.*region*\.codepipeline** VPC endpoint\. In the console, *region* is the region identifier for an AWS Region supported by CodePipeline, such as `us-east-2` for the US East \(Ohio\) Region\. For more information, see [Creating an Interface Endpoint](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint) in the *Amazon VPC User Guide*\.
 
 The endpoint is prepopulated with the region you specified when you signed in to AWS\. If you sign in to another region, the VPC endpoint is updated with the new region\.
 
-The following services integrate with CodePipeline, but they must communicate with the internet:
-+ CodeCommit, which might be a source repository\.
-+ GitHub webhooks\.
-+ Active Directory\.
-
-The following services are enabled for VPC support, but they must communicate with the internet, and cannot be connected to CodePipeline using VPC endpoints:
-+ Amazon ECR, which might be used with a custom Docker image\.
-+ Amazon CloudWatch Events and Amazon CloudWatch Logs\. 
+**Note**  
+Other AWS services that provide VPC support and integrate with CodePipeline, such as CodeCommit, might not support using Amazon VPC endpoints for that integration\. For example, traffic between CodePipeline and CodeCommit cannot be restricted to the VPC subnet range\.
 
 ## Troubleshooting Your VPC Setup<a name="troubleshooting-vpc"></a>
 

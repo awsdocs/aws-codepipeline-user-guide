@@ -7,6 +7,7 @@ Executes an operation on a AWS CloudFormation stack\. A stack is a collection of
 + [Configuration Parameters](#action-reference-CloudFormation-config)
 + [Input Artifacts](#action-reference-CloudFormation-input)
 + [Output Artifacts](#action-reference-CloudFormation-output)
++ [Output Variables](#action-reference-CloudFormation-variables)
 + [Action Declaration](#action-reference-CloudFormation-example)
 + [See Also](#action-reference-CloudFormation-links)
 
@@ -115,6 +116,18 @@ The template configuration filename follows this format:
 + **Description:** If the `OutputFileName` parameter is specified, there is an output artifact produced by this action that contains a JSON file with the specified name\. The JSON file contains the contents of the Outputs section from the AWS CloudFormation stack\.
 
   For more information about the outputs section you can create for your AWS CloudFormation action, see [Outputs](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/outputs-section-structure.html)\.
+
+## Output Variables<a name="action-reference-CloudFormation-variables"></a>
+
+When configured, this action produces variables that can be referenced by the action configuration of a downstream action in the pipeline\. You configure an action with a namespace to make those variables available to the configuration of downstream actions\.
+
+For AWS CloudFormation actions, variables are produced from any values designated in the `Outputs` section of a stack template\. Note that the only CloudFormation action modes that generate outputs are those that result in creating or updating a stack, such as stack creation, stack updates, and change set execution\. The corresponding action modes that generate variables are:
++ CREATE\_UPDATE
++ REPLACE\_ON\_FAILURE
++ ALWAYS\_REPLACE
++ CHANGE\_SET\_EXECUTE
+
+For more information, see [Variables](reference-variables.md)\. For a tutorial that shows you how to create a pipeline with a CloudFormation deployment action in a pipeline that uses CloudFormation output variables, see [Tutorial: Create a Pipeline That Uses Variables from AWS CloudFormation Deployment Actions](tutorials-cloudformation-action.md)\.
 
 ## Action Declaration<a name="action-reference-CloudFormation-example"></a>
 

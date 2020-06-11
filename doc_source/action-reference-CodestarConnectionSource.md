@@ -139,4 +139,4 @@ Most source actions in CodePipeline, such as GitHub, require either a configured
 ## See Also<a name="action-reference-CodestarConnectionSource-links"></a>
 
 The following related resources can help you as you work with this action\.
-+ [AWS CodeStar API Reference](https://docs.aws.amazon.com/codestar-connections/latest/APIReference/Welcome.html) – The AWS CodeStar Connections API Reference provides reference information for the available connections actions\.
++ [AWS CodeStar Connections API Reference](https://docs.aws.amazon.com/codestar-connections/latest/APIReference/Welcome.html) – The AWS CodeStar Connections API Reference provides reference information for the available connections actions\.

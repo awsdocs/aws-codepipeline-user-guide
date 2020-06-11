@@ -1,18 +1,13 @@
-# Tutorial: Use Lambda Output Variables in a Pipeline<a name="tutorials-lambda-variables"></a>
+# Tutorial: Using Variables with Lambda Invoke Actions<a name="tutorials-lambda-variables"></a>
 
-You can generate output variables with your Lambda invoke action types in AWS CodePipeline\. In this tutorial, you add a Lambda invoke action that sets up variable values, which can then be passed to an approval action for test runs on your application code\. Your pipeline manual approval action resolves the variables to provide a test URL and test run ID for code review and approval\.
+A Lambda invoke action can use variables from another action as part of its input and return new variables along with its output\. For information about variables for actions in CodePipeline, see [Variables](reference-variables.md)\.
 
-The `PutJobSuccessResult` action contains an `outputVariables` parameter, where you can add the output variables as key\-value pairs to the action structure\. For more information, see [PutJobSuccessResult](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_PutJobSuccessResult.html#CodePipeline-PutJobSuccessResult-request-outputVariables) in the *AWS CodePipeline API Reference*\.
-
-This example shows you how to do the following tasks:
-+ Add key\-value pairs to your Lambda function's `PutJobSuccessResult` structure that will generate the following output variables each time your Lambda action runs:
-  + A `dateTime` variable for the test timestamp
-  + A `testRunId` variable for the unique test ID
-  + A `region` variable for assembling the Region address URL
-+ Add variable syntax to your Lambda action in CodePipeline so that the Lambda action consumes output variables from an upstream action \(the commit ID from the AWS CodeCommit source action\)\.
-+ Add variables syntax to your downstream approval action that consumes the output variables from your CodeCommit and Lambda actions\.
-
-For information about output variables for actions in CodePipeline, see [Variables](reference-variables.md)\.
+At the end of this tutorial, you will have:
++ A Lambda invoke action that:
+  + Consumes the `CommitId` variable from a CodeCommit source action
+  + Outputs three new variables: `dateTime`, `testRunId`, and `region`
++ A manual approval action that consumes the new variables from your Lambda invoke action to provide a test URL and a test run ID
++ A pipeline updated with the new actions
 
 **Topics**
 + [Prerequisites](#lambda-variables-prereqs)
@@ -21,7 +16,9 @@ For information about output variables for actions in CodePipeline, see [Variabl
 
 ## Prerequisites<a name="lambda-variables-prereqs"></a>
 
-Before you begin, note that this tutorial builds on an existing pipeline\. This pipeline starts with a two\-stage pipeline created previously, and it adds a stage for your Lambda action and a stage for your manual approval action\. You can create or use the pipeline with the CodeCommit source in [Tutorial: Create a Simple Pipeline \(CodeCommit Repository\)](tutorials-simple-codecommit.md)\.
+Before you begin, you must have the following: 
++ You can create or use the pipeline with the CodeCommit source in [Tutorial: Create a Simple Pipeline \(CodeCommit Repository\)](tutorials-simple-codecommit.md)\.
++ Edit your existing pipeline so that the CodeCommit source action has a namespace\. Assign the namespace `SourceVariables` to the action\.
 
 ## Step 1: Create a Lambda Function<a name="lambda-variables-function"></a>
 
@@ -39,9 +36,27 @@ Use the following steps to create a Lambda function and a Lambda execution role\
 
 1. Choose **Create function**\.
 
-1. In your new function, leave **Edit code inline** selected, and paste the following example code under `index.js`\.
+1. To use a variable from another action, it will have to be passed to the `UserParameters` in the Lambda invoke action configuration\. You will be configuring the action in our pipeline later in the tutorial, but you will add the code assuming the variable will be passed\.
 
-   Under `PutJobSuccess`, the key\-value pairs for the Lambda action's output variables are entered in the `outputVariables` field\. In this example, the output variables specified are a date/time value \(`dateTime`\), a test ID \(`testRunId`\), and an AWS Region \(`region`\) value\. 
+   ```
+   const commitId =
+   event["CodePipeline.job"].data.actionConfiguration.configuration.UserParameters;
+   ```
+
+   To produce new variables, set a property called `outputVariables` on the input to `putJobSuccessResult`\. Note that you cannot produce variables as part of a `putJobFailureResult`\.
+
+   ```
+   const successInput = {
+     jobId: jobId,
+     outputVariables: {
+       testRunId: Math.floor(Math.random() * 1000).toString(),
+       dateTime: Date(Date.now()).toString(),
+       region: lambdaRegion
+     }
+   };
+   ```
+
+   In your new function, leave **Edit code inline** selected, and paste the following example code under `index.js`\.
 
    ```
    var AWS = require('aws-sdk');
@@ -54,14 +69,14 @@ Use the following steps to create a Lambda function and a Lambda execution role\
        
        // Retrieve the value of UserParameters from the Lambda action configuration in AWS CodePipeline,
        // in this case it is the Commit ID of the latest change of the pipeline.
-       var params = event["CodePipeline.job"].data.actionConfiguration.configuration.UserParameters; 
+       var commitId = event["CodePipeline.job"].data.actionConfiguration.configuration.UserParameters; 
        
        // The region from where the lambda function is being executed.
        var lambdaRegion = process.env.AWS_REGION;
        
        // Notify AWS CodePipeline of a successful job
        var putJobSuccess = function(message) {
-           var params = {
+           var successInput = {
                jobId: jobId,
                outputVariables: {
                    testRunId: Math.floor(Math.random() * 1000).toString(),
@@ -80,7 +95,7 @@ Use the following steps to create a Lambda function and a Lambda execution role\
        
        // Notify AWS CodePipeline of a failed job
        var putJobFailure = function(message) {
-           var params = {
+           var failureInput = {
                jobId: jobId,
                failureDetails: {
                    message: JSON.stringify(message),
@@ -95,7 +110,7 @@ Use the following steps to create a Lambda function and a Lambda execution role\
        
        var sendResult = function() {
            try {
-               console.log("Testing commit - " + params);
+               console.log("Testing commit - " + commitId);
                
                // Your tests here
                
@@ -115,7 +130,7 @@ Use the following steps to create a Lambda function and a Lambda execution role\
 
 1. Copy the Amazon Resource Name \(ARN\) at the top of the screen\.
 
-1. As a last step, open the AWS Identity and Access Management \(IAM\) console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\. Modify the execution role to add the following policy: [AWSCodePipelineCustomActionAccess](https://console.aws.amazon.com/iam/home?region=us-west-2#/policies/arn%3Aaws%3Aiam%3A%3Aaws%3Apolicy%2FAWSCodePipelineCustomActionAccess)\.
+1. As a last step, open the AWS Identity and Access Management \(IAM\) console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\. Modify the Lambda execution role to add the following policy: [AWSCodePipelineCustomActionAccess](https://console.aws.amazon.com/iam/home?region=us-west-2#/policies/arn%3Aaws%3Aiam%3A%3Aaws%3Apolicy%2FAWSCodePipelineCustomActionAccess)\. For the steps to create a Lambda execution role or modify the role policy, see [Step 2: Create the Lambda Function](actions-invoke-lambda-function.md#actions-invoke-lambda-function-create-function) \. 
 
 ## Step 2: Add a Lambda Invoke Action and Manual Approval Action to Your Pipeline<a name="lambda-variables-pipeline"></a>
 

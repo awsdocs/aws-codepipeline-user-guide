@@ -14,7 +14,7 @@ Currently, Bitbucket is the only supported connection provider\.
 **Note**  
 Bitbucket connections only provide access to repositories owned by the Bitbucket account that was used to create the connection\.
 
-For more information about connections, see the [AWS CodeStar API Reference](https://docs.aws.amazon.com/codestar-connections/latest/APIReference/Welcome.html)\. For more information about the Bitbucket source action, see [CodeStarSourceConnection](action-reference-CodestarConnectionSource.md)\. 
+For more information about connections, see the [AWS CodeStar Connections API Reference](https://docs.aws.amazon.com/codestar-connections/latest/APIReference/Welcome.html)\. For more information about the Bitbucket source action, see [CodeStarSourceConnection](action-reference-CodestarConnectionSource.md)\. 
 
 To create or attach a policy to your IAM user or role with the permissions required to use AWS CodeStar connections, see [IAM Permissions Reference for Connections](connections-permissions.md)\. Depending on when your CodePipeline service role was created, you might need to update its permissions to support AWS CodeStar connections\. For instructions, see [Add Permissions to the CodePipeline Service Role](security-iam.md#how-to-update-role-new-services)\.
 
