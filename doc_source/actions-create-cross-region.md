@@ -3,7 +3,7 @@
 AWS CodePipeline includes a number of actions that help you configure build, test, and deploy resources for your automated release process\. You can add actions to your pipeline that are in an AWS Region different from your pipeline\. When an AWS service is the provider for an action, and this action type/provider type are in a different AWS Region from your pipeline, this is a cross\-region action\. 
 
 **Note**  
-Certain action types in CodePipeline may only be available in certain AWS Regions\. Also note that there may AWS Regions where an action type is available, but a specific AWS provider for that action type is not available\.
+Certain action types in CodePipeline may only be available in certain AWS Regions\. Also note that there may be AWS Regions where an action type is available, but a specific AWS provider for that action type is not available\.
 
 You can use the console, AWS CLI, or AWS CloudFormation to add cross\-region actions in pipelines\.
 
