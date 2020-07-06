@@ -1,4 +1,4 @@
-# Create a CloudWatch Events Rule for a CodeCommit Source \(Console\)<a name="pipelines-trigger-source-repo-changes-console"></a>
+# Create a CloudWatch Events rule for a CodeCommit source \(console\)<a name="pipelines-trigger-source-repo-changes-console"></a>
 
 **Important**  
 If you use the console to create or edit your pipeline, your CloudWatch Events rule is created for you\.

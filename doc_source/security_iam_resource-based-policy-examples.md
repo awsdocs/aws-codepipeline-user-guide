@@ -1,4 +1,4 @@
-# AWS CodePipeline Resource\-Based Policy Examples<a name="security_iam_resource-based-policy-examples"></a>
+# AWS CodePipeline resource\-based policy examples<a name="security_iam_resource-based-policy-examples"></a>
 
 **Topics**
 

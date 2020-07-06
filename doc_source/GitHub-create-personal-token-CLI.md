@@ -1,4 +1,4 @@
-# Configure Your Pipeline to Use a Personal Access Token \(GitHub and CLI\)<a name="GitHub-create-personal-token-CLI"></a>
+# Configure your pipeline to use a personal access token \(GitHub and CLI\)<a name="GitHub-create-personal-token-CLI"></a>
 
 You can configure your pipeline to use a personal access token to connect to GitHub\. The advantage of using tokens instead of passwords in a script is that tokens can be revoked or rotated\. You can also grant specific privileges and permissions to a personal access token\. Each personal access token is associated at the pipeline, rather than account, level\.
 

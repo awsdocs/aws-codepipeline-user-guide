@@ -6,13 +6,13 @@ An AWS CodePipeline action that does the following:
 + Optionally sets an execution ID prefix for identifying executions originating from the action\.
 + Supports [Standard and Express](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-standard-vs-express.html) state machines\.
 
-## Action Type<a name="action-reference-StepFunctions-type"></a>
+## Action type<a name="action-reference-StepFunctions-type"></a>
 + Category: `Invoke`
 + Owner: `AWS`
 + Provider: `StepFunctions`
 + Version: `1`
 
-## Configuration Parameters<a name="action-reference-StepFunctions-config"></a>
+## Configuration parameters<a name="action-reference-StepFunctions-config"></a>
 
 **StateMachineArn**  
 Required: Yes  
@@ -55,17 +55,17 @@ Required: Conditional
 
   The contents of the file in the input artifact specified are used as the input for the state machine execution\.
 
-## Input Artifacts<a name="action-reference-StepFunctions-input"></a>
+## Input artifacts<a name="action-reference-StepFunctions-input"></a>
 + **Number of Artifacts:** `0 to 1`
 + **Description:** If **InputType** is set to **FilePath**, this artifact is required and is used to source the input for the state machine execution\.
 
-## Output Artifacts<a name="action-reference-StepFunctions-output"></a>
+## Output artifacts<a name="action-reference-StepFunctions-output"></a>
 + **Number of Artifacts:** `0 to 1` 
 + **Description:**
   + **Standard State Machines**: If provided, the output artifact is populated with the output of the state machine\. This is obtained from the `output` property of the [Step Functions DescribeExecution API](https://docs.aws.amazon.com/step-functions/latest/apireference/API_DescribeExecution.html) response after the state machine execution completes successfully\.
   + **Express State Machines**: Not supported\.
 
-## Output Variables<a name="action-reference-StepFunctions-variables"></a>
+## Output variables<a name="action-reference-StepFunctions-variables"></a>
 
 This action produces output variables that can be referenced by the action configuration of a downstream action in the pipeline\.
 
@@ -77,9 +77,9 @@ The ARN of the state machine\.
 **ExecutionArn**  
 The ARN of the execution of the state machine\. Standard state machines only\.
 
-## Example Action Configuration<a name="action-reference-StepFunctions-example"></a>
+## Example action configuration<a name="action-reference-StepFunctions-example"></a>
 
-### Example for Default Input<a name="action-reference-StepFunctions-example-default"></a>
+### Example for default input<a name="action-reference-StepFunctions-example-default"></a>
 
 ------
 #### [ YAML ]
@@ -124,7 +124,7 @@ Configuration:
 
 ------
 
-### Example for Literal Input<a name="action-reference-StepFunctions-example-literal"></a>
+### Example for literal input<a name="action-reference-StepFunctions-example-literal"></a>
 
 ------
 #### [ YAML ]
@@ -171,7 +171,7 @@ Configuration:
 
 ------
 
-### Example for Input File<a name="action-reference-StepFunctions-example-filepath"></a>
+### Example for input file<a name="action-reference-StepFunctions-example-filepath"></a>
 
 ------
 #### [ YAML ]
@@ -237,20 +237,20 @@ When **InputType** is set to **FilePath**, the action unzips the input artifact 
 
 After a successful start execution, behavior will diverge for the two state machine types, *standard* and *express*\.
 
-### Standard State Machines<a name="action-reference-StepFunctions-types-standard"></a>
+### Standard state machines<a name="action-reference-StepFunctions-types-standard"></a>
 
 If the standard state machine execution was successfully started, CodePipeline polls the `DescribeExecution` API until the execution reaches a terminal status\. If the execution completes successfully, the action succeeds; otherwise, it fails\.
 
 If an output artifact is configured, the artifact will contain the return value of the state machine\. This is obtained from the `output` property of the [Step Functions DescribeExecution API](https://docs.aws.amazon.com/step-functions/latest/apireference/API_DescribeExecution.html) response after the state machine execution completes successfully\. Note that there are output length constraints enforced on this API\.
 
-#### Error Handling<a name="action-reference-StepFunctions-types-standard-handling"></a>
+#### Error handling<a name="action-reference-StepFunctions-types-standard-handling"></a>
 + If the action fails to start a state machine execution, the action execution fails\.
 + If the state machine execution fails to reach a terminal status before the CodePipeline Step Functions action reaches its timeout \(default of 7 days\), the action execution fails\. The state machine might continue despite this failure\. For more information about state machine execution timeouts in Step Functions, see [Standard vs\. Express Workflows](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-standard-vs-express.html)\.
 **Note**  
 You can request a quota increase for the invoke action timeout for the account with the action\. However, the quota increase applies to all actions of this type in all Regions for that account\.
 + If the state machine execution reaches a terminal status of FAILED, TIMED\_OUT, or ABORTED, the action execution fails\.
 
-### Express State Machines<a name="action-reference-StepFunctions-types-express"></a>
+### Express state machines<a name="action-reference-StepFunctions-types-express"></a>
 
 If the express state machine execution was successfully started, the invoke action execution completes successfully\.
 
@@ -259,11 +259,11 @@ Considerations for actions configured for express state machines:
 + The action does not wait for the state machine execution to complete\.
 + After the action execution is started in CodePipeline, the action execution succeeds even if the state machine execution fails\.
 
-#### Error Handling<a name="action-reference-StepFunctions-types-express-handling"></a>
+#### Error handling<a name="action-reference-StepFunctions-types-express-handling"></a>
 + If CodePipeline fails to start a state machine execution, the action execution fails\. Otherwise, the action succeeds immediately\. The action succeeds in CodePipeline regardless of how long the state machine execution takes to complete or its outcome\.
 
-## See Also<a name="action-reference-StepFunctions-links"></a>
+## See also<a name="action-reference-StepFunctions-links"></a>
 
 The following related resources can help you as you work with this action\.
 + [AWS Step Functions Developer Guide](https://docs.aws.amazon.com/step-functions/latest/dg/) – For information about state machines, executions, and inputs for state machines, see the *AWS Step Functions Developer Guide*\.
-+ [Tutorial: Use an AWS Step Functions Invoke Action in a Pipeline](tutorials-step-functions.md) – This tutorial gets you started with a sample standard state machine and shows you how to use the console to update a pipeline by adding a Step Functions invoke action\.
++ [Tutorial: Use an AWS Step Functions invoke action in a pipeline](tutorials-step-functions.md) – This tutorial gets you started with a sample standard state machine and shows you how to use the console to update a pipeline by adding a Step Functions invoke action\.

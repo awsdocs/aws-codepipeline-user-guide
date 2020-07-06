@@ -1,14 +1,14 @@
-# How AWS CodePipeline Works with IAM<a name="security_iam_service-with-iam"></a>
+# How AWS CodePipeline works with IAM<a name="security_iam_service-with-iam"></a>
 
 Before you use IAM to manage access to CodePipeline, you should understand what IAM features are available to use with CodePipeline\. To get a high\-level view of how CodePipeline and other AWS services work with IAM, see [AWS Services That Work with IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-services-that-work-with-iam.html) in the *IAM User Guide*\.
 
 **Topics**
-+ [CodePipeline Identity\-Based Policies](#security_iam_service-with-iam-id-based-policies)
-+ [CodePipeline Resource\-Based Policies](#security_iam_service-with-iam-resource-based-policies)
-+ [Authorization Based on CodePipeline Tags](#security_iam_service-with-iam-tags)
-+ [CodePipeline IAM Roles](#security_iam_service-with-iam-roles)
++ [CodePipeline identity\-based policies](#security_iam_service-with-iam-id-based-policies)
++ [CodePipeline resource\-based policies](#security_iam_service-with-iam-resource-based-policies)
++ [Authorization based on CodePipeline tags](#security_iam_service-with-iam-tags)
++ [CodePipeline IAM roles](#security_iam_service-with-iam-roles)
 
-## CodePipeline Identity\-Based Policies<a name="security_iam_service-with-iam-id-based-policies"></a>
+## CodePipeline identity\-based policies<a name="security_iam_service-with-iam-id-based-policies"></a>
 
 With IAM identity\-based policies, you can specify allowed or denied actions and resources as well as the conditions under which actions are allowed or denied\. CodePipeline supports specific actions, resources, and condition keys\. To learn about all of the elements that you use in a JSON policy, see [IAM JSON Policy Elements Reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html) in the *IAM User Guide*\.
 
@@ -44,7 +44,7 @@ The `Resource` element specifies the object or objects to which the action appli
 
 
 
-#### CodePipeline Resources and Operations<a name="ACP_ARN_Format"></a>
+#### CodePipeline resources and operations<a name="ACP_ARN_Format"></a>
 
 In CodePipeline, the primary resource is a pipeline\. In a policy, you use an Amazon Resource Name \(ARN\) to identify the resource that the policy applies to\. CodePipeline supports other resources that can be used with the primary resource, such as stages, actions, and custom actions\. These are referred to as subresources\. These resources and subresources have unique Amazon Resource Names \(ARNs\) associated with them\. For more information about ARNs, see [Amazon Resource Names \(ARN\) and AWS Service Namespaces](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in the *Amazon Web Services General Reference*\. To get the pipeline ARN associated with your pipeline, use the CLI to run the get\-pipeline command\. For more information, see [GetPipeline](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_GetPipeline.html) in the [CodePipeline API Reference](https://docs.aws.amazon.com/codepipeline/latest/APIReference/)\.
 
@@ -61,7 +61,7 @@ In CodePipeline, the primary resource is a pipeline\. In a policy, you use an Am
 **Note**  
 Most services in AWS treat a colon \(:\) or a forward slash \(/\) as the same character in ARNs\. However, CodePipeline uses an exact match in event patterns and rules\. Be sure to use the correct ARN characters when creating event patterns so that they match the ARN syntax in the pipeline you want to match\.
 
-In CodePipeline, there are API calls that support resource\-level permissions\. Resource\-level permissions indicate whether an API call can specify a resource ARN, or whether the API call can only specify all resources using the wildcard\. See [CodePipeline Permissions Reference](permissions-reference.md) for a detailed description of resource\-level permissions and a listing of the CodePipeline API calls that support resource\-level permissions\.
+In CodePipeline, there are API calls that support resource\-level permissions\. Resource\-level permissions indicate whether an API call can specify a resource ARN, or whether the API call can only specify all resources using the wildcard\. See [CodePipeline permissions reference](permissions-reference.md) for a detailed description of resource\-level permissions and a listing of the CodePipeline API calls that support resource\-level permissions\.
 
 For example, you can indicate a specific pipeline \(*myPipeline*\) in your statement using its ARN as follows:
 
@@ -90,9 +90,9 @@ Some CodePipeline API calls accept multiple resources \(for example, `GetPipelin
 "Resource": ["arn1", "arn2"]
 ```
 
-CodePipeline provides a set of operations to work with the CodePipeline resources\. For a list of available operations, see [CodePipeline Permissions Reference](permissions-reference.md)\.
+CodePipeline provides a set of operations to work with the CodePipeline resources\. For a list of available operations, see [CodePipeline permissions reference](permissions-reference.md)\.
 
-### Condition Keys<a name="security_iam_service-with-iam-id-based-policies-conditionkeys"></a>
+### Condition keys<a name="security_iam_service-with-iam-id-based-policies-conditionkeys"></a>
 
 The `Condition` element \(or `Condition` *block*\) lets you specify conditions in which a statement is in effect\. The `Condition` element is optional\. You can build conditional expressions that use [condition operators](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html), such as equals or less than, to match the condition in the policy with values in the request\. 
 
@@ -112,9 +112,9 @@ To see a list of CodePipeline condition keys, see [Condition Keys for AWS CodePi
 
 
 
-To view examples of CodePipeline identity\-based policies, see [AWS CodePipeline Identity\-Based Policy Examples](security_iam_id-based-policy-examples.md)\.
+To view examples of CodePipeline identity\-based policies, see [AWS CodePipeline identity\-based policy examples](security_iam_id-based-policy-examples.md)\.
 
-## CodePipeline Resource\-Based Policies<a name="security_iam_service-with-iam-resource-based-policies"></a>
+## CodePipeline resource\-based policies<a name="security_iam_service-with-iam-resource-based-policies"></a>
 
 CodePipeline does not support resource\-based policies\. However, a resource\-based policy example for the S3 service related to CodePipeline is provided\.
 
@@ -122,25 +122,25 @@ CodePipeline does not support resource\-based policies\. However, a resource\-ba
 
 
 
-To view examples of CodePipeline resource\-based policies, see [AWS CodePipeline Resource\-Based Policy Examples](security_iam_resource-based-policy-examples.md),
+To view examples of CodePipeline resource\-based policies, see [AWS CodePipeline resource\-based policy examples](security_iam_resource-based-policy-examples.md),
 
-## Authorization Based on CodePipeline Tags<a name="security_iam_service-with-iam-tags"></a>
+## Authorization based on CodePipeline tags<a name="security_iam_service-with-iam-tags"></a>
 
-You can attach tags to CodePipeline resources or pass tags in a request to CodePipeline\. To control access based on tags, you provide tag information in the [condition element](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html) of a policy using the `codepipeline:ResourceTag/key-name`, `aws:RequestTag/key-name`, or `aws:TagKeys` condition keys\. For more information about tagging CodePipeline resources, see [Tagging Resources](tag-resources.md)\.
+You can attach tags to CodePipeline resources or pass tags in a request to CodePipeline\. To control access based on tags, you provide tag information in the [condition element](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html) of a policy using the `codepipeline:ResourceTag/key-name`, `aws:RequestTag/key-name`, or `aws:TagKeys` condition keys\. For more information about tagging CodePipeline resources, see [Tagging resources](tag-resources.md)\.
 
-To view an example identity\-based policy for limiting access to a resource based on the tags on that resource, see [Using Tags to Control Access to CodePipeline Resources](tag-based-access-control.md)\.
+To view an example identity\-based policy for limiting access to a resource based on the tags on that resource, see [Using tags to control access to CodePipeline resources](tag-based-access-control.md)\.
 
-## CodePipeline IAM Roles<a name="security_iam_service-with-iam-roles"></a>
+## CodePipeline IAM roles<a name="security_iam_service-with-iam-roles"></a>
 
 An [IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) is an entity in your AWS account that has specific permissions\.
 
-### Using Temporary Credentials with CodePipeline<a name="security_iam_service-with-iam-roles-tempcreds"></a>
+### Using temporary credentials with CodePipeline<a name="security_iam_service-with-iam-roles-tempcreds"></a>
 
 You can use temporary credentials to sign in with federation, assume an IAM role, or to assume a cross\-account role\. You obtain temporary security credentials by calling AWS STS API operations such as [AssumeRole](https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html) or [GetFederationToken](https://docs.aws.amazon.com/STS/latest/APIReference/API_GetFederationToken.html)\. 
 
 CodePipeline supports the use of temporary credentials\. 
 
-### Service Roles<a name="security_iam_service-with-iam-roles-service"></a>
+### Service roles<a name="security_iam_service-with-iam-roles-service"></a>
 
 CodePipeline allows a service to assume a [service role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-role) on your behalf\. This role allows the service to access resources in other services to complete an action on your behalf\. Service roles appear in your IAM account and are owned by the account\. This means that an IAM administrator can change the permissions for this role\. However, doing so might break the functionality of the service\.
 

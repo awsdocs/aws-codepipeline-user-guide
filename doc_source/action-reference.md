@@ -1,6 +1,6 @@
-# Action Structure Reference<a name="action-reference"></a>
+# Action structure reference<a name="action-reference"></a>
 
-This section is a reference for action configuration only\. For a conceptual overview of the pipeline structure, see [CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
+This section is a reference for action configuration only\. For a conceptual overview of the pipeline structure, see [CodePipeline pipeline structure reference](reference-pipeline-structure.md)\.
 
 Each action provider in CodePipeline uses a set of required and optional configuration fields in the pipeline structure\. This section provides the following reference information by action provider:
 + Valid values for the `ActionType` fields included in the pipeline structure action block, such as `Owner` and `Provider`\.
@@ -19,3 +19,4 @@ This section is updated periodically with more action providers\. Reference info
 + [AWS Lambda](action-reference-Lambda.md)
 + [Amazon S3](action-reference-S3.md)
 + [AWS Step Functions](action-reference-StepFunctions.md)
++ [AWS AppConfig](action-reference-AppConfig.md)

@@ -1,6 +1,6 @@
-# Use CloudWatch Events to Start a Pipeline \(Amazon S3 Source\)<a name="create-cloudtrail-S3-source"></a>
+# Use CloudWatch Events to start a pipeline \(Amazon S3 source\)<a name="create-cloudtrail-S3-source"></a>
 
-You should use Amazon CloudWatch Events to detect source code changes and trigger the start of your pipeline\. If your pipeline has an Amazon S3 source, you must create a AWS CloudTrail trail to log write events to objects in your Amazon S3 source bucket\.
+You should use Amazon CloudWatch Events to detect source code changes and trigger the start of your pipeline\. If your pipeline has an Amazon S3 source, you must create an AWS CloudTrail trail to log write events to objects in your Amazon S3 source bucket\.
 
 AWS CloudTrail is a service that logs and filters events on your Amazon S3 source bucket\. The trail sends the filtered source changes to the Amazon CloudWatch Events rule\. The Amazon CloudWatch Events rule detects the source change and then starts your pipeline\. 
 

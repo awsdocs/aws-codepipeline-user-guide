@@ -1,4 +1,4 @@
-# Edit Pipelines to Use Push Events<a name="update-change-detection"></a>
+# Edit pipelines to use push events<a name="update-change-detection"></a>
 
 AWS CodePipeline supports full, end\-to\-end continuous delivery, which includes starting your pipeline whenever there is a code change\. There are two supported ways to start your pipeline upon a code change:
 + Events \(either Amazon CloudWatch Events or webhooks\)
@@ -16,16 +16,16 @@ There are some important advantages to using push events instead of polling:
 
 When you use the CodePipeline console or AWS CodeStar to create a pipeline, events are enabled by default\. For backward compatibility, new pipelines created through the API, AWS CLI, or AWS CloudFormation use the original polling functionality\. We strongly recommend that you use events instead\. To opt in, use the AWS CLI or AWS CloudFormation to create the CloudWatch event or webhook and disable polling\. Use the instructions in the following table\.
 
-You should also use events on pipelines that were created before the new console was launched\. To opt in, use the CodePipeline console to create the CloudWatch event or webhook and disable polling\. Use the instructions in the following table \.
+You should also use events on pipelines that were created before the new console was launched\. To opt in, use the CodePipeline console to create the CloudWatch event or webhook and disable polling\. Use the instructions in the following table\.
 
 
 **To update AWS CodeCommit source actions**  
 
 | Type | Action Required | Instructions | 
 | --- | --- | --- | 
-| If you create and manage your pipeline with the AWS CLI | Use the AWS CLI to disable periodic checks and create your Amazon CloudWatch Events resources | [Update Pipelines for Push Events \(CodeCommit Source\) \(CLI\)](#update-change-detection-cli-codecommit) | 
-| If you create and manage your pipeline with AWS CloudFormation | Use AWS CloudFormation to execute a change set that disables periodic checks and creates your Amazon CloudWatch Events resources | [Update Pipelines for Push Events \(CodeCommit Source\) \(AWS CloudFormation Template\)](#update-change-detection-cfn-codecommit) | 
-| If you created your pipeline in the console before October 11, 2017 | Use the CodePipeline console to let CodePipeline disable periodic checks and create your Amazon CloudWatch Events resources | [Update Pipelines for Push Events \(CodeCommit or Amazon S3 Source\) \(Console\)](#update-change-detection-console-codecommit-S3) | 
+| If you create and manage your pipeline with the AWS CLI | Use the AWS CLI to disable periodic checks and create your Amazon CloudWatch Events resources | [Update pipelines for push events \(CodeCommit source\) \(CLI\)](#update-change-detection-cli-codecommit) | 
+| If you create and manage your pipeline with AWS CloudFormation | Use AWS CloudFormation to execute a change set that disables periodic checks and creates your Amazon CloudWatch Events resources | [Update pipelines for push events \(CodeCommit source\) \(AWS CloudFormation template\)](#update-change-detection-cfn-codecommit) | 
+| If you created your pipeline in the console before October 11, 2017 | Use the CodePipeline console to let CodePipeline disable periodic checks and create your Amazon CloudWatch Events resources | [Update pipelines for push events \(CodeCommit or Amazon S3 source\) \(console\)](#update-change-detection-console-codecommit-S3) | 
 | If you created your pipeline in the console after October 11, 2017 | No action required |  | 
 
 
@@ -33,9 +33,9 @@ You should also use events on pipelines that were created before the new console
 
 | Type | Action Required | Instructions | 
 | --- | --- | --- | 
-| If you create and manage your pipeline with the AWS CLI | Use the AWS CLI to disable periodic checks and create your Amazon CloudWatch Events and CloudTrail resources | [Update Pipelines for Push Events \(Amazon S3 Source\) \(CLI\)](#update-change-detection-cli-S3) | 
-| If you create and manage your pipeline with AWS CloudFormation | Use AWS CloudFormation to execute a change set that disables periodic checks and creates your Amazon CloudWatch Events and AWS CloudTrail resources | [Update Pipelines for Push Events \(Amazon S3 Source\) \(AWS CloudFormation Template\)](#update-change-detection-cfn-s3) | 
-| If you created your pipeline in the console before March 22, 2018 | Use the CodePipeline console to let CodePipeline disable periodic checks and create your Amazon CloudWatch Events and AWS CloudTrail resources | [Update Pipelines for Push Events \(CodeCommit or Amazon S3 Source\) \(Console\)](#update-change-detection-console-codecommit-S3) | 
+| If you create and manage your pipeline with the AWS CLI | Use the AWS CLI to disable periodic checks and create your Amazon CloudWatch Events and CloudTrail resources | [Update pipelines for push events \(Amazon S3 source\) \(CLI\)](#update-change-detection-cli-S3) | 
+| If you create and manage your pipeline with AWS CloudFormation | Use AWS CloudFormation to execute a change set that disables periodic checks and creates your Amazon CloudWatch Events and AWS CloudTrail resources | [Update pipelines for push events \(Amazon S3 source\) \(AWS CloudFormation template\)](#update-change-detection-cfn-s3) | 
+| If you created your pipeline in the console before March 22, 2018 | Use the CodePipeline console to let CodePipeline disable periodic checks and create your Amazon CloudWatch Events and AWS CloudTrail resources | [Update pipelines for push events \(CodeCommit or Amazon S3 source\) \(console\)](#update-change-detection-console-codecommit-S3) | 
 | If you create your pipeline in the console after March 22, 2018 | No action required |  | 
 
 
@@ -43,23 +43,23 @@ You should also use events on pipelines that were created before the new console
 
 | Type | Action Required | Instructions | 
 | --- | --- | --- | 
-| If you create and manage your pipeline with the AWS CLI | Use the AWS CLI to disable periodic checks and create and register your webhook | [Update Pipelines for Push Events \(GitHub Source\) \(CLI\)](#update-change-detection-cli-github) | 
-| If you create and manage your pipeline AWS CloudFormation | Use AWS CloudFormation to execute a change set that disables periodic checks and creates and registers your webhook | [Update Pipelines for Push Events \(GitHub Source\) \(AWS CloudFormation Template\)](#update-change-detection-cfn-github) | 
-| If you created your pipeline in the console before May 1, 2018 | Use the CodePipeline console to let CodePipeline disable periodic checks and create and register your webhook | [Update Pipelines for Push Events \(GitHub Source\) \(Console\)](#update-change-detection-console-github) | 
+| If you create and manage your pipeline with the AWS CLI | Use the AWS CLI to disable periodic checks and create and register your webhook | [Update pipelines for push events \(GitHub source\) \(CLI\)](#update-change-detection-cli-github) | 
+| If you create and manage your pipeline AWS CloudFormation | Use AWS CloudFormation to execute a change set that disables periodic checks and creates and registers your webhook | [Update pipelines for push events \(GitHub source\) \(AWS CloudFormation template\)](#update-change-detection-cfn-github) | 
+| If you created your pipeline in the console before May 1, 2018 | Use the CodePipeline console to let CodePipeline disable periodic checks and create and register your webhook | [Update pipelines for push events \(GitHub source\) \(console\)](#update-change-detection-console-github) | 
 | If you create your pipeline in the console after May 1, 2018 | No action required |  | 
 
-## Update Pipelines for Push Events \(Console\)<a name="update-change-detection-console"></a>
+## Update pipelines for push events \(console\)<a name="update-change-detection-console"></a>
 
 You can use the CodePipeline console to update your pipeline to use the recommended change detection method\.
 
-### Update Pipelines for Push Events \(CodeCommit or Amazon S3 Source\) \(Console\)<a name="update-change-detection-console-codecommit-S3"></a>
+### Update pipelines for push events \(CodeCommit or Amazon S3 source\) \(console\)<a name="update-change-detection-console-codecommit-S3"></a>
 
 You can use the CodePipeline console to update your pipeline to use Amazon CloudWatch Events to detect changes in your CodeCommit source repository or your Amazon S3 source bucket\.
 
 **Note**  
-When you use the console to edit a pipeline that has a CodeCommit source repository or an Amazon S3 source bucket, the rule and IAM role are created for you\. If you use the AWS CLI to edit the pipeline, you must create the Amazon CloudWatch Events rule and IAM role yourself\. For more information, see [ Use CloudWatch Events to Start a Pipeline \(CodeCommit Source\)](triggering.md)\.
+When you use the console to edit a pipeline that has a CodeCommit source repository or an Amazon S3 source bucket, the rule and IAM role are created for you\. If you use the AWS CLI to edit the pipeline, you must create the Amazon CloudWatch Events rule and IAM role yourself\. For more information, see [ Use CloudWatch Events to start a pipeline \(CodeCommit source\)](triggering.md)\.
 
-Use these steps to edit a pipeline that is using periodic checks\. If you want to create a pipeline, see [Create a Pipeline in CodePipeline](pipelines-create.md)\.
+Use these steps to edit a pipeline that is using periodic checks\. If you want to create a pipeline, see [Create a pipeline in CodePipeline](pipelines-create.md)\.
 
 **To edit the pipeline source stage**
 
@@ -87,11 +87,11 @@ Use these steps to edit a pipeline that is using periodic checks\. If you want t
 
 1. To test your action, release a change by using the AWS CLI to commit a change to the source specified in the source stage of the pipeline\.
 
-### Update Pipelines for Push Events \(GitHub Source\) \(Console\)<a name="update-change-detection-console-github"></a>
+### Update pipelines for push events \(GitHub source\) \(console\)<a name="update-change-detection-console-github"></a>
 
 You can use the CodePipeline console to update your pipeline to use webhooks to detect changes in your CodeCommit source repository\.
 
-Follow these steps to edit a pipeline that is using polling \(periodic checks\) to use Amazon CloudWatch Events instead\. If you want to create a pipeline, see [Create a Pipeline in CodePipeline](pipelines-create.md)\.
+Follow these steps to edit a pipeline that is using polling \(periodic checks\) to use Amazon CloudWatch Events instead\. If you want to create a pipeline, see [Create a pipeline in CodePipeline](pipelines-create.md)\.
 
 When you use the console, the `PollForSourceChanges` parameter for your pipelined is changed for you\. The GitHub webhook is created and registered for you\.
 
@@ -109,9 +109,9 @@ When you use the console, the `PollForSourceChanges` parameter for your pipeline
 
 1. Expand **Change detection options** and choose **Use Amazon CloudWatch Events to automatically start my pipeline when a change occurs \(recommended\)**\.
 
-   A message is displayed to advise that CodePipeline creates a webhook in GitHub to detect source changes\. Choose **Update**\. In addtion to the webhook, CodePipeline creates the following:
+   A message is displayed to advise that CodePipeline creates a webhook in GitHub to detect source changes\. Choose **Update**\. In addition to the webhook, CodePipeline creates the following:
    + A secret, randomly generated and used to authorize the connection to GitHub\.
-   + The webhook URL, generated using the public endpoint for the region\.
+   + The webhook URL, generated using the public endpoint for the Region\.
 
    CodePipeline registers the webhook with GitHub\. This subscribes the URL to receive repository events\.  
 ![\[Use the console to update a GitHub pipeline for change detection\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/poll-migration-console-github.png)![\[Use the console to update a GitHub pipeline for change detection\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Use the console to update a GitHub pipeline for change detection\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
@@ -122,13 +122,13 @@ When you use the console, the `PollForSourceChanges` parameter for your pipeline
 
 1. To test your action, release a change by using the AWS CLI to commit a change to the source specified in the source stage of the pipeline\.
 
-## Update Pipelines for Push Events \(CLI\)<a name="update-change-detection-cli"></a>
+## Update pipelines for push events \(CLI\)<a name="update-change-detection-cli"></a>
 
 You can use the CLI to update your pipeline to use the recommended change detection method\.
 
-### Update Pipelines for Push Events \(CodeCommit Source\) \(CLI\)<a name="update-change-detection-cli-codecommit"></a>
+### Update pipelines for push events \(CodeCommit source\) \(CLI\)<a name="update-change-detection-cli-codecommit"></a>
 
-Follow these steps to edit a pipeline that is using polling \(periodic checks\) to use a CloudWatch Events rule to start the pipeline\. If you want to create a pipeline, see [Create a Pipeline in CodePipeline](pipelines-create.md)\.
+Follow these steps to edit a pipeline that is using polling \(periodic checks\) to use a CloudWatch Events rule to start the pipeline\. If you want to create a pipeline, see [Create a pipeline in CodePipeline](pipelines-create.md)\.
 
 To build an event\-driven pipeline with CodeCommit, you edit the `PollForSourceChanges` parameter of your pipeline and then create the following resources:
 + Amazon CloudWatch Events event
@@ -136,7 +136,7 @@ To build an event\-driven pipeline with CodeCommit, you edit the `PollForSourceC
 
 **To edit your pipeline's PollForSourceChanges parameter**
 **Important**  
-When you create a pipeline with this method, the `PollForSourceChanges` parameter defaults to true if it is not explicitly set to false\. When you add event\-based change detection, you must add the parameter to your output and set it to false to disable polling\. Otherwise, your pipeline starts twice for a single source change\. For details, see [Default Settings for the PollForSourceChanges Parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
+When you create a pipeline with this method, the `PollForSourceChanges` parameter defaults to true if it is not explicitly set to false\. When you add event\-based change detection, you must add the parameter to your output and set it to false to disable polling\. Otherwise, your pipeline starts twice for a single source change\. For details, see [Default settings for the PollForSourceChanges parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
 
 1. Run the get\-pipeline command to copy the pipeline structure into a JSON file\. For example, for a pipeline named `MyFirstPipeline`, run the following command: 
 
@@ -258,9 +258,9 @@ The update\-pipeline command stops the pipeline\. If a revision is being run thr
    aws events put-targets --rule MyCodeCommitRepoRule --targets Id=1,Arn=arn:aws:codepipeline:us-west-2:80398EXAMPLE:TestPipeline
    ```
 
-### Update Pipelines for Push Events \(Amazon S3 Source\) \(CLI\)<a name="update-change-detection-cli-S3"></a>
+### Update pipelines for push events \(Amazon S3 source\) \(CLI\)<a name="update-change-detection-cli-S3"></a>
 
-Follow these steps to edit a pipeline that is using polling \(periodic checks\) to use an event in CloudWatch Events instead\. If you want to create a pipeline, see [Create a Pipeline in CodePipeline](pipelines-create.md)\.
+Follow these steps to edit a pipeline that is using polling \(periodic checks\) to use an event in CloudWatch Events instead\. If you want to create a pipeline, see [Create a pipeline in CodePipeline](pipelines-create.md)\.
 
 To build an event\-driven pipeline with Amazon S3, you edit the `PollForSourceChanges` parameter of your pipeline and then create the following resources:
 + AWS CloudTrail trail, bucket, and bucket policy that Amazon S3 can use to log the events\.
@@ -382,7 +382,7 @@ For more information, see [Creating a Trail with the AWS Command Line Interface]
 
 **To edit your pipeline's PollForSourceChanges parameter**
 **Important**  
-When you create a pipeline with this method, the `PollForSourceChanges` parameter defaults to true if it is not explicitly set to false\. When you add event\-based change detection, you must add the parameter to your output and set it to false to disable polling\. Otherwise, your pipeline starts twice for a single source change\. For details, see [Default Settings for the PollForSourceChanges Parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
+When you create a pipeline with this method, the `PollForSourceChanges` parameter defaults to true if it is not explicitly set to false\. When you add event\-based change detection, you must add the parameter to your output and set it to false to disable polling\. Otherwise, your pipeline starts twice for a single source change\. For details, see [Default settings for the PollForSourceChanges parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
 
 1. Run the get\-pipeline command to copy the pipeline structure into a JSON file\. For example, for a pipeline named `MyFirstPipeline`, run the following command: 
 
@@ -430,16 +430,16 @@ Be sure to include `file://` before the file name\. It is required in this comma
 **Note**  
 The update\-pipeline command stops the pipeline\. If a revision is being run through the pipeline when you run the update\-pipeline command, that run is stopped\. You must manually start the pipeline to run that revision through the updated pipeline\. Use the start\-pipeline\-execution command to manually start your pipeline\.
 
-### Update Pipelines for Push Events \(GitHub Source\) \(CLI\)<a name="update-change-detection-cli-github"></a>
+### Update pipelines for push events \(GitHub source\) \(CLI\)<a name="update-change-detection-cli-github"></a>
 
-Follow these steps to edit a pipeline that is using periodic checks to use a webhook instead\. If you want to create a pipeline, see [Create a Pipeline in CodePipeline](pipelines-create.md)\.
+Follow these steps to edit a pipeline that is using periodic checks to use a webhook instead\. If you want to create a pipeline, see [Create a pipeline in CodePipeline](pipelines-create.md)\.
 
 To build an event\-driven pipeline, you edit the `PollForSourceChanges` parameter of your pipeline and then create the following resources manually:
 + GitHub webhook and authorization parameters<a name="proc-cli-gh-webhook"></a>
 
 **To create and register your webhook**
 **Note**  
-When you use the CLI or AWS CloudFormation to create a pipeline and add a webhook, you must disable periodic checks\. To disable periodic checks, you must explicitly add the `PollForSourceChanges` parameter and set it to false, as detailed in the final procedure below\. Otherwise, the default for a CLI or AWS CloudFormation pipeline is that `PollForSourceChanges` defaults to true and does not display in the pipeline structure output\. For more information about PollForSourceChanges defaults, see [Default Settings for the PollForSourceChanges Parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
+When you use the CLI or AWS CloudFormation to create a pipeline and add a webhook, you must disable periodic checks\. To disable periodic checks, you must explicitly add the `PollForSourceChanges` parameter and set it to false, as detailed in the final procedure below\. Otherwise, the default for a CLI or AWS CloudFormation pipeline is that `PollForSourceChanges` defaults to true and does not display in the pipeline structure output\. For more information about PollForSourceChanges defaults, see [Default settings for the PollForSourceChanges parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
 
 1. In a text editor, create and save a JSON file for the webhook you want to create\. Use this sample file for a webhook named `my-webhook`:
 
@@ -498,7 +498,7 @@ When you use the CLI or AWS CloudFormation to create a pipeline and add a webhoo
    }
    ```
 
-   This example adds tagging to the webhook by including the `Project` tag key and `ProjectA` value on the webhook\. For more information about tagging resources in CodePipeline, see [Tagging Resources](tag-resources.md)\.
+   This example adds tagging to the webhook by including the `Project` tag key and `ProjectA` value on the webhook\. For more information about tagging resources in CodePipeline, see [Tagging resources](tag-resources.md)\.
 
 1. Call the register\-webhook\-with\-third\-party command and include the `--webhook-name` parameter\.
 
@@ -510,7 +510,7 @@ When you use the CLI or AWS CloudFormation to create a pipeline and add a webhoo
 
 **To edit your pipeline's PollForSourceChanges parameter**
 **Important**  
-When you create a pipeline with this method, the `PollForSourceChanges` parameter defaults to true if it is not explicitly set to false\. When you add event\-based change detection, you must add the parameter to your output and set it to false to disable polling\. Otherwise, your pipeline starts twice for a single source change\. For details, see [Default Settings for the PollForSourceChanges Parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
+When you create a pipeline with this method, the `PollForSourceChanges` parameter defaults to true if it is not explicitly set to false\. When you add event\-based change detection, you must add the parameter to your output and set it to false to disable polling\. Otherwise, your pipeline starts twice for a single source change\. For details, see [Default settings for the PollForSourceChanges parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
 
 1. Run the get\-pipeline command to copy the pipeline structure into a JSON file\. For example, for a pipeline named `MyFirstPipeline`, you would type the following command: 
 
@@ -560,13 +560,13 @@ Be sure to include `file://` before the file name\. It is required in this comma
 **Note**  
 The update\-pipeline command stops the pipeline\. If a revision is being run through the pipeline when you run the update\-pipeline command, that run is stopped\. You must manually start the pipeline to run that revision through the updated pipeline\. Use the start\-pipeline\-execution command to manually start your pipeline\.
 
-## Update Pipelines for Push Events \(AWS CloudFormation Template\)<a name="update-change-detection-cfn"></a>
+## Update pipelines for push events \(AWS CloudFormation template\)<a name="update-change-detection-cfn"></a>
 
 You can use AWS CloudFormation to update your pipeline to use the recommended method to detect changes in your source\.
 
 Follow these steps to edit a pipeline with AWS CloudFormation that is using periodic checks\. If you want to create a pipeline, see [Continuous Delivery with CodePipeline](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline.html)\.
 
-### Update Pipelines for Push Events \(CodeCommit Source\) \(AWS CloudFormation Template\)<a name="update-change-detection-cfn-codecommit"></a>
+### Update pipelines for push events \(CodeCommit source\) \(AWS CloudFormation template\)<a name="update-change-detection-cfn-codecommit"></a>
 
 To build an event\-driven pipeline with AWS CodeCommit, you edit the `PollForSourceChanges` parameter of your pipeline and then add the following resources to your template:
 + An Amazon CloudWatch Events rule
@@ -865,7 +865,7 @@ Resources:
 
 **To edit your pipeline's PollForSourceChanges parameter**
 **Important**  
-In many cases, the `PollForSourceChanges` parameter defaults to true when you create a pipeline\. When you add event\-based change detection, you must add the parameter to your output and set it to false to disable polling\. Otherwise, your pipeline starts twice for a single source change\. For details, see [Default Settings for the PollForSourceChanges Parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
+In many cases, the `PollForSourceChanges` parameter defaults to true when you create a pipeline\. When you add event\-based change detection, you must add the parameter to your output and set it to false to disable polling\. Otherwise, your pipeline starts twice for a single source change\. For details, see [Default settings for the PollForSourceChanges parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
 + In the template, change `PollForSourceChanges` to `false`\. If you did not include `PollForSourceChanges` in your pipeline definition, add it and set it to `false`\.
 
   **Why am I making this change?** Changing this parameter to `false` turns off periodic checks so you can use event\-based change detection only\.
@@ -1188,7 +1188,7 @@ Resources:
 ...
 ```
 
-### Update Pipelines for Push Events \(Amazon S3 Source\) \(AWS CloudFormation Template\)<a name="update-change-detection-cfn-s3"></a>
+### Update pipelines for push events \(Amazon S3 source\) \(AWS CloudFormation template\)<a name="update-change-detection-cfn-s3"></a>
 
 Use these steps to edit your pipeline with an Amazon S3 source from polling to event\-based change detection\.
 
@@ -1532,7 +1532,7 @@ The `Configuration` property in the source stage called `PollForSourceChanges`\.
 
 **To edit your pipeline's PollForSourceChanges parameter**
 **Important**  
-When you create a pipeline with this method, the `PollForSourceChanges` parameter defaults to true if it is not explicitly set to false\. When you add event\-based change detection, you must add the parameter to your output and set it to false to disable polling\. Otherwise, your pipeline starts twice for a single source change\. For details, see [Default Settings for the PollForSourceChanges Parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
+When you create a pipeline with this method, the `PollForSourceChanges` parameter defaults to true if it is not explicitly set to false\. When you add event\-based change detection, you must add the parameter to your output and set it to false to disable polling\. Otherwise, your pipeline starts twice for a single source change\. For details, see [Default settings for the PollForSourceChanges parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
 + In the template, change `PollForSourceChanges` to `false`\. If you did not include `PollForSourceChanges` in your pipeline definition, add it and set it to `false`\.
 
   **Why am I making this change?** Changing `PollForSourceChanges` to `false` turns off periodic checks so you can use event\-based change detection only\.
@@ -2404,7 +2404,7 @@ Outputs:
 ...
 ```
 
-### Update Pipelines for Push Events \(GitHub Source\) \(AWS CloudFormation Template\)<a name="update-change-detection-cfn-github"></a>
+### Update pipelines for push events \(GitHub source\) \(AWS CloudFormation template\)<a name="update-change-detection-cfn-github"></a>
 
 Follow these steps to update your pipeline \(with a GitHub source\) from periodic checks \(polling\) to event\-based change detection using webhooks\.
 
@@ -2514,7 +2514,7 @@ When passing secret parameters, do not enter the value directly into the templat
 
 When you use the CLI or AWS CloudFormation to create a pipeline and add a webhook, you must disable periodic checks\.
 **Note**  
-To disable periodic checks, you must explicitly add the `PollForSourceChanges` parameter and set it to false, as detailed in the final procedure below\. Otherwise, the default for a CLI or AWS CloudFormation pipeline is that `PollForSourceChanges` defaults to true and does not display in the pipeline structure output\. For more information about PollForSourceChanges defaults, see [Default Settings for the PollForSourceChanges Parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
+To disable periodic checks, you must explicitly add the `PollForSourceChanges` parameter and set it to false, as detailed in the final procedure below\. Otherwise, the default for a CLI or AWS CloudFormation pipeline is that `PollForSourceChanges` defaults to true and does not display in the pipeline structure output\. For more information about PollForSourceChanges defaults, see [Default settings for the PollForSourceChanges parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
 
 1. In the template, under `Resources`, add your parameters:
 
@@ -2631,7 +2631,7 @@ The `TargetAction` you specify must match the `Name` property of the source acti
 
 **To edit your pipeline's PollForSourceChanges parameter**
 **Important**  
-When you create a pipeline with this method, the `PollForSourceChanges` parameter defaults to true if it is not explicitly set to false\. When you add event\-based change detection, you must add the parameter to your output and set it to false to disable polling\. Otherwise, your pipeline starts twice for a single source change\. For details, see [Default Settings for the PollForSourceChanges Parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
+When you create a pipeline with this method, the `PollForSourceChanges` parameter defaults to true if it is not explicitly set to false\. When you add event\-based change detection, you must add the parameter to your output and set it to false to disable polling\. Otherwise, your pipeline starts twice for a single source change\. For details, see [Default settings for the PollForSourceChanges parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
 + In the template, change `PollForSourceChanges` to `false`\. If you did not include `PollForSourceChanges` in your pipeline definition, add it and set it to false\.
 
   **Why am I making this change? ** Changing this parameter to `false` turns off periodic checks so you can use event\-based change detection only\.

@@ -1,29 +1,29 @@
-# Identity and Access Management for AWS CodePipeline<a name="security-iam"></a>
+# Identity and access management for AWS CodePipeline<a name="security-iam"></a>
 
 AWS Identity and Access Management \(IAM\) is an AWS service that helps an administrator securely control access to AWS resources\. IAM administrators control who can be *authenticated* \(signed in\) and *authorized* \(have permissions\) to use CodePipeline resources\. IAM is an AWS service that you can use with no additional charge\.
 
 **Topics**
 + [Audience](#security_iam_audience)
-+ [Authenticating with Identities](#security_iam_authentication)
-+ [Managing Access Using Policies](#security_iam_access-manage)
-+ [How AWS CodePipeline Works with IAM](security_iam_service-with-iam.md)
-+ [AWS CodePipeline Identity\-Based Policy Examples](security_iam_id-based-policy-examples.md)
-+ [AWS CodePipeline Resource\-Based Policy Examples](security_iam_resource-based-policy-examples.md)
-+ [Troubleshooting AWS CodePipeline Identity and Access](security_iam_troubleshoot.md)
-+ [CodePipeline Permissions Reference](permissions-reference.md)
-+ [Manage the CodePipeline Service Role](#how-to-custom-role)
++ [Authenticating with identities](#security_iam_authentication)
++ [Managing access using policies](#security_iam_access-manage)
++ [How AWS CodePipeline works with IAM](security_iam_service-with-iam.md)
++ [AWS CodePipeline identity\-based policy examples](security_iam_id-based-policy-examples.md)
++ [AWS CodePipeline resource\-based policy examples](security_iam_resource-based-policy-examples.md)
++ [Troubleshooting AWS CodePipeline identity and access](security_iam_troubleshoot.md)
++ [CodePipeline permissions reference](permissions-reference.md)
++ [Manage the CodePipeline service role](#how-to-custom-role)
 
 ## Audience<a name="security_iam_audience"></a>
 
 How you use AWS Identity and Access Management \(IAM\) differs, depending on the work you do in CodePipeline\.
 
-**Service user** – If you use the CodePipeline service to do your job, then your administrator provides you with the credentials and permissions that you need\. As you use more CodePipeline features to do your work, you might need additional permissions\. Understanding how access is managed can help you request the right permissions from your administrator\. If you cannot access a feature in CodePipeline, see [Troubleshooting AWS CodePipeline Identity and Access](security_iam_troubleshoot.md)\.
+**Service user** – If you use the CodePipeline service to do your job, then your administrator provides you with the credentials and permissions that you need\. As you use more CodePipeline features to do your work, you might need additional permissions\. Understanding how access is managed can help you request the right permissions from your administrator\. If you cannot access a feature in CodePipeline, see [Troubleshooting AWS CodePipeline identity and access](security_iam_troubleshoot.md)\.
 
-**Service administrator** – If you're in charge of CodePipeline resources at your company, you probably have full access to CodePipeline\. It's your job to determine which CodePipeline features and resources your employees should access\. You must then submit requests to your IAM administrator to change the permissions of your service users\. Review the information on this page to understand the basic concepts of IAM\. To learn more about how your company can use IAM with CodePipeline, see [How AWS CodePipeline Works with IAM](security_iam_service-with-iam.md)\.
+**Service administrator** – If you're in charge of CodePipeline resources at your company, you probably have full access to CodePipeline\. It's your job to determine which CodePipeline features and resources your employees should access\. You must then submit requests to your IAM administrator to change the permissions of your service users\. Review the information on this page to understand the basic concepts of IAM\. To learn more about how your company can use IAM with CodePipeline, see [How AWS CodePipeline works with IAM](security_iam_service-with-iam.md)\.
 
-**IAM administrator** – If you're an IAM administrator, you might want to learn details about how you can write policies to manage access to CodePipeline\. To view example CodePipeline identity\-based policies that you can use in IAM, see [AWS CodePipeline Identity\-Based Policy Examples](security_iam_id-based-policy-examples.md)\.
+**IAM administrator** – If you're an IAM administrator, you might want to learn details about how you can write policies to manage access to CodePipeline\. To view example CodePipeline identity\-based policies that you can use in IAM, see [AWS CodePipeline identity\-based policy examples](security_iam_id-based-policy-examples.md)\.
 
-## Authenticating with Identities<a name="security_iam_authentication"></a>
+## Authenticating with identities<a name="security_iam_authentication"></a>
 
 Authentication is how you sign in to AWS using your identity credentials\. For more information about signing in using the AWS Management Console, see [The IAM Console and Sign\-in Page](https://docs.aws.amazon.com/IAM/latest/UserGuide/console.html) in the *IAM User Guide*\.
 
@@ -33,11 +33,11 @@ To sign in directly to the [AWS Management Console](https://console.aws.amazon.c
 
 Regardless of the authentication method that you use, you might also be required to provide additional security information\. For example, AWS recommends that you use multi\-factor authentication \(MFA\) to increase the security of your account\. To learn more, see [Using Multi\-Factor Authentication \(MFA\) in AWS](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html) in the *IAM User Guide*\.
 
-### AWS Account Root User<a name="security_iam_authentication-rootuser"></a>
+### AWS account root user<a name="security_iam_authentication-rootuser"></a>
 
   When you first create an AWS account, you begin with a single sign\-in identity that has complete access to all AWS services and resources in the account\. This identity is called the AWS account *root user* and is accessed by signing in with the email address and password that you used to create the account\. We strongly recommend that you do not use the root user for your everyday tasks, even the administrative ones\. Instead, adhere to the [best practice of using the root user only to create your first IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#create-iam-users)\. Then securely lock away the root user credentials and use them to perform only a few account and service management tasks\. 
 
-### IAM Users and Groups<a name="security_iam_authentication-iamuser"></a>
+### IAM users and groups<a name="security_iam_authentication-iamuser"></a>
 
 An *[IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html)* is an identity within your AWS account that has specific permissions for a single person or application\. An IAM user can have long\-term credentials such as a user name and password or a set of access keys\. To learn how to generate access keys, see [Managing Access Keys for IAM Users](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) in the *IAM User Guide*\. When you generate access keys for an IAM user, make sure you view and securely save the key pair\. You cannot recover the secret access key in the future\. Instead, you must generate a new access key pair\.
 
@@ -45,7 +45,7 @@ An [https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups.html](https://doc
 
 Users are different from roles\. A user is uniquely associated with one person or application, but a role is intended to be assumable by anyone who needs it\. Users have permanent long\-term credentials, but roles provide temporary credentials\. To learn more, see [When to Create an IAM User \(Instead of a Role\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html#id_which-to-choose) in the *IAM User Guide*\.
 
-### IAM Roles<a name="security_iam_authentication-iamrole"></a>
+### IAM roles<a name="security_iam_authentication-iamrole"></a>
 
 An *[IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)* is an identity within your AWS account that has specific permissions\. It is similar to an IAM user, but is not associated with a specific person\. You can temporarily assume an IAM role in the AWS Management Console by [switching roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-console.html)\. You can assume a role by calling an AWS CLI or AWS API operation or by using a custom URL\. For more information about methods for using roles, see [Using IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html) in the *IAM User Guide*\.
 
@@ -58,7 +58,7 @@ IAM roles with temporary credentials are useful in the following situations:
 
 To learn whether to use IAM roles, see [When to Create an IAM Role \(Instead of a User\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html#id_which-to-choose_role) in the *IAM User Guide*\.
 
-## Managing Access Using Policies<a name="security_iam_access-manage"></a>
+## Managing access using policies<a name="security_iam_access-manage"></a>
 
 You control access in AWS by creating policies and attaching them to IAM identities or AWS resources\. A policy is an object in AWS that, when associated with an identity or resource, defines their permissions\. AWS evaluates these policies when an entity \(root user, IAM user, or IAM role\) makes a request\. Permissions in the policies determine whether the request is allowed or denied\. Most policies are stored in AWS as JSON documents\. For more information about the structure and contents of JSON policy documents, see [Overview of JSON Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policies-json) in the *IAM User Guide*\.
 
@@ -66,24 +66,24 @@ An IAM administrator can use policies to specify who has access to AWS resources
 
 IAM policies define permissions for an action regardless of the method that you use to perform the operation\. For example, suppose that you have a policy that allows the `iam:GetRole` action\. A user with that policy can get role information from the AWS Management Console, the AWS CLI, or the AWS API\.
 
-### Identity\-Based Policies<a name="security_iam_access-manage-id-based-policies"></a>
+### Identity\-based policies<a name="security_iam_access-manage-id-based-policies"></a>
 
 Identity\-based policies are JSON permissions policy documents that you can attach to an identity, such as an IAM user, role, or group\. These policies control what actions that identity can perform, on which resources, and under what conditions\. To learn how to create an identity\-based policy, see [Creating IAM Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html) in the *IAM User Guide*\.
 
 Identity\-based policies can be further categorized as *inline policies* or *managed policies*\. Inline policies are embedded directly into a single user, group, or role\. Managed policies are standalone policies that you can attach to multiple users, groups, and roles in your AWS account\. Managed policies include AWS managed policies and customer managed policies\. To learn how to choose between a managed policy or an inline policy, see [Choosing Between Managed Policies and Inline Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#choosing-managed-or-inline) in the *IAM User Guide*\.
 
-### Resource\-Based Policies<a name="security_iam_access-manage-resource-based-policies"></a>
+### Resource\-based policies<a name="security_iam_access-manage-resource-based-policies"></a>
 
 Resource\-based policies are JSON policy documents that you attach to a resource such as an Amazon S3 bucket\. Service administrators can use these policies to define what actions a specified principal \(account member, user, or role\) can perform on that resource and under what conditions\. Resource\-based policies are inline policies\. There are no managed resource\-based policies\.
 
-### Other Policy Types<a name="security_iam_access-manage-other-policies"></a>
+### Other policy types<a name="security_iam_access-manage-other-policies"></a>
 
 AWS supports additional, less\-common policy types\. These policy types can set the maximum permissions granted to you by the more common policy types\. 
 + **Permissions boundaries** – A permissions boundary is an advanced feature in which you set the maximum permissions that an identity\-based policy can grant to an IAM entity \(IAM user or role\)\. You can set a permissions boundary for an entity\. The resulting permissions are the intersection of entity's identity\-based policies and its permissions boundaries\. Resource\-based policies that specify the user or role in the `Principal` field are not limited by the permissions boundary\. An explicit deny in any of these policies overrides the allow\. For more information about permissions boundaries, see [Permissions Boundaries for IAM Entities](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html) in the *IAM User Guide*\.
 + **Service control policies \(SCPs\)** – SCPs are JSON policies that specify the maximum permissions for an organization or organizational unit \(OU\) in AWS Organizations\. AWS Organizations is a service for grouping and centrally managing multiple AWS accounts that your business owns\. If you enable all features in an organization, then you can apply service control policies \(SCPs\) to any or all of your accounts\. The SCP limits permissions for entities in member accounts, including each AWS account root user\. For more information about Organizations and SCPs, see [How SCPs Work](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_about-scps.html) in the *AWS Organizations User Guide*\.
 + **Session policies** – Session policies are advanced policies that you pass as a parameter when you programmatically create a temporary session for a role or federated user\. The resulting session's permissions are the intersection of the user or role's identity\-based policies and the session policies\. Permissions can also come from a resource\-based policy\. An explicit deny in any of these policies overrides the allow\. For more information, see [Session Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session) in the *IAM User Guide*\. 
 
-## Manage the CodePipeline Service Role<a name="how-to-custom-role"></a>
+## Manage the CodePipeline service role<a name="how-to-custom-role"></a>
 
 The CodePipeline service role is configured with one or more policies that control access to the AWS resources used by the pipeline\. You might want to attach more policies to this role, edit the policy attached to the role, or configure policies for other service roles in AWS\. You might also want to attach a policy to a role when you configure cross\-account access to your pipeline\.
 
@@ -94,7 +94,7 @@ Modifying a policy statement or attaching another policy to the role can prevent
 In the console, service roles created before September 2018 are created with the name `oneClick_AWS-CodePipeline-Service_ID-Number`\.  
 Service roles created after September 2018 use the service role name format `AWSCodePipelineServiceRole-Region-Pipeline_Name`\. For example, for a pipeline named `MyFirstPipeline` created in the console in `eu-west-2`, the service role is named `AWSCodePipelineServiceRole-eu-west-2-MyFirstPipeline`\.
 
-### Remove Permissions from the CodePipeline Service Role<a name="remove-permissions-from-policy"></a>
+### Remove permissions from the CodePipeline service role<a name="remove-permissions-from-policy"></a>
 
 You can edit the service role statement to remove access to resources you do not use\. For example, if none of your pipelines include Elastic Beanstalk, you can edit the policy statement to remove the section that grants access to Elastic Beanstalk resources\.
 
@@ -114,7 +114,7 @@ Similarly, if none of your pipelines includes CodeDeploy, you can edit the polic
 },
 ```
 
-### Add Permissions to the CodePipeline Service Role<a name="how-to-update-role-new-services"></a>
+### Add permissions to the CodePipeline service role<a name="how-to-update-role-new-services"></a>
 
 You must update your service role policy statement with permissions for an AWS service not already included in the default service role policy statement before you can use it in your pipelines\.
 
@@ -127,6 +127,7 @@ The following table shows when support was added for other AWS services\.
 
 | AWS Service | CodePipeline Support Date | 
 | --- | --- | 
+| AWS AppConfig | June 22, 2020 | 
 | AWS Step Functions | May 27, 2020 | 
 | AWS CodeStar Connections | December 18, 2019 | 
 | The CodeDeployToECS action | November 27, 2018 | 
@@ -323,7 +324,7 @@ When you create IAM policies, follow the standard security advice of granting le
    },
    ```
 
-   For more information about the IAM permissions for connections, see [IAM Permissions Reference for Connections](connections-permissions.md)\.
+   For more information about the IAM permissions for connections, see [Connections permissions reference](https://docs.aws.amazon.com/dtconsole/latest/userguide/security-iam.html#permissions-reference-connections)\.
 
 1. For the `StepFunctions` action, the following are the minimum permissions needed to create pipelines with a Step Functions invoke action\.
 
@@ -333,6 +334,20 @@ When you create IAM policies, follow the standard security advice of granting le
            "states:DescribeStateMachine",
            "states:DescribeExecution",
            "states:StartExecution"
+       ],
+       "Resource": "*",
+       "Effect": "Allow"
+   },
+   ```
+
+1. For the `AppConfig` action, the following are the minimum permissions needed to create pipelines with an AWS AppConfig invoke action\.
+
+   ```
+   {
+       "Action": [
+           "appconfig:StartDeployment",
+           "appconfig:GetDeployment",
+           "appconfig:StopDeployment"
        ],
        "Resource": "*",
        "Effect": "Allow"

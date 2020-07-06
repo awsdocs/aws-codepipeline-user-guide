@@ -1,12 +1,12 @@
 # Variables<a name="reference-variables"></a>
 
-This section is a reference only\. For information about creating variables, see [Working with Variables](actions-variables.md)\.
+This section is a reference only\. For information about creating variables, see [Working with variables](actions-variables.md)\.
 
 Variables allow you to configure your pipeline actions with values that are determined at the time of the action execution\. Variables can be produced by an action execution or be implicitly available at the start of each pipeline execution\.
 
 Some action providers produce a defined set of variables\. You choose from default variable keys for that action provider, such as commit ID\.
 
-To see step\-by\-step examples of using variables, see [Tutorial: Using Variables with Lambda Invoke Actions](tutorials-lambda-variables.md), [Example: Use Variables in Manual Approvals](actions-variables.md#actions-variables-examples-approvals), and [Tutorial: Create a Pipeline That Uses Variables from AWS CloudFormation Deployment Actions](tutorials-cloudformation-action.md)\.
+To see step\-by\-step examples of using variables, see [Tutorial: Using variables with Lambda invoke actions](tutorials-lambda-variables.md), [Example: Use variables in manual approvals](actions-variables.md#actions-variables-examples-approvals), and [Tutorial: Create a pipeline that uses variables from AWS CloudFormation deployment actions](tutorials-cloudformation-action.md)\.
 
 **Variable Limits**
 
@@ -17,10 +17,10 @@ When you enter output variable syntax in the action configuration fields, do not
 
 **Topics**
 + [Concepts](#reference-variables-concepts)
-+ [Configuring Variables](#reference-variables-workflow)
-+ [Variable Resolution](#reference-variables-resolution)
-+ [Rules for Variables](#reference-variables-rules)
-+ [Variables Available for Pipeline Actions](#reference-variables-list)
++ [Configuring variables](#reference-variables-workflow)
++ [Variable resolution](#reference-variables-resolution)
++ [Rules for variables](#reference-variables-rules)
++ [Variables available for pipeline actions](#reference-variables-list)
 
 ## Concepts<a name="reference-variables-concepts"></a>
 
@@ -30,11 +30,11 @@ This section lists key terms and concepts related to variables and namespaces\.
 
 Variables are key\-value pairs that can be used to dynamically configure actions in your pipeline\. There are currently two ways these variables are made available:
 + There is a set of variables that are implicitly available at the start of each pipeline execution\. This set currently includes `PipelineExecutionId`, the ID of the current pipeline execution\.
-+ There are action types that produce sets of variables when they are executed\. You can see the variables produced by an action by inspecting the `outputVariables` field that is part of the [ListActionExecutions](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_ListActionExecutions.html) API\. To see which variables each action type produces, see the CodePipeline [Action Structure Reference](action-reference.md)\.
++ There are action types that produce sets of variables when they are executed\. You can see the variables produced by an action by inspecting the `outputVariables` field that is part of the [ListActionExecutions](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_ListActionExecutions.html) API\. To see which variables each action type produces, see the CodePipeline [Action structure reference](action-reference.md)\.
 
 To reference these variables in your action configuration, you must use the variable reference syntax with the correct namespace\. 
 
-For a list of available key names by action provider, see [Variables Available for Pipeline Actions](#reference-variables-list)\. For an example variable workflow, see [Configuring Variables ](#reference-variables-workflow)\.
+For a list of available key names by action provider, see [Variables available for pipeline actions](#reference-variables-list)\. For an example variable workflow, see [Configuring variables ](#reference-variables-workflow)\.
 
 ### Namespaces<a name="reference-variables-concepts-namespaces"></a>
 
@@ -60,7 +60,7 @@ There are two types of namespaces under which variables can be assigned:
   #{SourceVariables.VersionId}
   ```
 
-## Configuring Variables<a name="reference-variables-workflow"></a>
+## Configuring variables<a name="reference-variables-workflow"></a>
 
 You configure an action to produce variables by declaring a namespace for the action\. The action must already be one of the action providers that generates variables\. Otherwise, the variables available are pipeline\-level variables\.
 
@@ -140,13 +140,13 @@ In this example, the build action's configuration field shows environment variab
 },
 ```
 
-## Variable Resolution<a name="reference-variables-resolution"></a>
+## Variable resolution<a name="reference-variables-resolution"></a>
 
 Each time an action is executed as part of a pipeline execution, the variables it produces are available for use in any action that is guaranteed to occur after the producing action\. To use these variables in a consuming action, you can add them to the consuming action's configuration using the syntax shown in the previous example\. Before it performs a consuming action, CodePipeline resolves all of the variable references present in the configuration prior to initiating the action execution\.
 
 ![\[Example: Variables for multiple actions\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/variables-workflow-example.png)![\[Example: Variables for multiple actions\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Example: Variables for multiple actions\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
-## Rules for Variables<a name="reference-variables-rules"></a>
+## Rules for variables<a name="reference-variables-rules"></a>
 
 The following rules help you with the configuration of variables:
 + You specify the namespace and variable for an action through a new action property or by editing an action\. 
@@ -154,7 +154,7 @@ The following rules help you with the configuration of variables:
 + If the namespace isn't specified, the variables produced by that action cannot be referenced in any action configuration\.
 + To reference variables produced by an action, the referencing action must occur after the action that produces the variables\. This means it is either in a later stage than the action producing the variables, or in the same stage but at a higher run order\.
 
-## Variables Available for Pipeline Actions<a name="reference-variables-list"></a>
+## Variables available for pipeline actions<a name="reference-variables-list"></a>
 
 The action provider determines which variables can be generated by the action\. 
 
@@ -166,4 +166,4 @@ Each execution also has a set of CodePipeline\-generated pipeline variables that
 
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/reference-variables.html)
 
-For step\-by\-step procedures for managing variables, see [Working with Variables](actions-variables.md)\.
+For step\-by\-step procedures for managing variables, see [Working with variables](actions-variables.md)\.

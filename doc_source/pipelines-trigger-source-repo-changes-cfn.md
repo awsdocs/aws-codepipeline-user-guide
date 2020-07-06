@@ -1,4 +1,4 @@
-# Create a CloudWatch Events Rule for a CodeCommit Source \(AWS CloudFormation Template\)<a name="pipelines-trigger-source-repo-changes-cfn"></a>
+# Create a CloudWatch Events rule for a CodeCommit source \(AWS CloudFormation template\)<a name="pipelines-trigger-source-repo-changes-cfn"></a>
 
 To use AWS CloudFormation to create a rule, update your template as shown here\.<a name="proc-cfn-event-codecommit"></a>
 
@@ -221,7 +221,7 @@ To use AWS CloudFormation to create a rule, update your template as shown here\.
 
 **To edit your pipeline's PollForSourceChanges parameter**
 **Important**  
-In many cases, the `PollForSourceChanges` parameter defaults to true when you create a pipeline\. When you add event\-based change detection, you must add the parameter to your output and set it to false to disable polling\. Otherwise, your pipeline starts twice for a single source change\. For details, see [Default Settings for the PollForSourceChanges Parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
+In many cases, the `PollForSourceChanges` parameter defaults to true when you create a pipeline\. When you add event\-based change detection, you must add the parameter to your output and set it to false to disable polling\. Otherwise, your pipeline starts twice for a single source change\. For details, see [Default settings for the PollForSourceChanges parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
 + In the template, change `PollForSourceChanges` to `false`\. If you did not include `PollForSourceChanges` in your pipeline definition, add it and set it to `false`\.
 
   **Why am I making this change?** Changing this parameter to `false` turns off periodic checks so you can use event\-based change detection only\.

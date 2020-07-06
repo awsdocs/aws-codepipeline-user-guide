@@ -1,12 +1,12 @@
-# Start a Pipeline Manually in AWS CodePipeline<a name="pipelines-rerun-manually"></a>
+# Start a pipeline manually in AWS CodePipeline<a name="pipelines-rerun-manually"></a>
 
 By default, a pipeline starts automatically when it is created and any time a change is made in a source repository\. However, you might want to rerun the most recent revision through the pipeline a second time\. You can use the CodePipeline console or the AWS CLI and start\-pipeline\-execution command to manually rerun the most recent revision through your pipeline\.
 
 **Topics**
-+ [Start a Pipeline Manually \(Console\)](#pipelines-rerun-manually-console)
-+ [Start a Pipeline Manually \(CLI\)](#pipelines-rerun-manually-cli)
++ [Start a pipeline manually \(console\)](#pipelines-rerun-manually-console)
++ [Start a pipeline manually \(CLI\)](#pipelines-rerun-manually-cli)
 
-## Start a Pipeline Manually \(Console\)<a name="pipelines-rerun-manually-console"></a>
+## Start a pipeline manually \(console\)<a name="pipelines-rerun-manually-console"></a>
 
 **To manually start a pipeline and run the most recent revision through a pipeline**
 
@@ -16,7 +16,7 @@ By default, a pipeline starts automatically when it is created and any time a ch
 
 1. On the pipeline details page, choose **Release change**\. This starts the most recent revision available in each source location specified in a source action through the pipeline\.
 
-## Start a Pipeline Manually \(CLI\)<a name="pipelines-rerun-manually-cli"></a>
+## Start a pipeline manually \(CLI\)<a name="pipelines-rerun-manually-cli"></a>
 
 **To manually start a pipeline and run the most recent version of an artifact through a pipeline**
 
@@ -34,4 +34,4 @@ By default, a pipeline starts automatically when it is created and any time a ch
    }
    ```
 **Note**  
-After you have started the pipeline, you can monitor its progress in the CodePipeline console or by running the get\-pipeline\-state command\. For more information, see [View Pipeline Details and History \(Console\)](pipelines-view-console.md) and [View Pipeline Details and History \(CLI\)](pipelines-view-cli.md)\.
+After you have started the pipeline, you can monitor its progress in the CodePipeline console or by running the get\-pipeline\-state command\. For more information, see [View pipeline details and history \(console\)](pipelines-view-console.md) and [View pipeline details and history \(CLI\)](pipelines-view-cli.md)\.

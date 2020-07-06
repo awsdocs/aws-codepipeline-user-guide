@@ -1,4 +1,4 @@
-# Working with Variables<a name="actions-variables"></a>
+# Working with variables<a name="actions-variables"></a>
 
 Some actions in CodePipeline generate variables\. To use variables:
 + You assign a namespace to an action to make the variables it produces available to a downstream action configuration\.
@@ -9,15 +9,15 @@ Some actions in CodePipeline generate variables\. To use variables:
 For reference information about variables, an example workflow, and a list of actions that generate output variables, see [Variables](reference-variables.md)\.
 
 **Topics**
-+ [Configure Actions for Variables](#actions-variables-create)
-+ [View Output Variables](#actions-variables-view)
-+ [Example: Use Variables in Manual Approvals](#actions-variables-examples-approvals)
++ [Configure actions for variables](#actions-variables-create)
++ [View output variables](#actions-variables-view)
++ [Example: Use variables in manual approvals](#actions-variables-examples-approvals)
 
-## Configure Actions for Variables<a name="actions-variables-create"></a>
+## Configure actions for variables<a name="actions-variables-create"></a>
 
 When you add an action to your pipeline, you can assign it a namespace and configure it to consume variables from previous actions\.
 
-### Configure Actions with Variables \(Console\)<a name="actions-variables-create-console"></a>
+### Configure actions with variables \(console\)<a name="actions-variables-create-console"></a>
 
 This example creates a pipeline with a CodeCommit source action and a CodeBuild build action\. The CodeBuild action is configured to consume the variables produced by the CodeCommit action\.
 
@@ -56,9 +56,9 @@ You can enter variable syntax in any action configuration field in the wizard\.
 
 1. Sign in to the AWS Management Console and open the CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
 
-1. After the pipeline is created and runs successfully, you can view the variables on the **Action execution details** page\. For information, see [View Variables \(Console\)](#actions-variables-view-console)\.
+1. After the pipeline is created and runs successfully, you can view the variables on the **Action execution details** page\. For information, see [View variables \(console\)](#actions-variables-view-console)\.
 
-### Configure Actions for Variables \(CLI\)<a name="actions-variables-create-cli"></a>
+### Configure actions for variables \(CLI\)<a name="actions-variables-create-cli"></a>
 
 When you use the create\-pipeline command to create a pipeline or the update\-pipeline command to edit a pipeline, you can reference/use variables in the configuration of an action\.
 
@@ -66,7 +66,7 @@ When you use the create\-pipeline command to create a pipeline or the update\-pi
 
 **To configure an action with a namespace**
 
-1. Follow the steps in [Create a Pipeline in CodePipeline](pipelines-create.md) to create a pipeline using the CLI\. Start an input file to provide the create\-pipeline command with the `--cli-input-json` parameter\. In the pipeline structure, add the `namespace` parameter and specify a name, such as `SourceVariables`\.
+1. Follow the steps in [Create a pipeline in CodePipeline](pipelines-create.md) to create a pipeline using the CLI\. Start an input file to provide the create\-pipeline command with the `--cli-input-json` parameter\. In the pipeline structure, add the `namespace` parameter and specify a name, such as `SourceVariables`\.
 
    ```
    . . . 
@@ -143,11 +143,11 @@ When you use the create\-pipeline command to create a pipeline or the update\-pi
    aws codepipeline create-pipeline --cli-input-json file://MyPipeline.json
    ```
 
-## View Output Variables<a name="actions-variables-view"></a>
+## View output variables<a name="actions-variables-view"></a>
 
 You can view the action execution details to view the variables for that action, specific to each execution\.
 
-### View Variables \(Console\)<a name="actions-variables-view-console"></a>
+### View variables \(console\)<a name="actions-variables-view-console"></a>
 
 You can use the console to view variables for an action\.
 
@@ -170,7 +170,7 @@ You can use the console to view variables for an action\.
    By default, **Action configuration** displays the variable syntax\. You can choose **Show resolved configuration** to toggle the list to display the values that were produced during the action execution\.  
 ![\[Example: Resolved Action Configuration Variables\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/variables-actionconfig-codebuild-resolved.png)![\[Example: Resolved Action Configuration Variables\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Example: Resolved Action Configuration Variables\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
-### View Variables \(CLI\)<a name="actions-variables-view-cli"></a>
+### View variables \(CLI\)<a name="actions-variables-view-cli"></a>
 
 You can use the list\-action\-executions command to view variables for an action\.
 
@@ -234,7 +234,7 @@ You can use the list\-action\-executions command to view variables for an action
    },
    ```
 
-## Example: Use Variables in Manual Approvals<a name="actions-variables-examples-approvals"></a>
+## Example: Use variables in manual approvals<a name="actions-variables-examples-approvals"></a>
 
 When you specify a namespace for an action, and that action produces output variables, you can add a manual approval that displays variables in the approval message\. This example shows you how to add variable syntax to a manual approval message\.
 

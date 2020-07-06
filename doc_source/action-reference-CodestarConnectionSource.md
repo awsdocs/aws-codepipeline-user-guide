@@ -1,10 +1,5 @@
 # CodeStarSourceConnection<a name="action-reference-CodestarConnectionSource"></a>
 
-
-|  | 
-| --- |
-| The connections feature is in preview release for AWS CodePipeline and is subject to change\. | 
-
 Triggers a pipeline when a new commit is made on a third\-party source code repository\. The source action retrieves code changes when a pipeline is manually executed or when a webhook event is sent from the source provider\. Currently, Bitbucket Cloud is the only connection type supported by the `CodeStarSourceConnection` action\.
 
 After a code change is detected, you have the following options for passing the code to subsequent actions:
@@ -18,24 +13,24 @@ CodePipeline prompts you to add a Bitbucket Cloud app to your repo when you crea
 For more information, see [Bitbucket Cloud apps](https://confluence.atlassian.com/bitbucket/bitbucket-cloud-add-ons-780871938.html) in the Bitbucket developer documentation\.
 
 **Note**  
-To create or attach a policy to your IAM user or role with the permissions required to use AWS CodeStar connections, see [IAM Permissions Reference for Connections](connections-permissions.md)\. Depending on when your CodePipeline service role was created, you might need to update its permissions to support AWS CodeStar connections\. For instructions, see [Add Permissions to the CodePipeline Service Role](security-iam.md#how-to-update-role-new-services)\.
+To create or attach a policy to your IAM user or role with the permissions required to use AWS CodeStar connections, see [Connections permissions reference](https://docs.aws.amazon.com/dtconsole/latest/userguide/security-iam.html#permissions-reference-connections)\. Depending on when your CodePipeline service role was created, you might need to update its permissions to support AWS CodeStar connections\. For instructions, see [Add permissions to the CodePipeline service role](security-iam.md#how-to-update-role-new-services)\.
 
 **Topics**
-+ [Action Type](#action-reference-CodestarConnectionSource-type)
-+ [Configuration Parameters](#action-reference-CodestarConnectionSource-config)
-+ [Input Artifacts](#action-reference-CodestarConnectionSource-input)
-+ [Output Artifacts](#action-reference-CodestarConnectionSource-output)
-+ [Action Declaration \(Bitbucket Example\)](#action-reference-CodestarConnectionSource-example)
-+ [Installing the CodeStar App on Bitbucket and Creating a Connection](#action-reference-CodestarConnectionSource-auth)
-+ [See Also](#action-reference-CodestarConnectionSource-links)
++ [Action type](#action-reference-CodestarConnectionSource-type)
++ [Configuration parameters](#action-reference-CodestarConnectionSource-config)
++ [Input artifacts](#action-reference-CodestarConnectionSource-input)
++ [Output artifacts](#action-reference-CodestarConnectionSource-output)
++ [Action declaration \(Bitbucket example\)](#action-reference-CodestarConnectionSource-example)
++ [Installing the AWS CodeStar app on Bitbucket and creating a connection](#action-reference-CodestarConnectionSource-auth)
++ [See also](#action-reference-CodestarConnectionSource-links)
 
-## Action Type<a name="action-reference-CodestarConnectionSource-type"></a>
+## Action type<a name="action-reference-CodestarConnectionSource-type"></a>
 + Category: `Source`
 + Owner: `AWS`
 + Provider: `CodeStarSourceConnection`
 + Version: `1`
 
-## Configuration Parameters<a name="action-reference-CodestarConnectionSource-config"></a>
+## Configuration parameters<a name="action-reference-CodestarConnectionSource-config"></a>
 
 ****ConnectionArn****  
 Required: Yes  
@@ -55,11 +50,11 @@ Required: No
 Specifies the output artifact format\. Can be either `CODEBUILD_CLONE_REF` or `CODE_ZIP`\. If unspecified, the default is `CODE_ZIP`\.  
 The `CODEBUILD_CLONE_REF` option can only be used by CodeBuild downstream actions\.
 
-## Input Artifacts<a name="action-reference-CodestarConnectionSource-input"></a>
+## Input artifacts<a name="action-reference-CodestarConnectionSource-input"></a>
 + **Number of Artifacts:** `0`
 + **Description:** Input artifacts do not apply for this action type\.
 
-## Output Artifacts<a name="action-reference-CodestarConnectionSource-output"></a>
+## Output artifacts<a name="action-reference-CodestarConnectionSource-output"></a>
 + **Number of Artifacts:** `1` 
 + **Description:** The artifacts generated from the repository are the output artifacts for the `CodeStarSourceConnection` action\. The source code commit ID is displayed in CodePipeline as the source revision for the triggered pipeline execution\. You can configure the output artifact of this action in:
   + A ZIP file that contains the contents of the configured repository and branch at the commit specified as the source revision for the pipeline execution\.
@@ -67,7 +62,7 @@ The `CODEBUILD_CLONE_REF` option can only be used by CodeBuild downstream action
 **Important**  
 This option can only be used by CodeBuild downstream actions\.
 
-## Action Declaration \(Bitbucket Example\)<a name="action-reference-CodestarConnectionSource-example"></a>
+## Action declaration \(Bitbucket example\)<a name="action-reference-CodestarConnectionSource-example"></a>
 
 ------
 #### [ YAML ]
@@ -127,7 +122,7 @@ Actions:
 
 ------
 
-## Installing the CodeStar App on Bitbucket and Creating a Connection<a name="action-reference-CodestarConnectionSource-auth"></a>
+## Installing the AWS CodeStar app on Bitbucket and creating a connection<a name="action-reference-CodestarConnectionSource-auth"></a>
 
 The first time you use the console to add a new connection to a Bitbucket repository, you must authorize CodePipeline access to your repositories\. You choose or create an installation app that helps you connect to the account where you have created your third\-party code repository\.
 
@@ -136,7 +131,7 @@ The first time you use the console to add a new connection to a Bitbucket reposi
 **Note**  
 Most source actions in CodePipeline, such as GitHub, require either a configured change detection resource \(such as a webhook or CloudWatch Events rule\) or use the option to poll the repository for source changes\. For pipelines with a Bitbucket Cloud source action, you do not have to set up a webhook or default to polling\. The connections action manages your source change detection for you\. 
 
-## See Also<a name="action-reference-CodestarConnectionSource-links"></a>
+## See also<a name="action-reference-CodestarConnectionSource-links"></a>
 
 The following related resources can help you as you work with this action\.
 + [AWS CodeStar Connections API Reference](https://docs.aws.amazon.com/codestar-connections/latest/APIReference/Welcome.html) – The AWS CodeStar Connections API Reference provides reference information for the available connections actions\.

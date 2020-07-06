@@ -1,4 +1,4 @@
-# List Webhooks in Your Account<a name="pipelines-webhooks-view"></a>
+# List webhooks in your account<a name="pipelines-webhooks-view"></a>
 
 You can use the AWS CLI to list webhooks in your account\.
 

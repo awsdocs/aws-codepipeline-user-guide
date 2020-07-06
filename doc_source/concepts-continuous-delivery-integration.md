@@ -1,4 +1,4 @@
-# Continuous Delivery and Continuous Integration<a name="concepts-continuous-delivery-integration"></a>
+# Continuous delivery and continuous integration<a name="concepts-continuous-delivery-integration"></a>
 
 CodePipeline is a *continuous delivery* service that automates the building, testing, and deployment of your software into production\.
 

@@ -1,4 +1,4 @@
-# Stop a Pipeline Execution in CodePipeline<a name="pipelines-stop"></a>
+# Stop a pipeline execution in CodePipeline<a name="pipelines-stop"></a>
 
 When a pipeline execution starts to run through a pipeline, it enters one stage at a time and locks the stage while all action executions in the stage are running\. These in\-progress actions must be handled in a way so that, when the pipeline execution is stopped, the actions are either allowed to complete or abandoned\. 
 
@@ -13,10 +13,10 @@ There are two ways to stop a pipeline execution:
 This option can lead to failed tasks or out of sequence tasks\.
 
 **Topics**
-+ [Stop a Pipeline Execution \(Console\)](#pipelines-stop-console)
-+ [Stop a Pipeline \(CLI\)](#pipelines-stop-cli)
++ [Stop a pipeline execution \(console\)](#pipelines-stop-console)
++ [Stop a pipeline execution \(CLI\)](#pipelines-stop-cli)
 
-## Stop a Pipeline Execution \(Console\)<a name="pipelines-stop-console"></a>
+## Stop a pipeline execution \(console\)<a name="pipelines-stop-console"></a>
 
 1. Sign in to the AWS Management Console and open the CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
 
@@ -59,7 +59,7 @@ This action cannot be undone\.
 
    You can view the pipeline execution status in the execution history view and the detailed history view\.
 
-## Stop a Pipeline \(CLI\)<a name="pipelines-stop-cli"></a>
+## Stop a pipeline execution \(CLI\)<a name="pipelines-stop-cli"></a>
 
 To use the AWS CLI to manually stop a pipeline, use the stop\-pipeline\-execution command with the following parameters:
 + Execution ID \(required\)

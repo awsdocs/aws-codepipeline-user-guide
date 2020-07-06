@@ -1,4 +1,4 @@
-# Create a CloudWatch Events Rule for an Amazon ECR Source \(AWS CloudFormation Template\)<a name="create-cwe-ecr-source-cfn"></a>
+# Create a CloudWatch Events rule for an Amazon ECR source \(AWS CloudFormation template\)<a name="create-cwe-ecr-source-cfn"></a>
 
 To use AWS CloudFormation to create a rule, use the template snippet as shown here\.
 

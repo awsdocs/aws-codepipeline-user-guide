@@ -1,24 +1,24 @@
-# Tag a Pipeline in CodePipeline<a name="pipelines-tag"></a>
+# Tag a pipeline in CodePipeline<a name="pipelines-tag"></a>
 
-Tags are key\-value pairs associated with AWS resources\. You can apply tags to your pipelines in CodePipeline\. For information about CodePipeline resource tagging, use cases, tag key and value constraints, and supported resource types, see [Tagging Resources](tag-resources.md)\.
+Tags are key\-value pairs associated with AWS resources\. You can apply tags to your pipelines in CodePipeline\. For information about CodePipeline resource tagging, use cases, tag key and value constraints, and supported resource types, see [Tagging resources](tag-resources.md)\.
 
 You can use the CLI to specify tags when you create a pipeline\. You can use the console or CLI to add or remove tags, and update the values of tags in a pipeline\. You can add up to 50 tags to each pipeline\.
 
 **Topics**
-+ [Tag Pipelines \(Console\)](#pipelines-tag-console)
-+ [Tag Pipelines \(CLI\)](#pipelines-tag-cli)
++ [Tag pipelines \(console\)](#pipelines-tag-console)
++ [Tag pipelines \(CLI\)](#pipelines-tag-cli)
 
-## Tag Pipelines \(Console\)<a name="pipelines-tag-console"></a>
+## Tag pipelines \(console\)<a name="pipelines-tag-console"></a>
 
 You can use the console or the CLI to tag resources\. Pipelines are the only CodePipeline resource that can be managed with either the console or the CLI\.
 
 **Topics**
-+ [Add Tags to a Pipeline \(Console\)](#pipelines-tag-add-console)
-+ [View Tags for a Pipeline \(Console\)](#pipelines-tag-list-console)
-+ [Edit Tags for a Pipeline \(Console\)](#pipelines-tag-update-console)
-+ [Remove Tags from a Pipeline \(Console\)](#pipelines-tag-delete-console)
++ [Add tags to a pipeline \(console\)](#pipelines-tag-add-console)
++ [View tags for a pipeline \(console\)](#pipelines-tag-list-console)
++ [Edit tags for a pipeline \(console\)](#pipelines-tag-update-console)
++ [Remove tags from a pipeline \(console\)](#pipelines-tag-delete-console)
 
-### Add Tags to a Pipeline \(Console\)<a name="pipelines-tag-add-console"></a>
+### Add tags to a pipeline \(console\)<a name="pipelines-tag-add-console"></a>
 
 You can use the console to add tags to an existing pipeline\.
 
@@ -38,7 +38,7 @@ You can use the console to add tags to an existing pipeline\.
 1. Choose **Submit**\. The tags are listed under pipeline settings\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/pipeline-tags-console.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
-### View Tags for a Pipeline \(Console\)<a name="pipelines-tag-list-console"></a>
+### View tags for a pipeline \(console\)<a name="pipelines-tag-list-console"></a>
 
 You can use the console to list tags for existing pipelines\.
 
@@ -50,7 +50,7 @@ You can use the console to list tags for existing pipelines\.
 
 1. Under **Pipeline tags**, view the tags for the pipeline under the **Key** and **Value** columns\.
 
-### Edit Tags for a Pipeline \(Console\)<a name="pipelines-tag-update-console"></a>
+### Edit tags for a pipeline \(console\)<a name="pipelines-tag-update-console"></a>
 
 You can use the console to edit tags that have been added to pipelines\.
 
@@ -66,7 +66,7 @@ You can use the console to edit tags that have been added to pipelines\.
 
 1. Choose **Submit**\.
 
-### Remove Tags from a Pipeline \(Console\)<a name="pipelines-tag-delete-console"></a>
+### Remove tags from a pipeline \(console\)<a name="pipelines-tag-delete-console"></a>
 
 You can use the console to delete tags from pipelines\. When you remove tags from the associated resource, the tags are deleted\.
 
@@ -82,21 +82,21 @@ You can use the console to delete tags from pipelines\. When you remove tags fro
 
 1. Choose **Submit**\.
 
-## Tag Pipelines \(CLI\)<a name="pipelines-tag-cli"></a>
+## Tag pipelines \(CLI\)<a name="pipelines-tag-cli"></a>
 
 You can use the CLI to tag resources\. You must use the console to manage tags in pipelines\.
 
 **Topics**
-+ [Add Tags to a Pipeline \(CLI\)](#pipelines-tag-add-cli)
-+ [View Tags for a Pipeline \(CLI\)](#pipelines-tag-list-cli)
-+ [Edit Tags for a Pipeline \(CLI\)](#pipelines-tag-update-cli)
-+ [Remove Tags from a Pipeline \(CLI\)](#pipelines-tag-delete-cli)
++ [Add tags to a pipeline \(CLI\)](#pipelines-tag-add-cli)
++ [View tags for a pipeline \(CLI\)](#pipelines-tag-list-cli)
++ [Edit tags for a pipeline \(CLI\)](#pipelines-tag-update-cli)
++ [Remove tags from a pipeline \(CLI\)](#pipelines-tag-delete-cli)
 
-### Add Tags to a Pipeline \(CLI\)<a name="pipelines-tag-add-cli"></a>
+### Add tags to a pipeline \(CLI\)<a name="pipelines-tag-add-cli"></a>
 
 You can use the console or the AWS CLI to tag pipelines\.
 
-To add a tag to a pipeline when you create it, see [Create a Pipeline in CodePipeline](pipelines-create.md)\.
+To add a tag to a pipeline when you create it, see [Create a pipeline in CodePipeline](pipelines-create.md)\.
 
 In these steps, we assume that you have already installed a recent version of the AWS CLI or updated to the current version\. For more information, see [Installing the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/installing.html)\.
 
@@ -108,7 +108,7 @@ aws codepipeline tag-resource --resource-arn arn:aws:codepipeline:us-west-2:acco
 
 If successful, this command returns nothing\.
 
-### View Tags for a Pipeline \(CLI\)<a name="pipelines-tag-list-cli"></a>
+### View tags for a pipeline \(CLI\)<a name="pipelines-tag-list-cli"></a>
 
 Follow these steps to use the AWS CLI to view the AWS tags for a pipeline\. If no tags have been added, the returned list is empty\.
 
@@ -129,7 +129,7 @@ If successful, this command returns information similar to the following:
 }
 ```
 
-### Edit Tags for a Pipeline \(CLI\)<a name="pipelines-tag-update-cli"></a>
+### Edit tags for a pipeline \(CLI\)<a name="pipelines-tag-update-cli"></a>
 
 Follow these steps to use the AWS CLI to edit a tag for a pipeline\. You can change the value for an existing key or add another key\. You can also remove tags from a pipeline, as shown in the next section\.
 
@@ -141,7 +141,7 @@ aws codepipeline tag-resource --resource-arn arn:aws:codepipeline:us-west-2:acco
 
 If successful, this command returns nothing\.
 
-### Remove Tags from a Pipeline \(CLI\)<a name="pipelines-tag-delete-cli"></a>
+### Remove tags from a pipeline \(CLI\)<a name="pipelines-tag-delete-cli"></a>
 
 Follow these steps to use the AWS CLI to remove a tag from a pipeline\. When you remove tags from the associated resource, the tags are deleted\.
 

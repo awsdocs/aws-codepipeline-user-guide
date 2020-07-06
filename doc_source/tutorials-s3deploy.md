@@ -1,30 +1,30 @@
-# Tutorial: Create a Pipeline That Uses Amazon S3 as a Deployment Provider<a name="tutorials-s3deploy"></a>
+# Tutorial: Create a pipeline that uses Amazon S3 as a deployment provider<a name="tutorials-s3deploy"></a>
 
 In this tutorial, you configure a pipeline that continuously delivers files using Amazon S3 as the deployment action provider in your deployment stage\. The completed pipeline detects changes when you make a change to the source files in your source repository\. The pipeline then uses Amazon S3 to deploy the files to your bucket\. Each time you modify, add, or delete your website files in your source location, the deployment creates the website with your latest files\. This tutorial provides two options:
-+ Create a pipeline that deploys a static website to your S3 public bucket\. This example creates a pipeline with an AWS CodeCommit source action and an Amazon S3 deployment action\. See [Option 1: Deploy Static Website Files to Amazon S3](#tutorials-s3deploy-acc)\.
-+ Create a pipeline that compiles sample TypeScript code into JavaScript and deploys the CodeBuild output artifact to your S3 bucket for archive\. This example creates a pipeline with an Amazon S3 source action, a CodeBuild build action, and an Amazon S3 deployment action\. See [Option 2: Deploy Built Archive Files to Amazon S3 from an S3 Source Bucket](#tutorials-s3deploy-s3source)\.
++ Create a pipeline that deploys a static website to your S3 public bucket\. This example creates a pipeline with an AWS CodeCommit source action and an Amazon S3 deployment action\. See [Option 1: Deploy static website files to Amazon S3](#tutorials-s3deploy-acc)\.
++ Create a pipeline that compiles sample TypeScript code into JavaScript and deploys the CodeBuild output artifact to your S3 bucket for archive\. This example creates a pipeline with an Amazon S3 source action, a CodeBuild build action, and an Amazon S3 deployment action\. See [Option 2: Deploy built archive files to Amazon S3 from an S3 source bucket](#tutorials-s3deploy-s3source)\.
 
 **Important**  
 Many of the actions you add to your pipeline in this procedure involve AWS resources that you need to create before you create the pipeline\. AWS resources for your source actions must always be created in the same AWS Region where you create your pipeline\. For example, if you create your pipeline in the US East \(Ohio\) Region, your CodeCommit repository must be in the US East \(Ohio\) Region\.   
-You can add cross\-region actions when you create your pipeline\. AWS resources for cross\-region actions must be in the same AWS Region where you plan to execute the action\. For more information, see [Add a Cross\-Region Action in CodePipeline](actions-create-cross-region.md)\.
+You can add cross\-region actions when you create your pipeline\. AWS resources for cross\-region actions must be in the same AWS Region where you plan to execute the action\. For more information, see [Add a cross\-Region action in CodePipeline](actions-create-cross-region.md)\.
 
-## Option 1: Deploy Static Website Files to Amazon S3<a name="tutorials-s3deploy-acc"></a>
+## Option 1: Deploy static website files to Amazon S3<a name="tutorials-s3deploy-acc"></a>
 
 In this example, you download the sample static website template file, upload the files to your AWS CodeCommit repository, create your bucket, and configure it for hosting\. Next, you use the AWS CodePipeline console to create your pipeline and specify an Amazon S3 deployment configuration\.
 
 ### Prerequisites<a name="tutorials-s3deploy-acc-prereq"></a>
 
 You must already have the following:
-+ A CodeCommit repository\. You can use the AWS CodeCommit repository you created in [Tutorial: Create a Simple Pipeline \(CodeCommit Repository\)](tutorials-simple-codecommit.md)\.
++ A CodeCommit repository\. You can use the AWS CodeCommit repository you created in [Tutorial: Create a simple pipeline \(CodeCommit repository\)](tutorials-simple-codecommit.md)\.
 + Source files for your static website\. Use this link to download a [sample static website](samples/sample-website.zip)\. The sample\-website\.zip download produces the following files: 
   + An `index.html` file
   + A `main.css` file
   + A `graphic.jpg` file
-+ An S3 bucket configured for website hosting\. See [Hosting a Static Website on Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html)\. Make sure you create your bucket in the same region as the pipeline\.
++ An S3 bucket configured for website hosting\. See [Hosting a static website on Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html)\. Make sure you create your bucket in the same Region as the pipeline\.
 **Note**  
 To host a website, your bucket must have public read access, which gives everyone read access\. With the exception of website hosting, you should keep the default access settings that block public access to S3 buckets\.
 
-### Step 1: Push Source Files to Your CodeCommit Repository<a name="tutorials-s3deploy-acc-push"></a>
+### Step 1: Push source files to your CodeCommit repository<a name="tutorials-s3deploy-acc-push"></a>
 
 In this section, push your source files to the repository that the pipeline uses for your source stage\.
 
@@ -72,7 +72,7 @@ In this section, push your source files to the repository that the pipeline uses
 
       1. Repeat this step for each file you want to upload\.
 
-### Step 2: Create Your Pipeline<a name="tutorials-s3deploy-acc-pipeline"></a>
+### Step 2: Create your pipeline<a name="tutorials-s3deploy-acc-pipeline"></a>
 
 In this section, you create a pipeline with the following actions:
 + A source stage with a CodeCommit action where the source artifacts are the files for your website\.
@@ -90,7 +90,7 @@ In this section, you create a pipeline with the following actions:
 
 1. Leave the settings under **Advanced settings** at their defaults, and then choose **Next**\.
 
-1. In **Step 2: Add source stage**, in **Source provider**, choose **AWS CodeCommit**\. In **Repository name**, choose the name of the CodeCommit repository you created in [Step 1: Create a CodeCommit Repository](tutorials-simple-codecommit.md#codecommit-create-repository)\. In **Branch name**, choose the name of the branch that contains your latest code update\. Unless you created a different branch on your own, only `master` is available\. 
+1. In **Step 2: Add source stage**, in **Source provider**, choose **AWS CodeCommit**\. In **Repository name**, choose the name of the CodeCommit repository you created in [Step 1: Create a CodeCommit repository](tutorials-simple-codecommit.md#codecommit-create-repository)\. In **Branch name**, choose the name of the branch that contains your latest code update\. Unless you created a different branch on your own, only `master` is available\. 
 
    After you select the repository name and branch, the Amazon CloudWatch Events rule to be created for this pipeline is displayed\. 
 
@@ -108,7 +108,7 @@ In this section, you create a pipeline with the following actions:
 
    1. Select **Extract file before deploy**\.
 **Note**  
-The deployment fails if you do not select **Extract file before deploy**\.This is because the AWS CodeCommit action in your pipeline zips source artifacts and your file is a ZIP file\.
+The deployment fails if you do not select **Extract file before deploy**\. This is because the AWS CodeCommit action in your pipeline zips source artifacts and your file is a ZIP file\.
 
       When **Extract file before deploy** is selected, **Deployment path** is displayed\. Enter the name of the path you want to use\. This creates a folder structure in Amazon S3 to which the files are extracted\. For this tutorial, leave this field blank\.  
 ![\[The Step 4: Deploy page for an S3 deploy action with an AWS CodeCommit source\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/tutorial-s3deploy-stage-codecommit.png)![\[The Step 4: Deploy page for an S3 deploy action with an AWS CodeCommit source\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The Step 4: Deploy page for an S3 deploy action with an AWS CodeCommit source\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
@@ -137,23 +137,23 @@ The deployment fails if you do not select **Extract file before deploy**\.This i
    The sample appears as shown here\.  
 ![\[Sample website\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/tutorial-s3deploy-pipeline-website.png)![\[Sample website\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Sample website\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
-### Step 3: Make a Change to Any Source File and Verify Deployment<a name="tutorials-s3deploy-acc-update"></a>
+### Step 3: Make a change to any source file and verify deployment<a name="tutorials-s3deploy-acc-update"></a>
 
 Make a change to your source files and then push the change to your repository\. This triggers your pipeline to run\. Verify that your website is updated\.
 
-## Option 2: Deploy Built Archive Files to Amazon S3 from an S3 Source Bucket<a name="tutorials-s3deploy-s3source"></a>
+## Option 2: Deploy built archive files to Amazon S3 from an S3 source bucket<a name="tutorials-s3deploy-s3source"></a>
 
 In this option, the build commands in your build stage compile TypeScript code into JavaScript code and deploy the output to your S3 target bucket under a separate timestamped folder\. First, you create TypeScript code and a buildspec\.yml file\. After you combine the source files in a ZIP file, you upload the source ZIP file to your S3 source bucket, and use a CodeBuild stage to deploy a built application ZIP file to your S3 target bucket\. The compiled code is retained as an archive in your target bucket\.
 
 ### Prerequisites<a name="tutorials-s3deploy-s3source-prereq"></a>
 
 You must already have the following:
-+ An S3 source bucket\. You can use the bucket you created in [Tutorial: Create a Simple Pipeline \(S3 Bucket\)](tutorials-simple-s3.md)\.
-+ An S3 target bucket\. See [Hosting a Static Website on Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html)\. Make sure you create your bucket in the same AWS Region as the pipeline you want to create\.
++ An S3 source bucket\. You can use the bucket you created in [Tutorial: Create a simple pipeline \(S3 bucket\)](tutorials-simple-s3.md)\.
++ An S3 target bucket\. See [Hosting a static website on Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html)\. Make sure you create your bucket in the same AWS Region as the pipeline you want to create\.
 **Note**  
 This example demonstrates deploying files to a private bucket\. Do not enable your target bucket for website hosting or attach any policies that make the bucket public\.
 
-### Step 1: Create and Upload Source Files to Your S3 Source Bucket<a name="tutorials-s3deploy-s3source-upload"></a>
+### Step 1: Create and upload source files to your S3 source bucket<a name="tutorials-s3deploy-s3source-upload"></a>
 
 In this section, you create and upload your source files to the bucket that the pipeline uses for your source stage\. This section provides instructions for creating the following source files:
 + A `buildspec.yml` file, which is used for CodeBuild build projects\.
@@ -217,7 +217,7 @@ In this section, you create and upload your source files to the bucket that the 
    source.zip
    ```
 
-### Step 2: Create Your Pipeline<a name="tutorials-s3deploy-s3source-pipeline"></a>
+### Step 2: Create your pipeline<a name="tutorials-s3deploy-s3source-pipeline"></a>
 
 In this section, you create a pipeline with the following actions:
 + A source stage with an Amazon S3 action where the source artifacts are the files for your downloadable application\.
@@ -299,7 +299,7 @@ In this section, you create a pipeline with the following actions:
    greet(greeting);
    ```
 
-### Step 3: Make a Change to Any Source File and Verify Deployment<a name="tutorials-s3deploy-s3source-update"></a>
+### Step 3: Make a change to any source file and verify deployment<a name="tutorials-s3deploy-s3source-update"></a>
 
 Make a change to your source files and then upload them to your source bucket\. This triggers your pipeline to run\. View your target bucket and verify that the deployed output files are available in the `js-application` folder as shown:
 

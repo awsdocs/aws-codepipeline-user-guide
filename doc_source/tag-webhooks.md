@@ -1,18 +1,18 @@
-# Tag a Webhook in CodePipeline<a name="tag-webhooks"></a>
+# Tag a webhook in CodePipeline<a name="tag-webhooks"></a>
 
-You can apply tags to your webhooks in CodePipeline\. Tags are key\-value pairs associated with AWS resources\. For information about CodePipeline resource tagging, use cases, tag key and value constraints, and supported resource types, see [Tagging Resources](tag-resources.md)\.
+You can apply tags to your webhooks in CodePipeline\. Tags are key\-value pairs associated with AWS resources\. For information about CodePipeline resource tagging, use cases, tag key and value constraints, and supported resource types, see [Tagging resources](tag-resources.md)\.
 
 You can specify tags when you create a webhook\. You can add, remove, and update the values of tags in a webhook\. You can add up to 50 tags to each webhook\.
 
 **Topics**
-+ [Add Tags to an Existing Webhook](#tag-webhooks-add)
-+ [View Tags for a Webhook](#tag-webhooks-list)
-+ [Edit Tags for a Webhook](#tag-webhooks-update)
-+ [Remove Tags for a Webhook](#tag-webhooks-delete)
++ [Add tags to an existing webhook](#tag-webhooks-add)
++ [View tags for a webhook](#tag-webhooks-list)
++ [Edit tags for a webhook](#tag-webhooks-update)
++ [Remove tags for a webhook](#tag-webhooks-delete)
 
-## Add Tags to an Existing Webhook<a name="tag-webhooks-add"></a>
+## Add tags to an existing webhook<a name="tag-webhooks-add"></a>
 
-Follow these steps to use the AWS CLI to add a tag to a webhook\. To add a tag to a webhook when you create it, see [Create a Webhook for a GitHub Source](pipelines-webhooks-create.md)\.
+Follow these steps to use the AWS CLI to add a tag to a webhook\. To add a tag to a webhook when you create it, see [Create a webhook for a GitHub source](pipelines-webhooks-create.md)\.
 
 In these steps, we assume that you have already installed a recent version of the AWS CLI or updated to the current version\. For more information, see [Installing the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/installing.html)\.
 
@@ -24,7 +24,7 @@ aws codepipeline tag-resource --resource-arn arn:aws:codepipeline:us-west-2:acco
 
 If successful, this command returns nothing\.
 
-## View Tags for a Webhook<a name="tag-webhooks-list"></a>
+## View tags for a webhook<a name="tag-webhooks-list"></a>
 
 Follow these steps to use the AWS CLI to view the AWS tags for a webhook\. If no tags have been added, the returned list is empty\.
 
@@ -45,7 +45,7 @@ If successful, this command returns information similar to the following:
 }
 ```
 
-## Edit Tags for a Webhook<a name="tag-webhooks-update"></a>
+## Edit tags for a webhook<a name="tag-webhooks-update"></a>
 
 Follow these steps to use the AWS CLI to update a tag for a webhook\. You can change the value for an existing key or add another key\. You can also remove tags from a webhook, as shown in the next section\.
 
@@ -55,7 +55,7 @@ At the terminal or command line, run the tag\-resource command, specifying the A
 aws codepipeline tag-resource --resource-arn arn:aws:codepipeline:us-west-2:account-id:webhook:MyWebhook --tags key=Project,value=UpdatedProject
 ```
 
-## Remove Tags for a Webhook<a name="tag-webhooks-delete"></a>
+## Remove tags for a webhook<a name="tag-webhooks-delete"></a>
 
 Follow these steps to use the AWS CLI to remove a tag from a webhook\. When you remove tags from the associated resource, the tags are deleted\.
 

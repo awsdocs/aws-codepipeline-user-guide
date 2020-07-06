@@ -1,4 +1,4 @@
-# Integration Examples: Blog Posts<a name="integrations-community-blogposts"></a>
+# Integration examples: Blog posts<a name="integrations-community-blogposts"></a>
 + [How to deploy from GitHub to Amazon EC2 with CodePipeline](https://seanjziegler.com/deploying-code-from-github-to-aws-ec2-with-codepipeline/)
 
   Learn how to set up CodePipeline from scratch to deploy dev, test, and prod branches to separate deployment groups\. Learn how to use and configure IAM roles, the CodeDeploy agent, and CodeDeploy, along with CodePipeline\.
@@ -53,7 +53,7 @@
   *Published March 2016*
 + [Create a Pipeline Using the AWS CodePipeline Console](http://www.stelligent.com/cloud/create-a-pipeline-using-the-aws-codepipeline-console/)
 
-  Learn how to use the AWS CodePipeline console to create a two\-stage pipeline in a walkthrough based on the AWS CodePipeline [Tutorial: Create a Four\-Stage Pipeline](tutorials-four-stage-pipeline.md)\.
+  Learn how to use the AWS CodePipeline console to create a two\-stage pipeline in a walkthrough based on the AWS CodePipeline [Tutorial: Create a four\-stage pipeline](tutorials-four-stage-pipeline.md)\.
 
   *Published March 2016*
 + [Mocking AWS CodePipeline Pipelines with AWS Lambda](http://www.stelligent.com/automation/mocking-aws-codepipeline-pipelines-with-lambda/)
@@ -63,7 +63,7 @@
   *Published February 2016*
 + [Running AWS Lambda Functions in CodePipeline Using AWS CloudFormation](http://www.stelligent.com/automation/aws-lambda-functions-aws-codepipeline-cloudformation/)
 
-  Learn how to create an AWS CloudFormation stack that provisions all the AWS resources used in the user guide task [Invoke an AWS Lambda Function in a Pipeline in CodePipeline](actions-invoke-lambda-function.md)\.
+  Learn how to create an AWS CloudFormation stack that provisions all the AWS resources used in the user guide task [Invoke an AWS Lambda function in a pipeline in CodePipeline](actions-invoke-lambda-function.md)\.
 
   *Published February 2016*
 + [Provisioning Custom CodePipeline Actions in AWS CloudFormation](http://www.stelligent.com/automation/provisioning-custom-codepipeline-actions-in-cloudformation/)

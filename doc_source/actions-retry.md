@@ -1,6 +1,6 @@
-# Retry a Failed Action in CodePipeline<a name="actions-retry"></a>
+# Retry a failed action in CodePipeline<a name="actions-retry"></a>
 
-In AWS CodePipeline, an action is a task performed on an artifact in a stage\. If an action \(or a set of parallel actions\) is not completed successfully, the action fails\. You can use the CLI to manually retry the failed action before the stage completes \(while other actions are still in progress\)\. If a stage completes with one or more failed actions, the stage fails, and the pipeline execution does not transition to the next stage in the pipeline\.
+In AWS CodePipeline, an action is a task performed on an artifact in a stage\. A failure is an action in a stage that is not completed successfully\. You can use the CLI to manually retry the failed action before the stage completes \(while other actions are still in progress\)\. If a stage completes with one or more failed actions, the stage fails, and the pipeline execution does not transition to the next stage in the pipeline\.
 
 You can retry the latest failed actions in a stage without having to run a pipeline again from the beginning\. You do this by retrying the stage that contains the actions\. You can retry a stage immediately after any of actions fail\. All actions that are still in progress continue their work, and failed actions are triggered once again\.
 
@@ -16,10 +16,10 @@ The overall pipeline structure changed after an action failed\.
 Another retry attempt in the stage is already in progress\.
 
 **Topics**
-+ [Retry Failed Actions \(Console\)](#actions-retry-console)
-+ [Retry Failed Actions \(CLI\)](#actions-retry-cli)
++ [Retry failed actions \(console\)](#actions-retry-console)
++ [Retry failed actions \(CLI\)](#actions-retry-cli)
 
-## Retry Failed Actions \(Console\)<a name="actions-retry-console"></a>
+## Retry failed actions \(console\)<a name="actions-retry-console"></a>
 
 ****
 
@@ -35,7 +35,7 @@ To identify which actions in the stage can be retried, hover over the **Retry** 
 
    If all retried actions in the stage are completed successfully, the pipeline continues to run\.
 
-## Retry Failed Actions \(CLI\)<a name="actions-retry-cli"></a>
+## Retry failed actions \(CLI\)<a name="actions-retry-cli"></a>
 
 **Option 1: Retry failed actions using parameters for the CLI command**
 
@@ -129,4 +129,4 @@ Be sure to include `file://` before the file name\. It is required in this comma
    aws codepipeline retry-stage-execution --cli-input-json file://retry-failed-actions.json
    ```
 
-1. To view the results of the retry attempt, either open the CodePipeline console and choose the pipeline that contains the actions that failed, or use the get\-pipeline\-state command again\. For more information, see [View Pipeline Details and History in CodePipeline](pipelines-view.md)\. 
+1. To view the results of the retry attempt, either open the CodePipeline console and choose the pipeline that contains the actions that failed, or use the get\-pipeline\-state command again\. For more information, see [View pipeline details and history in CodePipeline](pipelines-view.md)\. 

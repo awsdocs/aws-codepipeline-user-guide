@@ -1,15 +1,15 @@
-# Configure GitHub Authentication<a name="GitHub-authentication"></a>
+# Configure GitHub authentication<a name="GitHub-authentication"></a>
 
 CodePipeline uses GitHub OAuth tokens and personal access tokens to access your GitHub repositories and retrieve the latest changes\. There are two ways to configure authentication in GitHub:
-+ AWS creates a default AWS\-managed OAuth token when you use the console to create or update pipelines\. 
++ AWS creates a default AWS managed OAuth token when you use the console to create or update pipelines\. 
 + You can create and manage your own customer\-generated personal access tokens\. You need personal access tokens when you use the CLI, SDK, or AWS CloudFormation to create or update your pipeline\. 
 
 **Topics**
-+ [View Your Authorized OAuth Apps](#GitHub-view-oauth-token)
-+ [Configure Your Pipeline to Use a Personal Access Token \(GitHub and CLI\)](GitHub-create-personal-token-CLI.md)
-+ [Use GitHub and the CodePipeline CLI to Create and Rotate Your GitHub Personal Access Token on a Regular Basis](#GitHub-rotate-personal-token-CLI)
++ [View your authorized OAuth apps](#GitHub-view-oauth-token)
++ [Configure your pipeline to use a personal access token \(GitHub and CLI\)](GitHub-create-personal-token-CLI.md)
++ [Use GitHub and the CodePipeline CLI to create and rotate your GitHub personal access token on a regular basis](#GitHub-rotate-personal-token-CLI)
 
-### View Your Authorized OAuth Apps<a name="GitHub-view-oauth-token"></a>
+### View your authorized OAuth apps<a name="GitHub-view-oauth-token"></a>
 
 CodePipeline uses OAuth tokens to integrate with GitHub\. GitHub tracks the permissions of the OAuth token for CodePipeline\.
 
@@ -22,7 +22,7 @@ CodePipeline uses OAuth tokens to integrate with GitHub\. GitHub tracks the perm
 1. Review your authorized apps\.  
 ![\[Review authorized apps in GitHub.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/oauth-apps.png)![\[Review authorized apps in GitHub.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Review authorized apps in GitHub.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
-### Use GitHub and the CodePipeline CLI to Create and Rotate Your GitHub Personal Access Token on a Regular Basis<a name="GitHub-rotate-personal-token-CLI"></a>
+### Use GitHub and the CodePipeline CLI to create and rotate your GitHub personal access token on a regular basis<a name="GitHub-rotate-personal-token-CLI"></a>
 
 The advantage of using tokens instead of passwords in a script is that tokens can be revoked or rotated\. You can also grant specific privileges and permissions to a personal access token\. Tokens should be stored securely and rotated or regenerated routinely\. Token rotation is recommended by [RFC\-6819 \(OAuth 2\.0 Threat Model and Security Considerations\), section 5\.1\.5\.3](https://tools.ietf.org/html/rfc6819#section-5.1.5.3)\.
 
@@ -96,4 +96,4 @@ Be sure to include `file://` before the file name\. It is required in this comma
 
 1. When you have finished updating your pipelines, delete the JSON files\.
 
-For more information, see [Pipeline Error: I receive a pipeline error that says: "Could not access the GitHub repository" or "Unable to connect to the GitHub repository"](troubleshooting.md#troubleshooting-gs2)\.
+For more information, see [Pipeline error: I receive a pipeline error that says: "Could not access the GitHub repository" or "Unable to connect to the GitHub repository"](troubleshooting.md#troubleshooting-gs2)\.

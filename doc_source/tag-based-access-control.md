@@ -1,6 +1,6 @@
-# Using Tags to Control Access to CodePipeline Resources<a name="tag-based-access-control"></a>
+# Using tags to control access to CodePipeline resources<a name="tag-based-access-control"></a>
 
-Conditions in IAM user policy statements are part of the syntax that you use to specify permissions to resources required by CodePipeline actions\. Using tags in conditions is one way to control access to resources and requests\. For information about tagging CodePipeline resources, see [Tagging Resources](tag-resources.md)\. This topic discusses tag\-based access control\.
+Conditions in IAM user policy statements are part of the syntax that you use to specify permissions to resources required by CodePipeline actions\. Using tags in conditions is one way to control access to resources and requests\. For information about tagging CodePipeline resources, see [Tagging resources](tag-resources.md)\. This topic discusses tag\-based access control\.
 
 When you design IAM policies, you might be setting granular permissions by granting access to specific resources\. As the number of resources that you manage grows, this task becomes more difficult\. Tagging resources and using tags in policy statement conditions can make this task easier\. You grant access in bulk to any resource with a certain tag\. Then you repeatedly apply this tag to relevant resources, during creation or later\.
 

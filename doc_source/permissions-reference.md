@@ -1,4 +1,4 @@
-# CodePipeline Permissions Reference<a name="permissions-reference"></a>
+# CodePipeline permissions reference<a name="permissions-reference"></a>
 
 Use the following table as a reference when you are setting up access control and writing permissions policies that you can attach to an IAM identity \(identity\-based policies\)\. The table lists each CodePipeline API operation and the corresponding actions for which you can grant permissions to perform the action\. For operations that support *resource\-level permissions*, the table lists the AWS resource for which you can grant the permissions\. You specify the actions in the policy's `Action` field\.
 
@@ -8,5 +8,5 @@ Use the following table as a reference when you are setting up access control an
 The **Resources** column lists the resource required for API calls that support resource\-level permissions\. For API calls that do not support resource\-level permissions, you can grant users permission to use it, but you have to specify a wildcard \(\*\) for the resource element of your policy statement\.
 
 
-**CodePipeline API Operations and Required Permissions for Actions**  
+**CodePipeline API Operations and required permissions for actions**  
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/permissions-reference.html)

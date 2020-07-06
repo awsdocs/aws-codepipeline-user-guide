@@ -1,4 +1,4 @@
-# Edit the Webhook for Your GitHub Source<a name="pipelines-webhooks-update.title"></a>
+# Edit the webhook for your GitHub source<a name="pipelines-webhooks-update.title"></a>
 
 You can use the AWS CLI to edit the webhook for your repository\.
 + If you use the console to edit the GitHub source action for your pipeline, the webhook is updated for you \(and re\-registered, if appropriate\)\.
@@ -7,7 +7,7 @@ You can use the AWS CLI to edit the webhook for your repository\.
 
 **Example 1: To update a webhook secret**
 
-1. In a text editor, edit the JSON file for the webhook you want to update\. This example modifies the sample file that was used to create the webhook in [Create a Webhook for a GitHub Source](pipelines-webhooks-create.md)\. This sample changes the secret token of the webhook named `"my-webhook"`\.
+1. In a text editor, edit the JSON file for the webhook you want to update\. This example modifies the sample file that was used to create the webhook in [Create a webhook for a GitHub source](pipelines-webhooks-create.md)\. This sample changes the secret token of the webhook named `"my-webhook"`\.
 
    ```
    {"webhook": 
@@ -40,8 +40,8 @@ You can edit the GitHub source action in the console\. This allows CodePipeline 
 
 **Example 2: To update a webhook name or GitHub repository**
 
-1. Use the steps in [Delete the Webhook for Your GitHub Source](pipelines-webhooks-delete.md) to deregister and delete the existing webhook that is associated with the old webhook name or GitHub repository\.
+1. Use the steps in [Delete the webhook for your GitHub source](pipelines-webhooks-delete.md) to deregister and delete the existing webhook that is associated with the old webhook name or GitHub repository\.
 
-1. Use the steps in [Create a Webhook for a GitHub Source](pipelines-webhooks-create.md) to recreate the webhook\.
+1. Use the steps in [Create a webhook for a GitHub source](pipelines-webhooks-create.md) to recreate the webhook\.
 **Note**  
 You can edit the GitHub source action in the console\. This allows CodePipeline to manage webhooks for you\.

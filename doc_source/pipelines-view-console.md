@@ -1,4 +1,4 @@
-# View Pipeline Details and History \(Console\)<a name="pipelines-view-console"></a>
+# View pipeline details and history \(console\)<a name="pipelines-view-console"></a>
 
 You can use the CodePipeline console to view a list of all of the pipelines in your account\. You can also view details for each pipeline, including when actions last ran in the pipeline, whether a transition between stages is enabled or disabled, whether any actions have failed, and other information\. You can also view a history page that shows details for all pipeline executions for which history has been recorded\. Execution history is retained for up to 12 months\.
 
@@ -6,14 +6,14 @@ You can use the CodePipeline console to view a list of all of the pipelines in y
 Detailed execution history is available for executions run on or after February 21, 2019\. 
 
 **Topics**
-+ [View Pipeline \(Console\)](#pipelines-list-console)
-+ [View Pipeline Execution History \(Console\)](#pipelines-executions-console)
-+ [View Execution Status \(Console\)](#pipelines-executions-status-console)
-+ [View Pipeline Execution Source Revisions \(Console\)](#pipelines-source-revisions-console)
-+ [View Action Executions \(Console\)](#pipelines-action-executions-console)
-+ [View Action Artifacts and Artifact Store Information \(Console\)](#pipelines-action-artifacts-console)
++ [View pipeline \(console\)](#pipelines-list-console)
++ [View pipeline execution history \(console\)](#pipelines-executions-console)
++ [View execution status \(console\)](#pipelines-executions-status-console)
++ [View pipeline execution source revisions \(console\)](#pipelines-source-revisions-console)
++ [View action executions \(console\)](#pipelines-action-executions-console)
++ [View action artifacts and artifact store information \(console\)](#pipelines-action-artifacts-console)
 
-## View Pipeline \(Console\)<a name="pipelines-list-console"></a>
+## View pipeline \(console\)<a name="pipelines-list-console"></a>
 
 You can view status, transitions, and artifact updates for a pipeline\.
 
@@ -65,7 +65,7 @@ Details are available for source actions that retrieve content from GitHub repos
 
 1. To view details about the most recent executions for the pipeline, choose **View history**\. For past executions, you can view revision details associated with source artifacts, such as execution IDs, status, start and end times, duration, and commit IDs and messages\.
 
-## View Pipeline Execution History \(Console\)<a name="pipelines-executions-console"></a>
+## View pipeline execution history \(console\)<a name="pipelines-executions-console"></a>
 
 You can use the console to view the history of executions in a pipeline, including status, source revisions, and timing details for each execution\.
 
@@ -83,7 +83,7 @@ You can use the console to view the history of executions in a pipeline, includi
 1. Choose an execution\. The detail view shows execution details, the **Timeline** tab, and the **Visualization** tab\.  
 ![\[View execution details.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/view-execution-detail.png)![\[View execution details.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[View execution details.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
-## View Execution Status \(Console\)<a name="pipelines-executions-status-console"></a>
+## View execution status \(console\)<a name="pipelines-executions-status-console"></a>
 
 You can view the pipeline status in **Status** on the execution history page\. Choose an execution ID link, and then view the action status\.
 
@@ -92,7 +92,7 @@ The following are valid states for pipelines, stages, and actions:
 
 **Pipeline\-level states**  
 
-| Pipeline State | Description | 
+| Pipeline state | Description | 
 | --- | --- | 
 | InProgress | The pipeline execution is currently running\. | 
 | Stopping | The pipeline execution is stopping due to a request to either stop and wait or stop and abandon the pipeline execution\. | 
@@ -104,7 +104,7 @@ The following are valid states for pipelines, stages, and actions:
 
 **Stage\-level states**  
 
-| Stage State | Description | 
+| Stage state | Description | 
 | --- | --- | 
 | InProgress | The stage is currently running\. | 
 | Stopping | The stage execution is stopping due to a request to either stop and wait or stop and abandon the pipeline execution\. | 
@@ -115,14 +115,14 @@ The following are valid states for pipelines, stages, and actions:
 
 **Action\-level states**  
 
-| Action State | Description | 
+| Action state | Description | 
 | --- | --- | 
 | InProgress | The action is currently running\. | 
 | Abandoned | The action is abandoned due to a request to stop and abandon the pipeline execution\. | 
 | Succeeded | The action was completed successfully\. | 
 | Failed | For approval actions, the FAILED state means the action was either rejected by the reviewer or failed due to an incorrect action configuration\. | 
 
-## View Pipeline Execution Source Revisions \(Console\)<a name="pipelines-source-revisions-console"></a>
+## View pipeline execution source revisions \(console\)<a name="pipelines-source-revisions-console"></a>
 
 You can view details about source artifacts \(output artifact that originated in the first stage of a pipeline\) that are used in an execution of a pipeline\. The details include identifiers, such as commit IDs, check\-in comments, and, when you use the CLI, version numbers of pipeline build actions\. For some revision types, you can view and open the URL of the commit\. Source revisions are made up of the following:
 + **Summary**: Summary information about the most recent revision of the artifact\. For GitHub and AWS CodeCommit repositories, the commit message\. For Amazon S3 buckets or actions, the user\-provided content of a codepipeline\-artifact\-revision\-summary key specified in the object metadata\. 
@@ -142,7 +142,7 @@ You can view details about source artifacts \(output artifact that originated in
      Choose **View current revisions** to view source information\. With the exception of artifacts stored in Amazon S3 buckets, identifiers such as commit IDs in this information detail view are linked to source information pages for the artifacts\.   
 ![\[View source revisions.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/view-changes-console-4.png)![\[View source revisions.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[View source revisions.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
-## View Action Executions \(Console\)<a name="pipelines-action-executions-console"></a>
+## View action executions \(console\)<a name="pipelines-action-executions-console"></a>
 
 You can view action details for a pipeline, such as action execution ID, input artifacts, output artifacts, and status\. You can view action details by choosing a pipeline in the console and then choosing an execution ID\.
 
@@ -163,7 +163,7 @@ Detailed execution history is available for executions run on or after February 
 
    1. In **Provider**, choose the link to view the action provider details\. For example, in the preceding example pipeline, if you choose CodeDeploy in either the Staging or Production stages, the CodeDeploy console page for the CodeDeploy application configured for that stage is displayed\.
 
-## View Action Artifacts and Artifact Store Information \(Console\)<a name="pipelines-action-artifacts-console"></a>
+## View action artifacts and artifact store information \(console\)<a name="pipelines-action-artifacts-console"></a>
 
 You can view input and output artifact details for an action\. You can also choose a link that takes you to the artifact information for that action\. Because the artifact store uses versioning, each action execution has a unique input and output artifact location\.
 

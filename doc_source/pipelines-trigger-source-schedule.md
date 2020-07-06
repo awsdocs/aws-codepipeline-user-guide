@@ -1,8 +1,8 @@
-# Use Amazon CloudWatch Events to Start a Pipeline on a Schedule<a name="pipelines-trigger-source-schedule"></a>
+# Use Amazon CloudWatch Events to start a pipeline on a schedule<a name="pipelines-trigger-source-schedule"></a>
 
 You can set up a rule in Amazon CloudWatch Events to start a pipeline on a schedule\. 
 
-## Create a CloudWatch Events Rule That Schedules Your Pipeline to Start \(Console\)<a name="pipelines-trigger-source-schedule-console"></a>
+## Create a CloudWatch Events rule that schedules your pipeline to start \(console\)<a name="pipelines-trigger-source-schedule-console"></a>
 
 **To create a CloudWatch Events rule with a schedule as the event source**
 
@@ -30,7 +30,7 @@ You can find the pipeline ARN in the metadata output after you run the get\-pipe
 
 1. If you're satisfied with the rule, choose **Create rule**\.
 
-## Create a CloudWatch Events Rule That Schedules Your Pipeline to Start \(CLI\)<a name="pipelines-trigger-source-schedule-cli"></a>
+## Create a CloudWatch Events rule that schedules your pipeline to start \(CLI\)<a name="pipelines-trigger-source-schedule-cli"></a>
 
 To use the AWS CLI to create a rule, call the put\-rule command, specifying:
 + A name that uniquely identifies the rule you are creating\. This name must be unique across all of the pipelines you create with CodePipeline associated with your AWS account\.

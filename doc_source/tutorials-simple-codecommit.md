@@ -1,4 +1,4 @@
-# Tutorial: Create a Simple Pipeline \(CodeCommit Repository\)<a name="tutorials-simple-codecommit"></a>
+# Tutorial: Create a simple pipeline \(CodeCommit repository\)<a name="tutorials-simple-codecommit"></a>
 
 In this tutorial, you use CodePipeline to deploy code maintained in a CodeCommit repository to a single Amazon EC2 instance\. Your pipeline is triggered when you push a change to the CodeCommit repository\. The pipeline deploys your changes to an Amazon EC2 instance using CodeDeploy as the deployment service\.
 
@@ -9,9 +9,9 @@ The pipeline has two stages:
 The easiest way to get started with AWS CodePipeline is to use the **Create Pipeline** wizard in the CodePipeline console\.
 
 **Note**  
-Before you begin, make sure you've set up your Git client to work with CodeCommit\. For instructions, see [Setting Up for CodeCommit](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up.html)\.
+Before you begin, make sure you've set up your Git client to work with CodeCommit\. For instructions, see [Setting up for CodeCommit](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up.html)\.
 
-## Step 1: Create a CodeCommit Repository<a name="codecommit-create-repository"></a>
+## Step 1: Create a CodeCommit repository<a name="codecommit-create-repository"></a>
 
 First, you create a repository in CodeCommit\. Your pipeline gets source code from this repository when it runs\. You also create a local repository where you maintain and update code before you push it to the CodeCommit repository\.
 
@@ -44,7 +44,7 @@ In this step, you set up a local repository to connect to your remote CodeCommit
    git clone ssh://git-codecommit.us-west-2.amazonaws.com/v1/repos/MyDemoRepo
    ```
 
-## Step 2: Add Sample Code to Your CodeCommit Repository<a name="codecommit-add-code"></a>
+## Step 2: Add sample code to your CodeCommit repository<a name="codecommit-add-code"></a>
 
 In this step, you download code for a sample application that was created for a CodeDeploy sample walkthrough, and add it to your CodeCommit repository\.
 
@@ -93,7 +93,7 @@ In this step, you download code for a sample application that was created for a 
 
 1. The files you downloaded and added to your local repo have now been added to the `master` branch in your CodeCommit `MyDemoRepo` repository and are ready to be included in a pipeline\.
 
-## Step 3: Create an EC2 Linux Instance and Install the CodeDeploy Agent<a name="codecommit-create-deployment"></a>
+## Step 3: Create an EC2 Linux instance and install the CodeDeploy agent<a name="codecommit-create-deployment"></a>
 
 In this step, you create the EC2 instance where you deploy a sample application\. As part of this process, you install the CodeDeploy agent on the EC2 instance\. The CodeDeploy agent is a software package that enables an instance to be used in CodeDeploy deployments\. You also attach an IAM role to the instance \(known as an *instance role*\) to allow it to fetch files that the CodeDeploy agent uses to deploy your application\.
 
@@ -162,7 +162,7 @@ For an example that runs these commands with elevated privileges \(sudo commands
 **Note**  
 For the purposes of this tutorial, you can proceed without a key pair\. To use SSH to connect to your instances, create or use a key pair\.
 
-   When you are ready, select the acknowledgement check box, and then choose **Launch Instances**\. 
+   When you are ready, select the acknowledgment check box, and then choose **Launch Instances**\. 
 
 1. Choose **View Instances** to close the confirmation page and return to the console\.
 
@@ -170,7 +170,7 @@ For the purposes of this tutorial, you can proceed without a key pair\. To use S
 
 1. It can take a few minutes for the instance to be ready for you to connect to it\. View the information in the **Status Checks** column to see if your instance has passed its status checks\. 
 
-## Step 4: Create an Application in CodeDeploy<a name="codecommit-create-codedeploy-app"></a>
+## Step 4: Create an application in CodeDeploy<a name="codecommit-create-codedeploy-app"></a>
 
 In CodeDeploy, an [https://docs.aws.amazon.com/codedeploy/latest/userguide/applications.html](https://docs.aws.amazon.com/codedeploy/latest/userguide/applications.html) is a resource that contains the software application you want to deploy\. Later, you use this application with CodePipeline to automate deployments of the sample application to your Amazon EC2 instance\.
 
@@ -226,7 +226,7 @@ A [https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-groups.htm
 
 1. Choose **Create deployment group**\.
 
-## Step 5: Create Your First Pipeline in CodePipeline<a name="codecommit-create-pipeline"></a>
+## Step 5: Create your first pipeline in CodePipeline<a name="codecommit-create-pipeline"></a>
 
 You're now ready to create and run your first pipeline\. In this step, you create a pipeline that runs automatically when code is pushed to your CodeCommit repository\.
 
@@ -244,7 +244,7 @@ You're now ready to create and run your first pipeline\. In this step, you creat
 
 1. Leave the settings under **Advanced settings** at their defaults, and then choose **Next**\.
 
-1. In **Step 2: Add source stage**, in **Source provider**, choose **AWS CodeCommit**\. In **Repository name**, choose the name of the CodeCommit repository you created in [Step 1: Create a CodeCommit Repository](#codecommit-create-repository)\. In **Branch name**, choose `master`, and then choose **Next step**\.  
+1. In **Step 2: Add source stage**, in **Source provider**, choose **AWS CodeCommit**\. In **Repository name**, choose the name of the CodeCommit repository you created in [Step 1: Create a CodeCommit repository](#codecommit-create-repository)\. In **Branch name**, choose `master`, and then choose **Next step**\.  
 ![\[The Step 2: Source page in the CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-wizard-source-codecommit-pol.png)![\[The Step 2: Source page in the CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The Step 2: Source page in the CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
    After you select the repository name and branch, a message displays the Amazon CloudWatch Events rule to be created for this pipeline\. 
@@ -282,9 +282,9 @@ Next, you verify the results\.
    This is the sample application you downloaded and pushed to your CodeCommit repository\.  
 ![\[The sample webpage application that was pushed to your CodeCommit repository.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-demo-success-message-codedeploy.png)![\[The sample webpage application that was pushed to your CodeCommit repository.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The sample webpage application that was pushed to your CodeCommit repository.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
-For more information about stages, actions, and how pipelines work, see [CodePipeline Concepts](concepts.md)\.
+For more information about stages, actions, and how pipelines work, see [CodePipeline concepts](concepts.md)\.
 
-## Step 6: Modify Code in Your CodeCommit Repository<a name="codecommit-push-code"></a>
+## Step 6: Modify code in your CodeCommit repository<a name="codecommit-push-code"></a>
 
 Your pipeline is configured to run whenever code changes are made to your CodeCommit repository\. In this step, you make changes to the HTML file that is part of the sample CodeDeploy application in the CodeCommit repository\. When you push these changes, your pipeline runs again, and the changes you make are visible at the web address you accessed earlier\.
 
@@ -363,21 +363,21 @@ Your pipeline is configured to run whenever code changes are made to your CodeCo
    The updated webpage is displayed:  
 ![\[The updated sample webpage application that was pushed to your CodeCommit repository.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-demo-success-message-codecommit.png)![\[The updated sample webpage application that was pushed to your CodeCommit repository.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The updated sample webpage application that was pushed to your CodeCommit repository.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
-## Step 7: Clean Up Resources<a name="codecommit-clean-up"></a>
+## Step 7: Clean up resources<a name="codecommit-clean-up"></a>
 
 You can use some of the resources you created in this tutorial for other tutorials in this guide\. For example, you can reuse the CodeDeploy application and deployment\. However, after you complete this and any other tutorials, you should delete the pipeline and the resources it uses so that you are not charged for the continued use of those resources\. First, delete the pipeline, then the CodeDeploy application and its associated Amazon EC2 instance, and finally, the CodeCommit repository\.
 
 **To clean up the resources used in this tutorial**
 
-1. To clean up your CodePipeline resources, follow the instructions in [Delete a Pipeline in AWS CodePipeline](pipelines-delete.md)\.
+1. To clean up your CodePipeline resources, follow the instructions in [Delete a pipeline in AWS CodePipeline](pipelines-delete.md)\.
 
 1. To clean up your CodeDeploy resources, follow the instructions in [Clean Up Deployment Walkthrough Resources](https://docs.aws.amazon.com/codedeploy/latest/userguide/tutorials-simple-s3alkthrough.html#tutorials-simple-s3alkthrough-clean-up)\.
 
-1. To delete the CodeCommit repository, follow the instructions in [Delete a CodeCommit Repository](https://docs.aws.amazon.com/codecommit/latest/userguide/how-to-delete-repository.html)\.
+1. To delete the CodeCommit repository, follow the instructions in [Delete a CodeCommit repository](https://docs.aws.amazon.com/codecommit/latest/userguide/how-to-delete-repository.html)\.
 
-## Step 8: Further Reading<a name="codecommit-optional-tasks"></a>
+## Step 8: Further reading<a name="codecommit-optional-tasks"></a>
 
 Learn more about how CodePipeline works:
-+ For more information about stages, actions, and how pipelines work, see [CodePipeline Concepts](concepts.md)\.
-+ For information about the actions you can perform using CodePipeline, see [Integrations with CodePipeline Action Types](integrations-action-type.md)\.
-+ Try this more advanced tutorial, [Tutorial: Create a Four\-Stage Pipeline](tutorials-four-stage-pipeline.md)\. It creates a multi\-stage pipeline that includes a step that builds code before it's deployed\.
++ For more information about stages, actions, and how pipelines work, see [CodePipeline concepts](concepts.md)\.
++ For information about the actions you can perform using CodePipeline, see [Integrations with CodePipeline action types](integrations-action-type.md)\.
++ Try this more advanced tutorial, [Tutorial: Create a four\-stage pipeline](tutorials-four-stage-pipeline.md)\. It creates a multi\-stage pipeline that includes a step that builds code before it's deployed\.

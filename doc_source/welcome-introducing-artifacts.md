@@ -1,4 +1,4 @@
-# Input and Output Artifacts<a name="welcome-introducing-artifacts"></a>
+# Input and output artifacts<a name="welcome-introducing-artifacts"></a>
 
 CodePipeline integrates with development tools to check for code changes and then build and deploy through all of the stages of the continuous delivery process\.
 
@@ -23,9 +23,9 @@ The following diagram shows a high\-level artifact workflow between stages in Co
 **Note**  
 CodePipeline truncates artifact names, which can cause some bucket names to appear similar\. Even though the artifact name appears to be truncated, CodePipeline maps to the artifact bucket in a way that is not affected by artifacts with truncated names\. The pipeline can function normally\. This is not an issue with the folder or artifacts\. There is a 100\-character limit to pipeline names\. Although the artifact folder name might appear to be shortened, it is still unique for your pipeline\.
 
-  When you create or edit a pipeline, you must have an artifact bucket in the pipeline Region and you must have one artifact bucket per Region where you plan to execute an action\. If you use the console to create a pipeline or cross\-region actions, default artifact buckets are configured by CodePipeline in the Regions where you have actions\.
+  When you create or edit a pipeline, you must have an artifact bucket in the pipeline Region and you must have one artifact bucket per Region where you plan to execute an action\. If you use the console to create a pipeline or cross\-Region actions, default artifact buckets are configured by CodePipeline in the Regions where you have actions\.
 
-  If you use the AWS CLI to create a pipeline, you can store the artifacts for that pipeline in any Amazon S3 bucket as long as that bucket is in the same AWS Region as the pipeline\. You might do this if you are concerned about exceeding the limits of Amazon S3 buckets allowed for your account\. If you use the AWS CLI to create or edit a pipeline, and you add a cross\-region action \(an action with an AWS provider in a Region different from your pipeline\), you must provide an artifact bucket for each additional Region where you plan to execute an action\.
+  If you use the AWS CLI to create a pipeline, you can store the artifacts for that pipeline in any Amazon S3 bucket as long as that bucket is in the same AWS Region as the pipeline\. You might do this if you are concerned about exceeding the limits of Amazon S3 buckets allowed for your account\. If you use the AWS CLI to create or edit a pipeline, and you add a cross\-Region action \(an action with an AWS provider in a Region different from your pipeline\), you must provide an artifact bucket for each additional Region where you plan to execute an action\.
 + Every action has a type\. Depending on the type, the action might have one or both of the following:
   + An input artifact, which is the artifact it consumes or works on over the course of the action run\.
   + An output artifact, which is the output of the action\.

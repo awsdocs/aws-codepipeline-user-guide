@@ -1,4 +1,4 @@
-# Tagging Resources<a name="tag-resources"></a>
+# Tagging resources<a name="tag-resources"></a>
 
 A *tag* is a custom attribute label that you or AWS assigns to an AWS resource\. Each AWS tag has two parts:
 + A *tag key* \(for example, `CostCenter`, `Environment`, `Project`, or `Secret`\)\. Tag keys are case sensitive\.
@@ -11,9 +11,9 @@ Tags help you identify and organize your AWS resources\. Many AWS services suppo
 For tips on using tags, see the [AWS Tagging Strategies](https://aws.amazon.com/answers/account-management/aws-tagging-strategies/) post on the *AWS Answers* blog\. 
 
 You can tag the following resource types in CodePipeline:
-+ [Tag a Pipeline in CodePipeline](pipelines-tag.md)
-+ [Tag a Custom Action in CodePipeline](customactions-tag.md)
-+ [Tag a Webhook in CodePipeline](tag-webhooks.md)
++ [Tag a pipeline in CodePipeline](pipelines-tag.md)
++ [Tag a custom action in CodePipeline](customactions-tag.md)
++ [Tag a webhook in CodePipeline](tag-webhooks.md)
 
 You can use the AWS CLI, CodePipeline APIs, or AWS SDKs to: 
 + Add tags to a pipeline, custom action, or webhook when you create it\.
@@ -21,4 +21,4 @@ You can use the AWS CLI, CodePipeline APIs, or AWS SDKs to:
 
 You can also use the console to add, manage, and remove tags for a pipeline\.
 
-In addition to identifying, organizing, and tracking your resource with tags, you can use tags in IAM policies to help control who can view and interact with your resource\. For examples of tag\-based access policies, see [Using Tags to Control Access to CodePipeline Resources](tag-based-access-control.md)\.
+In addition to identifying, organizing, and tracking your resource with tags, you can use tags in IAM policies to help control who can view and interact with your resource\. For examples of tag\-based access policies, see [Using tags to control access to CodePipeline resources](tag-based-access-control.md)\.

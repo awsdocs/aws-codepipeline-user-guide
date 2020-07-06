@@ -1,4 +1,4 @@
-# Integration Examples: Videos<a name="integrations-community-videos"></a>
+# Integration examples: Videos<a name="integrations-community-videos"></a>
 + **Create a Pipeline Using the CodePipeline Console**
 
   Learn how to use the CodePipeline console to create a pipeline that uses CodeDeploy and Amazon S3\.  

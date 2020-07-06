@@ -1,4 +1,4 @@
-# Create a CloudWatch Events Rule for an Amazon ECR Source \(Console\)<a name="create-cwe-ecr-source-console"></a>
+# Create a CloudWatch Events rule for an Amazon ECR source \(console\)<a name="create-cwe-ecr-source-console"></a>
 
 **To create a CloudWatch Events rule for use in CodePipeline operations \(Amazon ECR source\)**
 

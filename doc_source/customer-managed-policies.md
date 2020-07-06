@@ -1,21 +1,21 @@
-# Customer Managed Policy Examples<a name="customer-managed-policies"></a>
+# Customer managed policy examples<a name="customer-managed-policies"></a>
 
-In this section, you can find example user policies that grant permissions for various CodePipeline actions\. These policies work when you are using the CodePipeline API, AWS SDKs, or the AWS CLI\. When you are using the console, you must grant additional permissions specific to the console\. For more information, see [Permissions Required to Use the CodePipeline Console](security-iam-permissions-console.md)\.
+In this section, you can find example user policies that grant permissions for various CodePipeline actions\. These policies work when you are using the CodePipeline API, AWS SDKs, or the AWS CLI\. When you are using the console, you must grant additional permissions specific to the console\. For more information, see [Permissions required to use the CodePipeline console](security-iam-permissions-console.md)\.
 
 **Note**  
 All examples use the US West \(Oregon\) Region \(`us-west-2`\) and contain fictitious account IDs\.
 
 **Examples**
-+ [Example 1: Grant Permissions to Get the State of a Pipeline](#identity-based-policies-example-1)
-+ [Example 2: Grant Permissions to Enable and Disable Transitions Between Stages](#identity-based-policies-example-2)
-+ [Example 3: Grant Permissions to Get a List of All Available Action Types](#identity-based-policies-example-3)
-+ [Example 4: Grant Permissions to Approve or Reject Manual Approval Actions](#identity-based-policies-example-4)
-+ [Example 5: Grant Permissions to Poll for Jobs for a Custom Action](#identity-based-policies-example-5)
-+ [Example 6: Attach or Edit a Policy for Jenkins Integration with AWS CodePipeline](#identity-based-policies-example-6)
-+ [Example 7: Configure Cross\-Account Access to a Pipeline](#identity-based-policies-example-7)
-+ [Example 8: Use AWS Resources Associated with Another Account in a Pipeline](#identity-based-policies-example-8)
++ [Example 1: Grant permissions to get the state of a pipeline](#identity-based-policies-example-1)
++ [Example 2: Grant permissions to enable and disable transitions between stages](#identity-based-policies-example-2)
++ [Example 3: Grant permissions to get a list of all available action types](#identity-based-policies-example-3)
++ [Example 4: Grant permissions to approve or reject manual approval actions](#identity-based-policies-example-4)
++ [Example 5: Grant permissions to poll for jobs for a custom action](#identity-based-policies-example-5)
++ [Example 6: Attach or edit a policy for Jenkins integration with AWS CodePipeline](#identity-based-policies-example-6)
++ [Example 7: Configure cross\-account access to a pipeline](#identity-based-policies-example-7)
++ [Example 8: Use AWS resources associated with another account in a pipeline](#identity-based-policies-example-8)
 
-## Example 1: Grant Permissions to Get the State of a Pipeline<a name="identity-based-policies-example-1"></a>
+## Example 1: Grant permissions to get the state of a pipeline<a name="identity-based-policies-example-1"></a>
 
 The following example grants permissions to get the state of the pipeline named `MyFirstPipeline`:
 
@@ -34,7 +34,7 @@ The following example grants permissions to get the state of the pipeline named 
 }
 ```
 
-## Example 2: Grant Permissions to Enable and Disable Transitions Between Stages<a name="identity-based-policies-example-2"></a>
+## Example 2: Grant permissions to enable and disable transitions between stages<a name="identity-based-policies-example-2"></a>
 
 The following example grants permissions to disable and enable transitions between all stages in the pipeline named `MyFirstPipeline`:
 
@@ -60,7 +60,7 @@ To allow the user to disable and enable transitions for a single stage in a pipe
 "Resource": "arn:aws:codepipeline:us-west-2:111222333444:MyFirstPipeline/Staging"
 ```
 
-## Example 3: Grant Permissions to Get a List of All Available Action Types<a name="identity-based-policies-example-3"></a>
+## Example 3: Grant permissions to get a list of all available action types<a name="identity-based-policies-example-3"></a>
 
 The following example grants permissions to get a list of all available action types available for pipelines in the `us-west-2` Region:
 
@@ -79,7 +79,7 @@ The following example grants permissions to get a list of all available action t
 }
 ```
 
-## Example 4: Grant Permissions to Approve or Reject Manual Approval Actions<a name="identity-based-policies-example-4"></a>
+## Example 4: Grant permissions to approve or reject manual approval actions<a name="identity-based-policies-example-4"></a>
 
 The following example grants permissions to approve or reject manual approval actions in a stage named `Staging` in a pipeline named `MyFirstPipeline`: 
 
@@ -98,7 +98,7 @@ The following example grants permissions to approve or reject manual approval ac
 }
 ```
 
-## Example 5: Grant Permissions to Poll for Jobs for a Custom Action<a name="identity-based-policies-example-5"></a>
+## Example 5: Grant permissions to poll for jobs for a custom action<a name="identity-based-policies-example-5"></a>
 
 The following example grants permissions to poll for jobs for the custom action named `TestProvider`, which is a `Test` action type in its first version, across all pipelines: 
 
@@ -122,7 +122,7 @@ The job worker for a custom action might be configured under a different AWS acc
 }
 ```
 
-## Example 6: Attach or Edit a Policy for Jenkins Integration with AWS CodePipeline<a name="identity-based-policies-example-6"></a>
+## Example 6: Attach or edit a policy for Jenkins integration with AWS CodePipeline<a name="identity-based-policies-example-6"></a>
 
 If you configure a pipeline to use Jenkins for build or test, create a separate IAM user for that integration and attach an IAM policy that has the minimum permissions required for integration between Jenkins and CodePipeline\. This policy is the same as the `AWSCodePipelineCustomActionAccess` managed policy\. The following example shows a policy to attach to an IAM user for Jenkins integration:
 
@@ -145,7 +145,7 @@ If you configure a pipeline to use Jenkins for build or test, create a separate 
 }
 ```
 
-## Example 7: Configure Cross\-Account Access to a Pipeline<a name="identity-based-policies-example-7"></a>
+## Example 7: Configure cross\-account access to a pipeline<a name="identity-based-policies-example-7"></a>
 
 You can configure access to pipelines for users and groups in another AWS account\. The recommended way is to create a role in the account where the pipeline was created\. The role should allow users from the other AWS account to assume that role and access the pipeline\. For more information, see [Walkthrough: Cross\-Account Access Using Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/walkthru_cross-account-with-roles.html)\.
 
@@ -214,9 +214,9 @@ The following example shows a policy created in the *111111111111* AWS account t
 }
 ```
 
-## Example 8: Use AWS Resources Associated with Another Account in a Pipeline<a name="identity-based-policies-example-8"></a>
+## Example 8: Use AWS resources associated with another account in a pipeline<a name="identity-based-policies-example-8"></a>
 
-You can configure policies that allow a user to create a pipeline that uses resources in another AWS account\. This requires configuring policies and roles in both the account that creates the pipeline \(AccountA\) and the account that created the resources to be used in the pipeline \(AccountB\)\. You must also create a customer\-managed key in AWS Key Management Service to use for cross\-account access\. For more information and step\-by\-step examples, see [Create a Pipeline in CodePipeline That Uses Resources from Another AWS Account](pipelines-create-cross-account.md) and [Data Protection Configuration](data-protection.md#security-configuration)\.
+You can configure policies that allow a user to create a pipeline that uses resources in another AWS account\. This requires configuring policies and roles in both the account that creates the pipeline \(AccountA\) and the account that created the resources to be used in the pipeline \(AccountB\)\. You must also create a customer managed key in AWS Key Management Service to use for cross\-account access\. For more information and step\-by\-step examples, see [Create a pipeline in CodePipeline that uses resources from another AWS account](pipelines-create-cross-account.md) and [Data protection configuration](data-protection.md#security-configuration)\.
 
 The following example shows a policy configured by AccountA for an S3 bucket used to store pipeline artifacts\. The policy grants access to AccountB\. In the following example, the ARN for AccountB is `012ID_ACCOUNT_B`\. The ARN for the S3 bucket is `codepipeline-us-east-2-1234567890`\. Replace these ARNs with the ARNs for the S3 bucket and the account you want to allow access:
 
@@ -317,7 +317,7 @@ The following example shows a policy configured by AccountB and applied to the [
 }
 ```
 
-The following example shows a policy for AWS KMS where ***arn:aws:kms:us\-east\-1:012ID\_ACCOUNT\_A:key/2222222\-3333333\-4444\-556677EXAMPLE*** is the ARN of the customer\-managed key created in AccountA and configured to allow AccountB to use it:
+The following example shows a policy for AWS KMS where ***arn:aws:kms:us\-east\-1:012ID\_ACCOUNT\_A:key/2222222\-3333333\-4444\-556677EXAMPLE*** is the ARN of the customer managed key created in AccountA and configured to allow AccountB to use it:
 
 ```
 {
@@ -382,4 +382,4 @@ The following example shows an inline policy for an IAM role \(`CrossAccount_Rol
 }
 ```
 
-For more information about how to edit a pipeline for cross\-account access to resources, see [Step 2: Edit the Pipeline ](pipelines-create-cross-account.md#pipelines-create-cross-account-create)\.
+For more information about how to edit a pipeline for cross\-account access to resources, see [Step 2: Edit the pipeline ](pipelines-create-cross-account.md#pipelines-create-cross-account-create)\.

@@ -1,4 +1,4 @@
-# Use CloudWatch Events to Start a Pipeline \(CodeCommit Source\)<a name="triggering"></a>
+# Use CloudWatch Events to start a pipeline \(CodeCommit source\)<a name="triggering"></a>
 
 You can use Amazon CloudWatch Events to trigger pipelines to start when rule or schedule criteria are met\. For pipelines with an Amazon S3 or CodeCommit source, an Amazon CloudWatch Events rule detects source changes and then starts your pipeline\. When you use the console to create or change a pipeline, the rule and all associated resources are created for you\. If you create or change an Amazon S3 or CodeCommit pipeline in the AWS CLI or AWS CloudFormation, you must use these steps to create the Amazon CloudWatch Events rule and all associated resources manually\.
 
@@ -36,6 +36,6 @@ The event pattern uses these fields:
 + `detail:` contains the repository branch information, `referenceType` and `referenceName`\.
 
 **Topics**
-+ [Create a CloudWatch Events Rule for a CodeCommit Source \(Console\)](pipelines-trigger-source-repo-changes-console.md)
-+ [Create a CloudWatch Events Rule for a CodeCommit Source \(CLI\)](pipelines-trigger-source-repo-changes-cli.md)
-+ [Create a CloudWatch Events Rule for a CodeCommit Source \(AWS CloudFormation Template\)](pipelines-trigger-source-repo-changes-cfn.md)
++ [Create a CloudWatch Events rule for a CodeCommit source \(console\)](pipelines-trigger-source-repo-changes-console.md)
++ [Create a CloudWatch Events rule for a CodeCommit source \(CLI\)](pipelines-trigger-source-repo-changes-cli.md)
++ [Create a CloudWatch Events rule for a CodeCommit source \(AWS CloudFormation template\)](pipelines-trigger-source-repo-changes-cfn.md)

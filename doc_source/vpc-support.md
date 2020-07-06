@@ -31,16 +31,16 @@ CodePipeline currently supports VPC endpoints in the following AWS Regions:
 + South America \(São Paulo\)
 + AWS GovCloud \(US\-West\)
 
-## Create a VPC Endpoint for CodePipeline<a name="use-vpc-endpoints-with-codepipeline"></a>
+## Create a VPC endpoint for CodePipeline<a name="use-vpc-endpoints-with-codepipeline"></a>
 
- You can use the Amazon VPC console to create the **com\.amazonaws\.*region*\.codepipeline** VPC endpoint\. In the console, *region* is the region identifier for an AWS Region supported by CodePipeline, such as `us-east-2` for the US East \(Ohio\) Region\. For more information, see [Creating an Interface Endpoint](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint) in the *Amazon VPC User Guide*\.
+ You can use the Amazon VPC console to create the **com\.amazonaws\.*region*\.codepipeline** VPC endpoint\. In the console, *region* is the Region identifier for an AWS Region supported by CodePipeline, such as `us-east-2` for the US East \(Ohio\) Region\. For more information, see [Creating an Interface Endpoint](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint) in the *Amazon VPC User Guide*\.
 
-The endpoint is prepopulated with the region you specified when you signed in to AWS\. If you sign in to another region, the VPC endpoint is updated with the new region\.
+The endpoint is prepopulated with the Region you specified when you signed in to AWS\. If you sign in to another Region, the VPC endpoint is updated with the new Region\.
 
 **Note**  
 Other AWS services that provide VPC support and integrate with CodePipeline, such as CodeCommit, might not support using Amazon VPC endpoints for that integration\. For example, traffic between CodePipeline and CodeCommit cannot be restricted to the VPC subnet range\.
 
-## Troubleshooting Your VPC Setup<a name="troubleshooting-vpc"></a>
+## Troubleshooting your VPC setup<a name="troubleshooting-vpc"></a>
 
 When troubleshooting VPC issues, use the information that appears in internet connectivity error messages to help you identify, diagnose, and address issues\.
 

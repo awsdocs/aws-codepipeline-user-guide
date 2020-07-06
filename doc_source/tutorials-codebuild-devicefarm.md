@@ -1,10 +1,10 @@
-# Tutorial: Create a Pipeline That Builds and Tests Your Android App When a Commit Is Pushed to Your GitHub Repository<a name="tutorials-codebuild-devicefarm"></a>
+# Tutorial: Create a pipeline that builds and tests your Android app when a commit is pushed to your GitHub repository<a name="tutorials-codebuild-devicefarm"></a>
 
  You can use AWS CodePipeline to configure a continuous integration flow in which your app is built and tested each time a commit is pushed to its repository\. This tutorial shows how to create and configure a pipeline to build and test your Android app with source code in a GitHub repository\. The pipeline detects the arrival of a new commit through [webhooks that CodePipeline configures for your GitHub repository](https://docs.aws.amazon.com/codepipeline/latest/userguide/pipelines-webhooks-migration.html), and then uses [CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/welcome.html) to build the app and [Device Farm](https://docs.aws.amazon.com/devicefarm/latest/developerguide/welcome.html) to test it\. 
 
 **Important**  
 Many of the actions you add to your pipeline in this procedure involve AWS resources that you need to create before you create the pipeline\. AWS resources for your source actions must always be created in the same AWS Region where you create your pipeline\. For example, if you create your pipeline in the US East \(Ohio\) Region, your CodeCommit repository must be in the US East \(Ohio\) Region\.   
-You can add cross\-region actions when you create your pipeline\. AWS resources for cross\-region actions must be in the same AWS Region where you plan to execute the action\. For more information, see [Add a Cross\-Region Action in CodePipeline](actions-create-cross-region.md)\.
+You can add cross\-region actions when you create your pipeline\. AWS resources for cross\-region actions must be in the same AWS Region where you plan to execute the action\. For more information, see [Add a cross\-Region action in CodePipeline](actions-create-cross-region.md)\.
 
 You can try this out using your existing Android app and test definitions, or you can use the [sample app and test definitions provided by Device Farm](https://github.com/aws-samples/aws-device-farm-sample-app-for-android)\.
 
@@ -32,7 +32,7 @@ You can try this out using your existing Android app and test definitions, or yo
    https://<region-URL>/devicefarm/home?region=us-west-2#/projects/eec4905f-98f8-40aa-9afc-4c1cfexample/runs
    ```
 
-## Configure CodePipeline to Use Your Device Farm Tests<a name="codepipeline-configure-tests"></a>
+## Configure CodePipeline to use your Device Farm tests<a name="codepipeline-configure-tests"></a>
 
 1. Add and commit a file called [https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html](https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html) in the root of your app code, and push it to your repository\. CodeBuild uses this file to perform commands and access artifacts required to build your app\.
 
@@ -62,7 +62,7 @@ You can try this out using your existing Android app and test definitions, or yo
 
    1. In **Service role**, leave **New service role** selected, and leave **Role name** unchanged\. You can also choose to use an existing service role, if you have one\.
 **Note**  
-If you use a CodePipeline service role that was created before July 2018, you need to add permissions for Device Farm\. To do this, open the IAM console, find the role, and then add the following permissions to the role's policy\. For more information, see [Add Permissions to the CodePipeline Service Role](security-iam.md#how-to-update-role-new-services)\.  
+If you use a CodePipeline service role that was created before July 2018, you need to add permissions for Device Farm\. To do this, open the IAM console, find the role, and then add the following permissions to the role's policy\. For more information, see [Add permissions to the CodePipeline service role](security-iam.md#how-to-update-role-new-services)\.  
 
       ```
       {
@@ -123,7 +123,7 @@ If you use a CodePipeline service role that was created before July 2018, you ne
 
    1. In the upper right, choose **Edit**\.
 
-   1. At the bottom of the diagram, choose **\+ Add stage**\. In **Stage name**, enter a name, such as Test\.
+   1. At the bottom of the diagram, choose **\+ Add stage**\. In **Stage name**, enter a name, such as **Test**\.
 
    1. Choose **\+ Add action group**\.
 

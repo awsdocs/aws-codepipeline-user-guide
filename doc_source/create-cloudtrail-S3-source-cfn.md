@@ -1,4 +1,4 @@
-# Create a CloudWatch Events Rule for an Amazon S3 Source \(AWS CloudFormation Template\)<a name="create-cloudtrail-S3-source-cfn"></a>
+# Create a CloudWatch Events rule for an Amazon S3 source \(AWS CloudFormation template\)<a name="create-cloudtrail-S3-source-cfn"></a>
 
 To use AWS CloudFormation to create a rule, update your template as shown here\.<a name="proc-cfn-event-s3-createrule"></a>
 
@@ -254,7 +254,7 @@ To use AWS CloudFormation to create a rule, update your template as shown here\.
 
 **To edit your pipeline's PollForSourceChanges parameter**
 **Important**  
-When you create a pipeline with this method, the `PollForSourceChanges` parameter defaults to true if it is not explicitly set to false\. When you add event\-based change detection, you must add the parameter to your output and set it to false to disable polling\. Otherwise, your pipeline starts twice for a single source change\. For details, see [Default Settings for the PollForSourceChanges Parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
+When you create a pipeline with this method, the `PollForSourceChanges` parameter defaults to true if it is not explicitly set to false\. When you add event\-based change detection, you must add the parameter to your output and set it to false to disable polling\. Otherwise, your pipeline starts twice for a single source change\. For details, see [Default settings for the PollForSourceChanges parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
 + In the template, change `PollForSourceChanges` to `false`\. If you did not include `PollForSourceChanges` in your pipeline definition, add it and set it to `false`\.
 
   **Why am I making this change?** Changing `PollForSourceChanges` to `false` turns off periodic checks so you can use event\-based change detection only\.

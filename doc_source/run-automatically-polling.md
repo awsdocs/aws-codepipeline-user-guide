@@ -1,4 +1,4 @@
-# Use Periodic Checks to Start a Pipeline<a name="run-automatically-polling"></a>
+# Use periodic checks to start a pipeline<a name="run-automatically-polling"></a>
 
 Pipelines start automatically when repository changes are detected\. One change detection method is periodic checks\. Periodic checks can be enabled or disabled using the `PollForSourceChanges` flag\. If you use the CLI to create or edit a pipeline, this parameter defaults to `true`\. This is not the recommended configuration\. Instead, edit your pipeline to use the recommended change\-detection method and then set this parameter to `false`\.
 

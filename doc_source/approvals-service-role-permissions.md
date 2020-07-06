@@ -1,4 +1,4 @@
-# Grant Amazon SNS Permissions to a CodePipeline Service Role<a name="approvals-service-role-permissions"></a>
+# Grant Amazon SNS permissions to a CodePipeline service role<a name="approvals-service-role-permissions"></a>
 
 If you plan to use Amazon SNS to publish notifications to topics when approval actions require review, the service role you use in your CodePipeline operations must be granted permission to access the Amazon SNS resources\. You can use the IAM console to add this permission to your service role\.
 
@@ -6,7 +6,7 @@ If you plan to use Amazon SNS to publish notifications to topics when approval a
 
 1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 **Important**  
-Make sure you are signed in to the AWS Management Console with the same account information you used in [Getting Started with CodePipeline](getting-started-codepipeline.md)\.
+Make sure you are signed in to the AWS Management Console with the same account information you used in [Getting started with CodePipeline](getting-started-codepipeline.md)\.
 
 1. In the IAM console, in the navigation pane, choose **Roles**\.
 

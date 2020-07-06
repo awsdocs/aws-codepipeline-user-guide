@@ -1,17 +1,17 @@
-# How Pipeline Executions Work<a name="concepts-how-it-works"></a>
+# How pipeline executions work<a name="concepts-how-it-works"></a>
 
 This section provides an overview of the way CodePipeline processes a set of changes\. CodePipeline tracks each pipeline execution that starts when a change is made to the source code\. CodePipeline also tracks the way each execution progresses through the pipeline, including whether it is superseded by another execution\.
 
-## How Pipeline Executions Are Started<a name="concepts-how-it-works-starting"></a>
+## How pipeline executions are started<a name="concepts-how-it-works-starting"></a>
 
 You can trigger an execution when you change your source code or manually start the pipeline\. You can also trigger an execution through an Amazon CloudWatch Events rule that you schedule\. For example, when a source code change is pushed to a repository configured as the pipeline's source action, the pipeline detects the change and starts an execution\.
 
 **Note**  
 If a pipeline contains multiple source actions, all of them run again, even if a change is detected for one source action only\.
 
-## How Pipeline Executions Are Stopped<a name="concepts-how-it-works-stopping"></a>
+## How pipeline executions are stopped<a name="concepts-how-it-works-stopping"></a>
 
-To use the console to stop a pipeline execution, you can choose **Stop execution** on the pipeline visualization page, on the execution history page, or on the detailed history page\. To use the CLI to stop a pipeline execution, you use the `stop-pipeline-execution` command\. For more information, see [Stop a Pipeline Execution in CodePipeline](pipelines-stop.md)\.
+To use the console to stop a pipeline execution, you can choose **Stop execution** on the pipeline visualization page, on the execution history page, or on the detailed history page\. To use the CLI to stop a pipeline execution, you use the `stop-pipeline-execution` command\. For more information, see [Stop a pipeline execution in CodePipeline](pipelines-stop.md)\.
 
 There are two ways to stop a pipeline execution:
 + **Stop and wait:** All in\-progress action executions are allowed to complete, and subsequent actions are not started\. The pipeline execution does not continue to subsequent stages\. You cannot use this option on an execution that is already in a `Stopping` state\.
@@ -57,7 +57,7 @@ As an example of abandoned actions that can result in out\-of\-sequence tasks, i
 
 You might want to use the stop and abandon option in the case where you have a custom action\. For example, you can abandon a custom action with work that does not need to finish before you stop the execution for a new execution with a bug fix\.
 
-## How Executions Are Processed in a Pipeline<a name="concepts-how-it-works-executions"></a>
+## How executions are processed in a pipeline<a name="concepts-how-it-works-executions"></a>
 
 An execution consists of a set of changes picked up and processed by the execution\. Pipelines can process multiple executions at the same time\. Each execution is run through the pipeline separately\. The pipeline processes each execution in order and might supersede an earlier execution with a later one\. The following rules are used to process executions in a pipeline\.
 
@@ -82,7 +82,7 @@ Executions are only superseded in between stages\. A locked stage holds one exec
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/Batching.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
-## Managing Pipeline Executions<a name="concepts-how-it-works-transitions-approvals"></a>
+## Managing pipeline executions<a name="concepts-how-it-works-transitions-approvals"></a>
 
 The flow of pipeline executions can be controlled by:
 + A *transition*, which controls the flow of executions into the stage\. Transitions can be enabled or disabled\. After you enable the transition, any execution waiting to enter the stage moves into the stage and locks it\. Similar to executions awaiting a locked stage, when a transition is disabled, the execution waiting to enter the stage can still be superseded by a new execution\. When a disabled transition is re\-enabled, the latest execution, including any that superseded older executions while the transition was disabled, enters the stage\.
@@ -93,7 +93,7 @@ A stage with an approval action is locked until the approval action is approved 
   + You manually retry the stage that contains the failed actions\. This resumes the execution \(it retries failed actions and, if they succeed, continues in the stage/pipeline\)\.
   + Another execution enters the failed stage and supersedes the failed execution\. At this point, the failed execution cannot be retried\.
 
-### Recommended Pipeline Structure<a name="concepts-recommended-pipeline-method"></a>
+### Recommended pipeline structure<a name="concepts-recommended-pipeline-method"></a>
 
 When deciding how a code change should flow through your pipeline, it is best to group related actions within a stage so that, when the stage locks, the actions all process the same execution\. You might create a stage for each application environment, AWS Region, or Availability Zone, and so on\. A pipeline with too many stages \(that is, too granular\) can allow too many concurrent changes, while a pipeline with many actions in a large stage \(too coarse\) can take too long to release a change\.
 

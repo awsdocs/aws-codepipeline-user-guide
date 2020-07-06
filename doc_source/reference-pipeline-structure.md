@@ -1,13 +1,13 @@
-# CodePipeline Pipeline Structure Reference<a name="reference-pipeline-structure"></a>
+# CodePipeline pipeline structure reference<a name="reference-pipeline-structure"></a>
 
 By default, any pipeline you successfully create in AWS CodePipeline has a valid structure\. However, if you manually create or edit a JSON file to create a pipeline or update a pipeline from the AWS CLI, you might inadvertently create a structure that is not valid\. The following reference can help you better understand the requirements for your pipeline structure and how to troubleshoot issues\. See the constraints in [Quotas in AWS CodePipeline](limits.md), which apply to all pipelines\. 
 
 **Topics**
-+ [Valid Action Types and Providers in CodePipeline](#actions-valid-providers)
-+ [Pipeline and Stage Structure Requirements in CodePipeline](#pipeline-requirements)
-+ [Action Structure Requirements in CodePipeline](#action-requirements)
++ [Valid action types and providers in CodePipeline](#actions-valid-providers)
++ [Pipeline and stage structure requirements in CodePipeline](#pipeline-requirements)
++ [Action structure requirements in CodePipeline](#action-requirements)
 
-## Valid Action Types and Providers in CodePipeline<a name="actions-valid-providers"></a>
+## Valid action types and providers in CodePipeline<a name="actions-valid-providers"></a>
 
 The pipeline structure format is used to build actions and stages in a pipeline\. An action type consists of an action category and provider type\. 
 
@@ -23,21 +23,21 @@ Each action category has a designated set of providers\. Each action provider, s
 
 There are three valid values for the `Owner` field in the action category section in your pipeline structure: `AWS`, `ThirdParty`, and `Custom`\.
 
-To find the provider name and owner information for your action provider, see [Action Structure Reference](action-reference.md) or [Number of Input and Output Artifacts for Each Action Type](#reference-action-artifacts)\.
+To find the provider name and owner information for your action provider, see [Action structure reference](action-reference.md) or [Number of input and output artifacts for each action type](#reference-action-artifacts)\.
 
 This table lists valid providers by action type\.
 
 
-**Valid Action Providers by Action Type**  
+**Valid action providers by action type**  
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html)
 
 Some action types in CodePipeline are available in select AWS Regions only\. It is possible that an action type is available in an AWS Region, but an AWS provider for that action type is not available\.
 
-For more information about each action provider, see [Integrations with CodePipeline Action Types](integrations-action-type.md)\. 
+For more information about each action provider, see [Integrations with CodePipeline action types](integrations-action-type.md)\. 
 
 The following sections provide examples for provider information and configuration properties for each action type\.
 
-## Pipeline and Stage Structure Requirements in CodePipeline<a name="pipeline-requirements"></a>
+## Pipeline and stage structure requirements in CodePipeline<a name="pipeline-requirements"></a>
 
 A two\-stage pipeline has the following basic structure:
 
@@ -48,13 +48,13 @@ A two\-stage pipeline has the following basic structure:
         {
             "name": "SourceStageName",
             "actions": [
-            ... See [Action Structure Requirements in CodePipeline](#action-requirements) ...
+            ... See [Action structure requirements in CodePipeline](#action-requirements) ...
             ]
         },
         {
             "name": "NextStageName",
             "actions": [
-            ... See [Action Structure Requirements in CodePipeline](#action-requirements) ...
+            ... See [Action structure requirements in CodePipeline](#action-requirements) ...
             ]
         }
     ],
@@ -74,10 +74,10 @@ The pipeline structure has the following requirements:
 + Only the first stage of a pipeline can contain source actions\.
 + At least one stage in each pipeline must contain an action that is not a source action\.
 + All stage names in a pipeline must be unique\.
-+ Stage names cannot be edited in the CodePipeline console\. If you edit a stage name by using the AWS CLI, and the stage contains an action with one or more secret parameters \(such as an OAuth token\), the value of those secret parameters is not preserved\. You must manually type the value of the parameters \(which are masked by four asterisks in the JSON returned by the AWS CLI\) and include them in the JSON structure\.
++ Stage names cannot be edited in the CodePipeline console\. If you edit a stage name by using the AWS CLI, and the stage contains an action with one or more secret parameters \(such as an OAuth token\), the value of those secret parameters is not preserved\. You must manually enter the value of the parameters \(which are masked by four asterisks in the JSON returned by the AWS CLI\) and include them in the JSON structure\.
 + The `artifactStore` field contains the artifact bucket type and location for a pipeline with all actions in the same AWS Region\. If you add actions in a Region different from your pipeline, the `artifactStores` mapping is used to list the artifact bucket for each AWS Region where actions are executed\. When you create or edit a pipeline, you must have an artifact bucket in the pipeline Region and then you must have one artifact bucket per Region where you plan to execute an action\. 
 
-  The following example shows the basic structure for a pipeline with cross\-region actions that uses the `artifactStores` parameter: 
+  The following example shows the basic structure for a pipeline with cross\-Region actions that uses the `artifactStores` parameter: 
 
   ```
       "pipeline": {
@@ -105,7 +105,7 @@ If you want to rename an existing pipeline, you can use the CLI `get-pipeline` c
 
 The version number of a pipeline is automatically generated and updated every time you update the pipeline\.
 
-## Action Structure Requirements in CodePipeline<a name="action-requirements"></a>
+## Action structure requirements in CodePipeline<a name="action-requirements"></a>
 
 An action has the following high\-level structure:
 
@@ -135,7 +135,7 @@ An action has the following high\-level structure:
             ]
 ```
 
-For a list of example `configuration` details appropriate to the provider type, see [Configuration Details by Provider Type](#structure-configuration-examples)\.
+For a list of example `configuration` details appropriate to the provider type, see [Configuration details by provider type](#structure-configuration-examples)\.
 
 The action structure has the following requirements:
 + All action names within a stage must be unique\.
@@ -164,7 +164,7 @@ The action structure has the following requirements:
   The following illustration provides an example of input and output artifacts in actions in a pipeline:  
 ![\[An example of input and output artifacts in actions in a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-artifactsexplained.png)![\[An example of input and output artifacts in actions in a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[An example of input and output artifacts in actions in a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 + Output artifact names must be unique in a pipeline\. For example, a pipeline can include one action that has an output artifact named `"MyApp"` and another action that has an output artifact named `"MyBuiltApp"`\. However, a pipeline cannot include two actions that both have an output artifact named `"MyApp"`\.
-+ Cross\-region actions use the `Region` field to designate the AWS Region where the actions is to be created\. The AWS resources created for this action must be created in the same Region provided in the `region` field\. You cannot create cross\-region actions for the following action types:
++ Cross\-Region actions use the `Region` field to designate the AWS Region where the actions are to be created\. The AWS resources created for this action must be created in the same Region provided in the `region` field\. You cannot create cross\-Region actions for the following action types:
   + Source actions
   + Actions by third\-party providers
   + Actions by custom providers
@@ -198,22 +198,22 @@ The numbering of serial actions do not have to be in strict sequence\. For examp
     "provider": "S3"},
   ```
 + Every action must have a valid action configuration, which depends on the provider type for that action\. The following table lists the required action configuration elements for each valid provider type:  
-**Action Configuration Properties for Provider Types**    
+**Action configuration properties for provider types**    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html)
 
 **Topics**
-+ [Number of Input and Output Artifacts for Each Action Type](#reference-action-artifacts)
-+ [Default Settings for the PollForSourceChanges Parameter](#PollForSourceChanges-defaults)
-+ [Configuration Details by Provider Type](#structure-configuration-examples)
++ [Number of input and output artifacts for each action type](#reference-action-artifacts)
++ [Default settings for the PollForSourceChanges parameter](#PollForSourceChanges-defaults)
++ [Configuration details by provider type](#structure-configuration-examples)
 
-### Number of Input and Output Artifacts for Each Action Type<a name="reference-action-artifacts"></a>
+### Number of input and output artifacts for each action type<a name="reference-action-artifacts"></a>
 
 Depending on the action type, you can have the following number of input and output artifacts:
 
 
-**Action Type Constraints for Artifacts**  
+**Action type constraints for artifacts**  
 
-| Owner | Type of Action | Provider | Valid Number of Input Artifacts | Valid Number of Output Artifacts | 
+| Owner | Type of action | Provider | Valid number of input artifacts | Valid number of output artifacts | 
 | --- | --- | --- | --- | --- | 
 | AWS | Source | Amazon S3 | 0 | 1 | 
 | AWS | Source | CodeCommit | 0 | 1 | 
@@ -236,7 +236,7 @@ Depending on the action type, you can have the following number of input and out
 | Custom | Test | Jenkins | 0 to 5 | 0 to 5 | 
 | Custom | Any supported category | As specified in the custom action | 0 to 5 | 0 to 5 | 
 
-### Default Settings for the PollForSourceChanges Parameter<a name="PollForSourceChanges-defaults"></a>
+### Default settings for the PollForSourceChanges parameter<a name="PollForSourceChanges-defaults"></a>
 
 The `PollForSourceChanges` parameter default is determined by the method used to create the pipeline, as described in the following table\. In many cases, the `PollForSourceChanges` parameter defaults to true and must be disabled\. When the `PollForSourceChanges` parameter defaults to true, you should do the following:
 + Add the `PollForSourceChanges` parameter to the JSON file or AWS CloudFormation template\.
@@ -247,10 +247,10 @@ If you create a CloudWatch Events rule or webhook, you must set the parameter to
 
   The `PollForSourceChanges` parameter is not used for Amazon ECR source actions\.
 +   
-**PollForSourceChanges Parameter Defaults**    
+**PollForSourceChanges parameter defaults**    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html)
 
-### Configuration Details by Provider Type<a name="structure-configuration-examples"></a>
+### Configuration details by provider type<a name="structure-configuration-examples"></a>
 
 This section lists valid `configuration` parameters for each action provider\.
 

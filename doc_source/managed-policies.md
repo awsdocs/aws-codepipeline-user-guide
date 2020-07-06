@@ -1,4 +1,4 @@
-# AWS Managed \(Predefined\) Policies for CodePipeline<a name="managed-policies"></a>
+# AWS managed \(predefined\) policies for CodePipeline<a name="managed-policies"></a>
 
 AWS addresses many common use cases by providing standalone IAM policies that are created and administered by AWS\. Managed policies grant necessary permissions for common use cases so you can avoid having to investigate which permissions are needed\. For more information, see [AWS Managed Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#aws-managed-policies) in the *IAM User Guide*\.
 

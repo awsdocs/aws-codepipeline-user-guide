@@ -1,18 +1,18 @@
-# Tag a Custom Action in CodePipeline<a name="customactions-tag"></a>
+# Tag a custom action in CodePipeline<a name="customactions-tag"></a>
 
-Tags are key\-value pairs associated with AWS resources\. You can use the console or the CLI to apply tags to your custom actions in CodePipeline\. For information about CodePipeline resource tagging, use cases, tag key and value constraints, and supported resource types, see [Tagging Resources](tag-resources.md)\.
+Tags are key\-value pairs associated with AWS resources\. You can use the console or the CLI to apply tags to your custom actions in CodePipeline\. For information about CodePipeline resource tagging, use cases, tag key and value constraints, and supported resource types, see [Tagging resources](tag-resources.md)\.
 
 You can add, remove, and update the values of tags in a custom action\. You can add up to 50 tags to each custom action\. 
 
 **Topics**
-+ [Add Tags to a Custom Action](#customactions-tag-add)
-+ [View Tags for a Custom Action](#customactions-tag-list)
-+ [Edit Tags for a Custom Action](#customactions-tag-update)
-+ [Remove Tags from a Custom Action](#customactions-tag-delete)
++ [Add tags to a custom action](#customactions-tag-add)
++ [View tags for a custom action](#customactions-tag-list)
++ [Edit tags for a custom action](#customactions-tag-update)
++ [Remove tags from a custom action](#customactions-tag-delete)
 
-## Add Tags to a Custom Action<a name="customactions-tag-add"></a>
+## Add tags to a custom action<a name="customactions-tag-add"></a>
 
-Follow these steps to use the AWS CLI to add a tag to a custom action\. To add a tag to a custom action when you create it, see [Create and Add a Custom Action in CodePipeline](actions-create-custom-action.md)\.
+Follow these steps to use the AWS CLI to add a tag to a custom action\. To add a tag to a custom action when you create it, see [Create and add a custom action in CodePipeline](actions-create-custom-action.md)\.
 
 In these steps, we assume that you have already installed a recent version of the AWS CLI or updated to the current version\. For more information, see [Installing the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/installing.html)\.
 
@@ -24,7 +24,7 @@ aws codepipeline tag-resource --resource-arn arn:aws:codepipeline:us-west-2:acco
 
 If successful, this command returns nothing\.
 
-## View Tags for a Custom Action<a name="customactions-tag-list"></a>
+## View tags for a custom action<a name="customactions-tag-list"></a>
 
 Follow these steps to use the AWS CLI to view the AWS tags for a custom action\. If no tags have been added, the returned list is empty\.
 
@@ -45,7 +45,7 @@ If successful, this command returns information similar to the following:
 }
 ```
 
-## Edit Tags for a Custom Action<a name="customactions-tag-update"></a>
+## Edit tags for a custom action<a name="customactions-tag-update"></a>
 
 Follow these steps to use the AWS CLI to edit a tag for a custom action\. You can change the value for an existing key or add another key\. You can also remove tags from a custom action, as shown in the next section\.
 
@@ -55,7 +55,7 @@ At the terminal or command line, run the tag\-resource command, specifying the A
 aws codepipeline tag-resource --resource-arn arn:aws:codepipeline:us-west-2:account-id:actiontype:Owner/Category/Provider/Version --tags key=TestActionType,value=IntegrationTest
 ```
 
-## Remove Tags from a Custom Action<a name="customactions-tag-delete"></a>
+## Remove tags from a custom action<a name="customactions-tag-delete"></a>
 
 Follow these steps to use the AWS CLI to remove a tag from a custom action\. When you remove tags from the associated resource, the tags are deleted\.
 

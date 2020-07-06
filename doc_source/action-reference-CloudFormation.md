@@ -1,23 +1,23 @@
 # AWS CloudFormation<a name="action-reference-CloudFormation"></a>
 
-Executes an operation on a AWS CloudFormation stack\. A stack is a collection of AWS resources that you can manage as a single unit\. The resources in a stack are defined by the stack's AWS CloudFormation template\. A change set creates a comparison that can be viewed without altering the original stack\. For information about the types of AWS CloudFormation actions that can be performed on stacks and change sets, see the `ActionMode` parameter\.
+Executes an operation on an AWS CloudFormation stack\. A stack is a collection of AWS resources that you can manage as a single unit\. The resources in a stack are defined by the stack's AWS CloudFormation template\. A change set creates a comparison that can be viewed without altering the original stack\. For information about the types of AWS CloudFormation actions that can be performed on stacks and change sets, see the `ActionMode` parameter\.
 
 **Topics**
-+ [Action Type](#action-reference-CloudFormation-type)
-+ [Configuration Parameters](#action-reference-CloudFormation-config)
-+ [Input Artifacts](#action-reference-CloudFormation-input)
-+ [Output Artifacts](#action-reference-CloudFormation-output)
-+ [Output Variables](#action-reference-CloudFormation-variables)
-+ [Action Declaration](#action-reference-CloudFormation-example)
-+ [See Also](#action-reference-CloudFormation-links)
++ [Action type](#action-reference-CloudFormation-type)
++ [Configuration parameters](#action-reference-CloudFormation-config)
++ [Input artifacts](#action-reference-CloudFormation-input)
++ [Output artifacts](#action-reference-CloudFormation-output)
++ [Output variables](#action-reference-CloudFormation-variables)
++ [Action declaration](#action-reference-CloudFormation-example)
++ [See also](#action-reference-CloudFormation-links)
 
-## Action Type<a name="action-reference-CloudFormation-type"></a>
+## Action type<a name="action-reference-CloudFormation-type"></a>
 + Category: `Deploy`
 + Owner: `AWS`
 + Provider: `CloudFormation`
 + Version: `1`
 
-## Configuration Parameters<a name="action-reference-CloudFormation-config"></a>
+## Configuration parameters<a name="action-reference-CloudFormation-config"></a>
 
 **ActionMode**  
 Required: Yes  
@@ -49,7 +49,7 @@ This property is required if you have IAM resources in your stack template or yo
 + `CAPABILITY_IAM` 
 + `CAPABILITY_NAMED_IAM` 
 + `CAPABILITY_AUTO_EXPAND` 
- You can specify more than one capability by using a comma \(no space\) between capabilities\. The example in [Action Declaration](#action-reference-CloudFormation-example) shows an entry with both the CAPABILITY\_IAM and CAPABILITY\_AUTO\_EXPAND properties\.  
+ You can specify more than one capability by using a comma \(no space\) between capabilities\. The example in [Action declaration](#action-reference-CloudFormation-example) shows an entry with both the CAPABILITY\_IAM and CAPABILITY\_AUTO\_EXPAND properties\.  
 For more information about `Capabilities`, see the properties under [UpdateStack](https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStack.html) in the *AWS CloudFormation API Reference*\.
 
 **ChangeSetName**  
@@ -96,7 +96,7 @@ All parameter names must be present in the stack template\.
 **TemplateConfiguration**  
 Required: No  
 `TemplateConfiguration` is the template configuration file\. You include the file in an input artifact to this action\. It can contain template parameter values and a stack policy\. For more information about the template configuration file format, see [AWS CloudFormation Artifacts](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-cfn-artifacts.html)\.   
-The template configuration filename follows this format:   
+The template configuration file name follows this format:   
 `Artifactname::TemplateConfigurationFileName`  
 `Artifactname` is the input artifact name as it appears in CodePipeline\. For example, a source stage with the artifact name of `SourceArtifact` and a `test-configuration.json` file name creates a `TemplateConfiguration` name as shown in this example:  
 
@@ -104,20 +104,20 @@ The template configuration filename follows this format:
 "TemplateConfiguration": "SourceArtifact::test-configuration.json"
 ```
 
-## Input Artifacts<a name="action-reference-CloudFormation-input"></a>
+## Input artifacts<a name="action-reference-CloudFormation-input"></a>
 + **Number of Artifacts:** `0 to 10`
 + **Description:** As input, the AWS CloudFormation action optionally accepts artifacts for these purposes:
   + To provide the stack template file to execute\. \(See the `TemplatePath` parameter\.\)
   + To provide the template configuration file to use\. \(See the `TemplateConfiguration` parameter\.\) For more information about the template configuration file format, see [AWS CloudFormation Artifacts](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-cfn-artifacts.html)\. 
   + To provide the artifact for a Lambda function to be deployed as part of the AWS CloudFormation stack\.
 
-## Output Artifacts<a name="action-reference-CloudFormation-output"></a>
+## Output artifacts<a name="action-reference-CloudFormation-output"></a>
 + **Number of Artifacts:** `0 to 1` 
 + **Description:** If the `OutputFileName` parameter is specified, there is an output artifact produced by this action that contains a JSON file with the specified name\. The JSON file contains the contents of the Outputs section from the AWS CloudFormation stack\.
 
   For more information about the outputs section you can create for your AWS CloudFormation action, see [Outputs](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/outputs-section-structure.html)\.
 
-## Output Variables<a name="action-reference-CloudFormation-variables"></a>
+## Output variables<a name="action-reference-CloudFormation-variables"></a>
 
 When configured, this action produces variables that can be referenced by the action configuration of a downstream action in the pipeline\. You configure an action with a namespace to make those variables available to the configuration of downstream actions\.
 
@@ -127,9 +127,9 @@ For AWS CloudFormation actions, variables are produced from any values designate
 + ALWAYS\_REPLACE
 + CHANGE\_SET\_EXECUTE
 
-For more information, see [Variables](reference-variables.md)\. For a tutorial that shows you how to create a pipeline with a CloudFormation deployment action in a pipeline that uses CloudFormation output variables, see [Tutorial: Create a Pipeline That Uses Variables from AWS CloudFormation Deployment Actions](tutorials-cloudformation-action.md)\.
+For more information, see [Variables](reference-variables.md)\. For a tutorial that shows you how to create a pipeline with a CloudFormation deployment action in a pipeline that uses CloudFormation output variables, see [Tutorial: Create a pipeline that uses variables from AWS CloudFormation deployment actions](tutorials-cloudformation-action.md)\.
 
-## Action Declaration<a name="action-reference-CloudFormation-example"></a>
+## Action declaration<a name="action-reference-CloudFormation-example"></a>
 
 ------
 #### [ YAML ]
@@ -190,7 +190,7 @@ InputArtifacts:
 
 ------
 
-## See Also<a name="action-reference-CloudFormation-links"></a>
+## See also<a name="action-reference-CloudFormation-links"></a>
 
 The following related resources can help you as you work with this action\.
 + [Configuration Properties Reference](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-action-reference.html) – This reference chapter in the *AWS CloudFormation User Guide* provides more descriptions and examples for these CodePipeline parameters\.

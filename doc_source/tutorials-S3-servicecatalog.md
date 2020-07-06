@@ -1,4 +1,4 @@
-# Tutorial: Create a Pipeline That Deploys to AWS Service Catalog<a name="tutorials-S3-servicecatalog"></a>
+# Tutorial: Create a pipeline that deploys to AWS Service Catalog<a name="tutorials-S3-servicecatalog"></a>
 
 AWS Service Catalog enables you to create and provision products based on AWS CloudFormation templates\. This tutorial shows you how to create and configure a pipeline to deploy your product template to AWS Service Catalog and deliver changes you have made in your source repository \(already created in GitHub, CodeCommit, or Amazon S3\)\.
 
@@ -6,16 +6,16 @@ AWS Service Catalog enables you to create and provision products based on AWS Cl
 When Amazon S3 is the source provider for your pipeline, you must upload to your bucket all source files packaged as a single \.zip file\. Otherwise, the source action fails\.
 
 First, you create a product in AWS Service Catalog, and then you create a pipeline in AWS CodePipeline\. This tutorial provides two options for setting up the deployment configuration:
-+ Create a product in AWS Service Catalog and upload a template file to your source repository\. Provide product version and deployment configuration in the CodePipeline console \(without a separate configuration file\)\. See [Option 1: Deploy to AWS Service Catalog Without a Configuration File](#tutorials-S3-servicecatalog-ex1-configure)\.
++ Create a product in AWS Service Catalog and upload a template file to your source repository\. Provide product version and deployment configuration in the CodePipeline console \(without a separate configuration file\)\. See [Option 1: Deploy to AWS Service Catalog without a configuration file](#tutorials-S3-servicecatalog-ex1-configure)\.
 **Note**  
 The template file can be created in YAML or JSON format\.
-+ Create a product in AWS Service Catalog and upload a template file to your source repository\. Provide product version and deployment configuration in a separate configuration file\. See [Option 2: Deploy to AWS Service Catalog Using a Configuration File](#tutorials-S3-servicecatalog-ex2-configure)\.
++ Create a product in AWS Service Catalog and upload a template file to your source repository\. Provide product version and deployment configuration in a separate configuration file\. See [Option 2: Deploy to AWS Service Catalog using a configuration file](#tutorials-S3-servicecatalog-ex2-configure)\.
 
-## Option 1: Deploy to AWS Service Catalog Without a Configuration File<a name="tutorials-S3-servicecatalog-ex1-configure"></a>
+## Option 1: Deploy to AWS Service Catalog without a configuration file<a name="tutorials-S3-servicecatalog-ex1-configure"></a>
 
 In this example, you upload the sample AWS CloudFormation template file for an S3 bucket, and then create your product in AWS Service Catalog\. Next, you create your pipeline and specify deployment configuration in the CodePipeline console\.
 
-### Step 1: Upload Sample Template File to Source Repository<a name="tutorials-S3-servicecatalog-configure"></a>
+### Step 1: Upload sample template file to source repository<a name="tutorials-S3-servicecatalog-configure"></a>
 
 1. Open a text editor\. Create a sample template by pasting the following into the file\. Save the file as `S3_template.json`\.
 
@@ -44,7 +44,7 @@ In this example, you upload the sample AWS CloudFormation template file for an S
 
 1. Upload the `S3_template.json` file to your AWS CodeCommit repository\.
 
-### Step 2: Create a Product in AWS Service Catalog<a name="tutorials-S3-servicecatalog-product"></a>
+### Step 2: Create a product in AWS Service Catalog<a name="tutorials-S3-servicecatalog-product"></a>
 
 1. As an IT administrator, sign in to the AWS Service Catalog console, go to the **Products** page, and then choose **Upload new product**\.
 
@@ -84,7 +84,7 @@ Copy the URL for your product before you navigate away from the page\. Once you 
 
    After a few seconds, your product appears on the **Products** page\. You might need to refresh your browser to see the product in the list\.
 
-### Step 3: Create Your Pipeline<a name="tutorials-S3-servicecatalog-pipeline"></a>
+### Step 3: Create your pipeline<a name="tutorials-S3-servicecatalog-pipeline"></a>
 
 1. To name your pipeline and select parameters for your pipeline, do the following:
 
@@ -133,7 +133,7 @@ Copy the URL for your product before you navigate away from the page\. Once you 
 1. Under your product information, choose your version name to open the product template\. View the template deployment\.  
 ![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/deploy-servicecatalog-template-page.png)
 
-### Step 4: Push a Change and Verify Your Product in AWS Service Catalog<a name="tutorials-S3-servicecatalog-change"></a>
+### Step 4: Push a change and verify your product in AWS Service Catalog<a name="tutorials-S3-servicecatalog-change"></a>
 
 1. View your pipeline in the CodePipeline console, and on your source stage, choose **Details**\. Your source AWS CodeCommit repository opens in the console\. Choose **Edit**, and make a change in the file \(for example, to the description\)\. 
 
@@ -146,11 +146,11 @@ Copy the URL for your product before you navigate away from the page\. Once you 
 1. Under your product information, choose the new version name to open the product template\. View the deployed template change\.  
 ![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/tutorials-S3-servicecatalog-change.png)
 
-## Option 2: Deploy to AWS Service Catalog Using a Configuration File<a name="tutorials-S3-servicecatalog-ex2-configure"></a>
+## Option 2: Deploy to AWS Service Catalog using a configuration file<a name="tutorials-S3-servicecatalog-ex2-configure"></a>
 
 In this example, you upload the sample AWS CloudFormation template file for an S3 bucket, and then create your product in AWS Service Catalog\. You also upload a separate configuration file that specifies your deployment configuration\. Next, you create your pipeline and specify the location of your configuration file\.
 
-### Step 1: Upload Sample Template File to Source Repository<a name="tutorials-S3-servicecatalog-upload2"></a>
+### Step 1: Upload sample template file to source repository<a name="tutorials-S3-servicecatalog-upload2"></a>
 
 1. Open a text editor\. Create a sample template by pasting the following into the file\. Save the file as `S3_template.json`\.
 
@@ -179,7 +179,7 @@ In this example, you upload the sample AWS CloudFormation template file for an S
 
 1. Upload the `S3_template.json` file to your AWS CodeCommit repository\.
 
-### Step 2: Create Your Product Deployment Configuration File<a name="tutorials-S3-servicecatalog-configure2"></a>
+### Step 2: Create your product deployment configuration file<a name="tutorials-S3-servicecatalog-configure2"></a>
 
 1. Open a text editor\. Create the configuration file for your product\. The configuration file is used to define your AWS Service Catalog deployment parameters/preferences\. You use this file when you create your pipeline\.
 
@@ -203,7 +203,7 @@ In this example, you upload the sample AWS CloudFormation template file for an S
 
 1. Upload the `sample_config.json` file to your AWS CodeCommit repository\. Make sure you upload this file to your source repository\.
 
-### Step 3: Create a Product in AWS Service Catalog<a name="tutorials-S3-servicecatalog-product2"></a>
+### Step 3: Create a product in AWS Service Catalog<a name="tutorials-S3-servicecatalog-product2"></a>
 
 1. As an IT administrator, sign in to the AWS Service Catalog console, go to the **Products** page, and then choose **Upload new product**\.
 
@@ -243,7 +243,7 @@ Copy the URL for your product before you navigate away from the page\. Once you 
 
    After a few seconds, your product appears on the **Products** page\. You might need to refresh your browser to see the product in the list\.
 
-### Step 4: Create Your Pipeline<a name="tutorials-S3-servicecatalog-pipeline2"></a>
+### Step 4: Create your pipeline<a name="tutorials-S3-servicecatalog-pipeline2"></a>
 
 1. To name your pipeline and select parameters for your pipeline, do the following:
 
@@ -286,7 +286,7 @@ Copy the URL for your product before you navigate away from the page\. Once you 
 1. Under your product information, choose your version name to open the product template\. View the template deployment\.  
 ![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/deploy-servicecatalog-template-page.png)
 
-### Step 5: Push a Change and Verify Your Product in Service Catalog<a name="tutorials-S3-servicecatalog-change2"></a>
+### Step 5: Push a change and verify your product in Service Catalog<a name="tutorials-S3-servicecatalog-change2"></a>
 
 1. View your pipeline in the CodePipeline console, and on the source stage, choose **Details**\. Your source AWS CodeCommit repository opens in the console\. Choose **Edit**, and then make a change in the file \(for example, to the description\)\.
 

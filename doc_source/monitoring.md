@@ -1,4 +1,4 @@
-# Monitoring Pipelines with CodePipeline<a name="monitoring"></a>
+# Monitoring pipelines with CodePipeline<a name="monitoring"></a>
 
 Monitoring is an important part of maintaining the reliability, availability, and performance of AWS CodePipeline\. You should collect monitoring data from all parts of your AWS solution so that you can more easily debug a multi\-point failure, if one occurs\. Before you start monitoring, you should create a monitoring plan that answers the following questions:
 + What are your monitoring goals?
@@ -14,6 +14,6 @@ You can use the following tools to monitor your CodePipeline pipelines and their
 + **Console and CLI** — You can use the CodePipeline console and CLI to view details about the status of a pipeline or a particular pipeline execution\.
 
 **Topics**
-+ [Detect and React to Changes in Pipeline State with CloudWatch Events](detect-state-changes-cloudwatch-events.md)
-+ [Events Placeholder Bucket Reference](reference-ct-placeholder-buckets.md)
-+ [Logging API Calls with AWS CloudTrail](monitoring-cloudtrail-logs.md)
++ [Detect and react to changes in pipeline state with CloudWatch Events](detect-state-changes-cloudwatch-events.md)
++ [Events placeholder bucket reference](reference-ct-placeholder-buckets.md)
++ [Logging API calls with AWS CloudTrail](monitoring-cloudtrail-logs.md)

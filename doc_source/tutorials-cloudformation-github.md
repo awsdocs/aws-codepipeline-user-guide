@@ -1,4 +1,4 @@
-# Example 3: Create a GitHub Pipeline with AWS CloudFormation<a name="tutorials-cloudformation-github"></a>
+# Example 3: Create a GitHub pipeline with AWS CloudFormation<a name="tutorials-cloudformation-github"></a>
 
 This walkthrough shows you how to use the AWS CloudFormation console to create infrastructure that includes a pipeline connected to a GitHub source repository\. In this tutorial, you use the provided sample template file to create your resource stack, which includes your artifact store, pipeline, and change\-detection resource \(your webhook\)\. After you create your resource stack in AWS CloudFormation, you can view your pipeline in the AWS CodePipeline console\. The pipeline is a two\-stage pipeline with a GitHub source stage and a CodeDeploy deployment stage\.
 
@@ -10,7 +10,7 @@ When passing secret parameters, do not enter the value directly into the templat
 **Prerequisites:**
 
 You must have created the following resources to use with the AWS CloudFormation sample template:
-+ A CodeDeploy application and deployment group\. You can use the CodeDeploy resources you created in [Tutorial: Create a Simple Pipeline \(CodeCommit Repository\)](tutorials-simple-codecommit.md)\.
++ A CodeDeploy application and deployment group\. You can use the CodeDeploy resources you created in [Tutorial: Create a simple pipeline \(CodeCommit repository\)](tutorials-simple-codecommit.md)\.
 + Choose one of these links to download the sample AWS CloudFormation template file for creating a pipeline: [YAML](samples/codepipeline-github-events-yaml.zip) \| [JSON](samples/codepipeline-github-events-json.zip)
 
   Unzip the file and place it on your local computer\.

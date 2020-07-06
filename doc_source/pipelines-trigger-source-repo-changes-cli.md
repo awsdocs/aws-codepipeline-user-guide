@@ -1,4 +1,4 @@
-# Create a CloudWatch Events Rule for a CodeCommit Source \(CLI\)<a name="pipelines-trigger-source-repo-changes-cli"></a>
+# Create a CloudWatch Events rule for a CodeCommit source \(CLI\)<a name="pipelines-trigger-source-repo-changes-cli"></a>
 
 Call the put\-rule command, specifying:
 + A name that uniquely identifies the rule you are creating\. This name must be unique across all of the pipelines you create with CodePipeline associated with your AWS account\.
@@ -80,7 +80,7 @@ Call the put\-rule command, specifying:
 
 **To edit your pipeline's PollForSourceChanges parameter**
 **Important**  
-When you create a pipeline with this method, the `PollForSourceChanges` parameter defaults to true if it is not explicitly set to false\. When you add event\-based change detection, you must add the parameter to your output and set it to false to disable polling\. Otherwise, your pipeline starts twice for a single source change\. For details, see [Default Settings for the PollForSourceChanges Parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
+When you create a pipeline with this method, the `PollForSourceChanges` parameter defaults to true if it is not explicitly set to false\. When you add event\-based change detection, you must add the parameter to your output and set it to false to disable polling\. Otherwise, your pipeline starts twice for a single source change\. For details, see [Default settings for the PollForSourceChanges parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
 
 1. Run the get\-pipeline command to copy the pipeline structure into a JSON file\. For example, for a pipeline named `MyFirstPipeline`, run the following command: 
 

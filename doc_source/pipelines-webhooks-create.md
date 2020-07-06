@@ -1,4 +1,4 @@
-# Create a Webhook for a GitHub Source<a name="pipelines-webhooks-create"></a>
+# Create a webhook for a GitHub source<a name="pipelines-webhooks-create"></a>
 
 After you use the AWS CLI to manually create a webhook, you must register the webhook in GitHub\. A designated AWS endpoint is used for the webhook and is supplied by the put\-webhook command\.
 
@@ -11,7 +11,7 @@ To use the AWS CLI to create a webhook, call the put\-webhook command and supply
 
 **To create and register your webhook**
 **Note**  
-When you use the CLI or AWS CloudFormation to create a pipeline and add a webhook, you must disable periodic checks\. To disable periodic checks, you must explicitly add the `PollForSourceChanges` parameter and set it to false, as detailed in the final procedure below\. Otherwise, the default for a CLI or AWS CloudFormation pipeline is that `PollForSourceChanges` defaults to true and does not display in the pipeline structure output\. For more information about PollForSourceChanges defaults, see [Default Settings for the PollForSourceChanges Parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
+When you use the CLI or AWS CloudFormation to create a pipeline and add a webhook, you must disable periodic checks\. To disable periodic checks, you must explicitly add the `PollForSourceChanges` parameter and set it to false, as detailed in the final procedure below\. Otherwise, the default for a CLI or AWS CloudFormation pipeline is that `PollForSourceChanges` defaults to true and does not display in the pipeline structure output\. For more information about PollForSourceChanges defaults, see [Default settings for the PollForSourceChanges parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
 
 1. In a text editor, create and save a JSON file for the webhook you want to create\. Use this sample file for a webhook named `my-webhook`:
 
@@ -70,7 +70,7 @@ When you use the CLI or AWS CloudFormation to create a pipeline and add a webhoo
    }
    ```
 
-   This example adds tagging to the webhook by including the `Project` tag key and `ProjectA` value on the webhook\. For more information about tagging resources in CodePipeline, see [Tagging Resources](tag-resources.md)\.
+   This example adds tagging to the webhook by including the `Project` tag key and `ProjectA` value on the webhook\. For more information about tagging resources in CodePipeline, see [Tagging resources](tag-resources.md)\.
 
 1. Call the register\-webhook\-with\-third\-party command and include the `--webhook-name` parameter\.
 
@@ -84,7 +84,7 @@ If you are updating a pipeline to use webhooks, you must also use the following 
 
 **To edit your pipeline's PollForSourceChanges parameter**
 **Important**  
-When you create a pipeline with this method, the `PollForSourceChanges` parameter defaults to true if it is not explicitly set to false\. When you add event\-based change detection, you must add the parameter to your output and set it to false to disable polling\. Otherwise, your pipeline starts twice for a single source change\. For details, see [Default Settings for the PollForSourceChanges Parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
+When you create a pipeline with this method, the `PollForSourceChanges` parameter defaults to true if it is not explicitly set to false\. When you add event\-based change detection, you must add the parameter to your output and set it to false to disable polling\. Otherwise, your pipeline starts twice for a single source change\. For details, see [Default settings for the PollForSourceChanges parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
 
 1. Run the get\-pipeline command to copy the pipeline structure into a JSON file\. For example, for a pipeline named `MyFirstPipeline`, you would type the following command: 
 

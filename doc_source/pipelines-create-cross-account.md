@@ -1,4 +1,4 @@
-# Create a Pipeline in CodePipeline That Uses Resources from Another AWS Account<a name="pipelines-create-cross-account"></a>
+# Create a pipeline in CodePipeline that uses resources from another AWS account<a name="pipelines-create-cross-account"></a>
 
 You might want to create a pipeline that uses resources created or managed by another AWS account\. For example, you might want to use one account for your pipeline and another for your CodeDeploy resources\. 
 
@@ -15,35 +15,35 @@ Jenkins build actions
 For this example, you must create an AWS Key Management Service \(AWS KMS\) key to use, add the key to the pipeline, and set up account policies and roles to enable cross\-account access\. For an AWS KMS key, you can use the key ID, the key ARN, or the alias ARN\. 
 
 **Note**  
-Aliases are recognized only in the account that created the customer master key \(CMK\)\. For cross\-account actions, you can only use the key ID or key ARN to identify the key\.
+To specify a customer master key \(CMK\) in a different AWS account, you must use the key ARN or alias ARN\.
 
 In this walkthrough and its examples, *AccountA* is the account originally used to create the pipeline\. It has access to the Amazon S3 bucket used to store pipeline artifacts and the service role used by AWS CodePipeline\. *AccountB* is the account originally used to create the CodeDeploy application, deployment group, and service role used by CodeDeploy\. 
 
 For *AccountA* to edit a pipeline to use the CodeDeploy application created by *AccountB*, *AccountA* must: 
 + Request the ARN or account ID of *AccountB* \(in this walkthrough, the *AccountB* ID is *012ID\_ACCOUNT\_B*\)\.
-+ Create or use an AWS KMS customer\-managed key in the region for the pipeline, and grant permissions to use that key to the service role \(*AWS\-CodePipeline\-Service*\) and *AccountB*\. 
++ Create or use an AWS KMS customer managed key in the Region for the pipeline, and grant permissions to use that key to the service role \(*AWS\-CodePipeline\-Service*\) and *AccountB*\. 
 + Create an Amazon S3 bucket policy that grants *AccountB* access to the Amazon S3 bucket \(for example, *codepipeline\-us\-east\-2\-1234567890*\)\. 
 + Create a policy that allows *AccountA* to assume a role configured by *AccountB*, and attach that policy to the service role \(*AWS\-CodePipeline\-Service*\)\.
-+ Edit the pipeline to use the customer\-managed AWS KMS key instead of the default key\.
++ Edit the pipeline to use the customer managed AWS KMS key instead of the default key\.
 
 For *AccountB* to allow access to its resources to a pipeline created in *AccountA*, *AccountB* must:
 + Request the ARN or account ID of *AccountA* \(in this walkthrough, the *AccountA* ID is *012ID\_ACCOUNT\_A*\)\.
 + Create a policy applied to the [Amazon EC2 instance role](https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-create-iam-instance-profile.html) configured for CodeDeploy that allows access to the Amazon S3 bucket \(*codepipeline\-us\-east\-2\-1234567890*\)\.
-+ Create a policy applied to the [Amazon EC2 instance role](https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-create-iam-instance-profile.html) configured for CodeDeploy that allows access to the AWS KMS customer\-managed key used to encrypt the pipeline artifacts in *AccountA*\.
++ Create a policy applied to the [Amazon EC2 instance role](https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-create-iam-instance-profile.html) configured for CodeDeploy that allows access to the AWS KMS customer managed key used to encrypt the pipeline artifacts in *AccountA*\.
 + Configure and attach an IAM role \(*CrossAccount\_Role*\) with a trust relationship policy that allows *AccountA* to assume the role\.
 + Create a policy that allows access to the deployment resources required by the pipeline and attach it to *CrossAccount\_Role*\.
 + Create a policy that allows access to the Amazon S3 bucket \(*codepipeline\-us\-east\-2\-1234567890*\) and attach it to *CrossAccount\_Role*\.
 
 **Topics**
-+ [Prerequisite: Create an AWS KMS Encryption Key](#pipelines-create-cross-account-create-key)
-+ [Step 1: Set Up Account Policies and Roles](#pipelines-create-cross-account-setup)
-+ [Step 2: Edit the Pipeline](#pipelines-create-cross-account-create)
++ [Prerequisite: Create an AWS KMS encryption key](#pipelines-create-cross-account-create-key)
++ [Step 1: Set up account policies and roles](#pipelines-create-cross-account-setup)
++ [Step 2: Edit the pipeline](#pipelines-create-cross-account-create)
 
-## Prerequisite: Create an AWS KMS Encryption Key<a name="pipelines-create-cross-account-create-key"></a>
+## Prerequisite: Create an AWS KMS encryption key<a name="pipelines-create-cross-account-create-key"></a>
 
-Customer\-managed keys are specific to a region, as are all AWS KMS keys\. You must create your customer\-managed AWS KMS key in the same region where the pipeline was created \(for example, `us-east-2`\)\.
+Customer\-managed keys are specific to a Region, as are all AWS KMS keys\. You must create your customer managed AWS KMS key in the same Region where the pipeline was created \(for example, `us-east-2`\)\.
 
-**To create a customer\-managed key in AWS KMS**
+**To create a customer managed key in AWS KMS**
 
 1. Sign in to the AWS Management Console with *AccountA* and open the AWS KMS console\.
 
@@ -51,25 +51,25 @@ Customer\-managed keys are specific to a region, as are all AWS KMS keys\. You m
 
 1. Choose **Create key**\. In **Configure key**, leave the **Symmetric** default selected and choose **Next**\.
 
-1. In **Alias**, type an alias to use for this key \(for example, *PipelineName\-Key*\)\. Optionally, provide a description and tags for this key, and then choose **Next**\.
+1. In **Alias**, enter an alias to use for this key \(for example, *PipelineName\-Key*\)\. Optionally, provide a description and tags for this key, and then choose **Next**\.
 
 1. In **Define Key Administrative Permissions**, choose your IAM user and any other users or groups you want to act as administrators for this key, and then choose **Next**\.
 
-1. In **Define Key Usage Permissions**, under **This Account**, select the name of the service role for the pipeline \(for example, AWS\-CodePipeline\-Service\)\. Under **Other AWS accounts**, choose **Add another AWS account**\. Type the account ID for *AccountB* to complete the ARN, and then choose **Next**\.
+1. In **Define Key Usage Permissions**, under **This Account**, select the name of the service role for the pipeline \(for example, AWS\-CodePipeline\-Service\)\. Under **Other AWS accounts**, choose **Add another AWS account**\. Enter the account ID for *AccountB* to complete the ARN, and then choose **Next**\.
 
 1. In **Review and edit key policy**, review the policy, and then choose **Finish**\.
 
 1. From the list of keys, choose the alias of your key and copy its ARN \(for example, ***arn:aws:kms:us\-east\-2:012ID\_ACCOUNT\_A:key/2222222\-3333333\-4444\-556677EXAMPLE***\)\. You will need this when you edit your pipeline and configure policies\.
 
-## Step 1: Set Up Account Policies and Roles<a name="pipelines-create-cross-account-setup"></a>
+## Step 1: Set up account policies and roles<a name="pipelines-create-cross-account-setup"></a>
 
-Once you have created the AWS KMS key, you must create and attach policies that will enable the cross\-account access\. This requires actions from both *AccountA* and *AccountB*\.
+After you create the AWS KMS key, you must create and attach policies that will enable the cross\-account access\. This requires actions from both *AccountA* and *AccountB*\.
 
 **Topics**
-+ [Configure Policies and Roles in the Account That Will Create the Pipeline \(*AccountA*\)](#pipelines-create-cross-account-setup-accounta)
-+ [Configure Policies and Roles in the Account That Owns the AWS Resource \(*AccountB*\)](#pipelines-create-cross-account-setup-accountb)
++ [Configure policies and roles in the account that will create the pipeline \(*AccountA*\)](#pipelines-create-cross-account-setup-accounta)
++ [Configure policies and roles in the account that owns the AWS resource \(*AccountB*\)](#pipelines-create-cross-account-setup-accountb)
 
-### Configure Policies and Roles in the Account That Will Create the Pipeline \(*AccountA*\)<a name="pipelines-create-cross-account-setup-accounta"></a>
+### Configure policies and roles in the account that will create the pipeline \(*AccountA*\)<a name="pipelines-create-cross-account-setup-accounta"></a>
 
 To create a pipeline that uses CodeDeploy resources associated with another AWS account, *AccountA* must configure policies for both the Amazon S3 bucket used to store artifacts and the service role for CodePipeline\.
 
@@ -77,7 +77,7 @@ To create a pipeline that uses CodeDeploy resources associated with another AWS 
 
 1. Sign in to the AWS Management Console with *AccountA* and open the Amazon S3 console at [https://console\.aws\.amazon\.com/s3/](https://console.aws.amazon.com/s3/)\.
 
-1. In the list of Amazon S3 buckets, choose the Amazon S3 bucket where artifacts for your pipelines are stored\. This bucket is named codepipeline\-*region*\-*1234567EXAMPLE*, where *region* is the AWS region in which you created the pipeline and *1234567EXAMPLE* is a ten\-digit random number that ensures the bucket name is unique \(for example, *codepipeline\-us\-east\-2\-1234567890*\)\.
+1. In the list of Amazon S3 buckets, choose the Amazon S3 bucket where artifacts for your pipelines are stored\. This bucket is named `codepipeline-region-1234567EXAMPLE`, where *region* is the AWS Region in which you created the pipeline and *1234567EXAMPLE* is a ten\-digit random number that ensures the bucket name is unique \(for example, *codepipeline\-us\-east\-2\-1234567890*\)\.
 
 1. On the detail page for the Amazon S3 bucket, choose **Properties**\.
 
@@ -180,7 +180,7 @@ If you have not previously created any role policies, **Create Role Policy** wil
 
 1. After the policy is validated, choose **Apply Policy**\.
 
-### Configure Policies and Roles in the Account That Owns the AWS Resource \(*AccountB*\)<a name="pipelines-create-cross-account-setup-accountb"></a>
+### Configure policies and roles in the account that owns the AWS resource \(*AccountB*\)<a name="pipelines-create-cross-account-setup-accountb"></a>
 
 When you create an application, deployment, and deployment group in CodeDeploy, you also create an [Amazon EC2 instance role](https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-create-iam-instance-profile.html)\. \(This role is created for you if you use the Run Deployment Walkthrough wizard, but you can also create it manually\.\) For a pipeline created in *AccountA* to use CodeDeploy resources created in *AccountB*, you must: 
 + Configure a policy for the instance role that allows it to access the Amazon S3 bucket where pipeline artifacts are stored\.
@@ -202,7 +202,7 @@ These policies are specific to setting up CodeDeploy resources to be used in a p
 
 1. In **Set Permissions**, choose **Custom Policy**, and then choose **Select**\.
 
-1. On the **Review Policy** page, type a name for the policy in **Policy Name**\. In **Policy Document**, type the following policy to grant access to the Amazon S3 bucket used by *AccountA* to store artifacts for pipelines \(in this example, *codepipeline\-us\-east\-2\-1234567890*\):
+1. On the **Review Policy** page, enter a name for the policy in **Policy Name**\. In **Policy Document**, type the following policy to grant access to the Amazon S3 bucket used by *AccountA* to store artifacts for pipelines \(in this example, *codepipeline\-us\-east\-2\-1234567890*\):
 
    ```
    {
@@ -234,7 +234,7 @@ These policies are specific to setting up CodeDeploy resources to be used in a p
 
 1. After the policy is validated, choose **Apply Policy**\.
 
-1. Create a second policy for AWS KMS where ***arn:aws:kms:us\-east\-1:012ID\_ACCOUNT\_A:key/2222222\-3333333\-4444\-556677EXAMPLE*** is the ARN of the customer\-managed key created in *AccountA* and configured to allow *AccountB* to use it:
+1. Create a second policy for AWS KMS where ***arn:aws:kms:us\-east\-1:012ID\_ACCOUNT\_A:key/2222222\-3333333\-4444\-556677EXAMPLE*** is the ARN of the customer managed key created in *AccountA* and configured to allow *AccountB* to use it:
 
    ```
    {
@@ -349,7 +349,7 @@ This is not the policy you will use\. You must choose a policy to complete the w
 
 1. In **Managed Policies**, find **AmazonS3ReadOnlyAccess** in the list of policies under **Policy Name**, and choose **Detach Policy**\. When prompted, choose **Detach**\.
 
-## Step 2: Edit the Pipeline<a name="pipelines-create-cross-account-create"></a>
+## Step 2: Edit the pipeline<a name="pipelines-create-cross-account-create"></a>
 
 You cannot use the CodePipeline console to create or edit a pipeline that uses resources associated with another AWS account\. However, you can use the console to create the general structure of the pipeline, and then use the AWS CLI to edit the pipeline and add those resources\. Alternatively, you can use the structure of an existing pipeline and manually add the resources to it\. 
 
@@ -445,7 +445,7 @@ Be sure to include `file://` before the file name\. It is required in this comma
    aws codepipeline start-pipeline-execution --name MyFirstPipeline
    ```
 
-   For more information, see [Start a Pipeline Manually in AWS CodePipeline](pipelines-rerun-manually.md)\.
+   For more information, see [Start a pipeline manually in AWS CodePipeline](pipelines-rerun-manually.md)\.
 
 1. Sign in to the AWS Management Console with *AccountA* and open the CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
 

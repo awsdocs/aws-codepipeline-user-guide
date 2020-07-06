@@ -1,17 +1,17 @@
-# Image Definitions File Reference<a name="file-reference"></a>
+# Image definitions file reference<a name="file-reference"></a>
 
-This section is a reference only\. For information about creating a pipeline with source or deploy actions for containers, see [Create a Pipeline in CodePipeline](pipelines-create.md)\.
+This section is a reference only\. For information about creating a pipeline with source or deploy actions for containers, see [Create a pipeline in CodePipeline](pipelines-create.md)\.
 
 AWS CodePipeline job workers for container actions, such as an Amazon ECR source action or Amazon ECS deploy actions, use definitions files to map the image URI and container name to the task definition\. Each definitions file is a JSON\-formatted file used by the action provider as follows:
 + Amazon ECS standard deployments require an `imagedefinitions.json` file as an input to the deploy action\.
-+ Amazon ECS Blue/Green deployments require an `imageDetail.json` file as an input to the deploy action\.
++ Amazon ECS blue/green deployments require an `imageDetail.json` file as an input to the deploy action\.
   + Amazon ECR source actions generate an `imageDetail.json` file that is provided as an output from the source action\.
 
 **Topics**
-+ [imagedefinitions\.json File for Amazon ECS Standard Deployment Actions](#pipelines-create-image-definitions)
-+ [imageDetail\.json File for Amazon ECS Blue/Green Deployment Actions](#file-reference-ecs-bluegreen)
++ [imagedefinitions\.json file for Amazon ECS standard deployment actions](#pipelines-create-image-definitions)
++ [imageDetail\.json file for Amazon ECS blue/green deployment actions](#file-reference-ecs-bluegreen)
 
-## imagedefinitions\.json File for Amazon ECS Standard Deployment Actions<a name="pipelines-create-image-definitions"></a>
+## imagedefinitions\.json file for Amazon ECS standard deployment actions<a name="pipelines-create-image-definitions"></a>
 
 An image definitions document is a JSON file that describes your Amazon ECS container name and the image and tag\. If you are deploying container\-based applications, you must generate an image definitions file to provide the CodePipeline job worker with the Amazon ECS container and image identification to retrieve from the repository, such as Docker Hub\.
 
@@ -85,7 +85,7 @@ If your source repository is an Amazon S3 bucket, remember to zip the JSON file\
 
 For a step\-by\-step tutorial for creating a pipeline that uses Amazon ECS as the deployment provider, see [Tutorial: Continuous Deployment with CodePipeline](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-cd-pipeline.html)\.
 
-## imageDetail\.json File for Amazon ECS Blue/Green Deployment Actions<a name="file-reference-ecs-bluegreen"></a>
+## imageDetail\.json file for Amazon ECS blue/green deployment actions<a name="file-reference-ecs-bluegreen"></a>
 
 An `imageDetail.json` document is a JSON file that describes your Amazon ECS image URI\. If you are deploying container\-based applications for a blue/green deployment, you must generate the `imageDetail.json` file to provide the Amazon ECS and CodeDeploy job worker with the image identification to retrieve from the repository, such as Docker Hub\.
 
@@ -99,7 +99,7 @@ If your source repository is an Amazon S3 bucket, remember to zip the JSON file\
 + Amazon ECR source actions automatically generate an `imageDetail.json` file as an input artifact to the next action\.
 **Note**  
 Because the Amazon ECR source action creates this file, pipelines with an Amazon ECR source action do not need to manually provide an `imageDetail.json` file\.   
-For a tutorial about creating a pipeline that includes an Amazon ECR source stage, see [Tutorial: Create a Pipeline with an Amazon ECR Source and ECS\-to\-CodeDeploy Deployment](tutorials-ecs-ecr-codedeploy.md)\.
+For a tutorial about creating a pipeline that includes an Amazon ECR source stage, see [Tutorial: Create a pipeline with an Amazon ECR source and ECS\-to\-CodeDeploy deployment](tutorials-ecs-ecr-codedeploy.md)\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/imageDetail_file_diagram.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 

@@ -1,18 +1,18 @@
-# Example 1: Create an AWS CodeCommit Pipeline with AWS CloudFormation<a name="tutorials-cloudformation-codecommit"></a>
+# Example 1: Create an AWS CodeCommit pipeline with AWS CloudFormation<a name="tutorials-cloudformation-codecommit"></a>
 
 This walkthrough shows you how to use the AWS CloudFormation console to create infrastructure that includes a pipeline connected to a CodeCommit source repository\. In this tutorial, you use the provided sample template file to create your resource stack, which includes your artifact store, pipeline, and change\-detection resources, such as your Amazon CloudWatch Events rule\. After you create your resource stack in AWS CloudFormation, you can view your pipeline in the AWS CodePipeline console\. The pipeline is a two\-stage pipeline with a CodeCommit source stage and a CodeDeploy deployment stage\.
 
 **Prerequisites:**
 
 You must have created the following resources to use with the AWS CloudFormation sample template:
-+ You must have created a source repository\. You can use the AWS CodeCommit repository you created in [Tutorial: Create a Simple Pipeline \(CodeCommit Repository\)](tutorials-simple-codecommit.md)\.
-+ You must have created a CodeDeploy application and deployment group\. You can use the CodeDeploy resources you created in [Tutorial: Create a Simple Pipeline \(CodeCommit Repository\)](tutorials-simple-codecommit.md)\.
++ You must have created a source repository\. You can use the AWS CodeCommit repository you created in [Tutorial: Create a simple pipeline \(CodeCommit repository\)](tutorials-simple-codecommit.md)\.
++ You must have created a CodeDeploy application and deployment group\. You can use the CodeDeploy resources you created in [Tutorial: Create a simple pipeline \(CodeCommit repository\)](tutorials-simple-codecommit.md)\.
 + Choose one of these links to download the sample AWS CloudFormation template file for creating a pipeline: [YAML](samples/codepipeline-codecommit-events-yaml.zip) \| [JSON](samples/codepipeline-codecommit-events-json.zip)
 
   Unzip the file and place it on your local computer\.
 + Download the [SampleApp\_Linux\.zip](samples/SampleApp_Linux.zip) sample application file\.
 
-1. Unzip the files from [SampleApp\_Linux\.zip](samples/SampleApp_Linux.zip) and upload the files to your AWS CodeCommit repository\. You must upload the unzipped files to the root directory of your repository\. You can follow the instructions in [Step 2: Add Sample Code to Your CodeCommit Repository](tutorials-simple-codecommit.md#codecommit-add-code) to push the files to your repository\.
+1. Unzip the files from [SampleApp\_Linux\.zip](samples/SampleApp_Linux.zip) and upload the files to your AWS CodeCommit repository\. You must upload the unzipped files to the root directory of your repository\. You can follow the instructions in [Step 2: Add sample code to your CodeCommit repository](tutorials-simple-codecommit.md#codecommit-add-code) to push the files to your repository\.
 
 1. Open the AWS CloudFormation console and choose **Create Stack**\.
 

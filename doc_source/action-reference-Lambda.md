@@ -1,14 +1,14 @@
 # AWS Lambda<a name="action-reference-Lambda"></a>
 
-Allows you to execute a Lambda function as an action in your pipeline\. Using the event object that is an input to this function, the function has access to the action configuration, input artifact locations, output artifact locations, and other information required to access the artifacts\. For an example event passed to a Lambda invoke function, see [Example JSON Event](#action-reference-Lambda-event)\. As part of the implementation of the Lambda function, there must be a call to either the `[PutJobSuccessResult API](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_PutJobSuccessResult.html)` or `[PutJobFailureResult API](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_PutJobFailureResult.html)`\. Otherwise, the execution of this action hangs until the action times out\. If you specify output artifacts for the action, they must be uploaded to the S3 bucket as part of the function implementation\.
+Allows you to execute a Lambda function as an action in your pipeline\. Using the event object that is an input to this function, the function has access to the action configuration, input artifact locations, output artifact locations, and other information required to access the artifacts\. For an example event passed to a Lambda invoke function, see [Example JSON event](#action-reference-Lambda-event)\. As part of the implementation of the Lambda function, there must be a call to either the `[PutJobSuccessResult API](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_PutJobSuccessResult.html)` or `[PutJobFailureResult API](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_PutJobFailureResult.html)`\. Otherwise, the execution of this action hangs until the action times out\. If you specify output artifacts for the action, they must be uploaded to the S3 bucket as part of the function implementation\.
 
-## Action Type<a name="action-reference-Lambda-type"></a>
+## Action type<a name="action-reference-Lambda-type"></a>
 + Category: `Invoke`
 + Owner: `AWS`
 + Provider: `Lambda`
 + Version: `1`
 
-## Configuration Parameters<a name="action-reference-Lambda-config"></a>
+## Configuration parameters<a name="action-reference-Lambda-config"></a>
 
 **FunctionName**  
 Required: Yes  
@@ -18,21 +18,21 @@ Required: Yes
 Required: No  
 A string that can be processed as input by the Lambda function\.
 
-## Input Artifacts<a name="action-reference-Lambda-input"></a>
+## Input artifacts<a name="action-reference-Lambda-input"></a>
 + **Number of Artifacts:** `0 to 5`
 + **Description:** The set of artifacts to be made available to the Lambda function\.
 
-## Output Artifacts<a name="action-reference-Lambda-output"></a>
+## Output artifacts<a name="action-reference-Lambda-output"></a>
 + **Number of Artifacts:** `0 to 5` 
 + **Description:** The set of artifacts produced as output by the Lambda function\.
 
-## Output Variables<a name="action-reference-Lambda-variables"></a>
+## Output variables<a name="action-reference-Lambda-variables"></a>
 
 This action will produce as variables all key\-value pairs that are included in the `outputVariables` section of the [PutJobSuccessResult API](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_PutJobSuccessResult.html) request\.
 
 For more information about variables in CodePipeline, see [Variables](reference-variables.md)\.
 
-## Example Action Configuration<a name="action-reference-Lambda-example"></a>
+## Example action configuration<a name="action-reference-Lambda-example"></a>
 
 ------
 #### [ YAML ]
@@ -85,7 +85,7 @@ Actions:
 
 ------
 
-## Example JSON Event<a name="action-reference-Lambda-event"></a>
+## Example JSON event<a name="action-reference-Lambda-event"></a>
 
 The Lambda action sends a JSON event that contains the job ID, the pipeline action configuration, input and output artifact locations, and any encryption information for the artifacts\. The job worker accesses these details to complete the Lambda action\. For more information, see [job details](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_JobDetails.html)\. The following is an example event\.
 
@@ -134,7 +134,7 @@ The JSON event provides the following job details for the Lambda action in CodeP
 + `id`: The unique system\-generated ID of the job\.
 + `accountId`: The AWS account ID associated with the job\.
 + `data`: Other information required for a job worker to complete the job\. 
-  + `actionConfiguration`: The action parameters for the Lambda action\. For definitions, see [Configuration Parameters ](#action-reference-Lambda-config)\.
+  + `actionConfiguration`: The action parameters for the Lambda action\. For definitions, see [Configuration parameters ](#action-reference-Lambda-config)\.
   + `inputArtifacts`: The artifact supplied to the action\.
     + `location`: The artifact store location\.
       + `s3Location`: The input artifact location information for the action\.
@@ -160,9 +160,9 @@ The JSON event provides the following job details for the Lambda action in CodeP
     + `id`: The ID used to identify the key\. For an AWS KMS key, you can use the key ID, the key ARN, or the alias ARN\. 
     + `type`: The type of encryption key, such as an AWS KMS key\.
 
-## See Also<a name="action-reference-Lambda-links"></a>
+## See also<a name="action-reference-Lambda-links"></a>
 
 The following related resources can help you as you work with this action\.
 + [AWS Lambda Developer Guide](https://docs.aws.amazon.com/lambda/latest/dg/) – For an example pipeline with a Lambda invoke action, see [Building a Continuous Delivery Pipeline for a Lambda Application with AWS CodePipeline](https://docs.aws.amazon.com/lambda/latest/dg/build-pipeline.html) in the *AWS Lambda Developer Guide*\.
 + [AWS CloudFormation User Guide](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/) – For more information about Lambda actions and AWS CloudFormation artifacts for pipelines, see [Using Parameter Override Functions with CodePipeline Pipelines](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-parameter-override-functions.html), [Automating Deployment of Lambda\-based Applications](https://docs.aws.amazon.com/lambda/latest/dg/automating-deployment.html), and [AWS CloudFormation Artifacts](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-cfn-artifacts.html)\.
-+ [Invoke an AWS Lambda Function in a Pipeline in CodePipeline](actions-invoke-lambda-function.md) – This procedure provides a sample Lambda function and shows you how to use the console to create a pipeline with a Lambda invoke action\.
++ [Invoke an AWS Lambda function in a pipeline in CodePipeline](actions-invoke-lambda-function.md) – This procedure provides a sample Lambda function and shows you how to use the console to create a pipeline with a Lambda invoke action\.

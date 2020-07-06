@@ -1,4 +1,4 @@
-# Tutorial: Create a Pipeline That Publishes Your Serverless Application to the AWS Serverless Application Repository<a name="tutorials-serverlessrepo-auto-publish"></a>
+# Tutorial: Create a pipeline that publishes your serverless application to the AWS Serverless Application Repository<a name="tutorials-serverlessrepo-auto-publish"></a>
 
 You can use AWS CodePipeline to continuously deliver your AWS SAM serverless application to the AWS Serverless Application Repository\.
 
@@ -6,15 +6,15 @@ This tutorial shows how to create and configure a pipeline to build your serverl
 
 **Important**  
 Many of the actions you add to your pipeline in this procedure involve AWS resources that you need to create before you create the pipeline\. AWS resources for your source actions must always be created in the same AWS Region where you create your pipeline\. For example, if you create your pipeline in the US East \(Ohio\) Region, your CodeCommit repository must be in the US East \(Ohio\) Region\.   
-You can add cross\-region actions when you create your pipeline\. AWS resources for cross\-region actions must be in the same AWS Region where you plan to execute the action\. For more information, see [Add a Cross\-Region Action in CodePipeline](actions-create-cross-region.md)\.
+You can add cross\-region actions when you create your pipeline\. AWS resources for cross\-region actions must be in the same AWS Region where you plan to execute the action\. For more information, see [Add a cross\-Region action in CodePipeline](actions-create-cross-region.md)\.
 
-## Before You Begin<a name="tutorials-serverlessrepo-auto-publish-prereq"></a>
+## Before you begin<a name="tutorials-serverlessrepo-auto-publish-prereq"></a>
 
 In this tutorial, we assume the following\. 
 + You are familiar with [AWS Serverless Application Model \(AWS SAM\)](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/) and the [AWS Serverless Application Repository](https://docs.aws.amazon.com/serverlessrepo/latest/devguide/)\.
 + You have a serverless application hosted in GitHub that you have published to the AWS Serverless Application Repository using the AWS SAM CLI\. To publish an example application to the AWS Serverless Application Repository, see [Quick Start: Publishing Applications](https://docs.aws.amazon.com/serverlessrepo/latest/devguide/serverlessrepo-quick-start.html) in the *AWS Serverless Application Repository Developer Guide*\. To publish your own application to the AWS Serverless Application Repository, see [Publishing Applications Using the AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-template-publishing-applications.html) in the *AWS Serverless Application Model Developer Guide*\.
 
-## Step 1: Create a buildspec\.yml File<a name="serverlessrepo-auto-publish-create-buildspec"></a>
+## Step 1: Create a buildspec\.yml file<a name="serverlessrepo-auto-publish-create-buildspec"></a>
 
 Create a `buildspec.yml` file with the following contents, and add it to your serverless application's GitHub repository\. Replace *template\.yml* with your application's AWS SAM template and *bucketname* with the S3 bucket where your packaged application is stored\.
 
@@ -35,7 +35,7 @@ artifacts:
     - packaged-template.yml
 ```
 
-## Step 2: Create and Configure Your Pipeline<a name="serverlessrepo-auto-publish-create-pipeline"></a>
+## Step 2: Create and configure your pipeline<a name="serverlessrepo-auto-publish-create-pipeline"></a>
 
 Follow these steps to create your pipeline in the AWS Region where you want to publish your serverless application\.
 
@@ -113,7 +113,7 @@ Follow these steps to create your pipeline in the AWS Region where you want to p
 
    1. Choose **Save changes**\.
 
-## Step 3: Deploy the Publish Application<a name="serverlessrepo-auto-publish-deploy-app"></a>
+## Step 3: Deploy the publish application<a name="serverlessrepo-auto-publish-deploy-app"></a>
 
 Follow these steps to deploy the application that contains the Lambda function that performs the publish to the AWS Serverless Application Repository\. This application is **aws\-serverless\-codepipeline\-serverlessrepo\-publish**\.
 
@@ -130,7 +130,7 @@ You must deploy the application to the same AWS Region as your pipeline\.
 
 1. Expand the **Resources** section\. You see **ServerlessRepoPublish**, which is of the type **AWS::Lambda::Function**\. Make a note of the physical ID of this resource for the next step\. You use this physical ID when you create the new publish action in CodePipeline\.
 
-## Step 4: Create the Publish Action<a name="serverlessrepo-auto-publish-create-action"></a>
+## Step 4: Create the publish action<a name="serverlessrepo-auto-publish-create-action"></a>
 
 Follow these steps to create the publish action in your pipeline\.
 

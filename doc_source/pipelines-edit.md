@@ -1,23 +1,23 @@
-# Edit a Pipeline in CodePipeline<a name="pipelines-edit"></a>
+# Edit a pipeline in CodePipeline<a name="pipelines-edit"></a>
 
 A pipeline describes the release process that you want AWS CodePipeline to follow, including stages and actions that must be completed\. You can edit a pipeline to add or remove these elements\. However, when you edit a pipeline, values such as the pipeline name or pipeline metadata cannot be changed\.
 
-Unlike creating a pipeline, editing a pipeline does not rerun the most recent revision through the pipeline\. If you want to run the most recent revision through a pipeline you've just edited, you must manually rerun it\. Otherwise, the edited pipeline runs the next time you make a change to a source location configured in the source stage\. For information, see [Start a Pipeline Manually in AWS CodePipeline](pipelines-rerun-manually.md)\.
+Unlike creating a pipeline, editing a pipeline does not rerun the most recent revision through the pipeline\. If you want to run the most recent revision through a pipeline you've just edited, you must manually rerun it\. Otherwise, the edited pipeline runs the next time you make a change to a source location configured in the source stage\. For information, see [Start a pipeline manually in AWS CodePipeline](pipelines-rerun-manually.md)\.
 
-You can add actions to your pipeline that are in an AWS Region different from your pipeline\. When an AWS service is the provider for an action, and this action type/provider type are in a different AWS Region from your pipeline, this is a cross\-region action\. For more information about cross\-region actions, see [Add a Cross\-Region Action in CodePipeline](actions-create-cross-region.md)\.
+You can add actions to your pipeline that are in an AWS Region different from your pipeline\. When an AWS service is the provider for an action, and this action type/provider type are in a different AWS Region from your pipeline, this is a cross\-Region action\. For more information about cross\-Region actions, see [Add a cross\-Region action in CodePipeline](actions-create-cross-region.md)\.
 
 CodePipeline uses change detection methods to start your pipeline when a source code change is pushed\. These detection methods are based on source type: 
 + CodePipeline uses Amazon CloudWatch Events to detect changes in your CodeCommit source repository or your Amazon S3 source bucket\.
 + CodePipeline uses webhooks to detect changes in your GitHub source repository and branch\.
 
 **Note**  
-Change detection resources are created automatically when you use the console\. When you use the console to create or edit a pipeline, the additional resources are created for you\. If you use the AWS CLI to create the pipeline, you must create the additional resources yourself\. For more information about creating or updating a CodeCommit pipeline, see [Create a CloudWatch Events Rule for a CodeCommit Source \(CLI\)](pipelines-trigger-source-repo-changes-cli.md)\. For more information about using the CLI to create or update an Amazon S3 pipeline, see [Create a CloudWatch Events Rule for an Amazon S3 Source \(CLI\)](create-cloudtrail-S3-source-cli.md)\. For more information about creating or updating a GitHub pipeline, see [Use Webhooks to Start a Pipeline \(GitHub Source\)](pipelines-webhooks.md)\.
+Change detection resources are created automatically when you use the console\. When you use the console to create or edit a pipeline, the additional resources are created for you\. If you use the AWS CLI to create the pipeline, you must create the additional resources yourself\. For more information about creating or updating a CodeCommit pipeline, see [Create a CloudWatch Events rule for a CodeCommit source \(CLI\)](pipelines-trigger-source-repo-changes-cli.md)\. For more information about using the CLI to create or update an Amazon S3 pipeline, see [Create a CloudWatch Events rule for an Amazon S3 source \(CLI\)](create-cloudtrail-S3-source-cli.md)\. For more information about creating or updating a GitHub pipeline, see [Use webhooks to start a pipeline \(GitHub source\)](pipelines-webhooks.md)\.
 
 **Topics**
-+ [Edit a Pipeline \(Console\)](#pipelines-edit-console)
-+ [Edit a Pipeline \(AWS CLI\)](#pipelines-edit-cli)
++ [Edit a pipeline \(console\)](#pipelines-edit-console)
++ [Edit a pipeline \(AWS CLI\)](#pipelines-edit-cli)
 
-## Edit a Pipeline \(Console\)<a name="pipelines-edit-console"></a>
+## Edit a pipeline \(console\)<a name="pipelines-edit-console"></a>
 
 You can use the CodePipeline console to add, edit, or remove stages in a pipeline and to add, edit, or remove actions in a stage\.
 
@@ -41,7 +41,7 @@ You can use the CodePipeline console to add, edit, or remove stages in a pipelin
      + For a GitHub source, the following are added for the pipeline:
        + CodePipeline uses an OAuth token to create an authorized application that is managed by CodePipeline\.
 **Note**  
-In GitHub, there is a limit to the number of OAuth tokens you can use for an application, such as CodePipeline\. If you exceed this limit, retry the connection to allow CodePipeline to reconnect by reusing existing tokens\. For more information, see [Pipeline Error: I receive a pipeline error that says: "Could not access the GitHub repository" or "Unable to connect to the GitHub repository"](troubleshooting.md#troubleshooting-gs2)\.
+In GitHub, there is a limit to the number of OAuth tokens you can use for an application, such as CodePipeline\. If you exceed this limit, retry the connection to allow CodePipeline to reconnect by reusing existing tokens\. For more information, see [Pipeline error: I receive a pipeline error that says: "Could not access the GitHub repository" or "Unable to connect to the GitHub repository"](troubleshooting.md#troubleshooting-gs2)\.
        + CodePipeline creates a webhook in GitHub to detect source changes and then start your pipeline when a change occurs\. CodePipeline creates the following along with the webhook:
          + A secret is randomly generated and used to authorize the connection to GitHub\.
          + The webhook URL is generated using the public endpoint for the Region\.
@@ -57,7 +57,7 @@ In GitHub, there is a limit to the number of OAuth tokens you can use for an app
 
    1. In **Edit action**, in **Action name**, enter the name of your action\. The **Action provider** list displays provider options by category\. Look for the category \(for example, **Deploy**\)\. Under the category, choose the provider \(for example, **AWS CodeDeploy**\)\. In **Region**, choose the AWS Region where the resource is created or where you plan to create it\. The **Region** field designates where the AWS resources are created for this action type and provider type\. This field only displays for actions where the action provider is an AWS service\. The **Region** field defaults to the same AWS Region as your pipeline\.
 
-      For more information about the requirements for actions in CodePipeline, including names for input and output artifacts and how they are used, see [Action Structure Requirements in CodePipeline](reference-pipeline-structure.md#action-requirements)\. For examples of adding action providers and using the default fields for each provider, see [Create a Pipeline \(Console\)](pipelines-create.md#pipelines-create-console)\. 
+      For more information about the requirements for actions in CodePipeline, including names for input and output artifacts and how they are used, see [Action structure requirements in CodePipeline](reference-pipeline-structure.md#action-requirements)\. For examples of adding action providers and using the default fields for each provider, see [Create a pipeline \(console\)](pipelines-create.md#pipelines-create-console)\. 
 
       To add CodeBuild as a build action or test action to a stage, see [Use CodePipeline with CodeBuild to Test Code and Run Builds](https://docs.aws.amazon.com/codebuild/latest/userguide/how-to-create-pipeline.html) in the *CodeBuild User Guide*\.
 **Note**  
@@ -71,9 +71,9 @@ You cannot rename a stage in the console view\. You can add a stage with the nam
 **Important**  
 After you save your changes, you cannot undo them\. You must edit the pipeline again\. If a revision is running through your pipeline when you save your changes, the run is not completed\. If you want a specific commit or change to run through the edited pipeline, you must manually run it through the pipeline\. Otherwise, the next commit or change runs automatically through the pipeline\.
 
-1. To test your action, choose **Release change** to process that commit through the pipeline and commit a change to the source specified in the source stage of the pipeline\. Or follow the steps in [Start a Pipeline Manually in AWS CodePipeline](pipelines-rerun-manually.md) to use the AWS CLI to manually release a change\.
+1. To test your action, choose **Release change** to process that commit through the pipeline and commit a change to the source specified in the source stage of the pipeline\. Or follow the steps in [Start a pipeline manually in AWS CodePipeline](pipelines-rerun-manually.md) to use the AWS CLI to manually release a change\.
 
-## Edit a Pipeline \(AWS CLI\)<a name="pipelines-edit-cli"></a>
+## Edit a pipeline \(AWS CLI\)<a name="pipelines-edit-cli"></a>
 
 You can use the update\-pipeline command to edit a pipeline\.
 
@@ -94,7 +94,7 @@ Although you can use the AWS CLI to edit pipelines that include partner actions,
 
    The following example shows how you would add another deployment stage in the pipeline\.json file\. This stage runs after the first deployment stage named *Staging*\. 
 **Note**  
-This is just a portion of the file, not the entire structure\. For more information, see [CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
+This is just a portion of the file, not the entire structure\. For more information, see [CodePipeline pipeline structure reference](reference-pipeline-structure.md)\.
 
    ```
    ,      
@@ -152,9 +152,9 @@ This is just a portion of the file, not the entire structure\. For more informat
    }
    ```
 
-   The following example shows how you would add a source stage that uses a GitHub repository as its source action\. For more information about how CodePipeline integrates with GitHub, see [Source Action Integrations](integrations-action-type.md#integrations-source)\. 
+   The following example shows how you would add a source stage that uses a GitHub repository as its source action\. For more information about how CodePipeline integrates with GitHub, see [Source action integrations](integrations-action-type.md#integrations-source)\. 
 **Note**  
-This is just a portion of the file, not the entire structure\. For more information, see [CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md)\.
+This is just a portion of the file, not the entire structure\. For more information, see [CodePipeline pipeline structure reference](reference-pipeline-structure.md)\.
 
    ```
    {
@@ -187,11 +187,11 @@ This is just a portion of the file, not the entire structure\. For more informat
                },
    ```
 
-   The value for `OAuthToken` remains masked because CodePipeline uses it to access the GitHub repository\. You can use a personal access token for this value\. To create a personal access token, see [Configure Your Pipeline to Use a Personal Access Token \(GitHub and CLI\)](GitHub-create-personal-token-CLI.md)\.
+   The value for `OAuthToken` remains masked because CodePipeline uses it to access the GitHub repository\. You can use a personal access token for this value\. To create a personal access token, see [Configure your pipeline to use a personal access token \(GitHub and CLI\)](GitHub-create-personal-token-CLI.md)\.
 **Note**  
-Some edits, such as moving an action from one stage to another stage, delete the last known state history for the action\. If a pipeline contains one or more secret parameters, such as an OAuth token for an action, that token is masked by a series of asterisks \(\*\*\*\*\)\. These secret parameters are left unchanged unless you edit that portion of the pipeline \(for example, if you change the name of the action that includes the OAuth token or the name of the stage that contains an action that uses an OAuth token\)\. If you make a change that affects an action that includes an OAuth token, you must include the value of the token in the edited JSON\. For more information, see [Configure Your Pipeline to Use a Personal Access Token \(GitHub and CLI\)](GitHub-create-personal-token-CLI.md)\. It is a security best practice to rotate your personal access token on a regular basis\. For more information, see [Use GitHub and the CodePipeline CLI to Create and Rotate Your GitHub Personal Access Token on a Regular Basis](GitHub-authentication.md#GitHub-rotate-personal-token-CLI)\.
+Some edits, such as moving an action from one stage to another stage, delete the last known state history for the action\. If a pipeline contains one or more secret parameters, such as an OAuth token for an action, that token is masked by a series of asterisks \(\*\*\*\*\)\. These secret parameters are left unchanged unless you edit that portion of the pipeline \(for example, if you change the name of the action that includes the OAuth token or the name of the stage that contains an action that uses an OAuth token\)\. If you make a change that affects an action that includes an OAuth token, you must include the value of the token in the edited JSON\. For more information, see [Configure your pipeline to use a personal access token \(GitHub and CLI\)](GitHub-create-personal-token-CLI.md)\. It is a security best practice to rotate your personal access token on a regular basis\. For more information, see [Use GitHub and the CodePipeline CLI to create and rotate your GitHub personal access token on a regular basis](GitHub-authentication.md#GitHub-rotate-personal-token-CLI)\.
 
-   For information about using the CLI to add an approval action to a pipeline, see [Add a Manual Approval Action to a Pipeline in CodePipeline ](approvals-action-add.md)\.
+   For information about using the CLI to add an approval action to a pipeline, see [Add a manual approval action to a pipeline in CodePipeline ](approvals-action-add.md)\.
 
    Make sure the `PollForSourceChanges` parameter in your JSON file is set as follows: 
 
@@ -201,7 +201,7 @@ Some edits, such as moving an action from one stage to another stage, delete the
 
    CodePipeline uses Amazon CloudWatch Events to detect changes in your CodeCommit source repository and branch or your Amazon S3 source bucket\. CodePipeline uses webhooks to detect changes in your GitHub source repository and branch\. The next step includes instructions for creating these resources manually\. Setting the flag to `false` disables periodic checks, which are not required when you use the recommended change detection methods\. 
 
-1. To add a build, test, or deploy action in a Region different from your pipeline, you must add the following to your pipeline structure\. For detailed instructions, see [Add a Cross\-Region Action in CodePipeline](actions-create-cross-region.md)\.
+1. To add a build, test, or deploy action in a Region different from your pipeline, you must add the following to your pipeline structure\. For detailed instructions, see [Add a cross\-Region action in CodePipeline](actions-create-cross-region.md)\.
    + Add the `Region` parameter to your action's pipeline structure\.
    + Use the `artifactStores` parameter to specify an artifact bucket for each Region where you have an action\.
 
@@ -220,9 +220,9 @@ Some edits, such as moving an action from one stage to another stage, delete the
    Save the file\.
 
 1. If you use the CLI to edit a pipeline, you must manually manage the recommended change detection resources for your pipeline:
-   + For a CodeCommit repository, you must create the CloudWatch Events rule, as described in [Create a CloudWatch Events Rule for a CodeCommit Source \(CLI\)](pipelines-trigger-source-repo-changes-cli.md)\.
-   + For an Amazon S3 source, you must create the CloudWatch Events rule and AWS CloudTrail trail, as described in [Use CloudWatch Events to Start a Pipeline \(Amazon S3 Source\)](create-cloudtrail-S3-source.md)\.
-   + For a GitHub source, you must create the webhook, as described in [Use Webhooks to Start a Pipeline \(GitHub Source\)](pipelines-webhooks.md)\.
+   + For a CodeCommit repository, you must create the CloudWatch Events rule, as described in [Create a CloudWatch Events rule for a CodeCommit source \(CLI\)](pipelines-trigger-source-repo-changes-cli.md)\.
+   + For an Amazon S3 source, you must create the CloudWatch Events rule and AWS CloudTrail trail, as described in [Use CloudWatch Events to start a pipeline \(Amazon S3 source\)](create-cloudtrail-S3-source.md)\.
+   + For a GitHub source, you must create the webhook, as described in [Use webhooks to start a pipeline \(GitHub source\)](pipelines-webhooks.md)\.
 
 1. To apply your changes, run the update\-pipeline command, specifying the pipeline JSON file:
 **Important**  
@@ -240,6 +240,6 @@ The update\-pipeline command stops the pipeline\. If a revision is being run thr
 
    The pipeline shows your changes\. The next time you make a change to the source location, the pipeline runs that revision through the revised structure of the pipeline\.
 
-1. To manually run the last revision through the revised structure of the pipeline, run the start\-pipeline\-execution command\. For more information, see [Start a Pipeline Manually in AWS CodePipeline](pipelines-rerun-manually.md)\.
+1. To manually run the last revision through the revised structure of the pipeline, run the start\-pipeline\-execution command\. For more information, see [Start a pipeline manually in AWS CodePipeline](pipelines-rerun-manually.md)\.
 
-For more information about the structure of a pipeline and expected values, see [CodePipeline Pipeline Structure Reference](reference-pipeline-structure.md) and [AWS CodePipeline API Reference](http://docs.aws.amazon.com/codepipeline/latest/APIReference)\.
+For more information about the structure of a pipeline and expected values, see [CodePipeline pipeline structure reference](reference-pipeline-structure.md) and [AWS CodePipeline API Reference](http://docs.aws.amazon.com/codepipeline/latest/APIReference)\.

@@ -1,10 +1,10 @@
-# Tutorial: Create a Pipeline That Tests Your iOS App After a Change in Your S3 Bucket<a name="tutorials-codebuild-devicefarm-S3"></a>
+# Tutorial: Create a pipeline that tests your iOS app after a change in your S3 bucket<a name="tutorials-codebuild-devicefarm-S3"></a>
 
  You can use AWS CodePipeline to easily configure a continuous integration flow in which your app is tested each time the source bucket changes\. This tutorial shows you how to create and configure a pipeline to test your built iOS app from an S3 bucket\. The pipeline detects the arrival of a saved change through Amazon CloudWatch Events, and then uses [Device Farm](https://docs.aws.amazon.com/devicefarm/latest/developerguide/welcome.html) to test the built application\. 
 
 **Important**  
 Many of the actions you add to your pipeline in this procedure involve AWS resources that you need to create before you create the pipeline\. AWS resources for your source actions must always be created in the same AWS Region where you create your pipeline\. For example, if you create your pipeline in the US East \(Ohio\) Region, your CodeCommit repository must be in the US East \(Ohio\) Region\.   
-You can add cross\-region actions when you create your pipeline\. AWS resources for cross\-region actions must be in the same AWS Region where you plan to execute the action\. For more information, see [Add a Cross\-Region Action in CodePipeline](actions-create-cross-region.md)\.
+You can add cross\-region actions when you create your pipeline\. AWS resources for cross\-region actions must be in the same AWS Region where you plan to execute the action\. For more information, see [Add a cross\-Region action in CodePipeline](actions-create-cross-region.md)\.
 
 You can try this out using your existing iOS app, or you can use the [sample iOS app](samples/s3-ios-test-1.zip)\.
 
@@ -35,9 +35,9 @@ When Amazon S3 is the source provider for your pipeline, you must upload to your
    https://<region-URL>/devicefarm/home?region=us-west-2#/projects/eec4905f-98f8-40aa-9afc-4c1cfexample/runs
    ```
 
-## Configure CodePipeline to Use Your Device Farm Tests \(Amazon S3 Example\)<a name="codepipeline-configure-tests-S3"></a>
+## Configure CodePipeline to use your Device Farm tests \(Amazon S3 example\)<a name="codepipeline-configure-tests-S3"></a>
 
-1. Create or use an S3 bucket with versioning enabled\. Follow the instructions in [Step 1: Create an S3 Bucket for Your Application](tutorials-simple-s3.md#s3-create-s3-bucket) to create an S3 bucket\.
+1. Create or use an S3 bucket with versioning enabled\. Follow the instructions in [Step 1: Create an S3 bucket for your application](tutorials-simple-s3.md#s3-create-s3-bucket) to create an S3 bucket\.
 
 1. In the Amazon S3 console for your bucket, choose **Upload**, and follow the instructions to upload your \.zip file\.
 
@@ -51,7 +51,7 @@ When Amazon S3 is the source provider for your pipeline, you must upload to your
 
    1. In **Service role**, leave **New service role** selected, and leave **Role name** unchanged\. You can also choose to use an existing service role, if you have one\.
 **Note**  
-If you use a CodePipeline service role that was created before July 2018, you must add permissions for Device Farm\. To do this, open the IAM console, find the role, and then add the following permissions to the role's policy\. For more information, see [Add Permissions to the CodePipeline Service Role](security-iam.md#how-to-update-role-new-services)\.  
+If you use a CodePipeline service role that was created before July 2018, you must add permissions for Device Farm\. To do this, open the IAM console, find the role, and then add the following permissions to the role's policy\. For more information, see [Add permissions to the CodePipeline service role](security-iam.md#how-to-update-role-new-services)\.  
 
       ```
       {

@@ -1,4 +1,4 @@
-# Delete the Webhook for Your GitHub Source<a name="pipelines-webhooks-delete"></a>
+# Delete the webhook for your GitHub source<a name="pipelines-webhooks-delete"></a>
 
 To use the AWS CLI to delete a webhook:
 

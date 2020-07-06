@@ -1,16 +1,16 @@
-# Integrations with CodePipeline Action Types<a name="integrations-action-type"></a>
+# Integrations with CodePipeline action types<a name="integrations-action-type"></a>
 
 The integrations information in this topic is organized by CodePipeline action type\.
 
 **Topics**
-+ [Source Action Integrations](#integrations-source)
-+ [Build Action Integrations](#integrations-build)
-+ [Test Action Integrations](#integrations-test)
-+ [Deploy Action Integrations](#integrations-deploy)
-+ [Approval Action Integrations](#integrations-approval)
-+ [Invoke Action Integrations](#integrations-invoke)
++ [Source action integrations](#integrations-source)
++ [Build action integrations](#integrations-build)
++ [Test action integrations](#integrations-test)
++ [Deploy action integrations](#integrations-deploy)
++ [Approval action integrations](#integrations-approval)
++ [Invoke action integrations](#integrations-invoke)
 
-## Source Action Integrations<a name="integrations-source"></a>
+## Source action integrations<a name="integrations-source"></a>
 
 The following information is organized by CodePipeline action type and can help you configure CodePipeline to integrate with the products and services you use\.
 
@@ -21,9 +21,9 @@ The following information is organized by CodePipeline action type and can help 
 | AWS CodeCommit |  [CodeCommit](https://docs.aws.amazon.com/codecommit/latest/userguide/) is a version control service that you can use to privately store and manage assets \(such as documents, source code, and binary files\) in the cloud\. You can configure CodePipeline to use a branch in a CodeCommit repository as the source stage for your code\. Create the repository and associate it with a working directory on your local machine\. Then you can create a pipeline that uses the branch as part of a source action in a stage\. You can connect to the CodeCommit repository by either creating a pipeline or editing an existing one\.  Learn more:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
 | GitHub |   You can configure CodePipeline to use a [GitHub](https://github.com/) repository as the source stage for your code\. You must have previously created a GitHub account and at least one GitHub repository\. You can connect to the GitHub repository by either creating a pipeline or editing an existing one\.  CodePipeline integration with GitHub Enterprise is not supported\.  The first time you add a GitHub repository to a pipeline, you are prompted to authorize CodePipeline access to your repositories\. To integrate with GitHub, CodePipeline creates an OAuth application for your pipeline\. If you create or edit your pipeline in the console, CodePipeline creates a GitHub webhook that starts your pipeline when a change occurs in the repository\. The token and webhook require the following GitHub scopes: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html) For more information about GitHub scopes, see the [GitHub Developer API Reference](https://developer.github.com/v3/oauth/#scopes)\. Access for CodePipeline is configured for all repositories to which that GitHub account has access\. It cannot currently be configured for individual repositories\. To revoke this access from GitHub, choose **Settings**, and then choose **Applications**\. Under **Authorized applications**, find CodePipeline in the list of authorized applications, and then choose **Revoke**\. Revoking access immediately prevents CodePipeline from accessing any GitHub repositories previously configured for access with that GitHub account\.  If you want to limit the access CodePipeline has to repositories, create a GitHub account, grant that account access only to those repositories you want to integrate with CodePipeline, and then use that account when you configure CodePipeline to use GitHub repositories for source stages in pipelines\. Learn more: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
 | Amazon ECR | [Amazon ECR](https://docs.aws.amazon.com/AmazonECR/latest/userguide/) is an AWS Docker image repository service\. You use Docker push and pull commands to upload Docker images to your repository\. An Amazon ECR repository URI and image are used in Amazon ECS task definitions to reference source image information\.Learn more:[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html) | 
-| AWS CodeStar Connections | You can set up resources called connections to allow your pipelines to access third\-party code repositories\. When you create a connection, you install the AWS CodeStar app with your third\-party code repository, and then associate it with your connection\. For more information, see [Working with Connections in CodePipeline](connections.md)\. | 
+| AWS CodeStar Connections | You can set up resources called connections to allow your pipelines to access third\-party code repositories\. When you create a connection, you install the AWS CodeStar app with your third\-party code repository, and then associate it with your connection\. For more information, see [Create a Connection](https://docs.aws.amazon.com/dtconsole/latest/userguide/connections-create.html)\. | 
 
-## Build Action Integrations<a name="integrations-build"></a>
+## Build action integrations<a name="integrations-build"></a>
 
 
 |  |  | 
@@ -33,7 +33,7 @@ The following information is organized by CodePipeline action type and can help 
 | Jenkins  |  You can configure CodePipeline to use [Jenkins CI](https://jenkins-ci.org/) to build or test your code in one or more actions in a pipeline\. You must have previously created a Jenkins project and installed and configured the CodePipeline Plugin for Jenkins for that project\. You can connect to the Jenkins project by either creating a new pipeline or editing an existing one\. Access for Jenkins is configured on a per\-project basis\. You must install the CodePipeline Plugin for Jenkins on every Jenkins instance you want to use with CodePipeline\. You must also configure CodePipeline access to the Jenkins project\. Secure your Jenkins project by configuring it to accept HTTPS/SSL connections only\. If your Jenkins project is installed on an Amazon EC2 instance, consider providing your AWS credentials by installing the AWS CLI on each instance\. Then configure an AWS profile on those instances with the IAM user profile and AWS credentials you want to use for connections\. This is an alternative to adding and storing them through the Jenkins web interface\.  Learn more: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
 | TeamCity |  You can configure CodePipeline to use [TeamCity](https://www.jetbrains.com/teamcity/) to build and test your code in one or more actions in a pipeline\. Learn more: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
 
-## Test Action Integrations<a name="integrations-test"></a>
+## Test action integrations<a name="integrations-test"></a>
 
 
 |  |  | 
@@ -46,12 +46,13 @@ The following information is organized by CodePipeline action type and can help 
 | Nouvola | You can configure CodePipeline to use [Nouvola](http://www.nouvola.com/aws-codepipeline-plugin/) to test your code in one or more actions in a pipeline\.Learn more:[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html) | 
 | Runscope | You can configure CodePipeline to use [Runscope](https://www.runscope.com/) to test your code in one or more actions in a pipeline\.Learn more:[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html) | 
 
-## Deploy Action Integrations<a name="integrations-deploy"></a>
+## Deploy action integrations<a name="integrations-deploy"></a>
 
 
 |  |  | 
 | --- |--- |
 | Amazon Simple Storage Service \(Amazon S3\) |  [Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/) is storage for the internet\. You can use Amazon S3 to store and retrieve any amount of data at any time, from anywhere on the web\. You can add an action to a pipeline that uses Amazon S3 as a deployment provider\.  Amazon S3 can also be included in a pipeline as a source action\.  Learn more: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
+| AWS AppConfig |  AWS AppConfig is a capability of AWS Systems Manager to create, manage, and quickly deploy application configurations\. You can use AppConfig with applications hosted on EC2 instances, AWS Lambda, containers, mobile applications, or IoT devices\. Learn more: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
 | [AWS CloudFormation](action-reference-CloudFormation.md) |  [AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/) gives developers and systems administrators an easy way to create and manage a collection of related AWS resources, using templates to provision and update those resources\. You can use the service’s sample templates or create your own\. Templates describe the AWS resources and any dependencies or runtime parameters required to run your application\. The AWS Serverless Application Model \(AWS SAM\) extends AWS CloudFormation to provide a simplified way to define and deploy serverless applications\. AWS SAM supports Amazon API Gateway APIs, AWS Lambda functions, and Amazon DynamoDB tables\. You can use CodePipeline with AWS CloudFormation and the AWS SAM to continuously deliver your serverless applications\. You can add an action to a pipeline that uses AWS CloudFormation as a deployment provider\. When you use AWS CloudFormation as a deployment provider, you can take action on AWS CloudFormation stacks and change sets as part of a pipeline execution\. AWS CloudFormation can create, update, replace, and delete stacks and change sets when a pipeline runs\. As a result, AWS and custom resources can be created, provisioned, updated, or terminated during a pipeline execution according to the specifications you provide in AWS CloudFormation templates and parameter definitions\. Learn more: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
 | AWS CodeDeploy |  [CodeDeploy](https://docs.aws.amazon.com/codedeploy/latest/userguide/) coordinates application deployments to Amazon EC2 instances, on\-premises instances, or both\. You can configure CodePipeline to use CodeDeploy to deploy your code\. You can create the CodeDeploy application, deployment, and deployment group to use in a deploy action in a stage either before you create the pipeline or when you use the **Create Pipeline** wizard\. Learn more: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
 | Amazon Elastic Container Service |  Amazon ECS is a highly scalable, high performance container management service that allows you to run container\-based applications in the AWS Cloud\. When you create a pipeline, you can select Amazon ECS as a deployment provider\. A change to code in your source control repository triggers your pipeline to build a new Docker image, push it to your container registry, and then deploy the updated image to Amazon ECS\. You can also use the **ECS \(Blue/Green\)** provider action in CodePipeline to route and deploy traffic to Amazon ECS with CodeDeploy\. Learn more: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
@@ -61,14 +62,14 @@ The following information is organized by CodePipeline action type and can help 
 | Alexa Skills Kit |  [Amazon Alexa Skills Kit](https://developer.amazon.com/docs/custom-skills/use-the-alexa-skills-kit-samples.html) lets you build and distribute cloud\-based skills to users of Alexa\-enabled devices\. You can add an action to a pipeline that uses Alexa Skills Kit as a deployment provider\. Source changes are detected by your pipeline, and then your pipeline deploys updates to your Alexa skill in the Alexa service\. Learn more: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
 | XebiaLabs |  You can configure CodePipeline to use [XebiaLabs](https://xebialabs.com/) to deploy your code in one or more actions in a pipeline\. Learn more:[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html) | 
 
-## Approval Action Integrations<a name="integrations-approval"></a>
+## Approval action integrations<a name="integrations-approval"></a>
 
 
 |  |  | 
 | --- |--- |
 | Amazon Simple Notification Service |  [Amazon SNS](https://docs.aws.amazon.com/sns/latest/gsg/) is a fast, flexible, fully managed push notification service that lets you send individual messages or to fan out messages to large numbers of recipients\. Amazon SNS makes it simple and cost effective to send push notifications to mobile device users, email recipients or even send messages to other distributed services\. When you create a manual approval request in CodePipeline, you can optionally publish to a topic in Amazon SNS so that all IAM users subscribed to it are notified that the approval action is ready to be reviewed\. Learn more: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
 
-## Invoke Action Integrations<a name="integrations-invoke"></a>
+## Invoke action integrations<a name="integrations-invoke"></a>
 
 
 |  |  | 

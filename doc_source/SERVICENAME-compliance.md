@@ -1,4 +1,4 @@
-# Compliance Validation for AWS CodePipeline<a name="SERVICENAME-compliance"></a>
+# Compliance validation for AWS CodePipeline<a name="SERVICENAME-compliance"></a>
 
 Third\-party auditors assess the security and compliance of AWS CodePipeline as part of multiple AWS compliance programs\. These include PCI, ISO, HIPAA, and others\.
 

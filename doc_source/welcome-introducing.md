@@ -1,4 +1,4 @@
-# A Quick Look at CodePipeline<a name="welcome-introducing"></a>
+# A quick look at CodePipeline<a name="welcome-introducing"></a>
 
 The following diagram shows an example release process using CodePipeline\.
 

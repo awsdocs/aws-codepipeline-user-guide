@@ -1,4 +1,4 @@
-# Create a CloudWatch Events Rule for an Amazon S3 Source \(Console\)<a name="create-cloudtrail-S3-source-console"></a>
+# Create a CloudWatch Events rule for an Amazon S3 source \(console\)<a name="create-cloudtrail-S3-source-console"></a>
 
 Before you set up a rule in CloudWatch Events, you must create an AWS CloudTrail trail\. For more information, see [Creating a Trail in the Console](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-a-trail-using-the-console-first-time.html)\.
 

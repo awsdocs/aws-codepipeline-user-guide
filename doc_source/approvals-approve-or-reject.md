@@ -1,4 +1,4 @@
-# Approve or Reject an Approval Action in CodePipeline<a name="approvals-approve-or-reject"></a>
+# Approve or reject an approval action in CodePipeline<a name="approvals-approve-or-reject"></a>
 
 When a pipeline includes an approval action, the pipeline execution stops at the point where the action has been added\. The pipeline won't resume unless someone manually approves the action\. If an approver rejects the action, or if no approval response is received within seven days of the pipeline stopping for the approval action, the pipeline status becomes "Failed\."
 
@@ -6,7 +6,7 @@ If the person who added the approval action to the pipeline configured notificat
 
 ![\[A sample notification email for a manual approval request\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/approvals-email-example.png)![\[A sample notification email for a manual approval request\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[A sample notification email for a manual approval request\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
-## Approve or Reject an Approval Action \(Console\)<a name="approvals-approve-or-reject-console"></a>
+## Approve or reject an approval action \(console\)<a name="approvals-approve-or-reject-console"></a>
 
 If you receive a notification that includes a direct link to an approval action, choose the **Approve or reject** link, sign in to the console, and then continue with step 7 here\. Otherwise, follow all of these steps\.
 
@@ -18,13 +18,13 @@ If you receive a notification that includes a direct link to an approval action,
 
 1. Hover over the information icon to view the comments and URL, if any\. The message also displays the URL of content for you to review, if one was included\. 
 
-1. If a URL was provided, choose the **Manual approval** link in the action to open the target web page, and then review the content\.
+1. If a URL was provided, choose the **Manual approval** link in the action to open the target webpage, and then review the content\.
 
 1. Return to the pipeline details view, and then choose **Review**\.
 
 1. In the **Approve or reject the revision** window, enter review comments, such as why you are approving or rejecting the action, and then choose **Approve** or **Reject**\.
 
-## Approve or Reject an Approval Request \(CLI\)<a name="approvals-approve-or-reject-cli"></a>
+## Approve or reject an approval request \(CLI\)<a name="approvals-approve-or-reject-cli"></a>
 
 To use the CLI to respond to an approval action, you must first use the get\-pipeline\-state command to retrieve the token associated with latest execution of the approval action\. 
 

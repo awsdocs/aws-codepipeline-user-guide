@@ -1,4 +1,4 @@
-# View Pipeline Details and History \(CLI\)<a name="pipelines-view-cli"></a>
+# View pipeline details and history \(CLI\)<a name="pipelines-view-cli"></a>
 
 You can run the following commands to view details about your pipelines and pipeline executions:
 +  list\-pipelines command to view a summary of all of the pipelines associated with your AWS account\.
@@ -9,13 +9,13 @@ You can run the following commands to view details about your pipelines and pipe
 + list\-action\-executions to view action execution details for a pipeline\. 
 
 **Topics**
-+ [View Pipeline \(CLI\)](#pipelines-list-cli)
-+ [View Execution History \(CLI\)](#pipelines-executions-cli)
-+ [View Execution Status \(CLI\)](#pipelines-executions-status-cli)
-+ [View Source Revisions \(CLI\)](#pipelines-source-revisions-cli)
-+ [View Action Executions \(CLI\)](#pipelines-action-executions-cli)
++ [View pipeline \(CLI\)](#pipelines-list-cli)
++ [View execution history \(CLI\)](#pipelines-executions-cli)
++ [View execution status \(CLI\)](#pipelines-executions-status-cli)
++ [View source revisions \(CLI\)](#pipelines-source-revisions-cli)
++ [View action executions \(CLI\)](#pipelines-action-executions-cli)
 
-## View Pipeline \(CLI\)<a name="pipelines-list-cli"></a>
+## View pipeline \(CLI\)<a name="pipelines-list-cli"></a>
 
 You can view pipeline details\.
 
@@ -35,7 +35,7 @@ You can view pipeline details\.
 
    This command returns the structure of the pipeline\.
 
-## View Execution History \(CLI\)<a name="pipelines-executions-cli"></a>
+## View execution history \(CLI\)<a name="pipelines-executions-cli"></a>
 
 You can view pipeline execution history\.
 + To view details about past executions of a pipeline, run the [list\-pipeline\-executions](http://docs.aws.amazon.com/cli/latest/reference/codepipeline/list-pipeline-executions.html) command, specifying the unique name of the pipeline\. For example, to view details about the current state of a pipeline named *MyFirstPipeline*, enter the following:
@@ -103,7 +103,7 @@ You can view pipeline execution history\.
   }
   ```
 
-## View Execution Status \(CLI\)<a name="pipelines-executions-status-cli"></a>
+## View execution status \(CLI\)<a name="pipelines-executions-status-cli"></a>
 
 You can view pipeline, stage, and action status\.
 + To view details about the current state of a pipeline, run the [get\-pipeline\-state](http://docs.aws.amazon.com/cli/latest/reference/codepipeline/get-pipeline-state.html) command, specifying the unique name of the pipeline\. For example, to view details about the current state of a pipeline named *MyFirstPipeline*, enter the following:
@@ -182,7 +182,7 @@ You can view pipeline, stage, and action status\.
   }
   ```
 
-## View Source Revisions \(CLI\)<a name="pipelines-source-revisions-cli"></a>
+## View source revisions \(CLI\)<a name="pipelines-source-revisions-cli"></a>
 
 You can view details about source artifacts \(output artifacts that originated in the first stage of a pipeline\) that are used in an execution of a pipeline\. The details include identifiers, such as commit IDs, check\-in comments, time since the artifact was created or updated and, when you use the CLI, version numbers of build actions\. For some revision types, you can view and open the URL of the commit for the artifact version\. Source revisions are made up of the following:
 + **Summary**: Summary information about the most recent revision of the artifact\. For GitHub and AWS CodeCommit repositories, the commit message\. For Amazon S3 buckets or actions, the user\-provided content of a codepipeline\-artifact\-revision\-summary key specified in the object metadata\. 
@@ -236,7 +236,7 @@ In other words, if you want to view details about artifacts currently in the Sta
    }
    ```
 
-## View Action Executions \(CLI\)<a name="pipelines-action-executions-cli"></a>
+## View action executions \(CLI\)<a name="pipelines-action-executions-cli"></a>
 
 You can view action execution details for a pipeline, such as action execution ID, input artifacts, output artifacts, execution result, and status\. You provide the Execution ID filter to return a listing of actions in a pipeline execution:
 

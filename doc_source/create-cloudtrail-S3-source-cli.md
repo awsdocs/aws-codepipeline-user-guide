@@ -1,4 +1,4 @@
-# Create a CloudWatch Events Rule for an Amazon S3 Source \(CLI\)<a name="create-cloudtrail-S3-source-cli"></a><a name="proc-cli-event-s3-createtrail"></a>
+# Create a CloudWatch Events rule for an Amazon S3 source \(CLI\)<a name="create-cloudtrail-S3-source-cli"></a><a name="proc-cli-event-s3-createtrail"></a>
 
 **To create an AWS CloudTrail trail and enable logging**
 
@@ -115,7 +115,7 @@ For more information, see [Creating a Trail with the AWS Command Line Interface]
 
 **To edit your pipeline's PollForSourceChanges parameter**
 **Important**  
-When you create a pipeline with this method, the `PollForSourceChanges` parameter defaults to true if it is not explicitly set to false\. When you add event\-based change detection, you must add the parameter to your output and set it to false to disable polling\. Otherwise, your pipeline starts twice for a single source change\. For details, see [Default Settings for the PollForSourceChanges Parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
+When you create a pipeline with this method, the `PollForSourceChanges` parameter defaults to true if it is not explicitly set to false\. When you add event\-based change detection, you must add the parameter to your output and set it to false to disable polling\. Otherwise, your pipeline starts twice for a single source change\. For details, see [Default settings for the PollForSourceChanges parameter](reference-pipeline-structure.md#PollForSourceChanges-defaults)\.
 
 1. Run the get\-pipeline command to copy the pipeline structure into a JSON file\. For example, for a pipeline named `MyFirstPipeline`, run the following command: 
 

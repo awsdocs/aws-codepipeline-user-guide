@@ -9,10 +9,10 @@ Security is a shared responsibility between AWS and you\. The [shared responsibi
 This documentation helps you understand how to apply the shared responsibility model when using CodePipeline\. The following topics show you how to configure CodePipeline to meet your security and compliance objectives\. You also learn how to use other AWS services that help you to monitor and secure your CodePipeline resources\. 
 
 **Topics**
-+ [Data Protection in AWS CodePipeline](data-protection.md)
-+ [Identity and Access Management for AWS CodePipeline](security-iam.md)
-+ [Logging and Monitoring in CodePipeline](incident-response.md)
-+ [Compliance Validation for AWS CodePipeline](SERVICENAME-compliance.md)
++ [Data protection in AWS CodePipeline](data-protection.md)
++ [Identity and access management for AWS CodePipeline](security-iam.md)
++ [Logging and monitoring in CodePipeline](incident-response.md)
++ [Compliance validation for AWS CodePipeline](SERVICENAME-compliance.md)
 + [Resilience in AWS CodePipeline](disaster-recovery-resiliency.md)
-+ [Infrastructure Security in AWS CodePipeline](infrastructure-security.md)
-+ [Security Best Practices](security-best-practices.md)
++ [Infrastructure security in AWS CodePipeline](infrastructure-security.md)
++ [Security best practices](security-best-practices.md)

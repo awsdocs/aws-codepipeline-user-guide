@@ -1,9 +1,4 @@
-# Connect to Bitbucket<a name="connections-create"></a>
-
-
-|  | 
-| --- |
-| The connections feature is in preview release for AWS CodePipeline and is subject to change\. | 
+# Create a connection to Bitbucket<a name="connections-pipelines"></a>
 
 You can use the AWS CodePipeline console to create a connection to a third\-party code repository\. As an example, this topic shows you how to create a connection to a Bitbucket repository\. Before you begin:
 + You must have created an account with the provider of the third\-party repository, such as Bitbucket\.
@@ -13,10 +8,10 @@ You can use the AWS CodePipeline console to create a connection to a third\-part
 Bitbucket connections only provide access to repositories owned by the Bitbucket account that was used to create the connection\.
 
 **Topics**
-+ [Create a Connection \(Console\)](#connections-create-console)
-+ [Create a Connection \(CLI\)](#connections-create-cli)
++ [Create a connection \(console\)](#connections-pipelines-console)
++ [Create a connection \(CLI\)](#connections-pipelines-cli)
 
-## Create a Connection \(Console\)<a name="connections-create-console"></a>
+## Create a connection \(console\)<a name="connections-pipelines-console"></a>
 
 You use the console to create a connection by using one of the following methods:
 + Use the **Create Pipeline** wizard or the **Edit action** page in the CodePipeline console\. Note that when you configure a CodePipeline action, you can choose existing connections or create a new connection\.
@@ -93,7 +88,7 @@ Depending on when your service role was created, you might need to update its pe
 
 1.  To exit the wizard without creating a pipeline, choose **Cancel**\.
 
-## Create a Connection \(CLI\)<a name="connections-create-cli"></a>
+## Create a connection \(CLI\)<a name="connections-pipelines-cli"></a>
 
 You can use the AWS Command Line Interface \(AWS CLI\) to create a connection\. 
 
@@ -118,4 +113,4 @@ A connection created through the AWS CLI or AWS CloudFormation is in `PENDING` s
    }
    ```
 
-1. Use the console to complete the connection\. For more information, see [Update a Pending Connection](connections-update.md)\.
+1. Use the console to complete the connection\. For more information, see [Update a pending connection](https://docs.aws.amazon.com/dtconsole/latest/userguide/connections-update.html)\.

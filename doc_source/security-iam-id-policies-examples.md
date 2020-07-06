@@ -1,4 +1,4 @@
-# Identity\-Based Policies \(IAM\) Examples<a name="security-iam-id-policies-examples"></a>
+# Identity\-based policies \(IAM\) examples<a name="security-iam-id-policies-examples"></a>
 
 You can attach policies to IAM identities\. For example, you can do the following: 
 + **Attach a permissions policy to a user or a group in your account** – To grant a user permissions to view pipelines in the CodePipeline console, you can attach a permissions policy to a user or group that the user belongs to\.
@@ -8,7 +8,7 @@ You can attach policies to IAM identities\. For example, you can do the followin
 
   1. Account A administrator attaches a trust policy to the role identifying Account B as the principal who can assume the role\. 
 
-  1. Account B administrator can then delegate permissions to assume the role to any users in Account B\. Doing this allows users in Account B to create or access resources in Account A\. The principal in the trust policy an also be an AWS service principal if you want to grant an AWS service permissions to assume the role\.
+  1. Account B administrator can then delegate permissions to assume the role to any users in Account B\. Doing this allows users in Account B to create or access resources in Account A\. The principal in the trust policy can also be an AWS service principal if you want to grant an AWS service permissions to assume the role\.
 
   For more information about using IAM to delegate permissions, see [Access Management](https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) in the *IAM User Guide*\.
 
@@ -104,4 +104,4 @@ The following example shows a policy created in the *111111111111* AWS account t
 }
 ```
 
-You can create IAM policies to restrict the calls and resources that users in your account have access to, and then attach those policies to IAM users\. For more information about how to create IAM roles and to explore example IAM policy statements for CodePipeline, see [Customer Managed Policy Examples](customer-managed-policies.md)\. 
+You can create IAM policies to restrict the calls and resources that users in your account have access to, and then attach those policies to IAM users\. For more information about how to create IAM roles and to explore example IAM policy statements for CodePipeline, see [Customer managed policy examples](customer-managed-policies.md)\. 
