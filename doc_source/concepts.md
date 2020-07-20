@@ -17,6 +17,7 @@ The following terms are used in CodePipeline:
   + [Stopped executions](#concepts-executions-stopped)
   + [Failed executions](#concepts-failed)
   + [Superseded executions](#concepts-superseded)
++ [Stage executions](#concepts-stage-executions)
 + [Action executions](#concepts-action-executions)
 + [Transitions](#concepts-transitions)
 + [Artifacts](#concepts-artifacts)
@@ -36,13 +37,17 @@ An *action* is a set of operations performed on application code and configured 
 
 Valid CodePipeline action types are `source`, `build`, `test`, `deploy`, `approval`, and `invoke`\. For a list of action providers, see [Valid action types and providers in CodePipeline ](reference-pipeline-structure.md#actions-valid-providers)\.
 
+Actions can run in series or in parallel\. For information about serial and parallel actions in a stage, see the `runOrder` information in [action structure requirements](https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements)\.
+
 ### Pipeline executions<a name="concepts-executions"></a>
 
 An *execution* is a set of changes released by a pipeline\. Each pipeline execution is unique and has its own ID\. An execution corresponds to a set of changes, such as a merged commit or a manual release of the latest commit\. Two executions can release the same set of changes at different times\.
 
 While a pipeline can process multiple executions at the same time, a pipeline stage processes only one execution at a time\. To do this, a stage is locked while it processes an execution\. Two pipeline executions can't occupy the same stage at the same time\.
 
-Pipeline executions traverse pipeline stages in order\. Valid statuses for pipelines are `InProgress`, `Stopping`, `Stopped`, `Succeeded`, `Superseded`, and `Failed`\. An execution with a `Failed` or `Superseded` status does not continue through the pipeline and cannot be retried\.
+Pipeline executions traverse pipeline stages in order\. 
+
+Valid statuses for pipelines are `InProgress`, `Stopping`, `Stopped`, `Succeeded`, `Superseded`, and `Failed`\. An execution with a `Failed` or `Superseded` status does not continue through the pipeline and cannot be retried\. For more information, see [PipelineExecution](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_PipelineExecution.html)\.
 
 #### Stopped executions<a name="concepts-executions-stopped"></a>
 
@@ -66,9 +71,17 @@ If an execution is waiting to enter a locked stage, a more recent execution migh
 
 For more information about superseded executions and locked stages, see [How executions are processed in a pipeline ](concepts-how-it-works.md#concepts-how-it-works-executions)\.
 
+### Stage executions<a name="concepts-stage-executions"></a>
+
+A *stage execution* is the process of completing all of the actions within a stage\. For information about how a stage execution works and information about locked stages, see [How executions are processed in a pipeline ](concepts-how-it-works.md#concepts-how-it-works-executions)\.
+
+Valid statuses for stages are `InProgress`, `Stopping`, `Stopped`, `Succeeded`, and `Failed`\. For more information, see [StageExecution](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_StageExecution.html)\.
+
 ### Action executions<a name="concepts-action-executions"></a>
 
-An *action execution* is the process of completing a configured action that operates on designated [artifacts](https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-artifacts)\. These can be input artifacts, output artifacts, or both\. For example, a build action might run build commands on an input artifact, such as compiling application source code\. Action execution details include an action execution ID, the related pipeline execution source trigger, and the input and output artifacts for the action\. Valid statuses for actions are `InProgress`, `Succeeded`, and `Failed`\.
+An *action execution* is the process of completing a configured action that operates on designated [artifacts](https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-artifacts)\. These can be input artifacts, output artifacts, or both\. For example, a build action might run build commands on an input artifact, such as compiling application source code\. Action execution details include an action execution ID, the related pipeline execution source trigger, and the input and output artifacts for the action\.
+
+Valid statuses for actions are `InProgress`, `Abandoned`, `Succeeded`, or `Failed`\. For more information, see [ActionExecution](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_ActionExecution.html)\.
 
 ### Transitions<a name="concepts-transitions"></a>
 

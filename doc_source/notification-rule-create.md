@@ -1,4 +1,4 @@
-# Create a Notification Rule<a name="notification-rule-create"></a>
+# Create a notification rule<a name="notification-rule-create"></a>
 
 You can use notification rules to notify users of important changes, such as when a pipeline starts execution\. Notification rules specify both the events and the Amazon SNS topic that is used to send notifications\. For more information, see [What are notifications?](https://docs.aws.amazon.com/codestar-notifications/latest/userguide/welcome.html)
 

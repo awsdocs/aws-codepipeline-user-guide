@@ -114,7 +114,7 @@ Each type of execution state change event emits notifications with specific mess
 Valid state values:
 
 
-**Pipeline\-level states**  
+**Pipeline\-level states in events**  
 
 | Pipeline state | Description | 
 | --- | --- | 
@@ -126,7 +126,7 @@ Valid state values:
 | SUPERSEDED |  While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution advanced and continued through the pipeline instead\.  | 
 
 
-**Stage\-level states**  
+**Stage\-level states in events**  
 
 | Stage state | Description | 
 | --- | --- | 
@@ -137,7 +137,7 @@ Valid state values:
 | CANCELED | The stage was canceled because the pipeline structure was updated\. | 
 
 
-**Action\-level states**  
+**Action\-level states in events**  
 
 | Action state | Description | 
 | --- | --- | 

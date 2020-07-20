@@ -1,8 +1,8 @@
 # AWS CodeBuild<a name="action-reference-CodeBuild"></a>
 
-Allows you to run builds and tests as part of your pipeline\. When you run a CodeBuild build or test action, commands specified in the build spec are run inside of a CodeBuild container\. All artifacts that are specified as input artifacts to a CodeBuild action are available inside of the container running the commands\. CodeBuild can provide either a build or test action\. 
+Allows you to run builds and tests as part of your pipeline\. When you run a CodeBuild build or test action, commands specified in the build spec are run inside of a CodeBuild container\. All artifacts that are specified as input artifacts to a CodeBuild action are available inside of the container running the commands\. CodeBuild can provide either a build or test action\. For more information, see the [AWS CodeBuild User Guide](https://docs.aws.amazon.com/codebuild/latest/userguide/)\.
 
-When you use the CodePipeline wizard in the console to create a build project, the CodeBuild build project shows the source provider is CodePipeline\. When you create a build project in the CodeBuild console, you cannot specify CodePipeline as the source provider, but adding the build action to your pipeline adjusts the source in the CodeBuild console\. For more information, see the [AWS CodeBuild User Guide](https://docs.aws.amazon.com/codebuild/latest/userguide/)\.
+When you use the CodePipeline wizard in the console to create a build project, the CodeBuild build project shows the source provider is CodePipeline\. When you create a build project in the CodeBuild console, you cannot specify CodePipeline as the source provider, but adding the build action to your pipeline adjusts the source in the CodeBuild console\. For more information, see [ProjectSource](https://docs.aws.amazon.com/codebuild/latest/APIReference/API_ProjectSource.html) in the *AWS CodeBuild API Reference*\.
 
 **Topics**
 + [Action type](#action-reference-CodeBuild-type)
@@ -48,7 +48,7 @@ For more information, see [ EnvironmentVariable](https://docs.aws.amazon.com/cod
 
   Each input artifact is extracted to its own directory, the locations of which are stored in environment variables\. The directory for the primary source artifact is made available with `$CODEBUILD_SRC_DIR`\. The directories for all other input artifacts are made available with `$CODEBUILD_SRC_DIR_yourInputArtifactName`\.
 **Note**  
-The artifact configured in your CodeBuild project becomes the CodePipeline input artifact in your pipeline action\.
+The artifact configured in your CodeBuild project becomes the input artifact used by the CodeBuild action in your pipeline\.
 
 ## Output artifacts<a name="action-reference-CodeBuild-output"></a>
 + **Number of Artifacts:** `0 to 5` 

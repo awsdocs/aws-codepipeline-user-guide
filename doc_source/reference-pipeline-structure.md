@@ -48,13 +48,13 @@ A two\-stage pipeline has the following basic structure:
         {
             "name": "SourceStageName",
             "actions": [
-            ... See [Action structure requirements in CodePipeline](#action-requirements) ...
+            ... See  ...
             ]
         },
         {
             "name": "NextStageName",
             "actions": [
-            ... See [Action structure requirements in CodePipeline](#action-requirements) ...
+            ... See  ...
             ]
         }
     ],
@@ -171,7 +171,7 @@ The action structure has the following requirements:
 + Actions can be configured with variables\. You use the `namespace` field to set the namespace and variable information for execution variables\. For reference information about execution variables and action output variables, see [Variables](reference-variables.md)\.
 + For all currently supported action types, the only valid version string is "1"\.
 + For all currently supported action types, the only valid owner string is "AWS", "ThirdParty", or "Custom"\. For more information, see the [CodePipeline API Reference](http://docs.aws.amazon.com/codepipeline/latest/APIReference)\.
-+ The default `runOrder` value for an action is 1\. The value must be a positive integer \(natural number\)\. You cannot use fractions, decimals, negative numbers, or zero\. To specify a serial sequence of actions, use the smallest number for the first action and larger numbers for each of the rest of the actions in sequence\. To specify parallel actions, use the same integer for each action you want to run in parallel\. 
++ The default `runOrder` value for an action is 1\. The value must be a positive integer \(natural number\)\. You cannot use fractions, decimals, negative numbers, or zero\. To specify a serial sequence of actions, use the smallest number for the first action and larger numbers for each of the rest of the actions in sequence\. To specify parallel actions, use the same integer for each action you want to run in parallel\. In the console, you can specify a serial sequence for an action by choosing **Add action group** at the level in the stage where you want it to run, or you can specify a parallel sequence by choosing **Add action**\. *Action group* refers to a run order of one or more actions at the same level\.
 
   For example, if you want three actions to run in sequence in a stage, you would give the first action the `runOrder` value of 1, the second action the `runOrder` value of 2, and the third the `runOrder` value of 3\. However, if you want the second and third actions to run in parallel, you would give the first action the `runOrder` value of 1 and both the second and third actions the `runOrder` value of 2\.
 **Note**  

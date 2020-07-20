@@ -9,6 +9,10 @@ When Amazon S3 is the source provider for your pipeline, you may zip your source
 
 After you create this simple pipeline, you add another stage and then disable and enable the transition between stages\.
 
+**Important**  
+Many of the actions you add to your pipeline in this procedure involve AWS resources that you need to create before you create the pipeline\. AWS resources for your source actions must always be created in the same AWS Region where you create your pipeline\. For example, if you create your pipeline in the US East \(Ohio\) Region, your CodeCommit repository must be in the US East \(Ohio\) Region\.   
+You can add cross\-region actions when you create your pipeline\. AWS resources for cross\-region actions must be in the same AWS Region where you plan to execute the action\. For more information, see [Add a cross\-Region action in CodePipeline](actions-create-cross-region.md)\.
+
 Before you begin, you should complete the prerequisites in [Getting started with CodePipeline](getting-started-codepipeline.md)\.
 
 **Topics**

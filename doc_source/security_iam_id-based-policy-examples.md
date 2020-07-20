@@ -12,14 +12,14 @@ To learn how to create an IAM identity\-based policy using these example JSON po
 + [Using tags to control access to CodePipeline resources](tag-based-access-control.md)
 + [Permissions required to use the CodePipeline console](security-iam-permissions-console.md)
 + [AWS managed \(predefined\) policies for CodePipeline](managed-policies.md)
-+ [CodePipeline Managed Policies and Notifications](#notifications-permissions)
++ [CodePipeline managed policies and notifications](#notifications-permissions)
 + [Customer managed policy examples](customer-managed-policies.md)
 
-## CodePipeline Managed Policies and Notifications<a name="notifications-permissions"></a>
+## CodePipeline managed policies and notifications<a name="notifications-permissions"></a>
 
 CodePipeline supports notifications, which can notify users of important changes to pipelines\. Managed policies for CodePipeline include policy statements for notification functionality\. For more information, see [What are notifications?](https://docs.aws.amazon.com/codestar-notifications/latest/userguide/welcome.html)\.
 
-### Permissions Related to Notifications in Full Access Managed Policies<a name="notifications-fullaccess"></a>
+### Permissions related to notifications in full access managed policies<a name="notifications-fullaccess"></a>
 
 The `AWSCodePipelineFullAccess` managed policy includes the following statements to allow full access to notifications\. Users with this managed policy applied can also create and manage Amazon SNS topics for notifications, subscribe and unsubscribe users to topics, list topics to choose as targets for notification rules, and list AWS Chatbot clients configured for Slack\.
 
@@ -78,7 +78,7 @@ The `AWSCodePipelineFullAccess` managed policy includes the following statements
     }
 ```
 
-### Permissions Related to Notifications in Read\-Only Managed Policies<a name="notifications-readonly"></a>
+### Permissions related to notifications in read\-only managed policies<a name="notifications-readonly"></a>
 
 The `AWSCodePipelineReadOnlyAccess` managed policy includes the following statements to allow read\-only access to notifications\. Users with this policy applied can view notifications for resources, but cannot create, manage, or subscribe to them\. 
 

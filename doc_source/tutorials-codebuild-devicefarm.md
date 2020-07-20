@@ -149,17 +149,26 @@ If you use a CodePipeline service role that was created before July 2018, you ne
 
    1. In **App**, enter the path of the compiled app package\. The path is relative to the root of the input artifact for the test stage\. Typically, this path is similar to `app-release.apk`\.
 
-   1. In **TestType**, do one of the following:
-      + If you're using one of the built\-in Device Farm tests, enter the type of test configured in your Device Farm project, such as BUILTIN\_FUZZ\. In **FuzzEventCount**, enter a time in milliseconds, such as 6000\. In **FuzzEventThrottle**, enter a time in milliseconds, such as 50\.
-      + If you aren't using one of the built\-in Device Farm tests, enter your type of test, and then in **Test**, enter the path of the test definition file\. The path is relative to the root of the input artifact for your test\.
+   1. In **TestType**, enter your type of test, and then in **Test**, enter the path of the test definition file\. The path is relative to the root of the input artifact for your test\.
 
       The following is a list of valid values for **TestType**:
+      + **APPIUM\_JAVA\_JUNIT**
+      + **APPIUM\_JAVA\_TESTNG**
+      + **APPIUM\_PYTHON**
+      + **APPIUM\_WEB\_JAVA\_JUNIT**
+      + **APPIUM\_WEB\_JAVA\_TESTNG**
+      + **APPIUM\_WEB\_PYTHON**
+      + **BUILTIN\_EXPLORER**
+      + **BUILTIN\_FUZZ**
       + **CALABASH**
       + **INSTRUMENTATION**
       + **UIAUTOMATION**
       + **UIAUTOMATOR**
+      + **WEB\_PERFORMANCE\_PROFILE**
       + **XCTEST**
       + **XCTEST\_UI**
+**Note**  
+Custom environment nodes are not supported\.
 
    1. In the remaining fields, provide the configuration that is appropriate for your test and application type\.
 

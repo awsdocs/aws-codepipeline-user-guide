@@ -42,7 +42,7 @@ For more information, see [Granting a User Permissions to Pass a Role to an AWS 
 
 1. In the IAM console, in the navigation pane, choose **Policies**, and then choose the `AWSCodePipelineFullAccess` managed policy from the list of policies\.
 
-1. On the **Policy Details** page, choose the **Attached Entities** tab, and then choose **Attach**\.
+1. On the **Summary** page, choose the **Policy Usage** tab, and then choose **Attach**\.
 
 1. On the **Attach Policy** page, select the check box next to the IAM users or groups, and then choose **Attach Policy**\.
 **Note**  
