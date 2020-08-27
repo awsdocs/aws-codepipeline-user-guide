@@ -33,12 +33,12 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      docker: 18
+      docker: 19
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
       - aws --version
-      - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/name
+      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
       - REPOSITORY_URI=012345678910.dkr.ecr.us-west-2.amazonaws.com/hello-world
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
@@ -64,25 +64,85 @@ The build specification was written for the following task definition, used by t
 
 ```
 {
-  "taskDefinition": {
-    "family": "hello-world",
-    "containerDefinitions": [
-      {
-        "name": "hello-world",
-        "image": "012345678910.dkr.ecr.us-west-2.amazonaws.com/hello-world:latest",
-        "cpu": 100,
-        "portMappings": [
-          {
-            "protocol": "tcp",
-            "containerPort": 80,
-            "hostPort": 80
-          }
-        ],
-        "memory": 128,
-        "essential": true
-      }
-    ]
-  }
+  "ipcMode": null,
+  "executionRoleArn": "role_ARN",
+  "containerDefinitions": [
+    {
+      "dnsSearchDomains": null,
+      "environmentFiles": null,
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "secretOptions": null,
+        "options": {
+          "awslogs-group": "/ecs/hello-world",
+          "awslogs-region": "us-west-2",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "entryPoint": null,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "protocol": "tcp",
+          "containerPort": 80
+        }
+      ],
+      "command": null,
+      "linuxParameters": null,
+      "cpu": 0,
+      "environment": [],
+      "resourceRequirements": null,
+      "ulimits": null,
+      "dnsServers": null,
+      "mountPoints": [],
+      "workingDirectory": null,
+      "secrets": null,
+      "dockerSecurityOptions": null,
+      "memory": null,
+      "memoryReservation": 128,
+      "volumesFrom": [],
+      "stopTimeout": null,
+      "image": "image_name",
+      "startTimeout": null,
+      "firelensConfiguration": null,
+      "dependsOn": null,
+      "disableNetworking": null,
+      "interactive": null,
+      "healthCheck": null,
+      "essential": true,
+      "links": null,
+      "hostname": null,
+      "extraHosts": null,
+      "pseudoTerminal": null,
+      "user": null,
+      "readonlyRootFilesystem": null,
+      "dockerLabels": null,
+      "systemControls": null,
+      "privileged": null,
+      "name": "hello-world"
+    }
+  ],
+  "placementConstraints": [],
+  "memory": "2048",
+  "taskRoleArn": null,
+  "compatibilities": [
+    "EC2",
+    "FARGATE"
+  ],
+  "taskDefinitionArn": "ARN",
+  "family": "hello-world",
+  "requiresAttributes": [],
+  "pidMode": null,
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "networkMode": "awsvpc",
+  "cpu": "1024",
+  "revision": 1,
+  "status": "ACTIVE",
+  "inferenceAccelerators": null,
+  "proxyConfiguration": null,
+  "volumes": []
 }
 ```
 
@@ -148,7 +208,7 @@ Use the CodePipeline wizard to create your pipeline stages and connect your sour
 
    1. Select **Enable this flag if you want to build Docker images or want your builds to get elevated privileges**\.
 
-   1. Deselect **CloudWatch logs**\.
+   1. Deselect **CloudWatch logs**\. You might need to expand **Advanced**\.
 
    1. Choose **Continue to CodePipeline**\.
 

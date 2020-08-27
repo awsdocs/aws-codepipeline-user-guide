@@ -12,6 +12,7 @@ Detailed execution history is available for executions run on or after February 
 + [View pipeline execution source revisions \(console\)](#pipelines-source-revisions-console)
 + [View action executions \(console\)](#pipelines-action-executions-console)
 + [View action artifacts and artifact store information \(console\)](#pipelines-action-artifacts-console)
++ [View the pipeline ARN and service role ARN \(console\)](#pipelines-settings-console)
 
 ## View pipeline \(console\)<a name="pipelines-list-console"></a>
 
@@ -183,3 +184,18 @@ You can view input and output artifact details for an action\. You can also choo
 
 1. In **Artifacts**, view the artifact details in **Artifact type** and **Artifact provider**\. Choose the link under **Artifact name** to view the artifacts in the artifact store\.   
 ![\[View action details.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/view-action-details.png)![\[View action details.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[View action details.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+
+## View the pipeline ARN and service role ARN \(console\)<a name="pipelines-settings-console"></a>
+
+You can use the console to view pipeline settings, such as the pipeline ARN, the service role ARN, and the pipeline artifact store\.
+
+1. Sign in to the AWS Management Console and open the CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
+
+   The names of all pipelines associated with your AWS account will be displayed\. 
+
+1. Choose the name of your pipeline, and then choose **Settings** in the left\-hand navigation pane\. The page shows the following:
+   + The pipeline name
+   + The pipeline Amazon Resource Name \(ARN\)
+   + The CodePipeline service role ARN for your pipeline
+   + The pipeline version
+   + The name and location of the artifact store for the pipeline

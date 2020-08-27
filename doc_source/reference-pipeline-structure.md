@@ -254,36 +254,6 @@ If you create a CloudWatch Events rule or webhook, you must set the parameter to
 
 This section lists valid `configuration` parameters for each action provider\.
 
-The following example shows a valid configuration for a deploy action that uses Amazon ECS:
-
-```
-"configuration": {
-  "ClusterName": "my-ecs-cluster",
-  "ServiceName": "sample-app-service",
-  "FileName": "imagedefinitions.json",
-}
-```
-
-The following example shows a valid configuration for a test action that uses AWS Device Farm:
-
-```
-"configuration": {
-  "RecordAppPerformanceData": "true",
-  "AppType": "Android",
-  "ProjectId": "Project_ID",
-  "App": "app-release.apk",
-  "RadioBluetoothEnabled": "true",
-  "RecordVideo": "true",
-  "RadioWifiEnabled": "true",
-  "RadioNfcEnabled": "true",
-  "RadioGpsEnabled": "true",
-  "Test": "tests.zip",
-  "DevicePoolArn": "ARN",
-  "TestType": "Calabash",
-  "AppiumVersion": "1.7.2"
-}
-```
-
 The following example shows a valid configuration for a deploy action that uses AWS Service Catalog, for a pipeline that was created in the console without a separate configuration file:
 
 ```
@@ -323,21 +293,6 @@ The following example shows a valid configuration for a deploy action that uses 
   "BucketName": "website-bucket",
   "Extract": "true",
   "ObjectKey": "MyWebsite"
-}
-```
-
-The following example shows a valid configuration for an Amazon ECS and CodeDeploy blue/green deployment:
-
-```
-"configuration": {
-  "ApplicationName": "codedeploy-ecs-application",
-  "DeploymentGroupName": "ecs-codedeploy-deplgroup",
-  "Image1ArtifactName": "MyImage",
-  "TaskDefinitionTemplateArtifact": "SourceArtifact",
-  "Image1ContainerName": "IMAGE1_NAME",
-  "TaskDefinitionTemplatePath": "taskdef.json",
-  "AppSpecTemplateArtifact": "SourceArtifact",
-  "AppSpecTemplatePath": "appspec.yaml",
 }
 ```
 

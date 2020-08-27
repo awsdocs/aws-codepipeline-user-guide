@@ -122,12 +122,18 @@ This step is optional if you plan to create a deployment stage\.
 
     In **Project name**, choose your build project\. If you have already created a build project in CodeBuild, choose it\. Or you can create a build project in CodeBuild and then return to this task\. Follow the instructions in [Create a Pipeline That Uses CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/how-to-create-pipeline.html#pipelines-create-console) in the *CodeBuild User Guide*\.
 
-    To add CodeBuild environment variables to your build action, choose **Add environment variable**\. Each variable is made up of three entries:
+    In **Environment variables**, to add CodeBuild environment variables to your build action, choose **Add environment variable**\. Each variable is made up of three entries:
     + In **Name**, enter the name or key of the environment variable\.
     + In **Value**, enter the value of the environment variable\. If you choose **Parameter** for the variable type, make sure this value is the name of a parameter you have already stored in AWS Systems Manager Parameter Store\.
 **Note**  
 We strongly discourage the use of environment variables to store sensitive values, especially AWS secret key IDs and secret access keys\. When you use the CodeBuild console or AWS CLI, environment variables are displayed in plain text\. For sensitive values, we recommend that you use the **Parameter** type instead\. 
     + \(Optional\) In **Type**, enter the type of environment variable\. Valid values are **Plaintext** or **Parameter**\. The default is **Plaintext**\.
+
+    \(Optional\) In **Build type**, choose one of the following:
+    + To run each build in a single build action execution, choose **Single build**\.
+    + To run multiple builds in the same build action execution, choose **Batch build**\. 
+
+    \(Optional\) If you chose to run batch builds, you can choose **Combine all artifacts from batch into a single location** to place all build artifacts into a single output artifact\.
 
 **Step 4: Create a deployment stage**
 

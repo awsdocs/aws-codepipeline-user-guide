@@ -2,10 +2,11 @@
 
 The following table describes the important changes in each release of the CodePipeline User Guide\. For notification about updates to this documentation, you can subscribe to an RSS feed\.
 + **API version:** 2015\-07\-09
-+ **Latest documentation update:** July 18, 2020
++ **Latest documentation update:** August 25, 2020
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [The CodeBuild action supports enabling batch builds in AWS CodePipeline](#history) | For CodeBuild actions in your pipeline, you can enable batch builds to run multiple builds in a single execution\. For more information, see [CodeBuild action structure reference](https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CodeBuild.html) and [Create a pipeline \(console\)](https://docs.aws.amazon.com/codepipeline/latest/userguide/pipelines-create.html#pipelines-create-console)\. | July 30, 2020 | 
 | [AWS CodePipeline now supports AWS AppConfig deployment actions](#history) | A new tutorial, [Tutorial: Create a pipeline that uses AWS AppConfig as a deployment provider](https://docs.aws.amazon.com/codepipeline/latest/userguide/tutorials-AppConfig.html), provides steps to use AWS AppConfig to deploy configuration files with your pipeline\. The [AWS AppConfig action structure reference](https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-AppConfig.html) topic has also been added\. | June 25, 2020 | 
 | [AWS CodePipeline now supports Amazon VPC in AWS GovCloud \(US\-West\)](#history) | You can now connect directly to AWS CodePipeline through a private Amazon VPC endpoint in AWS GovCloud \(US\-West\)\. For more information, see [Use CodePipeline with Amazon Virtual Private Cloud](https://docs.aws.amazon.com/codepipeline/latest/userguide/vpc-support.html)\. | June 2, 2020 | 
 | [AWS CodePipeline now supports AWS Step Functions invoke actions](#history) | You can now create a pipeline in CodePipeline that uses AWS Step Functions as the invoke action provider\. A new tutorial, [Tutorial: Use an AWS Step Functions invoke action in a pipeline](https://docs.aws.amazon.com/codepipeline/latest/userguide/tutorials-step-functions.html), provides steps for starting a state machine execution from your pipeline\. The [AWS Step Functions Action Structure Reference](https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-StepFunctions.html) topic has also been added\. | May 28, 2020 | 

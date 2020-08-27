@@ -6,7 +6,11 @@ Variables allow you to configure your pipeline actions with values that are dete
 
 Some action providers produce a defined set of variables\. You choose from default variable keys for that action provider, such as commit ID\.
 
-To see step\-by\-step examples of using variables, see [Tutorial: Using variables with Lambda invoke actions](tutorials-lambda-variables.md), [Example: Use variables in manual approvals](actions-variables.md#actions-variables-examples-approvals), and [Tutorial: Create a pipeline that uses variables from AWS CloudFormation deployment actions](tutorials-cloudformation-action.md)\.
+To see step\-by\-step examples of using variables:
++ For a tutorial with a Lambda action that uses variables from an upstream action \(CodeCommit\) and generates output variables, see [Tutorial: Using variables with Lambda invoke actions](tutorials-lambda-variables.md)\.
++ For a tutorial with a AWS CloudFormation action that references stack output variables from an upstream CloudFormation action, see [Tutorial: Create a pipeline that uses variables from AWS CloudFormation deployment actions](tutorials-cloudformation-action.md)\.
++ For an example manual approval action with message text that references output variables that resolve to the CodeCommit commit ID and commit message, see [Example: Use variables in manual approvals](actions-variables.md#actions-variables-examples-approvals)\.
++ For an example CodeBuild action with an environment variable that resolves to the GitHub branch name, see [Example: Use a BranchName variable with CodeBuild environment variables](actions-variables.md#actions-variables-examples-env-branchname)\.
 
 **Variable Limits**
 

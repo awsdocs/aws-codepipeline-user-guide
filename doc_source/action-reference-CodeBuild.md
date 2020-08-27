@@ -30,6 +30,17 @@ Required: Conditional
 The value of the `PrimarySource` parameter must be the name of one of the input artifacts to the action\. CodeBuild looks for the build spec file and runs the build spec commands in the directory that contains the unzipped version of this artifact\.  
 This parameter is required if multiple input artifacts are specified for a CodeBuild action\. When there is only one source artifact for the action, the `PrimarySource` artifact defaults to that artifact\.
 
+**BatchEnabled**  
+Required: No  
+The Boolean value of the `BatchEnabled` parameter allows the action to run multiple builds in the same build execution\.  
+When this option is enabled, the `CombineArtifacts` option is available\.  
+For pipeline examples with batch builds enabled, see[CodePipeline integration with CodeBuild and batch builds](https://docs.aws.amazon.com/codebuild/latest/userguide/sample-pipeline-batch.html)\.
+
+**CombineArtifacts**  
+Required: No  
+The Boolean value of the `CombineArtifacts` parameter combines all build artifacts from a batch build into a single artifact file for the build action\.  
+To use this option, the `BatchEnabled` parameter must be enabled\.
+
 **EnvironmentVariables**  
 Required: No  
 The value of this parameter is used to set environment variables for the CodeBuild action in your pipeline\. The value for the `EnvironmentVariables` parameter takes the form of a JSON array of environment variable objects\. See the example parameter in [Action declaration \(CodeBuild example\)](#action-reference-CodeBuild-example)\.  
@@ -56,6 +67,8 @@ The artifact configured in your CodeBuild project becomes the input artifact use
 **Note**  
 The artifact configured in your CodeBuild project becomes the CodePipeline input artifact in your pipeline action\.
 
+  If the `CombineArtifacts` parameter is selected for batch builds, the output artifact location contains the combined artifacts from multiple builds that were run in the same execution\.
+
 ## Output variables<a name="action-reference-CodeBuild-variables"></a>
 
 This action will produce as variables all environment variables that were exported as part of the build\. See [https://docs\.aws\.amazon\.com/codebuild/latest/userguide/build\-spec\-ref\.html\#exported\-variables\-build\-spec](https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#exported-variables-build-spec) for more details on how to export environment variables\.
@@ -78,6 +91,8 @@ Actions:
       Version: '1'
     RunOrder: 1
     Configuration:
+      BatchEnabled: 'true'
+      CombineArtifacts: 'true'
       ProjectName: my-build-project
       PrimarySource: MyApplicationSource1
       EnvironmentVariables: '[{"name":"TEST_VARIABLE","value":"TEST_VALUE","type":"PLAINTEXT"},{"name":"ParamStoreTest","value":"PARAMETER_NAME","type":"PARAMETER_STORE"}]'
@@ -105,6 +120,8 @@ Actions:
             },
             "RunOrder": 1,
             "Configuration": {
+                "BatchEnabled": "true",
+                "CombineArtifacts": "true",
                 "ProjectName": "my-build-project",
                 "PrimarySource": "MyApplicationSource1",
                 "EnvironmentVariables": "[{\"name\":\"TEST_VARIABLE\",\"value\":\"TEST_VALUE\",\"type\":\"PLAINTEXT\"},{\"name\":\"ParamStoreTest\",\"value\":\"PARAMETER_NAME\",\"type\":\"PARAMETER_STORE\"}]"

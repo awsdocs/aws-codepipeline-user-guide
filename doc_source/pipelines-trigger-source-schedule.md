@@ -18,7 +18,7 @@ You can set up a rule in Amazon CloudWatch Events to start a pipeline on a sched
 
 1. Enter the pipeline ARN for the pipeline execution that starts when triggered by this schedule\.
 **Note**  
-You can find the pipeline ARN in the metadata output after you run the get\-pipeline command\.
+You can find the pipeline ARN under **Settings** in the console\. See [View the pipeline ARN and service role ARN \(console\)](pipelines-view-console.md#pipelines-settings-console)\.
 
 1. Choose one of the following to create or specify an IAM service role that gives Amazon CloudWatch Events permissions to invoke the target associated with your Amazon CloudWatch Events rule \(in this case, the target is CodePipeline\)\. 
    + Choose **Create a new role for this specific resource** to create a service role that grants Amazon CloudWatch Events permissions to start your pipeline executions when triggered\.

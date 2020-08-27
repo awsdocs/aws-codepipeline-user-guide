@@ -51,7 +51,7 @@ In this step, you create a pipeline to which you later add the Lambda function\.
 
 1. On the status page for your pipeline, in the CodeDeploy action, choose **Details**\. On the deployment details page for the deployment group, choose an instance ID from the list\. 
 
-1. In the Amazon EC2 console, on the **Description** tab for the instance, copy the IP address in **Public IP** \(for example, **192\.0\.2\.4**\)\. You use this address as the target of the function in AWS Lambda\.
+1. In the Amazon EC2 console, on the **Details** tab for the instance, copy the IP address in **Public IPv4 address** \(for example, **192\.0\.2\.4**\)\. You use this address as the target of the function in AWS Lambda\.
 
 **Note**  
 The default service role policy for CodePipeline includes the Lambda permissions required to invoke the function\. However, if you have modified the default service role or selected a different one, make sure the policy for the role allows the `lambda:InvokeFunction` and `lambda:ListFunctions` permissions\. Otherwise, pipelines that include Lambda actions fail\.
@@ -427,7 +427,7 @@ The sample Lambda function expects these file names and compressed structure\. H
 
 1. In **Runtime**, choose **Python 2\.7**\.
 
-1. Under **Role**, select **Choose an existing role**\. In **Existing role**, choose your role, and then choose **Create function**\.
+1. Under **Choose or create an execution role**, select **Use an existing role**\. In **Existing role**, choose your role, and then choose **Create function**\.
 
    The detail page for your created function opens\.
 
@@ -810,18 +810,20 @@ The sample Lambda function expects these file names and compressed structure\. H
        return "Complete."
    ```
 
-1. Leave **Handler** at the default value, and leave **Role** at the default, **CodePipelineLambdaExecRole**\. 
+1. Leave **Handler** at the default value, and leave **Role** at the name you selected or created earlier, **CodePipelineLambdaExecRole**\. 
 
 1. In **Basic settings**, for **Timeout**, replace the default of 3 seconds with **20**\.
 
 1. Choose **Save**\.
 
-1. From the CodePipeline console, edit the pipeline to add the function as an action in a stage in your pipeline\. In **UserParameters**, you must provide a JSON string with three parameters:
+1. From the CodePipeline console, edit the pipeline to add the function as an action in a stage in your pipeline\. Choose **Edit** for the pipeline stage you want to change, and choose **Add action group**\. On the **Edit action** page, in **Action name**, enter a name for your action\. In **Action provider**, choose **AWS Lambda**\. 
+
+   Under **Input artifacts**, choose `MyTemplate`\. In **UserParameters**, you must provide a JSON string with three parameters:
    + Stack name
    + AWS CloudFormation template name and path to the file
-   + Application name\. 
+   + Input artifact
 
-   Use curly brackets \(\{ \}\) and separate the parameters with commas\. For example, to create a stack named *MyTestStack*, for a pipeline with the input artifact *MyTemplate*, in **UserParameters**, enter: \{"stack":"*MyTestStack*","file":"template\-package/template\.json", "artifact":"*MyTemplate*"\}\.
+   Use curly brackets \(\{ \}\) and separate the parameters with commas\. For example, to create a stack named *MyTestStack*, for a pipeline with the input artifact *MyTemplate*, in **UserParameters**, enter: \{"stack":"*MyTestStack*","file":"template\-package/template\.json","artifact":"*MyTemplate*"\}\.
 **Note**  
 Even though you have specified the input artifact in **UserParameters**, you must also specify this input artifact for the action in **Input artifacts**\.
 

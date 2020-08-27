@@ -19,6 +19,7 @@ An image definitions document is a JSON file that describes your Amazon ECS cont
 The default file name for the file is `imagedefinitions.json`\. If you choose to use a different file name, you must provide it when you create the pipeline deployment stage\.
 
 Create the `imagedefinitions.json` file with the following considerations:
++ The file must use UTF\-8 encoding\.
 + The maximum file size limit for the image definitions file is 100 KB\.
 + You must create the file as a source or build artifact so that it is an input artifact for the deploy action\. In other words, make sure that the file is either uploaded to your source location, such as your CodeCommit repository, or generated as a built output artifact\.
 

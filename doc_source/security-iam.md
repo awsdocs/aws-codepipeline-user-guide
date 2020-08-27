@@ -127,6 +127,7 @@ The following table shows when support was added for other AWS services\.
 
 | AWS Service | CodePipeline Support Date | 
 | --- | --- | 
+| CodeBuild batch builds | July 30, 2020 | 
 | AWS AppConfig | June 22, 2020 | 
 | AWS Step Functions | May 27, 2020 | 
 | AWS CodeStar Connections | December 18, 2019 | 
@@ -223,6 +224,8 @@ When you create IAM policies, follow the standard security advice of granting le
        "Effect": "Allow"
    },
    ```
+**Note**  
+Support for batch builds was added at a later date\. See step 11 for the permissions to add to the service role for batch builds\.
 
    For AWS Device Farm support, add the following to your policy statement:
 
@@ -348,6 +351,19 @@ When you create IAM policies, follow the standard security advice of granting le
            "appconfig:StartDeployment",
            "appconfig:GetDeployment",
            "appconfig:StopDeployment"
+       ],
+       "Resource": "*",
+       "Effect": "Allow"
+   },
+   ```
+
+1. For CodeBuild support for batch builds, add the following to your policy statement:
+
+   ```
+   {
+       "Action": [
+           "codebuild:BatchGetBuildBatches",
+           "codebuild:StartBuildBatch"
        ],
        "Resource": "*",
        "Effect": "Allow"

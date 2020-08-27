@@ -56,7 +56,8 @@ You can find the ARN for a CodeCommit repository on the **Settings** page in the
 
 1. Enter the pipeline ARN for the pipeline to be started when triggered by this rule\.
 **Note**  
-You can find the pipeline ARN in the metadata output after you run the get\-pipeline command\. The pipeline ARN is constructed in this format:   
+You can find the pipeline ARN under **Settings** in the console\. See [View the pipeline ARN and service role ARN \(console\)](pipelines-view-console.md#pipelines-settings-console)\.  
+The pipeline ARN is constructed in this format:   
 arn:aws:codepipeline:*region*:*account*:*pipeline\-name*  
 Sample pipeline ARN:  
 `arn:aws:codepipeline:us-east-2:80398EXAMPLE:MyFirstPipeline`

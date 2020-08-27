@@ -114,7 +114,11 @@ If you use a CodePipeline service role that was created before July 2018, you mu
 
    1. In **ProjectId**, choose your Device Farm project ID\. Use the steps at the start of this tutorial to retrieve your project ID\.
 
-   1. In **DevicePoolArn**, enter the ARN for the device pool\.
+   1. In **DevicePoolArn**, enter the ARN for the device pool\. To get the available device pool ARNs for the project, including the ARN for Top Devices, use the AWS CLI to enter the following command: 
+
+      ```
+      aws devicefarm list-device-pools --arn arn:aws:devicefarm:us-west-2:account_ID:project:project_ID
+      ```
 
    1. In **AppType**, enter **iOS**\.  
 ![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-choose-test-provider-S3.png)
@@ -127,6 +131,10 @@ If you use a CodePipeline service role that was created before July 2018, you mu
    1. In **App**, enter the path of the compiled app package\. The path is relative to the root of the input artifact for the test stage\. Typically, this path is similar to `ios-test.ipa`\.
 
    1. In **TestType**, enter your type of test, and then in **Test**, enter the path of the test definition file\. The path is relative to the root of the input artifact for your test\.
+
+      If you're using one of the built\-in Device Farm tests, enter the type of test configured in your Device Farm project, such as BUILTIN\_FUZZ\. In **FuzzEventCount**, enter a time in milliseconds, such as 6000\. In **FuzzEventThrottle**, enter a time in milliseconds, such as 50\.
+
+      If you aren't using one of the built\-in Device Farm tests, enter your type of test, and then in **Test**, enter the path of the test definition file\. The path is relative to the root of the input artifact for your test\. 
 
       The following is a list of valid values for **TestType**:
       + **APPIUM\_JAVA\_JUNIT**

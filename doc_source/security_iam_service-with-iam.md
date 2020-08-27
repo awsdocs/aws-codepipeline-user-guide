@@ -46,7 +46,7 @@ The `Resource` element specifies the object or objects to which the action appli
 
 #### CodePipeline resources and operations<a name="ACP_ARN_Format"></a>
 
-In CodePipeline, the primary resource is a pipeline\. In a policy, you use an Amazon Resource Name \(ARN\) to identify the resource that the policy applies to\. CodePipeline supports other resources that can be used with the primary resource, such as stages, actions, and custom actions\. These are referred to as subresources\. These resources and subresources have unique Amazon Resource Names \(ARNs\) associated with them\. For more information about ARNs, see [Amazon Resource Names \(ARN\) and AWS Service Namespaces](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in the *Amazon Web Services General Reference*\. To get the pipeline ARN associated with your pipeline, use the CLI to run the get\-pipeline command\. For more information, see [GetPipeline](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_GetPipeline.html) in the [CodePipeline API Reference](https://docs.aws.amazon.com/codepipeline/latest/APIReference/)\.
+In CodePipeline, the primary resource is a pipeline\. In a policy, you use an Amazon Resource Name \(ARN\) to identify the resource that the policy applies to\. CodePipeline supports other resources that can be used with the primary resource, such as stages, actions, and custom actions\. These are referred to as subresources\. These resources and subresources have unique Amazon Resource Names \(ARNs\) associated with them\. For more information about ARNs, see [Amazon Resource Names \(ARN\) and AWS Service Namespaces](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in the *Amazon Web Services General Reference*\. To get the pipeline ARN associated with your pipeline, you can find the pipeline ARN under **Settings** in the console\. For more information, see [View the pipeline ARN and service role ARN \(console\)](pipelines-view-console.md#pipelines-settings-console)\.
 
 
 | Resource Type | ARN Format | 
@@ -94,7 +94,7 @@ CodePipeline provides a set of operations to work with the CodePipeline resource
 
 ### Condition keys<a name="security_iam_service-with-iam-id-based-policies-conditionkeys"></a>
 
-The `Condition` element \(or `Condition` *block*\) lets you specify conditions in which a statement is in effect\. The `Condition` element is optional\. You can build conditional expressions that use [condition operators](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html), such as equals or less than, to match the condition in the policy with values in the request\. 
+The `Condition` element \(or `Condition` *block*\) lets you specify conditions in which a statement is in effect\. The `Condition` element is optional\. You can create conditional expressions that use [condition operators](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html), such as equals or less than, to match the condition in the policy with values in the request\. 
 
 If you specify multiple `Condition` elements in a statement, or multiple keys in a single `Condition` element, AWS evaluates them using a logical `AND` operation\. If you specify multiple values for a single condition key, AWS evaluates the condition using a logical `OR` operation\. All of the conditions must be met before the statement's permissions are granted\.
 
