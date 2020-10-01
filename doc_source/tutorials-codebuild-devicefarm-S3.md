@@ -1,4 +1,4 @@
-# Tutorial: Create a pipeline that tests your iOS app after a change in your S3 bucket<a name="tutorials-codebuild-devicefarm-S3"></a>
+# Tutorial: Create a pipeline that tests your iOS app with AWS Device Farm<a name="tutorials-codebuild-devicefarm-S3"></a>
 
  You can use AWS CodePipeline to easily configure a continuous integration flow in which your app is tested each time the source bucket changes\. This tutorial shows you how to create and configure a pipeline to test your built iOS app from an S3 bucket\. The pipeline detects the arrival of a saved change through Amazon CloudWatch Events, and then uses [Device Farm](https://docs.aws.amazon.com/devicefarm/latest/developerguide/welcome.html) to test the built application\. 
 

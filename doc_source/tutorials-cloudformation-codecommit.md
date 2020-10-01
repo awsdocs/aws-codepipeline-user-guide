@@ -12,6 +12,8 @@ You must have created the following resources to use with the AWS CloudFormation
   Unzip the file and place it on your local computer\.
 + Download the [SampleApp\_Linux\.zip](samples/SampleApp_Linux.zip) sample application file\.
 
+**Create your pipeline in AWS CloudFormation**
+
 1. Unzip the files from [SampleApp\_Linux\.zip](samples/SampleApp_Linux.zip) and upload the files to your AWS CodeCommit repository\. You must upload the unzipped files to the root directory of your repository\. You can follow the instructions in [Step 2: Add sample code to your CodeCommit repository](tutorials-simple-codecommit.md#codecommit-add-code) to push the files to your repository\.
 
 1. Open the AWS CloudFormation console and choose **Create Stack**\.

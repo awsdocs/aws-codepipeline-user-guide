@@ -60,7 +60,7 @@ Call the put\-rule command, specifying:
 
 1. Call the put\-rule command and include the `--name`, `--event-pattern`, and `--role-arn` parameters\.
 
-   **Why am I making this change?** We must create an event with a rule that specifies how an image push must be made, and a target that names the pipeline to be triggered by the event\.
+   **Why am I making this change?** You must create an event with a rule that specifies how an image push must be made, and a target that names the pipeline to be started by the event\.
 
    The following sample command creates a rule called `MyECRRepoRule`\.
 

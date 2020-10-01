@@ -69,14 +69,14 @@ Use the following steps to create a Lambda function and a Lambda execution role\
        
        // Retrieve the value of UserParameters from the Lambda action configuration in AWS CodePipeline,
        // in this case it is the Commit ID of the latest change of the pipeline.
-       var commitId = event["CodePipeline.job"].data.actionConfiguration.configuration.UserParameters; 
+       var params = event["CodePipeline.job"].data.actionConfiguration.configuration.UserParameters; 
        
        // The region from where the lambda function is being executed.
        var lambdaRegion = process.env.AWS_REGION;
        
        // Notify AWS CodePipeline of a successful job
        var putJobSuccess = function(message) {
-           var successInput = {
+           var params = {
                jobId: jobId,
                outputVariables: {
                    testRunId: Math.floor(Math.random() * 1000).toString(),
@@ -95,7 +95,7 @@ Use the following steps to create a Lambda function and a Lambda execution role\
        
        // Notify AWS CodePipeline of a failed job
        var putJobFailure = function(message) {
-           var failureInput = {
+           var params = {
                jobId: jobId,
                failureDetails: {
                    message: JSON.stringify(message),
@@ -110,7 +110,7 @@ Use the following steps to create a Lambda function and a Lambda execution role\
        
        var sendResult = function() {
            try {
-               console.log("Testing commit - " + commitId);
+               console.log("Testing commit - " + params);
                
                // Your tests here
                

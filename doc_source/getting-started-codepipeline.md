@@ -28,10 +28,10 @@ Create an IAM user or use an existing one in your AWS account\. Make sure that y
 
 ## Step 3: Use an IAM managed policy to assign CodePipeline permissions to the IAM user<a name="assign-permissions"></a>
 
-You must give the IAM user permissions to interact with CodePipeline\. The quickest way to do this is to apply the `AWSCodePipelineFullAccess` managed policy to the IAM user\. 
+You must give the IAM user permissions to interact with CodePipeline\. The quickest way to do this is to apply the `AWSCodePipeline_FullAccess` managed policy to the IAM user\. 
 
 **Note**  
-The `AWSCodePipelineFullAccess` policy includes permissions that allow the console user to pass an IAM role to CodePipeline or other AWS services\. This allows the service to assume the role and perform actions on your behalf\. When you attach the policy to a user, role, or group, the `iam:PassRole` permissions are applied\. Make sure the policy is only applied to trusted users\. When users with these permissions use the console to create or edit a pipeline, the following choices are available:  
+The `AWSCodePipeline_FullAccess` policy includes permissions that allow the console user to pass an IAM role to CodePipeline or other AWS services\. This allows the service to assume the role and perform actions on your behalf\. When you attach the policy to a user, role, or group, the `iam:PassRole` permissions are applied\. Make sure the policy is only applied to trusted users\. When users with these permissions use the console to create or edit a pipeline, the following choices are available:  
 Create a CodePipeline service role or choose an existing one and pass the role to CodePipeline
 Might choose to create a CloudWatch Events rule for change detection and pass the CloudWatch Events service role to CloudWatch Events 
 For more information, see [Granting a User Permissions to Pass a Role to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html)\.
@@ -40,13 +40,13 @@ For more information, see [Granting a User Permissions to Pass a Role to an AWS 
 
 1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 
-1. In the IAM console, in the navigation pane, choose **Policies**, and then choose the `AWSCodePipelineFullAccess` managed policy from the list of policies\.
+1. In the IAM console, in the navigation pane, choose **Policies**, and then choose the `AWSCodePipeline_FullAccess` managed policy from the list of policies\.
 
 1. On the **Summary** page, choose the **Policy Usage** tab, and then choose **Attach**\.
 
 1. On the **Attach Policy** page, select the check box next to the IAM users or groups, and then choose **Attach Policy**\.
 **Note**  
-The `AWSCodePipelineFullAccess` policy provides access to all CodePipeline actions and resources that the IAM user has access to, as well as all possible actions when creating stages in a pipeline, such as creating stages that include CodeDeploy, Elastic Beanstalk, or Amazon S3\. As a best practice, you should grant individuals only the permissions they need to perform their duties\. For more information about how to restrict IAM users to a limited set of CodePipeline actions and resources, see [Remove permissions from the CodePipeline service role](security-iam.md#remove-permissions-from-policy)\.
+The `AWSCodePipeline_FullAccess` policy provides access to all CodePipeline actions and resources that the IAM user has access to, as well as all possible actions when creating stages in a pipeline, such as creating stages that include CodeDeploy, Elastic Beanstalk, or Amazon S3\. As a best practice, you should grant individuals only the permissions they need to perform their duties\. For more information about how to restrict IAM users to a limited set of CodePipeline actions and resources, see [Remove permissions from the CodePipeline service role](security-iam.md#remove-permissions-from-policy)\.
 
 ## Step 4: Install the AWS CLI<a name="install-cli"></a>
 

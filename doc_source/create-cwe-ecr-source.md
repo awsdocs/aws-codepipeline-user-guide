@@ -1,8 +1,10 @@
-# Use CloudWatch Events to start a pipeline \(Amazon ECR source\)<a name="create-cwe-ecr-source"></a>
+# Amazon ECR source actions and CloudWatch Events<a name="create-cwe-ecr-source"></a>
 
-You can use Amazon CloudWatch Events to trigger pipelines to start when rule or schedule criteria are met\. For pipelines with an Amazon ECR source, an Amazon CloudWatch Events rule detects source changes and then starts your pipeline\. When you use the console to create or change a pipeline, the rule and all associated resources are created for you\. If you create or change a pipeline with an Amazon ECR source in the AWS CLI or AWS CloudFormation, you must use these steps to create the Amazon CloudWatch Events rule and all associated resources manually\.
-
-In Amazon CloudWatch Events, you create a rule to detect and react to changes in the state of the pipeline's defined source\.
+To add an Amazon ECR source action in CodePipeline, you can choose either to: 
++ Use the CodePipeline console **Create pipeline** wizard \([Create a pipeline \(console\)](pipelines-create.md#pipelines-create-console)\) or **Edit action** page to choose the **CodeCommit** provider option\. The console creates an Amazon CloudWatch Events rule that starts your pipeline when the source changes\.
++ Use the CLI to add the action configuration for the `ECR` action and create additional resources as follows:
+  + Use the `ECR` example action configuration in [Amazon ECR](action-reference-ECR.md) to create your action as shown in [Create a pipeline \(CLI\)](pipelines-create.md#pipelines-create-cli)\.
+  + The change detection method defaults to starting the pipeline by polling the source\. You should disable periodic checks and create the change detection rule manually\. Use one of the following methods: [Create a CloudWatch Events rule for an Amazon ECR source \(console\)](create-cwe-ecr-source-console.md), [Create a CloudWatch Events rule for an Amazon ECR source \(CLI\)](create-cwe-ecr-source-cli.md), or [Create a CloudWatch Events rule for an Amazon ECR source \(AWS CloudFormation template\) ](create-cwe-ecr-source-cfn.md)\.
 
 **Topics**
 + [Create a CloudWatch Events rule for an Amazon ECR source \(console\)](create-cwe-ecr-source-console.md)

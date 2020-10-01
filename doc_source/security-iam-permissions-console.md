@@ -15,6 +15,6 @@ Depending on the other services you incorporate into your pipelines, you might n
 + AWS Lambda
 + AWS OpsWorks
 
-If you create an IAM policy that is more restrictive than the minimum required permissions, the console won't function as intended for users with that IAM policy\. To ensure that those users can still use the CodePipeline console, also attach the `AWSCodePipelineReadOnlyAccess` managed policy to the user, as described in [AWS managed \(predefined\) policies for CodePipeline](managed-policies.md)\.
+If you create an IAM policy that is more restrictive than the minimum required permissions, the console won't function as intended for users with that IAM policy\. To ensure that those users can still use the CodePipeline console, also attach the `AWSCodePipeline_ReadOnlyAccess` managed policy to the user, as described in [AWS managed \(predefined\) policies for CodePipeline](managed-policies.md)\.
 
 You don't need to allow minimum console permissions for users who are making calls to the AWS CLI or the CodePipeline API\.

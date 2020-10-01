@@ -1,6 +1,6 @@
-# Tutorial: Create a pipeline that builds and tests your Android app when a commit is pushed to your GitHub repository<a name="tutorials-codebuild-devicefarm"></a>
+# Tutorial: Create a pipeline that builds and tests your Android app with AWS Device Farm<a name="tutorials-codebuild-devicefarm"></a>
 
- You can use AWS CodePipeline to configure a continuous integration flow in which your app is built and tested each time a commit is pushed to its repository\. This tutorial shows how to create and configure a pipeline to build and test your Android app with source code in a GitHub repository\. The pipeline detects the arrival of a new commit through [webhooks that CodePipeline configures for your GitHub repository](https://docs.aws.amazon.com/codepipeline/latest/userguide/pipelines-webhooks-migration.html), and then uses [CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/welcome.html) to build the app and [Device Farm](https://docs.aws.amazon.com/devicefarm/latest/developerguide/welcome.html) to test it\. 
+You can use AWS CodePipeline to configure a continuous integration flow in which your app is built and tested each time a commit is pushed\. This tutorial shows how to create and configure a pipeline to build and test your Android app with source code in a GitHub repository\. The pipeline detects the arrival of a new GitHub commit and then uses [CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/welcome.html) to build the app and [Device Farm](https://docs.aws.amazon.com/devicefarm/latest/developerguide/welcome.html) to test it\.
 
 **Important**  
 Many of the actions you add to your pipeline in this procedure involve AWS resources that you need to create before you create the pipeline\. AWS resources for your source actions must always be created in the same AWS Region where you create your pipeline\. For example, if you create your pipeline in the US East \(Ohio\) Region, your CodeCommit repository must be in the US East \(Ohio\) Region\.   
@@ -81,16 +81,15 @@ If you use a CodePipeline service role that was created before July 2018, you ne
 
    1. Leave the settings under **Advanced settings** at their defaults, and then choose **Next**\.
 
-   1. On the **Step 2: Add source stage** page, in **Source provider**, choose **GitHub**, and then choose **Connect to GitHub**\.
+   1. On the **Step 2: Add source stage** page, in **Source provider**, choose **GitHub**\.
 
-   1. In the browser window, choose **Authorize aws\-codesuite**\. This allows your pipeline to make your repository a source, and to use webhooks that detect when new code is pushed to the repository\.
+   1. Under **Connection**, choose an existing connection or create a new one\. To create or manage a connection for your GitHub source action, see [GitHub connections](connections-github.md)\.
 
    1. In **Repository**, choose the source repository\.
 
-   1. In **Branch**, choose the branch that you want to use\.  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-add-source.png)
+   1. In **Branch**, choose the branch that you want to use\.
 
-   1. Choose **Next**\.
+   1. Leave the remaining defaults for the source action\. Choose **Next**\.
 
 1. In **Add build stage**, add a build stage:
 

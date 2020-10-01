@@ -1,6 +1,11 @@
 # Tutorial: Create a pipeline that uses Amazon S3 as a deployment provider<a name="tutorials-s3deploy"></a>
 
-In this tutorial, you configure a pipeline that continuously delivers files using Amazon S3 as the deployment action provider in your deployment stage\. The completed pipeline detects changes when you make a change to the source files in your source repository\. The pipeline then uses Amazon S3 to deploy the files to your bucket\. Each time you modify, add, or delete your website files in your source location, the deployment creates the website with your latest files\. This tutorial provides two options:
+In this tutorial, you configure a pipeline that continuously delivers files using Amazon S3 as the deployment action provider in your deployment stage\. The completed pipeline detects changes when you make a change to the source files in your source repository\. The pipeline then uses Amazon S3 to deploy the files to your bucket\. Each time you modify or add your website files in your source location, the deployment creates the website with your latest files\. 
+
+**Note**  
+Even if you delete files from the source repository, the S3 deploy action does not delete S3 objects corresponding to deleted files\.
+
+This tutorial provides two options:
 + Create a pipeline that deploys a static website to your S3 public bucket\. This example creates a pipeline with an AWS CodeCommit source action and an Amazon S3 deployment action\. See [Option 1: Deploy static website files to Amazon S3](#tutorials-s3deploy-acc)\.
 + Create a pipeline that compiles sample TypeScript code into JavaScript and deploys the CodeBuild output artifact to your S3 bucket for archive\. This example creates a pipeline with an Amazon S3 source action, a CodeBuild build action, and an Amazon S3 deployment action\. See [Option 2: Deploy built archive files to Amazon S3 from an S3 source bucket](#tutorials-s3deploy-s3source)\.
 

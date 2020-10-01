@@ -30,9 +30,9 @@ You must already have the following:
 
 Download the sample AWS CloudFormation template file and upload it to your CodeCommit repository\.
 
-1. Navigate to the sample template page for your Region\. For example, the page for us\-west\-2 is at [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/sample-templates-services-us-west-2.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/sample-templates-services-us-west-2.html)\. Download the template for `RDS_with_DBParameterGroup.template`\. The file name is `documentdb_full_stack.yml`\.
+1. Navigate to the sample template page for your Region\. For example, the page for us\-west\-2 is at [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/sample-templates-services-us-west-2.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/sample-templates-services-us-west-2.html)\. Under **Amazon DocumentDB**, download the template for an Amazon DocumentDB Cluster\. The file name is `documentdb_full_stack.yaml`\.
 
-1. Unzip the `documentdb_full_stack.yml` file, and open it in a text editor\. Make the following changes\.
+1. Unzip the `documentdb_full_stack.yaml` file, and open it in a text editor\. Make the following changes\.
 
    1. For this example, add the following `Purpose:` parameter to your `Parameters` section in the template\.
 

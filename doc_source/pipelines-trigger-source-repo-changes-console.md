@@ -11,10 +11,9 @@ If you use the console to create or edit your pipeline, your CloudWatch Events r
 
 1. Choose **Create rule**, and then under **Event source**, from **Service Name**, choose **CodeCommit**\.
 
-   The service name that you choose owns the event resource\. For example, choose CodeCommit to trigger a pipeline when there are changes to the CodeCommit repository associated with a pipeline\.
+   The service name that you choose owns the event resource\. For example, choose CodeCommit to start a pipeline when there are changes to the CodeCommit repository associated with a pipeline\.
 
-1. From **Event Type**, choose **CodeCommit Repository State Change**\.  
-![\[Create repository state change rule\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/test-repoevent-cptarget.png)![\[Create repository state change rule\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Create repository state change rule\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+1. From **Event Type**, choose **CodeCommit Repository State Change**\.
 
 1. To make a rule that applies to all repositories, choose **Any resource**\.
 
@@ -54,17 +53,16 @@ You can find the ARN for a CodeCommit repository on the **Settings** page in the
 
 1. In **Targets**, choose **CodePipeline**\.
 
-1. Enter the pipeline ARN for the pipeline to be started when triggered by this rule\.
+1. Enter the pipeline ARN for the pipeline to be started by this rule\.
 **Note**  
-You can find the pipeline ARN under **Settings** in the console\. See [View the pipeline ARN and service role ARN \(console\)](pipelines-view-console.md#pipelines-settings-console)\.  
-The pipeline ARN is constructed in this format:   
+You can find the pipeline ARN in the metadata output after you run the get\-pipeline command\. The pipeline ARN is constructed in this format:   
 arn:aws:codepipeline:*region*:*account*:*pipeline\-name*  
 Sample pipeline ARN:  
 `arn:aws:codepipeline:us-east-2:80398EXAMPLE:MyFirstPipeline`
 
 1. Create or specify an IAM service role that grants Amazon CloudWatch Events permissions to invoke the target associated with your Amazon CloudWatch Events rule \(in this case, the target is CodePipeline\)\. 
-   + Choose **Create a new role for this specific resource** to create a service role that gives Amazon CloudWatch Events permissions to your start your pipeline executions when triggered\.
-   + Choose **Use existing role** to enter a service role that gives Amazon CloudWatch Events permissions to your start your pipeline executions when triggered\.
+   + Choose **Create a new role for this specific resource** to create a service role that gives Amazon CloudWatch Events permissions to your start your pipeline executions\.
+   + Choose **Use existing role** to enter a service role that gives Amazon CloudWatch Events permissions to your start your pipeline executions\.
 
 1. Review your rule setup to make sure it meets your requirements\.
 

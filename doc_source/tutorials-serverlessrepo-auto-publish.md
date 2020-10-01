@@ -26,10 +26,7 @@ phases:
         python: 3.8
   build:
     commands:
-      - pip install --upgrade pip
-      - pip install pipenv --user
-      - pipenv install awscli aws-sam-cli
-      - pipenv run sam package --template-file template.yml --s3-bucket bucketname --output-template-file packaged-template.yml
+      - sam package --template-file template.yml --s3-bucket bucketname --output-template-file packaged-template.yml
 artifacts:
   files:
     - packaged-template.yml
@@ -49,15 +46,15 @@ Follow these steps to create your pipeline in the AWS Region where you want to p
 
 1. Leave the settings under **Advanced settings** at their defaults, and then choose **Next**\.
 
-1. On the **Add source stage** page, in **Source provider**, choose **GitHub**, and then choose **Connect to GitHub**\.
+1. On the **Add source stage** page, in **Source provider**, choose **GitHub**\.
 
-1. In the browser window, choose **Authorize aws\-codesuite**\. This allows your pipeline to make your repository a source, and to use webhooks that detect when new code is pushed to the repository\.
+1. Under **Connection**, choose an existing connection or create a new one\. To create or manage a connection for your GitHub source action, see [GitHub connections](connections-github.md)\.
 
 1. In **Repository**, choose your GitHub source repository\.
 
 1. In **Branch**, choose your GitHub branch\.
 
-1. Choose **Next**\.
+1. Leave the remaining defaults for the source action\. Choose **Next**\.
 
 1. On the **Add build stage** page, add a build stage:
 

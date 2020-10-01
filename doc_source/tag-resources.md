@@ -13,7 +13,6 @@ For tips on using tags, see the [AWS Tagging Strategies](https://aws.amazon.com/
 You can tag the following resource types in CodePipeline:
 + [Tag a pipeline in CodePipeline](pipelines-tag.md)
 + [Tag a custom action in CodePipeline](customactions-tag.md)
-+ [Tag a webhook in CodePipeline](tag-webhooks.md)
 
 You can use the AWS CLI, CodePipeline APIs, or AWS SDKs to: 
 + Add tags to a pipeline, custom action, or webhook when you create it\.

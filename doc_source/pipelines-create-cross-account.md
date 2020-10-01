@@ -445,7 +445,7 @@ Be sure to include `file://` before the file name\. It is required in this comma
    aws codepipeline start-pipeline-execution --name MyFirstPipeline
    ```
 
-   For more information, see [Start a pipeline manually in AWS CodePipeline](pipelines-rerun-manually.md)\.
+   For more information, see [Start a pipeline manually](pipelines-rerun-manually.md)\.
 
 1. Sign in to the AWS Management Console with *AccountA* and open the CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
 

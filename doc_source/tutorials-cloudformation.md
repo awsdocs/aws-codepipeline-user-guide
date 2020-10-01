@@ -5,4 +5,3 @@ The examples provide sample templates that allow you to use AWS CloudFormation t
 **Topics**
 + [Example 1: Create an AWS CodeCommit pipeline with AWS CloudFormation](tutorials-cloudformation-codecommit.md)
 + [Example 2: Create an Amazon S3 pipeline with AWS CloudFormation](tutorials-cloudformation-s3.md)
-+ [Example 3: Create a GitHub pipeline with AWS CloudFormation](tutorials-cloudformation-github.md)

@@ -1,11 +1,12 @@
-# Use CloudWatch Events to start a pipeline \(Amazon S3 source\)<a name="create-cloudtrail-S3-source"></a>
+# Amazon S3 source actions and CloudWatch Events<a name="create-cloudtrail-S3-source"></a>
 
-You should use Amazon CloudWatch Events to detect source code changes and trigger the start of your pipeline\. If your pipeline has an Amazon S3 source, you must create an AWS CloudTrail trail to log write events to objects in your Amazon S3 source bucket\.
+To add an Amazon S3 source action in CodePipeline, you choose either to: 
++ Use the CodePipeline console **Create pipeline** wizard \([Create a pipeline \(console\)](pipelines-create.md#pipelines-create-console)\) or **Edit action** page to choose the **S3** provider option\. The console creates an Amazon CloudWatch Events rule and a CloudTrail trail that starts your pipeline when the source changes\.
++ Use the CLI to add the action configuration for the `S3` action and create additional resources as follows:
+  + Use the `S3` example action configuration in [Amazon S3](action-reference-S3.md) to create your action as shown in [Create a pipeline \(CLI\)](pipelines-create.md#pipelines-create-cli)\.
+  + The change detection method defaults to starting the pipeline by polling the source\. You should disable periodic checks and create the change detection rule and trail manually\. Use one of the following methods: [Create a CloudWatch Events rule for an Amazon S3 source \(console\)](create-cloudtrail-S3-source-console.md), [Create a CloudWatch Events rule for an Amazon S3 source \(CLI\)](create-cloudtrail-S3-source-cli.md), or [Create a CloudWatch Events rule for an Amazon S3 source \(AWS CloudFormation template\) ](create-cloudtrail-S3-source-cfn.md)\.
 
 AWS CloudTrail is a service that logs and filters events on your Amazon S3 source bucket\. The trail sends the filtered source changes to the Amazon CloudWatch Events rule\. The Amazon CloudWatch Events rule detects the source change and then starts your pipeline\. 
-
-**Note**  
-For pipelines with an Amazon S3 source, an Amazon CloudWatch Events rule detects source changes and then starts your pipeline when changes occur\. When you use the console to create or change a pipeline, the rule and all associated resources are created for you\. If you create or change a pipeline with an Amazon S3 source in the CLI or AWS CloudFormation, you must create the Amazon CloudWatch Events rule, IAM role, and AWS CloudTrail trail manually\.
 
 **Requirements:**
 + If you are not creating a trail, use an existing AWS CloudTrail trail for logging events in your Amazon S3 source bucket and sending filtered events to the Amazon CloudWatch Events rule\.

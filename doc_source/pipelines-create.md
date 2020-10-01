@@ -8,10 +8,9 @@ You can also create pipelines that build and deploy container\-based application
 
 CodePipeline uses change detection methods to start your pipeline when a source code change is pushed\. These detection methods are based on source type:
 + CodePipeline uses Amazon CloudWatch Events to detect changes in your CodeCommit source repository and branch or your S3 source bucket\.
-+ CodePipeline uses webhooks to detect changes in your GitHub source repository and branch\. A webhook is an HTTP notification that detects events in an external tool and connects those external events to a pipeline\.
 
 **Note**  
-When you use the console to create or edit a pipeline, the change detection resources are created for you\. If you use the AWS CLI to create the pipeline, you must create the additional resources yourself\. For more information, see [ Use CloudWatch Events to start a pipeline \(CodeCommit source\)](triggering.md)\.
+When you use the console to create or edit a pipeline, the change detection resources are created for you\. If you use the AWS CLI to create the pipeline, you must create the additional resources yourself\. For more information, see [ CodeCommit source actions and CloudWatch Events](triggering.md)\.
 
 **Topics**
 + [Create a pipeline \(console\)](#pipelines-create-console)
@@ -72,19 +71,15 @@ For more information, see [Input and output artifacts](welcome-introducing-artif
 + On the **Step 2: Add source stage** page, in **Source provider**, choose the type of repository where your source code is stored, specify its required options, and then choose **Next step**\.
   + For **GitHub**: 
 
-    1. Choose **Connect to GitHub**\. If you are prompted to sign in, enter your GitHub credentials\. 
-**Important**  
-Do not enter your AWS credentials\.
-
-    1. If this is your first time connecting to GitHub from CodePipeline for this Region, you are asked to authorize application access to your account\. Review the permissions required for integration, and then, if you want to continue, choose **Authorize application**\. When you connect to GitHub in the console, the following resources are created for you:
-       + CodePipeline uses an OAuth token to create an authorized application that is managed by CodePipeline\.
-**Note**  
-In GitHub, there is a limit to the number of OAuth tokens you can use for an application, such as CodePipeline\. If you exceed this limit, retry the connection to allow CodePipeline to reconnect by reusing existing tokens\. For more information, see [Pipeline error: I receive a pipeline error that says: "Could not access the GitHub repository" or "Unable to connect to the GitHub repository"](troubleshooting.md#troubleshooting-gs2)\.
-       + CodePipeline creates a webhook in GitHub to detect source changes and then start your pipeline when a change occurs\. In addition to the webhook, CodePipeline:
-         + Randomly generates a secret and uses it to authorize the connection to GitHub\.
-         + Generates the webhook URL using the public endpoint for the Region and registers it with GitHub\. This subscribes the URL to receive repository events\.
+    1. Under **Connection**, choose an existing connection or create a new one\. To create or manage a connection for your GitHub source action, see [GitHub connections](connections-github.md)\.
 
     1. Choose the GitHub repository you want to use as the source location for your pipeline\. In **Branch**, from the drop\-down list, choose the branch you want to use\.
+
+    1. In **Output artifact format**, choose the format for your artifacts\. 
+       + To store output artifacts from the GitHub action using the default method, choose **CodePipeline default**\. The action accesses the files from the GitHub repository and stores the artifacts in a ZIP file in the pipeline artifact store\.
+       + To store a JSON file that contains a URL reference to the repository so that downstream actions can perform Git commands directly, choose **Full clone**\. This option can only be used by CodeBuild downstream actions\.
+
+         If you choose this option, you will need to update the permissions for your CodeBuild project service role as shown in [Troubleshooting CodePipeline](troubleshooting.md)\. For a tutorial that shows you how to use the **Full clone** option, see [Tutorial: Use full clone with a GitHub pipeline source](tutorials-github-gitclone.md)\.
   + For **Amazon S3**: 
 
     1. In **Amazon S3 location**, provide the S3 bucket name and path to the object in a bucket with versioning enabled\. The format of the bucket name and path looks like this:
@@ -341,7 +336,7 @@ You can also use the get\-pipeline command to get a copy of the JSON structure o
                    "PollForSourceChanges": "false",
    ```
 
-   CodePipeline uses Amazon CloudWatch Events to detect changes in your CodeCommit source repository and branch or your S3 source bucket\. CodePipeline uses webhooks to detect changes in your GitHub source repository and branch\. The next step includes instructions to manually create these resources for your pipeline\. Setting the flag to `false` disables periodic checks, which are not necessary when you are using the recommended change detection methods\. 
+   CodePipeline uses Amazon CloudWatch Events to detect changes in your CodeCommit source repository and branch or your S3 source bucket\. The next step includes instructions to manually create these resources for your pipeline\. Setting the flag to `false` disables periodic checks, which are not necessary when you are using the recommended change detection methods\. 
 
 1. To create a build, test, or deploy action in a Region different from your pipeline, you must add the following to your pipeline structure\. For instructions, see [Add a cross\-Region action in CodePipeline](actions-create-cross-region.md)\.
    + Add the `Region` parameter to your action's pipeline structure\.
@@ -367,5 +362,4 @@ Be sure to include `file://` before the file name\. It is required in this comma
 
 1. If you use the CLI to create a pipeline, you must manually create the recommended change detection resources for your pipeline:
    + For a pipeline with a CodeCommit repository, you must manually create the CloudWatch Events rule, as described in [Create a CloudWatch Events rule for a CodeCommit source \(CLI\)](pipelines-trigger-source-repo-changes-cli.md)\.
-   + For a pipeline with an Amazon S3 source, you must manually create the CloudWatch Events rule and AWS CloudTrail trail, as described in [Use CloudWatch Events to start a pipeline \(Amazon S3 source\)](create-cloudtrail-S3-source.md)\.
-   + For a pipeline with a GitHub source, you must manually create the webhook, as described in [Use webhooks to start a pipeline \(GitHub source\)](pipelines-webhooks.md)\.
+   + For a pipeline with an Amazon S3 source, you must manually create the CloudWatch Events rule and AWS CloudTrail trail, as described in [Amazon S3 source actions and CloudWatch Events](create-cloudtrail-S3-source.md)\.

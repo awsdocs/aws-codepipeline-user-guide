@@ -20,5 +20,4 @@ For more information about pipelines, see [CodePipeline concepts](concepts.md), 
 + [Edit a pipeline for push events](update-change-detection.md)
 + [Create the CodePipeline service role](pipelines-create-service-role.md)
 + [Tag a pipeline](pipelines-tag.md)
-+ [Create a connection to Bitbucket](connections-pipelines.md)
 + [Create a notification rule](notification-rule-create.md)

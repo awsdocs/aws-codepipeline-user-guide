@@ -240,7 +240,7 @@ Depending on the action type, you can have the following number of input and out
 
 The `PollForSourceChanges` parameter default is determined by the method used to create the pipeline, as described in the following table\. In many cases, the `PollForSourceChanges` parameter defaults to true and must be disabled\. When the `PollForSourceChanges` parameter defaults to true, you should do the following:
 + Add the `PollForSourceChanges` parameter to the JSON file or AWS CloudFormation template\.
-+ Create change detection resources \(CloudWatch Events rule or webhook, as applicable\)\.
++ Create change detection resources \(CloudWatch Events rule, as applicable\)\.
 + Set the `PollForSourceChanges` parameter to false\.
 **Note**  
 If you create a CloudWatch Events rule or webhook, you must set the parameter to false to avoid triggering the pipeline more than once\.

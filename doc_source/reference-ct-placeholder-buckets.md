@@ -1,6 +1,6 @@
 # Events placeholder bucket reference<a name="reference-ct-placeholder-buckets"></a>
 
-This section is a reference only\. For information about creating a pipeline with event detection resources, see [ Change detection methods to start pipelines](pipelines-about-starting.md#change-detection-methods)\.
+This section is a reference only\. For information about creating a pipeline with event detection resources, see [ Source actions and change detection methods](pipelines-about-starting.md#change-detection-methods)\.
 
 Source actions provided by Amazon S3 and CodeCommit use event\-based change detection resources to trigger your pipeline when a change is made in the source bucket or repository\. These resources are the CloudWatch Events rules that are configured to respond to events in the pipeline source, such as a code change to the CodeCommit repository\. When you use CloudWatch Events for an Amazon S3 source, you must turn on CloudTrail so the events are logged\. CloudTrail requires an S3 bucket where it can send its digests\. You can access the log files for your CloudWatch Events resources from the placeholder bucket or from a bucket you designated\.
 + If you used the CLI or AWS CloudFormation to set up the CloudWatch Events resources, you can find your CloudTrail files in the bucket that you specified when you set up your pipeline\.

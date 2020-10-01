@@ -32,7 +32,7 @@ The following shows an example of a permissions policy that allows a user to ena
 }
 ```
 
-The following example shows a policy in the 111222333444 account that allows users to view, but not change, the pipeline named `MyFirstPipeline` in the CodePipeline console\. This policy is based on the `AWSCodePipelineReadOnlyAccess` managed policy, but because it is specific to the `MyFirstPipeline` pipeline, it cannot use the managed policy directly\. If you do not want to restrict the policy to a specific pipeline, consider using one of the managed policies created and maintained by CodePipeline\. For more information, see [Working with Managed Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-using.html)\. You must attach this policy to an IAM role you create for access, for example, a role named `CrossAccountPipelineViewers`:
+The following example shows a policy in the 111222333444 account that allows users to view, but not change, the pipeline named `MyFirstPipeline` in the CodePipeline console\. This policy is based on the `AWSCodePipeline_ReadOnlyAccess` managed policy, but because it is specific to the `MyFirstPipeline` pipeline, it cannot use the managed policy directly\. If you do not want to restrict the policy to a specific pipeline, consider using one of the managed policies created and maintained by CodePipeline\. For more information, see [Working with Managed Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-using.html)\. You must attach this policy to an IAM role you create for access, for example, a role named `CrossAccountPipelineViewers`:
 
 ```
 {

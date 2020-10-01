@@ -2,8 +2,8 @@
 
 [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/) is a compute service that lets you run code without provisioning or managing servers\. You can create Lambda functions and add them as actions in your pipelines\. Because Lambda allows you to write functions to perform almost any task, you can customize the way your pipeline works\. 
 
-**Note**  
-Creating and running Lambda functions might result in charges to your AWS account\. For more information, see [Pricing](http://aws.amazon.com/lambda/pricing/)\.
+**Important**  
+Do not log the JSON event that CodePipeline sends to Lambda because this can result in user credentials being logged in CloudWatch Logs\. The CodePipeline role uses a JSON event to pass temporary credentials to Lambda in the `artifactCredentials` field\. For an example event, see [Example JSON event](#actions-invoke-lambda-function-json-event-example)\.
 
 Here are some ways Lambda functions can be used in pipelines:
 + To create resources on demand in one stage of a pipeline using AWS CloudFormation and delete them in another stage\.
@@ -11,6 +11,9 @@ Here are some ways Lambda functions can be used in pipelines:
 + To deploy to Amazon ECS Docker instances\.
 + To back up resources before building or deploying by creating an AMI snapshot\.
 + To add integration with third\-party products to your pipeline, such as posting messages to an IRC client\.
+
+**Note**  
+Creating and running Lambda functions might result in charges to your AWS account\. For more information, see [Pricing](http://aws.amazon.com/lambda/pricing/)\.
 
 This topic assumes you are familiar with AWS CodePipeline and AWS Lambda and know how to create pipelines, functions, and the IAM policies and roles on which they depend\. This topic shows you how to:
 + Create a Lambda function that tests whether a webpage was deployed successfully\.

@@ -14,7 +14,7 @@ For the complete syntax and semantics of tag condition keys, see [Controlling Ac
 The following examples demonstrate how to specify tag conditions in policies for CodePipeline users\.
 
 **Example 1: Limit actions based on tags in the request**  
-The `CodePipelineFullAccess` managed user policy gives users unlimited permission to perform any CodePipeline action on any resource\.  
+The `AWSCodePipeline_FullAccess` managed user policy gives users unlimited permission to perform any CodePipeline action on any resource\.  
 The following policy limits this power and denies unauthorized users permission to create pipelines for specific projects\. To do that, it denies the `CreatePipeline` action if the request specifies a tag named `Project` with one of the values `ProjectA` or `ProjectB`\. \(The `aws:RequestTag` condition key is used to control which tags can be passed in an IAM request\.\) In addition, the policy prevents these unauthorized users from tampering with the resources by using the `aws:TagKeys` condition key to not allow tag modification actions to include these same tag values or to completely remove the `Project` tag\. A customer's administrator must attach this IAM policy to unauthorized IAM users, in addition to the managed user policy\.  
 
 ```
@@ -51,7 +51,7 @@ The following policy limits this power and denies unauthorized users permission 
 ```
 
 **Example 2: Limit actions based on resource tags**  
-The `CodePipelineFullAccess` managed user policy gives users unlimited permission to perform any CodePipeline action on any resource\.  
+The `AWSCodePipeline_FullAccess ` managed user policy gives users unlimited permission to perform any CodePipeline action on any resource\.  
 The following policy limits this power and denies unauthorized users permission to perform actions on specified project pipelines\. To do that, it denies some actions if the resource has a tag named `Project` with one of the values `ProjectA` or `ProjectB`\. \(The `aws:ResourceTag` condition key is used to control access to the resources based on the tags on those resources\.\) A customer's administrator must attach this IAM policy to unauthorized IAM users, in addition to the managed user policy\.  
 
 ```
@@ -80,7 +80,7 @@ The following policy limits this power and denies unauthorized users permission 
 
 **Example 3: Allow actions based on tags in the request**  
 The following policy grants users permission to create development pipelines in CodePipeline\.  
-To do that, it allows the `CreatePipeline` and `TagResource` actions if the request specifies a tag named `Project` with the value `ProjectA`\. \(The `aws:RequestTag` condition key is used to control which tags can be passed in an IAM request\.\) The `aws:TagKeys` condition ensures tag key case sensitivity\. This policy is useful for IAM users who don't have the `CodePipelineFullAccess` managed user policy attached\. The managed policy gives users unlimited permission to perform any CodePipeline action on any resource\.  
+To do that, it allows the `CreatePipeline` and `TagResource` actions if the request specifies a tag named `Project` with the value `ProjectA`\. \(The `aws:RequestTag` condition key is used to control which tags can be passed in an IAM request\.\) The `aws:TagKeys` condition ensures tag key case sensitivity\. This policy is useful for IAM users who don't have the `AWSCodePipeline_FullAccess ` managed user policy attached\. The managed policy gives users unlimited permission to perform any CodePipeline action on any resource\.  
 
 ```
 {
@@ -108,7 +108,7 @@ To do that, it allows the `CreatePipeline` and `TagResource` actions if the requ
 
 **Example 4: Allow actions based on resource tags**  
 The following policy grants users permission to perform actions on, and get information about, project pipelines in CodePipeline\.  
-To do that, it allows specific actions if the pipeline has a tag named `Project` with the value `ProjectA`\. \(The `aws:RequestTag` condition key is used to control which tags can be passed in an IAM request\.\) The `aws:TagKeys` condition ensures tag key case sensitivity\. This policy is useful for IAM users who don't have the `CodePipelineFullAccess` managed user policy attached\. The managed policy gives users unlimited permission to perform any CodePipeline action on any resource\.  
+To do that, it allows specific actions if the pipeline has a tag named `Project` with the value `ProjectA`\. \(The `aws:RequestTag` condition key is used to control which tags can be passed in an IAM request\.\) The `aws:TagKeys` condition ensures tag key case sensitivity\. This policy is useful for IAM users who don't have the `AWSCodePipeline_FullAccess ` managed user policy attached\. The managed policy gives users unlimited permission to perform any CodePipeline action on any resource\.  
 
 ```
 {

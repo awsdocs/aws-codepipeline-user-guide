@@ -47,5 +47,4 @@ This section describes data protection configuration for the following:
 
 **Topics**
 + [Configure server\-side encryption for artifacts stored in Amazon S3 for CodePipeline](S3-artifact-encryption.md)
-+ [Configure GitHub authentication](GitHub-authentication.md)
 + [Use AWS Secrets Manager to track database passwords or third\-party API keys](parameter-store-encryption.md)
