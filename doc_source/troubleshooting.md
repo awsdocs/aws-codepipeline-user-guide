@@ -137,11 +137,11 @@ To add permissions to your CodeBuild service role policy, you create a customer\
 
 **Problem:** 
 
-The maximum artifact ZIP size in the CodePipeline deploy action to ECS through CodeDeploy \(the `CodeDeployToECS` action\) is 3 MB\. The following error message is returned when artifact sizes exceed 3 MB: 
+The maximum artifact ZIP size in the CodePipeline deploy action to ECS through CodeDeploy \(the `CodeDeployToECS` action\) is 3 MB\. Also, ZIP files that use input streams together with the store (uncompressed) archiving method are not supported. The following error message is returned when artifact sizes exceed 3 MB, or if the ZIP file uses stored (uncompressed) input streams: 
 
 Exception while trying to read the task definition artifact file from: <source artifact name>
 
-**Possible fixes:** Create an artifact with a compressed size less than 3 MB\.
+**Possible fixes:** Create an artifact with a compressed size less than 3 MB\. Also, verify that the ZIP file does not use the combination of input streams and the store (uncompressed) archiving method\.
 
 ## Need help with a different issue?<a name="troubleshooting-other"></a>
 
