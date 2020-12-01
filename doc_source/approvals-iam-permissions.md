@@ -15,7 +15,7 @@ The permissions described in this topic grant very limited access\. To enable a 
 
 1. Choose the **Permissions** tab\.
 
-1. Choose **Add permissions**, and then choose **Attach existing policies directly **\.
+1. Choose **Add permissions**, and then choose **Attach existing policies directly**\.
 
 1. Select the check box next to `AWSCodePipelineApproverAccess` managed policy, and then choose **Next: Review**\.
 

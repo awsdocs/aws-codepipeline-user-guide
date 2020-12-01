@@ -9,6 +9,7 @@ Detailed execution history is available for executions run on or after February 
 + [View pipeline \(console\)](#pipelines-list-console)
 + [View pipeline execution history \(console\)](#pipelines-executions-console)
 + [View execution status \(console\)](#pipelines-executions-status-console)
++ [View an inbound execution \(Console\)](#pipelines-executions-inbound-console)
 + [View pipeline execution source revisions \(console\)](#pipelines-source-revisions-console)
 + [View action executions \(console\)](#pipelines-action-executions-console)
 + [View action artifacts and artifact store information \(console\)](#pipelines-action-artifacts-console)
@@ -90,6 +91,9 @@ You can view the pipeline status in **Status** on the execution history page\. C
 
 The following are valid states for pipelines, stages, and actions:
 
+**Note**  
+The following pipeline states also apply to a pipeline execution that is an inbound execution\. To view an inbound execution and its status, see [View an inbound execution \(Console\)](#pipelines-executions-inbound-console)\.
+
 
 **Pipeline\-level states**  
 
@@ -122,6 +126,26 @@ The following are valid states for pipelines, stages, and actions:
 | Abandoned | The action is abandoned due to a request to stop and abandon the pipeline execution\. | 
 | Succeeded | The action was completed successfully\. | 
 | Failed | For approval actions, the FAILED state means the action was either rejected by the reviewer or failed due to an incorrect action configuration\. | 
+
+## View an inbound execution \(Console\)<a name="pipelines-executions-inbound-console"></a>
+
+You can use the console to view the status and details for an inbound execution\. When the transition is enabled or the stage becomes available, an inbound execution that is `InProgress` continues and enters the stage\. An inbound execution with a `Stopped` status does not enter the stage\. An inbound execution status changes to `Failed` if the pipeline is edited\. When you edit a pipeline, all in\-progress executions do not continue, and the execution status changes to `Failed`\.
+
+If you do not see an inbound execution, then there are no pending executions at a disabled stage transition\.
+
+1. Sign in to the AWS Management Console and open the CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
+
+   The names of all pipelines associated with your AWS account will be displayed\. 
+
+1. Choose the name of the pipeline for which you want to view the inbound execution, Do one of the following: 
+   + Choose **View**\. In the pipeline diagram, in the **Inbound execution ID** field in front of your disabled transition, you can view the inbound execution ID\.   
+![\[Information about a revision can be viewed on the execution history page\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/inbound-console.png)![\[Information about a revision can be viewed on the execution history page\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Information about a revision can be viewed on the execution history page\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+
+     Choose **View summary** to see execution details, such as the execution ID, source trigger, and the name of the next stage\.
+   + Choose the pipeline and choose **View history**\.
+
+   The diagram below shows a stage occupied by a pipeline execution and expecting an inbound execution\. The stage has a disabled transition, and the execution waiting to enter the stage is the inbound execution\. The inbound execution has successfully completed the first stage and will enter the second stage when the transition is enabled\. Note how the **Source** stage and the **Deploy** stage have a different pipeline execution ID\.  
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/inbound-executions.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
 ## View pipeline execution source revisions \(console\)<a name="pipelines-source-revisions-console"></a>
 

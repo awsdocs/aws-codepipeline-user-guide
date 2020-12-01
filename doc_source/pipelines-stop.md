@@ -14,9 +14,16 @@ This option can lead to failed tasks or out of sequence tasks\.
 
 **Topics**
 + [Stop a pipeline execution \(console\)](#pipelines-stop-console)
++ [Stop an Inbound Execution \(Console\)](#pipelines-stop-inbound-console)
 + [Stop a pipeline execution \(CLI\)](#pipelines-stop-cli)
++ [Stop an Inbound Execution \(CLI\)](#pipelines-stop-inbound-cli)
 
 ## Stop a pipeline execution \(console\)<a name="pipelines-stop-console"></a>
+
+You can use the console to stop a pipeline execution\. Choose an execution, and then choose the method for stopping the pipeline execution\.
+
+**Note**  
+You can also stop a pipeline execution that is an inbound execution\. To learn more about stopping an inbound execution, see Stop an Inbound Execution \(LINK\)\.
 
 1. Sign in to the AWS Management Console and open the CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
 
@@ -59,6 +66,27 @@ This action cannot be undone\.
 
    You can view the pipeline execution status in the execution history view and the detailed history view\.
 
+## Stop an Inbound Execution \(Console\)<a name="pipelines-stop-inbound-console"></a>
+
+You can use the console to stop an inbound execution\. An inbound execution is a pipeline execution that is waiting to enter a stage where the transition has been disabled\. When the transition is enabled, an inbound execution that is `InProgress` continues to enter the stage\. An inbound execution that is `Stopped` does not enter the stage\.
+
+**Note**  
+After an inbound execution has been stopped, it cannot be retried\.
+
+If you do not see an inbound execution, then there are no pending executions at a disabled stage transition\.
+
+1. Sign in to the AWS Management Console and open the CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
+
+   The names of all pipelines associated with your AWS account will be displayed\. 
+
+1. Choose the name of the pipeline for which you want to stop the inbound execution, Do one of the following: 
+   + In the Pipeline view, choose the inbound execution ID and then choose to stop the execution\.
+   + Choose the pipeline and choose **View history**\. In the execution history, choose the inbound execution ID and then choose to stop the execution\.
+
+1. In the **Stop execution** modal, follow the steps in the section above to select the execution ID and specify the stop method\.
+
+   Use the get\-pipeline\-state command to view the status of the inbound execution\. See [View inbound execution status \(CLI\) ](pipelines-view-cli.md#pipelines-executions-inbound-cli)\.
+
 ## Stop a pipeline execution \(CLI\)<a name="pipelines-stop-cli"></a>
 
 To use the AWS CLI to manually stop a pipeline, use the stop\-pipeline\-execution command with the following parameters:
@@ -96,3 +124,28 @@ You cannot choose to stop and wait if the execution is already in a **Stopping**
      ```
      aws codepipeline stop-pipeline-execution --pipeline-name MyFirstPipeline --pipeline-execution-id d-EXAMPLE --abandon --reason "Stopping execution for a bug fix"
      ```
+
+## Stop an Inbound Execution \(CLI\)<a name="pipelines-stop-inbound-cli"></a>
+
+You can use the CLI to stop an inbound execution\. An inbound execution is a pipeline execution that is waiting to enter a stage where the transition has been disabled\. When the transition is enabled, an inbound execution that is `InProgress` continues to enter the stage\. An inbound execution that is `Stopped` does not enter the stage\.
+
+**Note**  
+After an inbound execution has been stopped, it cannot be retried\.
+
+If you do not see an inbound execution, then there are no pending executions at a disabled stage transition\.
+
+To use the AWS CLI to manually stop an inbound execution, use the stop\-pipeline\-execution command with the following parameters:
++ Inbound Execution ID \(required\)
++ Comments \(optional\)
++ Pipeline name \(required\)
++ Abandon flag \(optional, the default is false\)
+
+Command format:
+
+```
+aws codepipeline stop-pipeline-execution --pipeline-name Pipeline_Name –-pipeline-execution-id Inbound_Execution_ID [--abandon | --no-abandon] [--reason STOP_EXECUTION_REASON]
+```
+
+Follow the steps in the procedure above to enter the command and specify the stop method\.
+
+Use the get\-pipeline\-state command to view the status of the inbound execution\. See [View inbound execution status \(CLI\) ](pipelines-view-cli.md#pipelines-executions-inbound-cli)\.

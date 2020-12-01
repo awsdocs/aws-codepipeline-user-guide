@@ -3,7 +3,7 @@
 This appendix provides information about version 1 of the GitHub action in CodePipeline\.
 
 **Note**  
-The GitHub version 1 action is not recommended and will soon no longer be supported\. For a pipeline with a GitHub version 1 action, CodePipeline uses OAuth\-based tokens to connect to your GitHub repository\. By contrast, the GitHub action \(version 2\) uses a connection resource to associate AWS resources to your GitHub repository\. The connection resource uses app\-based tokens to connect\. For more information about updating your pipeline to the recommended GitHub action that uses a connection, see [Update a GitHub version 1 source action to a GitHub version 2 source action](update-github-action-connections.md)\. For more information about OAuth\-based GitHub access in contrast to app\-based GitHub access, see [https://docs.github.com/en/developers/apps/differences-between-github-apps-and-oauth-apps](https://docs.github.com/en/developers/apps/differences-between-github-apps-and-oauth-apps)\.
+While we don’t recommend using the GitHub version 1 action, existing pipelines with the GitHub version 1 action will continue to work without any impact\. For a pipeline with a GitHub version 1 action, CodePipeline uses OAuth\-based tokens to connect to your GitHub repository\. By contrast, the GitHub action \(version 2\) uses a connection resource to associate AWS resources to your GitHub repository\. The connection resource uses app\-based tokens to connect\. For more information about updating your pipeline to the recommended GitHub action that uses a connection, see [Update a GitHub version 1 source action to a GitHub version 2 source action](update-github-action-connections.md)\. For more information about OAuth\-based GitHub access in contrast to app\-based GitHub access, see [https://docs.github.com/en/developers/apps/differences-between-github-apps-and-oauth-apps](https://docs.github.com/en/developers/apps/differences-between-github-apps-and-oauth-apps)\.
 
 To integrate with GitHub, CodePipeline uses a GitHub OAuth application for your pipeline\. CodePipeline uses webhooks to manage change detection for your pipeline with the GitHub version 1 source action\.
 
@@ -41,7 +41,7 @@ You add GitHub version 1 source actions to CodePipeline by:
 ## GitHub version 1 source action structure reference<a name="action-reference-GitHub"></a>
 
 **Note**  
-The GitHub version 1 source action is not recommended and will soon no longer be supported\. For a pipeline with a GitHub GitHub version 1 source action, CodePipeline uses OAuth\-based tokens to connect to your GitHub repository\. By contrast, the new GitHub action \(version 2\) uses a connection resource to associate AWS resources to your GitHub repository\. The connection resource uses app\-based tokens to connect\. For more information about updating your pipeline to the recommended GitHub action that uses a connection, see [Update a GitHub version 1 source action to a GitHub version 2 source action](update-github-action-connections.md)\.
+While we don’t recommend using the GitHub version 1 action, existing pipelines with the GitHub version 1 action will continue to work without any impact\. For a pipeline with a GitHub GitHub version 1 source action, CodePipeline uses OAuth\-based tokens to connect to your GitHub repository\. By contrast, the new GitHub action \(version 2\) uses a connection resource to associate AWS resources to your GitHub repository\. The connection resource uses app\-based tokens to connect\. For more information about updating your pipeline to the recommended GitHub action that uses a connection, see [Update a GitHub version 1 source action to a GitHub version 2 source action](update-github-action-connections.md)\.
 
 Triggers the pipeline when a new commit is made on the configured GitHub repository and branch\.
 
@@ -242,7 +242,11 @@ If you use the console to create or edit your pipeline, your webhook is created 
 
 To use the AWS CLI to create a webhook, call the put\-webhook command and supply the following:
 + A name that uniquely identifies the webhook\. This name must be unique within the region of the account for the pipeline\.
-+ A secret in the JSON file to be used for GitHub authorization\.<a name="proc-cli-gh-webhook"></a>
++ A secret in the JSON file to be used for GitHub authorization\.
+
+  The *webhook secret* is used when GitHub makes a webhook request to CodePipeline so that CodePipeline can validate the webhook request is authentic and came from GitHub\. It is recommended to provide a long randomly generated secret value for this field\. When the CodePipeline `RegisterWebhookWithThirdParty` API is called, the webhook secret ispassed to GitHub through the GitHub create webhook API\. For more information, see[https://developer\.github\.com/v3/repos/hooks/\#create\-hook\-config\-params](https://developer.github.com/v3/repos/hooks/#create-hook-config-params)\.
+
+  The GitHub OAuth or personal token should not be used as a webhook secret\.<a name="proc-cli-gh-webhook"></a>
 
 **To create and register your webhook**
 **Note**  

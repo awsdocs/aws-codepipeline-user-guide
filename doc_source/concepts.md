@@ -43,7 +43,9 @@ Actions can run in series or in parallel\. For information about serial and para
 
 An *execution* is a set of changes released by a pipeline\. Each pipeline execution is unique and has its own ID\. An execution corresponds to a set of changes, such as a merged commit or a manual release of the latest commit\. Two executions can release the same set of changes at different times\.
 
-While a pipeline can process multiple executions at the same time, a pipeline stage processes only one execution at a time\. To do this, a stage is locked while it processes an execution\. Two pipeline executions can't occupy the same stage at the same time\.
+While a pipeline can process multiple executions at the same time, a pipeline stage processes only one execution at a time\. To do this, a stage is locked while it processes an execution\. Two pipeline executions can't occupy the same stage at the same time\. The execution waiting to enter the occupied stage is referred to an *inbound execution*\. An inbound execution can still fail, be superseded, or be manually stopped\. For more information about how inbound executions work, see [How Inbound Executions Work](concepts-how-it-works.md#how-it-works-inbound-executions)\.
+
+Pipeline executions traverse pipeline stages in order\. Valid statuses for pipelines are `InProgress`, `Stopping`, `Stopped`, `Succeeded`, `Superseded`, and `Failed`\. An execution with a `Failed` or `Superseded` status does not continue through the pipeline and cannot be retried\.
 
 Pipeline executions traverse pipeline stages in order\. 
 

@@ -48,13 +48,13 @@ A two\-stage pipeline has the following basic structure:
         {
             "name": "SourceStageName",
             "actions": [
-            ... See  ...
+            ... See Action structure requirements in CodePipeline ...
             ]
         },
         {
             "name": "NextStageName",
             "actions": [
-            ... See  ...
+            ... See Action structure requirements in CodePipeline ...
             ]
         }
     ],

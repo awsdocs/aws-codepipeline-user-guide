@@ -201,7 +201,19 @@ Each execution also has a set of CodePipeline\-generated pipeline variables that
 | RepositoryName | myCodeCommitRepo | \#\{SourceVariables\.RepositoryName\} | 
 
 
-**GitHub variables**  
+**`CodeStarSourceConnection` variables \(Bitbucket, GitHub, and GitHub Enterprise Repository\)**  
+
+| Variable key | Example value | Example variable syntax | 
+| --- | --- | --- | 
+| AuthorDate | 2019\-10\-29T03:32:21Z | \#\{SourceVariables\.AuthorDate\} | 
+| BranchName | development | \#\{SourceVariables\.BranchName\} | 
+| CommitId |  exampleb01f91b31  | \#\{SourceVariables\.CommitId\} | 
+| CommitMessage | Fixed a bug \(100 KB maximum size\) | \#\{SourceVariables\.CommitMessage\} | 
+| ConnectionArn | arn:aws:codestar\-connections:region:account\-id:connection/connection\-id | \#\{SourceVariables\.ConnectionArn\} | 
+| FullRepositoryName | username/GitHubRepo | \#\{SourceVariables\.FullRepositoryName\} | 
+
+
+**GitHub variables \(GitHub action version 1\)**  
 
 | Variable key | Example value | Example variable syntax | 
 | --- | --- | --- | 

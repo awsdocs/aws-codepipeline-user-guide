@@ -7,4 +7,3 @@ These links are provided for informational purposes only, and should not be cons
 
 **Topics**
 + [Integration examples: Blog posts](integrations-community-blogposts.md)
-+ [Integration examples: Videos](integrations-community-videos.md)

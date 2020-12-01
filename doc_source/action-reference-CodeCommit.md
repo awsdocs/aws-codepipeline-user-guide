@@ -1,10 +1,16 @@
 # CodeCommit<a name="action-reference-CodeCommit"></a>
 
-Triggers the pipeline when a new commit is made on the configured CodeCommit repository and branch\.
+Starts the pipeline when a new commit is made on the configured CodeCommit repository and branch\.
 
 If you use the console to create or edit the pipeline, CodePipeline creates a CodeCommit CloudWatch Events rule that starts your pipeline when a change occurs in the repository\.
 
 You must have already created a CodeCommit repository before you connect the pipeline through a CodeCommit action\.
+
+After a code change is detected, you have the following options for passing the code to subsequent actions:
++ **Default** – Configures the CodeCommit source action to output a ZIP file with a shallow copy of your commit\.
++ **Full clone** – Configures the source action to output a Git URL reference to the repository for subsequent actions\.
+
+  Currently, the Git URL reference can only be used by downstream CodeBuild actions to clone the repo and associated Git metadata\. Attempting to pass a Git URL reference to non\-CodeBuild actions results in an error\.
 
 **Topics**
 + [Action type](#action-reference-CodeCommit-type)
@@ -12,7 +18,7 @@ You must have already created a CodeCommit repository before you connect the pip
 + [Input artifacts](#action-reference-CodeCommit-input)
 + [Output artifacts](#action-reference-CodeCommit-output)
 + [Output variables](#action-reference-CodeCommit-variables)
-+ [Action declaration \(CodeCommit example\)](#action-reference-CodeCommit-example)
++ [Example action configuration](#action-reference-CodeCommit-example)
 + [See also](#action-reference-CodeCommit-links)
 
 ## Action type<a name="action-reference-CodeCommit-type"></a>
@@ -40,6 +46,12 @@ Valid values for this parameter:
 **Note**  
 If you omit `PollForSourceChanges`, CodePipeline defaults to polling your repository for source changes\. This behavior is the same as if `PollForSourceChanges` is included and set to `true`\.
 + `False`: If set, CodePipeline does not poll your repository for source changes\. Use this setting if you intend to configure a CloudWatch Events rule to detect source changes\.
+
+****OutputArtifactFormat****  
+Required: No  
+The output artifact format\. Values can be either `CODEBUILD_CLONE_REF` or `CODE_ZIP`\. If unspecified, the default is `CODE_ZIP`\.  
+The `CODEBUILD_CLONE_REF` option can only be used by CodeBuild downstream actions\.  
+If you choose this option, you need to add the `codecommit:GitPull` permission to your CodeBuild service role as shown in [Add CodeBuild GitClone permissions for CodeCommit source actions](troubleshooting.md#codebuild-role-codecommitclone)\. You also need to add the `codecommit:GetRepository` permission to your CodePipeline service role as shown in [Add permissions to the CodePipeline service role](security-iam.md#how-to-update-role-new-services)\. For a tutorial that shows you how to use the **Full clone** option, see [Tutorial: Use full clone with a CodeCommit pipeline source](tutorials-codecommit-gitclone.md)\.
 
 ## Input artifacts<a name="action-reference-CodeCommit-input"></a>
 + **Number of Artifacts:** `0`
@@ -75,7 +87,9 @@ For more information about the difference between an author and a committer in G
 The date when the commit was committed, in timestamp format\.  
 For more information about the difference between an author and a committer in Git, see [Viewing the Commit History](http://git-scm.com/book/ch2-3.html) in Pro Git by Scott Chacon and Ben Straub\.
 
-## Action declaration \(CodeCommit example\)<a name="action-reference-CodeCommit-example"></a>
+## Example action configuration<a name="action-reference-CodeCommit-example"></a>
+
+### Example for default output artifact format<a name="w23aac44c27c25b3"></a>
 
 ------
 #### [ YAML ]
@@ -88,7 +102,7 @@ Actions:
     Name: source
     Configuration:
       RepositoryName: MyWebsite
-      BranchName: mainline
+      BranchName: main
       PollForSourceChanges: 'false'
     RunOrder: 1
     ActionTypeId:
@@ -115,7 +129,7 @@ Actions:
             "Name": "source",
             "Configuration": {
                 "RepositoryName": "MyWebsite",
-                "BranchName": "mainline",
+                "BranchName": "main",
                 "PollForSourceChanges": "false"
             },
             "RunOrder": 1,
@@ -129,6 +143,63 @@ Actions:
     ],
     "Name": "Source"
 },
+```
+
+------
+
+### Example for full clone output artifact format<a name="w23aac44c27c25b5"></a>
+
+------
+#### [ YAML ]
+
+```
+name: Source
+actionTypeId:
+  category: Source
+  owner: AWS
+  provider: CodeCommit
+  version: '1'
+runOrder: 1
+configuration:
+  BranchName: main
+  OutputArtifactFormat: CODEBUILD_CLONE_REF
+  PollForSourceChanges: 'false'
+  RepositoryName: MyWebsite
+outputArtifacts:
+  - name: SourceArtifact
+inputArtifacts: []
+region: us-west-2
+namespace: SourceVariables
+```
+
+------
+#### [ JSON ]
+
+```
+{
+    "name": "Source",
+    "actionTypeId": {
+        "category": "Source",
+        "owner": "AWS",
+        "provider": "CodeCommit",
+        "version": "1"
+    },
+    "runOrder": 1,
+    "configuration": {
+        "BranchName": "main",
+        "OutputArtifactFormat": "CODEBUILD_CLONE_REF",
+        "PollForSourceChanges": "false",
+        "RepositoryName": "MyWebsite"
+    },
+    "outputArtifacts": [
+        {
+            "name": "SourceArtifact"
+        }
+    ],
+    "inputArtifacts": [],
+    "region": "us-west-2",
+    "namespace": "SourceVariables"
+}
 ```
 
 ------

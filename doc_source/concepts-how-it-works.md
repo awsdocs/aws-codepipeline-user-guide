@@ -82,10 +82,12 @@ Executions are only superseded in between stages\. A locked stage holds one exec
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/Batching.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
-## Managing pipeline executions<a name="concepts-how-it-works-transitions-approvals"></a>
+## Managing Pipeline Flow<a name="concepts-how-it-works-transitions-approvals"></a>
 
 The flow of pipeline executions can be controlled by:
-+ A *transition*, which controls the flow of executions into the stage\. Transitions can be enabled or disabled\. After you enable the transition, any execution waiting to enter the stage moves into the stage and locks it\. Similar to executions awaiting a locked stage, when a transition is disabled, the execution waiting to enter the stage can still be superseded by a new execution\. When a disabled transition is re\-enabled, the latest execution, including any that superseded older executions while the transition was disabled, enters the stage\.
++ A *transition*, which controls the flow of executions into the stage\. Transitions can be enabled or disabled\. When a transition is disabled, pipeline executions cannot enter the stage\. The pipeline execution waiting to enter a stage where the transition is disabled is called the inbound execution\. After you enable the transition, an inbound execution moves into the stage and locks it\.
+
+  Similar to executions awaiting a locked stage, when a transition is disabled, the execution waiting to enter the stage can still be superseded by a new execution\. When a disabled transition is re\-enabled, the latest execution, including any that superseded older executions while the transition was disabled, enters the stage\.
 + An *approval action*, which prevents a pipeline from transitioning to the next action until permission is granted \(for example, through manual approval from an authorized IAM user\)\. You might use an approval action when you want to control the time at which a pipeline transitions to a final **Production** stage, for example\.
 **Note**  
 A stage with an approval action is locked until the approval action is approved or rejected or has timed out\. A timed\-out approval action is processed in the same way as a failed action\.
@@ -100,3 +102,18 @@ When deciding how a code change should flow through your pipeline, it is best to
 As an example, a test action after a deployment action in the same stage is guaranteed to test the same change that was deployed\. In this example, a change is deployed to a Test environment and then tested, and then the latest change from the test environment is deployed to a Production environment\. In the recommended example, the Test environment and the Prod environment are separate stages\. 
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/structure-example-recommended-notrecommended.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+
+### How Inbound Executions Work<a name="how-it-works-inbound-executions"></a>
+
+An inbound execution is an execution that is waiting for an unavailable stage, transition, or action to become available before it moves forward\. The next stage, transition, or action might be unavailable because: 
++ Another execution has already entered the next stage and locked it\.
++ The transition to enter the next stage is disabled\.
+
+You might disable a transition to hold an inbound execution if you want to control whether a current execution has time to complete in subsequent stages, or if you want to stop all actions at a certain point\. To determine if you have an inbound execution, you can view the pipeline in the console or view the output from the get\-pipeline\-state command\.
+
+Inbound executions operate with the following considerations:
++ As soon as the action, transition, or locked stage becomes available, the in\-progress inbound execution enters the stage and continues through the pipeline\.
++ While the inbound execution is waiting, it can be manually stopped\. An inbound execution can have an `InProgress`, `Stopped`, or `Failed` state\.
++ When an inbound execution has been stopped or has failed, it cannot be retried because there are no failed actions to retry\. When an inbound execution has been stopped, and the transition is enabled, the stopped inbound execution does not continue into the stage\.
+
+You can view or stop an inbound execution\. See [View inbound execution status \(CLI\) ](pipelines-view-cli.md#pipelines-executions-inbound-cli) and [Stop an Inbound Execution \(CLI\)](pipelines-stop.md#pipelines-stop-inbound-cli)\.

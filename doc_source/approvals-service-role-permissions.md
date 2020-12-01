@@ -12,17 +12,13 @@ Make sure you are signed in to the AWS Management Console with the same account 
 
 1. Choose the name of the service role you use in your CodePipeline operations\.
 
-1. On the **Permissions** tab, in the **Inline Policies** area, choose **Create Role Policy**\.
+1. Choose the **Permissions** tab\. Choose **Attach policies**\.
 
-   –or–
+1. Choose **Create policy**\.
 
-   If the **Create Role Policy** button is not available, expand the **Inline Policies** area, and then choose **click here**\.
+1. On the **Create policy** page, choose the **JSON** tab\.
 
-1. On the **Set Permissions** page, choose **Custom Policy**, and then choose **Select**\.
-
-1. On the **Review Policy** page, in the **Policy Name** field, type a name to identify this policy, such as `SNSPublish`\.
-
-1. Paste the following into the **Policy Document** field: 
+   Paste the following policy: 
 
    ```
    {
@@ -37,4 +33,10 @@ Make sure you are signed in to the AWS Management Console with the same account 
    }
    ```
 
-1. Choose **Apply Policy**\.
+   Choose **Review policy**\.
+
+1. On the **Review policy** page, in the **Name** field, type a name to identify this policy, such as `SNSPublish`\. Choose **Create policy**\.
+
+1. Go back to your service role and choose the **Permissions** tab\. Choose **Attach policies**\.
+
+   Find your `SNSPublish` policy and choose the box next to it\. Choose **Attach policy**\.

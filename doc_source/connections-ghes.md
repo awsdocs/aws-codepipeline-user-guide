@@ -16,7 +16,7 @@ Before you begin:
 + You must have already created a code repository with GitHub Enterprise Server\.
 
 **Important**  
-AWS CodeStar Connections does not support GitHub Enterprise Server version 2\.22\.0\.
+AWS CodeStar Connections does not support GitHub Enterprise Server version 2\.22\.0 due to a known issue in the release\. To connect, upgrade to version 2\.22\.1 or the latest available version\.
 
 **Topics**
 + [Create a connection to GitHub Enterprise Server \(console\)](#connections-ghes-console)
@@ -52,19 +52,48 @@ For a host connection to GitHub Enterprise Server, you must have completed the s
 After you choose to create the connection, the **Connect to GitHub Enterprise Server** page is shown\.
 
 **Important**  
-AWS CodeStar Connections does not support GitHub Enterprise Server version 2\.22\.0\.
+AWS CodeStar Connections does not support GitHub Enterprise Server version 2\.22\.0 due to a known issue in the release\. To connect, upgrade to version 2\.22\.1 or the latest available version\.
 
 **To connect to GitHub Enterprise Server**
 
-1. Under **GitHub Enterprise Server apps**, choose an app installation or choose **Install a new app** to create one\. 
+1. In **Connection name**, enter the name for your connection\.
+
+1. In **URL**, enter the endpoint for your server\.
 **Note**  
-You install one app for all of your connections to a particular provider\. If you have already installed the GitHub Enterprise Server app, choose it and skip this step\.
+If the provided URL has already been used to set up a GitHub Enterprise Server for a connection, you will be prompted to choose the host resource ARN that was created previously for that endpoint\.
 
-1. On the GitHub authorization page, choose **Authorize**\.
+1. If you have launched your server into an Amazon VPC and you want to connect with your VPC, choose **Use a VPC** and complete the following\.
 
-1. On the app installation page, a message shows that the AWS app is ready to be installed\. Choose **Install**\.
+   1. In **VPC ID**, choose your VPC ID\. Make sure to choose the VPC for the infrastructure where your GitHub Enterprise Server instance is installed or a VPC with access to your GitHub Enterprise Server instance through VPN or Direct Connect\.
 
-1. The connection ID for your new GitHub Enterprise Server installation is displayed\. Choose **Connect**\.
+   1. Under **Subnet ID**, choose **Add**\. In the field, choose the subnet ID you want to use for your host\. You can choose up to 10 subnets\.
+
+      Make sure to choose the subnet for the infrastructure where your GitHub Enterprise Server instance is installed or a subnet with access to your installed GitHub Enterprise Server instance through VPN or Direct Connect\.
+
+   1. Under **Security group IDs**, choose **Add**\. In the field, choose the security group you want to use for your host\. You can choose up to 10 security groups\.
+
+      Make sure to choose the security group for the infrastructure where your GitHub Enterprise Server instance is installed or a security group with access to your installed GitHub Enterprise Server instance through VPN or Direct Connect\.
+
+   1. If you have a private VPC configured, and you have configured your GitHub Enterprise Server instance to perform TLS validation using a non\-public certificate authority, in **TLS certificate**, enter your certificate ID\. The TLS Certificate value should be the public key of the certificate\.  
+![\[Console screenshot showing create GitHub Enterprise Server connection page for VPC options.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/connections-create-ghes-screen-vpc.png)![\[Console screenshot showing create GitHub Enterprise Server connection page for VPC options.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing create GitHub Enterprise Server connection page for VPC options.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+
+1. Choose **Connect to GitHub Enterprise Server**\. The created connection is shown with a **Pending** status\. A host resource is created for the connection with the server information you provided\. For the host name, the URL is used\.
+
+1. Choose **Update pending connection\.**
+
+1. If prompted, on the GitHub Enterprise login page, sign in with your GitHub Enterprise credentials\.
+
+1. On the **Create GitHub App** page, choose a name for your app\.  
+![\[Console screenshot showing app creation page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/connections-create-ghes-app-name.png)![\[Console screenshot showing app creation page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing app creation page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+
+1. On the GitHub authorization page, choose **Authorize <app\-name>**\.  
+![\[Console screenshot showing app authorization page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/connections-create-ghes-app-authorize.png)![\[Console screenshot showing app authorization page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing app authorization page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+
+1. On the app installation page, a message shows that the AWS CodeStar Connector app is ready to be installed\. If you have multiple organizations, you might be prompted to choose the organization where you want to install the app\. 
+
+   Choose the repository settings where you want to install the app\. Choose **Install**\.
+
+1. The connection page shows the created connection in an **Available** status\.
 
 ### Step 3: Save your GitHub Enterprise Server source action<a name="connections-ghes-console-save"></a>
 

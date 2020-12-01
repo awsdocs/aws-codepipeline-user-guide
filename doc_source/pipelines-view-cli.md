@@ -12,6 +12,7 @@ You can run the following commands to view details about your pipelines and pipe
 + [View pipeline \(CLI\)](#pipelines-list-cli)
 + [View execution history \(CLI\)](#pipelines-executions-cli)
 + [View execution status \(CLI\)](#pipelines-executions-status-cli)
++ [View inbound execution status \(CLI\)](#pipelines-executions-inbound-cli)
 + [View source revisions \(CLI\)](#pipelines-source-revisions-cli)
 + [View action executions \(CLI\)](#pipelines-action-executions-cli)
 
@@ -105,7 +106,7 @@ You can view pipeline execution history\.
 
 ## View execution status \(CLI\)<a name="pipelines-executions-status-cli"></a>
 
-You can view pipeline, stage, and action status\.
+You can use the CLI to view pipeline, stage, and action status\.
 + To view details about the current state of a pipeline, run the [get\-pipeline\-state](http://docs.aws.amazon.com/cli/latest/reference/codepipeline/get-pipeline-state.html) command, specifying the unique name of the pipeline\. For example, to view details about the current state of a pipeline named *MyFirstPipeline*, enter the following:
 
   ```
@@ -179,6 +180,88 @@ You can view pipeline, stage, and action status\.
               "stageName": "Production"
           }
       ]
+  }
+  ```
+
+## View inbound execution status \(CLI\)<a name="pipelines-executions-inbound-cli"></a>
+
+You can use the CLI to view inbound execution status\. When the transition is enabled or the stage becomes available, an inbound execution that is `InProgress` continues and enters the stage\. An inbound execution with a `Stopped` status does not enter the stage\. An inbound execution status changes to `Failed` if the pipeline is edited\. When you edit a pipeline, all in\-progress executions do not continue, and the execution status changes to `Failed`\.
++ To view details about the current state of a pipeline, run the [get\-pipeline\-state](http://docs.aws.amazon.com/cli/latest/reference/codepipeline/get-pipeline-state.html) command, specifying the unique name of the pipeline\. For example, to view details about the current state of a pipeline named *MyFirstPipeline*, enter the following:
+
+  ```
+  aws codepipeline get-pipeline-state --name MyFirstPipeline
+  ```
+
+  This command returns the current status of all stages of the pipeline and the status of the actions in those stages\. The output also shows pipeline execution ID in each stage, and whether there is an inbound execution ID for a stage with a disabled transition\.
+
+  The following example shows the returned data for a two\-stage pipeline named *MyFirstPipeline*, where the first stage shows an enabled transition and a successful pipeline execution, and the second stage, named `Beta`, shows a disabled transition and an inbound execution ID\. The inbound execution can have an `InProgress`, `Stopped`, or `FAILED` state\.
+
+  ```
+  {
+      "pipelineName": "MyFirstPipeline",
+      "pipelineVersion": 2,
+      "stageStates": [
+          {
+              "stageName": "Source",
+              "inboundTransitionState": {
+                  "enabled": true
+              },
+              "actionStates": [
+                  {
+                      "actionName": "SourceAction",
+                      "currentRevision": {
+                          "revisionId": "PARcnxX_u0SMRBnKh83pHL09.zPRLLMu"
+                      },
+                      "latestExecution": {
+                          "actionExecutionId": "14c8b311-0e34-4bda-EXAMPLE",
+                          "status": "Succeeded",
+                          "summary": "Amazon S3 version id: PARcnxX_u0EXAMPLE",
+                          "lastStatusChange": 1586273484.137,
+                          "externalExecutionId": "PARcnxX_u0EXAMPLE"
+                      },
+                      "entityUrl": "https://console.aws.amazon.com/s3/home?#"
+                  }
+              ],
+              "latestExecution": {
+                  "pipelineExecutionId": "27a47e06-6644-42aa-EXAMPLE",
+                  "status": "Succeeded"
+              }
+          },
+          {
+              "stageName": "Beta",
+              "inboundExecution": {
+                  "pipelineExecutionId": "27a47e06-6644-42aa-958a-EXAMPLE",
+                  "status": "InProgress"
+              },
+              "inboundTransitionState": {
+                  "enabled": false,
+                  "lastChangedBy": "USER_ARN",
+                  "lastChangedAt": 1586273583.949,
+                  "disabledReason": "disabled"
+              },
+                      "currentRevision": {
+              "actionStates": [
+                  {
+                      "actionName": "BetaAction",
+                      "latestExecution": {
+                          "actionExecutionId": "a748f4bf-0b52-4024-98cf-EXAMPLE",
+                          "status": "Succeeded",
+                          "summary": "Deployment Succeeded",
+                          "lastStatusChange": 1586272707.343,
+                          "externalExecutionId": "d-KFGF3EXAMPLE",
+                          "externalExecutionUrl": "https://us-west-2.console.aws.amazon.com/codedeploy/home?#/deployments/d-KFGF3WTS2"
+                      },
+                      "entityUrl": "https://us-west-2.console.aws.amazon.com/codedeploy/home?#/applications/my-application"
+                  }
+              ],
+              "latestExecution": {
+                  "pipelineExecutionId": "f6bf1671-d706-4b28-EXAMPLE",
+                  "status": "Succeeded"
+              }
+          }
+      ],
+      "created": 1585622700.512,
+      "updated": 1586273472.662
   }
   ```
 

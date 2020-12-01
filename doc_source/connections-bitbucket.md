@@ -76,7 +76,7 @@ Use these steps on the wizard or **Edit action** page to save your source action
    + To store output artifacts from the Bitbucket action using the default method, choose **CodePipeline default**\. The action accesses the files from the Bitbucket repository and stores the artifacts in a ZIP file in the pipeline artifact store\.
    + To store a JSON file that contains a URL reference to the repository so that downstream actions can perform Git commands directly, choose **Full clone**\. This option can only be used by CodeBuild downstream actions\.
 
-     If you choose this option, you will need to update the permissions for your CodeBuild project service role as shown in [Add GitClone permissions for connections](troubleshooting.md#codebuild-role-connections)\.
+     If you choose this option, you will need to update the permissions for your CodeBuild project service role as shown in [Add CodeBuild GitClone permissions for connections to Bitbucket, GitHub, or GitHub Enterprise Server](troubleshooting.md#codebuild-role-connections)\.
 
 1. Choose **Next** on the wizard or **Save** on the **Edit action** page\.
 

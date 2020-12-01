@@ -142,7 +142,7 @@ In the `env` section of the build spec, make sure the credential helper for git 
 
 ## Step 3: Update the CodeBuild service role policy to use connections<a name="tutorials-github-gitclone-rolepolicy"></a>
 
-The initial pipeline run will fail because the CodeBuild service role must be updated with permissions to use connections\. Add the `codestar-connections:UseConnection` IAM permission to your service role policy\. For instructions to update the policy in the IAM console, see [Add GitClone permissions for connections](troubleshooting.md#codebuild-role-connections)\.
+The initial pipeline run will fail because the CodeBuild service role must be updated with permissions to use connections\. Add the `codestar-connections:UseConnection` IAM permission to your service role policy\. For instructions to update the policy in the IAM console, see [Add CodeBuild GitClone permissions for connections to Bitbucket, GitHub, or GitHub Enterprise Server](troubleshooting.md#codebuild-role-connections)\.
 
 ## Step 4: View repository commands in build output<a name="tutorials-github-gitclone-view"></a>
 

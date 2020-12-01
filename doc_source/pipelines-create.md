@@ -93,6 +93,11 @@ When Amazon S3 is the source provider for your pipeline, you may zip your source
     1. After you choose the S3 source bucket, CodePipeline creates the Amazon CloudWatch Events rule and the AWS CloudTrail trail to be created for this pipeline\. Accept the defaults under **Change detection options**\. This allows CodePipeline to use Amazon CloudWatch Events and AWS CloudTrail to detect changes for your new pipeline\. Choose **Next**\.
   + For **AWS CodeCommit**:
     + In **Repository name**, choose the name of the CodeCommit repository you want to use as the source location for your pipeline\. In **Branch name**, from the drop\-down list, choose the branch you want to use\.
+    + In **Output artifact format**, choose the format for your artifacts\. 
+      + To store output artifacts from the CodeCommit action using the default method, choose **CodePipeline default**\. The action accesses the files from the CodeCommit repository and stores the artifacts in a ZIP file in the pipeline artifact store\.
+      + To store a JSON file that contains a URL reference to the repository so that downstream actions can perform Git commands directly, choose **Full clone**\. This option can only be used by CodeBuild downstream actions\.
+
+        If you choose this option, you will need to add the `codecommit:GitPull` permission to your CodeBuild service role as shown in [Add CodeBuild GitClone permissions for CodeCommit source actions](troubleshooting.md#codebuild-role-codecommitclone)\. You will also need to add the `codecommit:GetRepository` permissions to your CodePipeline service role as shown in [Add permissions to the CodePipeline service role](security-iam.md#how-to-update-role-new-services)\. For a tutorial that shows you how to use the **Full clone** option, see [Tutorial: Use full clone with a GitHub pipeline source](tutorials-github-gitclone.md)\.
     + After you choose the CodeCommit repository name and branch, a message is displayed in **Change detection options** showing the Amazon CloudWatch Events rule to be created for this pipeline\. Accept the defaults under **Change detection options**\. This allows CodePipeline to use Amazon CloudWatch Events to detect changes for your new pipeline\.
   + For **Amazon ECR**:
     + In **Repository name**, choose the name of your Amazon ECR repository\.

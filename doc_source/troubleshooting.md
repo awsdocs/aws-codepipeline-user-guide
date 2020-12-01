@@ -10,8 +10,10 @@ The following information might help you troubleshoot common issues in AWS CodeP
 + [Pipeline error: A pipeline created in one AWS Region using a bucket created in another AWS Region returns an "InternalError" with the code "JobFailed"](#troubleshooting-reg-1)
 + [Deployment error: A ZIP file that contains a WAR file is deployed successfully to AWS Elastic Beanstalk, but the application URL reports a 404 not found error](#troubleshooting-aeb2)
 + [Pipeline artifact folder names appear to be truncated](#troubleshooting-truncated-artifacts)
-+ [Add GitClone permissions for connections](#codebuild-role-connections)
++ [Add CodeBuild GitClone permissions for connections to Bitbucket, GitHub, or GitHub Enterprise Server](#codebuild-role-connections)
++ [Add CodeBuild GitClone permissions for CodeCommit source actions](#codebuild-role-codecommitclone)
 + [Pipeline error: A deployment with the CodeDeployToECS action returns an error message: "Exception while trying to read the task definition artifact file from: <source artifact name>"](#troubleshooting-ecstocodedeploy-size)
++ [GitHub version 2 source action: Unable to complete the connection for a repository](#troubleshooting-connections-GitHub-admin)
 + [Need help with a different issue?](#troubleshooting-other)
 
 ## Pipeline error: A pipeline configured with AWS Elastic Beanstalk returns an error message: "Deployment failed\. The provided role does not have sufficient permissions: Service:AmazonElasticLoadBalancing"<a name="troubleshooting-aeb1"></a>
@@ -82,7 +84,7 @@ For an example, see [AWS Elastic Beanstalk Sample for CodeBuild](https://docs.aw
 
 Even though the artifact name appears to be truncated, CodePipeline maps to the artifact bucket in a way that is not affected by artifacts with truncated names\. The pipeline can function normally\. This is not an issue with the folder or artifacts\. There is a 100\-character limit to pipeline names\. Although the artifact folder name might appear to be shortened, it is still unique for your pipeline\.
 
-## Add GitClone permissions for connections<a name="codebuild-role-connections"></a>
+## Add CodeBuild GitClone permissions for connections to Bitbucket, GitHub, or GitHub Enterprise Server<a name="codebuild-role-connections"></a>
 
 When you use an AWS CodeStar connection in a source action and a CodeBuild action, there are two ways the input artifact can be passed to the build:
 + The default: The source action produces a zip file that contains the code that CodeBuild downloads\.
@@ -103,7 +105,7 @@ To add permissions to your CodeBuild service role policy, you create a customer\
    ```  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/gitclone-configuration.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
-1. To find your CodeBuild service role, open the build project used in your pipeline and navigate to the **Build details **tab\. 
+1. To find your CodeBuild service role, open the build project used in your pipeline and navigate to the **Build details** tab\. 
 
 1. Choose the **Service role** link\. This opens the IAM console where you can add a new policy that grants access to your connection\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/gitclone-configuration-role.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
@@ -133,15 +135,57 @@ To add permissions to your CodeBuild service role policy, you create a customer\
 1. Return to the page where you were attaching permissions, refresh the policy list, and select the policy you just created\. Choose **Attach policies**\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/gitclone-role-policy-attach.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
+## Add CodeBuild GitClone permissions for CodeCommit source actions<a name="codebuild-role-codecommitclone"></a>
+
+When your pipeline has a CodeCommit source action, there are two ways you can pass the input artifact to the build:
++ **Default** – The source action produces a zip file that contains the code that CodeBuild downloads\.
++ **Full clone** – The source code can be directly downloaded to the build environment\. 
+
+  The **Full clone** option allows you to interact with the source code as a working Git repository\. To use this mode, you must add permissions for your CodeBuild environment to pull from your repository\.
+
+To add permissions to your CodeBuild service role policy, you create a customer\-managed policy that you attach to your CodeBuild service role\. The following steps create a policy that specifies the `codecommit:GitPull` permission in the `action` field\.
+
+**To use the console to add the GitPull permissions**
+
+1. To find your CodeBuild service role, open the build project used in your pipeline and navigate to the **Build details** tab\.
+
+1. Choose the **Service role** link\. This opens the IAM console where you can add a new policy that grants access to your repository\.
+
+1. In the IAM console, choose **Attach policies**, and then choose **Create policy**\. 
+
+1. On the **JSON** tab, paste the following sample policy\.
+
+   ```
+   {
+       "Action": [
+           "codecommit:GitPull"
+       ],
+       "Resource": "*",
+       "Effect": "Allow"
+   },
+   ```
+
+1. Choose **Review policy**\. Enter a name for the policy \(for example, **codecommit\-gitpull**\), and then choose **Create policy**\.
+
+1. Return to the page where you were attaching permissions, refresh the policy list, and select the policy you just created\. Choose **Attach policies**\.
+
 ## Pipeline error: A deployment with the CodeDeployToECS action returns an error message: "Exception while trying to read the task definition artifact file from: <source artifact name>"<a name="troubleshooting-ecstocodedeploy-size"></a>
 
 **Problem:** 
 
-The maximum artifact ZIP size in the CodePipeline deploy action to ECS through CodeDeploy \(the `CodeDeployToECS` action\) is 3 MB\. Also, ZIP files that use input streams together with the store (uncompressed) archiving method are not supported. The following error message is returned when artifact sizes exceed 3 MB, or if the ZIP file uses stored (uncompressed) input streams: 
+The maximum artifact ZIP size in the CodePipeline deploy action to ECS through CodeDeploy \(the `CodeDeployToECS` action\) is 3 MB\. Also, ZIP files that use input streams together with the store \(uncompressed\) archiving method are not supported\. The following error message is returned when artifact sizes exceed 3 MB, or if the ZIP file uses stored \(uncompressed\) input streams: 
 
 Exception while trying to read the task definition artifact file from: <source artifact name>
 
-**Possible fixes:** Create an artifact with a compressed size less than 3 MB\. Also, verify that the ZIP file does not use the combination of input streams and the store (uncompressed) archiving method\.
+**Possible fixes:** Create an artifact with a compressed size less than 3 MB\. Also, verify that the ZIP file does not use the combination of input streams and the store \(uncompressed\) archiving method\.
+
+## GitHub version 2 source action: Unable to complete the connection for a repository<a name="troubleshooting-connections-GitHub-admin"></a>
+
+**Problem:** 
+
+Because a connection to a GitHub repository uses the AWS Connector for GitHub, you need organization owner permissions or admin permissions to the repository to create the connection\.
+
+**Possible fixes:** For information about permission levels for a GitHub repository, see [https://docs\.github\.com/en/free\-pro\-team@latest/github/setting\-up\-and\-managing\-organizations\-and\-teams/permission\-levels\-for\-an\-organization](https://docs.github.com/en/free-pro-team@latest/github/setting-up-and-managing-organizations-and-teams/permission-levels-for-an-organization)\.
 
 ## Need help with a different issue?<a name="troubleshooting-other"></a>
 

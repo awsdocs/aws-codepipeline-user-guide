@@ -21,7 +21,7 @@ CodePipeline supports notifications, which can notify users of important changes
 
 ### Permissions related to notifications in full access managed policies<a name="notifications-fullaccess"></a>
 
-The `AWSCodePipelineFullAccess` managed policy includes the following statements to allow full access to notifications\. Users with this managed policy applied can also create and manage Amazon SNS topics for notifications, subscribe and unsubscribe users to topics, list topics to choose as targets for notification rules, and list AWS Chatbot clients configured for Slack\.
+The `AWSCodePipeline_FullAccess` managed policy includes the following statements to allow full access to notifications\. Users with this managed policy applied can also create and manage Amazon SNS topics for notifications, subscribe and unsubscribe users to topics, list topics to choose as targets for notification rules, and list AWS Chatbot clients configured for Slack\.
 
 ```
     {
@@ -80,7 +80,7 @@ The `AWSCodePipelineFullAccess` managed policy includes the following statements
 
 ### Permissions related to notifications in read\-only managed policies<a name="notifications-readonly"></a>
 
-The `AWSCodePipelineReadOnlyAccess` managed policy includes the following statements to allow read\-only access to notifications\. Users with this policy applied can view notifications for resources, but cannot create, manage, or subscribe to them\. 
+The `AWSCodePipeline_ReadOnlyAccess` managed policy includes the following statements to allow read\-only access to notifications\. Users with this policy applied can view notifications for resources, but cannot create, manage, or subscribe to them\. 
 
 ```
    {

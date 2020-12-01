@@ -7,7 +7,6 @@ AWS CodePipeline is a continuous delivery service you can use to model, visualiz
 + [What can I do with CodePipeline?](welcome-what-can-I-do.md)
 + [A quick look at CodePipeline](welcome-introducing.md)
 + [How do I get started with CodePipeline?](welcome-get-started.md)
-+ [We want to hear from you](welcome-contact-us.md)
 + [CodePipeline concepts](concepts.md)
 + [DevOps pipeline example](concepts-devops-example.md)
 + [How pipeline executions work](concepts-how-it-works.md)

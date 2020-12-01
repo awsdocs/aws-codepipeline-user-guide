@@ -4,12 +4,12 @@ Triggers a pipeline when a new commit is made on a third\-party source code repo
 
 Connections can associate your AWS resources with the following third\-party repositories:
 + Bitbucket \(through the **Bitbucket** provider option in the CodePipeline console\)
-+ GitHub and GitHub Enterprise Cloud \(through the **GitHub** provider option in the CodePipeline console\)
++ GitHub and GitHub Enterprise Cloud \(through the **GitHub \(Version 2\)** provider option in the CodePipeline console\)
 + GitHub Enterprise Server \(through the **GitHub Enterprise Server** provider option in the CodePipeline console\)
 
 After a code change is detected, you have the following options for passing the code to subsequent actions:
-+ Like other existing CodePipeline source actions, `CodeStarSourceConnection` can output a ZIP file with a shallow copy of your commit\.
-+ `CodeStarSourceConnection` can also be configured to output a URL reference to the repo for subsequent actions\.
++ Default: Like other existing CodePipeline source actions, `CodeStarSourceConnection` can output a ZIP file with a shallow copy of your commit\.
++ Full clone: `CodeStarSourceConnection` can also be configured to output a URL reference to the repo for subsequent actions\.
 
   Currently, the Git URL reference can only be used by downstream CodeBuild actions to clone the repo and associated Git metadata\. Attempting to pass a Git URL reference to non\-CodeBuild actions results in an error\.
 
@@ -23,6 +23,7 @@ To create or attach a policy to your IAM user or role with the permissions requi
 + [Configuration parameters](#action-reference-CodestarConnectionSource-config)
 + [Input artifacts](#action-reference-CodestarConnectionSource-input)
 + [Output artifacts](#action-reference-CodestarConnectionSource-output)
++ [Output variables](#action-reference-CodestarConnectionSource-variables)
 + [Action declaration](#action-reference-CodestarConnectionSource-example)
 + [Installing the installation app and creating a connection](#action-reference-CodestarConnectionSource-auth)
 + [See also](#action-reference-CodestarConnectionSource-links)
@@ -52,7 +53,7 @@ The name of the branch where source changes are to be detected\.
 Required: No  
 Specifies the output artifact format\. Can be either `CODEBUILD_CLONE_REF` or `CODE_ZIP`\. If unspecified, the default is `CODE_ZIP`\.  
 The `CODEBUILD_CLONE_REF` option can only be used by CodeBuild downstream actions\.  
-If you choose this option, you will need to update the permissions for your CodeBuild project service role as shown in [Add GitClone permissions for connections](troubleshooting.md#codebuild-role-connections)\. For a tutorial that shows you how to use the **Full clone** option, see [Tutorial: Use full clone with a GitHub pipeline source](tutorials-github-gitclone.md)\.
+If you choose this option, you will need to update the permissions for your CodeBuild project service role as shown in [Add CodeBuild GitClone permissions for connections to Bitbucket, GitHub, or GitHub Enterprise Server](troubleshooting.md#codebuild-role-connections)\. For a tutorial that shows you how to use the **Full clone** option, see [Tutorial: Use full clone with a GitHub pipeline source](tutorials-github-gitclone.md)\.
 
 ## Input artifacts<a name="action-reference-CodestarConnectionSource-input"></a>
 + **Number of Artifacts:** `0`
@@ -66,6 +67,30 @@ If you choose this option, you will need to update the permissions for your Code
 **Important**  
 This option can only be used by CodeBuild downstream actions\.  
 If you choose this option, you will need to update the permissions for your CodeBuild project service role as shown in [Troubleshooting CodePipeline](troubleshooting.md)\. For a tutorial that shows you how to use the **Full clone** option, see [Tutorial: Use full clone with a GitHub pipeline source](tutorials-github-gitclone.md)\.
+
+## Output variables<a name="action-reference-CodestarConnectionSource-variables"></a>
+
+When configured, this action produces variables that can be referenced by the action configuration of a downstream action in the pipeline\. This action produces variables which can be viewed as output variables, even if the action doesn't have a namespace\. You configure an action with a namespace to make those variables available to the configuration of downstream actions\.
+
+For more information, see [Variables](reference-variables.md)\.
+
+AuthorDate  
+The date when the commit was authored, in timestamp format\.
+
+BranchName  
+The name of the branch for the repository where the source change was made\.
+
+CommitId  
+The commit ID that triggered the pipeline execution\.
+
+CommitMessage  
+The description message, if any, associated with the commit that triggered the pipeline execution\.
+
+ConnectionArn  
+The connection ARN that is configured and authenticated for the source provider\.
+
+FullRepositoryName  
+The name of the repository where the commit that triggered the pipeline was made\.
 
 ## Action declaration<a name="action-reference-CodestarConnectionSource-example"></a>
 

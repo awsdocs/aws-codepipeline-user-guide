@@ -29,7 +29,7 @@ If you use the console to create or edit your pipeline, your CloudWatch Events r
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. In the navigation pane, choose **Events**\.
+1. In the navigation pane, choose **Events**, and then choose **Rules**\. Choose **Create rule**\.
 
 1. Choose **Event Pattern**, and then choose **Build event pattern to match events by service**\.
 
