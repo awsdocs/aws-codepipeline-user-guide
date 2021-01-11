@@ -30,6 +30,8 @@ You must already have the following:
 
 Download the sample AWS CloudFormation template file and upload it to your CodeCommit repository\.
 
+
+
 1. Navigate to the sample template page for your Region\. For example, the page for us\-west\-2 is at [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/sample-templates-services-us-west-2.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/sample-templates-services-us-west-2.html)\. Under **Amazon DocumentDB**, download the template for an Amazon DocumentDB Cluster\. The file name is `documentdb_full_stack.yaml`\.
 
 1. Unzip the `documentdb_full_stack.yaml` file, and open it in a text editor\. Make the following changes\.
@@ -108,7 +110,7 @@ For more information, see [Input and output artifacts](welcome-introducing-artif
 
    1. In **Repository name**, choose the name of the CodeCommit repository that you created in [Step 1: Create a CodeCommit repository](tutorials-simple-codecommit.md#codecommit-create-repository)\.
 
-   1. In **Branch name**, choose the name of the branch that contains your latest code update\. Unless you created a different branch on your own, only `master` is available\. 
+   1. In **Branch name**, choose the name of the branch that contains your latest code update\.
 
    After you select the repository name and branch, the Amazon CloudWatch Events rule to be created for this pipeline is displayed\. 
 
@@ -134,8 +136,8 @@ For more information, see [Input and output artifacts](welcome-introducing-artif
       {
       "DBClusterName": "MyDBCluster",
       "DBInstanceName": "MyDBInstance",
-      "MasterUser": "MasterUser",
-      "MasterPassword": "MasterPassword",
+      "MasterUser": "UserName",
+      "MasterPassword": "Password",
       "DBInstanceClass": "db.r4.large",
       "Purpose": "testing"}
       ```
@@ -150,6 +152,8 @@ For more information, see [Input and output artifacts](welcome-introducing-artif
 ## Step 3: Add an AWS CloudFormation deployment action to create the change set<a name="tutorials-cloudformation-action-changeset"></a>
 
 Create a next action in your pipeline that will allow AWS CloudFormation to create the change set before the manual approval action\.
+
+
 
 1. Open the CodePipeline console at [https://console\.aws\.amazon\.com/codepipeline/](https://console.aws.amazon.com/codepipeline/)\.
 
@@ -183,8 +187,8 @@ Create a next action in your pipeline that will allow AWS CloudFormation to crea
       {
       "DBClusterName": "MyDBCluster",
       "DBInstanceName": "MyDBInstance",
-      "MasterUser": "MasterUser",
-      "MasterPassword": "MasterPassword",
+      "MasterUser": "UserName",
+      "MasterPassword": "Password",
       "DBInstanceClass": "db.r4.large",
       "Purpose": "production"}
       ```
@@ -195,6 +199,8 @@ Create a next action in your pipeline that will allow AWS CloudFormation to crea
 
 Create a manual approval action in your pipeline\.
 
+
+
 1. Choose to edit the pipeline, or continue to display the pipeline in **Edit** mode\.
 
 1. Add a manual approval action after the deploy action that creates the change set\. This action allows you to verify the created resource change set in AWS CloudFormation before the pipeline executes the change set\.
@@ -202,6 +208,8 @@ Create a manual approval action in your pipeline\.
 ## Step 5: Add a CloudFormation deployment action to execute the change set<a name="tutorials-cloudformation-action-deployment"></a>
 
 Create a next action in your pipeline that allows AWS CloudFormation to execute the change set after the manual approval action\.
+
+
 
 1. Open the CodePipeline console at [https://console\.aws\.amazon\.com/codepipeline/](https://console.aws.amazon.com/codepipeline/)\.
 
@@ -236,6 +244,8 @@ Create a next action in your pipeline that allows AWS CloudFormation to execute 
 ## Step 6: Add a CloudFormation deployment action to delete the stack<a name="tutorials-cloudformation-action-delete"></a>
 
 Create a final action in your pipeline that allows AWS CloudFormation to get the stack name from the variable in the outputs file and delete the stack\.
+
+
 
 1. Open the CodePipeline console at [https://console\.aws\.amazon\.com/codepipeline/](https://console.aws.amazon.com/codepipeline/)\.
 

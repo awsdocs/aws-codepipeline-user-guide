@@ -119,7 +119,8 @@ The location on the host machine where custom artifacts will be stored\.
 
 **CustomDeviceArtifacts**  
 Required: No  
-The location on the device where custom artifacts will be stored\.
+The location on the device where custom artifacts will be stored\.  
+
 
 **UnmeteredDevicesOnly**  
 Required: No  

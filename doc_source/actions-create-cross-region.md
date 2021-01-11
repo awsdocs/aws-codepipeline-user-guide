@@ -27,6 +27,8 @@ When a pipeline includes a cross\-Region action as part of a stage, CodePipeline
 **Note**  
 The pipeline Region and the Region where your CloudWatch Events change detection resources are maintained remain the same\. The Region where your pipeline is hosted does not change\.
 
+
+
 ## Manage cross\-Region actions in a pipeline \(console\)<a name="actions-cross-region-console"></a>
 
 You can use the CodePipeline console to add a cross\-Region action to an existing pipeline\. To create a new pipeline with cross\-Region actions using the Create pipeline wizard, see [Create a pipeline \(console\)](pipelines-create.md#pipelines-create-console)\.
@@ -261,7 +263,7 @@ Be sure to include `file://` before the file name\. It is required in this comma
                            ],
                            "configuration": {
                                "PollForSourceChanges": "false",
-                               "BranchName": "master",
+                               "BranchName": "main",
                                "RepositoryName": "MyTestRepo"
                            },
                            "runOrder": 1

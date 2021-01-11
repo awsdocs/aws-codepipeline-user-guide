@@ -73,7 +73,7 @@ The artifact configured in your CodeBuild project becomes the CodePipeline input
 
 This action will produce as variables all environment variables that were exported as part of the build\. See [https://docs\.aws\.amazon\.com/codebuild/latest/userguide/build\-spec\-ref\.html\#exported\-variables\-build\-spec](https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#exported-variables-build-spec) for more details on how to export environment variables\.
 
-For more information about variables in CodePipeline, see [Variables](reference-variables.md)\.
+For more information about variables in CodePipeline, see [CodeBuild action output variables](reference-variables.md#reference-variables-list-configured-codebuild)\.
 
 ## Action declaration \(CodeBuild example\)<a name="action-reference-CodeBuild-example"></a>
 

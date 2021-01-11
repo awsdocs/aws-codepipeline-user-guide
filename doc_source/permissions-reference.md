@@ -8,5 +8,7 @@ Use the following table as a reference when you are setting up access control an
 The **Resources** column lists the resource required for API calls that support resource\-level permissions\. For API calls that do not support resource\-level permissions, you can grant users permission to use it, but you have to specify a wildcard \(\*\) for the resource element of your policy statement\.
 
 
+
+
 **CodePipeline API Operations and required permissions for actions**  
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/permissions-reference.html)

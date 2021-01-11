@@ -47,9 +47,7 @@ While a pipeline can process multiple executions at the same time, a pipeline st
 
 Pipeline executions traverse pipeline stages in order\. Valid statuses for pipelines are `InProgress`, `Stopping`, `Stopped`, `Succeeded`, `Superseded`, and `Failed`\. An execution with a `Failed` or `Superseded` status does not continue through the pipeline and cannot be retried\.
 
-Pipeline executions traverse pipeline stages in order\. 
-
-Valid statuses for pipelines are `InProgress`, `Stopping`, `Stopped`, `Succeeded`, `Superseded`, and `Failed`\. An execution with a `Failed` or `Superseded` status does not continue through the pipeline and cannot be retried\. For more information, see [PipelineExecution](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_PipelineExecution.html)\.
+For more information, see [PipelineExecution](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_PipelineExecution.html)\.
 
 #### Stopped executions<a name="concepts-executions-stopped"></a>
 

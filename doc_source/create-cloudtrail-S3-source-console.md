@@ -37,9 +37,11 @@ If you use the console to create or edit your pipeline, your CloudWatch Events r
 
 1. From **Event Type**, choose **Object Level Operations**\.
 
-1. Choose **Specific operation\(s\)**, and then choose **CompleteMultipartUpload**, **CopyObject**, and **PutObject**\.
+1. 
 
-   Above the **Event Pattern Preview** pane, choose **Edit**\. Edit the event pattern to add the bucket name and encryption key as `requestParameters`, as shown in this example for a bucket named `my-bucket`\. When you use the **Edit** window to specify resources, your rule is updated to use a custom event pattern\.  
+   Choose **Specific operation\(s\)**, and then choose **CompleteMultipartUpload**, **CopyObject**, and **PutObject**\.
+
+   Above the **Event Pattern Preview** pane, choose **Edit**\. Edit the event pattern to add the bucket name and S3 object key \(or key name\) which uniquely identifies the object in the bucket as `requestParameters`\. In this example, a rule is created for a bucket named `my-bucket` and an object key of `my-files.zip`\. When you use the **Edit** window to specify resources, your rule is updated to use a custom event pattern\.  
 ![\[S3 source state change rule\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/cloudwatch-rule-event-pattern-S3-source.png)![\[S3 source state change rule\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[S3 source state change rule\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
    The following is a sample event pattern to copy and paste:
@@ -66,7 +68,7 @@ If you use the console to create or edit your pipeline, your CloudWatch Events r
                    "my-bucket"
                ],
                "key": [
-                   "my-key"
+                   "my-files.zip"
                ]
            }
        }

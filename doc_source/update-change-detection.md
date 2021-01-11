@@ -19,6 +19,8 @@ When you use the CodePipeline console or AWS CodeStar to create a pipeline, even
 You should also use events on pipelines that were created before the new console was launched\. To opt in, use the CodePipeline console to create the CloudWatch event or webhook and disable polling\. Use the instructions in the following table\.
 
 
+
+
 **To update AWS CodeCommit source actions**  
 
 | Type | Action Required | Instructions | 
@@ -118,7 +120,7 @@ When you create a pipeline with this method, the `PollForSourceChanges` paramete
    ```
    "configuration": {
      "PollForSourceChanges": "false",
-     "BranchName": "master",
+     "BranchName": "main",
      "RepositoryName": "MyTestRepo"
      },
    ```
@@ -210,7 +212,7 @@ The update\-pipeline command stops the pipeline\. If a revision is being run thr
    The following sample command creates a rule called `MyCodeCommitRepoRule`\.
 
    ```
-   aws events put-rule --name "MyCodeCommitRepoRule" --event-pattern "{\"source\":[\"aws.codecommit\"],\"detail-type\":[\"CodeCommit Repository State Change\"],\"resources\":[\"repository-ARN\"],\"detail\":{\"referenceType\":[\"branch\"],\"referenceName\":[\"master\"]}}" --role-arn "arn:aws:iam::ACCOUNT_ID:role/Role-for-MyRule"
+   aws events put-rule --name "MyCodeCommitRepoRule" --event-pattern "{\"source\":[\"aws.codecommit\"],\"detail-type\":[\"CodeCommit Repository State Change\"],\"resources\":[\"repository-ARN\"],\"detail\":{\"referenceType\":[\"branch\"],\"referenceName\":[\"main\"]}}" --role-arn "arn:aws:iam::ACCOUNT_ID:role/Role-for-MyRule"
    ```
 
 1. To add CodePipeline as a target, call the put\-targets command and include the following parameters:
@@ -597,7 +599,7 @@ Resources:
              referenceType:
                - branch
              referenceName:
-               - master
+               - main
          Targets:
            -
              Arn: 
@@ -650,7 +652,7 @@ Resources:
              "branch"
            ],
            "referenceName": [
-             "master"
+             "main"
            ]
          }
        },
@@ -809,7 +811,7 @@ Resources:
           referenceType:
             - branch
           referenceName:
-            - master
+            - main
       Targets:
         -
           Arn: 
@@ -943,7 +945,7 @@ Resources:
                             "branch"
                         ],
                         "referenceName": [
-                            "master"
+                            "main"
                         ]
                     }
                 },
@@ -1023,12 +1025,15 @@ Resources:
 ...
 ```
 
+
 ### Update pipelines for push events \(Amazon S3 source\) \(AWS CloudFormation template\)<a name="update-change-detection-cfn-s3"></a>
+
+
 
 Use these steps to edit your pipeline with an Amazon S3 source from polling to event\-based change detection\.
 
 To build an event\-driven pipeline with Amazon S3, you edit the `PollForSourceChanges` parameter of your pipeline and then add the following resources to your template:
-+ Amazon CloudWatch Events requires that all Amazon S3 events must be logged\. You must create an AWS CloudTrail trail, bucket, and bucket policy that Amazon S3 can use to log the events that occur\. For more information, see [Logging Management and Data Events with AWS CloudTrail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html)\.
++ Amazon CloudWatch Events requires that all Amazon S3 events must be logged\. You must create an AWS CloudTrail trail, bucket, and bucket policy that Amazon S3 can use to log the events that occur\. For more information, see [Logging data events for trails](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html) and [Logging management events for trails](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html)\.
 + Amazon CloudWatch Events rule and IAM role to allow this event to start our pipeline\.
 
 If you use AWS CloudFormation to create and manage your pipelines, your template includes content like the following\.

@@ -34,7 +34,9 @@ You can try this out using your existing Android app and test definitions, or yo
 
 ## Configure CodePipeline to use your Device Farm tests<a name="codepipeline-configure-tests"></a>
 
-1. Add and commit a file called [https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html](https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html) in the root of your app code, and push it to your repository\. CodeBuild uses this file to perform commands and access artifacts required to build your app\.
+1. 
+
+   Add and commit a file called [https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html](https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html) in the root of your app code, and push it to your repository\. CodeBuild uses this file to perform commands and access artifacts required to build your app\.
 
    ```
    version: 0.2

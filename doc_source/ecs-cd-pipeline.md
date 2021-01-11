@@ -11,6 +11,92 @@ All of these resources should be created within the same AWS Region\.
 + A source control repository \(this tutorial uses CodeCommit\) with your Dockerfile and application source\. For more information, see [Create a CodeCommit Repository](https://docs.aws.amazon.com/codecommit/latest/userguide/how-to-create-repository.html) in the *AWS CodeCommit User Guide*\.
 + A Docker image repository \(this tutorial uses Amazon ECR\) that contains an image you have built from your Dockerfile and application source\. For more information, see [Creating a Repository](https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-create.html) and [Pushing an Image](https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html) in the *Amazon Elastic Container Registry User Guide*\.
 + An Amazon ECS task definition that references the Docker image hosted in your image repository\. For more information, see [Creating a Task Definition](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-task-definition.html) in the *Amazon Elastic Container Service Developer Guide*\.
+
+  Below is a sample task definition used for this tutorial\. The value you use for `name` and `family` will be used in the next step for your build specification file\.
+
+  ```
+  {
+    "ipcMode": null,
+    "executionRoleArn": "role_ARN",
+    "containerDefinitions": [
+      {
+        "dnsSearchDomains": null,
+        "environmentFiles": null,
+        "logConfiguration": {
+          "logDriver": "awslogs",
+          "secretOptions": null,
+          "options": {
+            "awslogs-group": "/ecs/hello-world",
+            "awslogs-region": "us-west-2",
+            "awslogs-stream-prefix": "ecs"
+          }
+        },
+        "entryPoint": null,
+        "portMappings": [
+          {
+            "hostPort": 80,
+            "protocol": "tcp",
+            "containerPort": 80
+          }
+        ],
+        "command": null,
+        "linuxParameters": null,
+        "cpu": 0,
+        "environment": [],
+        "resourceRequirements": null,
+        "ulimits": null,
+        "dnsServers": null,
+        "mountPoints": [],
+        "workingDirectory": null,
+        "secrets": null,
+        "dockerSecurityOptions": null,
+        "memory": null,
+        "memoryReservation": 128,
+        "volumesFrom": [],
+        "stopTimeout": null,
+        "image": "image_name",
+        "startTimeout": null,
+        "firelensConfiguration": null,
+        "dependsOn": null,
+        "disableNetworking": null,
+        "interactive": null,
+        "healthCheck": null,
+        "essential": true,
+        "links": null,
+        "hostname": null,
+        "extraHosts": null,
+        "pseudoTerminal": null,
+        "user": null,
+        "readonlyRootFilesystem": null,
+        "dockerLabels": null,
+        "systemControls": null,
+        "privileged": null,
+        "name": "hello-world"
+      }
+    ],
+    "placementConstraints": [],
+    "memory": "2048",
+    "taskRoleArn": null,
+    "compatibilities": [
+      "EC2",
+      "FARGATE"
+    ],
+    "taskDefinitionArn": "ARN",
+    "family": "hello-world",
+    "requiresAttributes": [],
+    "pidMode": null,
+    "requiresCompatibilities": [
+      "FARGATE"
+    ],
+    "networkMode": "awsvpc",
+    "cpu": "1024",
+    "revision": 1,
+    "status": "ACTIVE",
+    "inferenceAccelerators": null,
+    "proxyConfiguration": null,
+    "volumes": []
+  }
+  ```
 + An Amazon ECS cluster that is running a service that uses your previously mentioned task definition\. For more information, see [Creating a Cluster](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create_cluster.html) and [Creating a Service](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-service.html) in the *Amazon Elastic Container Service Developer Guide*\.
 
 After you have satisfied these prerequisites, you can proceed with the tutorial and create your CD pipeline\.
@@ -26,6 +112,8 @@ This tutorial uses CodeBuild to build your Docker image and push the image to Am
 + Post\-build stage:
   + Push the image to your ECR repository with both tags\.
   + Write a file called `imagedefinitions.json` in the build root that has your Amazon ECS service's container name and the image and tag\. The deployment stage of your CD pipeline uses this information to create a new revision of your service's task definition, and then it updates the service to use the new task definition\. The `imagedefinitions.json` file is required for the ECS job worker\.
+
+Paste this sample text to create your `buildspec.yml` file, and replace the values for your image and task definition\.
 
 ```
 version: 0.2
@@ -60,91 +148,7 @@ artifacts:
     files: imagedefinitions.json
 ```
 
-The build specification was written for the following task definition, used by the Amazon ECS service for this tutorial\. The `REPOSITORY_URI` value corresponds to the `image` repository \(without any image tag\), and the `hello-world` value near the end of the file corresponds to the container name in the service's task definition\. 
-
-```
-{
-  "ipcMode": null,
-  "executionRoleArn": "role_ARN",
-  "containerDefinitions": [
-    {
-      "dnsSearchDomains": null,
-      "environmentFiles": null,
-      "logConfiguration": {
-        "logDriver": "awslogs",
-        "secretOptions": null,
-        "options": {
-          "awslogs-group": "/ecs/hello-world",
-          "awslogs-region": "us-west-2",
-          "awslogs-stream-prefix": "ecs"
-        }
-      },
-      "entryPoint": null,
-      "portMappings": [
-        {
-          "hostPort": 80,
-          "protocol": "tcp",
-          "containerPort": 80
-        }
-      ],
-      "command": null,
-      "linuxParameters": null,
-      "cpu": 0,
-      "environment": [],
-      "resourceRequirements": null,
-      "ulimits": null,
-      "dnsServers": null,
-      "mountPoints": [],
-      "workingDirectory": null,
-      "secrets": null,
-      "dockerSecurityOptions": null,
-      "memory": null,
-      "memoryReservation": 128,
-      "volumesFrom": [],
-      "stopTimeout": null,
-      "image": "image_name",
-      "startTimeout": null,
-      "firelensConfiguration": null,
-      "dependsOn": null,
-      "disableNetworking": null,
-      "interactive": null,
-      "healthCheck": null,
-      "essential": true,
-      "links": null,
-      "hostname": null,
-      "extraHosts": null,
-      "pseudoTerminal": null,
-      "user": null,
-      "readonlyRootFilesystem": null,
-      "dockerLabels": null,
-      "systemControls": null,
-      "privileged": null,
-      "name": "hello-world"
-    }
-  ],
-  "placementConstraints": [],
-  "memory": "2048",
-  "taskRoleArn": null,
-  "compatibilities": [
-    "EC2",
-    "FARGATE"
-  ],
-  "taskDefinitionArn": "ARN",
-  "family": "hello-world",
-  "requiresAttributes": [],
-  "pidMode": null,
-  "requiresCompatibilities": [
-    "FARGATE"
-  ],
-  "networkMode": "awsvpc",
-  "cpu": "1024",
-  "revision": 1,
-  "status": "ACTIVE",
-  "inferenceAccelerators": null,
-  "proxyConfiguration": null,
-  "volumes": []
-}
-```
+The build specification was written for the sample task definition that was provided in [Prerequisites](#ecs-cd-prereqs), used by the Amazon ECS service for this tutorial\. The `REPOSITORY_URI` value corresponds to the `image` repository \(without any image tag\), and the `hello-world` value near the end of the file corresponds to the container name in the service's task definition\. 
 
 **To add a `buildspec.yml` file to your source repository**
 

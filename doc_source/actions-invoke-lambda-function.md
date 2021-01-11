@@ -118,6 +118,8 @@ If you see a **Welcome** page instead of the **Lambda** page, choose **Get Start
 
 1. On the **Create function** page, choose **Author from scratch**\. In **Function name**, enter a name for your Lambda function \(for example, **MyLambdaFunctionForAWSCodePipeline**\)\. In **Runtime**, choose **Node\.js 10\.x**\.
 
+   
+
 1. Under **Role**, select **Choose an existing role**\. In **Existing role**, choose your role, and then choose **Create function**\.
 
    The detail page for your created function opens\.
@@ -248,6 +250,8 @@ You can also choose to add your Lambda action to an existing stage\. For demonst
 
 1. Choose **\+ Add action group**\. In **Edit action**, in **Action name**, enter a name for your Lambda action \(for example, **MyLambdaAction**\)\. In **Provider**, choose **AWS Lambda**\. In **Function name**, choose or enter the name of your Lambda function \(for example, **MyLambdaFunctionForAWSCodePipeline**\)\. In **User parameters**, specify the IP address for the Amazon EC2 instance you copied earlier \(for example, **http://*192\.0\.2\.4***\), and then choose **Done**\.   
 ![\[The configuration for a Lambda action in the Add action form.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-lambda-action-add-pol.png)![\[The configuration for a Lambda action in the Add action form.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The configuration for a Lambda action in the Add action form.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+
+    
 **Note**  
 This topic uses an IP address, but in a real\-world scenario, you could provide your registered website name instead \(for example, **http://*www\.example\.com***\)\. For more information about event data and handlers in AWS Lambda, see [Programming Model](https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html) in the *AWS Lambda Developer Guide*\.
 

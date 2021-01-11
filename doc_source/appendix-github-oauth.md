@@ -7,6 +7,9 @@ While we don’t recommend using the GitHub version 1 action, existing pipelines
 
 To integrate with GitHub, CodePipeline uses a GitHub OAuth application for your pipeline\. CodePipeline uses webhooks to manage change detection for your pipeline with the GitHub version 1 source action\.
 
+**Note**  
+When you configure a GitHub version 2 source action in AWS CloudFormation, you do not include any GitHub token information or add a webhook resource\. You configure a connections resource as shown in [AWS::CodeStarConnections::Connection](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codestarconnections-connection.html) in the* AWS CloudFormation User Guide\.*
+
 This reference contains the following sections for the GitHub version 1 action:
 + For information about how to add a GitHub version 1 source action and webhook to a pipeline, see [Adding a GitHub version 1 source action](#appendix-github-methods)\.
 + For information about the configuration parameters and example YAML/JSON snippets for a GitHub version 1 source action, see [GitHub version 1 source action structure reference](#action-reference-GitHub)\.
@@ -159,7 +162,7 @@ Actions:
       Owner: MyGitHubAccountName
       Repo: MyGitHubRepositoryName
       PollForSourceChanges: 'false'
-      Branch: master
+      Branch: main
       OAuthToken: '{{resolve:secretsmanager:MyGitHubSecret:SecretString:token}}'
     Name: ApplicationSource
 ```
@@ -189,7 +192,7 @@ Actions:
                 "Owner": "MyGitHubAccountName",
                 "Repo": "MyGitHubRepositoryName",
                 "PollForSourceChanges": "false",
-                "Branch": "master",
+                "Branch": "main",
                 "OAuthToken": "{{resolve:secretsmanager:MyGitHubSecret:SecretString:token}}"
             },
             "Name": "ApplicationSource"
@@ -234,6 +237,8 @@ When you use the console to create or edit a pipeline that has a GitHub source, 
 + [Create a webhook for a GitHub source \(AWS CloudFormation template\)](#pipelines-webhooks-create-cfn)
 
 ### Create a webhook for a GitHub source<a name="pipelines-webhooks-create"></a>
+
+
 
 After you use the AWS CLI to manually create a webhook, you must register the webhook in GitHub\. A designated AWS endpoint is used for the webhook and is supplied by the put\-webhook command\.
 
@@ -342,7 +347,7 @@ When you create a pipeline with this method, the `PollForSourceChanges` paramete
      "Owner": "darlaker",
      "Repo": "UserGitHubRepo",
      "PollForSourceChanges": "false",
-     "Branch": "master",
+     "Branch": "main",
      "OAuthToken": "****"
      },
    ```
@@ -376,6 +381,8 @@ The update\-pipeline command stops the pipeline\. If a revision is being run thr
 ### List webhooks in your account<a name="pipelines-webhooks-view"></a>
 
 You can use the AWS CLI to list webhooks in your account\.
+
+
 
 **To list webhooks in your account**
 
@@ -562,6 +569,8 @@ If successful, this command returns nothing\. To verify the tags associated with
 
 ### Create a webhook for a GitHub source \(AWS CloudFormation template\)<a name="pipelines-webhooks-create-cfn"></a>
 
+
+
 To use AWS CloudFormation to create a webhook, update your template as described here\.<a name="proc-cfn-webhook-github"></a>
 
 **To add parameters and create a webhook in your template**
@@ -596,7 +605,7 @@ To disable periodic checks, you must explicitly add the `PollForSourceChanges` p
        "BranchName": {
          "Description": "GitHub branch name",
            "Type": "String",
-             "Default": "master"
+             "Default": "main"
        },
        "GitHubOwner": {
          "Type": "String"
@@ -761,6 +770,8 @@ When you create a pipeline with this method, the `PollForSourceChanges` paramete
 
 Update a polling pipeline for a GitHub version 1 source action
 
+
+
 ### Update pipelines for push events \(GitHub version 1 source actions\) \(console\)<a name="update-change-detection-console-github"></a>
 
 You can use the CodePipeline console to update your pipeline to use webhooks to detect changes in your CodeCommit source repository\.
@@ -894,7 +905,7 @@ When you create a pipeline with this method, the `PollForSourceChanges` paramete
      "Owner": "darlaker",
      "Repo": "UserGitHubRepo",
      "PollForSourceChanges": "false",
-     "Branch": "master",
+     "Branch": "main",
      "OAuthToken": "****"
      },
    ```
@@ -1058,7 +1069,7 @@ To disable periodic checks, you must explicitly add the `PollForSourceChanges` p
        "BranchName": {
          "Description": "GitHub branch name",
            "Type": "String",
-             "Default": "master"
+             "Default": "main"
        },
        "GitHubOwner": {
          "Type": "String"
@@ -1279,7 +1290,7 @@ Resources:
         "BranchName": {
             "Description": "GitHub branch name",
             "Type": "String",
-            "Default": "master"
+            "Default": "main"
         },
         "RepositoryName": {
             "Description": "GitHub repository name",
@@ -1443,7 +1454,7 @@ Make sure you copy your generated token now\. You cannot view the token after yo
    "configuration": {
            "Owner": "MyGitHubUserName",
            "Repo": "test-repo",
-           "Branch": "master",
+           "Branch": "main",
            "OAuthToken": "111222333444555666777888EXAMPLE"
        }
    ```
@@ -1518,7 +1529,7 @@ After you rotate your personal access token, remember to update any AWS CLI scri
    "configuration": {
            "Owner": "MyGitHubUserName",
            "Repo": "test-repo",
-           "Branch": "master",
+           "Branch": "main",
            "OAuthToken": "111222333444555666777888EXAMPLE"
        }
    ```
@@ -1573,6 +1584,8 @@ You must have created the following resources to use with the AWS CloudFormation
 + The GitHub repository and branch you want to use for your source\.
 + A personal access key for your GitHub repository\. This is used to provide an OAuth token for connection to your repository\.
 
+
+
 **To create your stack in AWS CloudFormation**
 
 1. Unzip the files from [SampleApp\_Linux\.zip](samples/SampleApp_Linux.zip) and upload the files to your GitHub repository\. You must upload the unzipped files to the root directory of your repository\.
@@ -1626,6 +1639,8 @@ If these permissions have been revoked or otherwise disabled, then the pipeline 
 It is a security best practice to rotate your personal access token on a regular basis\. For more information, see [Use GitHub and the CodePipeline CLI to create and rotate your GitHub personal access token on a regular basis](#GitHub-rotate-personal-token-CLI)\.
 
 **Possible fixes:** 
+
+
 
  If CodePipeline is unable to connect to the GitHub repository, there are two troubleshooting options: 
 + You might simply need to reconnect your pipeline to the repository manually\. You might have revoked the permissions of the OAuth token for CodePipeline and they just need to be restored\. To do this, see the steps below\.

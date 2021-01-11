@@ -26,6 +26,8 @@ When you use the console to create a pipeline, you must include a source stage a
 
 When you use the pipeline wizard, CodePipeline creates the names of stages \(source, build, staging\)\. These names cannot be changed\. You can use more specific names \(for example, BuildToGamma or DeployToProd\) to stages you add later\.
 
+
+
 **Step 1: Create and name your pipeline**
 
 1. Sign in to the AWS Management Console and open the CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
@@ -104,7 +106,7 @@ When Amazon S3 is the source provider for your pipeline, you may zip your source
     + In **Image tag**, specify the image name and version, if different from LATEST\.
     + In **Output artifacts**, choose the output artifact default, such as MyApp, that contains the image name and repository URI information you want the next stage to use\.
 
-      For a tutorial about creating a pipeline for Amazon ECS with CodeDeploy blue\-green deployments that includes an Amazon ECR source stage, see [Tutorial: Create a Pipeline with an Amazon ECR Source and ECS\-to\-CodeDeploy Deployment](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/tutorials-ecs-ecr-codedeploy.html)\.
+      For a tutorial about creating a pipeline for Amazon ECS with CodeDeploy blue\-green deployments that includes an Amazon ECR source stage, see [Tutorial: Create a pipeline with an Amazon ECR source and ECS\-to\-CodeDeploy deployment](tutorials-ecs-ecr-codedeploy.md)\.
 
     When you include an Amazon ECR source stage in your pipeline, the source action generates an `imageDetail.json` file as an output artifact when you commit a change\. For information about the `imageDetail.json` file, see [imageDetail\.json file for Amazon ECS blue/green deployment actions](file-reference.md#file-reference-ecs-bluegreen)\.
 **Note**  

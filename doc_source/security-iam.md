@@ -134,6 +134,7 @@ The following table shows when support was added for other AWS services\.
 
 | AWS Service | CodePipeline Support Date | 
 | --- | --- | 
+| AWS CloudFormation StackSets actions | December 30, 2020 | 
 | CodeCommit full clone output artifact format | November 11, 2020 | 
 | CodeBuild batch builds | July 30, 2020 | 
 | AWS AppConfig | June 22, 2020 | 
@@ -151,15 +152,15 @@ The following table shows when support was added for other AWS services\.
 
 Follow these steps to add permissions for a supported service:
 
+ 
+
 1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 
 1. In the IAM console, in the navigation pane, choose **Roles**, and then choose your `AWS-CodePipeline-Service` role from the list of roles\.
 
-1. On the **Permissions** tab, in **Inline Policies**, in the row for your service role policy, choose **Edit Policy**\.
-**Note**  
-Your service role has a name in a format similar to `oneClick_AWS-CodePipeline-1111222233334`\.
+1. On the **Permissions** tab, in **Inline policies**, in the row for your service role policy, choose **Edit Policy**\.
 
-1. Add the required permissions in the **Policy Document** box\. 
+1. Add the required permissions in the **Policy document** box\. 
 **Note**  
 When you create IAM policies, follow the standard security advice of granting least privilege—that is, granting only the permissions required to perform a task\. Some API calls support resource\-based permissions and allow access to be limited\. For example, in this case, to limit permissions when calling `DescribeTasks` and `ListTasks`, you can replace the wildcard character \(\*\) with a resource ARN or with a resource ARN that contains a wildcard character \(\*\)\.
 
@@ -412,6 +413,36 @@ Support for batch builds was added at a later date\. See step 11 for the permiss
    },
    ```
 
+1. For AWS CloudFormation StackSets actions, the following minimum permissions are required\.
+   + For the `CloudFormationStackSet` action, add the following to your policy statement:
+
+     ```
+     {
+         "Action": [
+             "cloudformation:CreateStackSet",
+             "cloudformation:UpdateStackSet",
+             "cloudformation:CreateStackInstances",
+             "cloudformation:DescribeStackSetOperation",
+             "cloudformation:DescribeStackSet",
+             "cloudformation:ListStackInstances"
+         ],
+         "Resource": "*",
+         "Effect": "Allow"
+     },
+     ```
+   + For the `CloudFormationStackInstances` action, add the following to your policy statement:
+
+     ```
+     {
+         "Action": [
+             "cloudformation:CreateStackInstances",
+             "cloudformation:DescribeStackSetOperation"
+         ],
+         "Resource": "*",
+         "Effect": "Allow"
+     },
+     ```
+
 1. For CodeCommit support for the full clone option, add the following to your policy statement:
 
    ```
@@ -426,4 +457,4 @@ Support for batch builds was added at a later date\. See step 11 for the permiss
 **Note**  
 To make sure your CodeBuild action can use the full clone option with a CodeCommit source, you must also add the `codecommit:GitPull `permission to the policy statement for your project's CodeBuild service role\.
 
-1. Choose **Validate Policy** to ensure the policy contains no errors\. When the policy is error\-free, choose **Apply Policy**\.
+1. Choose **Review policy** to ensure the policy contains no errors\. When the policy is error\-free, choose **Apply policy**\.

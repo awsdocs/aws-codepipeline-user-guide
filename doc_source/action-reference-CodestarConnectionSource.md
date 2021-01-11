@@ -1,6 +1,9 @@
 # CodeStarSourceConnection<a name="action-reference-CodestarConnectionSource"></a>
 
-Triggers a pipeline when a new commit is made on a third\-party source code repository\. The source action retrieves code changes when a pipeline is manually executed or when a webhook event is sent from the source provider\.
+Triggers a pipeline when a new commit is made on a third\-party source code repository\. The source action retrieves code changes when a pipeline is manually run or when a webhook event is sent from the source provider\.
+
+**Note**  
+This feature is not available in the Asia Pacific \(Hong Kong\) Region\. To use other source actions available in that Region, see [Source action integrations](integrations-action-type.md#integrations-source)\.
 
 Connections can associate your AWS resources with the following third\-party repositories:
 + Bitbucket \(through the **Bitbucket** provider option in the CodePipeline console\)
@@ -55,6 +58,12 @@ Specifies the output artifact format\. Can be either `CODEBUILD_CLONE_REF` or `C
 The `CODEBUILD_CLONE_REF` option can only be used by CodeBuild downstream actions\.  
 If you choose this option, you will need to update the permissions for your CodeBuild project service role as shown in [Add CodeBuild GitClone permissions for connections to Bitbucket, GitHub, or GitHub Enterprise Server](troubleshooting.md#codebuild-role-connections)\. For a tutorial that shows you how to use the **Full clone** option, see [Tutorial: Use full clone with a GitHub pipeline source](tutorials-github-gitclone.md)\.
 
+**DetectChanges**  
+ Required: No  
+Controls automatically starting your pipeline when a new commit is made on the configured repository and branch\. If unspecified, the default value is `true`, and the field does not display by default\. Valid values for this parameter:  
++ `true`: CodePipeline automatically starts your pipeline on new commits\.
++ `false`: CodePipeline does not start your pipeline on new commits\.
+
 ## Input artifacts<a name="action-reference-CodestarConnectionSource-input"></a>
 + **Number of Artifacts:** `0`
 + **Description:** Input artifacts do not apply for this action type\.
@@ -94,6 +103,8 @@ The name of the repository where the commit that triggered the pipeline was made
 
 ## Action declaration<a name="action-reference-CodestarConnectionSource-example"></a>
 
+In the following example, the output artifact is set to the default ZIP format of `CODE_ZIP` for the connection with ARN `arn:aws:codestar-connections:region:account-id:connection/connection-id`\.
+
 ------
 #### [ YAML ]
 
@@ -112,7 +123,7 @@ Actions:
     Configuration:
       ConnectionArn: "arn:aws:codestar-connections:region:account-id:connection/connection-id"
       FullRepositoryId: "some-user/my-repo"
-      BranchName: "master"
+      BranchName: "main"
       OutputArtifactFormat: "CODE_ZIP"
     Name: ApplicationSource
 ```
@@ -141,7 +152,7 @@ Actions:
             "Configuration": {
                 "ConnectionArn": "arn:aws:codestar-connections:region:account-id:connection/connection-id",
                 "FullRepositoryId": "some-user/my-repo",
-                "BranchName": "master",
+                "BranchName": "main",
                 "OutputArtifactFormat": "CODE_ZIP"
             },
             "Name": "ApplicationSource"
@@ -164,7 +175,8 @@ For a `CodeStarSourceConnection` source action, you do not have to set up a webh
 ## See also<a name="action-reference-CodestarConnectionSource-links"></a>
 
 The following related resources can help you as you work with this action\.
-+ [AWS CodeStar Connections API Reference](https://docs.aws.amazon.com/codestar-connections/latest/APIReference/Welcome.html) – The AWS CodeStar Connections API Reference provides reference information for the available connections actions\.
++ [AWS::CodeStarConnections::Connection](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codestarconnections-connection.html) – The AWS CloudFormation template reference for the AWS CodeStar Connections resource provides parameters and examples for connections in AWS CloudFormation templates\.
++ [AWS CodeStar Connections API Reference](https://docs.aws.amazon.com/codestar-connections/latest/APIReference/Welcome.html) – The *AWS CodeStar Connections API Reference* provides reference information for the available connections actions\.
 + To view the steps for creating a pipeline with source actions supported by connections, see the following:
   + For Bitbucket, use the **Bitbucket** option in the console or the `CodestarSourceConnection` action in the CLI\. See [Bitbucket connections](connections-bitbucket.md)\.
   + For GitHub and GitHub Enterprise Cloud, use the **GitHub** provider option in the console or the `CodestarSourceConnection` action in the CLI\. See [GitHub connections](connections-github.md)\.

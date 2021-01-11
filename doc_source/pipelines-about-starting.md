@@ -40,3 +40,5 @@ The CodeCommit and S3 source actions require either a configured change detectio
 | GitHub Enterprise Server | This source action uses a connection resource and a host resource\. | See [GitHub Enterprise Server connections](connections-ghes.md) AWS CodeStar Connections does not support GitHub Enterprise Server version 2\.22\.0 due to a known issue in the release\. To connect, upgrade to version 2\.22\.1 or the latest available version\.  | 
 
 If you have a pipeline that uses polling, you can update it to use the recommended detection method\. For more information, see [Update polling pipelines to the recommended change detection method](trigger-S3-migration-cwe.md)\.
+
+If you want to turn off change detection for a source action that uses connections, see [CodeStarSourceConnection](action-reference-CodestarConnectionSource.md)\.

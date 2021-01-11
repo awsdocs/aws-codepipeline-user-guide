@@ -2,6 +2,8 @@
 
 You can use notification rules to notify users of important changes, such as when a pipeline starts execution\. Notification rules specify both the events and the Amazon SNS topic that is used to send notifications\. For more information, see [What are notifications?](https://docs.aws.amazon.com/codestar-notifications/latest/userguide/welcome.html)
 
+
+
 You can use the console or the AWS CLI to create notification rules for AWS CodePipeline\. <a name="notification-rule-create-console"></a>
 
 # To create a notification rule \(console\)<a name="notification-rule-create-console"></a>
@@ -14,7 +16,9 @@ You can use the console or the AWS CLI to create notification rules for AWS Code
 
 1. In **Notification name**, enter a name for the rule\.
 
-1. In **Detail type**, choose **Basic** if you want only the information provided to Amazon EventBridge included in the notification\. Choose **Full** if you want to include information provided to Amazon EventBridge and information that might be supplied by the CodePipeline or the notification manager\.
+1. 
+
+   In **Detail type**, choose **Basic** if you want only the information provided to Amazon EventBridge included in the notification\. Choose **Full** if you want to include information provided to Amazon EventBridge and information that might be supplied by the CodePipeline or the notification manager\.
 
    For more information, see [Understanding Notification Contents and Security](https://docs.aws.amazon.com/codestar-notifications/latest/userguide/security.html#security-notifications)\.
 

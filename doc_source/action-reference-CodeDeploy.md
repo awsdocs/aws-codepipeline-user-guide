@@ -37,6 +37,8 @@ The deployment group that you created in CodeDeploy\.
 
   For more information about the AppSpec file, see the [CodeDeploy AppSpec File Reference](https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file.html)\.
 
+  
+
 ## Output Artifacts<a name="action-reference-CodeDeploy-output"></a>
 + **Number of Artifacts:** `0` 
 + **Description:** Output artifacts do not apply for this action type\.

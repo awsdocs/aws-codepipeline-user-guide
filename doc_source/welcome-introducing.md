@@ -1,5 +1,7 @@
 # A quick look at CodePipeline<a name="welcome-introducing"></a>
 
+
+
 The following diagram shows an example release process using CodePipeline\.
 
 ![\[An example release process using CodePipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/PipelineFlow.png)![\[An example release process using CodePipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[An example release process using CodePipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)

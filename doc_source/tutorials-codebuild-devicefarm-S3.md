@@ -76,6 +76,8 @@ If you use a CodePipeline service role that was created before July 2018, you mu
 
 1. In **Build**, create a placeholder build stage for your pipeline\. This allows you to create the pipeline in the wizard\. After you use the wizard to create your two\-stage pipeline, you no longer need this placeholder build stage\. After the pipeline is completed, this second stage is deleted and the new test stage is added in step 5\.
 
+   
+
    1. In **Build provider**, choose **Add Jenkins**\. This build selection is a placeholder\. It is not used\.
 
    1. In **Provider name**, enter a name\. The name is a placeholder\. It is not used\.

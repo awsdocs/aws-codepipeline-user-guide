@@ -2,6 +2,9 @@
 
 You use connections to authorize and establish configurations that associate your third\-party provider with your AWS resources\.
 
+**Note**  
+This feature is not available in the Asia Pacific \(Hong Kong\) Region\. To use other source actions available in that Region, see [Source action integrations](integrations-action-type.md#integrations-source)\.
+
 To add a source action for your GitHub or GitHub Enterprise Cloud repository in CodePipeline, you can choose either to:
 + Use the CodePipeline console **Create pipeline** wizard or **Edit action** page to choose the **GitHub \(Version 2\)** provider option\. See [Create a connection to GitHub Enterprise Server \(console\)](connections-ghes.md#connections-ghes-console) to add the action\. The console helps you create a connections resource\.
 **Note**  
@@ -64,6 +67,8 @@ You only install the app once for each GitHub account\. If you previously instal
 
 1. On the **Install AWS Connector for GitHub** page, leave the defaults, and choose **Install**\.  
 ![\[Console screenshot showing the second AWS Connector for GitHub installation page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/github-conn-access-app-install2.png)![\[Console screenshot showing the second AWS Connector for GitHub installation page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing the second AWS Connector for GitHub installation page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+
+   
 
 1. On the **Connect to GitHub** page, the connection ID for your new installation appears in **GitHub Apps**\. Choose **Connect**\.
 

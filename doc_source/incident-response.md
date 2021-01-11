@@ -7,4 +7,4 @@ You can use logging features in AWS to determine the actions users have taken in
 
 Logging features are available in the following AWS services:
 + AWS CloudTrail can be used to log AWS API calls and related events made by or on behalf of an AWS account\. For more information, see [Logging CodePipeline API calls with AWS CloudTrail](monitoring-cloudtrail-logs.md)\.
-+ Amazon CloudWatch Events can be used to monitor your AWS Cloud resources and the applications you run on AWS\. You can create alerts in Amazon CloudWatch Events based on metrics that you define\. For more information, see [Detect and react to changes in pipeline state with Amazon CloudWatch Events](detect-state-changes-cloudwatch-events.md)\.
++ Amazon CloudWatch Events can be used to monitor your AWS Cloud resources and the applications you run on AWS\. You can create alerts in Amazon CloudWatch Events based on metrics that you define\. For more information, see [Monitoring CodePipeline events](detect-state-changes-cloudwatch-events.md)\.

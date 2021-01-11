@@ -15,24 +15,24 @@ We strongly recommend that you never put sensitive identifying information, such
 ## Internetwork traffic privacy<a name="inter-network-traffic-privacy"></a>
 
  Amazon VPC is an AWS service that you can use to launch AWS resources in a virtual network \(*virtual private cloud*\) that you define\. CodePipeline supports Amazon VPC endpoints powered by AWS PrivateLink, an AWS technology that facilitates private communication between AWS services using an elastic network interface with private IP addresses\. This means you can connect directly to CodePipeline through a private endpoint in your VPC, keeping all traffic inside your VPC and the AWS network\. Previously, applications running inside a VPC required internet access to connect to CodePipeline\. With a VPC, you have control over your network settings, such as:
-+ IP address range\.
-+ Subnets\.
-+ Route tables\.
++ IP address range,
++ Subnets,
++ Route tables, and
 + Network gateways\.
 
 To connect your VPC to CodePipeline, you define an interface VPC endpoint for CodePipeline\. This type of endpoint makes it possible for you to connect your VPC to AWS services\. The endpoint provides reliable, scalable connectivity to CodePipeline without requiring an internet gateway, network address translation \(NAT\) instance, or VPN connection\. For information about setting up a VPC, see the [VPC User Guide](https://docs.aws.amazon.com/vpc/latest/userguide/)\.
 
 ## Encryption at rest<a name="encryption-at-rest"></a>
 
-Data in CodePipeline is encrypted at rest using service\-owned KMS keys\. Code artifacts are stored in a customer\-owned S3 bucket and encrypted with either the default AWS managed SSE\-KMS encryption key or a customer managed SSE\-KMS key\. For more information, see [Configure server\-side encryption for artifacts stored in Amazon S3 for CodePipeline](S3-artifact-encryption.md)\.
+Data in CodePipeline is encrypted at rest using AWS KMS customer master keys \(CMKs\)\. Code artifacts are stored in a customer\-owned S3 bucket and encrypted with either the AWS managed CMK or a customer managed CMK\. For more information, see [Configure server\-side encryption for artifacts stored in Amazon S3 for CodePipeline](S3-artifact-encryption.md)\.
 
 ## Encryption in transit<a name="encryption-in-transit"></a>
 
-All service to service communication is encrypted in transit using SSL/TLS\. 
+All service\-to\-service communication is encrypted in transit using SSL/TLS\. 
 
 ## Encryption key management<a name="key-management"></a>
 
-If the customer chooses the default option for encrypting code artifacts, CodePipeline uses the default AWS managed SSE\-KMS encryption key\. Customers cannot change or delete this AWS managed key\. If customers are using a customer managed key \(CMK\) in AWS KMS to encrypt or decrypt artifacts in the S3 bucket, they can change or rotate this key as necessary\.
+If you choose the default option for encrypting code artifacts, CodePipeline uses the AWS managed CMK\. You cannot change or delete this AWS managed CMK\. If you use a customer managed CMK in AWS KMS to encrypt or decrypt artifacts in the S3 bucket, you can change or rotate this customer managed CMK as necessary\.
 
 **Important**  
 CodePipeline only supports symmetric customer master keys \(CMKs\)\. Do not use an asymmetric CMK to encrypt the data in your S3 bucket\.
@@ -43,6 +43,8 @@ This section describes data protection configuration for the following:
 + S3 artifacts server\-side encryption \(SSE\)\.
 + GitHub personal access tokens\.
 + Secret parameter tracking in AWS Secrets Manager\.
+
+
 
 **Topics**
 + [Configure server\-side encryption for artifacts stored in Amazon S3 for CodePipeline](S3-artifact-encryption.md)

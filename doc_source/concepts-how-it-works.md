@@ -82,7 +82,11 @@ Executions are only superseded in between stages\. A locked stage holds one exec
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/Batching.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
+
+
 ## Managing Pipeline Flow<a name="concepts-how-it-works-transitions-approvals"></a>
+
+
 
 The flow of pipeline executions can be controlled by:
 + A *transition*, which controls the flow of executions into the stage\. Transitions can be enabled or disabled\. When a transition is disabled, pipeline executions cannot enter the stage\. The pipeline execution waiting to enter a stage where the transition is disabled is called the inbound execution\. After you enable the transition, an inbound execution moves into the stage and locks it\.

@@ -15,13 +15,13 @@ The integrations information in this topic is organized by CodePipeline action t
 The following information is organized by CodePipeline action type and can help you configure CodePipeline to integrate with the following source action providers\.
 
 **Topics**
-+ [AmazonECR source actions](#integrations-source-ecr)
++ [Amazon ECR source actions](#integrations-source-ecr)
 + [Amazon S3 source actions](#integrations-source-s3)
 + [Connections to Bitbucket, GitHub \(version 2\), and GitHub Enterprise Server](#integrations-source-connections)
 + [CodeCommit source actions](#integrations-source-codecommit)
 + [GitHub \(version 1\) source actions](#integrations-source-gh-oauth)
 
-### AmazonECR source actions<a name="integrations-source-ecr"></a>
+### Amazon ECR source actions<a name="integrations-source-ecr"></a>
 
 
 |  |  | 
@@ -38,6 +38,9 @@ The following information is organized by CodePipeline action type and can help 
 ### Connections to Bitbucket, GitHub \(version 2\), and GitHub Enterprise Server<a name="integrations-source-connections"></a>
 
 Connections \(`CodestarSourceConnection` actions\) are used to access your third\-party Bitbucket, GitHub, or GitHub Enterprise Server repository\.
+
+**Note**  
+This feature is not available in the Asia Pacific \(Hong Kong\) Region\. To use other source actions available in that Region, see [Source action integrations](#integrations-source)\.
 
 
 |  |  | 
@@ -173,81 +176,92 @@ The following information is organized by CodePipeline action type and can help 
 The following information is organized by CodePipeline action type and can help you configure CodePipeline to integrate with the following deploy action providers\.
 
 **Topics**
-+ [Amazon S3 deploy actions](#w23aac12b9c13b7)
-+ [AWS AppConfig deploy actions](#w23aac12b9c13b9)
-+ [AWS CloudFormation deploy actions](#w23aac12b9c13c11)
-+ [Amazon ECS deploy actions](#w23aac12b9c13c13)
-+ [Elastic Beanstalk deploy actions](#w23aac12b9c13c15)
-+ [AWS OpsWorks deploy actions](#w23aac12b9c13c17)
-+ [AWS Service Catalog deploy actions](#w23aac12b9c13c19)
-+ [Amazon Alexa deploy actions](#w23aac12b9c13c21)
-+ [CodeDeploy deploy actions](#w23aac12b9c13c23)
-+ [XebiaLabs deploy actions](#w23aac12b9c13c25)
++ [Amazon S3 deploy actions](#integrations-deploy-S3)
++ [AWS AppConfig deploy actions](#integrations-deploy-AppConfig)
++ [AWS CloudFormation deploy actions](#integrations-deploy-CloudFormation)
++ [AWS CloudFormation StackSets deploy actions](#integrations-deploy-StackSets)
++ [Amazon ECS deploy actions](#integrations-deploy-ECS)
++ [Elastic Beanstalk deploy actions](#integrations-deploy-beanstalk)
++ [AWS OpsWorks deploy actions](#integrations-deploy-opsworks)
++ [AWS Service Catalog deploy actions](#integrations-deploy-servicecatalog)
++ [Amazon Alexa deploy actions](#integrations-deploy-alexa)
++ [CodeDeploy deploy actions](#integrations-deploy-CodeDeploy)
++ [XebiaLabs deploy actions](#integrations-deploy-xebialabs)
 
-### Amazon S3 deploy actions<a name="w23aac12b9c13b7"></a>
+### Amazon S3 deploy actions<a name="integrations-deploy-S3"></a>
 
 
 |  |  | 
 | --- |--- |
 | Amazon S3 |  [Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/) is storage for the internet\. You can use Amazon S3 to store and retrieve any amount of data at any time, from anywhere on the web\. You can add an action to a pipeline that uses Amazon S3 as a deployment provider\.  Amazon S3 can also be included in a pipeline as a source action\.  Learn more: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
 
-### AWS AppConfig deploy actions<a name="w23aac12b9c13b9"></a>
+### AWS AppConfig deploy actions<a name="integrations-deploy-AppConfig"></a>
 
 
 |  |  | 
 | --- |--- |
 | AWS AppConfig |  AWS AppConfig is a capability of AWS Systems Manager to create, manage, and quickly deploy application configurations\. You can use AppConfig with applications hosted on EC2 instances, AWS Lambda, containers, mobile applications, or IoT devices\. Learn more: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
 
-### AWS CloudFormation deploy actions<a name="w23aac12b9c13c11"></a>
+### AWS CloudFormation deploy actions<a name="integrations-deploy-CloudFormation"></a>
 
 
 |  |  | 
 | --- |--- |
 | AWS CloudFormation |  [AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/) gives developers and systems administrators an easy way to create and manage a collection of related AWS resources, using templates to provision and update those resources\. You can use the service’s sample templates or create your own\. Templates describe the AWS resources and any dependencies or runtime parameters required to run your application\. The AWS Serverless Application Model \(AWS SAM\) extends AWS CloudFormation to provide a simplified way to define and deploy serverless applications\. AWS SAM supports Amazon API Gateway APIs, AWS Lambda functions, and Amazon DynamoDB tables\. You can use CodePipeline with AWS CloudFormation and the AWS SAM to continuously deliver your serverless applications\. You can add an action to a pipeline that uses AWS CloudFormation as a deployment provider\. When you use AWS CloudFormation as a deployment provider, you can take action on AWS CloudFormation stacks and change sets as part of a pipeline execution\. AWS CloudFormation can create, update, replace, and delete stacks and change sets when a pipeline runs\. As a result, AWS and custom resources can be created, provisioned, updated, or terminated during a pipeline execution according to the specifications you provide in AWS CloudFormation templates and parameter definitions\. Learn more: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
 
-### Amazon ECS deploy actions<a name="w23aac12b9c13c13"></a>
+### AWS CloudFormation StackSets deploy actions<a name="integrations-deploy-StackSets"></a>
+
+
+|  |  | 
+| --- |--- |
+| AWS CloudFormation StackSets |  [AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/) gives you a way to deploy resources across multiple accounts and AWS Regions\. You can use CodePipeline with AWS CloudFormation to update your stack set definition and deploy updates to your instances\. You can add the following actions to a pipeline to use AWS CloudFormation StackSets as a deployment provider\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html) Learn more: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
+
+### Amazon ECS deploy actions<a name="integrations-deploy-ECS"></a>
 
 
 |  |  | 
 | --- |--- |
 | Amazon ECS |  Amazon ECS is a highly scalable, high performance container management service that allows you to run container\-based applications in the AWS Cloud\. When you create a pipeline, you can select Amazon ECS as a deployment provider\. A change to code in your source control repository triggers your pipeline to build a new Docker image, push it to your container registry, and then deploy the updated image to Amazon ECS\. You can also use the **ECS \(Blue/Green\)** provider action in CodePipeline to route and deploy traffic to Amazon ECS with CodeDeploy\. Learn more: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
 
-### Elastic Beanstalk deploy actions<a name="w23aac12b9c13c15"></a>
+### Elastic Beanstalk deploy actions<a name="integrations-deploy-beanstalk"></a>
 
 
 |  |  | 
 | --- |--- |
 | Elastic Beanstalk |  [Elastic Beanstalk](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/) is a service for deploying and scaling web applications and services developed with Java, \.NET, PHP, Node\.js, Python, Ruby, Go, and Docker on familiar servers such as Apache, Nginx, Passenger, and IIS\. You can configure CodePipeline to use Elastic Beanstalk to deploy your code\. You can create the Elastic Beanstalk application and environment to use in a deploy action in a stage either before you create the pipeline or when you use the **Create Pipeline** wizard\. Learn more: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
 
-### AWS OpsWorks deploy actions<a name="w23aac12b9c13c17"></a>
+### AWS OpsWorks deploy actions<a name="integrations-deploy-opsworks"></a>
 
 
 |  |  | 
 | --- |--- |
 | AWS OpsWorks |  AWS OpsWorks is a configuration management service that helps you configure and operate applications of all shapes and sizes using Chef\. Using AWS OpsWorks Stacks, you can define the application’s architecture and the specification of each component including package installation, software configuration and resources such as storage\. You can configure CodePipeline to use AWS OpsWorks Stacks to deploy your code in conjunction with custom Chef cookbooks and applications in AWS OpsWorks\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html) Before you create the pipeline, you create the AWS OpsWorks stack and layer\. You can create the AWS OpsWorks application to use in a deploy action in a stage either before you create the pipeline or when you use the **Create Pipeline** wizard\. CodePipeline support for AWS OpsWorks is currently available in the US East \(N\. Virginia\) Region \(us\-east\-1\) only\. Learn more:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
 
-### AWS Service Catalog deploy actions<a name="w23aac12b9c13c19"></a>
+### AWS Service Catalog deploy actions<a name="integrations-deploy-servicecatalog"></a>
 
 
 |  |  | 
 | --- |--- |
 | AWS Service Catalog |  [AWS Service Catalog](https://docs.aws.amazon.com/servicecatalog/latest/dg/) enables organizations to create and manage catalogs of products that are approved for use on AWS\. You can configure CodePipeline to deploy updates and versions of your product templates to AWS Service Catalog\. You can create the AWS Service Catalog product to use in a deployment action and then use the **Create Pipeline** wizard to create the pipeline\. Learn more: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
 
-### Amazon Alexa deploy actions<a name="w23aac12b9c13c21"></a>
+### Amazon Alexa deploy actions<a name="integrations-deploy-alexa"></a>
+
+**Note**  
+This feature is not available in the Asia Pacific \(Hong Kong\) Region\. To use other deploy actions available in that Region, see [Deploy action integrations](#integrations-deploy)\.
 
 
 |  |  | 
 | --- |--- |
 | Alexa Skills Kit |  [Amazon Alexa Skills Kit](https://developer.amazon.com/docs/custom-skills/use-the-alexa-skills-kit-samples.html) lets you build and distribute cloud\-based skills to users of Alexa\-enabled devices\. You can add an action to a pipeline that uses Alexa Skills Kit as a deployment provider\. Source changes are detected by your pipeline, and then your pipeline deploys updates to your Alexa skill in the Alexa service\. Learn more: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
 
-### CodeDeploy deploy actions<a name="w23aac12b9c13c23"></a>
+### CodeDeploy deploy actions<a name="integrations-deploy-CodeDeploy"></a>
 
 
 |  |  | 
 | --- |--- |
 | CodeDeploy |  [CodeDeploy](https://docs.aws.amazon.com/codedeploy/latest/userguide/) coordinates application deployments to Amazon EC2 instances, on\-premises instances, or both\. You can configure CodePipeline to use CodeDeploy to deploy your code\. You can create the CodeDeploy application, deployment, and deployment group to use in a deploy action in a stage either before you create the pipeline or when you use the **Create Pipeline** wizard\. Learn more: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
 
-### XebiaLabs deploy actions<a name="w23aac12b9c13c25"></a>
+### XebiaLabs deploy actions<a name="integrations-deploy-xebialabs"></a>
 
 
 |  |  | 

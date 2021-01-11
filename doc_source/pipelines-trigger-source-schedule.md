@@ -32,6 +32,8 @@ You can find the pipeline ARN under **Settings** in the console\. See [View the 
 
 ## Create a CloudWatch Events rule that schedules your pipeline to start \(CLI\)<a name="pipelines-trigger-source-schedule-cli"></a>
 
+ 
+
 To use the AWS CLI to create a rule, call the put\-rule command, specifying:
 + A name that uniquely identifies the rule you are creating\. This name must be unique across all of the pipelines you create with CodePipeline associated with your AWS account\.
 + The schedule expression for the rule\.

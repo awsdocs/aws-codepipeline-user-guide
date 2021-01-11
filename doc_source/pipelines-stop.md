@@ -23,7 +23,7 @@ This option can lead to failed tasks or out of sequence tasks\.
 You can use the console to stop a pipeline execution\. Choose an execution, and then choose the method for stopping the pipeline execution\.
 
 **Note**  
-You can also stop a pipeline execution that is an inbound execution\. To learn more about stopping an inbound execution, see Stop an Inbound Execution \(LINK\)\.
+You can also stop a pipeline execution that is an inbound execution\. To learn more about stopping an inbound execution, see [Stop an Inbound Execution \(Console\)](#pipelines-stop-inbound-console)\.
 
 1. Sign in to the AWS Management Console and open the CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
 

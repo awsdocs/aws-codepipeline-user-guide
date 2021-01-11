@@ -11,6 +11,8 @@ If you use the console to create or edit your pipeline, your CloudWatch Events r
 
 1. Choose **Create rule**, and then under **Event source**, from **Service Name**, choose **CodeCommit**\.
 
+   
+
    The service name that you choose owns the event resource\. For example, choose CodeCommit to start a pipeline when there are changes to the CodeCommit repository associated with a pipeline\.
 
 1. From **Event Type**, choose **CodeCommit Repository State Change**\.

@@ -20,6 +20,8 @@ Change detection resources are created automatically when you use the console\. 
 
 You can use the CodePipeline console to add, edit, or remove stages in a pipeline and to add, edit, or remove actions in a stage\.
 
+When you update a pipeline, CodePipeline gracefully completes all the running actions and then fails the stages and pipeline executions where the running actions were completed\. When a pipeline is updated, you will need to re\-run your pipeline\. For more information on running a pipeline, see [Start a pipeline manually](pipelines-rerun-manually.md)\.
+
 **To edit a pipeline**
 
 1. Sign in to the AWS Management Console and open the CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
@@ -33,6 +35,8 @@ You can use the CodePipeline console to add, edit, or remove stages in a pipelin
 1. On the **Edit** page, do one of the following:
    + To edit a stage, choose **Edit stage**\. You can add actions in serial and parallel with existing actions:
 
+     
+
      You can also edit actions in this view by choosing the edit icon for those actions\. To delete an action, choose the delete icon on that action\.
    + To edit an action, choose the edit icon for that action, and then on **Edit action**, change the values\. Items marked with an asterisk \(**\***\) are required\.
      + For a CodeCommit repository name and branch, a message appears showing the Amazon CloudWatch Events rule to be created for this pipeline\. If you remove the CodeCommit source, a message appears showing the Amazon CloudWatch Events rule to be deleted\.
@@ -44,7 +48,9 @@ You can use the CodePipeline console to add, edit, or remove stages in a pipelin
 
    1. In the stage where you want to add your action, choose **Edit stage**, and then choose **\+ Add action group**\. 
 
-   1. In **Edit action**, in **Action name**, enter the name of your action\. The **Action provider** list displays provider options by category\. Look for the category \(for example, **Deploy**\)\. Under the category, choose the provider \(for example, **AWS CodeDeploy**\)\. In **Region**, choose the AWS Region where the resource is created or where you plan to create it\. The **Region** field designates where the AWS resources are created for this action type and provider type\. This field only displays for actions where the action provider is an AWS service\. The **Region** field defaults to the same AWS Region as your pipeline\.
+   1. 
+
+      In **Edit action**, in **Action name**, enter the name of your action\. The **Action provider** list displays provider options by category\. Look for the category \(for example, **Deploy**\)\. Under the category, choose the provider \(for example, **AWS CodeDeploy**\)\. In **Region**, choose the AWS Region where the resource is created or where you plan to create it\. The **Region** field designates where the AWS resources are created for this action type and provider type\. This field only displays for actions where the action provider is an AWS service\. The **Region** field defaults to the same AWS Region as your pipeline\.
 
       For more information about the requirements for actions in CodePipeline, including names for input and output artifacts and how they are used, see [Action structure requirements in CodePipeline](reference-pipeline-structure.md#action-requirements)\. For examples of adding action providers and using the default fields for each provider, see [Create a pipeline \(console\)](pipelines-create.md#pipelines-create-console)\. 
 
@@ -65,6 +71,8 @@ After you save your changes, you cannot undo them\. You must edit the pipeline a
 ## Edit a pipeline \(AWS CLI\)<a name="pipelines-edit-cli"></a>
 
 You can use the update\-pipeline command to edit a pipeline\.
+
+When you update a pipeline, CodePipeline gracefully completes all the running actions and then fails the stages and pipeline executions where the running actions were completed\. When a pipeline is updated, you will need to re\-run your pipeline\. For more information on running a pipeline, see [Start a pipeline manually](pipelines-rerun-manually.md)\.
 
 **Important**  
 Although you can use the AWS CLI to edit pipelines that include partner actions, you must not manually edit the JSON of a partner action\. If you do so, the partner action fails after you update the pipeline\.

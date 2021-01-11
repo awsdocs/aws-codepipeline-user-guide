@@ -89,7 +89,7 @@ For more information about the difference between an author and a committer in G
 
 ## Example action configuration<a name="action-reference-CodeCommit-example"></a>
 
-### Example for default output artifact format<a name="w23aac44c27c25b3"></a>
+### Example for default output artifact format<a name="w23aac45c30c25b3"></a>
 
 ------
 #### [ YAML ]
@@ -147,7 +147,7 @@ Actions:
 
 ------
 
-### Example for full clone output artifact format<a name="w23aac44c27c25b5"></a>
+### Example for full clone output artifact format<a name="w23aac45c30c25b5"></a>
 
 ------
 #### [ YAML ]

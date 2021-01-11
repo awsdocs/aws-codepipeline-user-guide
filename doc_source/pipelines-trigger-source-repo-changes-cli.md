@@ -1,5 +1,7 @@
 # Create a CloudWatch Events rule for a CodeCommit source \(CLI\)<a name="pipelines-trigger-source-repo-changes-cli"></a>
 
+
+
 Call the put\-rule command, specifying:
 + A name that uniquely identifies the rule you are creating\. This name must be unique across all of the pipelines you create with CodePipeline associated with your AWS account\.
 + The event pattern for the source and detail fields used by the rule\. For more information, see [Amazon CloudWatch Events and Event Patterns](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html)\.<a name="proc-cli-event-codecommit"></a>
@@ -65,7 +67,7 @@ Call the put\-rule command, specifying:
    The following sample command creates a rule called `MyCodeCommitRepoRule`\.
 
    ```
-   aws events put-rule --name "MyCodeCommitRepoRule" --event-pattern "{\"source\":[\"aws.codecommit\"],\"detail-type\":[\"CodeCommit Repository State Change\"],\"resources\":[\"repository-ARN\"],\"detail\":{\"referenceType\":[\"branch\"],\"referenceName\":[\"master\"]}}" --role-arn "arn:aws:iam::ACCOUNT_ID:role/Role-for-MyRule"
+   aws events put-rule --name "MyCodeCommitRepoRule" --event-pattern "{\"source\":[\"aws.codecommit\"],\"detail-type\":[\"CodeCommit Repository State Change\"],\"resources\":[\"repository-ARN\"],\"detail\":{\"referenceType\":[\"branch\"],\"referenceName\":[\"main\"]}}" --role-arn "arn:aws:iam::ACCOUNT_ID:role/Role-for-MyRule"
    ```
 
 1. To add CodePipeline as a target, call the put\-targets command and include the following parameters:
@@ -97,7 +99,7 @@ When you create a pipeline with this method, the `PollForSourceChanges` paramete
    ```
    "configuration": {
      "PollForSourceChanges": "false",
-     "BranchName": "master",
+     "BranchName": "main",
      "RepositoryName": "MyTestRepo"
      },
    ```

@@ -151,17 +151,13 @@ If a policy is already attached to your Amazon S3 bucket, choose **Edit bucket p
 
 1. Sign in to the AWS Management Console with *AccountA* and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 
-1. In **Dashboard**, choose **Roles**\.
+1. In the navigation pane, choose **Roles**\.
 
-1. In the list of roles, under **Role Name**, choose the name of the service role for CodePipeline\. By default, this is AWS\-CodePipeline\-Service\. If you used a different name for your service role, be sure to choose it from the list\.
+1. In the list of roles, under **Role Name**, choose the name of the service role for CodePipeline\.
 
-1. On the **Summary** page, on the **Permissions** tab, expand **Inline Policies**, and then choose **Create Role Policy**\.
-**Note**  
-If you have not previously created any role policies, **Create Role Policy** will not appear\. Choose the link to create a new policy instead\.
+1. On the **Permissions** tab, choose **Add inline policy**\. 
 
-1. In **Set Permissions**, choose **Custom Policy**, and then choose **Select**\.
-
-1. On the **Review Policy** page, type a name for the policy in **Policy Name**\. In **Policy Document**, type the following policy to allow *AccountB* to assume the role\. In the following example, *012ID\_ACCOUNT\_B* is the ARN for *AccountB*:
+1. Choose the  **JSON** tab, and enter the following policy to allow *AccountB* to assume the role\. In the following example, *012ID\_ACCOUNT\_B* is the ARN for *AccountB*:
 
    ```
    {
@@ -176,9 +172,9 @@ If you have not previously created any role policies, **Create Role Policy** wil
     }
    ```
 
-1. Choose **Validate Policy**\.
+1. Choose **Review policy**\. 
 
-1. After the policy is validated, choose **Apply Policy**\.
+1. In **Name**, enter a name for this policy\. Choose **Create policy**\.
 
 ### Configure policies and roles in the account that owns the AWS resource \(*AccountB*\)<a name="pipelines-create-cross-account-setup-accountb"></a>
 
@@ -194,15 +190,13 @@ These policies are specific to setting up CodeDeploy resources to be used in a p
 
 1. Sign in to the AWS Management Console with *AccountB* and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 
-1. In **Dashboard**, choose **Roles**\.
+1. In the navigation pane, choose **Roles**\.
 
 1. In the list of roles, under **Role Name**, choose the name of the service role used as the Amazon EC2 instance role for the CodeDeploy application\. This role name can vary, and more than one instance role can be used by a deployment group\. For more information, see [Create an IAM Instance Profile for your Amazon EC2 Instances](https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-create-iam-instance-profile.html)\. 
 
-1. On the **Summary** page, on the **Permissions** tab, expand **Inline Policies**, and then choose **Create Role Policy**\.
+1. On the **Permissions** tab, choose **Add inline policy**\. 
 
-1. In **Set Permissions**, choose **Custom Policy**, and then choose **Select**\.
-
-1. On the **Review Policy** page, enter a name for the policy in **Policy Name**\. In **Policy Document**, type the following policy to grant access to the Amazon S3 bucket used by *AccountA* to store artifacts for pipelines \(in this example, *codepipeline\-us\-east\-2\-1234567890*\):
+1. Choose the **JSON** tab, and enter the following policy to grant access to the Amazon S3 bucket used by *AccountA* to store artifacts for pipelines \(in this example, *codepipeline\-us\-east\-2\-1234567890*\):
 
    ```
    {
@@ -230,9 +224,9 @@ These policies are specific to setting up CodeDeploy resources to be used in a p
     }
    ```
 
-1. Choose **Validate Policy**\.
+1. Choose **Review policy**\. 
 
-1. After the policy is validated, choose **Apply Policy**\.
+1. In **Name**, enter a name for this policy\. Choose **Create policy**\.
 
 1. Create a second policy for AWS KMS where ***arn:aws:kms:us\-east\-1:012ID\_ACCOUNT\_A:key/2222222\-3333333\-4444\-556677EXAMPLE*** is the ARN of the customer managed key created in *AccountA* and configured to allow *AccountB* to use it:
 
@@ -259,9 +253,9 @@ These policies are specific to setting up CodeDeploy resources to be used in a p
 **Important**  
 You must use the account ID of *AccountA* in this policy as part of the resource ARN for the AWS KMS key, as shown here, or the policy will not work\.
 
-1. Choose **Validate Policy**\.
+1. Choose **Review policy**\. 
 
-1. After the policy is validated, choose **Apply Policy**\.
+1. In **Name**, enter a name for this policy\. Choose **Create policy**\.
 
 Now create an IAM role to use for cross\-account access, and configure it so that *AccountA* can assume the role\. This role must contain policies that allow access to the CodeDeploy resources and the Amazon S3 bucket used to store artifacts in *AccountA*\.
 
@@ -269,29 +263,23 @@ Now create an IAM role to use for cross\-account access, and configure it so tha
 
 1. Sign in to the AWS Management Console with *AccountB* and open the IAM console at [https://console\.aws\.amazon\.com/iam](https://console.aws.amazon.com/iam)\.
 
-1. In **Dashboard**, choose **Roles**, and then choose **Create New Role**\.
+1. In the navigation pane, choose **Roles**\. Choose **Create role**\.
 
-1. On the **Set New Role** page, type a name for this role in **Role Name** \(for example, *CrossAccount\_Role*\)\. You can name this role anything you want as long as it follows the naming conventions in IAM\. Consider giving the role a name that clearly states its purpose\.
-
-1.  On the **Select Role Type** page, choose **Role for Cross\-Account Access**\. Next to **Provide access between AWS accounts you own**, choose **Select**\.
-
-1. Type the AWS account ID for the account that will create the pipeline in CodePipeline \(*AccountA*\), and then choose **Next Step**\.
+1. Under **Select type of trusted entity**, choose **Another AWS account**\. Under **Specify accounts that can use this role**, in **Account ID**,  enter the AWS account ID for the account that will create the pipeline in CodePipeline \(*AccountA*\), and then choose **Next: Permissions**\.
 **Note**  
 This step creates the trust relationship policy between *AccountB* and *AccountA*\.
 
-1. In **Attach Policy**, choose **AmazonS3ReadOnlyAccess**, and then choose **Next Step**\.
+1. Under**Attach permissions policies**, choose **AmazonS3ReadOnlyAccess**, and then choose **Next: Tags**\.
 **Note**  
 This is not the policy you will use\. You must choose a policy to complete the wizard\.
 
-1. On the **Review** page, choose **Create Role**\.
+1. Choose **Next: Review**\. Type a name for this role in **Role name** \(for example, *CrossAccount\_Role*\)\. You can name this role anything you want as long as it follows the naming conventions in IAM\. Consider giving the role a name that clearly states its purpose\. Choose **Create Role**\.
 
-1. From the list of roles, choose the policy you just created \(for example, *CrossAccount\_Role*\) to open the **Summary** page for that role\.
+1. From the list of roles, choose the role you just created \(for example, *CrossAccount\_Role*\) to open the **Summary** page for that role\.
 
-1. Expand **Permissions**, and then expand **Inline Policies**\. Choose the link to create an inline policy\.
+1. On the **Permissions** tab, choose **Add inline policy**\. 
 
-1. In **Set Permissions**, choose **Custom Policy**, and then choose **Select**\.
-
-1. On the **Review Policy** page, type a name for the policy in **Policy Name**\. In **Policy Document**, type the following policy to allow access to CodeDeploy resources:
+1. Choose the **JSON** tab, and enter the following policy to allow access to CodeDeploy resources:
 
    ```
    {
@@ -312,15 +300,13 @@ This is not the policy you will use\. You must choose a policy to complete the w
    }
    ```
 
-1. Choose **Validate Policy**\.
+1. Choose **Review policy**\.
 
-1. After the policy is validated, choose **Apply Policy**\.
+1. In **Name**, enter a name for this policy\. Choose **Create policy**\.
 
-1. In **Inline Policies**, choose **Create Role Policy**\.
+1. On the **Permissions** tab, choose **Add inline policy**\.
 
-1. In **Set Permissions**, choose **Custom Policy**, and then choose **Select**\.
-
-1. On the **Review Policy** page, type a name for the policy in **Policy Name**\. In **Policy Document**, type the following policy to allow this role to retrieve input artifacts from, and put output artifacts into, the Amazon S3 bucket in *AccountA*:
+1. Choose the **JSON** tab, and enter the following policy to allow this role to retrieve input artifacts from, and put output artifacts into, the Amazon S3 bucket in *AccountA*:
 
    ```
    {
@@ -343,11 +329,11 @@ This is not the policy you will use\. You must choose a policy to complete the w
    }
    ```
 
-1. Choose **Validate Policy**\.
+1. Choose **Review policy**\.
 
-1. When the policy is validated, choose **Apply Policy**\.
+1. In **Name**, enter a name for this policy\. Choose **Create policy**\.
 
-1. In **Managed Policies**, find **AmazonS3ReadOnlyAccess** in the list of policies under **Policy Name**, and choose **Detach Policy**\. When prompted, choose **Detach**\.
+1. On the **Permissions** tab,  find **AmazonS3ReadOnlyAccess** in the list of policies under **Policy Name**, and choose the delete icon \(**X**\) next to the policy\. When prompted, choose **Detach**\.
 
 ## Step 2: Edit the pipeline<a name="pipelines-create-cross-account-create"></a>
 

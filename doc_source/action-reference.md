@@ -16,6 +16,7 @@ This section is updated periodically with more action providers\. Reference info
 + [Amazon S3](action-reference-S3.md)
 + [AWS AppConfig](action-reference-AppConfig.md)
 + [AWS CloudFormation](action-reference-CloudFormation.md)
++ [AWS CloudFormation StackSets](action-reference-StackSets.md)
 + [AWS CodeBuild](action-reference-CodeBuild.md)
 + [AWS CodeCommit](action-reference-CodeCommit.md)
 + [AWS CodeDeploy](action-reference-CodeDeploy.md)

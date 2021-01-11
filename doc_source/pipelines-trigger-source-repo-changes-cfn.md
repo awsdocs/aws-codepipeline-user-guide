@@ -1,5 +1,7 @@
 # Create a CloudWatch Events rule for a CodeCommit source \(AWS CloudFormation template\)<a name="pipelines-trigger-source-repo-changes-cfn"></a>
 
+
+
 To use AWS CloudFormation to create a rule, update your template as shown here\.<a name="proc-cfn-event-codecommit"></a>
 
 **To update your pipeline AWS CloudFormation template and create CloudWatch Events rule**
@@ -118,7 +120,7 @@ To use AWS CloudFormation to create a rule, update your template as shown here\.
              referenceType:
                - branch
              referenceName:
-               - master
+               - main
          Targets:
            -
              Arn: 
@@ -171,7 +173,7 @@ To use AWS CloudFormation to create a rule, update your template as shown here\.
              "branch"
            ],
            "referenceName": [
-             "master"
+             "main"
            ]
          }
        },

@@ -2,6 +2,9 @@
 
 Connections allow you to authorize and establish configurations that associate your third\-party provider with your AWS resources\. To associate your third\-party repository as a source for your pipeline, you use a connection\. 
 
+**Note**  
+This feature is not available in the Asia Pacific \(Hong Kong\) Region\. To use other source actions available in that Region, see [Source action integrations](integrations-action-type.md#integrations-source)\.
+
 To add a GitHub Enterprise Server source action in CodePipeline, you can choose either to: 
 + Use the CodePipeline console **Create pipeline** wizard or **Edit action** page to choose the **GitHub Enterprise Server** provider option\. See [Create a connection to GitHub Enterprise Server \(console\)](#connections-ghes-console) to add the action\. The console helps you create a host resource and a connections resource\.
 + Use the CLI to add the action configuration for the `CreateSourceConnection` action with the `GitHubEnterpriseServer` provider and create your resources:

@@ -1,5 +1,7 @@
 # Create a CloudWatch Events rule for an Amazon ECR source \(AWS CloudFormation template\)<a name="create-cwe-ecr-source-cfn"></a>
 
+
+
 To use AWS CloudFormation to create a rule, use the template snippet as shown here\.
 
 **To update your pipeline AWS CloudFormation template and create CloudWatch Events rule**
@@ -87,7 +89,7 @@ To use AWS CloudFormation to create a rule, use the template snippet as shown he
 
 ------
 
-1. In the template, under `Resources`, use the `AWS::Events::Rule` AWS CloudFormation resource to add a CloudWatch Events rule for the Amazon ECR source\. This event pattern creates an event that monitors push changes to your repository When CloudWatch Events detects a repository state change, the rule invokes `StartPipelineExecution` on your target pipeline\.
+1. In the template, under `Resources`, use the `AWS::Events::Rule` AWS CloudFormation resource to add a CloudWatch Events rule for the Amazon ECR source\. This event pattern creates an event that monitors commits to your repository\. When CloudWatch Events detects a repository state change, the rule invokes `StartPipelineExecution` on your target pipeline\.
 
    **Why am I making this change? ** You must create an event with a rule that specifies how an image push must be made, and a target that names the pipeline to be started by the event\.
 

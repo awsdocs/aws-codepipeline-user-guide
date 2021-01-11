@@ -17,6 +17,8 @@ First, you create a repository in CodeCommit\. Your pipeline gets source code fr
 
 **To create a CodeCommit repository**
 
+
+
 1. Open the CodeCommit console at [https://console\.aws\.amazon\.com/codecommit/](https://console.aws.amazon.com/codecommit/)\.
 
 1. In the Region selector, choose the AWS Region where you want to create the repository and pipeline\. For more information, see [AWS Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html)\.
@@ -47,6 +49,8 @@ In this step, you set up a local repository to connect to your remote CodeCommit
 ## Step 2: Add sample code to your CodeCommit repository<a name="codecommit-add-code"></a>
 
 In this step, you download code for a sample application that was created for a CodeDeploy sample walkthrough, and add it to your CodeCommit repository\.
+
+
 
 1. Download the following file: [SampleApp\_Linux\.zip](samples/SampleApp_Linux.zip)
 
@@ -259,6 +263,8 @@ In this tutorial, you are deploying code that requires no build service, so you 
 
 1. In **Step 4: Add deploy stage**, in **Deploy provider**, choose **AWS CodeDeploy**\. In **Application name**, choose **MyDemoApplication**\. In **Deployment group**, choose **MyDemoDeploymentGroup**, and then choose **Next step**\.  
 ![\[The Step 4: Deploy page in the CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-wizard-deploy-pol.png)![\[The Step 4: Deploy page in the CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The Step 4: Deploy page in the CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+
+    
 
 1. In **Step 5: Review**, review the information, and then choose **Create pipeline**\.
 

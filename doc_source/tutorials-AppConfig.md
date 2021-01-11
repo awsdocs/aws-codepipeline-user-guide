@@ -12,7 +12,7 @@ In this tutorial, you configure a pipeline that continuously delivers configurat
 ## Prerequisites<a name="tutorials-AppConfig-prereq"></a>
 
 Before you begin, you must complete the following:
-+ Create or use an Amazon S3 bucket with versioning enabled\. Follow the instructions in [Step 1: Create an S3 bucket for your application](tutorials-simple-s3.md#s3-create-s3-bucket) to create an S3 bucket\.
++ This example uses an S3 source for your pipeline\. Create or use an Amazon S3 bucket with versioning enabled\. Follow the instructions in [Step 1: Create an S3 bucket for your application](tutorials-simple-s3.md#s3-create-s3-bucket) to create an S3 bucket\.
 
 ## Step 1: Create your AWS AppConfig resources<a name="tutorials-AppConfig-application"></a>
 
@@ -34,7 +34,7 @@ In this section, you create the following resources:
 
 ## Step 2: Upload files to your S3 source bucket<a name="tutorials-AppConfig-bucket"></a>
 
-In this section, zip and push your source files to the bucket that the pipeline uses for your source stage\.
+In this section, create your configuration file or files\. Then zip and push your source files to the bucket that the pipeline uses for your source stage\.
 
 **To create configuration files**
 
@@ -44,7 +44,7 @@ In this section, zip and push your source files to the bucket that the pipeline 
    Hello World!
    ```
 
-1. In the Amazon S3 console for your bucket, choose **Upload**, and follow the instructions to upload your \.zip file\.
+1. Use the following steps to zip and upload your configuration files\.
 
 **To zip and upload source files**
 
@@ -65,8 +65,8 @@ In this section, zip and push your source files to the bucket that the pipeline 
 ## Step 3: Create your pipeline<a name="tutorials-AppConfig-pipeline"></a>
 
 In this section, you create a pipeline with the following actions:
-+ A source stage with a CodeCommit action where the source artifacts are the files for your website\.
-+ A deployment stage with an Amazon S3 deployment action\.
++ A source stage with an Amazon S3 action where the source artifacts are the files for your configuration\.
++ A deployment stage with an AppConfig deployment action\.
 
 **To create a pipeline with the wizard**
 
@@ -74,7 +74,7 @@ In this section, you create a pipeline with the following actions:
 
 1. On the **Welcome** page, **Getting started** page, or **Pipelines** page, choose **Create pipeline**\.
 
-1. In **Step 1: Choose pipeline settings**, in **Pipeline name**, enter **MyS3DeployPipeline**\.
+1. In **Step 1: Choose pipeline settings**, in **Pipeline name**, enter **MyAppConfigPipeline**\.
 
 1. In **Service role**, choose **New service role** to allow CodePipeline to create a service role in IAM\.
 
@@ -102,7 +102,7 @@ In this section, you create a pipeline with the following actions:
 
    1. In **Deployment strategy**, choose the name of your deployment strategy\. This can be either a deployment strategy you created in AppConfig or one you have chosen from predefined deployment strategies in AppConfig\. The field shows the ID for your deployment strategy\.
 
-   1. In **Input artifact configuration path**, enter the file path\. Make sure that your input artifact configuration path matches the directory structure in your S3 bucket\.  
+   1. In **Input artifact configuration path**, enter the file path\. Make sure that your input artifact configuration path matches the directory structure in your S3 bucket \.zip file\. For this example, enter the following file path: `appconfig-configurations/MyConfigurations/us-west-2/configuration.json`\.   
 ![\[The action page for an AWS AppConfig action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/appconfig-deploy-action.png)![\[The action page for an AWS AppConfig action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The action page for an AWS AppConfig action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
    1. Choose **Next**\.

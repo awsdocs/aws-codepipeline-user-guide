@@ -14,7 +14,7 @@ The following diagram shows a high\-level view of a pipeline that includes a cus
 
 ![\[A high-level view of a pipeline that includes a custom build action.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/PipelineCustomActionCS.png)![\[A high-level view of a pipeline that includes a custom build action.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[A high-level view of a pipeline that includes a custom build action.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
-When a pipeline includes a custom action as part of a stage, the pipeline will create a job request\. A custom job worker detects that request and performs that job \(in this example, a custom process using third\-party build software\)\. When the action is complete, the job worker returns either a success result or a failure result\. If a success result is received, the pipeline will transition the revision and its artifacts to the next action\. If a failure is returned, the pipeline will not transition the revision to the next action in the pipeline\.
+When a pipeline includes a custom action as part of a stage, the pipeline will create a job request\. A custom job worker detects that request and performs that job \(in this example, a custom process using third\-party build software\)\. When the action is complete, the job worker returns either a success result or a failure result\. If a success result is received, the pipeline will AMP the revision and its artifacts to the next action\. If a failure is returned, the pipeline will not AMP the revision to the next action in the pipeline\.
 
 **Note**  
 These instructions assume that you have already completed the steps in [Getting started with CodePipeline](getting-started-codepipeline.md)\.
@@ -235,26 +235,11 @@ If your job worker performs all the work for a custom action, you should conside
 After you have mapped out your high\-level workflow, you can create your job worker\. Although the specifics of your custom action will ultimately determine what is needed for your job worker, most job workers for custom actions include the following functionality:
 + Polling for jobs from CodePipeline using `PollForJobs`\. 
 + Acknowledging jobs and returning results to CodePipeline using `AcknowledgeJob`, `PutJobSuccessResult`, and `PutJobFailureResult`\.
-+ Retrieving artifacts from and/or putting artifacts into the Amazon S3 bucket for the pipeline\. To download artifacts from the Amazon S3 bucket, you must create an Amazon S3 client that uses Signature Version 4 signing \(Sig V4\)\. Sig V4 is required for SSE\-KMS\.
++ Retrieving artifacts from and/or putting artifacts into the Amazon S3 bucket for the pipeline\. To download artifacts from the Amazon S3 bucket, you must create an Amazon S3 client that uses Signature Version 4 signing \(Sig V4\)\. Sig V4 is required for AWS KMS\.
 
-  To upload artifacts to the Amazon S3 bucket, you must additionally configure the Amazon S3 `[PutObject](https://docs.aws.amazon.com/AmazonS3/latest/API/SOAPPutObject.html)` request to use encryption\. Currently only SSE\-KMS is supported for encryption\. In order to know whether to use the default key or a customer\-managed key to upload artifacts, your custom job worker must look at the [job data](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_JobData.html) and check the [encryption key](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_EncryptionKey.html) property\. If the encryption key property is set, you should use that encryption key ID when configuring SSE\-KMS\. If the key is null, you use the default master key\. CodePipeline uses the default Amazon S3 master key unless otherwise configured\. 
+  To upload artifacts to the Amazon S3 bucket, you must additionally configure the Amazon S3 `[PutObject](https://docs.aws.amazon.com/AmazonS3/latest/API/SOAPPutObject.html)` request to use encryption\. Currently only AWS Key Management Service \(AWS KMS\) is supported for encryption\. AWS KMS uses customer master keys \(CMKs\)\. In order to know whether to use the AWS managed CMK or a customer managed CMK to upload artifacts, your custom job worker must look at the [job data](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_JobData.html) and check the [encryption key](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_EncryptionKey.html) property\. If the property is set, you should use that customer managed CMK ID when configuring AWS KMS\. If the key property is null, you use the AWS managed CMK\. CodePipeline uses the AWS managed CMK unless otherwise configured\.
 
-  The following sample shows how to create the KMS parameters in Java:
-
-  ```
-  private static SSEAwsKeyManagementParams createSSEAwsKeyManagementParams(final EncryptionKey encryptionKey) {
-      if (encryptionKey != null
-             &&  encryptionKey.getId() != null
-             &&  EncryptionKeyType.KMS.toString().equals(encryptionKey.getType())) {
-             // Use a customer-managed encryption key
-          return new SSEAwsKeyManagementParams(encryptionKey.getId());
-      }
-            // Use the default master key
-      return new SSEAwsKeyManagementParams();
-  }
-  ```
-
-  For more samples, see [Specifying the AWS Key Management Service in Amazon S3 Using the AWS SDKs](https://docs.aws.amazon.com/AmazonS3/latest/dev/kms-using-sdks.html)\. For more information about the Amazon S3 bucket for CodePipeline, see [CodePipeline concepts](concepts.md)\.
+  For an example that shows how to create the AWS KMS parameters in Java or \.NET, see [Specifying the AWS Key Management Service in Amazon S3 Using the AWS SDKs](https://docs.aws.amazon.com/AmazonS3/latest/dev/kms-using-sdks.html)\. For more information about the Amazon S3 bucket for CodePipeline, see [CodePipeline concepts](concepts.md)\.
 
 A more complex example of a custom job worker is available on GitHub\. This sample is open source and provided as\-is\.
 + [Sample Job Worker for CodePipeline](https://github.com/awslabs/aws-codepipeline-custom-job-worker): Download the sample from the GitHub repository\.

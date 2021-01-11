@@ -3,6 +3,8 @@
 In this tutorial, you configure a pipeline that continuously delivers your Alexa skill using the Alexa Skills Kit as the deployment provider in your deployment stage\. The completed pipeline detects changes to your skill when you make a change to the source files in your source repository\. The pipeline then uses the Alexa Skills Kit to deploy to the Alexa skill development stage\.
 
 **Note**  
+This feature is not available in the Asia Pacific \(Hong Kong\) Region\. To use other deploy actions available in that Region, see [Deploy action integrations](integrations-action-type.md#integrations-deploy)\.
+
 To create your custom skill as a Lambda function, see [Host a Custom Skill as an AWS Lambda Function](https://developer.amazon.com/docs/custom-skills/host-a-custom-skill-as-an-aws-lambda-function.html)\. You can also create a pipeline that uses Lambda source files and a CodeBuild project to deploy changes to Lambda for your skill\. For example, to create a new skill and related Lambda function, you can create an AWS CodeStar project\. See [Create an Alexa Skill Project in AWS CodeStar](https://docs.aws.amazon.com/codestar/latest/userguide/alexa-tutorial.html)\. For that option, the pipeline includes a third build stage with an CodeBuild action and an action in the Deploy stage for AWS CloudFormation\.
 
 ## Prerequisites<a name="tutorials-alexa-skills-kit-prereq"></a>
@@ -145,7 +147,7 @@ In this section, you create a pipeline with the following actions:
 
 1. Leave the settings under **Advanced settings** at their defaults, and then choose **Next**\.
 
-1. In **Step 2: Add source stage**, in **Source provider**, choose **AWS CodeCommit**\. In **Repository name**, choose the name of the CodeCommit repository you created in [Step 1: Create a CodeCommit repository](tutorials-simple-codecommit.md#codecommit-create-repository)\. In **Branch name**, choose the name of the branch that contains your latest code update\. Unless you created a different branch on your own, only `master` is available\. 
+1. In **Step 2: Add source stage**, in **Source provider**, choose **AWS CodeCommit**\. In **Repository name**, choose the name of the CodeCommit repository you created in [Step 1: Create a CodeCommit repository](tutorials-simple-codecommit.md#codecommit-create-repository)\. In **Branch name**, choose the name of the branch that contains your latest code update\.
 
    After you select the repository name and branch, a message shows the Amazon CloudWatch Events rule to be created for this pipeline\. 
 
