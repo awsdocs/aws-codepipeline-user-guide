@@ -232,7 +232,7 @@ Now that the pipeline has been created, it attempts to run through the different
 
 ## Step 3: Add Amazon ECR Permissions to the CodeBuild Role<a name="code-build-perms"></a>
 
-The CodePipeline wizard created an IAM role for the CodeBuild build project, called **code\-build\-*build\-project\-name*\-service\-role**\. For this tutorial, the name is **code\-build\-hello\-world\-service\-role**\. Because the `buildspec.yml` file makes calls to Amazon ECR API operations, the role must have a policy that allows permissions to make these Amazon ECR calls\. The following procedure helps you attach the proper permissions to the role\.
+The CodePipeline wizard created an IAM role for the CodeBuild build project, called **codebuild\-*build\-project\-name*\-service\-role**\. For this tutorial, the name is **codebuild\-hello\-world\-service\-role**\. Because the `buildspec.yml` file makes calls to Amazon ECR API operations, the role must have a policy that allows permissions to make these Amazon ECR calls\. The following procedure helps you attach the proper permissions to the role\.
 
 **To add Amazon ECR permissions to the CodeBuild role**
 
