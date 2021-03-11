@@ -20,7 +20,7 @@ This section is updated periodically with more action providers\. Reference info
 + [AWS CodeBuild](action-reference-CodeBuild.md)
 + [AWS CodeCommit](action-reference-CodeCommit.md)
 + [AWS CodeDeploy](action-reference-CodeDeploy.md)
-+ [CodeStarSourceConnection](action-reference-CodestarConnectionSource.md)
++ [CodeStarSourceConnection for Bitbucket, GitHub, and GitHub Enterprise Server actions](action-reference-CodestarConnectionSource.md)
 + [AWS Device Farm](action-reference-DeviceFarm.md)
 + [AWS Lambda](action-reference-Lambda.md)
 + [AWS Step Functions](action-reference-StepFunctions.md)

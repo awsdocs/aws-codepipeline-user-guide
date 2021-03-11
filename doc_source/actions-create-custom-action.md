@@ -14,7 +14,7 @@ The following diagram shows a high\-level view of a pipeline that includes a cus
 
 ![\[A high-level view of a pipeline that includes a custom build action.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/PipelineCustomActionCS.png)![\[A high-level view of a pipeline that includes a custom build action.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[A high-level view of a pipeline that includes a custom build action.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
-When a pipeline includes a custom action as part of a stage, the pipeline will create a job request\. A custom job worker detects that request and performs that job \(in this example, a custom process using third\-party build software\)\. When the action is complete, the job worker returns either a success result or a failure result\. If a success result is received, the pipeline will AMP the revision and its artifacts to the next action\. If a failure is returned, the pipeline will not AMP the revision to the next action in the pipeline\.
+When a pipeline includes a custom action as part of a stage, the pipeline will create a job request\. A custom job worker detects that request and performs that job \(in this example, a custom process using third\-party build software\)\. When the action is complete, the job worker returns either a success result or a failure result\. If a success result is received, the pipeline will provide the revision and its artifacts to the next action\. If a failure is returned, the pipeline will not provide the revision to the next action in the pipeline\.
 
 **Note**  
 These instructions assume that you have already completed the steps in [Getting started with CodePipeline](getting-started-codepipeline.md)\.

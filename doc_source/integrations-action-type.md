@@ -40,7 +40,7 @@ The following information is organized by CodePipeline action type and can help 
 Connections \(`CodestarSourceConnection` actions\) are used to access your third\-party Bitbucket, GitHub, or GitHub Enterprise Server repository\.
 
 **Note**  
-This feature is not available in the Asia Pacific \(Hong Kong\) Region\. To use other source actions available in that Region, see [Source action integrations](#integrations-source)\.
+This feature is not available in the Asia Pacific \(Hong Kong\) or Europe \(Milan\) Region\. To use other source actions available in that Region, see [Source action integrations](#integrations-source)\.
 
 
 |  |  | 
@@ -69,7 +69,7 @@ This feature is not available in the Asia Pacific \(Hong Kong\) Region\. To use 
 
 |  |  | 
 | --- |--- |
-| GitHub \(version 1\) |  The GitHub version 1 action is managed with OAuth Apps\. In available Regions, you can also use a [CodeStarSourceConnection](action-reference-CodestarConnectionSource.md) source action in your pipeline that manages your GitHub source action with GitHub Apps\. If you have a pipeline that uses the GitHub version 1 action, see the steps to update it to use a GitHub version 2 action in [Update a GitHub version 1 source action to a GitHub version 2 source action](update-github-action-connections.md)\.  While we don’t recommend using the GitHub version 1 action, existing pipelines with the GitHub version 1 action will continue to work without any impact\.  Learn more: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
+| GitHub \(version 1\) |  The GitHub version 1 action is managed with OAuth Apps\. In available Regions, you can also use a [CodeStarSourceConnection for Bitbucket, GitHub, and GitHub Enterprise Server actions](action-reference-CodestarConnectionSource.md) source action in your pipeline that manages your GitHub source action with GitHub Apps\. If you have a pipeline that uses the GitHub version 1 action, see the steps to update it to use a GitHub version 2 action in [Update a GitHub version 1 source action to a GitHub version 2 source action](update-github-action-connections.md)\.  While we don’t recommend using the GitHub version 1 action, existing pipelines with the GitHub version 1 action will continue to work without any impact\.  Learn more: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
 
 ## Build action integrations<a name="integrations-build"></a>
 
@@ -247,7 +247,7 @@ The following information is organized by CodePipeline action type and can help 
 ### Amazon Alexa deploy actions<a name="integrations-deploy-alexa"></a>
 
 **Note**  
-This feature is not available in the Asia Pacific \(Hong Kong\) Region\. To use other deploy actions available in that Region, see [Deploy action integrations](#integrations-deploy)\.
+This feature is not available in the Asia Pacific \(Hong Kong\) or Europe \(Milan\) Region\. To use other deploy actions available in that Region, see [Deploy action integrations](#integrations-deploy)\.
 
 
 |  |  | 

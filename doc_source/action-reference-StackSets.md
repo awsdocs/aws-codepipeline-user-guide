@@ -1,12 +1,15 @@
 # AWS CloudFormation StackSets<a name="action-reference-StackSets"></a>
 
-CodePipeline offers the ability to perform AWS CloudFormation StackSets operations as part of your CI/CD process\. You use a stack set to create stacks in AWS accounts across AWS Regions by using a single AWS CloudFormation template\. All the resources included in each stack are defined by the stack set’s AWS CloudFormation template\. When you create the stack set, you specify the template to use, as well as any parameters and capabilities that the template requires\. 
+CodePipeline offers the ability to perform AWS CloudFormation StackSets operations as part of your CI/CD process\. You use a stack set to create stacks in AWS accounts across AWS Regions by using a single AWS CloudFormation template\. All the resources included in each stack are defined by the stack set’s AWS CloudFormation template\. When you create the stack set, you specify the template to use, as well as any parameters and capabilities that the template requires\.
 
 For more information about concepts for AWS CloudFormation StackSets, see [StackSets concepts](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html) in the *AWS CloudFormation User Guide*\.
 
 You integrate your pipeline with AWS CloudFormation StackSets through two distinct action types that you use together:
 + The `CloudFormationStackSet` action creates or updates a stack set or stack instances from the template stored in the pipeline source location\. Each time a stack set is created or updated, it initiates a deployment of those changes to specified instances\. In the console, you can choose the **CloudFormation Stack Set** action provider when you create or edit your pipeline\.
 + The `CloudFormationStackInstances` action deploys changes from the `CloudFormationStackSet` action to specified instances, creates new stack instances, and defines parameter overrides to specified instances\. In the console, you can choose the **CloudFormation Stack Instances** action provider when you edit an existing pipeline\.
+
+**Note**  
+This feature is not available in the Asia Pacific \(Hong Kong\) or Europe \(Milan\) Region\. To use other actions available in that Region, see [Product and service integrations with CodePipeline](integrations.md)\.
 
 You can use these actions to deploy to target AWS accounts or target AWS Organizations organizational unit IDs\.
 
@@ -210,7 +213,7 @@ Valid values are:
 + `Disabled`\. Required: No\. 
 
   StackSets does not automatically deploy additional stack instances to AWS Organizations accounts that are added to a target organization or organizational unit \(OU\) in the specified Regions\.
-+ `EnabledwithStackRetention`\. Required: No\.
++ `EnabledWithStackRetention`\. Required: No\.
 
   Stack resources are retained when an account is removed from a target organization or OU\.
 
@@ -311,14 +314,14 @@ The following example shows a **CloudFormationStackSet** action where the deploy
 #### [ YAML ]
 
 ```
-name: CreateStackSet
-actionTypeId:
-  category: Deploy
-  owner: AWS
-  provider: CloudFormationStackSet
-  version: '1'
-runOrder: 1
-configuration:
+Name: CreateStackSet
+ActionTypeId:
+  Category: Deploy
+  Owner: AWS
+  Provider: CloudFormationStackSet
+  Version: '1'
+RunOrder: 1
+Configuration:
   DeploymentTargets: '111111222222'
   FailureTolerancePercentage: '20'
   MaxConcurrentPercentage: '25'
@@ -326,11 +329,11 @@ configuration:
   Regions: us-east-1
   StackSetName: my-stackset
   TemplatePath: 'SourceArtifact::template.json'
-outputArtifacts: []
-inputArtifacts:
-  - name: SourceArtifact
-region: us-west-2
-namespace: DeployVariables
+OutputArtifacts: []
+InputArtifacts:
+  - Name: SourceArtifact
+Region: us-west-2
+Namespace: DeployVariables
 ```
 
 ------
@@ -338,15 +341,15 @@ namespace: DeployVariables
 
 ```
 {
-    "name": "CreateStackSet",
-    "actionTypeId": {
-        "category": "Deploy",
-        "owner": "AWS",
-        "provider": "CloudFormationStackSet",
-        "version": "1"
+    "Name": "CreateStackSet",
+    "ActionTypeId": {
+        "Category": "Deploy",
+        "Owner": "AWS",
+        "Provider": "CloudFormationStackSet",
+        "Version": "1"
     },
-    "runOrder": 1,
-    "configuration": {
+    "RunOrder": 1,
+    "Configuration": {
         "DeploymentTargets": "111111222222",
         "FailureTolerancePercentage": "20",
         "MaxConcurrentPercentage": "25",
@@ -355,14 +358,14 @@ namespace: DeployVariables
         "StackSetName": "my-stackset",
         "TemplatePath": "SourceArtifact::template.json"
     },
-    "outputArtifacts": [],
-    "inputArtifacts": [
+    "OutputArtifacts": [],
+    "InputArtifacts": [
         {
-            "name": "SourceArtifact"
+            "Name": "SourceArtifact"
         }
     ],
-    "region": "us-west-2",
-    "namespace": "DeployVariables"
+    "Region": "us-west-2",
+    "Namespace": "DeployVariables"
 }
 ```
 
@@ -376,24 +379,24 @@ The following example shows a **CloudFormationStackSet** action for the service\
 #### [ YAML ]
 
 ```
-name: Deploy
-actionTypeId:
-  category: Deploy
-  owner: AWS
-  provider: CloudFormationStackSet
-  version: '1'
-runOrder: 1
-configuration:
+Name: Deploy
+ActionTypeId:
+  Category: Deploy
+  Owner: AWS
+  Provider: CloudFormationStackSet
+  Version: '1'
+RunOrder: 1
+Configuration:
   Capabilities: 'CAPABILITY_IAM,CAPABILITY_NAMED_IAM'
   OrganizationsAutoDeployment: EnabledWithStackRetention
   PermissionModel: SERVICE_MANAGED
   StackSetName: stacks-orgs
   TemplatePath: 'SourceArtifact::template.json'
-outputArtifacts: []
-inputArtifacts:
-  - name: SourceArtifact
-region: eu-central-1
-namespace: DeployVariables
+OutputArtifacts: []
+InputArtifacts:
+  - Name: SourceArtifact
+Region: eu-central-1
+Namespace: DeployVariables
 ```
 
 ------
@@ -401,29 +404,29 @@ namespace: DeployVariables
 
 ```
 {
-    "name": "Deploy",
-    "actionTypeId": {
-        "category": "Deploy",
-        "owner": "AWS",
-        "provider": "CloudFormationStackSet",
-        "version": "1"
+    "Name": "Deploy",
+    "ActionTypeId": {
+        "Category": "Deploy",
+        "Owner": "AWS",
+        "Provider": "CloudFormationStackSet",
+        "Version": "1"
     },
-    "runOrder": 1,
-    "configuration": {
+    "RunOrder": 1,
+    "Configuration": {
         "Capabilities": "CAPABILITY_IAM,CAPABILITY_NAMED_IAM",
         "OrganizationsAutoDeployment": "EnabledWithStackRetention",
         "PermissionModel": "SERVICE_MANAGED",
         "StackSetName": "stacks-orgs",
         "TemplatePath": "SourceArtifact::template.json"
     },
-    "outputArtifacts": [],
-    "inputArtifacts": [
+    "OutputArtifacts": [],
+    "InputArtifacts": [
         {
-            "name": "SourceArtifact"
+            "Name": "SourceArtifact"
         }
     ],
-    "region": "eu-central-1",
-    "namespace": "DeployVariables"
+    "Region": "eu-central-1",
+    "Namespace": "DeployVariables"
 }
 ```
 
@@ -597,21 +600,21 @@ The following example shows a **CloudFormationStackInstances** action where the 
 #### [ YAML ]
 
 ```
-name: my-instances
-actionTypeId:
-  category: Deploy
-  owner: AWS
-  provider: CloudFormationStackInstances
-  version: '1'
-runOrder: 2
-configuration:
+Name: my-instances
+ActionTypeId:
+  Category: Deploy
+  Owner: AWS
+  Provider: CloudFormationStackInstances
+  Version: '1'
+RunOrder: 2
+Configuration:
   DeploymentTargets: '111111222222'
   Regions: 'us-east-1,us-east-2,us-west-1,us-west-2'
   StackSetName: my-stackset
-outputArtifacts: []
-inputArtifacts:
-  - name: SourceArtifact
-region: us-west-2
+OutputArtifacts: []
+InputArtifacts:
+  - Name: SourceArtifact
+Region: us-west-2
 ```
 
 ------
@@ -619,26 +622,26 @@ region: us-west-2
 
 ```
 {
-    "name": "my-instances",
-    "actionTypeId": {
-        "category": "Deploy",
-        "owner": "AWS",
-        "provider": "CloudFormationStackInstances",
-        "version": "1"
+    "Name": "my-instances",
+    "ActionTypeId": {
+        "Category": "Deploy",
+        "Owner": "AWS",
+        "Provider": "CloudFormationStackInstances",
+        "Version": "1"
     },
-    "runOrder": 2,
-    "configuration": {
+    "RunOrder": 2,
+    "Configuration": {
         "DeploymentTargets": "111111222222",
         "Regions": "us-east-1,us-east-2,us-west-1,us-west-2",
         "StackSetName": "my-stackset"
     },
-    "outputArtifacts": [],
-    "inputArtifacts": [
+    "OutputArtifacts": [],
+    "InputArtifacts": [
         {
-            "name": "SourceArtifact"
+            "Name": "SourceArtifact"
         }
     ],
-    "region": "us-west-2"
+    "Region": "us-west-2"
 }
 ```
 
@@ -652,21 +655,21 @@ The following example shows a **CloudFormationStackInstances** action for the se
 #### [ YAML ]
 
 ```
-name: Instances
-actionTypeId:
-  category: Deploy
-  owner: AWS
-  provider: CloudFormationStackInstances
-  version: '1'
-runOrder: 2
-configuration:
+Name: Instances
+ActionTypeId:
+  Category: Deploy
+  Owner: AWS
+  Provider: CloudFormationStackInstances
+  Version: '1'
+RunOrder: 2
+Configuration:
   DeploymentTargets: ou-1111-1example
   Regions: us-east-1
   StackSetName: my-stackset
-outputArtifacts: []
-inputArtifacts:
-  - name: SourceArtifact
-region: eu-central-1
+OutputArtifacts: []
+InputArtifacts:
+  - Name: SourceArtifact
+Region: eu-central-1
 ```
 
 ------
@@ -674,26 +677,26 @@ region: eu-central-1
 
 ```
 {
-    "name": "Instances",
-    "actionTypeId": {
-        "category": "Deploy",
-        "owner": "AWS",
-        "provider": "CloudFormationStackInstances",
-        "version": "1"
+    "Name": "Instances",
+    "ActionTypeId": {
+        "Category": "Deploy",
+        "Owner": "AWS",
+        "Provider": "CloudFormationStackInstances",
+        "Version": "1"
     },
-    "runOrder": 2,
-    "configuration": {
+    "RunOrder": 2,
+    "Configuration": {
         "DeploymentTargets": "ou-1111-1example",
         "Regions": "us-east-1",
         "StackSetName": "my-stackset"
     },
-    "outputArtifacts": [],
-    "inputArtifacts": [
+    "OutputArtifacts": [],
+    "InputArtifacts": [
         {
-            "name": "SourceArtifact"
+            "Name": "SourceArtifact"
         }
     ],
-    "region": "eu-central-1"
+    "Region": "eu-central-1"
 }
 ```
 

@@ -1,7 +1,7 @@
 # AWS CodePipeline User Guide
 
 -----
-*****Copyright &copy; 2020 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; 2021 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -89,6 +89,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Tag a pipeline in CodePipeline](pipelines-tag.md)
    + [Create a notification rule](notification-rule-create.md)
 + [Working with actions in CodePipeline](actions.md)
+   + [Working with action types](action-types.md)
    + [Create and add a custom action in CodePipeline](actions-create-custom-action.md)
    + [Tag a custom action in CodePipeline](customactions-tag.md)
    + [Invoke an AWS Lambda function in a pipeline in CodePipeline](actions-invoke-lambda-function.md)
@@ -141,10 +142,11 @@ Amazon's trademarks and trade dress may not be used in
    + [AWS CodeBuild](action-reference-CodeBuild.md)
    + [CodeCommit](action-reference-CodeCommit.md)
    + [AWS CodeDeploy](action-reference-CodeDeploy.md)
-   + [CodeStarSourceConnection](action-reference-CodestarConnectionSource.md)
+   + [CodeStarSourceConnection for Bitbucket, GitHub, and GitHub Enterprise Server actions](action-reference-CodestarConnectionSource.md)
    + [AWS Device Farm](action-reference-DeviceFarm.md)
    + [AWS Lambda](action-reference-Lambda.md)
    + [AWS Step Functions](action-reference-StepFunctions.md)
++ [Integration model reference](reference-integrations.md)
 + [Image definitions file reference](file-reference.md)
 + [Variables](reference-variables.md)
 + [Update polling pipelines to the recommended change detection method](trigger-S3-migration-cwe.md)

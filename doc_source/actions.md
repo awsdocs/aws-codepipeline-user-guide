@@ -13,6 +13,7 @@ CodePipeline provides support for six types of actions:
 For information about the AWS services and partner products and services you can integrate into your pipeline based on action type, see [Integrations with CodePipeline action types](integrations-action-type.md)\.
 
 **Topics**
++ [Working with action types](action-types.md)
 + [Create a custom action for a pipeline](actions-create-custom-action.md)
 + [Tag a custom action in CodePipeline](customactions-tag.md)
 + [Invoke a Lambda function in a pipeline](actions-invoke-lambda-function.md)

@@ -41,4 +41,4 @@ The CodeCommit and S3 source actions require either a configured change detectio
 
 If you have a pipeline that uses polling, you can update it to use the recommended detection method\. For more information, see [Update polling pipelines to the recommended change detection method](trigger-S3-migration-cwe.md)\.
 
-If you want to turn off change detection for a source action that uses connections, see [CodeStarSourceConnection](action-reference-CodestarConnectionSource.md)\.
+If you want to turn off change detection for a source action that uses connections, see [CodeStarSourceConnection for Bitbucket, GitHub, and GitHub Enterprise Server actions](action-reference-CodestarConnectionSource.md)\.

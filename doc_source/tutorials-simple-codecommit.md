@@ -95,7 +95,7 @@ In this step, you download code for a sample application that was created for a 
    git push
    ```
 
-1. The files you downloaded and added to your local repo have now been added to the `master` branch in your CodeCommit `MyDemoRepo` repository and are ready to be included in a pipeline\.
+1. The files you downloaded and added to your local repo have now been added to the `main` branch in your CodeCommit `MyDemoRepo` repository and are ready to be included in a pipeline\.
 
 ## Step 3: Create an EC2 Linux instance and install the CodeDeploy agent<a name="codecommit-create-deployment"></a>
 
@@ -220,11 +220,11 @@ A [https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-groups.htm
 
 1. Under **Deployment type**, choose **In\-place**\.
 
-1. Under **Environment configuration**, choose **Amazon EC2 Instances**\. In the **Key** field, enter the name you used to tag the instance \(for example, **MyCodePipelineDemo**\)\.
+1. Under **Environment configuration**, choose **Amazon EC2 Instances**\. In the **Key** field, enter **Name**\. In the **Value** field, enter the name you used to tag the instance \(for example, **MyCodePipelineDemo**\)\.
 
 1. Under **Deployment configuration**, choose `CodeDeployDefault.OneAtaTime`\.
 
-1. Under **Load Balancer**, clear **Enable load balancing**\. You do not need to set up a load balancer or choose a target group for this example\.
+1. Under **Load Balancer**, make sure **Enable load balancing** is not selected\. You do not need to set up a load balancer or choose a target group for this example\.
 
 1. Expand the **Advanced** section\. Under **Alarms**, if any alarms are listed, choose **Ignore alarm configuration**\.
 
@@ -248,7 +248,7 @@ You're now ready to create and run your first pipeline\. In this step, you creat
 
 1. Leave the settings under **Advanced settings** at their defaults, and then choose **Next**\.
 
-1. In **Step 2: Add source stage**, in **Source provider**, choose **AWS CodeCommit**\. In **Repository name**, choose the name of the CodeCommit repository you created in [Step 1: Create a CodeCommit repository](#codecommit-create-repository)\. In **Branch name**, choose `master`, and then choose **Next step**\.  
+1. In **Step 2: Add source stage**, in **Source provider**, choose **AWS CodeCommit**\. In **Repository name**, choose the name of the CodeCommit repository you created in [Step 1: Create a CodeCommit repository](#codecommit-create-repository)\. In **Branch name**, choose `main`, and then choose **Next step**\.  
 ![\[The Step 2: Source page in the CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-wizard-source-codecommit-pol.png)![\[The Step 2: Source page in the CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The Step 2: Source page in the CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
    After you select the repository name and branch, a message displays the Amazon CloudWatch Events rule to be created for this pipeline\. 

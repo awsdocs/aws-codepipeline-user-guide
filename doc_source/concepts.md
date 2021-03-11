@@ -45,7 +45,7 @@ An *execution* is a set of changes released by a pipeline\. Each pipeline execut
 
 While a pipeline can process multiple executions at the same time, a pipeline stage processes only one execution at a time\. To do this, a stage is locked while it processes an execution\. Two pipeline executions can't occupy the same stage at the same time\. The execution waiting to enter the occupied stage is referred to an *inbound execution*\. An inbound execution can still fail, be superseded, or be manually stopped\. For more information about how inbound executions work, see [How Inbound Executions Work](concepts-how-it-works.md#how-it-works-inbound-executions)\.
 
-Pipeline executions traverse pipeline stages in order\. Valid statuses for pipelines are `InProgress`, `Stopping`, `Stopped`, `Succeeded`, `Superseded`, and `Failed`\. An execution with a `Failed` or `Superseded` status does not continue through the pipeline and cannot be retried\.
+Pipeline executions traverse pipeline stages in order\. Valid statuses for pipelines are `InProgress`, `Stopping`, `Stopped`, `Succeeded`, `Superseded`, and `Failed`\.
 
 For more information, see [PipelineExecution](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_PipelineExecution.html)\.
 
@@ -82,6 +82,16 @@ Valid statuses for stages are `InProgress`, `Stopping`, `Stopped`, `Succeeded`, 
 An *action execution* is the process of completing a configured action that operates on designated [artifacts](https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-artifacts)\. These can be input artifacts, output artifacts, or both\. For example, a build action might run build commands on an input artifact, such as compiling application source code\. Action execution details include an action execution ID, the related pipeline execution source trigger, and the input and output artifacts for the action\.
 
 Valid statuses for actions are `InProgress`, `Abandoned`, `Succeeded`, or `Failed`\. For more information, see [ActionExecution](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_ActionExecution.html)\.
+
+### Action types<a name="concepts-action-types"></a>
+
+*Action types* are preconfigured actions that are available for selection in CodePipeline\. The action type is defined by its owner, provider, version, and category\. The action type provides customized parameters that are used to complete the action tasks in a pipeline\.
+
+For information about the AWS services and third\-party products and services you can integrate into your pipeline based on action type, see [Integrations with CodePipeline action types](integrations-action-type.md)\.
+
+For information about the integration models supported for action types in CodePipeline, see [Integration model reference](reference-integrations.md)\.
+
+For information about how third\-party providers can set up and manage action types in CodePipeline, see [Working with action types](action-types.md)\.
 
 ### Transitions<a name="concepts-transitions"></a>
 

@@ -27,6 +27,9 @@ To find the provider name and owner information for your action provider, see [A
 
 This table lists valid providers by action type\.
 
+**Note**  
+For Bitbucket, GitHub, or GitHub Enterprise Server actions, refer to the [CodeStarSourceConnection for Bitbucket, GitHub, and GitHub Enterprise Server actions](action-reference-CodestarConnectionSource.md) action reference topic\.
+
 
 **Valid action providers by action type**  
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html)
@@ -169,7 +172,6 @@ The action structure has the following requirements:
   + Actions by third\-party providers
   + Actions by custom providers
 + Actions can be configured with variables\. You use the `namespace` field to set the namespace and variable information for execution variables\. For reference information about execution variables and action output variables, see [Variables](reference-variables.md)\.
-+ For all currently supported action types, the only valid version string is "1"\.
 + For all currently supported action types, the only valid owner string is "AWS", "ThirdParty", or "Custom"\. For more information, see the [CodePipeline API Reference](http://docs.aws.amazon.com/codepipeline/latest/APIReference)\.
 + The default `runOrder` value for an action is 1\. The value must be a positive integer \(natural number\)\. You cannot use fractions, decimals, negative numbers, or zero\. To specify a serial sequence of actions, use the smallest number for the first action and larger numbers for each of the rest of the actions in sequence\. To specify parallel actions, use the same integer for each action you want to run in parallel\. In the console, you can specify a serial sequence for an action by choosing **Add action group** at the level in the stage where you want it to run, or you can specify a parallel sequence by choosing **Add action**\. *Action group* refers to a run order of one or more actions at the same level\.
 

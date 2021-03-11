@@ -6,6 +6,9 @@ An AWS CodePipeline action that does the following:
 + Optionally sets an execution ID prefix for identifying executions originating from the action\.
 + Supports [Standard and Express](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-standard-vs-express.html) state machines\.
 
+**Note**  
+This feature is not available in the Asia Pacific \(Hong Kong\) or Europe \(Milan\) Region\. To use other actions available in that Region, see [Product and service integrations with CodePipeline](integrations.md)\.
+
 ## Action type<a name="action-reference-StepFunctions-type"></a>
 + Category: `Invoke`
 + Owner: `AWS`

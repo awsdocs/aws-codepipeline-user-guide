@@ -14,6 +14,7 @@ The following information might help you troubleshoot common issues in AWS CodeP
 + [Add CodeBuild GitClone permissions for CodeCommit source actions](#codebuild-role-codecommitclone)
 + [Pipeline error: A deployment with the CodeDeployToECS action returns an error message: "Exception while trying to read the task definition artifact file from: <source artifact name>"](#troubleshooting-ecstocodedeploy-size)
 + [GitHub version 2 source action: Unable to complete the connection for a repository](#troubleshooting-connections-GitHub-admin)
++ [Amazon S3 error: CodePipeline service role <ARN> is getting S3 access denied for the S3 bucket <BucketName>](#troubleshooting-S3-access-denied-list)
 + [Need help with a different issue?](#troubleshooting-other)
 
 ## Pipeline error: A pipeline configured with AWS Elastic Beanstalk returns an error message: "Deployment failed\. The provided role does not have sufficient permissions: Service:AmazonElasticLoadBalancing"<a name="troubleshooting-aeb1"></a>
@@ -186,6 +187,98 @@ Exception while trying to read the task definition artifact file from: <source a
 Because a connection to a GitHub repository uses the AWS Connector for GitHub, you need organization owner permissions or admin permissions to the repository to create the connection\.
 
 **Possible fixes:** For information about permission levels for a GitHub repository, see [https://docs\.github\.com/en/free\-pro\-team@latest/github/setting\-up\-and\-managing\-organizations\-and\-teams/permission\-levels\-for\-an\-organization](https://docs.github.com/en/free-pro-team@latest/github/setting-up-and-managing-organizations-and-teams/permission-levels-for-an-organization)\.
+
+## Amazon S3 error: CodePipeline service role <ARN> is getting S3 access denied for the S3 bucket <BucketName><a name="troubleshooting-S3-access-denied-list"></a>
+
+**Problem:** 
+
+While in progress, the CodeCommit action in CodePipeline checks that the pipeline artifact bucket exists\. If the action does not have permission to check, an `AccessDenied` error occurs in Amazon S3 and the following error message displays in CodePipeline:
+
+CodePipeline service role "arn:aws:iam::*AccountID*:role/service\-role/*RoleID*" is getting S3 access denied for the S3 bucket "*BucketName*"
+
+The CloudTrail logs for the action also log the `AccessDenied` error\.
+
+**Possible fixes:** Do the following:
++ For the policy attached to your CodePipeline service role, add `s3:ListBucket` to the list of actions in your policy\. For instructions on to view your service role policy, see [View the pipeline ARN and service role ARN \(console\)](pipelines-view-console.md#pipelines-settings-console)\. Edit the policy statement for your service role as detailed in [Add permissions to the CodePipeline service role](security-iam.md#how-to-update-role-new-services)\.
++ For the resource\-based policy attached to the Amazon S3 artifact bucket for your pipeline, also called the *artifact bucket policy*, add a statement to allow the `s3:ListBucket` permission to be used by your CodePipeline service role\. 
+
+**To add your policy to the artifact bucket**
+
+  1. Follow the steps in [View the pipeline ARN and service role ARN \(console\)](pipelines-view-console.md#pipelines-settings-console) to choose your artifact bucket on the pipeline **Settings** page and then view it in the Amazon S3 console\.
+
+  1. Choose **Permissions**\.
+
+  1. Under **Bucket policy**, choose **Edit**\.
+
+  1. In the **Policy** text field, enter a new bucket policy, or edit the existing policy as shown in the following example\. The bucket policy is a JSON file, so you must enter valid JSON\.
+
+     The following example shows a bucket policy statement for an artifact bucket\.
+
+     ```
+     {
+         "Effect": "Allow",
+         "Principal": "*",
+         "Action": "s3:ListBucket",
+         "Resource": "arn:aws:s3:::BucketName",
+         "Condition": {
+             "StringLike": {
+                 "aws:userid": "RoleIdForServiceRole:*"
+             }
+         }
+     }
+     ```
+
+     The following example shows the same bucket policy statement after the permission is added\.
+
+     ```
+     {
+         "Version": "2012-10-17",
+         "Id": "SSEAndSSLPolicy",
+         "Statement": [
+             {
+                 "Effect": "Allow",
+                 "Principal": "*",
+                 "Action": "s3:ListBucket",
+                 "Resource": "arn:aws:s3:::codepipeline-us-east-2-1234567890",
+                 "Condition": {
+                     "StringLike": {
+                         "aws:userid": "RoleIdForServiceRole:*"
+                     }
+                 }
+             },
+             {
+                 "Sid": "DenyUnEncryptedObjectUploads",
+                 "Effect": "Deny",
+                 "Principal": "*",
+                 "Action": "s3:PutObject",
+                 "Resource": "arn:aws:s3:::codepipeline-us-east-2-1234567890/*",
+                 "Condition": {
+                     "StringNotEquals": {
+                         "s3:x-amz-server-side-encryption": "aws:kms"
+                     }
+                 }
+             },
+             {
+                 "Sid": "DenyInsecureConnections",
+                 "Effect": "Deny",
+                 "Principal": "*",
+                 "Action": "s3:*",
+                 "Resource": "arn:aws:s3:::codepipeline-us-east-2-1234567890/*",
+                 "Condition": {
+                     "Bool": {
+                         "aws:SecureTransport": false
+                     }
+                 }
+             }
+         ]
+     }
+     ```
+
+     For more information, see the steps in [https://aws.amazon.com/blogs/security/writing-iam-policies-how-to-grant-access-to-an-amazon-s3-bucket/](https://aws.amazon.com/blogs/security/writing-iam-policies-how-to-grant-access-to-an-amazon-s3-bucket/)\.
+
+  1. Choose **Save**\.
+
+After you apply the edited policy, follow the steps in [Start a pipeline manually](pipelines-rerun-manually.md) to manually rerun your pipeline\.
 
 ## Need help with a different issue?<a name="troubleshooting-other"></a>
 

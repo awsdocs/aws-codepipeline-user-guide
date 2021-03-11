@@ -16,6 +16,11 @@ Each type of execution state change event emits notifications with specific mess
 + The `version` entry under pipeline `detail` shows the pipeline structure version number\.
 + The `execution-id` entry under pipeline `detail` shows the execution ID for the pipeline execution that caused the state change\. Refer to the GetPipelineExecution API call in the [AWS CodePipeline API Reference](https://docs.aws.amazon.com/codepipeline/latest/APIReference/)\.
 
+CodePipeline reports an event to Amazon CloudWatch Events whenever the state of a resource in your AWS account changes\. Events are emitted on a guaranteed, at\-least\-once basis for the following resources:
++ Pipeline executions
++ Stage executions
++ Action executions
+
 The following examples show events for CodePipeline\.
 
 **Topics**

@@ -42,10 +42,10 @@ Required: No
 `PollForSourceChanges` controls whether CodePipeline polls the Amazon S3 source bucket for source changes\. We recommend that you use CloudWatch Events and CloudTrail to detect source changes instead\. For more information about configuring CloudWatch Events, see [Update pipelines for push events \(Amazon S3 source\) \(CLI\)](update-change-detection.md#update-change-detection-cli-S3) or [Update pipelines for push events \(Amazon S3 source\) \(AWS CloudFormation template\)](update-change-detection.md#update-change-detection-cfn-s3)\.  
 If you intend to configure CloudWatch Events, you must set `PollForSourceChanges` to `false` to avoid duplicate pipeline executions\.
 Valid values for this parameter:  
-+ `True`: If set, CodePipeline polls your source location for source changes\.
++ `true`: If set, CodePipeline polls your source location for source changes\.
 **Note**  
 If you omit `PollForSourceChanges`, CodePipeline defaults to polling your source location for source changes\. This behavior is the same as if `PollForSourceChanges` is included and set to `true`\.
-+ `False`: If set, CodePipeline does not poll your source location for source changes\. Use this setting if you intend to configure a CloudWatch Events rule to detect source changes\.
++ `false`: If set, CodePipeline does not poll your source location for source changes\. Use this setting if you intend to configure a CloudWatch Events rule to detect source changes\.
 
 ## Input artifacts<a name="action-reference-S3-input"></a>
 + **Number of Artifacts:** `0`

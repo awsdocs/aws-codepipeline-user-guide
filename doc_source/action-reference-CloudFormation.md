@@ -80,7 +80,7 @@ This property is required for the following action modes:
 + REPLACE\_ON\_FAILURE
 + CHANGE\_SET\_REPLACE
 For all other action modes, this property is ignored\.  
-The AWS CloudFormation template file containing the template body has a minimum length of 1 byte and a maximum length of 51,200 bytes\. For AWS CloudFormation deployment actions in CodePipeline, the maximum input artifact size is always 256 MB\. For more information, see [Quotas in AWS CodePipeline](limits.md) and [AWS CloudFormation Limits](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html)\.
+The AWS CloudFormation template file containing the template body has a minimum length of 1 byte and a maximum length of 1 MB\. For AWS CloudFormation deployment actions in CodePipeline, the maximum input artifact size is always 256 MB\. For more information, see [Quotas in AWS CodePipeline](limits.md) and [AWS CloudFormation Limits](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html)\.
 
 **OutputFileName**  
 Required: No  
@@ -122,10 +122,10 @@ The template configuration file name follows this format:
 When configured, this action produces variables that can be referenced by the action configuration of a downstream action in the pipeline\. You configure an action with a namespace to make those variables available to the configuration of downstream actions\.
 
 For AWS CloudFormation actions, variables are produced from any values designated in the `Outputs` section of a stack template\. Note that the only CloudFormation action modes that generate outputs are those that result in creating or updating a stack, such as stack creation, stack updates, and change set execution\. The corresponding action modes that generate variables are:
-+ CREATE\_UPDATE
-+ REPLACE\_ON\_FAILURE
-+ ALWAYS\_REPLACE
-+ CHANGE\_SET\_EXECUTE
++ `CHANGE_SET_EXECUTE`
++ `CHANGE_SET_REPLACE`
++ `CREATE_UPDATE`
++ `REPLACE_ON_FAILURE`
 
 For more information, see [Variables](reference-variables.md)\. For a tutorial that shows you how to create a pipeline with a CloudFormation deployment action in a pipeline that uses CloudFormation output variables, see [Tutorial: Create a pipeline that uses variables from AWS CloudFormation deployment actions](tutorials-cloudformation-action.md)\.
 

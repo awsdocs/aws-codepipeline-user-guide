@@ -18,11 +18,13 @@ CodePipeline currently supports VPC endpoints in the following AWS Regions:
 + US West \(N\. California\)
 + US West \(Oregon\)
 + Canada \(Central\)
-+ Europe \(Stockholm\)
++ Europe \(Frankfurt\)
 + Europe \(Ireland\)
 + Europe \(London\)
++ Europe \(Milan\)\*
 + Europe \(Paris\)
-+ Europe \(Frankfurt\)
++ Europe \(Stockholm\)
++ Asia Pacific \(Hong Kong\)\*
 + Asia Pacific \(Mumbai\)
 + Asia Pacific \(Tokyo\)
 + Asia Pacific \(Seoul\)
@@ -30,6 +32,8 @@ CodePipeline currently supports VPC endpoints in the following AWS Regions:
 + Asia Pacific \(Sydney\)
 + South America \(São Paulo\)
 + AWS GovCloud \(US\-West\)
+
+\* You must enable this Region before you can use it\.
 
 ## Create a VPC endpoint for CodePipeline<a name="use-vpc-endpoints-with-codepipeline"></a>
 

@@ -42,10 +42,10 @@ Required: No
 `PollForSourceChanges` controls whether CodePipeline polls the CodeCommit repository for source changes\. We recommend that you use CloudWatch Events to detect source changes instead\. For more information about configuring CloudWatch Events, see [Update pipelines for push events \(CodeCommit source\) \(CLI\)](update-change-detection.md#update-change-detection-cli-codecommit) or [Update pipelines for push events \(CodeCommit source\) \(AWS CloudFormation template\)](update-change-detection.md#update-change-detection-cfn-codecommit)\.  
 If you intend to configure a CloudWatch Events rule, you must set `PollForSourceChanges` to `false` to avoid duplicate pipeline executions\.
 Valid values for this parameter:  
-+ `True`: If set, CodePipeline polls your repository for source changes\.
++ `true`: If set, CodePipeline polls your repository for source changes\.
 **Note**  
 If you omit `PollForSourceChanges`, CodePipeline defaults to polling your repository for source changes\. This behavior is the same as if `PollForSourceChanges` is included and set to `true`\.
-+ `False`: If set, CodePipeline does not poll your repository for source changes\. Use this setting if you intend to configure a CloudWatch Events rule to detect source changes\.
++ `false`: If set, CodePipeline does not poll your repository for source changes\. Use this setting if you intend to configure a CloudWatch Events rule to detect source changes\.
 
 ****OutputArtifactFormat****  
 Required: No  
@@ -89,7 +89,7 @@ For more information about the difference between an author and a committer in G
 
 ## Example action configuration<a name="action-reference-CodeCommit-example"></a>
 
-### Example for default output artifact format<a name="w23aac45c30c25b3"></a>
+### Example for default output artifact format<a name="w23aac45c29c25b3"></a>
 
 ------
 #### [ YAML ]
@@ -147,7 +147,7 @@ Actions:
 
 ------
 
-### Example for full clone output artifact format<a name="w23aac45c30c25b5"></a>
+### Example for full clone output artifact format<a name="w23aac45c29c25b5"></a>
 
 ------
 #### [ YAML ]

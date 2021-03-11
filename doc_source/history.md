@@ -2,10 +2,11 @@
 
 The following table describes the important changes in each release of the CodePipeline User Guide\. For notification about updates to this documentation, you can subscribe to an RSS feed\.
 + **API version:** 2015\-07\-09
-+ **Latest documentation update:** January 8, 2021
++ **Latest documentation update:** March 10, 2021
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [New supported Region Europe \(Milan\)](#history) | CodePipeline is now available in Europe \(Milan\)\. The [Limits](https://docs.aws.amazon.com/codepipeline/latest/userguide/limits.html) topic and [AWS service endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#codepipeline_region) topic have been updated\. | January 27, 2021 | 
 | [Change detection can be turned off for source actions with connections](#history) | You can use the CLI or SDK to update a `CodeStarSourceConnection` source action to turn off automatic change detection for the source repository\. The [CodeStarSourceConnection action structure reference](https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CodestarConnectionSource.html) topic has been updated with a description for the `DetectChanges` parameter\. | January 8, 2021 | 
 | [CodePipeline now supports AWS CloudFormation StackSets deployment actions](#history) | A new tutorial, [Tutorial: Create a pipeline that uses AWS CloudFormation StackSets as a deployment provider](https://docs.aws.amazon.com/codepipeline/latest/userguide/tutorials-stackset-deployment.html), provides steps to use AWS CloudFormation StackSets to create and update your stack sets and stack instances with your pipeline\. The [AWS CloudFormation StackSets action structure reference](https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-StackSets.html) topic has also been added\. | December 30, 2020 | 
 | [New supported Region Asia Pacific \(Hong Kong\)](#history) | CodePipeline is now available in Asia Pacific \(Hong Kong\)\. The [Limits](https://docs.aws.amazon.com/codepipeline/latest/userguide/limits.html) topic and [AWS service endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#codepipeline_region) topic have been updated\. | December 22, 2020 | 

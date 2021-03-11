@@ -218,7 +218,7 @@ Use the CodePipeline wizard to create your pipeline stages and connect your sour
 
    1. Choose **Next**\.
 **Note**  
-The wizard creates a CodeBuild service role for your build project, called **code\-build\-*build\-project\-name*\-service\-role**\. Note this role name, as you add Amazon ECR permissions to it later\.
+The wizard creates a CodeBuild service role for your build project, called **codebuild\-*build\-project\-name*\-service\-role**\. Note this role name, as you add Amazon ECR permissions to it later\.
 
 1. On the **Step 4: Add deploy stage** page, for **Deployment provider**, choose **Amazon ECS**\.
 

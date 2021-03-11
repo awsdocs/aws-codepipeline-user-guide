@@ -155,9 +155,9 @@ If a policy is already attached to your Amazon S3 bucket, choose **Edit bucket p
 
 1. In the list of roles, under **Role Name**, choose the name of the service role for CodePipeline\.
 
-1. On the **Permissions** tab, choose **Add inline policy**\. 
+1. On the **Permissions** tab, choose **Add inline policy**\.
 
-1. Choose the  **JSON** tab, and enter the following policy to allow *AccountB* to assume the role\. In the following example, *012ID\_ACCOUNT\_B* is the ARN for *AccountB*:
+1. Choose the **JSON** tab, and enter the following policy to allow *AccountB* to assume the role\. In the following example, *012ID\_ACCOUNT\_B* is the ARN for *AccountB*:
 
    ```
    {
@@ -194,7 +194,7 @@ These policies are specific to setting up CodeDeploy resources to be used in a p
 
 1. In the list of roles, under **Role Name**, choose the name of the service role used as the Amazon EC2 instance role for the CodeDeploy application\. This role name can vary, and more than one instance role can be used by a deployment group\. For more information, see [Create an IAM Instance Profile for your Amazon EC2 Instances](https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-create-iam-instance-profile.html)\. 
 
-1. On the **Permissions** tab, choose **Add inline policy**\. 
+1. On the **Permissions** tab, choose **Add inline policy**\.
 
 1. Choose the **JSON** tab, and enter the following policy to grant access to the Amazon S3 bucket used by *AccountA* to store artifacts for pipelines \(in this example, *codepipeline\-us\-east\-2\-1234567890*\):
 
@@ -265,7 +265,7 @@ Now create an IAM role to use for cross\-account access, and configure it so tha
 
 1. In the navigation pane, choose **Roles**\. Choose **Create role**\.
 
-1. Under **Select type of trusted entity**, choose **Another AWS account**\. Under **Specify accounts that can use this role**, in **Account ID**,  enter the AWS account ID for the account that will create the pipeline in CodePipeline \(*AccountA*\), and then choose **Next: Permissions**\.
+1. Under **Select type of trusted entity**, choose **Another AWS account**\. Under **Specify accounts that can use this role**, in **Account ID**, enter the AWS account ID for the account that will create the pipeline in CodePipeline \(*AccountA*\), and then choose **Next: Permissions**\.
 **Note**  
 This step creates the trust relationship policy between *AccountB* and *AccountA*\.
 
@@ -333,7 +333,7 @@ This is not the policy you will use\. You must choose a policy to complete the w
 
 1. In **Name**, enter a name for this policy\. Choose **Create policy**\.
 
-1. On the **Permissions** tab,  find **AmazonS3ReadOnlyAccess** in the list of policies under **Policy Name**, and choose the delete icon \(**X**\) next to the policy\. When prompted, choose **Detach**\.
+1. On the **Permissions** tab, find **AmazonS3ReadOnlyAccess** in the list of policies under **Policy Name**, and choose the delete icon \(**X**\) next to the policy\. When prompted, choose **Detach**\.
 
 ## Step 2: Edit the pipeline<a name="pipelines-create-cross-account-create"></a>
 

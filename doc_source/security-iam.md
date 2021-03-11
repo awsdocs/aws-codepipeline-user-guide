@@ -333,8 +333,7 @@ Support for batch builds was added at a later date\. See step 11 for the permiss
            "codedeploy:GetApplicationRevision",
            "codedeploy:RegisterApplicationRevision",
            "codedeploy:GetDeploymentConfig",
-           "ecs:RegisterTaskDefinition",
-           "iam:PassRole"
+           "ecs:RegisterTaskDefinition"
        ],
        "Resource": "*",
        "Effect": "Allow"
@@ -356,6 +355,30 @@ Support for batch builds was added at a later date\. See step 11 for the permiss
            }
        ]
    }
+   ```
+
+   You can also add `ecs-tasks.amazonaws.com` to the list of services under the `iam:PassedToService` condition, as shown in this example\.
+
+   ```
+   {
+       "Statement": [
+           {
+               "Action": [
+                   "iam:PassRole"
+               ],
+               "Resource": "*",
+               "Effect": "Allow",
+               "Condition": {
+                   "StringEqualsIfExists": {
+                       "iam:PassedToService": [
+                           "cloudformation.amazonaws.com",
+                           "elasticbeanstalk.amazonaws.com",
+                           "ec2.amazonaws.com",
+                           "ecs-tasks.amazonaws.com"
+                       ]
+                   }
+               }
+           },
    ```
 
 1. For AWS CodeStar connections, the following permission is required to create pipelines with a source that uses a connection, such as Bitbucket\.

@@ -1,5 +1,7 @@
 # Create the CodePipeline service role \(console\)<a name="pipelines-create-service-role-console"></a>
 
+When you use the console to create a pipeline, you create the CodePipeline service role with the pipeline creation wizard\.
+
 1. Sign in to the AWS Management Console and open the CodePipeline console at [http://console\.aws\.amazon\.com/codesuite/codepipeline/home](http://console.aws.amazon.com/codesuite/codepipeline/home)\.
 
    Choose **Create pipeline** and complete the **Step 1: Choose pipeline settings** page in the pipeline creation wizard\.
