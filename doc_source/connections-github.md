@@ -36,7 +36,7 @@ Connections for GitHub only provide access to repositories owned by the GitHub a
 
 1. Choose one of the following\.
    + Choose to create a pipeline\. Follow the steps in *Create a Pipeline* to complete the first screen and choose **Next**\. On the **Source** page, under **Source Provider**, choose **GitHub \(Version 2\)**\.
-   + Chooseto edit an existing pipeline\. Choose **Edit**, and then choose **Edit stage**\. Choose to add or edit your source action\. On the **Edit action** page, under **Action name**, enter the name for your action\. In **Action provider**, choose **GitHub \(Version 2\)**\.
+   + Choose to edit an existing pipeline\. Choose **Edit**, and then choose **Edit stage**\. Choose to add or edit your source action\. On the **Edit action** page, under **Action name**, enter the name for your action\. In **Action provider**, choose **GitHub \(Version 2\)**\.
 
 1. Do one of the following:
    + Under **Connection**, if you have not already created a connection to your provider, choose **Connect to GitHub**\. Proceed to Step 2: Create a Connection to GitHub\.
