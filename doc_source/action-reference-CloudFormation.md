@@ -66,6 +66,9 @@ This property is required for the following action modes:
 + DELETE\_ONLY
 + CHANGE\_SET\_REPLACE
 
+**Note**  
+This role must be in the same account as the role that the action is running as, configured in the action declaration `RoleArn`.
+
 **TemplatePath**  
 Required: Conditional  
 `TemplatePath` represents the AWS CloudFormation template file\. You include the file in an input artifact to this action\. The file name follows this format:  
