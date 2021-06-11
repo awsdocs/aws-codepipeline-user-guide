@@ -70,6 +70,7 @@ If you already have Jenkins resources you want to use, you can do so, but you mu
 
 1. Install Jenkins on the EC2 instance\. For more information, see the Jenkins documentation for [installing Jenkins](https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins) and [starting and accessing Jenkins](https://wiki.jenkins.io/pages/viewpage.action?pageId=42469975), as well as [details of integration with Jenkins](integrations-action-type.md#JenkinsInt_2) in [Product and service integrations with CodePipeline](integrations.md)\.
 
+#Jenkins installtion link is not working.
 1. Launch Jenkins, and on the home page, choose **Manage Jenkins**\.
 
 1. On the **Manage Jenkins** page, choose **Manage Plugins**\.
