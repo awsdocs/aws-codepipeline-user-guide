@@ -61,7 +61,7 @@ Pipeline\-level events are emitted when there is a state change for a pipeline e
 {
     "version": "0",
     "id": "01234567-EXAMPLE",
-    "detail-type": "CodePipeline Pipeline Execution State Change",
+    "detailType": "CodePipeline Pipeline Execution State Change",
     "source": "aws.codepipeline",
     "account": "123456789012",
     "time": "2020-01-24T22:03:07Z",
@@ -90,7 +90,7 @@ When a pipeline execution is stopping, it emits an event that sends notification
 {
     "version": "0",
     "id": "01234567-EXAMPLE",
-    "detail-type": "CodePipeline Pipeline Execution State Change",
+    "detailType": "CodePipeline Pipeline Execution State Change",
     "source": "aws.codepipeline",
     "account": "123456789012",
     "time": "2020-01-24T22:02:20Z",
@@ -116,7 +116,7 @@ When a pipeline execution is stopping, it emits an event that sends notification
 {
     "version": "0",
     "id": "01234567-EXAMPLE",
-    "detail-type": "CodePipeline Pipeline Execution State Change",
+    "detailType": "CodePipeline Pipeline Execution State Change",
     "source": "aws.codepipeline",
     "account": "123456789012",
     "time": "2020-01-24T22:03:44Z",
@@ -141,7 +141,7 @@ When a pipeline execution fails, it emits an event that sends notifications with
 {
     "version": "0",
     "id": "01234567-EXAMPLE",
-    "detail-type": "CodePipeline Pipeline Execution State Change",
+    "detailType": "CodePipeline Pipeline Execution State Change",
     "source": "aws.codepipeline",
     "account": "123456789012",
     "time": "2020-01-31T18:55:43Z",
@@ -175,7 +175,7 @@ When a stage execution starts, it emits an event that sends notifications with t
 {
     "version": "0",
     "id": 01234567-EXAMPLE,
-    "detail-type": "CodePipeline Stage Execution State Change",
+    "detailType": "CodePipeline Stage Execution State Change",
     "source": "aws.codepipeline",
     "account": 123456789012,
     "time": "2020-01-24T22:03:07Z",
@@ -201,7 +201,7 @@ When a stage execution is stopping, it emits an event that sends notifications w
 {
     "version": "0",
     "id": "01234567-EXAMPLE",
-    "detail-type": "CodePipeline Stage Execution State Change",
+    "detailType": "CodePipeline Stage Execution State Change",
     "source": "aws.codepipeline",
     "account": "123456789012",
     "time": "2020-01-24T22:02:20Z",
@@ -227,7 +227,7 @@ When a stage execution is stopped, it emits an event that sends notifications wi
 {
     "version": "0",
     "id": "01234567-EXAMPLE",
-    "detail-type": "CodePipeline Stage Execution State Change",
+    "detailType": "CodePipeline Stage Execution State Change",
     "source": "aws.codepipeline",
     "account": "123456789012",
     "time": "2020-01-31T18:21:39Z",
@@ -263,7 +263,7 @@ When an action execution starts, it emits an event that sends notifications with
 {
     "version": "0",
     "id": 01234567-EXAMPLE,
-    "detail-type": "CodePipeline Action Execution State Change",
+    "detailType": "CodePipeline Action Execution State Change",
     "source": "aws.codepipeline",
     "account": 123456789012,
     "time": "2020-01-24T22:03:07Z",
@@ -296,7 +296,7 @@ When an action execution succeeds, it emits an event that sends notifications wi
 {
     "version": "0",
     "id": "01234567-EXAMPLE",
-    "detail-type": "CodePipeline Action Execution State Change",
+    "detailType": "CodePipeline Action Execution State Change",
     "source": "aws.codepipeline",
     "account": "123456789012",
     "time": "2020-01-24T22:03:11Z",
@@ -330,7 +330,7 @@ When an action execution fails, it emits an event that sends notifications with 
 {
     "version": "0",
     "id": "01234567-EXAMPLE",
-    "detail-type": "CodePipeline Action Execution State Change",
+    "detailType": "CodePipeline Action Execution State Change",
     "source": "aws.codepipeline",
     "account": "123456789012",
     "time": "2020-01-31T18:55:43Z",
@@ -364,7 +364,7 @@ When an action execution is abandoned, it emits an event that sends notification
 {
     "version": "0",
     "id": "01234567-EXAMPLE",
-    "detail-type": "CodePipeline Action Execution State Change",
+    "detailType": "CodePipeline Action Execution State Change",
     "source": "aws.codepipeline",
     "account": "123456789012",
     "time": "2020-01-31T18:21:39Z",
