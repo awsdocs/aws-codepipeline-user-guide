@@ -66,8 +66,11 @@ This property is required for the following action modes:
 + DELETE\_ONLY
 + CHANGE\_SET\_REPLACE
 
+**Note**
+This role must be in the same account as the role that the action is running as, configured in the action declaration `RoleArn`\.
+
 **Note**  
-CloudFormation is given an S3 signed URL to the template, and therefore this `RoleArn` does not need permission to access the artifact bucket. However, the action `RoleArn` _does_ need permission to access the artifact bucket, in order to generate the signed URL.
+CloudFormation is given an S3 signed URL to the template, and therefore this `RoleArn` does not need permission to access the artifact bucket\. However, the action `RoleArn` _does_ need permission to access the artifact bucket, in order to generate the signed URL\.
 
 **TemplatePath**  
 Required: Conditional  
