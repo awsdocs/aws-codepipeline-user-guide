@@ -150,7 +150,7 @@ If you do not see an inbound execution, then there are no pending executions at 
 ## View pipeline execution source revisions \(console\)<a name="pipelines-source-revisions-console"></a>
 
 You can view details about source artifacts \(output artifact that originated in the first stage of a pipeline\) that are used in an execution of a pipeline\. The details include identifiers, such as commit IDs, check\-in comments, and, when you use the CLI, version numbers of pipeline build actions\. For some revision types, you can view and open the URL of the commit\. Source revisions are made up of the following:
-+ **Summary**: Summary information about the most recent revision of the artifact\. For GitHub and AWS CodeCommit repositories, the commit message\. For Amazon S3 buckets or actions, the user\-provided content of a codepipeline\-artifact\-revision\-summary key specified in the object metadata\. 
++ **Summary**: Summary information about the most recent revision of the artifact\. For GitHub and CodeCommit repositories, the commit message\. For Amazon S3 buckets or actions, the user\-provided content of a codepipeline\-artifact\-revision\-summary key specified in the object metadata\. 
 + **revisionUrl**: The revision URL for the artifact revision \(for example, the external repository URL\)\. 
 + **revisionId**: The revision ID for the artifact revision\. For example, for a source change in a CodeCommit or GitHub repository, this is the commit ID\. For artifacts stored in GitHub or CodeCommit repositories, the commit ID is linked to a commit details page\. 
 

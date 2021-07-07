@@ -1,9 +1,24 @@
 # Integration examples: Blog posts<a name="integrations-community-blogposts"></a>
++ [Tracking the AWS CodePipeline build status from the third\-party Git repository](https://aws.amazon.com/blogs/devops/aws-codepipeline-build-status-in-a-third-party-git-repository/)
+
+  Learn how to set up resources that will display your pipeline and build action status in your third\-party repository, making it easy for the developer to track status without switching context\.
+
+  *Published March 2021*
++ [Complete CI/CD with AWS CodeCommit, AWS CodeBuild, AWS CodeDeploy, and AWS CodePipeline](https://aws.amazon.com/blogs/devops/complete-ci-cd-with-aws-codecommit-aws-codebuild-aws-codedeploy-and-aws-codepipeline/)
+
+  Learn how to set up a pipeline that uses the CodeCommit, CodePipeline, CodeBuild, and CodeDeploy services to compile, build, and install a version\-controlled Java application onto a set of Amazon EC2 Linux instances\.
+
+  *Published September 2020*
 + [How to deploy from GitHub to Amazon EC2 with CodePipeline](https://seanjziegler.com/deploying-code-from-github-to-aws-ec2-with-codepipeline/)
 
   Learn how to set up CodePipeline from scratch to deploy dev, test, and prod branches to separate deployment groups\. Learn how to use and configure IAM roles, the CodeDeploy agent, and CodeDeploy, along with CodePipeline\.
 
   *Published April 2020*
++ [Testing and creating CI/CD pipelines for AWS Step Functions](https://aws.amazon.com/blogs/devops/testing-and-creating-ci-cd-pipelines-for-aws-step-functions-using-aws-codepipeline-and-aws-codebuild/?nc1=b_rp)
+
+  Learn how to set up resources that will coordinate your Step Functions state machine and your pipeline\.
+
+  *Published March 2020*
 + [Implementing DevSecOps Using CodePipeline](https://aws.amazon.com/blogs/devops/implementing-devsecops-using-aws-codepipeline/)
 
   Learn how to use a CI/CD pipeline in CodePipeline to automate preventive and detective security controls\. This post covers how to use a pipeline to create a simple security group and perform security checks during the source, test, and production stages to improve the security posture of your AWS accounts\.
@@ -21,11 +36,6 @@
   + [View a sample application](https://gist.github.com/SAPessi/246b278b6b7502b157a9fbaf3981d103) written in Go with the Gin framework and an API Gateway proxy shim\.
 
   *Published December 2016*
-+ [Integrating Git with CodePipeline](https://aws.amazon.com/blogs/devops/integrating-git-with-aws-codepipeline/)
-
-  Learn how to integrate CodePipeline with Git servers that support webhooks functionality, such as GitHub Enterprise, Bitbucket, and GitLab\.
-
-  *Published November 2016*
 + [Scaling DevOps Deployments with CodePipeline and Dynatrace](https://www.dynatrace.com/blog/scaling-devops-deployments-with-aws-codepipeline-dynatrace/)
 
   Learn how use Dynatrace monitoring solutions to scale pipelines in CodePipeline, automatically analyze test executions before code is committed, and maintain optimal lead times\.

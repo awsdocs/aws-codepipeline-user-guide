@@ -21,7 +21,9 @@ CodePipeline reports an event to Amazon CloudWatch Events whenever the state of 
 + Stage executions
 + Action executions
 
-The following examples show events for CodePipeline\.
+Events are emitted by EventBridge with the event pattern and schema detailed above\. For processed events, such as events you receive through notifications you have configured in the Developer Tools console, the event message includes event pattern fields with some variation\. For example, the `detail-type` field is converted to `detailType`\. For more information, refer to the PutEvents API call in the [Amazon EventBridge API Reference](https://docs.aws.amazon.com/eventbridge/latest/APIReference/)\.
+
+The following examples show events for CodePipeline\. Where possible, each example shows the schema for an emitted event along with the schema for a processed event\.
 
 **Topics**
 + [Detail types](#detect-state-events-types)
@@ -38,6 +40,9 @@ You can configure notifications to be sent when the state changes for:
 + Specified pipelines or all your pipelines\. You control this by using `"detail-type":` `"CodePipeline Pipeline Execution State Change"`\.
 + Specified stages or all your stages, within a specified pipeline or all your pipelines\. You control this by using `"detail-type":` `"CodePipeline Stage Execution State Change"`\.
 + Specified actions or all actions, within a specified stage or all stages, within a specified pipeline or all your pipelines\. You control this by using `"detail-type":` `"CodePipeline Action Execution State Change"`\.
+
+**Note**  
+Events emitted by EventBridge contain the `detail-type` parameter, which is converted to `detailType` when events are processed\.
 
 
 ****  
@@ -57,11 +62,14 @@ Pipeline\-level events are emitted when there is a state change for a pipeline e
 
  When a pipeline execution starts, it emits an event that sends notifications with the following content\. This example is for the pipeline named `"myPipeline"` in the `us-east-1` Region\. The `id` field represents the event ID, and the `account` field represents the account ID where the pipeline is created\.
 
+------
+#### [ Emitted event ]
+
 ```
 {
     "version": "0",
     "id": "01234567-EXAMPLE",
-    "detailType": "CodePipeline Pipeline Execution State Change",
+    "detail-type": "CodePipeline Pipeline Execution State Change",
     "source": "aws.codepipeline",
     "account": "123456789012",
     "time": "2020-01-24T22:03:07Z",
@@ -82,15 +90,46 @@ Pipeline\-level events are emitted when there is a state change for a pipeline e
 }
 ```
 
+------
+#### [ Processed event ]
+
+```
+{
+    "account": "123456789012",
+    "detailType": "CodePipeline Pipeline Execution State Change",
+    "region": "us-east-1",
+    "source": "aws.codepipeline",
+    "time": "2021-06-24T00:44:50Z",
+    "notificationRuleArn": "arn:aws:codestar-notifications:us-east-1:123456789012:notificationrule/a69c62c21EXAMPLE",
+    "detail": {
+        "pipeline": "myPipeline",
+        "execution-id": "12345678-1234-5678-abcd-12345678abcd",
+        "execution-trigger": {
+            "trigger-type": "StartPipelineExecution",
+            "trigger-detail": "arn:aws:sts::123456789012:assumed-role/Admin/my-user"
+        },
+        "state": "STARTED",
+        "version": 1,
+        "pipeline-execution-attempt": 1
+    },
+    "resources": [
+        "arn:aws:codepipeline:us-east-1:123456789012:myPipeline"
+    ],
+    "additionalAttributes": {}
+}
+```
+
+------
+
 ### Pipeline STOPPING event<a name="detect-state-events-pipeline-stopping"></a>
 
-When a pipeline execution is stopping, it emits an event that sends notifications with the following content\. This example is for the pipeline named `myPipeline` in the `us-east-1` Region\.
+When a pipeline execution is stopping, it emits an event that sends notifications with the following content\. This example is for the pipeline named `myPipeline` in the `us-west-2` Region\.
 
 ```
 {
     "version": "0",
     "id": "01234567-EXAMPLE",
-    "detailType": "CodePipeline Pipeline Execution State Change",
+    "detail-type": "CodePipeline Pipeline Execution State Change",
     "source": "aws.codepipeline",
     "account": "123456789012",
     "time": "2020-01-24T22:02:20Z",
@@ -110,19 +149,22 @@ When a pipeline execution is stopping, it emits an event that sends notification
 
 ### Pipeline SUCCEEDED event<a name="detect-state-events-pipeline-succeeded"></a>
 
- When a pipeline execution succeeds, it emits an event that sends notifications with the following content\. This example is for the pipeline named `myPipeline` in the `us-west-2` Region\.
+ When a pipeline execution succeeds, it emits an event that sends notifications with the following content\. This example is for the pipeline named `myPipeline` in the `us-east-1` Region\.
+
+------
+#### [ Emitted event ]
 
 ```
 {
     "version": "0",
     "id": "01234567-EXAMPLE",
-    "detailType": "CodePipeline Pipeline Execution State Change",
+    "detail-type": "CodePipeline Pipeline Execution State Change",
     "source": "aws.codepipeline",
     "account": "123456789012",
     "time": "2020-01-24T22:03:44Z",
-    "region": "us-west-2",
+    "region": "us-east-1",
     "resources": [
-        "arn:aws:codepipeline:us-west-2:123456789012:myPipeline"
+        "arn:aws:codepipeline:us-east-1:123456789012:myPipeline"
     ],
     "detail": {
         "pipeline": "myPipeline",
@@ -133,15 +175,45 @@ When a pipeline execution is stopping, it emits an event that sends notification
 }
 ```
 
+------
+#### [ Processed event ]
+
+```
+{
+    "account": "123456789012",
+    "detailType": "CodePipeline Pipeline Execution State Change",
+    "region": "us-east-1",
+    "source": "aws.codepipeline",
+    "time": "2021-06-30T22:13:51Z",
+    "notificationRuleArn": "arn:aws:codestar-notifications:us-west-2:123456789012:notificationrule/a69c62c21EXAMPLE",
+    "detail": {
+        "pipeline": "myPipeline",
+        "execution-id": "12345678-1234-5678-abcd-12345678abcd",
+        "state": "SUCCEEDED",
+        "version": 1,
+        "pipeline-execution-attempt": 1
+    },
+    "resources": [
+        "arn:aws:codepipeline:us-west-2:123456789012:myPipeline"
+    ],
+    "additionalAttributes": {}
+}
+```
+
+------
+
 ### Pipeline FAILED event<a name="detect-state-events-pipeline-failed"></a>
 
 When a pipeline execution fails, it emits an event that sends notifications with the following content\. This example is for the pipeline named `"myPipeline"` in the `us-west-2` Region\.
+
+------
+#### [ Emitted event ]
 
 ```
 {
     "version": "0",
     "id": "01234567-EXAMPLE",
-    "detailType": "CodePipeline Pipeline Execution State Change",
+    "detail-type": "CodePipeline Pipeline Execution State Change",
     "source": "aws.codepipeline",
     "account": "123456789012",
     "time": "2020-01-31T18:55:43Z",
@@ -158,6 +230,41 @@ When a pipeline execution fails, it emits an event that sends notifications with
 }
 ```
 
+------
+#### [ Processed event ]
+
+```
+{
+    "account": "123456789012",
+    "detailType": "CodePipeline Pipeline Execution State Change",
+    "region": "us-west-2",
+    "source": "aws.codepipeline",
+    "time": "2021-06-24T00:46:16Z",
+    "notificationRuleArn": "arn:aws:codestar-notifications:us-west-2:123456789012:notificationrule/a69c62c21EXAMPLE",
+    "detail": {
+        "pipeline": "myPipeline",
+        "execution-id": "12345678-1234-5678-abcd-12345678abcd",
+        "state": "FAILED",
+        "version": 1,
+        "pipeline-execution-attempt": 1
+    },
+    "resources": [
+        "arn:aws:codepipeline:us-west-2:123456789012:myPipeline"
+    ],
+    "additionalAttributes": {
+        "failedActionCount": 1,
+        "failedActions": [
+            {
+                "action": "Deploy",
+                "additionalInformation": "Deployment <ID> failed"
+            }
+        ],
+        "failedStage": "Deploy"
+    }
+```
+
+------
+
 ## Stage\-level events<a name="detect-state-events-stage"></a>
 
 Stage\-level events are emitted when there is a state change for a stage execution\.
@@ -171,11 +278,14 @@ Stage\-level events are emitted when there is a state change for a stage executi
 
 When a stage execution starts, it emits an event that sends notifications with the following content\. This example is for the pipeline named `"myPipeline"` in the `us-east-1` Region, for the stage `Prod`\.
 
+------
+#### [ Emitted event ]
+
 ```
 {
     "version": "0",
     "id": 01234567-EXAMPLE,
-    "detailType": "CodePipeline Stage Execution State Change",
+    "detail-type": "CodePipeline Stage Execution State Change",
     "source": "aws.codepipeline",
     "account": 123456789012,
     "time": "2020-01-24T22:03:07Z",
@@ -193,6 +303,46 @@ When a stage execution starts, it emits an event that sends notifications with t
 }
 ```
 
+------
+#### [ Processed event ]
+
+```
+{
+    "account": "123456789012",
+    "detailType": "CodePipeline Stage Execution State Change",
+    "region": "us-east-1",
+    "source": "aws.codepipeline",
+    "time": "2021-06-24T00:45:40Z",
+    "notificationRuleArn": "arn:aws:codestar-notifications:us-west-2:123456789012:notificationrule/a69c62c21EXAMPLE",
+    "detail": {
+        "pipeline": "myPipeline",
+        "execution-id": "12345678-1234-5678-abcd-12345678abcd",
+        "stage": "Source",
+        "state": "STARTED",
+        "version": 1,
+        "pipeline-execution-attempt": 0
+    },
+    "resources": [
+        "arn:aws:codepipeline:us-east-1:123456789012:myPipeline"
+    ],
+    "additionalAttributes": {
+        "sourceActions": [
+            {
+                "sourceActionName": "Source",
+                "sourceActionProvider": "CodeCommit",
+                "sourceActionVariables": {
+                    "BranchName": "main",
+                    "CommitId": "<ID>",
+                    "RepositoryName": "my-repo"
+                }
+            }
+        ]
+    }
+}
+```
+
+------
+
 ### Stage STOPPING event<a name="detect-state-events-stage-stopping"></a>
 
 When a stage execution is stopping, it emits an event that sends notifications with the following content\. This example is for the pipeline named `myPipeline` in the `us-west-2` Region, for the stage `Deploy`\.
@@ -201,7 +351,7 @@ When a stage execution is stopping, it emits an event that sends notifications w
 {
     "version": "0",
     "id": "01234567-EXAMPLE",
-    "detailType": "CodePipeline Stage Execution State Change",
+    "detail-type": "CodePipeline Stage Execution State Change",
     "source": "aws.codepipeline",
     "account": "123456789012",
     "time": "2020-01-24T22:02:20Z",
@@ -227,7 +377,7 @@ When a stage execution is stopped, it emits an event that sends notifications wi
 {
     "version": "0",
     "id": "01234567-EXAMPLE",
-    "detailType": "CodePipeline Stage Execution State Change",
+    "detail-type": "CodePipeline Stage Execution State Change",
     "source": "aws.codepipeline",
     "account": "123456789012",
     "time": "2020-01-31T18:21:39Z",
@@ -259,11 +409,14 @@ Action\-level events are emitted when there is a state change for an action exec
 
 When an action execution starts, it emits an event that sends notifications with the following content\. This example is for the pipeline named `myPipeline` in the `us-east-1` Region, for the deployment action `myAction`\.
 
+------
+#### [ Emitted event ]
+
 ```
 {
     "version": "0",
     "id": 01234567-EXAMPLE,
-    "detailType": "CodePipeline Action Execution State Change",
+    "detail-type": "CodePipeline Action Execution State Change",
     "source": "aws.codepipeline",
     "account": 123456789012,
     "time": "2020-01-24T22:03:07Z",
@@ -283,20 +436,76 @@ When an action execution starts, it emits an event that sends notifications with
             "provider": "CodeDeploy",
             "version": 1
         },
-        "version": "1",
+        "input-artifacts": [
+            {
+                "name": "SourceArtifact",
+                "s3location": {
+                    "bucket": "codepipeline-us-east-1-BUCKETEXAMPLE",
+                    "key": "myPipeline/SourceArti/KEYEXAMPLE"
+                }
+            }
+        ]
     }
 }
 ```
+
+------
+#### [ Processed event ]
+
+```
+{
+    "account": "123456789012",
+    "detailType": "CodePipeline Action Execution State Change",
+    "region": "us-west-2",
+    "source": "aws.codepipeline",
+    "time": "2021-06-24T00:45:44Z",
+    "notificationRuleArn": "arn:aws:codestar-notifications:us-west-2:123456789012:notificationrule/a69c62c21EXAMPLE",
+    "detail": {
+        "pipeline": "myPipeline",
+        "execution-id": "12345678-1234-5678-abcd-12345678abcd",
+        "stage": "Deploy",
+        "action": "Deploy",
+        "input-artifacts": [
+            {
+                "name": "SourceArtifact",
+                "s3location": {
+                    "bucket": "codepipeline-us-east-1-EXAMPLE",
+                    "key": "myPipeline/SourceArti/EXAMPLE"
+                }
+            }
+        ],
+        "state": "STARTED",
+        "region": "us-east-1",
+        "type": {
+            "owner": "AWS",
+            "provider": "CodeDeploy",
+            "category": "Deploy",
+            "version": "1"
+        },
+        "version": 1,
+        "pipeline-execution-attempt": 1
+    },
+    "resources": [
+        "arn:aws:codepipeline:us-east-1:123456789012:myPipeline"
+    ],
+    "additionalAttributes": {}
+}
+```
+
+------
 
 ### Action SUCCEEDED event<a name="detect-state-events-action-succeeded"></a>
 
 When an action execution succeeds, it emits an event that sends notifications with the following content\. This example is for the pipeline named `"myPipeline"` in the `us-west-2` Region, for the source action `"Source"`\. For this event type, there are two different `region` fields\. The event `region` field specifies the Region for the pipeline event\. The `region` field under the `detail` section specifies the Region for the action\.
 
+------
+#### [ Emitted event ]
+
 ```
 {
     "version": "0",
     "id": "01234567-EXAMPLE",
-    "detailType": "CodePipeline Action Execution State Change",
+    "detail-type": "CodePipeline Action Execution State Change",
     "source": "aws.codepipeline",
     "account": "123456789012",
     "time": "2020-01-24T22:03:11Z",
@@ -308,6 +517,20 @@ When an action execution succeeds, it emits an event that sends notifications wi
         "pipeline": "myPipeline",
         "execution-id": "12345678-1234-5678-abcd-12345678abcd",
         "stage": "Source",
+        "execution-result": {
+            "external-execution-url": "https://us-west-2.console.aws.amazon.com/codecommit/home#/repository/my-repo/commit/8cf40f2EXAMPLE",
+            "external-execution-summary": "Added LICENSE.txt",
+            "external-execution-id": "8cf40fEXAMPLE"
+        },
+        "output-artifacts": [
+            {
+                "name": "SourceArtifact",
+                "s3location": {
+                    "bucket": "codepipeline-us-west-2-BUCKETEXAMPLE",
+                    "key": "myPipeline/SourceArti/KEYEXAMPLE"
+                }
+            }
+        ],
         "action": "Source",
         "state": "SUCCEEDED",
         "region": "us-west-2",
@@ -322,15 +545,68 @@ When an action execution succeeds, it emits an event that sends notifications wi
 }
 ```
 
+------
+#### [ Processed event ]
+
+```
+{
+    "account": "123456789012",
+    "detailType": "CodePipeline Action Execution State Change",
+    "region": "us-west-2",
+    "source": "aws.codepipeline",
+    "time": "2021-06-24T00:45:44Z",
+    "notificationRuleArn": "arn:aws:codestar-notifications:us-west-2:ACCOUNT:notificationrule/a69c62c21EXAMPLE",
+    "detail": {
+        "pipeline": "myPipeline",
+        "execution-id": "arn:aws:codepipeline:us-west-2:123456789012:myPipeline",
+        "stage": "Source",
+        "execution-result": {
+            "external-execution-url": "https://us-west-2.console.aws.amazon.com/codecommit/home#/repository/my-repo/commit/8cf40f2EXAMPLE",
+            "external-execution-summary": "Edited index.html",
+            "external-execution-id": "36ab3ab7EXAMPLE"
+        },
+        "output-artifacts": [
+            {
+                "name": "SourceArtifact",
+                "s3location": {
+                    "bucket": "codepipeline-us-west-2-EXAMPLE",
+                    "key": "myPipeline/SourceArti/EXAMPLE"
+                }
+            }
+        ],
+        "action": "Source",
+        "state": "SUCCEEDED",
+        "region": "us-west-2",
+        "type": {
+            "owner": "AWS",
+            "provider": "CodeCommit",
+            "category": "Source",
+            "version": "1"
+        },
+        "version": 1,
+        "pipeline-execution-attempt": 1
+    },
+    "resources": [
+        "arn:aws:codepipeline:us-west-2:123456789012:myPipeline"
+    ],
+    "additionalAttributes": {}
+}
+```
+
+------
+
 ### Action FAILED event<a name="detect-state-events-action-failed"></a>
 
 When an action execution fails, it emits an event that sends notifications with the following content\. This example is for the pipeline named `"myPipeline"` in the `us-west-2` Region, for the action `"Deploy"`\.
+
+------
+#### [ Emitted event ]
 
 ```
 {
     "version": "0",
     "id": "01234567-EXAMPLE",
-    "detailType": "CodePipeline Action Execution State Change",
+    "detail-type": "CodePipeline Action Execution State Change",
     "source": "aws.codepipeline",
     "account": "123456789012",
     "time": "2020-01-31T18:55:43Z",
@@ -342,6 +618,12 @@ When an action execution fails, it emits an event that sends notifications with 
         "pipeline": "myPipeline",
         "execution-id": "12345678-1234-5678-abcd-12345678abcd",
         "stage": "Deploy",
+        "execution-result": {
+            "external-execution-url": "https://us-west-2.console.aws.amazon.com/codedeploy/home?#/deployments/<ID>",
+            "external-execution-summary": "Deployment <ID> failed",
+            "external-execution-id": "<ID>",
+            "error-code": "JobFailed"
+        },
         "action": "Deploy",
         "state": "FAILED",
         "region": "us-west-2",
@@ -356,6 +638,50 @@ When an action execution fails, it emits an event that sends notifications with 
 }
 ```
 
+------
+#### [ Processed event ]
+
+```
+{
+    "account": "123456789012",
+    "detailType": "CodePipeline Action Execution State Change",
+    "region": "us-west-2",
+    "source": "aws.codepipeline",
+    "time": "2021-06-24T00:46:16Z",
+    "notificationRuleArn": "arn:aws:codestar-notifications:us-west-2:123456789012:notificationrule/a69c62c21EXAMPLE",
+    "detail": {
+        "pipeline": "myPipeline",
+        "execution-id": "12345678-1234-5678-abcd-12345678abcd",
+        "stage": "Deploy",
+        "execution-result": {
+            "external-execution-url": "https://console.aws.amazon.com/codedeploy/home?region=us-west-2#/deployments/<ID>",
+            "external-execution-summary": "Deployment <ID> failed",
+            "external-execution-id": "<ID>",
+            "error-code": "JobFailed"
+        },
+        "action": "Deploy",
+        "state": "FAILED",
+        "region": "us-west-2",
+        "type": {
+            "owner": "AWS",
+            "provider": "CodeDeploy",
+            "category": "Deploy",
+            "version": "1"
+        },
+        "version": 13,
+        "pipeline-execution-attempt": 1
+    },
+    "resources": [
+        "arn:aws:codepipeline:us-west-2:123456789012:myPipeline"
+    ],
+    "additionalAttributes": {
+        "additionalInformation": "Deployment <ID> failed"
+    }
+}
+```
+
+------
+
 ### Action ABANDONED event<a name="detect-state-events-action-abandoned"></a>
 
 When an action execution is abandoned, it emits an event that sends notifications with the following content\. This example is for the pipeline named `"myPipeline"` in the `us-west-2` Region, for the action `"Deploy"`\.
@@ -364,7 +690,7 @@ When an action execution is abandoned, it emits an event that sends notification
 {
     "version": "0",
     "id": "01234567-EXAMPLE",
-    "detailType": "CodePipeline Action Execution State Change",
+    "detail-type": "CodePipeline Action Execution State Change",
     "source": "aws.codepipeline",
     "account": "123456789012",
     "time": "2020-01-31T18:21:39Z",

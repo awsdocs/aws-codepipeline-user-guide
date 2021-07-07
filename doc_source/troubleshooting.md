@@ -13,8 +13,10 @@ The following information might help you troubleshoot common issues in AWS CodeP
 + [Add CodeBuild GitClone permissions for connections to Bitbucket, GitHub, or GitHub Enterprise Server](#codebuild-role-connections)
 + [Add CodeBuild GitClone permissions for CodeCommit source actions](#codebuild-role-codecommitclone)
 + [Pipeline error: A deployment with the CodeDeployToECS action returns an error message: "Exception while trying to read the task definition artifact file from: <source artifact name>"](#troubleshooting-ecstocodedeploy-size)
++ [GitHub version 1 source action: Repository list shows different repositories](#troubleshooting-connections-GitHub-org)
 + [GitHub version 2 source action: Unable to complete the connection for a repository](#troubleshooting-connections-GitHub-admin)
 + [Amazon S3 error: CodePipeline service role <ARN> is getting S3 access denied for the S3 bucket <BucketName>](#troubleshooting-S3-access-denied-list)
++ [Pipelines with an Amazon S3, Amazon ECR, or CodeCommit source no longer start automatically](#troubleshooting-events-identifiers)
 + [Need help with a different issue?](#troubleshooting-other)
 
 ## Pipeline error: A pipeline configured with AWS Elastic Beanstalk returns an error message: "Deployment failed\. The provided role does not have sufficient permissions: Service:AmazonElasticLoadBalancing"<a name="troubleshooting-aeb1"></a>
@@ -180,6 +182,14 @@ Exception while trying to read the task definition artifact file from: <source a
 
 **Possible fixes:** Create an artifact with a compressed size less than 3 MB\.
 
+## GitHub version 1 source action: Repository list shows different repositories<a name="troubleshooting-connections-GitHub-org"></a>
+
+**Problem:** 
+
+After a successful authorization for a GitHub version 1 action in the CodePipeline console, you can choose from a list of your GitHub repositories\. If the list does not include the repositories you expected to see, then you can troubleshoot the account used for authorization\.
+
+**Possible fixes:** The list of repositories provided in the CodePipeline console are based on the GitHub organization the authorized account belongs to\. Verify that the account you are using to authorize with GitHub is the account associated with the GitHub organization where your repository is created\.
+
 ## GitHub version 2 source action: Unable to complete the connection for a repository<a name="troubleshooting-connections-GitHub-admin"></a>
 
 **Problem:** 
@@ -279,6 +289,38 @@ The CloudTrail logs for the action also log the `AccessDenied` error\.
   1. Choose **Save**\.
 
 After you apply the edited policy, follow the steps in [Start a pipeline manually](pipelines-rerun-manually.md) to manually rerun your pipeline\.
+
+## Pipelines with an Amazon S3, Amazon ECR, or CodeCommit source no longer start automatically<a name="troubleshooting-events-identifiers"></a>
+
+**Problem:** 
+
+After making a change to configuration settings for an action that uses event rules \(EventBridge or CloudWatch Events\) for change detection, the console might not detect a change where source trigger identifiers are similar and have identical initial characters\. Because the new event rule is not created by the console, the pipeline no longer starts automatically\.
+
+An example of a minor change at the end of the parameter name for CodeCommit would be changing your CodeCommit branch name `MyTestBranch-1` to `MyTestBranch-2`\. Because the change is at the end of the branch name, the event rule for the source action might not update or create a rule for the new source settings\.
+
+This applies to source actions that use CWE events for change detection as follows:
+
+
+****  
+
+| Source action | Parameters / trigger identifiers \(console\) | 
+| --- | --- | 
+| Amazon ECR |   **Repository name** **Image tag**   | 
+| Amazon S3 |   **Bucket** **S3 object key**   | 
+| CodeCommit |   **Repository name** **Branch name**   | 
+
+**Possible fixes:** 
+
+Do one of the following:
++ Change the CodeCommit/S3/ECR configuration settings so that changes are made to the starting portion of the parameter value\.
+
+  **Example:** Change your branch name `release-branch` to `2nd-release-branch`\. Avoid a change at the end of the name, such as `release-branch-2`\.
++ Change the CodeCommit/S3/ECR configuration settings for each pipeline\.
+
+  **Example:** Change your branch name `myRepo/myBranch` to `myDeployRepo/myDeployBranch`\. Avoid a change at the end of the name, such as `myRepo/myBranch2`\.
++ Instead of the console, use the CLI or AWS CloudFormation to create and update your change\-detection event rules\. For instructions on creating event rules for an S3 source action, see [Amazon S3 source actions and CloudWatch Events](create-cloudtrail-S3-source.md)\. For instructions on creating event rules for an Amazon ECR action, see [ Amazon ECR source actions and CloudWatch Events](create-cwe-ecr-source.md)\. For instructions on creating event rules for a CodeCommit action, see [ CodeCommit source actions and CloudWatch Events](triggering.md)\.
+
+After you edit your action configuration in the console, accept the updated change\-detection resources created by the console\.
 
 ## Need help with a different issue?<a name="troubleshooting-other"></a>
 

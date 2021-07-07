@@ -47,9 +47,18 @@ Before you create your action definition file, executor resources, and action ty
 
 ### Step 1: Choose your integration model<a name="action-types-choose-model"></a>
 
-Choose your integration model and then create the configuration for that model\. After you choose the  integration model, you must configure your integration resources\.
-+ For the Lambda integration model, you create a Lambda function and add permissions\. Add permissions to your integrator Lambda function to provide the CodePipeline service with permissions to invoke it using the CodePipeline service principal: `codepipeline.amazonaws.com`\. The permissions can be added using CloudFormation or the command line\.
-  + [Sample code for adding permission via CloudFormation](https://code.amazon.com/packages/DuckHawkJobInvokerServiceInfrastructure/blobs/b9f9fa508c0c901e87e0909d05ad61ea49757b9b/--/configuration/cloudFormation/lambdaBasedTestRoles.template.yml#L72-L77)
+Choose your integration model and then create the configuration for that model\. After you choose the integration model, you must configure your integration resources\.
++ For the Lambda integration model, you create a Lambda function and add permissions\. Add permissions to your integrator Lambda function to provide the CodePipeline service with permissions to invoke it using the CodePipeline service principal: `codepipeline.amazonaws.com`\. The permissions can be added using AWS CloudFormation or the command line\.
+  + Example for adding permissions using AWS CloudFormation:
+
+    ```
+      CodePipelineLambdaBasedActionPermission:
+        Type: 'AWS::Lambda::Permission'
+        Properties:
+          Action: 'lambda:invokeFunction'
+          FunctionName: {"Fn::Sub": "arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:function-name"}
+          Principal: codepipeline.amazonaws.com
+    ```
   + [Documentation for command line](https://docs.aws.amazon.com/cli/latest/reference/lambda/add-permission.html)
 + For the job worker integration model, you create an integration with a list of allowed accounts where the job worker polls for jobs with the CodePipeline APIs\.
 
@@ -265,7 +274,7 @@ Your customers can optionally use the CLI to add the action type to their pipeli
 
 1. To test your action, commit a change to the source specified in the source stage of the pipeline or follow the steps in [Manually Start a Pipeline](https://docs.aws.amazon.com/codepipeline/latest/userguide/how-to-manually-start.html)\.
 
-To create a pipeline with your action type, follow the steps in [Create a Pipeline](https://docs.aws.amazon.com/codepipeline/latest/userguide/how-to-create-pipelines) and choose your action type from as many stages as you will test\.
+To create a pipeline with your action type, follow the steps in [Create a pipeline in CodePipeline](pipelines-create.md) and choose your action type from as many stages as you will test\.
 
 ## View an action type<a name="action-types-view-cli"></a>
 

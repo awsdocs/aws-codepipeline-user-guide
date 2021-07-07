@@ -56,8 +56,6 @@ When troubleshooting VPC issues, use the information that appears in internet co
 
 1. [Make sure that your security groups allow traffic to flow](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules)\.
 
-1. [Troubleshoot your NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-troubleshooting)\.
-
-1. [Make sure that the route table for private subnets points to the NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html#route-tables-nat)\.
+1. [Make sure that the route table for private subnets points to the virtual private gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html#route-tables-nat)\.
 
 1. Make sure that the service role used by CodePipeline has the appropriate permissions\. For example, if CodePipeline does not have the Amazon EC2 permissions required to work with an Amazon VPC, you might receive an error that says, "Unexpected EC2 error: UnauthorizedOperation\."

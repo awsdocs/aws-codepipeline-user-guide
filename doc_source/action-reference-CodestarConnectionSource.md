@@ -1,17 +1,21 @@
 # CodeStarSourceConnection for Bitbucket, GitHub, and GitHub Enterprise Server actions<a name="action-reference-CodestarConnectionSource"></a>
 
-Triggers a pipeline when a new commit is made on a third\-party source code repository\. The source action retrieves code changes when a pipeline is manually run or when a webhook event is sent from the source provider\.
+Triggers a pipeline when a new commit is made on a third\-party source code repository\. The source action retrieves code changes when a pipeline is manually run or when a webhook event is sent from the source provider\. 
 
 **Note**  
 This feature is not available in the Asia Pacific \(Hong Kong\) or Europe \(Milan\) Region\. To use other source actions available in that Region, see [Source action integrations](integrations-action-type.md#integrations-source)\.
 
 Connections can associate your AWS resources with the following third\-party repositories:
-+ Bitbucket \(through the **Bitbucket** provider option in the CodePipeline console\)
++ Bitbucket Cloud \(through the **Bitbucket** provider option in the CodePipeline console\)
+**Note**  
+You can create connections to a Bitbucket Cloud repository\. Installed Bitbucket provider types, such as Bitbucket Server, are not supported\. 
 + GitHub and GitHub Enterprise Cloud \(through the **GitHub \(Version 2\)** provider option in the CodePipeline console\)
 + GitHub Enterprise Server \(through the **GitHub Enterprise Server** provider option in the CodePipeline console\)
 
 **Note**  
 Each connection supports all of the repositories you have with that provider\. You only need to create a new connection for each provider type\.
+
+Connections allow your pipeline to detect source changes through the third\-party provider's installation app\. For example, webhooks are used to subscribe to GitHub event types and can be installed on an organization, a repository, or a GitHub App\. Your connection installs a repository webhook on your GitHub App that subscribes to GitHub push type events\.
 
 After a code change is detected, you have the following options for passing the code to subsequent actions:
 + Default: Like other existing CodePipeline source actions, `CodeStarSourceConnection` can output a ZIP file with a shallow copy of your commit\.

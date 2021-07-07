@@ -60,17 +60,13 @@ Required: Conditional
 **RoleArn**  
 Required: Conditional  
 The `RoleArn` is the ARN of the IAM service role that AWS CloudFormation assumes when it operates on resources in the specified stack\. `RoleArn` is not applied when executing a change set\. If you do not use CodePipeline to create the change set, make sure that the change set or stack has an associated role\.  
+This role must be in the same account as the role for the action that is running, as configured in the action declaration `RoleArn`\.
 This property is required for the following action modes:  
 + CREATE\_UPDATE
 + REPLACE\_ON\_FAILURE
 + DELETE\_ONLY
 + CHANGE\_SET\_REPLACE
-
-**Note**
-This role must be in the same account as the role that the action is running as, configured in the action declaration `RoleArn`\.
-
-**Note**  
-CloudFormation is given an S3 signed URL to the template, and therefore this `RoleArn` does not need permission to access the artifact bucket\. However, the action `RoleArn` _does_ need permission to access the artifact bucket, in order to generate the signed URL\.
+AWS CloudFormation is given an S3\-signed URL to the template; therefore, this `RoleArn` does not need permission to access the artifact bucket\. However, the action `RoleArn` *does* need permission to access the artifact bucket, in order to generate the signed URL\.
 
 **TemplatePath**  
 Required: Conditional  

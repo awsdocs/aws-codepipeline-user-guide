@@ -17,7 +17,7 @@ The following information is organized by CodePipeline action type and can help 
 **Topics**
 + [Amazon ECR source actions](#integrations-source-ecr)
 + [Amazon S3 source actions](#integrations-source-s3)
-+ [Connections to Bitbucket, GitHub \(version 2\), and GitHub Enterprise Server](#integrations-source-connections)
++ [Connections to Bitbucket Cloud, GitHub \(version 2\), and GitHub Enterprise Server](#integrations-source-connections)
 + [CodeCommit source actions](#integrations-source-codecommit)
 + [GitHub \(version 1\) source actions](#integrations-source-gh-oauth)
 
@@ -35,9 +35,9 @@ The following information is organized by CodePipeline action type and can help 
 | --- |--- |
 | Amazon Simple Storage Service \(Amazon S3\) |  [Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/) is storage for the internet\. You can use Amazon S3 to store and retrieve any amount of data at any time, from anywhere on the web\. You can configure CodePipeline to use a versioned Amazon S3 bucket as the source action for your code\.  Amazon S3 can also be included in a pipeline as a deploy action\.  Learn more: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
 
-### Connections to Bitbucket, GitHub \(version 2\), and GitHub Enterprise Server<a name="integrations-source-connections"></a>
+### Connections to Bitbucket Cloud, GitHub \(version 2\), and GitHub Enterprise Server<a name="integrations-source-connections"></a>
 
-Connections \(`CodestarSourceConnection` actions\) are used to access your third\-party Bitbucket, GitHub, or GitHub Enterprise Server repository\.
+Connections \(`CodestarSourceConnection` actions\) are used to access your third\-party Bitbucket Cloud, GitHub, or GitHub Enterprise Server repository\.
 
 **Note**  
 This feature is not available in the Asia Pacific \(Hong Kong\) or Europe \(Milan\) Region\. To use other source actions available in that Region, see [Source action integrations](#integrations-source)\.
@@ -45,7 +45,7 @@ This feature is not available in the Asia Pacific \(Hong Kong\) or Europe \(Mila
 
 |  |  | 
 | --- |--- |
-| Bitbucket |  You can configure CodePipeline to use a Bitbucket repository as the source for your code\. You must have previously created a Bitbucket account and at least one Bitbucket repository\. You can add a source action for your Bitbucket repository by either creating a pipeline or editing an existing one\. You can set up resources called *connections* to allow your pipelines to access third\-party code repositories\. When you create a connection, you install the AWS CodeStar app with your third\-party code repository, and then associate it with your connection\. For Bitbucket, use the **Bitbucket** option in the console or the `CodestarSourceConnection` action in the CLI\. See [Bitbucket connections](connections-bitbucket.md)\. You can use the **Full clone** option for this action to reference the repository Git metadata so that downstream actions can perform Git commands directly\. This option can only be used by CodeBuild downstream actions\. Learn more: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
+| Bitbucket |  You can configure CodePipeline to use a Bitbucket repository as the source for your code\. You must have previously created a Bitbucket account and at least one Bitbucket repository\. You can add a source action for your Bitbucket repository by either creating a pipeline or editing an existing one\.  You can create connections to a Bitbucket Cloud repository\. Installed Bitbucket provider types, such as Bitbucket Server, are not supported\.  You can set up resources called *connections* to allow your pipelines to access third\-party code repositories\. When you create a connection, you install the AWS CodeStar app with your third\-party code repository, and then associate it with your connection\. For Bitbucket, use the **Bitbucket** option in the console or the `CodestarSourceConnection` action in the CLI\. See [Bitbucket connections](connections-bitbucket.md)\. You can use the **Full clone** option for this action to reference the repository Git metadata so that downstream actions can perform Git commands directly\. This option can only be used by CodeBuild downstream actions\. Learn more: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
 
 
 |  |  | 
@@ -277,20 +277,28 @@ This feature is not available in the Asia Pacific \(Hong Kong\) or Europe \(Mila
 
 ## Invoke action integrations<a name="integrations-invoke"></a>
 
-The following information is organized by CodePipeline action type and can help you configure CodePipeline to integrate with the following deploy action providers\.
+The following information is organized by CodePipeline action type and can help you configure CodePipeline to integrate with the following invoke action providers\.
 
 **Topics**
-+ [Lambda invoke actions](#w23aac12b9c17b9)
-+ [Step Functions invoke actions](#w23aac12b9c17c11)
++ [Lambda invoke actions](#w23aac11b9c17b9)
++ [Snyk invoke actions](#w23aac11b9c17c11)
++ [Step Functions invoke actions](#w23aac11b9c17c13)
 
-### Lambda invoke actions<a name="w23aac12b9c17b9"></a>
+### Lambda invoke actions<a name="w23aac11b9c17b9"></a>
 
 
 |  |  | 
 | --- |--- |
 | Lambda |  [Lambda](https://docs.aws.amazon.com/lambda/latest/dg/) lets you run code without provisioning or managing servers\. You can configure CodePipeline to use Lambda functions to add flexibility and functionality to your pipelines\. You can create the Lambda function to add as an action in a stage either before you create the pipeline or when you use the **Create Pipeline** wizard\. Learn more: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
 
-### Step Functions invoke actions<a name="w23aac12b9c17c11"></a>
+### Snyk invoke actions<a name="w23aac11b9c17c11"></a>
+
+
+|  |  | 
+| --- |--- |
+| Snyk |  You can configure CodePipeline to use Snyk to keep your open source environments secure by detecting and fixing security vulnerabilities and updating dependencies in your application code and container images\. You can also use the **Snyk** action in CodePipeline to automate security testing controls in your pipeline\. Learn more: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
+
+### Step Functions invoke actions<a name="w23aac11b9c17c13"></a>
 
 
 |  |  | 

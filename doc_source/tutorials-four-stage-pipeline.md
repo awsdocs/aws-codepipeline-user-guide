@@ -68,9 +68,8 @@ For more information about instance roles and Amazon EC2, see [IAM roles for Ama
 **Note**  
 If you already have Jenkins resources you want to use, you can do so, but you must create a special IAM user, apply the `AWSCodePipelineCustomActionAccess` managed policy to that user, and then configure and use the access credentials for that user on your Jenkins resource\. If you want to use the Jenkins UI to supply the credentials, configure Jenkins to only allow HTTPS\. For more information, see [Troubleshooting CodePipeline](troubleshooting.md)\.
 
-1. Install Jenkins on the EC2 instance\. For more information, see the Jenkins documentation for [installing Jenkins](https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins) and [starting and accessing Jenkins](https://wiki.jenkins.io/pages/viewpage.action?pageId=42469975), as well as [details of integration with Jenkins](integrations-action-type.md#JenkinsInt_2) in [Product and service integrations with CodePipeline](integrations.md)\.
+1. Install Jenkins on the EC2 instance\. For more information, see the Jenkins documentation for [installing Jenkins](https://www.jenkins.io/doc/book/installing/linux/) and [starting and accessing Jenkins](https://wiki.jenkins.io/pages/viewpage.action?pageId=42469975), as well as [details of integration with Jenkins](integrations-action-type.md#JenkinsInt_2) in [Product and service integrations with CodePipeline](integrations.md)\.
 
-#Jenkins installtion link is not working.
 1. Launch Jenkins, and on the home page, choose **Manage Jenkins**\.
 
 1. On the **Manage Jenkins** page, choose **Manage Plugins**\.

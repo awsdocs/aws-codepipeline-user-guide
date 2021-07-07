@@ -174,15 +174,15 @@ Unlike a namespace which you can choose, the following actions use variable keys
 Each execution also has a set of CodePipeline\-generated pipeline variables that contain data about the execution, such as the pipeline release ID\. These variables can be consumed by any action in the pipeline\.
 
 **Topics**
-+ [CodePipeline execution ID output variable](#w23aac51c29b7b9)
-+ [Amazon ECR action output variables](#w23aac51c29b7c11)
-+ [AWS CloudFormation StackSets action output variables](#w23aac51c29b7c15)
-+ [CodeCommit action output variables](#w23aac51c29b7c19)
-+ [CodeStarSourceConnection action output variables](#w23aac51c29b7c21)
-+ [GitHub action output variables \(GitHub action version 1\)](#w23aac51c29b7c23)
-+ [S3 action output variables](#w23aac51c29b7c25)
++ [CodePipeline execution ID output variable](#w23aac49c29b7b9)
++ [Amazon ECR action output variables](#w23aac49c29b7c11)
++ [AWS CloudFormation StackSets action output variables](#w23aac49c29b7c15)
++ [CodeCommit action output variables](#w23aac49c29b7c19)
++ [CodeStarSourceConnection action output variables](#w23aac49c29b7c21)
++ [GitHub action output variables \(GitHub action version 1\)](#w23aac49c29b7c23)
++ [S3 action output variables](#w23aac49c29b7c25)
 
-#### CodePipeline execution ID output variable<a name="w23aac51c29b7b9"></a>
+#### CodePipeline execution ID output variable<a name="w23aac49c29b7b9"></a>
 
 
 **CodePipeline execution ID variable**  
@@ -191,7 +191,7 @@ Each execution also has a set of CodePipeline\-generated pipeline variables that
 | --- | --- | --- | --- | 
 | codepipeline | PipelineExecutionId | 8abc75f0\-fbf8\-4f4c\-bfEXAMPLE | \#\{codepipeline\.PipelineExecutionId\} | 
 
-#### Amazon ECR action output variables<a name="w23aac51c29b7c11"></a>
+#### Amazon ECR action output variables<a name="w23aac49c29b7c11"></a>
 
 
 **Amazon ECR variables**  
@@ -204,7 +204,7 @@ Each execution also has a set of CodePipeline\-generated pipeline variables that
 | RegistryId | EXAMPLE12233 | \#\{SourceVariables\.RegistryId\} | 
 | RepositoryName | my\-image\-repo | \#\{SourceVariables\.RepositoryName\} | 
 
-#### AWS CloudFormation StackSets action output variables<a name="w23aac51c29b7c15"></a>
+#### AWS CloudFormation StackSets action output variables<a name="w23aac49c29b7c15"></a>
 
 
 **AWS CloudFormation StackSets variables**  
@@ -214,7 +214,7 @@ Each execution also has a set of CodePipeline\-generated pipeline variables that
 | OperationId | 11111111\-2bbb\-111\-2bbb\-11111example | \#\{DeployVariables\.OperationId\} | 
 | StackSetId | my\-stackset:1111aaaa\-1111\-2222\-2bbb\-11111example | \#\{DeployVariables\.StackSetId\} | 
 
-#### CodeCommit action output variables<a name="w23aac51c29b7c19"></a>
+#### CodeCommit action output variables<a name="w23aac49c29b7c19"></a>
 
 
 **CodeCommit variables**  
@@ -228,7 +228,7 @@ Each execution also has a set of CodePipeline\-generated pipeline variables that
 | CommitterDate | 2019\-10\-29T03:32:21Z | \#\{SourceVariables\.CommitterDate\} | 
 | RepositoryName | myCodeCommitRepo | \#\{SourceVariables\.RepositoryName\} | 
 
-#### CodeStarSourceConnection action output variables<a name="w23aac51c29b7c21"></a>
+#### CodeStarSourceConnection action output variables<a name="w23aac49c29b7c21"></a>
 
 
 **`CodeStarSourceConnection` variables \(Bitbucket, GitHub, and GitHub Enterprise Repository\)**  
@@ -242,7 +242,7 @@ Each execution also has a set of CodePipeline\-generated pipeline variables that
 | ConnectionArn | arn:aws:codestar\-connections:region:account\-id:connection/connection\-id | \#\{SourceVariables\.ConnectionArn\} | 
 | FullRepositoryName | username/GitHubRepo | \#\{SourceVariables\.FullRepositoryName\} | 
 
-#### GitHub action output variables \(GitHub action version 1\)<a name="w23aac51c29b7c23"></a>
+#### GitHub action output variables \(GitHub action version 1\)<a name="w23aac49c29b7c23"></a>
 
 
 **GitHub variables \(GitHub action version 1\)**  
@@ -257,7 +257,7 @@ Each execution also has a set of CodePipeline\-generated pipeline variables that
 | CommitUrl |  | \#\{SourceVariables\.CommitUrl\} | 
 | RepositoryName | myGitHubRepo | \#\{SourceVariables\.RepositoryName\} | 
 
-#### S3 action output variables<a name="w23aac51c29b7c25"></a>
+#### S3 action output variables<a name="w23aac49c29b7c25"></a>
 
 
 **S3 variables**  
@@ -272,18 +272,18 @@ Each execution also has a set of CodePipeline\-generated pipeline variables that
 For CodeBuild, AWS CloudFormation, and Lambda actions, the variable keys are configured by the user\.
 
 **Topics**
-+ [CloudFormation action output variables](#w23aac51c29b9b7)
++ [CloudFormation action output variables](#w23aac49c29b9b7)
 + [CodeBuild action output variables](#reference-variables-list-configured-codebuild)
-+ [Lambda action output variables](#w23aac51c29b9c11)
++ [Lambda action output variables](#w23aac49c29b9c11)
 
-#### CloudFormation action output variables<a name="w23aac51c29b9b7"></a>
+#### CloudFormation action output variables<a name="w23aac49c29b9b7"></a>
 
 
 **AWS CloudFormation variables**  
 
 | Variable key | Example variable syntax | 
 | --- | --- | 
-| For AWS CloudFormation actions, variables are produced from any values designated in the `Outputs` section of a stack template\. Note that the only CloudFormation action modes that generate outputs are those that result in creating or updating a stack, such as stack creation, stack updates, and change set execution\. The corresponding action modes that generate variables are:[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/reference-variables.html)For a tutorial that shows you how to create a pipeline with an AWS CloudFormation deployment action in a pipeline that uses AWS CloudFormation output variables, see [Tutorial: Create a pipeline that uses variables from AWS CloudFormation deployment actions](tutorials-cloudformation-action.md)\. | \#\{DeployVariables\.StackName\} | 
+| For AWS CloudFormation actions, variables are produced from any values designated in the `Outputs` section of a stack template\. Note that the only CloudFormation action modes that generate outputs are those that result in creating or updating a stack, such as stack creation, stack updates, and change set execution\. The corresponding action modes that generate variables are:[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/reference-variables.html)For more information about these action modes, see [AWS CloudFormation](action-reference-CloudFormation.md)\. For a tutorial that shows you how to create a pipeline with an AWS CloudFormation deployment action in a pipeline that uses AWS CloudFormation output variables, see [Tutorial: Create a pipeline that uses variables from AWS CloudFormation deployment actions](tutorials-cloudformation-action.md)\. | \#\{DeployVariables\.StackName\} | 
 
 #### CodeBuild action output variables<a name="reference-variables-list-configured-codebuild"></a>
 
@@ -294,7 +294,7 @@ For CodeBuild, AWS CloudFormation, and Lambda actions, the variable keys are con
 | --- | --- | 
 |  For CodeBuild actions, variables are produced from values generated by exported environment variables\. Set up a CodeBuild environment variable by editing your CodeBuild action in CodePipeline or by adding the environment variable to the build spec\. Add instructions to your CodeBuild build spec to add the environment variable under the exported variables section\. See [env/exported\-variables](https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec.env.exported-variables) in the *AWS CodeBuild User Guide*\.  |  <pre>#{BuildVariables.EnvVar}</pre>  | 
 
-#### Lambda action output variables<a name="w23aac51c29b9c11"></a>
+#### Lambda action output variables<a name="w23aac49c29b9c11"></a>
 
 
 **Lambda variables**  

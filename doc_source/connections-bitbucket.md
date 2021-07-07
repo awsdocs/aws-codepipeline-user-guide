@@ -5,8 +5,10 @@ Connections allow you to authorize and establish configurations that associate y
 **Note**  
 This feature is not available in the Asia Pacific \(Hong Kong\) or Europe \(Milan\) Region\. To use other source actions available in that Region, see [Source action integrations](integrations-action-type.md#integrations-source)\.
 
-To add a Bitbucket source action in CodePipeline, you can choose either to: 
+To add a Bitbucket Cloud source action in CodePipeline, you can choose either to: 
 + Use the CodePipeline console **Create pipeline** wizard or **Edit action** page to choose the **Bitbucket** provider option\. See [Create a connection to Bitbucket \(console\)](#connections-bitbucket-console) to add the action\. The console helps you create a connections resource\.
+**Note**  
+You can create connections to a Bitbucket Cloud repository\. Installed Bitbucket provider types, such as Bitbucket Server, are not supported\. 
 + Use the CLI to add the action configuration for the `CreateSourceConnection` action with the `Bitbucket` provider as follows:
   + To create your connections resources, see [Create a connection to Bitbucket \(CLI\)](#connections-bitbucket-cli) to create a connections resource with the CLI\.
   + Use the `CreateSourceConnection` example action configuration in [CodeStarSourceConnection for Bitbucket, GitHub, and GitHub Enterprise Server actions](action-reference-CodestarConnectionSource.md) to add your action as shown in [Create a pipeline \(CLI\)](pipelines-create.md#pipelines-create-cli)\.
@@ -18,6 +20,9 @@ Before you begin:
 + You must have created an account with the provider of the third\-party repository, such as Bitbucket\.
 + You must have already created a third\-party code repository, such as a Bitbucket repository\.
 
+**Note**  
+Bitbucket connections only provide access to repositories owned by the Bitbucket account that was used to create the connection\.
+
 **Topics**
 + [Create a connection to Bitbucket \(console\)](#connections-bitbucket-console)
 + [Create a connection to Bitbucket \(CLI\)](#connections-bitbucket-cli)
@@ -27,7 +32,7 @@ Before you begin:
 Use these steps to use the CodePipeline console to add a connections action for your Bitbucket repository\.
 
 **Note**  
-Bitbucket connections only provide access to repositories owned by the Bitbucket account that was used to create the connection\.
+You can create connections to a Bitbucket Cloud repository\. Installed Bitbucket provider types, such as Bitbucket Server, are not supported\. 
 
 ### Step 1: Create or edit your pipeline<a name="connections-bitbucket-console-action"></a>
 
@@ -62,10 +67,10 @@ You install one app for all of your connections to a particular provider\. If yo
 1. If the login page for Bitbucket displays, log in with your credentials and then choose to continue\.
 
 1. On the app installation page, a message shows that the AWS CodeStar app is trying to connect to your Bitbucket account\. Choose **Grant access**\.  
-![\[Console screenshot showing AWS CodeStar requests access.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/bitbucket-access-popup.png)![\[Console screenshot showing AWS CodeStar requests access.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing AWS CodeStar requests access.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+![\[Console screenshot showing request for access.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/bitbucket-access-popup.png)![\[Console screenshot showing request for access.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing request for access.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
 1. In **Bitbucket apps**, the connection ID for your new installation is displayed\. Choose **Connect**\. The created connection displays in the connections list\.  
-![\[Console screenshot showing AWS CodeStar requests access.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/create-connection-bitbucket-app-ID.png)![\[Console screenshot showing AWS CodeStar requests access.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing AWS CodeStar requests access.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+![\[Console screenshot showing request for access.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/create-connection-bitbucket-app-ID.png)![\[Console screenshot showing request for access.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing request for access.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
 ### Step 3: Save your Bitbucket source action<a name="connections-bitbucket-console-save"></a>
 
@@ -86,6 +91,9 @@ Use these steps on the wizard or **Edit action** page to save your source action
 ## Create a connection to Bitbucket \(CLI\)<a name="connections-bitbucket-cli"></a>
 
 You can use the AWS Command Line Interface \(AWS CLI\) to create a connection\. 
+
+**Note**  
+You can create connections to a Bitbucket Cloud repository\. Installed Bitbucket provider types, such as Bitbucket Server, are not supported\. 
 
 To do this, use the create\-connection command\. 
 

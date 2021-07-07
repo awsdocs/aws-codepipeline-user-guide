@@ -63,7 +63,7 @@ For more information, see [Input and output artifacts](welcome-introducing-artif
 
 1. In **Encryption key**, do one of the following: 
 
-   1. To use the CodePipeline default AWS\-managed AWS KMS customer master key \(CMK\) to encrypt the data in the pipeline artifact store \(S3 bucket\), choose **Default AWS Managed Key**\.
+   1. To use the CodePipeline default AWS KMS customer master key \(CMK\) to encrypt the data in the pipeline artifact store \(S3 bucket\), choose **Default AWS Managed Key**\.
 
    1. To use your CMK to encrypt the data in the pipeline artifact store \(S3 bucket\), choose **Customer Managed Key**\. In **KMS customer master key**, choose the key ID, key ARN, or alias ARN\.
 

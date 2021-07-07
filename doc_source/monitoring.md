@@ -10,6 +10,7 @@ Monitoring is an important part of maintaining the reliability, availability, an
 
 You can use the following tools to monitor your CodePipeline pipelines and their resources:
 + **EventBridge event bus events** — You can monitor CodePipeline events in EventBridge, which detects changes in your pipeline, stage, or action execution status\. EventBridge routes that data to targets such as AWS Lambda and Amazon Simple Notification Service\. EventBridge events are the same as those that appear in Amazon CloudWatch Events\.
++ **Notifications for pipeline events in the Developer Tools console** — You can monitor CodePipeline events with notifications that you set up in the console and then create an Amazon Simple Notification Service topic and subscription for\. For more information, see [What are notifications](https://docs.aws.amazon.com/dtconsole/latest/userguide/welcome.html) in the *Developer Tools Console User Guide*\.
 + **AWS CloudTrail** — Use CloudTrail to capture API calls made by or on behalf of CodePipeline in your AWS account and deliver the log files to an Amazon S3 bucket\. You can choose to have CloudWatch publish Amazon SNS notifications when new log files are delivered so you can take quick action\.
 + **Console and CLI** — You can use the CodePipeline console and CLI to view details about the status of a pipeline or a particular pipeline execution\.
 

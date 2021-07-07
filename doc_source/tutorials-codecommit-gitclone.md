@@ -5,7 +5,7 @@ You can choose the full clone option for your CodeCommit source action in CodePi
 In this tutorial, you create a pipeline that accesses your CodeCommit repository, uses the full clone option for source data, and runs a CodeBuild build that clones your repository and performs Git commands for the repository\.
 
 **Note**  
-CodeBuild actions are the only downstream actions support use of Git metadata available with the Git clone option\.
+CodeBuild actions are the only downstream actions support use of Git metadata available with the Git clone option\. Also, while your pipeline can contain cross\-account actions, the CodeCommit action and the CodeBuild action must be in the same account for the full clone option to succeed\.
 
 **Topics**
 + [Prerequisites](#tutorials-codecommit-gitclone-prereq)

@@ -6,7 +6,7 @@
 
 1. In the navigation pane, choose **Events**\.
 
-1. Choose **Create rule**, and then under **Event source**, from **Service Name**, choose **EC2 Container Registry**\.
+1. Choose **Create rule**, and then under **Event source**, from **Service Name**, choose **Elastic Container Registry \(ECR\)**\.
 
 1. In **Event Source**, choose **Event Pattern**\.
 

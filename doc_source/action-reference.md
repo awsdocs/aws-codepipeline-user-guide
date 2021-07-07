@@ -23,4 +23,5 @@ This section is updated periodically with more action providers\. Reference info
 + [CodeStarSourceConnection for Bitbucket, GitHub, and GitHub Enterprise Server actions](action-reference-CodestarConnectionSource.md)
 + [AWS Device Farm](action-reference-DeviceFarm.md)
 + [AWS Lambda](action-reference-Lambda.md)
++ [Snyk](action-reference-Snyk.md)
 + [AWS Step Functions](action-reference-StepFunctions.md)

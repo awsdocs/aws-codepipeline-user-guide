@@ -1,7 +1,7 @@
 # AWS CodePipeline User Guide
 
 -----
-*****Copyright &copy; 2021 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -145,6 +145,7 @@ Amazon's trademarks and trade dress may not be used in
    + [CodeStarSourceConnection for Bitbucket, GitHub, and GitHub Enterprise Server actions](action-reference-CodestarConnectionSource.md)
    + [AWS Device Farm](action-reference-DeviceFarm.md)
    + [AWS Lambda](action-reference-Lambda.md)
+   + [Snyk action structure reference](action-reference-Snyk.md)
    + [AWS Step Functions](action-reference-StepFunctions.md)
 + [Integration model reference](reference-integrations.md)
 + [Image definitions file reference](file-reference.md)

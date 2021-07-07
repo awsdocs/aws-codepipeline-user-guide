@@ -81,7 +81,7 @@ At any time, you can integrate your preferred IDE into your AWS CodeStar dashboa
 
 ### Use CodePipeline to compile, build, and test code with CodeBuild<a name="use-cases-codebuild"></a>
 
-CodeBuild is a managed build service in the cloud that lets you build and test your code without a server or system\. Use CodePipeline with CodeBuild to automate running revisions through the pipeline for continuous delivery of software builds whenever there is a change to the source code\. For more information, see [Use AWS CodePipeline with CodeBuild to test code and run builds](https://docs.aws.amazon.com/codebuild/latest/userguide/how-to-create-pipeline.html)\.
+CodeBuild is a managed build service in the cloud that lets you build and test your code without a server or system\. Use CodePipeline with CodeBuild to automate running revisions through the pipeline for continuous delivery of software builds whenever there is a change to the source code\. For more information, see [Use CodePipeline with CodeBuild to test code and run builds](https://docs.aws.amazon.com/codebuild/latest/userguide/how-to-create-pipeline.html)\.
 
 ### Use CodePipeline with Amazon ECS for continuous delivery of container\-based applications to the cloud<a name="use-cases-ecs"></a>
 

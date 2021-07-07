@@ -140,11 +140,11 @@ The event object, under the CodePipeline\.job key, contains the [job details](ht
        // Retrieve the Job ID from the Lambda action
        var jobId = event["CodePipeline.job"].id;
        
-       // Retrieve the value of UserParameters from the Lambda action configuration in AWS CodePipeline, in this case a URL which will be
+       // Retrieve the value of UserParameters from the Lambda action configuration in CodePipeline, in this case a URL which will be
        // health checked by this function.
        var url = event["CodePipeline.job"].data.actionConfiguration.configuration.UserParameters; 
        
-       // Notify AWS CodePipeline of a successful job
+       // Notify CodePipeline of a successful job
        var putJobSuccess = function(message) {
            var params = {
                jobId: jobId
@@ -158,7 +158,7 @@ The event object, under the CodePipeline\.job key, contains the [job details](ht
            });
        };
        
-       // Notify AWS CodePipeline of a failed job
+       // Notify CodePipeline of a failed job
        var putJobFailure = function(message) {
            var params = {
                jobId: jobId,

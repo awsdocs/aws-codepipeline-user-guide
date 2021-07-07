@@ -149,6 +149,7 @@ The following table shows when support was added for other AWS services\.
 | AWS OpsWorks | June 2, 2016 | 
 | AWS CloudFormation | November 3, 2016 | 
 | AWS CodeBuild | December 1, 2016 | 
+| Elastic Beanstalk | Initial service launch | 
 
 Follow these steps to add permissions for a supported service:
 
@@ -162,7 +163,7 @@ Follow these steps to add permissions for a supported service:
 
 1. Add the required permissions in the **Policy document** box\. 
 **Note**  
-When you create IAM policies, follow the standard security advice of granting least privilege—that is, granting only the permissions required to perform a task\. Some API calls support resource\-based permissions and allow access to be limited\. For example, in this case, to limit permissions when calling `DescribeTasks` and `ListTasks`, you can replace the wildcard character \(\*\) with a resource ARN or with a resource ARN that contains a wildcard character \(\*\)\.
+When you create IAM policies, follow the standard security advice of granting least privilege—that is, granting only the permissions required to perform a task\. Some API calls support resource\-based permissions and allow access to be limited\. For example, in this case, to limit permissions when calling `DescribeTasks` and `ListTasks`, you can replace the wildcard character \(\*\) with a resource ARN or with a resource ARN that contains a wildcard character \(\*\)\. For more information about creating a policy that grants least\-privilege access, see [https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege)\.
 
    For example, for CodeCommit support, add the following to your policy statement:
 
@@ -479,5 +480,29 @@ Support for batch builds was added at a later date\. See step 11 for the permiss
    ```
 **Note**  
 To make sure your CodeBuild action can use the full clone option with a CodeCommit source, you must also add the `codecommit:GitPull `permission to the policy statement for your project's CodeBuild service role\.
+
+1. For Elastic Beanstalk, the following are the minimum permissions needed to create pipelines with an `ElasticBeanstalk` deploy action\.
+
+   ```
+   {
+               "Action": [
+                   "elasticbeanstalk:*",
+                   "ec2:*",
+                   "elasticloadbalancing:*",
+                   "autoscaling:*",
+                   "cloudwatch:*",
+                   "s3:*",
+                   "sns:*",
+                   "cloudformation:*",
+                   "rds:*",
+                   "sqs:*",
+                   "ecs:*"
+               ],
+               "Resource": "*",
+               "Effect": "Allow"
+           },
+   ```
+**Note**  
+You should replace wildcards in the resource policy with the resources for the account you want to limit access to\. For more information about creating a policy that grants least\-privilege access, see [https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege)\.
 
 1. Choose **Review policy** to ensure the policy contains no errors\. When the policy is error\-free, choose **Apply policy**\.

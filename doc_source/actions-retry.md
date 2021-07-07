@@ -4,16 +4,18 @@ In AWS CodePipeline, an action is a task performed on an artifact in a stage\. A
 
 You can retry the latest failed actions in a stage without having to run a pipeline again from the beginning\. You do this by retrying the stage that contains the actions\. You can retry a stage immediately after any of actions fail\. All actions that are still in progress continue their work, and failed actions are triggered once again\.
 
+**Note**  
+In the following cases, you may not be able to retry actions:  
+The overall pipeline structure changed after an action failed\.
+Another retry attempt in the stage is already in progress\.
+
+In cases where you have edited your pipeline structure and so the failed action cannot be retried, choose **Release change** to manually start the pipeline\.
+
 If you are using the console to view a pipeline, a **Retry** button appears on the stage where the failed actions can be retried\. 
 
 ![\[A stage that contains one or more failed actions displays a Retry button\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/actions-retry-button.png)![\[A stage that contains one or more failed actions displays a Retry button\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[A stage that contains one or more failed actions displays a Retry button\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
 If you are using the AWS CLI, you can use the get\-pipeline\-state command to determine whether any actions have failed\.
-
-**Note**  
-In the following cases, you may not be able to retry actions:  
-The overall pipeline structure changed after an action failed\.
-Another retry attempt in the stage is already in progress\.
 
 **Topics**
 + [Retry failed actions \(console\)](#actions-retry-console)

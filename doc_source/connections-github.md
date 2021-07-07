@@ -61,12 +61,12 @@ After you choose to create the connection, the **Connect to GitHub** page appear
 You install one app for all of your connections to a particular provider\. If you have already installed the AWS Connector for GitHub app, choose it and skip this step\.
 
 1. On the **Install AWS Connector for GitHub** page, choose the account where you want to install the app\.  
-![\[Console screenshot showing the AWS Connector for GitHub installation page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/github-conn-access-app-install1.png)![\[Console screenshot showing the AWS Connector for GitHub installation page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing the AWS Connector for GitHub installation page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+![\[Console screenshot showing the Connector for GitHub installation page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/github-conn-access-app-install1.png)![\[Console screenshot showing the Connector for GitHub installation page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing the Connector for GitHub installation page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 **Note**  
 You only install the app once for each GitHub account\. If you previously installed the app, you can choose **Configure** to proceed to a modification page for your app installation, or you can use the back button to return to the console\.
 
 1. On the **Install AWS Connector for GitHub** page, leave the defaults, and choose **Install**\.  
-![\[Console screenshot showing the second AWS Connector for GitHub installation page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/github-conn-access-app-install2.png)![\[Console screenshot showing the second AWS Connector for GitHub installation page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing the second AWS Connector for GitHub installation page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+![\[Console screenshot showing the second Connector for GitHub installation page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/github-conn-access-app-install2.png)![\[Console screenshot showing the second Connector for GitHub installation page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing the second Connector for GitHub installation page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
    
 

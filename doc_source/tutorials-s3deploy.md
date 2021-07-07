@@ -95,7 +95,7 @@ In this section, you create a pipeline with the following actions:
 
 1. Leave the settings under **Advanced settings** at their defaults, and then choose **Next**\.
 
-1. In **Step 2: Add source stage**, in **Source provider**, choose **AWS CodeCommit**\. In **Repository name**, choose the name of the CodeCommit repository you created in [Step 1: Create a CodeCommit repository](tutorials-simple-codecommit.md#codecommit-create-repository)\. In **Branch name**, choose the name of the branch that contains your latest code update\. Unless you created a different branch on your own, only `master` is available\. 
+1. In **Step 2: Add source stage**, in **Source provider**, choose **AWS CodeCommit**\. In **Repository name**, choose the name of the CodeCommit repository you created in [Step 1: Create a CodeCommit repository](tutorials-simple-codecommit.md#codecommit-create-repository)\. In **Branch name**, choose the name of the branch that contains your latest code update\. Unless you created a different branch on your own, only `main` is available\. 
 
    After you select the repository name and branch, the Amazon CloudWatch Events rule to be created for this pipeline is displayed\. 
 

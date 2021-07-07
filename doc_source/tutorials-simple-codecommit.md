@@ -35,6 +35,8 @@ The remaining steps in this tutorial use **MyDemoRepo** for the name of your Cod
 **To set up a local repository**
 
 In this step, you set up a local repository to connect to your remote CodeCommit repository\.
+**Note**  
+You are not required to set up a local repository\. You can also use the console to upload files as described in [Step 2: Add sample code to your CodeCommit repository](#codecommit-add-code)\.
 
 1. With your new repository open in the console, choose **Clone URL** on the top right of the page, and then choose **Clone SSH**\. The address to clone your Git repository is copied to your clipboard\.
 
@@ -70,30 +72,60 @@ In this step, you download code for a sample application that was created for a 
               └-- stop_server
    ```
 
-1. Change directories to your local repo:
+1. To upload files to your repository, use one of the following methods\.
 
-   ```
-   (For Linux, macOS, or Unix) cd /tmp/MyDemoRepo
-   (For Windows) cd c:\temp\MyDemoRepo
-   ```
+   1. To use the CodeCommit console to upload your files: 
 
-1. Run the following command to stage all of your files at once:
+      1. Open the CodeCommit console, and choose your repository from the **Repositories** list\.
 
-   ```
-   git add -A
-   ```
+      1. Choose **Add file**, and then choose **Upload file**\. 
 
-1. Run the following command to commit the files with a commit message:
+      1. Select **Choose file**, and then browse for your file\. To add a file under a folder, choose **Create file** and then enter the folder name with the file name, such as `scripts/install_dependencies`\. Paste the file contents into the new file\.
 
-   ```
-   git commit -m "Add sample application files"
-   ```
+         Commit the change by entering your user name and email address\. 
 
-1. Run the following command to push the files from your local repo to your CodeCommit repository:
+         Choose **Commit changes**\.
 
-   ```
-   git push
-   ```
+      1. Repeat this step for each file\.
+
+         Your repository contents should look like this:
+
+         ```
+                │-- appspec.yml
+                │-- index.html
+                │-- LICENSE.txt
+                └-- scripts
+                    │-- install_dependencies
+                    │-- start_server
+                    └-- stop_server
+         ```
+
+   1. To use git commands to upload your files: 
+
+      1. Change directories to your local repo:
+
+         ```
+         (For Linux, macOS, or Unix) cd /tmp/MyDemoRepo
+         (For Windows) cd c:\temp\MyDemoRepo
+         ```
+
+      1. Run the following command to stage all of your files at once:
+
+         ```
+         git add -A
+         ```
+
+      1. Run the following command to commit the files with a commit message:
+
+         ```
+         git commit -m "Add sample application files"
+         ```
+
+      1. Run the following command to push the files from your local repo to your CodeCommit repository:
+
+         ```
+         git push
+         ```
 
 1. The files you downloaded and added to your local repo have now been added to the `main` branch in your CodeCommit `MyDemoRepo` repository and are ready to be included in a pipeline\.
 
@@ -109,7 +141,7 @@ In this step, you create the EC2 instance where you deploy a sample application\
 
 1. Choose **Create role**\.
 
-1. Under **Select type of trusted entity**, select **AWS service**\. Under **Choose a use case**, select **EC2**, and then choose **Next: Permissions**\.
+1. Under **Select type of trusted entity**, select **AWS service**\. Under **Choose a use case**, select **EC2**\. Under **Select your use case**, choose **EC2**\. Choose **Next: Permissions**\.
 
 1. Search for and select the policy named **AmazonEC2RoleforAWSCodeDeploy**, and then choose **Next: Tags**\.
 
@@ -141,7 +173,7 @@ Make a note of your role name for the next step\. You choose this role when you 
      yum install -y ruby
      yum install -y aws-cli
      cd /home/ec2-user
-     aws s3 cp s3://aws-codedeploy-us-east-2/latest/install . --region us-east-2
+     wget https://aws-codedeploy-us-east-2.s3.us-east-2.amazonaws.com/latest/install
      chmod +x ./install
      ./install auto
      ```
@@ -188,7 +220,7 @@ First, you create a role that allows CodeDeploy to perform deployments\. Then, y
 
 1. Choose **Create role**\.
 
-1. Under **Select type of trusted entity**, select **AWS service**\. Under **Choose a use case**, select **CodeDeploy**, and then choose **Next: Permissions**\. The `AWSCodeDeployRole` managed policy is already attached to the role\.
+1. Under **Select type of trusted entity**, select **AWS service**\. Under **Choose a use case**, select **CodeDeploy**\. Under **Select your use case**, choose **CodeDeploy**\. Choose **Next: Permissions**\. The `AWSCodeDeployRole` managed policy is already attached to the role\.
 
 1. Choose **Next: Tags**, and **Next: Review**\.
 

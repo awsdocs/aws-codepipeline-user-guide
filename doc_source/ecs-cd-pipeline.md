@@ -2,6 +2,9 @@
 
 This tutorial helps you to create a complete, end\-to\-end continuous deployment \(CD\) pipeline with Amazon ECS with CodePipeline\.
 
+**Note**  
+This tutorial is for the Amazon ECS standard deployment action for CodePipeline\. For a tutorial that uses the Amazon ECS to CodeDeploy blue/green deployment action in CodePipeline, see [Tutorial: Create a pipeline with an Amazon ECR source and ECS\-to\-CodeDeploy deployment](tutorials-ecs-ecr-codedeploy.md)\.
+
 ## Prerequisites<a name="ecs-cd-prereqs"></a>
 
 There are a few resources that you must have in place before you can use this tutorial to create your CD pipeline\. Here are the things you need to get started:
@@ -119,14 +122,11 @@ Paste this sample text to create your `buildspec.yml` file, and replace the valu
 version: 0.2
 
 phases:
-  install:
-    runtime-versions:
-      docker: 19
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
       - aws --version
-      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin 012345678910.dkr.ecr.us-west-2.amazonaws.com
       - REPOSITORY_URI=012345678910.dkr.ecr.us-west-2.amazonaws.com/hello-world
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
@@ -206,7 +206,7 @@ Use the CodePipeline wizard to create your pipeline stages and connect your sour
 
    1. For **Runtime\(s\)**, choose **Standard**\.
 
-   1. For **Image**, choose **aws/codebuild/amazonlinux2\-x86\_64\-standard:2\.0**\.
+   1. For **Image**, choose **aws/codebuild/amazonlinux2\-x86\_64\-standard:3\.0**\.
 
    1. For **Image version** and **Environment type**, use the default values\.
 
