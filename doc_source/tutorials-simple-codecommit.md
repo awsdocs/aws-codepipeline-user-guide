@@ -254,7 +254,7 @@ A [https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-groups.htm
 
 1. Under **Environment configuration**, choose **Amazon EC2 Instances**\. In the **Key** field, enter **Name**\. In the **Value** field, enter the name you used to tag the instance \(for example, **MyCodePipelineDemo**\)\.
 
-1. Under **Deployment configuration**, choose `CodeDeployDefault.OneAtaTime`\.
+1. Under **Deployment settings**, choose `CodeDeployDefault.OneAtaTime`\.
 
 1. Under **Load Balancer**, make sure **Enable load balancing** is not selected\. You do not need to set up a load balancer or choose a target group for this example\.
 
