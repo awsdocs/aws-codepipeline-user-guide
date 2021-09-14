@@ -43,7 +43,7 @@ When you use the pipeline wizard, CodePipeline creates the names of stages \(sou
 After you create a pipeline, you cannot change its name\. For information about other limitations, see [Quotas in AWS CodePipeline](limits.md)\.
 
 1. In **Service role**, do one of the following:
-   + Choose **New service role** to allow CodePipeline to create a new service role in IAM\. In **Role name**, the role and policy name both default to this format: AWSCodePipelineServiceRole\-*region*\-*pipeline\_name*\. For example, this is the service role created for a pipeline named MyPipeline: AWSCodePipelineServiceRole\-eu\-west\-2\-MyPipeline\.
+   + Choose **New service role** to allow CodePipeline to create a new service role in IAM\.
    + Choose **Existing service role** to use a service role already created in IAM\. In **Role ARN**, choose your service role ARN from the list\.
 **Note**  
 Depending on when your service role was created, you might need to update its permissions to support additional AWS services\. For information, see [Add permissions to the CodePipeline service role](security-iam.md#how-to-update-role-new-services)\. 
@@ -63,9 +63,9 @@ For more information, see [Input and output artifacts](welcome-introducing-artif
 
 1. In **Encryption key**, do one of the following: 
 
-   1. To use the CodePipeline default AWS KMS customer master key \(CMK\) to encrypt the data in the pipeline artifact store \(S3 bucket\), choose **Default AWS Managed Key**\.
+   1. To use the CodePipeline default AWS KMS key to encrypt the data in the pipeline artifact store \(S3 bucket\), choose **Default AWS Managed Key**\.
 
-   1. To use your CMK to encrypt the data in the pipeline artifact store \(S3 bucket\), choose **Customer Managed Key**\. In **KMS customer master key**, choose the key ID, key ARN, or alias ARN\.
+   1. To use your customer managed key to encrypt the data in the pipeline artifact store \(S3 bucket\), choose **Customer Managed Key**\. Choose the key ID, key ARN, or alias ARN\.
 
 1.  Choose **Next**\.
 

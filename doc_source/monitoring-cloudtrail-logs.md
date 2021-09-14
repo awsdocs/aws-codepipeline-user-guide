@@ -55,7 +55,7 @@ The following example shows a CloudTrail log entry for an update pipeline event,
 	"requestParameters":{
 	  "pipeline":{
 		 "version":1,
-		 "roleArn":"arn:aws:iam::80398EXAMPLE:role/AWS-CodePipeline-Service",
+		 "roleArn":"arn:aws:iam::80398EXAMPLE:role/CodePipeline_Service_Role",
 		 "name":"MyFirstPipeline",
 		 "stages":[
 		   {

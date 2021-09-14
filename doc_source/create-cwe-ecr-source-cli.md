@@ -6,7 +6,7 @@ Call the put\-rule command, specifying:
 
 **To create a CloudWatch Events rule with Amazon ECR as the event source and CodePipeline as the target**
 
-1. Add permissions for Amazon CloudWatch Events to use CodePipeline to invoke the rule\. For more information, see [Using Resource\-Based Policies for Amazon CloudWatch Events](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/resource-based-policies-cwe.html)\.
+1. Add permissions for Amazon CloudWatch Events to use CodePipeline to invoke the rule\. For more information, see [Using resource\-based policies for Amazon EventBridge](http://docs.aws.amazon.com/eventbridge/latest/userguide/eb-use-resource-based.html)\.
 
    1. Use the following sample to create the trust policy that allows CloudWatch Events to assume the service role\. Name the trust policy `trustpolicyforCWE.json`\.
 

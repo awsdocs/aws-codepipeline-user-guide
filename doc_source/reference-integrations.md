@@ -311,9 +311,7 @@ The CodePipeline team invokes the integrator after 30 seconds with the same `con
 
 ### Provide CodePipeline the permissions to invoke the integrator Lambda function at runtime<a name="reference-integrations-models-lambda-permissions"></a>
 
-You add permissions to your integrator Lambda function to provide the CodePipeline service with permissions to invoke it using the CodePipeline service principal: `codepipeline.amazonaws.com`\. You can add permissions by using AWS CloudFormation or the command line\.
-+ [Sample code for adding permission via CloudFormation](https://code.amazon.com/packages/DuckHawkJobInvokerServiceInfrastructure/blobs/b9f9fa508c0c901e87e0909d05ad61ea49757b9b/--/configuration/cloudFormation/lambdaBasedTestRoles.template.yml#L72-L77)
-+ [Documentation for command line](https://docs.aws.amazon.com/cli/latest/reference/lambda/add-permission.html)
+You add permissions to your integrator Lambda function to provide the CodePipeline service with permissions to invoke it using the CodePipeline service principal: `codepipeline.amazonaws.com`\. You can add permissions by using AWS CloudFormation or the command line\. For an example, see [Working with action types](action-types.md)\.
 
 ## Job worker integration model<a name="reference-integrations-models-worker"></a>
 
@@ -322,7 +320,7 @@ After you have designed your high\-level workflow, you can create your job worke
 + Acknowledging jobs and returning results to CodePipeline using `AcknowledgeThirdPartyJob`, `PutThirdPartyJobSuccessResult`, and `PutThirdPartyJobFailureResult`\.
 + Retrieving artifacts from and/or putting artifacts into the Amazon S3 bucket for the pipeline\. To download artifacts from the Amazon S3 bucket, you must create an Amazon S3 client that uses Signature Version 4 signing \(Sig V4\)\. Sig V4 is required for AWS KMS\.
 
-  To upload artifacts to the Amazon S3 bucket, you must also configure the Amazon S3 `[PutObject](https://docs.aws.amazon.com/AmazonS3/latest/API/SOAPPutObject.html)` request to use encryption through AWS Key Management Service \(AWS KMS\)\. AWS KMS uses customer master keys \(CMKs\)\. In order to know whether to use the AWS managed CMK or a customer managed CMK to upload artifacts, your job worker must look at the [job data](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_JobData.html) and check the [encryption key](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_EncryptionKey.html) property\. If the property is set, you should use that customer managed CMK ID when configuring AWS KMS\. If the key property is null, you use the AWS managed CMK\. CodePipeline uses the AWS managed CMK unless otherwise configured\.
+  To upload artifacts to the Amazon S3 bucket, you must also configure the Amazon S3 `[PutObject](https://docs.aws.amazon.com/AmazonS3/latest/API/SOAPPutObject.html)` request to use encryption through AWS Key Management Service \(AWS KMS\)\. AWS KMS uses AWS KMS keys\. In order to know whether to use the AWS managed key or a customer managed key to upload artifacts, your job worker must look at the [job data](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_JobData.html) and check the [encryption key](https://docs.aws.amazon.com/codepipeline/latest/APIReference/API_EncryptionKey.html) property\. If the property is set, you should use that customer managed key ID when configuring AWS KMS\. If the key property is null, you use the AWS managed key\. CodePipeline uses the AWS managed key unless otherwise configured\.
 
   For an example that shows how to create the AWS KMS parameters in Java or \.NET, see [Specifying the AWS Key Management Service in Amazon S3 Using the AWS SDKs](https://docs.aws.amazon.com/AmazonS3/latest/dev/kms-using-sdks.html)\. For more information about the Amazon S3 bucket for CodePipeline, see [CodePipeline concepts](concepts.md)\.
 

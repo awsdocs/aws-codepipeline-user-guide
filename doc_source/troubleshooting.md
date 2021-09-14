@@ -222,7 +222,7 @@ The CloudTrail logs for the action also log the `AccessDenied` error\.
 
   1. In the **Policy** text field, enter a new bucket policy, or edit the existing policy as shown in the following example\. The bucket policy is a JSON file, so you must enter valid JSON\.
 
-     The following example shows a bucket policy statement for an artifact bucket\.
+     The following example shows a bucket policy statement for an artifact bucket where the example role ID for the service role is *AROAEXAMPLEID*\.
 
      ```
      {
@@ -232,7 +232,7 @@ The CloudTrail logs for the action also log the `AccessDenied` error\.
          "Resource": "arn:aws:s3:::BucketName",
          "Condition": {
              "StringLike": {
-                 "aws:userid": "RoleIdForServiceRole:*"
+                 "aws:userid": "AROAEXAMPLEID:*"
              }
          }
      }
@@ -252,7 +252,7 @@ The CloudTrail logs for the action also log the `AccessDenied` error\.
                  "Resource": "arn:aws:s3:::codepipeline-us-east-2-1234567890",
                  "Condition": {
                      "StringLike": {
-                         "aws:userid": "RoleIdForServiceRole:*"
+                         "aws:userid": "AROAEXAMPLEID:*"
                      }
                  }
              },

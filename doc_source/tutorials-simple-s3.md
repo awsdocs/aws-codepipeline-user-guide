@@ -172,9 +172,9 @@ In CodeDeploy, an *application* is an identifier, in the form of a name, for the
 **Important**  
 You must choose the same value for the **Name** key here that you assigned to your EC2 instances when you created them\. If you tagged your instances with something other than **MyCodePipelineDemo**, be sure to use it here\.
 
-1. Under **Deployment configuration**, choose `CodeDeployDefault.OneAtaTime`\.
+1. Under **Deployment settings**, choose `CodeDeployDefault.OneAtaTime`\.
 
-1. Under **Load Balancer**, clear **Enable load balancing**\. You do not need to set up a load balancer or choose a target group for this example\.
+1. Under **Load Balancer**, make sure the **Enable load balancing** box is not selected\. You do not need to set up a load balancer or choose a target group for this example\. After you de\-select the checkbox, the load balancer options do not display\.
 
 1. In the **Advanced** section, leave the defaults\.
 
@@ -195,7 +195,7 @@ In this part of the tutorial, you create the pipeline\. The sample runs automati
 If you choose another name for your pipeline, be sure to use that name instead of **MyFirstPipeline** for the rest of this tutorial\. After you create a pipeline, you cannot change its name\. Pipeline names are subject to some limitations\. For more information, see [Quotas in AWS CodePipeline](limits.md)\. 
 
 1. In **Service role**, do one of the following:
-   + Choose **New service role** to allow CodePipeline to create a new service role in IAM\. In **Role name**, the role and policy name both default to this format: AWSCodePipelineServiceRole\-*region*\-*pipeline\_name*\. For example, this is the service role created for this tutorial: AWSCodePipelineServiceRole\-eu\-west\-2\-MyFirstPipeline\.
+   + Choose **New service role** to allow CodePipeline to create a new service role in IAM\.
    + Choose **Existing service role** to use a service role already created in IAM\. In **Role name**, choose your service role from the list\.
 
 1. Leave the settings under **Advanced settings** at their defaults, and then choose **Next**\.

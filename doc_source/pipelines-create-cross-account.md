@@ -15,15 +15,15 @@ Jenkins build actions
 For this example, you must create an AWS Key Management Service \(AWS KMS\) key to use, add the key to the pipeline, and set up account policies and roles to enable cross\-account access\. For an AWS KMS key, you can use the key ID, the key ARN, or the alias ARN\. 
 
 **Note**  
-To specify a customer master key \(CMK\) in a different AWS account, you must use the key ARN or alias ARN\.
+Aliases are recognized only in the account that created the KMS key\. For cross\-account actions, you can only use the key ID or key ARN to identify the key\.
 
 In this walkthrough and its examples, *AccountA* is the account originally used to create the pipeline\. It has access to the Amazon S3 bucket used to store pipeline artifacts and the service role used by AWS CodePipeline\. *AccountB* is the account originally used to create the CodeDeploy application, deployment group, and service role used by CodeDeploy\. 
 
 For *AccountA* to edit a pipeline to use the CodeDeploy application created by *AccountB*, *AccountA* must: 
 + Request the ARN or account ID of *AccountB* \(in this walkthrough, the *AccountB* ID is *012ID\_ACCOUNT\_B*\)\.
-+ Create or use an AWS KMS customer managed key in the Region for the pipeline, and grant permissions to use that key to the service role \(*AWS\-CodePipeline\-Service*\) and *AccountB*\. 
++ Create or use an AWS KMS customer managed key in the Region for the pipeline, and grant permissions to use that key to the service role \(*CodePipeline\_Service\_Role*\) and *AccountB*\. 
 + Create an Amazon S3 bucket policy that grants *AccountB* access to the Amazon S3 bucket \(for example, *codepipeline\-us\-east\-2\-1234567890*\)\. 
-+ Create a policy that allows *AccountA* to assume a role configured by *AccountB*, and attach that policy to the service role \(*AWS\-CodePipeline\-Service*\)\.
++ Create a policy that allows *AccountA* to assume a role configured by *AccountB*, and attach that policy to the service role \(*CodePipeline\_Service\_Role*\)\.
 + Edit the pipeline to use the customer managed AWS KMS key instead of the default key\.
 
 For *AccountB* to allow access to its resources to a pipeline created in *AccountA*, *AccountB* must:
@@ -55,7 +55,7 @@ Customer\-managed keys are specific to a Region, as are all AWS KMS keys\. You m
 
 1. In **Define Key Administrative Permissions**, choose your IAM user and any other users or groups you want to act as administrators for this key, and then choose **Next**\.
 
-1. In **Define Key Usage Permissions**, under **This Account**, select the name of the service role for the pipeline \(for example, AWS\-CodePipeline\-Service\)\. Under **Other AWS accounts**, choose **Add another AWS account**\. Enter the account ID for *AccountB* to complete the ARN, and then choose **Next**\.
+1. In **Define Key Usage Permissions**, under **This Account**, select the name of the service role for the pipeline \(for example, CodePipeline\_Service\_Role\)\. Under **Other AWS accounts**, choose **Add another AWS account**\. Enter the account ID for *AccountB* to complete the ARN, and then choose **Next**\.
 
 1. In **Review and edit key policy**, review the policy, and then choose **Finish**\.
 

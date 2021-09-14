@@ -274,7 +274,7 @@ The following example shows a policy configured by AccountA for an S3 bucket use
 }
 ```
 
- The following example shows a policy configured by AccountA that allows AccountB to assume a role\. This policy must be applied to the service role for CodePipeline \(`AWS-CodePipeline-Service`\)\. For more information about how to apply policies to roles in IAM, see [Modifying a Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-managingrole-editing.html)\. In the following example, `012ID_ACCOUNT_B` is the ARN for AccountB:
+ The following example shows a policy configured by AccountA that allows AccountB to assume a role\. This policy must be applied to the service role for CodePipeline \(`CodePipeline_Service_Role`\)\. For more information about how to apply policies to roles in IAM, see [Modifying a Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-managingrole-editing.html)\. In the following example, `012ID_ACCOUNT_B` is the ARN for AccountB:
 
 ```
 {

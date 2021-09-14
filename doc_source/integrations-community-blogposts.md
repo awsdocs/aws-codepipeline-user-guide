@@ -86,11 +86,6 @@
   Learn how to provision a basic continuous delivery pipeline in CodePipeline using AWS CloudFormation\.
 
   *Published December 2015*
-+ [Building Continuous Deployment on AWS with CodePipeline, Jenkins, and Elastic Beanstalk](https://blogs.aws.amazon.com/application-management/post/Tx34AXRMYLXG5OT/Building-Continuous-Deployment-on-AWS-with-AWS-CodePipeline-Jenkins-and-AWS-Elas)
-
-  Learn how to use GitHub, CodePipeline, Jenkins, and Elastic Beanstalk to create a deployment pipeline for a web application that is updated automatically every time you change your code\.
-
-  *Published December 2015*
 + [Performance Testing in Continuous Delivery Using CodePipeline and BlazeMeter](https://aws.amazon.com/blogs/apn/performance-testing-in-continuous-delivery-using-aws-codepipeline-and-blazemeter/)
 
   Learn how to inject automated load tests at the right places in the CodePipeline delivery workflow with BlazeMeter’s native CodePipeline integration\.

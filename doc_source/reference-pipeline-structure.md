@@ -46,7 +46,7 @@ A two\-stage pipeline has the following basic structure:
 
 ```
 {
-    "roleArn": "An IAM ARN for a service role, such as arn:aws:iam::80398EXAMPLE:role/AWS-CodePipeline-Service",
+    "roleArn": "An IAM ARN for a service role, such as arn:aws:iam::80398EXAMPLE:role/CodePipeline_Service_Role",
     "stages": [
         {
             "name": "SourceStageName",
@@ -85,7 +85,7 @@ The pipeline structure has the following requirements:
   ```
       "pipeline": {
           "name": "YourPipelineName",
-          "roleArn": "ServiceRoleARN",
+          "roleArn": "CodePipeline_Service_Role",
           "artifactStores": {
               "us-east-1": {
                   "type": "S3",

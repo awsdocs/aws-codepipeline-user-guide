@@ -88,9 +88,7 @@ Each action in the source and deployment stages created by the wizard is assigne
 1. In **Step 1: Choose pipeline settings**, in **Pipeline name**, enter **MyCFNDeployPipeline**\.
 
 1. In **Service role**, do one of the following:
-   + Choose **New service role** to allow CodePipeline to create a service role in IAM\. In **Role name**, the role and policy name both default to this format: `AWSCodePipelineServiceRole-region-pipeline_name`\. 
-
-     For example, the service role created for this tutorial is `AWSCodePipelineServiceRole-us-west-2-MyS3DeployPipeline`\.
+   + Choose **New service role** to allow CodePipeline to create a service role in IAM\.
    + Choose **Existing service role**\. In **Role name**, choose your service role from the list\.
 
 1. In **Artifact store**: 

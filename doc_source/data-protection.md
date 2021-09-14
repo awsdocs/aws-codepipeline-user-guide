@@ -10,7 +10,7 @@ For data protection purposes, we recommend that you protect AWS account credenti
 + Use advanced managed security services such as Amazon Macie, which assists in discovering and securing personal data that is stored in Amazon S3\.
 + If you require FIPS 140\-2 validated cryptographic modules when accessing AWS through a command line interface or an API, use a FIPS endpoint\. For more information about the available FIPS endpoints, see [Federal Information Processing Standard \(FIPS\) 140\-2](http://aws.amazon.com/compliance/fips/)\.
 
-We strongly recommend that you never put sensitive identifying information, such as your customers' account numbers, into free\-form fields such as a **Name** field\. This includes when you work with CodePipeline or other AWS services using the console, API, AWS CLI, or AWS SDKs\. Any data that you enter into CodePipeline or other services might get picked up for inclusion in diagnostic logs\. When you provide a URL to an external server, don't include credentials information in the URL to validate your request to that server\.
+We strongly recommend that you never put confidential or sensitive information, such as your customers' email addresses, into tags or free\-form fields such as a **Name** field\. This includes when you work with CodePipeline or other AWS services using the console, API, AWS CLI, or AWS SDKs\. Any data that you enter into tags or free\-form fields used for names may be used for billing or diagnostic logs\. If you provide a URL to an external server, we strongly recommend that you do not include credentials information in the URL to validate your request to that server\.
 
 ## Internetwork traffic privacy<a name="inter-network-traffic-privacy"></a>
 
@@ -24,7 +24,7 @@ To connect your VPC to CodePipeline, you define an interface VPC endpoint for Co
 
 ## Encryption at rest<a name="encryption-at-rest"></a>
 
-Data in CodePipeline is encrypted at rest using AWS KMS customer master keys \(CMKs\)\. Code artifacts are stored in a customer\-owned S3 bucket and encrypted with either the AWS managed CMK or a customer managed CMK\. For more information, see [Configure server\-side encryption for artifacts stored in Amazon S3 for CodePipeline](S3-artifact-encryption.md)\.
+Data in CodePipeline is encrypted at rest using AWS KMS keys\. Code artifacts are stored in a customer\-owned S3 bucket and encrypted with either the AWS managed key or a customer managed key\. For more information, see [Configure server\-side encryption for artifacts stored in Amazon S3 for CodePipeline](S3-artifact-encryption.md)\.
 
 ## Encryption in transit<a name="encryption-in-transit"></a>
 
@@ -32,10 +32,10 @@ All service\-to\-service communication is encrypted in transit using SSL/TLS\.
 
 ## Encryption key management<a name="key-management"></a>
 
-If you choose the default option for encrypting code artifacts, CodePipeline uses the AWS managed CMK\. You cannot change or delete this AWS managed CMK\. If you use a customer managed CMK in AWS KMS to encrypt or decrypt artifacts in the S3 bucket, you can change or rotate this customer managed CMK as necessary\.
+If you choose the default option for encrypting code artifacts, CodePipeline uses the AWS managed key\. You cannot change or delete this AWS managed key\. If you use a customer managed key in AWS KMS to encrypt or decrypt artifacts in the S3 bucket, you can change or rotate this customer managed key as necessary\.
 
 **Important**  
-CodePipeline only supports symmetric customer master keys \(CMKs\)\. Do not use an asymmetric CMK to encrypt the data in your S3 bucket\.
+CodePipeline only supports symmetric KMS keys\. Do not use an asymmetric KMS key to encrypt the data in your S3 bucket\.
 
 ## Data protection configuration<a name="security-configuration"></a>
 
