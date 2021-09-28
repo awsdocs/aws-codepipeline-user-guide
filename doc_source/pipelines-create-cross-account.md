@@ -269,7 +269,7 @@ Now create an IAM role to use for cross\-account access, and configure it so tha
 **Note**  
 This step creates the trust relationship policy between *AccountB* and *AccountA*\.
 
-1. Under**Attach permissions policies**, choose **AmazonS3ReadOnlyAccess**, and then choose **Next: Tags**\.
+1. Under **Attach permissions policies**, choose **AmazonS3ReadOnlyAccess**, and then choose **Next: Tags**\.
 **Note**  
 This is not the policy you will use\. You must choose a policy to complete the wizard\.
 
