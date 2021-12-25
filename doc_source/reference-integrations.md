@@ -15,7 +15,7 @@ To certify your third\-party action type as a partner integration with CodePipel
 
 ## How third\-party action types work with the integrator<a name="reference-integrations-description"></a>
 
-You can add third\-party action types to customer pipelines to complete tasks on customer resources\. The integrator manages job requests and runs the action with CodePipeline\. The following diagram shows a third\-party action type created for customers use use in their pipeline\. After the customer configures the action, the action runs and creates job requests that are handled by the integrator's action engine\.
+You can add third\-party action types to customer pipelines to complete tasks on customer resources\. The integrator manages job requests and runs the action with CodePipeline\. The following diagram shows a third\-party action type created for customers to use in their pipeline\. After the customer configures the action, the action runs and creates job requests that are handled by the integrator's action engine\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-integration-model.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
