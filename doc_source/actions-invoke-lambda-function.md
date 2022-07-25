@@ -116,7 +116,7 @@ These are the minimum permissions required for a Lambda function to interoperate
 **Note**  
 If you see a **Welcome** page instead of the **Lambda** page, choose **Get Started Now**\.
 
-1. On the **Create function** page, choose **Author from scratch**\. In **Function name**, enter a name for your Lambda function \(for example, **MyLambdaFunctionForAWSCodePipeline**\)\. In **Runtime**, choose **Node\.js 10\.x**\.
+1. On the **Create function** page, choose **Author from scratch**\. In **Function name**, enter a name for your Lambda function \(for example, **MyLambdaFunctionForAWSCodePipeline**\)\. In **Runtime**, choose **Node\.js 14\.x**\.
 
    
 
