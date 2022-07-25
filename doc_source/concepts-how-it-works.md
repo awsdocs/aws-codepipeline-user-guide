@@ -55,7 +55,7 @@ We recommend that you use the stop and wait option to stop a pipeline execution\
 
 As an example of abandoned actions that can result in out\-of\-sequence tasks, if you are deploying a large file \(1GB\) through an S3 deployment action, and you choose to stop and abandon the action while the deployment is already in progress, the action is abandoned in CodePipeline, but continues in Amazon S3\. Amazon S3 does not encounter any instruction to cancel the upload\. Next, if you start a new pipeline execution with a very small file, there are now two deployments in progress\. Because the file size of the new execution is small, the new deployment completes while the old deployment is still uploading\. When the old deployment completes, the new file is overwritten by the old file\.
 
-You might want to use the stop and abandon option in the case where you have a custom action\. For example, you can abandon a custom action with work that does not need to finish before you stop the execution for a new execution with a bug fix\.
+You might want to use the stop and abandon option in the case where you have a custom action\. For example, you can abandon a custom action with work that does not need to finish before starting a new execution for a bug fix\.
 
 ## How executions are processed in a pipeline<a name="concepts-how-it-works-executions"></a>
 
