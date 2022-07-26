@@ -1,6 +1,11 @@
-# Amazon S3<a name="action-reference-S3"></a>
+# Amazon S3 source action<a name="action-reference-S3"></a>
 
 Triggers the pipeline when a new object is uploaded to the configured bucket and object key\.
+
+**Note**  
+This reference topic describes the Amazon S3 source action for CodePipeline where the source location is an Amazon S3 bucket configured for versioning\. For reference information about the Amazon S3 deploy action in CodePipeline, see [Amazon S3 deploy action](action-reference-S3Deploy.md)\.
+
+You can create an Amazon S3 bucket to use as the source location for your application files\.
 
 **Note**  
 When you create your source bucket, make sure you enable versioning on the bucket\. If you want to use an existing Amazon S3 bucket, see [Using versioning](http://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html) to enable versioning on an existing bucket\.
@@ -18,7 +23,7 @@ When Amazon S3 is the source provider for your pipeline, you may zip your source
 + [Input artifacts](#action-reference-S3-input)
 + [Output artifacts](#action-reference-S3-output)
 + [Output variables](#action-reference-S3-variables)
-+ [Action declaration \(S3 example\)](#action-reference-S3-example)
++ [Action declaration](#action-reference-S3-example)
 + [See also](#action-reference-S3-links)
 
 ## Action type<a name="action-reference-S3-type"></a>
@@ -52,7 +57,7 @@ If you omit `PollForSourceChanges`, CodePipeline defaults to polling your source
 + **Description:** Input artifacts do not apply for this action type\.
 
 ## Output artifacts<a name="action-reference-S3-output"></a>
-+ **Number of Artifacts:** `1` 
++ **Number of artifacts:** `1` 
 + **Description:** Provides the artifacts that are available in the source bucket configured to connect to the pipeline\. The artifacts generated from the bucket are the output artifacts for the Amazon S3 action\. The Amazon S3 object metadata \(ETag and version ID\) is displayed in CodePipeline as the source revision for the triggered pipeline execution\.
 
 ## Output variables<a name="action-reference-S3-variables"></a>
@@ -67,7 +72,7 @@ The entity tag for the object related to the source change that triggered the pi
 **VersionId**  
 The version ID for the version of the object related to the source change that triggered the pipeline\.
 
-## Action declaration \(S3 example\)<a name="action-reference-S3-example"></a>
+## Action declaration<a name="action-reference-S3-example"></a>
 
 ------
 #### [ YAML ]

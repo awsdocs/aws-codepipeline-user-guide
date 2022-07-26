@@ -22,7 +22,7 @@ In this example, you upload the sample AWS CloudFormation template file for an S
    ```
    {
      "AWSTemplateFormatVersion": "2010-09-09",
-     "Description": "AWS CloudFormation Sample Template S3_Bucket: Sample template showing how to create a privately accessible S3 bucket. **WARNING** This template creates an S3 bucket. You will be billed for the AWS resources used if you create a stack from this template.",
+     "Description": "CloudFormation Sample Template S3_Bucket: Sample template showing how to create a privately accessible S3 bucket. **WARNING** This template creates an S3 bucket. You will be billed for the resources used if you create a stack from this template.",
      "Resources": {
        "S3Bucket": {
          "Type": "AWS::S3::Bucket",
@@ -108,16 +108,15 @@ Copy the URL for your product before you navigate away from the page\. Once you 
 
 1. In **Add deploy stage**, complete the following:
 
-   1. In **Deploy provider**, choose **AWS Service Catalog**\.
+   1. In **Deploy provider**, choose **AWS service Catalog**\.
 
-   1. For deployment configuration, choose **Enter deployment configuration**\.  
-![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/deploy-servicecatalog-nofile.png)
+   1. For deployment configuration, choose **Enter deployment configuration**\.
 
    1. In **Product ID**, paste the product ID you copied from the AWS Service Catalog console\.
 
    1. In **Template file path**, enter the relative path where the template file is stored\.
 
-   1. In **Product type**, choose **AWS CloudFormation Template**\.
+   1. In **Product type**, choose **AWS CloudFormation template**\.
 
    1. In **Product version name**, enter the name of the product version you specified in AWS Service Catalog\. If you want to have the template change deployed to a new product version, enter a product version name that has not been used for any previous product version in the same product\.
 
@@ -130,8 +129,7 @@ Copy the URL for your product before you navigate away from the page\. Once you 
 1. After your pipeline runs successfully, on the deployment stage, choose **Details**\. This opens your product in AWS Service Catalog\.  
 ![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/deploy-servicecatalog-pipeline.png)
 
-1. Under your product information, choose your version name to open the product template\. View the template deployment\.  
-![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/deploy-servicecatalog-template-page.png)
+1. Under your product information, choose your version name to open the product template\. View the template deployment\.
 
 ### Step 4: Push a change and verify your product in AWS Service Catalog<a name="tutorials-S3-servicecatalog-change"></a>
 
@@ -143,8 +141,7 @@ Copy the URL for your product before you navigate away from the page\. Once you 
 
 1. Commit and push your change\. Your pipeline starts after you push the change\. When the run of the pipeline is complete, on the deployment stage, choose **Details** to open your product in AWS Service Catalog\.
 
-1. Under your product information, choose the new version name to open the product template\. View the deployed template change\.  
-![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/tutorials-S3-servicecatalog-change.png)
+1. Under your product information, choose the new version name to open the product template\. View the deployed template change\.
 
 ## Option 2: Deploy to AWS Service Catalog using a configuration file<a name="tutorials-S3-servicecatalog-ex2-configure"></a>
 
@@ -157,7 +154,7 @@ In this example, you upload the sample AWS CloudFormation template file for an S
    ```
    {
      "AWSTemplateFormatVersion": "2010-09-09",
-     "Description": "AWS CloudFormation Sample Template S3_Bucket: Sample template showing how to create a privately accessible S3 bucket. **WARNING** This template creates an S3 bucket. You will be billed for the AWS resources used if you create a stack from this template.",
+     "Description": "CloudFormation Sample Template S3_Bucket: Sample template showing how to create a privately accessible S3 bucket. **WARNING** This template creates an S3 bucket. You will be billed for the resources used if you create a stack from this template.",
      "Resources": {
        "S3Bucket": {
          "Type": "AWS::S3::Bucket",
@@ -267,10 +264,9 @@ Copy the URL for your product before you navigate away from the page\. Once you 
 
 1. In **Add deploy stage**, complete the following:
 
-   1. In **Deploy provider**, choose **AWS Service Catalog**\.
+   1. In **Deploy provider**, choose **AWS service Catalog**\.
 
-   1. Choose **Use configuration file**\.  
-![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/deploy-servicecatalog-withfile.png)
+   1. Choose **Use configuration file**\.
 
    1. In **Product ID**, paste the product ID you copied from the AWS Service Catalog console\.
 
@@ -283,8 +279,7 @@ Copy the URL for your product before you navigate away from the page\. Once you 
 1. After your pipeline runs successfully, on your deployment stage, choose **Details** to open your product in AWS Service Catalog\.  
 ![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/deploy-servicecatalog-pipeline.png)
 
-1. Under your product information, choose your version name to open the product template\. View the template deployment\.  
-![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/deploy-servicecatalog-template-page.png)
+1. Under your product information, choose your version name to open the product template\. View the template deployment\.
 
 ### Step 5: Push a change and verify your product in Service Catalog<a name="tutorials-S3-servicecatalog-change2"></a>
 
@@ -296,5 +291,4 @@ Copy the URL for your product before you navigate away from the page\. Once you 
 
 1. Commit and push your change\. Your pipeline starts after you push the change\. When the run of the pipeline is complete, on the deployment stage, choose **Details** to open your product in AWS Service Catalog\.
 
-1. Under your product information, choose the new version name to open the product template\. View the deployed template change\.  
-![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/tutorials-S3-servicecatalog-change.png)
+1. Under your product information, choose the new version name to open the product template\. View the deployed template change\.

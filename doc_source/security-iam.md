@@ -169,6 +169,7 @@ When you create IAM policies, follow the standard security advice of granting le
 
    ```
    {
+     "Effect": "Allow",
      "Action": [  
          "codecommit:GetBranch",
          "codecommit:GetCommit",
@@ -176,8 +177,7 @@ When you create IAM policies, follow the standard security advice of granting le
          "codecommit:GetUploadArchiveStatus",      
          "codecommit:CancelUploadArchive"
                ],
-     "Resource": "*",
-     "Effect": "Allow"
+     "Resource": "resource_ARN"
    },
    ```
 
@@ -185,6 +185,7 @@ When you create IAM policies, follow the standard security advice of granting le
 
    ```
    {
+       "Effect": "Allow",
        "Action": [
            "opsworks:CreateDeployment",
            "opsworks:DescribeApps",
@@ -195,8 +196,7 @@ When you create IAM policies, follow the standard security advice of granting le
            "opsworks:UpdateApp",
            "opsworks:UpdateStack"
        ],
-       "Resource": "*",
-       "Effect": "Allow"
+       "Resource": "resource_ARN"
    },
    ```
 
@@ -204,6 +204,7 @@ When you create IAM policies, follow the standard security advice of granting le
 
    ```
    {
+       "Effect": "Allow",
        "Action": [
            "cloudformation:CreateStack",
            "cloudformation:DeleteStack",
@@ -217,8 +218,7 @@ When you create IAM policies, follow the standard security advice of granting le
            "cloudformation:ValidateTemplate",
            "iam:PassRole"
        ],
-       "Resource": "*",
-       "Effect": "Allow"
+       "Resource": "resource_ARN"
    },
    ```
 
@@ -226,12 +226,12 @@ When you create IAM policies, follow the standard security advice of granting le
 
    ```
    {
+       "Effect": "Allow",
        "Action": [
            "codebuild:BatchGetBuilds",
            "codebuild:StartBuild"
        ],
-       "Resource": "*",
-       "Effect": "Allow"
+       "Resource": "resource_ARN"
    },
    ```
 **Note**  
@@ -241,6 +241,7 @@ Support for batch builds was added at a later date\. See step 11 for the permiss
 
    ```
    {
+       "Effect": "Allow",
        "Action": [
            "devicefarm:ListProjects",
            "devicefarm:ListDevicePools",
@@ -249,8 +250,7 @@ Support for batch builds was added at a later date\. See step 11 for the permiss
            "devicefarm:CreateUpload",
            "devicefarm:ScheduleRun"
        ],
-       "Resource": "*",
-       "Effect": "Allow"
+       "Resource": "resource_ARN"
    },
    ```
 
@@ -266,14 +266,14 @@ Support for batch builds was added at a later date\. See step 11 for the permiss
            "servicecatalog:DeleteProvisioningArtifact",
            "servicecatalog:UpdateProduct"
        ],
-       "Resource": "*"
+       "Resource": "resource_ARN"
    },
    {
        "Effect": "Allow",
        "Action": [
            "cloudformation:ValidateTemplate"
        ],
-       "Resource": "*"
+       "Resource": "resource_ARN"
    }
    ```
 
@@ -281,11 +281,11 @@ Support for batch builds was added at a later date\. See step 11 for the permiss
 
    ```
    {
+       "Effect": "Allow",
        "Action": [
            "ecr:DescribeImages"
        ],
-       "Resource": "*",
-       "Effect": "Allow"
+       "Resource": "resource_ARN"
    },
    ```
 
@@ -293,6 +293,7 @@ Support for batch builds was added at a later date\. See step 11 for the permiss
 
    ```
    {
+       "Effect": "Allow",
        "Action": [
            "ecs:DescribeServices",
            "ecs:DescribeTaskDefinition",
@@ -301,8 +302,7 @@ Support for batch builds was added at a later date\. See step 11 for the permiss
            "ecs:RegisterTaskDefinition",
            "ecs:UpdateService"
        ],
-       "Resource": "*",
-       "Effect": "Allow"
+       "Resource": "resource_ARN"
    },
    ```
 
@@ -316,7 +316,7 @@ Support for batch builds was added at a later date\. See step 11 for the permiss
                "Effect": "Allow",
                "Action": "iam:PassRole",
                "Resource": [
-                   "arn:aws:iam::<aws_account_id>:role/<ecsTaskExecutionRole_or_TaskRole_name>"
+                   "arn:aws:iam::aws_account_ID:role/ecsTaskExecutionRole_or_TaskRole_name"
                ]
            }
        ]
@@ -327,6 +327,7 @@ Support for batch builds was added at a later date\. See step 11 for the permiss
 
    ```
    {
+       "Effect": "Allow",
        "Action": [
            "codedeploy:CreateDeployment",
            "codedeploy:GetDeployment",
@@ -336,8 +337,7 @@ Support for batch builds was added at a later date\. See step 11 for the permiss
            "codedeploy:GetDeploymentConfig",
            "ecs:RegisterTaskDefinition"
        ],
-       "Resource": "*",
-       "Effect": "Allow"
+       "Resource": "resource_ARN"
    },
    ```
 
@@ -351,7 +351,7 @@ Support for batch builds was added at a later date\. See step 11 for the permiss
                "Effect": "Allow",
                "Action": "iam:PassRole",
                "Resource": [
-                   "arn:aws:iam::<aws_account_id>:role/<ecsTaskExecutionRole_or_TaskRole_name>"
+                   "arn:aws:iam::aws_account_ID:role/ecsTaskExecutionRole_or_TaskRole_name"
                ]
            }
        ]
@@ -364,11 +364,11 @@ Support for batch builds was added at a later date\. See step 11 for the permiss
    {
        "Statement": [
            {
+               "Effect": "Allow",
                "Action": [
                    "iam:PassRole"
                ],
-               "Resource": "*",
-               "Effect": "Allow",
+               "Resource": "resource_ARN",
                "Condition": {
                    "StringEqualsIfExists": {
                        "iam:PassedToService": [
@@ -386,11 +386,11 @@ Support for batch builds was added at a later date\. See step 11 for the permiss
 
    ```
    {
+       "Effect": "Allow",
        "Action": [
            "codestar-connections:UseConnection"
        ],
-       "Resource": "*",
-       "Effect": "Allow"
+       "Resource": "resource_ARN"
    },
    ```
 
@@ -400,13 +400,13 @@ Support for batch builds was added at a later date\. See step 11 for the permiss
 
    ```
    {
+       "Effect": "Allow",
        "Action": [
            "states:DescribeStateMachine",
            "states:DescribeExecution",
            "states:StartExecution"
        ],
-       "Resource": "*",
-       "Effect": "Allow"
+       "Resource": "resource_ARN"
    },
    ```
 
@@ -414,13 +414,13 @@ Support for batch builds was added at a later date\. See step 11 for the permiss
 
    ```
    {
+       "Effect": "Allow",
        "Action": [
            "appconfig:StartDeployment",
            "appconfig:GetDeployment",
            "appconfig:StopDeployment"
        ],
-       "Resource": "*",
-       "Effect": "Allow"
+       "Resource": "resource_ARN"
    },
    ```
 
@@ -428,12 +428,12 @@ Support for batch builds was added at a later date\. See step 11 for the permiss
 
    ```
    {
+       "Effect": "Allow",
        "Action": [
            "codebuild:BatchGetBuildBatches",
            "codebuild:StartBuildBatch"
        ],
-       "Resource": "*",
-       "Effect": "Allow"
+       "Resource": "resource_ARN"
    },
    ```
 
@@ -442,6 +442,7 @@ Support for batch builds was added at a later date\. See step 11 for the permiss
 
      ```
      {
+         "Effect": "Allow",
          "Action": [
              "cloudformation:CreateStackSet",
              "cloudformation:UpdateStackSet",
@@ -450,20 +451,19 @@ Support for batch builds was added at a later date\. See step 11 for the permiss
              "cloudformation:DescribeStackSet",
              "cloudformation:ListStackInstances"
          ],
-         "Resource": "*",
-         "Effect": "Allow"
+         "Resource": "resource_ARN"
      },
      ```
    + For the `CloudFormationStackInstances` action, add the following to your policy statement:
 
      ```
      {
+         "Effect": "Allow",
          "Action": [
              "cloudformation:CreateStackInstances",
              "cloudformation:DescribeStackSetOperation"
          ],
-         "Resource": "*",
-         "Effect": "Allow"
+         "Resource": "resource_ARN"
      },
      ```
 
@@ -471,36 +471,36 @@ Support for batch builds was added at a later date\. See step 11 for the permiss
 
    ```
    {
+       "Effect": "Allow",
        "Action": [
            "codecommit:GetRepository"
        ],
-       "Resource": "*",
-       "Effect": "Allow"
+       "Resource": "resource_ARN"
    },
    ```
 **Note**  
-To make sure your CodeBuild action can use the full clone option with a CodeCommit source, you must also add the `codecommit:GitPull `permission to the policy statement for your project's CodeBuild service role\.
+To make sure your CodeBuild action can use the full clone option with a CodeCommit source, you must also add the `codecommit:GitPull` permission to the policy statement for your project's CodeBuild service role\.
 
 1. For Elastic Beanstalk, the following are the minimum permissions needed to create pipelines with an `ElasticBeanstalk` deploy action\.
 
    ```
    {
-               "Action": [
-                   "elasticbeanstalk:*",
-                   "ec2:*",
-                   "elasticloadbalancing:*",
-                   "autoscaling:*",
-                   "cloudwatch:*",
-                   "s3:*",
-                   "sns:*",
-                   "cloudformation:*",
-                   "rds:*",
-                   "sqs:*",
-                   "ecs:*"
-               ],
-               "Resource": "*",
-               "Effect": "Allow"
-           },
+       "Effect": "Allow",
+       "Action": [
+           "elasticbeanstalk:*",
+           "ec2:*",
+           "elasticloadbalancing:*",
+           "autoscaling:*",
+           "cloudwatch:*",
+           "s3:*",
+           "sns:*",
+           "cloudformation:*",
+           "rds:*",
+           "sqs:*",
+           "ecs:*"
+       ],
+       "Resource": "resource_ARN"
+   },
    ```
 **Note**  
 You should replace wildcards in the resource policy with the resources for the account you want to limit access to\. For more information about creating a policy that grants least\-privilege access, see [https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege)\.

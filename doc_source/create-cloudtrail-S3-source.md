@@ -3,7 +3,7 @@
 To add an Amazon S3 source action in CodePipeline, you choose either to: 
 + Use the CodePipeline console **Create pipeline** wizard \([Create a pipeline \(console\)](pipelines-create.md#pipelines-create-console)\) or **Edit action** page to choose the **S3** provider option\. The console creates an Amazon CloudWatch Events rule and a CloudTrail trail that starts your pipeline when the source changes\.
 + Use the CLI to add the action configuration for the `S3` action and create additional resources as follows:
-  + Use the `S3` example action configuration in [Amazon S3](action-reference-S3.md) to create your action as shown in [Create a pipeline \(CLI\)](pipelines-create.md#pipelines-create-cli)\.
+  + Use the `S3` example action configuration in [Amazon S3 source action](action-reference-S3.md) to create your action as shown in [Create a pipeline \(CLI\)](pipelines-create.md#pipelines-create-cli)\.
   + The change detection method defaults to starting the pipeline by polling the source\. You should disable periodic checks and create the change detection rule and trail manually\. Use one of the following methods: [Create a CloudWatch Events rule for an Amazon S3 source \(console\)](create-cloudtrail-S3-source-console.md), [Create a CloudWatch Events rule for an Amazon S3 source \(CLI\)](create-cloudtrail-S3-source-cli.md), or [Create a CloudWatch Events rule for an Amazon S3 source \(AWS CloudFormation template\) ](create-cloudtrail-S3-source-cfn.md)\.
 
 AWS CloudTrail is a service that logs and filters events on your Amazon S3 source bucket\. The trail sends the filtered source changes to the Amazon CloudWatch Events rule\. The Amazon CloudWatch Events rule detects the source change and then starts your pipeline\. 

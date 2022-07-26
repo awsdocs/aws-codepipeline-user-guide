@@ -11,19 +11,19 @@ If you use the console to create or edit your pipeline, your CloudWatch Events r
 
 1. In the navigation pane, choose **Trails**\.
 
-1. Choose **Create Trail**\. For **Trail name**, enter a name for your trail\.
-
-1. For **Apply trail to all regions**, choose **No**\. 
-
-1. Under **Data events**, make sure **S3** is selected\. Specify an Amazon S3 bucket and the object prefix \(folder name\) to log data events for all objects in the folder\. For each trail, you can add up to 250 Amazon S3 objects\.
-
-1. For **Read/Write events**, choose **None**\. 
-
-1. Choose **Write**\. The trail records Amazon S3 object\-level API activity \(for example, `GetObject` and `PutObject`\) on the specified bucket and prefix\.
+1. Choose **Create trail**\. For **Trail name**, enter a name for your trail\.
 
 1. Under **Storage location**, create or specify the bucket to be used to store the log files\. By default, Amazon S3 buckets and objects are private\. Only the resource owner \(the AWS account that created the bucket\) can access the bucket and its objects\. The bucket must have a resource policy that allows AWS CloudTrail permissions to access the objects in the bucket\.
 
-1. If you're satisfied with the trail, choose **Create**\.
+1. Under **Trail log bucket and folder**, specify an Amazon S3 bucket and the object prefix \(folder name\) to log data events for all objects in the folder\. For each trail, you can add up to 250 Amazon S3 objects\. Complete the required encryption key information and choose **Next**\.
+
+1. For **Event type**, choose **Management events**\.
+
+1. For **Management events**, choose **Write**\. The trail records Amazon S3 object\-level API activity \(for example, `GetObject` and `PutObject`\) on the specified bucket and prefix\.
+
+1. Choose **Write**\. 
+
+1. If you're satisfied with the trail, choose **Create trail**\.
 
 **To create a CloudWatch Events rule that targets your pipeline with an S3 source**
 
@@ -41,8 +41,7 @@ If you use the console to create or edit your pipeline, your CloudWatch Events r
 
    Choose **Specific operation\(s\)**, and then choose **CompleteMultipartUpload**, **CopyObject**, and **PutObject**\.
 
-   Above the **Event Pattern Preview** pane, choose **Edit**\. Edit the event pattern to add the bucket name and S3 object key \(or key name\) which uniquely identifies the object in the bucket as `requestParameters`\. In this example, a rule is created for a bucket named `my-bucket` and an object key of `my-files.zip`\. When you use the **Edit** window to specify resources, your rule is updated to use a custom event pattern\.  
-![\[S3 source state change rule\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/cloudwatch-rule-event-pattern-S3-source.png)![\[S3 source state change rule\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[S3 source state change rule\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+   Above the **Event Pattern Preview** pane, choose **Edit**\. Edit the event pattern to add the bucket name and S3 object key \(or key name\) which uniquely identifies the object in the bucket as `requestParameters`\. In this example, a rule is created for a bucket named `my-bucket` and an object key of `my-files.zip`\. When you use the **Edit** window to specify resources, your rule is updated to use a custom event pattern\.
 
    The following is a sample event pattern to copy and paste:
 

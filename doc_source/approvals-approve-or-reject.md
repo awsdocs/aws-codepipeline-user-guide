@@ -2,9 +2,7 @@
 
 When a pipeline includes an approval action, the pipeline execution stops at the point where the action has been added\. The pipeline won't resume unless someone manually approves the action\. If an approver rejects the action, or if no approval response is received within seven days of the pipeline stopping for the approval action, the pipeline status becomes "Failed\."
 
-If the person who added the approval action to the pipeline configured notifications, you might receive an email that looks similar to the following:
-
-![\[A sample notification email for a manual approval request\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/approvals-email-example.png)![\[A sample notification email for a manual approval request\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[A sample notification email for a manual approval request\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+If the person who added the approval action to the pipeline configured notifications, you might receive an email with the pipeline information and status for approval\.
 
 ## Approve or reject an approval action \(console\)<a name="approvals-approve-or-reject-console"></a>
 

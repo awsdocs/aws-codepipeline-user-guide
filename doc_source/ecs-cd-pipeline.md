@@ -190,7 +190,7 @@ Use the CodePipeline wizard to create your pipeline stages and connect your sour
 
 1. On the **Step 1: Name** page, for **Pipeline name**, type the name for your pipeline and choose **Next**\. For this tutorial, the pipeline name is **hello\-world**\.
 
-1. On the **Step 2: Add source stage** page, for **Source provider**, choose **AWS CodeCommit**\.
+1. On the **Step 2: Add source stage** page, for **Source provider**, choose ** AWS CodeCommit**\.
 
    1. For **Repository name**, choose the name of the CodeCommit repository to use as the source location for your pipeline\.
 
@@ -206,7 +206,7 @@ Use the CodePipeline wizard to create your pipeline stages and connect your sour
 
    1. For **Runtime\(s\)**, choose **Standard**\.
 
-   1. For **Image**, choose **aws/codebuild/amazonlinux2\-x86\_64\-standard:3\.0**\.
+   1. For **Image**, choose **`aws/codebuild/amazonlinux2-x86_64-standard:3.0`**\.
 
    1. For **Image version** and **Environment type**, use the default values\.
 

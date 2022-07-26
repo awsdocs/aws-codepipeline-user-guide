@@ -21,7 +21,7 @@ You should also use events on pipelines that were created before the new console
 
 
 
-**To update AWS CodeCommit source actions**  
+**To update CodeCommit source actions**  
 
 | Type | Action Required | Instructions | 
 | --- | --- | --- | 
@@ -77,11 +77,9 @@ Use these steps to edit a pipeline that is using periodic checks\. If you want t
 
 1. Expand **Change Detection Options** and choose **Use CloudWatch Events to automatically start my pipeline when a change occurs \(recommended\)**\. 
 
-   A message appears showing the Amazon CloudWatch Events rule to be created for this pipeline\. Choose **Update**\.  
-![\[Use the console to update a CodeCommit pipeline for change detection\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/poll-migration-console-codecommit.png)![\[Use the console to update a CodeCommit pipeline for change detection\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Use the console to update a CodeCommit pipeline for change detection\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+   A message appears showing the Amazon CloudWatch Events rule to be created for this pipeline\. Choose **Update**\.
 
-   If you are updating a pipeline that has an Amazon S3 source, you see the following message\. Choose **Update**\.  
-![\[Use the console to update an Amazon S3 pipeline for change detection\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/poll-migration-console-s3.png)![\[Use the console to update an Amazon S3 pipeline for change detection\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Use the console to update an Amazon S3 pipeline for change detection\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+   If you are updating a pipeline that has an Amazon S3 source, you see the following message\. Choose **Update**\.
 
 1. When you have finished editing your pipeline, choose **Save pipeline changes** to return to the summary page\.
 
@@ -240,7 +238,7 @@ To use the AWS CLI to create a trail, call the create\-trail command, specifying
 + The trail name\.
 + The bucket to which you have already applied the bucket policy for AWS CloudTrail\.
 
-For more information, see [Creating a Trail with the AWS Command Line Interface](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-and-update-a-trail-by-using-the-aws-cli.html)\.
+For more information, see [Creating a trail with the AWS command line interface](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-and-update-a-trail-by-using-the-aws-cli.html)\.
 
 1. Call the create\-trail command and include the `--name` and `--s3-bucket-name` parameters\.
 
@@ -1495,6 +1493,7 @@ When you create a pipeline with this method, the `PollForSourceChanges` paramete
                 Values:
                   - !Join [ '', [ !ImportValue SourceBucketARN, '/', !Ref SourceObjectKey ] ]
             ReadWriteType: WriteOnly
+            IncludeManagementEvents: false
         IncludeGlobalServiceEvents: true
         IsLogging: true
         IsMultiRegionTrail: true
@@ -1614,7 +1613,8 @@ When you create a pipeline with this method, the `PollForSourceChanges` paramete
                   ]
                 }
               ],
-              "ReadWriteType": "WriteOnly"
+              "ReadWriteType": "WriteOnly",
+              "IncludeManagementEvents": false
             }
           ],
           "IncludeGlobalServiceEvents": true,
@@ -1695,7 +1695,7 @@ Resources:
                   - codecommit:GetCommit
                   - codecommit:GetUploadArchiveStatus
                   - codecommit:UploadArchive
-                Resource: '*'
+                Resource: 'resource_ARN'
               -
                 Effect: Allow
                 Action:
@@ -1704,13 +1704,13 @@ Resources:
                   - codedeploy:GetDeployment
                   - codedeploy:GetDeploymentConfig
                   - codedeploy:RegisterApplicationRevision
-                Resource: '*'
+                Resource: 'resource_ARN'
               -
                 Effect: Allow
                 Action:
                   - codebuild:BatchGetBuilds
                   - codebuild:StartBuild
-                Resource: '*'
+                Resource: 'resource_ARN'
               -
                 Effect: Allow
                 Action:
@@ -1720,18 +1720,18 @@ Resources:
                   - devicefarm:GetUpload
                   - devicefarm:CreateUpload
                   - devicefarm:ScheduleRun
-                Resource: '*'
+                Resource: 'resource_ARN'
               -
                 Effect: Allow
                 Action:
                   - lambda:InvokeFunction
                   - lambda:ListFunctions
-                Resource: '*'
+                Resource: 'resource_ARN'
               -
                 Effect: Allow
                 Action:
                   - iam:PassRole
-                Resource: '*'
+                Resource: 'resource_ARN'
               -
                 Effect: Allow
                 Action:
@@ -1746,7 +1746,7 @@ Resources:
                   - rds:*
                   - sqs:*
                   - ecs:*
-                Resource: '*'
+                Resource: 'resource_ARN'
   AppPipeline: 
     Type: AWS::CodePipeline::Pipeline
     Properties: 
@@ -1954,7 +1954,7 @@ Outputs:
                                         "codecommit:GetUploadArchiveStatus",
                                         "codecommit:UploadArchive"
                                     ],
-                                    "Resource": "*"
+                                    "Resource": "resource_ARN"
                                 },
                                 {
                                     "Effect": "Allow",
@@ -1965,7 +1965,7 @@ Outputs:
                                         "codedeploy:GetDeploymentConfig",
                                         "codedeploy:RegisterApplicationRevision"
                                     ],
-                                    "Resource": "*"
+                                    "Resource": "resource_ARN"
                                 },
                                 {
                                     "Effect": "Allow",
@@ -1973,7 +1973,7 @@ Outputs:
                                         "codebuild:BatchGetBuilds",
                                         "codebuild:StartBuild"
                                     ],
-                                    "Resource": "*"
+                                    "Resource": "resource_ARN"
                                 },
                                 {
                                     "Effect": "Allow",
@@ -1985,7 +1985,7 @@ Outputs:
                                         "devicefarm:CreateUpload",
                                         "devicefarm:ScheduleRun"
                                     ],
-                                    "Resource": "*"
+                                    "Resource": "resource_ARN"
                                 },
                                 {
                                     "Effect": "Allow",
@@ -1993,14 +1993,14 @@ Outputs:
                                         "lambda:InvokeFunction",
                                         "lambda:ListFunctions"
                                     ],
-                                    "Resource": "*"
+                                    "Resource": "resource_ARN"
                                 },
                                 {
                                     "Effect": "Allow",
                                     "Action": [
                                         "iam:PassRole"
                                     ],
-                                    "Resource": "*"
+                                    "Resource": "resource_ARN"
                                 },
                                 {
                                     "Effect": "Allow",
@@ -2017,7 +2017,7 @@ Outputs:
                                         "sqs:*",
                                         "ecs:*"
                                     ],
-                                    "Resource": "*"
+                                    "Resource": "resource_ARN"
                                 }
                             ]
                         }

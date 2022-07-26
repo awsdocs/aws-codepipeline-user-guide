@@ -130,6 +130,7 @@ If you configure a pipeline to use Jenkins for build or test, create a separate 
 {
     "Statement": [
         {
+            "Effect": "Allow",
             "Action": [
                 "codepipeline:AcknowledgeJob",
                 "codepipeline:GetJobDetails",
@@ -137,7 +138,6 @@ If you configure a pipeline to use Jenkins for build or test, create a separate 
                 "codepipeline:PutJobFailureResult",
                 "codepipeline:PutJobSuccessResult"
             ],
-            "Effect": "Allow",
             "Resource": "*"
         }
     ],
@@ -153,8 +153,9 @@ The following example shows a policy in the 80398EXAMPLE account that allows use
 
 ```
 {
-   "Statement": [
+    "Statement": [
         {
+            "Effect": "Allow",
             "Action": [
                 "codepipeline:GetPipeline",
                 "codepipeline:GetPipelineState",
@@ -174,7 +175,6 @@ The following example shows a policy in the 80398EXAMPLE account that allows use
                 "lambda:GetFunctionConfiguration",
                 "lambda:ListFunctions"
             ],
-            "Effect": "Allow",
             "Resource": "arn:aws:codepipeline:us-east-2:80398EXAMPLE:MyFirstPipeline"
         }
     ],
@@ -216,7 +216,7 @@ The following example shows a policy created in the *111111111111* AWS account t
 
 ## Example 8: Use AWS resources associated with another account in a pipeline<a name="identity-based-policies-example-8"></a>
 
-You can configure policies that allow a user to create a pipeline that uses resources in another AWS account\. This requires configuring policies and roles in both the account that creates the pipeline \(AccountA\) and the account that created the resources to be used in the pipeline \(AccountB\)\. You must also create a customer managed key in AWS Key Management Service to use for cross\-account access\. For more information and step\-by\-step examples, see [Create a pipeline in CodePipeline that uses resources from another AWS account](pipelines-create-cross-account.md) and [Data protection configuration](data-protection.md#security-configuration)\.
+You can configure policies that allow a user to create a pipeline that uses resources in another AWS account\. This requires configuring policies and roles in both the account that creates the pipeline \(AccountA\) and the account that created the resources to be used in the pipeline \(AccountB\)\. You must also create a customer managed key in AWS Key Management Service to use for cross\-account access\. For more information and step\-by\-step examples, see [Create a pipeline in CodePipeline that uses resources from another AWS account](pipelines-create-cross-account.md) and [Configure server\-side encryption for artifacts stored in Amazon S3 for CodePipeline](S3-artifact-encryption.md)\.
 
 The following example shows a policy configured by AccountA for an S3 bucket used to store pipeline artifacts\. The policy grants access to AccountB\. In the following example, the ARN for AccountB is `012ID_ACCOUNT_B`\. The ARN for the S3 bucket is `codepipeline-us-east-2-1234567890`\. Replace these ARNs with the ARNs for the S3 bucket and the account you want to allow access:
 

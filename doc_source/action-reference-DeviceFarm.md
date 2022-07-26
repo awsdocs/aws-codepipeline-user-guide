@@ -2,21 +2,23 @@
 
 In your pipeline, you can configure a test action that uses AWS Device Farm to run and test your application on devices\. Device Farm uses test pools of devices and testing frameworks to test applications on specific devices\. For information about the types of testing frameworks supported by the Device Farm action, see [Working with Test Types in AWS Device Farm](https://docs.aws.amazon.com/devicefarm/latest/developerguide/test-types.html)\.
 
-**Topics**
-+ [Action Type](#action-reference-DeviceFarm-type)
-+ [Configuration Parameters](#action-reference-DeviceFarm-config)
-+ [Input Artifacts](#action-reference-DeviceFarm-input)
-+ [Output Artifacts](#action-reference-DeviceFarm-output)
-+ [Action Declaration](#action-reference-DeviceFarm-example)
-+ [See Also](#action-reference-DeviceFarm-links)
+**Note**  
 
-## Action Type<a name="action-reference-DeviceFarm-type"></a>
+**Topics**
++ [Action type](#action-reference-DeviceFarm-type)
++ [Configuration parameters](#action-reference-DeviceFarm-config)
++ [Input artifacts](#action-reference-DeviceFarm-input)
++ [Output artifacts](#action-reference-DeviceFarm-output)
++ [Action declaration](#action-reference-DeviceFarm-example)
++ [See also](#action-reference-DeviceFarm-links)
+
+## Action type<a name="action-reference-DeviceFarm-type"></a>
 + Category: `Test`
 + Owner: `AWS`
 + Provider: `DeviceFarm`
 + Version: `1`
 
-## Configuration Parameters<a name="action-reference-DeviceFarm-config"></a>
+## Configuration parameters<a name="action-reference-DeviceFarm-config"></a>
 
 **AppType**  
 Required: Yes  
@@ -138,15 +140,15 @@ The latitude of the device expressed in geographic coordinate system degrees\.
 Required: No  
 The longitude of the device expressed in geographic coordinate system degrees\.
 
-## Input Artifacts<a name="action-reference-DeviceFarm-input"></a>
-+ **Number of Artifacts:** `1`
+## Input artifacts<a name="action-reference-DeviceFarm-input"></a>
++ **Number of artifacts:** `1`
 + **Description:** The set of artifacts to be made available to the test action\. Device Farm looks for the built application and test definitions to use\.
 
-## Output Artifacts<a name="action-reference-DeviceFarm-output"></a>
+## Output artifacts<a name="action-reference-DeviceFarm-output"></a>
 + **Number of Artifacts:** `0` 
 + **Description:** Output artifacts do not apply for this action type\.
 
-## Action Declaration<a name="action-reference-DeviceFarm-example"></a>
+## Action declaration<a name="action-reference-DeviceFarm-example"></a>
 
 ------
 #### [ YAML ]
@@ -215,7 +217,7 @@ Actions:
 
 ------
 
-## See Also<a name="action-reference-DeviceFarm-links"></a>
+## See also<a name="action-reference-DeviceFarm-links"></a>
 
 The following related resources can help you as you work with this action\.
 + [Working with Test Types in Device Farm](https://docs.aws.amazon.com/devicefarm/latest/developerguide/test-types.html) – This reference chapter in the *Device Farm Developer Guide* provides more description about the Android, iOS, and Web Application testing frameworks supported by Device Farm\.

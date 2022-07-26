@@ -2,6 +2,9 @@
 
 CodePipeline offers the ability to perform AWS CloudFormation StackSets operations as part of your CI/CD process\. You use a stack set to create stacks in AWS accounts across AWS Regions by using a single AWS CloudFormation template\. All the resources included in each stack are defined by the stack set’s AWS CloudFormation template\. When you create the stack set, you specify the template to use, as well as any parameters and capabilities that the template requires\.
 
+**Note**  
+You must use the AWS Organizations management account to deploy with AWS CloudFormation StackSets\. You cannot use a delegated administration account for this action\.
+
 For more information about concepts for AWS CloudFormation StackSets, see [StackSets concepts](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html) in the *AWS CloudFormation User Guide*\.
 
 You integrate your pipeline with AWS CloudFormation StackSets through two distinct action types that you use together:
@@ -9,7 +12,7 @@ You integrate your pipeline with AWS CloudFormation StackSets through two distin
 + The `CloudFormationStackInstances` action deploys changes from the `CloudFormationStackSet` action to specified instances, creates new stack instances, and defines parameter overrides to specified instances\. In the console, you can choose the **CloudFormation Stack Instances** action provider when you edit an existing pipeline\.
 
 **Note**  
-This feature is not available in the Asia Pacific \(Hong Kong\) or Europe \(Milan\) Region\. To use other actions available in that Region, see [Product and service integrations with CodePipeline](integrations.md)\.
+This feature is not available in the Asia Pacific \(Hong Kong\) and Europe \(Milan\) Regions\. To reference other available actions, see [Product and service integrations with CodePipeline](integrations.md)\.
 
 You can use these actions to deploy to target AWS accounts or target AWS Organizations organizational unit IDs\.
 
@@ -219,7 +222,7 @@ Valid values are:
 
 ****DeploymentTargets****  
 Required: No  
-For the SERVICE\_MANAGED permissions model, you can provide either accounts or organizational Unit IDs for deployment targets\. For the SELF\_MANAGED permissions model, you can only provide accounts\.
+For the SERVICE\_MANAGED permissions model, you can provide either the organization root ID or organizational Unit IDs for deployment targets\. For the SELF\_MANAGED permissions model, you can only provide accounts\.
 When this parameter is selected, you must also select **Regions**\.
 A list of AWS accounts or organizational unit IDs where stack set instances should be created/updated\.  
 + **Accounts**:
@@ -284,14 +287,14 @@ The maximum percentage of accounts in which to perform this operation at one tim
 ### Input artifacts<a name="action-reference-StackSet-input"></a>
 
 You must include at least one input artifact that contains the template for the stack set in a `CloudFormationStackSet` action\. You can include more input artifacts for lists of deployment targets, accounts, and parameters\.
-+ **Number of Artifacts:** `1 to 3`
++ **Number of artifacts:** `1 to 3`
 + **Description:** You can include artifacts to provide:
   + The stack template file\. \(See the `TemplatePath` parameter\.\)
   + The parameters file\. \(See the `Parameters` parameter\.\)
   + The accounts file\. \(See the `DeploymentTargets` parameter\.\)
 
 ### Output artifacts<a name="action-reference-StackSet-output"></a>
-+ **Number of Artifacts:** `0` 
++ **Number of artifacts:** `0` 
 + **Description:** Output artifacts do not apply for this action type\.
 
 ### Output variables<a name="action-reference-StackSet-variables"></a>
@@ -465,7 +468,7 @@ The name may only contain alphanumeric and hyphen characters\. It must begin wit
 
 ****DeploymentTargets****  
 Required: No  
-For the SERVICE\_MANAGED permissions model, you can provide either accounts or organizational Unit IDs for deployment targets\. For the SELF\_MANAGED permissions model, you can only provide accounts\.
+For the SERVICE\_MANAGED permissions model, you can provide either the organization root ID or organizational Unit IDs for deployment targets\. For the SELF\_MANAGED permissions model, you can only provide accounts\.
 When this parameter is selected, you must also select **Regions**\.
 A list of AWS accounts or organizational unit IDs where stack set instances should be created/updated\.  
 + **Accounts**:
@@ -571,13 +574,13 @@ The maximum percentage of accounts on which to perform this operation at one tim
 ### Input artifacts<a name="action-reference-StackInstances-input"></a>
 
 `CloudFormationStackInstances` can contain artifacts that list deployment targets and parameters\.
-+ **Number of Artifacts:** `0 to 2`
++ **Number of artifacts:** `0 to 2`
 + **Description:** As input, the stack set action optionally accepts artifacts for these purposes:
   + To provide the parameters file to use\. \(See the `ParameterOverrides` parameter\.\)
   + To provide the target accounts file to use\. \(See the `DeploymentTargets` parameter\.\)
 
 ### Output artifacts<a name="action-reference-StackInstances-output"></a>
-+ **Number of Artifacts:** `0` 
++ **Number of artifacts:** `0` 
 + **Description:** Output artifacts do not apply for this action type\.
 
 ### Output variables<a name="action-reference-StackInstances-variables"></a>

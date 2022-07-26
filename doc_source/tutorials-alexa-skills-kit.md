@@ -172,8 +172,7 @@ In this section, you create a pipeline with the following actions:
 
    1. Choose **Next**\.
 
-1. In **Step 5: Review**, review the information, and then choose **Create pipeline**\.  
-![\[The completed pipeline for an Alexa Skills Kit action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/alexa-deploy-pipeline.png)![\[The completed pipeline for an Alexa Skills Kit action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The completed pipeline for an Alexa Skills Kit action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+1. In **Step 5: Review**, review the information, and then choose **Create pipeline**\.
 
 ## Step 5: Make a change to any source file and verify deployment<a name="tutorials-alexa-skills-kit-update"></a>
 

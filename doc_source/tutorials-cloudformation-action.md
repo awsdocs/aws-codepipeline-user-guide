@@ -4,6 +4,8 @@ In this tutorial, you use the AWS CodePipeline console to create a pipeline with
 
 In the action where you create the stack from the template, you designate a variable namespace\. The variables produced by the `outputs` file can then be consumed by subsequent actions\. In this example, you create a change set based on the `StackName` variable produced by the AWS CloudFormation action\. After a manual approval, you execute the change set and then create a delete stack action that deletes the stack based on the `StackName` variable\.
 
+**Note**  
+
 **Topics**
 + [Prerequisites: Create an AWS CloudFormation service role and a CodeCommit repository](#tutorials-cloudformation-action-prereq)
 + [Step 1: Download, edit, and upload the sample AWS CloudFormation template](#tutorials-cloudformation-action-upload)
@@ -140,8 +142,7 @@ For more information, see [Input and output artifacts](welcome-introducing-artif
       "Purpose": "testing"}
       ```
 
-      If you don't enter overrides, the template creates a stack with default values\.  
-![\[Console screenshot showing the fields under step 4: Add deploy stage.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/create-stack-overrides.png)![\[Console screenshot showing the fields under step 4: Add deploy stage.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing the fields under step 4: Add deploy stage.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+      If you don't enter overrides, the template creates a stack with default values\.
 
    1. Choose **Next**\.
 
@@ -257,12 +258,10 @@ Create a final action in your pipeline that allows AWS CloudFormation to get the
 
    1. In **Action mode**, choose **Delete a stack**\.
 
-   1. In **Stack name**, enter the variable syntax as shown\. This is the name of the stack that the action will delete\.  
-![\[Console screenshot showing how to add a deployment action to delete the stack.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/delete-stack-variable.png)![\[Console screenshot showing how to add a deployment action to delete the stack.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing how to add a deployment action to delete the stack.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+   1. In **Stack name**, enter the variable syntax as shown\. This is the name of the stack that the action will delete\.
 
    1. Choose **Done** to save the action\.
 
-   1. Choose **Save** to save the pipeline\.  
-![\[Diagram of the pipeline stages, including source, deploy, approval, and delete stack.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/delete-stack-pipeline.png)![\[Diagram of the pipeline stages, including source, deploy, approval, and delete stack.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Diagram of the pipeline stages, including source, deploy, approval, and delete stack.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+   1. Choose **Save** to save the pipeline\.
 
    The pipeline runs when it is saved\.

@@ -3,7 +3,7 @@
 Triggers a pipeline when a new commit is made on a third\-party source code repository\. The source action retrieves code changes when a pipeline is manually run or when a webhook event is sent from the source provider\. 
 
 **Note**  
-This feature is not available in the Asia Pacific \(Hong Kong\) or Europe \(Milan\) Region\. To use other source actions available in that Region, see [Source action integrations](integrations-action-type.md#integrations-source)\.
+This feature is not available in the Asia Pacific \(Hong Kong\) and Europe \(Milan\) Regions\. To reference other available actions, see [Product and service integrations with CodePipeline](integrations.md)\.
 
 Connections can associate your AWS resources with the following third\-party repositories:
 + Bitbucket Cloud \(through the **Bitbucket** provider option in the CodePipeline console\)
@@ -72,11 +72,11 @@ Controls automatically starting your pipeline when a new commit is made on the c
 + `false`: CodePipeline does not start your pipeline on new commits\.
 
 ## Input artifacts<a name="action-reference-CodestarConnectionSource-input"></a>
-+ **Number of Artifacts:** `0`
++ **Number of artifacts:** `0`
 + **Description:** Input artifacts do not apply for this action type\.
 
 ## Output artifacts<a name="action-reference-CodestarConnectionSource-output"></a>
-+ **Number of Artifacts:** `1` 
++ **Number of artifacts:** `1` 
 + **Description:** The artifacts generated from the repository are the output artifacts for the `CodeStarSourceConnection` action\. The source code commit ID is displayed in CodePipeline as the source revision for the triggered pipeline execution\. You can configure the output artifact of this action in:
   + A ZIP file that contains the contents of the configured repository and branch at the commit specified as the source revision for the pipeline execution\.
   + A JSON file that contains a URL reference to the repository so that downstream actions can perform Git commands directly\.

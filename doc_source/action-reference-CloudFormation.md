@@ -2,6 +2,8 @@
 
 Executes an operation on an AWS CloudFormation stack\. A stack is a collection of AWS resources that you can manage as a single unit\. The resources in a stack are defined by the stack's AWS CloudFormation template\. A change set creates a comparison that can be viewed without altering the original stack\. For information about the types of AWS CloudFormation actions that can be performed on stacks and change sets, see the `ActionMode` parameter\.
 
+**Note**  
+
 **Topics**
 + [Action type](#action-reference-CloudFormation-type)
 + [Configuration parameters](#action-reference-CloudFormation-config)
@@ -107,14 +109,14 @@ The template configuration file name follows this format:
 ```
 
 ## Input artifacts<a name="action-reference-CloudFormation-input"></a>
-+ **Number of Artifacts:** `0 to 10`
++ **Number of artifacts:** `0 to 10`
 + **Description:** As input, the AWS CloudFormation action optionally accepts artifacts for these purposes:
   + To provide the stack template file to execute\. \(See the `TemplatePath` parameter\.\)
   + To provide the template configuration file to use\. \(See the `TemplateConfiguration` parameter\.\) For more information about the template configuration file format, see [AWS CloudFormation Artifacts](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-cfn-artifacts.html)\. 
   + To provide the artifact for a Lambda function to be deployed as part of the AWS CloudFormation stack\.
 
 ## Output artifacts<a name="action-reference-CloudFormation-output"></a>
-+ **Number of Artifacts:** `0 to 1` 
++ **Number of artifacts:** `0 to 1` 
 + **Description:** If the `OutputFileName` parameter is specified, there is an output artifact produced by this action that contains a JSON file with the specified name\. The JSON file contains the contents of the Outputs section from the AWS CloudFormation stack\.
 
   For more information about the outputs section you can create for your AWS CloudFormation action, see [Outputs](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/outputs-section-structure.html)\.

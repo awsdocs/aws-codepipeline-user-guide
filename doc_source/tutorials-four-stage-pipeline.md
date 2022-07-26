@@ -37,8 +37,8 @@ You have set the required system environment variables so that Rake commands can
 **To clone the sample and push to a GitHub repository**
 
 1. Download the sample code from the GitHub repository, or clone the repositories to your local computer\. There are two sample packages: 
-   + If you will be deploying your sample to Amazon Linux, RHEL, or Ubuntu Server instances, choose [aws\-codepipeline\-jenkins\-aws\-codedeploy\_linux\.zip](https://github.com/awslabs/aws-codepipeline-jenkins-aws-codedeploy_linux)\. 
-   + If you will be deploying your sample to Windows Server instances, choose [AWSCodePipeline\-Jenkins\-AWSCodeDeploy\_Windows\.zip](https://github.com/awslabs/AWSCodePipeline-Jenkins-AWSCodeDeploy_windows)\.
+   + If you will be deploying your sample to Amazon Linux, RHEL, or Ubuntu Server instances, choose [codepipeline\-jenkins\-aws\-codedeploy\_linux\.zip](https://github.com/awslabs/aws-codepipeline-jenkins-aws-codedeploy_linux)\. 
+   + If you will be deploying your sample to Windows Server instances, choose [CodePipeline\-Jenkins\-AWSCodeDeploy\_Windows\.zip](https://github.com/awslabs/AWSCodePipeline-Jenkins-AWSCodeDeploy_windows)\.
 
 1. From the repository, choose **Fork** to clone the sample repo into a repo in your Github account\. For more information, see the [GitHub documentation](https://help.github.com/articles/create-a-repo/)\.
 
@@ -68,7 +68,7 @@ For more information about instance roles and Amazon EC2, see [IAM roles for Ama
 **Note**  
 If you already have Jenkins resources you want to use, you can do so, but you must create a special IAM user, apply the `AWSCodePipelineCustomActionAccess` managed policy to that user, and then configure and use the access credentials for that user on your Jenkins resource\. If you want to use the Jenkins UI to supply the credentials, configure Jenkins to only allow HTTPS\. For more information, see [Troubleshooting CodePipeline](troubleshooting.md)\.
 
-1. Install Jenkins on the EC2 instance\. For more information, see the Jenkins documentation for [installing Jenkins](https://www.jenkins.io/doc/book/installing/linux/) and [starting and accessing Jenkins](https://wiki.jenkins.io/pages/viewpage.action?pageId=42469975), as well as [details of integration with Jenkins](integrations-action-type.md#JenkinsInt_2) in [Product and service integrations with CodePipeline](integrations.md)\.
+1. Install Jenkins on the EC2 instance\. For more information, see the Jenkins documentation for [installing Jenkins](https://www.jenkins.io/doc/book/installing/linux/) and [starting and accessing Jenkins](https://wiki.jenkins.io/JENKINS/Starting-and-Accessing-Jenkins.html), as well as [details of integration with Jenkins](integrations-action-type.md#JenkinsInt_2) in [Product and service integrations with CodePipeline](integrations.md)\.
 
 1. Launch Jenkins, and on the home page, choose **Manage Jenkins**\.
 
@@ -138,7 +138,7 @@ Do not provide your AWS credentials on the GitHub website\.
 
    After you have selected GitHub, a message displays advising that CodePipeline will create a webhook in GitHub for your pipeline\.
 
-   After you have connected to GitHub, choose the repository and branch where you pushed the sample you want to use for this tutorial \(aws\-codepipeline\-jenkins\-aws\-codedeploy\_linux\.zip or AWSCodePipeline\-Jenkins\-AWSCodeDeploy\_Windows\.zip\), and then choose **Next**\.
+   After you have connected to GitHub, choose the repository and branch where you pushed the sample you want to use for this tutorial \(codepipeline\-jenkins\-aws\-codedeploy\_linux\.zip or CodePipeline\-Jenkins\-AWSCodeDeploy\_Windows\.zip\), and then choose **Next**\.
 **Note**  
 In GitHub, there is a limit to the number of OAuth tokens you can use for an application, such as CodePipeline\. If you exceed this limit, retry the connection to allow CodePipeline to reconnect by reusing existing tokens\.
 

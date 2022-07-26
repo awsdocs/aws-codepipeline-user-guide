@@ -13,7 +13,7 @@ AWS CodePipeline job workers for container actions, such as an Amazon ECR source
 
 ## imagedefinitions\.json file for Amazon ECS standard deployment actions<a name="pipelines-create-image-definitions"></a>
 
-An image definitions document is a JSON file that describes your Amazon ECS container name and the image and tag\. If you are deploying container\-based applications, you must generate an image definitions file to provide the CodePipeline job worker with the Amazon ECS container and image identification to retrieve from the repository, such as Docker Hub\.
+An image definitions document is a JSON file that describes your Amazon ECS container name and the image and tag\. If you are deploying container\-based applications, you must generate an image definitions file to provide the CodePipeline job worker with the Amazon ECS container and image identification to retrieve from the image repository, such as Amazon ECR\.
 
 **Note**  
 The default file name for the file is `imagedefinitions.json`\. If you choose to use a different file name, you must provide it when you create the pipeline deployment stage\.
@@ -69,7 +69,7 @@ Before you create your pipeline, use the following steps to set up the `imagedef
 
 1. Choose one of the following:
 
-   1.  If your pipeline has skipped the build stage, you must manually create the JSON file and upload it to your source repository so the source action can provide the artifact\. Create the file using a text editor, and name the file or use the default `imagedefinitions.json` file name\. Push the image definitions file to your source repository\.
+   1.  If your pipeline is created so that it skips the build stage, you must manually create the JSON file and upload it to your source repository so the source action can provide the artifact\. Create the file using a text editor, and name the file or use the default `imagedefinitions.json` file name\. Push the image definitions file to your source repository\.
 **Note**  
 If your source repository is an Amazon S3 bucket, remember to zip the JSON file\.
 
@@ -88,7 +88,7 @@ For a step\-by\-step tutorial for creating a pipeline that uses Amazon ECS as th
 
 ## imageDetail\.json file for Amazon ECS blue/green deployment actions<a name="file-reference-ecs-bluegreen"></a>
 
-An `imageDetail.json` document is a JSON file that describes your Amazon ECS image URI\. If you are deploying container\-based applications for a blue/green deployment, you must generate the `imageDetail.json` file to provide the Amazon ECS and CodeDeploy job worker with the image identification to retrieve from the repository, such as Docker Hub\.
+An `imageDetail.json` document is a JSON file that describes your Amazon ECS image URI\. If you are deploying container\-based applications for a blue/green deployment, you must generate the `imageDetail.json` file to provide the Amazon ECS and CodeDeploy job worker with the image identification to retrieve from the image repository, such as Amazon ECR\.
 
 **Note**  
 The name of the file must be `imageDetail.json`\.

@@ -10,11 +10,11 @@ This feature is not available in the Asia Pacific \(Hong Kong\) or Europe \(Mila
 There are some important advantages to using the GitHub version 2 action instead of the GitHub version 1 action:
 + With connections, CodePipeline no longer requires OAuth apps or personal access tokens to access your repository\. When you create a connection, you install a GitHub App that manages authentication to your GitHub repository and allows permissions at the organization level\. You must authorize OAuth tokens as a user to access the repository\. For more information about OAuth\-based GitHub access in contrast to App\-based GitHub access, see [https://docs.github.com/en/developers/apps/differences-between-github-apps-and-oauth-apps](https://docs.github.com/en/developers/apps/differences-between-github-apps-and-oauth-apps)\.
 + When you manage GitHub version 2 actions in the CLI or CloudFormation, you no longer have to store your personal access token as a secret in Secrets Manager\. You no longer have to dynamically reference the stored secret in your CodePipeline action configuration\. You instead add the connection ARN to your action configuration\. For an example action configuration, see [CodeStarSourceConnection for Bitbucket, GitHub, and GitHub Enterprise Server actions](action-reference-CodestarConnectionSource.md)\.
-+ When you create a connection resource to use with your GitHub version 2 action in CodePipeline, you can use the same connection resource to associate other supported services, such as AWS CodeGuru Reviewer, with your repository\.
++ When you create a connection resource to use with your GitHub version 2 action in CodePipeline, you can use the same connection resource to associate other supported services, such as CodeGuru Reviewer, with your repository\.
 + In Github version 2, you can clone repositories to access git metadata in subsequent CodeBuild actions, while in Github version 1 you can only download the source\.
 + An administrator installs the app for your organization's repositories\. You no longer have to track OAuth tokens that depend on the individual who created the token\.
 
-All apps installed to an organization have access to the same set of repositories\. To change who can access each repository, modify the IAM policy for each connection\. For an example, see [Example: A scoped\-down policy for using AWS CodeStar Connections with a specified repository](https://docs.aws.amazon.com/dtconsole/latest/userguide/security_iam_id-based-policy-examples-connections.html#security_iam_id-based-policy-examples-connections-reposcope)\.
+All apps installed to an organization have access to the same set of repositories\. To change who can access each repository, modify the IAM policy for each connection\. For an example, see [Example: A scoped\-down policy for using connections with a specified repository](https://docs.aws.amazon.com/dtconsole/latest/userguide/security_iam_id-based-policy-examples-connections.html#security_iam_id-based-policy-examples-connections-reposcope)\.
 
 You can use the steps in this topic to delete your GitHub version 1 source action and add a GitHub version 2 source action from the CodePipeline console\.
 
@@ -31,8 +31,7 @@ Use the pipeline edit page to replace your version 1 GitHub action with a versio
 
 1. Sign in to the CodePipeline console\.
 
-1. Choose your pipeline, and choose **Edit**\. Choose **Edit stage** on your source stage\. A message displays that recommends you update your action\.  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/change-github-source-action.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+1. Choose your pipeline, and choose **Edit**\. Choose **Edit stage** on your source stage\. A message displays that recommends you update your action\.
 
 1. In **Action provider**, choose **GitHub \(Version 2\)**\.
 

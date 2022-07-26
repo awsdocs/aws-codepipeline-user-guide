@@ -5,7 +5,7 @@ You can choose the full clone option for your GitHub source action in CodePipeli
 In this tutorial, you will create a pipeline that connects to your GitHub repository, uses the full clone option for source data, and run a CodeBuild build that clones your repository and performs Git commands for the repository\.
 
 **Note**  
-This feature is not available in the Asia Pacific \(Hong Kong\) or Europe \(Milan\) Region\. To use other source actions available in that Region, see [Source action integrations](integrations-action-type.md#integrations-source)\.
+This feature is not available in the Asia Pacific \(Hong Kong\) and Europe \(Milan\) Regions\. To reference other available actions, see [Product and service integrations with CodePipeline](integrations.md)\.
 
 **Topics**
 + [Prerequisites](#tutorials-github-gitclone-prereq)

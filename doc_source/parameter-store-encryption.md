@@ -6,7 +6,7 @@ For pipelines where you pass parameters that are secrets \(such as OAuth credent
 
 
 
-### See also<a name="related-resources-managing-secrets"></a>
+## See also<a name="related-resources-managing-secrets"></a>
 
 The following related resources can help you as you work with managing secrets\.
 + Secrets Manager can rotate database credentials automatically, such as for rotation of Amazon RDS secrets\. For more information, see [Rotating Your AWS Secrets Manager Secrets](https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html) in the *AWS Secrets Manager User Guide*\.

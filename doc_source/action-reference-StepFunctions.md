@@ -7,7 +7,7 @@ An AWS CodePipeline action that does the following:
 + Supports [Standard and Express](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-standard-vs-express.html) state machines\.
 
 **Note**  
-This feature is not available in the Asia Pacific \(Hong Kong\) or Europe \(Milan\) Region\. To use other actions available in that Region, see [Product and service integrations with CodePipeline](integrations.md)\.
+This feature is not available in the Asia Pacific \(Hong Kong\) and Europe \(Milan\) Regions\. To reference other available actions, see [Product and service integrations with CodePipeline](integrations.md)\.
 
 ## Action type<a name="action-reference-StepFunctions-type"></a>
 + Category: `Invoke`
@@ -59,11 +59,11 @@ Required: Conditional
   The contents of the file in the input artifact specified are used as the input for the state machine execution\.
 
 ## Input artifacts<a name="action-reference-StepFunctions-input"></a>
-+ **Number of Artifacts:** `0 to 1`
++ **Number of artifacts:** `0 to 1`
 + **Description:** If **InputType** is set to **FilePath**, this artifact is required and is used to source the input for the state machine execution\.
 
 ## Output artifacts<a name="action-reference-StepFunctions-output"></a>
-+ **Number of Artifacts:** `0 to 1` 
++ **Number of artifacts:** `0 to 1` 
 + **Description:**
   + **Standard State Machines**: If provided, the output artifact is populated with the output of the state machine\. This is obtained from the `output` property of the [Step Functions DescribeExecution API](https://docs.aws.amazon.com/step-functions/latest/apireference/API_DescribeExecution.html) response after the state machine execution completes successfully\.
   + **Express State Machines**: Not supported\.

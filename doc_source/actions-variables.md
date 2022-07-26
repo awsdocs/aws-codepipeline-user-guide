@@ -39,8 +39,7 @@ If the namespace isn’t specified, the variables are not available for referenc
 
 1. In **Build**, in **Provider**, choose **CodeBuild**\. Choose an existing CodeBuild build project name or choose **Create project**\. On **Create build project**, create a build project, and then choose **Return to CodePipeline**\.
 
-   Under **Environment variables**, choose **Add environment variables**\. In this example, enter the execution ID with the variable syntax `#{codepipeline.PipelineExecutionId}` and commit ID with the variable syntax `#{SourceVariables.CommitId}`\.   
-![\[Example: Variables for multiple actions\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/variables-codebuild-wizard.png)![\[Example: Variables for multiple actions\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Example: Variables for multiple actions\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+   Under **Environment variables**, choose **Add environment variables**\. For example, enter the execution ID with the variable syntax `#{codepipeline.PipelineExecutionId}` and commit ID with the variable syntax `#{SourceVariables.CommitId}`\. 
 **Note**  
 You can enter variable syntax in any action configuration field in the wizard\.
 
@@ -55,8 +54,7 @@ You can enter variable syntax in any action configuration field in the wizard\.
 
 1. Choose the pipeline you want to edit, and then choose **Edit**\. For the source stage, choose **Edit stage**\. Add the CodeCommit action\.
 
-1. On **Edit action**, view the **Variable namespace** field\. If the existing action was created previously or without using the wizard, you must add a namespace\. In **Variable namespace**, enter a namespace name, and then choose **Save**\.  
-![\[Example: Namespace in the Edit action screen\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/variables-namespace-editaction.png)![\[Example: Namespace in the Edit action screen\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Example: Namespace in the Edit action screen\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+1. On **Edit action**, view the **Variable namespace** field\. If the existing action was created previously or without using the wizard, you must add a namespace\. In **Variable namespace**, enter a namespace name, and then choose **Save**\.
 
 **To view output variables**
 
@@ -254,11 +252,15 @@ When you specify a namespace for an action, and that action produces output vari
 
 1. In **Action provider**, choose **Manual approval**\.
 
-1. In **URL for review** and **Comments**, add the variable syntax for `CommitId` and `CommitMessage` as shown\. Make sure you use the namespace assigned to your source action\. For example, the variable syntax for a CodeCommit action with the default namespace `SourceVariables` is `#{SourceVariables.CommitId}`\.  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/variable-manual-approval.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+1. In **URL for review**, add the variable syntax for `CommitId` to your CodeCommit URL\. Make sure you use the namespace assigned to your source action\. For example, the variable syntax for a CodeCommit action with the default namespace `SourceVariables` is `#{SourceVariables.CommitId}`\.
 
-1. After the pipeline runs successfully, you can view the variable values in the approval message\.  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/variable-manual-approval-commitURL.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+   In **Comments**, in `CommitMessage`, enter the commit message: 
+
+   ```
+   Please approve this change. Commit message: #{SourceVariables.CommitMessage}
+   ```
+
+1. After the pipeline runs successfully, you can view the variable values in the approval message\.
 
 ## Example: Use a BranchName variable with CodeBuild environment variables<a name="actions-variables-examples-env-branchname"></a>
 

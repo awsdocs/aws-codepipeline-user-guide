@@ -6,7 +6,7 @@ To use the AWS CLI to create a trail, call the create\-trail command, specifying
 + The trail name\.
 + The bucket to which you have already applied the bucket policy for AWS CloudTrail\.
 
-For more information, see [Creating a Trail with the AWS Command Line Interface](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-and-update-a-trail-by-using-the-aws-cli.html)\.
+For more information, see [Creating a trail with the AWS command line interface](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-and-update-a-trail-by-using-the-aws-cli.html)\.
 
 1. Call the create\-trail command and include the `--name` and `--s3-bucket-name` parameters\.
 

@@ -11,9 +11,10 @@ This section is updated periodically with more action providers\. Reference info
 
 **Topics**
 + [Amazon ECR](action-reference-ECR.md)
-+ [Amazon ECS and CodeDeploy Blue\-Green](action-reference-ECSbluegreen.md)
++ [Amazon ECS and CodeDeploy blue\-green](action-reference-ECSbluegreen.md)
 + [Amazon Elastic Container Service](action-reference-ECS.md)
-+ [Amazon S3](action-reference-S3.md)
++ [Amazon S3 deploy action](action-reference-S3Deploy.md)
++ [Amazon S3 source action](action-reference-S3.md)
 + [AWS AppConfig](action-reference-AppConfig.md)
 + [AWS CloudFormation](action-reference-CloudFormation.md)
 + [AWS CloudFormation StackSets](action-reference-StackSets.md)

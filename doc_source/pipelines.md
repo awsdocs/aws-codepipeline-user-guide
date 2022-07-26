@@ -10,12 +10,13 @@ Before you can create a pipeline, you must first complete the steps in [Getting 
 For more information about pipelines, see [CodePipeline concepts](concepts.md), [CodePipeline tutorials](tutorials.md), and, if you want to use the AWS CLI to create a pipeline, [CodePipeline pipeline structure reference](reference-pipeline-structure.md)\. To view a list of pipelines, see [View pipeline details and history in CodePipeline](pipelines-view.md)\.
 
 **Topics**
-+ [Start a pipeline execution](pipelines-about-starting.md)
++ [Start a pipeline](pipelines-about-starting.md)
 + [Stop a pipeline execution](pipelines-stop.md)
 + [Create a pipeline](pipelines-create.md)
 + [Edit a pipeline](pipelines-edit.md)
 + [View pipeline details and history](pipelines-view.md)
 + [Delete a pipeline](pipelines-delete.md)
++ [Clone a pipeline](pipelines-clone.md)
 + [Create a pipeline that uses resources from another account](pipelines-create-cross-account.md)
 + [Edit a pipeline for push events](update-change-detection.md)
 + [Create the CodePipeline service role](pipelines-create-service-role.md)

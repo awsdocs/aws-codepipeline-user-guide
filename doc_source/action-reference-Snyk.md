@@ -2,6 +2,8 @@
 
 The **Snyk** action in CodePipeline automates detecting and fixing security vulnerabilities in your open source code\. You can use Snyk with application source code in your third\-party repository, such as GitHub or Bitbucket, or with images for container applications\. Your action will scan and report on vulnerability levels and alerts that you configure\. 
 
+**Note**  
+
 **Topics**
 + [Action type ID](#action-reference-Snyk-type)
 + [Input artifacts](#action-reference-Snyk-input)
@@ -26,11 +28,11 @@ Example:
 ```
 
 ## Input artifacts<a name="action-reference-Snyk-input"></a>
-+ **Number of Artifacts:** `1`
++ **Number of artifacts:** `1`
 + **Description:** The files that make up the input artifact for the invoke action\.
 
 ## Output artifacts<a name="action-reference-Snyk-output"></a>
-+ **Number of Artifacts:** `1`
++ **Number of artifacts:** `1`
 + **Description:** The files that make up the output artifact for the invoke action\.
 
 ## See also<a name="action-reference-Snyk-links"></a>

@@ -124,8 +124,7 @@ The deployment fails if you do not select **Extract file before deploy**\. This 
 
    1. Choose **Next**\.
 
-1. In **Step 5: Review**, review the information, and then choose **Create pipeline**\.  
-![\[The completed pipeline for an Amazon S3 deploy action with an AWS CodeCommit source\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/tutorial-s3deploy-pipeline-codecommit.png)![\[The completed pipeline for an Amazon S3 deploy action with an AWS CodeCommit source\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The completed pipeline for an Amazon S3 deploy action with an AWS CodeCommit source\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+1. In **Step 5: Review**, review the information, and then choose **Create pipeline**\.
 
 1. After your pipeline runs successfully, open the Amazon S3 console and verify that your files appear in your public bucket as shown:
 
@@ -139,8 +138,7 @@ The deployment fails if you do not select **Extract file before deploy**\. This 
 
    Example endpoint: `http://my-bucket.s3-website-us-west-2.amazonaws.com/`\. 
 
-   The sample appears as shown here\.  
-![\[Sample website\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/tutorial-s3deploy-pipeline-website.png)![\[Sample website\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Sample website\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+   The sample web page appears\.
 
 ### Step 3: Make a change to any source file and verify deployment<a name="tutorials-s3deploy-acc-update"></a>
 
@@ -246,7 +244,7 @@ In this section, you create a pipeline with the following actions:
 
 1. In **Step 3: Add build stage**:
 
-   1. In **Build provider**, choose **AWS CodeBuild**\.
+   1. In **Build provider**, choose **CodeBuild**\.
 
    1. Choose **Create build project**\. On the **Create project** page:
 
@@ -285,8 +283,7 @@ In this section, you create a pipeline with the following actions:
 
    1. Choose **Next**\.
 
-1. In **Step 5: Review**, review the information, and then choose **Create pipeline**\.  
-![\[The completed pipeline for an Amazon S3 deploy action with an Amazon S3 source\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/tutorial-s3deploy-pipeline-s3source.png)![\[The completed pipeline for an Amazon S3 deploy action with an Amazon S3 source\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The completed pipeline for an Amazon S3 deploy action with an Amazon S3 source\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+1. In **Step 5: Review**, review the information, and then choose **Create pipeline**\.
 
 1. After your pipeline runs successfully, view your bucket in the Amazon S3 console\. Verify that your deployed ZIP file is displayed in your target bucket under the `js-application` folder\. The JavaScript file contained in the ZIP file should be `index.js`\. The `index.js` file contains the following output:
 

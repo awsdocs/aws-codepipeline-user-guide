@@ -40,7 +40,7 @@ The following information is organized by CodePipeline action type and can help 
 Connections \(`CodestarSourceConnection` actions\) are used to access your third\-party Bitbucket Cloud, GitHub, or GitHub Enterprise Server repository\.
 
 **Note**  
-This feature is not available in the Asia Pacific \(Hong Kong\) or Europe \(Milan\) Region\. To use other source actions available in that Region, see [Source action integrations](#integrations-source)\.
+This feature is not available in the Asia Pacific \(Hong Kong\) and Europe \(Milan\) Regions\. To reference other available actions, see [Product and service integrations with CodePipeline](integrations.md)\.
 
 
 |  |  | 
@@ -65,6 +65,8 @@ This feature is not available in the Asia Pacific \(Hong Kong\) or Europe \(Mila
 | CodeCommit |  [CodeCommit](https://docs.aws.amazon.com/codecommit/latest/userguide/) is a version control service that you can use to privately store and manage assets \(such as documents, source code, and binary files\) in the cloud\. You can configure CodePipeline to use a branch in a CodeCommit repository as the source for your code\. Create the repository and associate it with a working directory on your local machine\. Then you can create a pipeline that uses the branch as part of a source action in a stage\. You can connect to the CodeCommit repository by either creating a pipeline or editing an existing one\.  You can use the **Full clone** option for this action to reference the repository Git metadata so that downstream actions can perform Git commands directly\. This option can only be used by CodeBuild downstream actions\. Learn more:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
 
 ### GitHub \(version 1\) source actions<a name="integrations-source-gh-oauth"></a>
+
+**Note**  
 
 
 |  |  | 
@@ -130,6 +132,8 @@ The following information is organized by CodePipeline action type and can help 
 | CodeBuild |  [CodeBuild](http://aws.amazon.com/codebuild/) is a fully managed build service in the cloud\. CodeBuild compiles your source code, runs unit tests, and produces artifacts that are ready to deploy\.  You can add CodeBuild to a pipeline as a test action\. For more information, see the CodePipeline Action Configuration Reference for [AWS CodeBuild](action-reference-CodeBuild.md)\.  CodeBuild can also be included in a pipeline as a build action, with a mandatory build output artifact\.  Learn more:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
 
 ### AWS Device Farm test actions<a name="integrations-test-devicefarm"></a>
+
+**Note**  
 
 
 |  |  | 
@@ -204,12 +208,17 @@ The following information is organized by CodePipeline action type and can help 
 
 ### AWS CloudFormation deploy actions<a name="integrations-deploy-CloudFormation"></a>
 
+**Note**  
+
 
 |  |  | 
 | --- |--- |
 | AWS CloudFormation |  [AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/) gives developers and systems administrators an easy way to create and manage a collection of related AWS resources, using templates to provision and update those resources\. You can use the service’s sample templates or create your own\. Templates describe the AWS resources and any dependencies or runtime parameters required to run your application\. The AWS Serverless Application Model \(AWS SAM\) extends AWS CloudFormation to provide a simplified way to define and deploy serverless applications\. AWS SAM supports Amazon API Gateway APIs, AWS Lambda functions, and Amazon DynamoDB tables\. You can use CodePipeline with AWS CloudFormation and the AWS SAM to continuously deliver your serverless applications\. You can add an action to a pipeline that uses AWS CloudFormation as a deployment provider\. When you use AWS CloudFormation as a deployment provider, you can take action on AWS CloudFormation stacks and change sets as part of a pipeline execution\. AWS CloudFormation can create, update, replace, and delete stacks and change sets when a pipeline runs\. As a result, AWS and custom resources can be created, provisioned, updated, or terminated during a pipeline execution according to the specifications you provide in AWS CloudFormation templates and parameter definitions\. Learn more: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
 
 ### AWS CloudFormation StackSets deploy actions<a name="integrations-deploy-StackSets"></a>
+
+**Note**  
+This feature is not available in the Asia Pacific \(Hong Kong\) and Europe \(Milan\) Regions\. To reference other available actions, see [Product and service integrations with CodePipeline](integrations.md)\.
 
 
 |  |  | 
@@ -280,25 +289,30 @@ This feature is not available in the Asia Pacific \(Hong Kong\) or Europe \(Mila
 The following information is organized by CodePipeline action type and can help you configure CodePipeline to integrate with the following invoke action providers\.
 
 **Topics**
-+ [Lambda invoke actions](#w23aac11b9c17b9)
-+ [Snyk invoke actions](#w23aac11b9c17c11)
-+ [Step Functions invoke actions](#w23aac11b9c17c13)
++ [Lambda invoke actions](#w23aac11b9c17b7)
++ [Snyk invoke actions](#w23aac11b9c17b9)
++ [Step Functions invoke actions](#w23aac11b9c17c11)
 
-### Lambda invoke actions<a name="w23aac11b9c17b9"></a>
+### Lambda invoke actions<a name="w23aac11b9c17b7"></a>
 
 
 |  |  | 
 | --- |--- |
 | Lambda |  [Lambda](https://docs.aws.amazon.com/lambda/latest/dg/) lets you run code without provisioning or managing servers\. You can configure CodePipeline to use Lambda functions to add flexibility and functionality to your pipelines\. You can create the Lambda function to add as an action in a stage either before you create the pipeline or when you use the **Create Pipeline** wizard\. Learn more: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
 
-### Snyk invoke actions<a name="w23aac11b9c17c11"></a>
+### Snyk invoke actions<a name="w23aac11b9c17b9"></a>
+
+**Note**  
 
 
 |  |  | 
 | --- |--- |
 | Snyk |  You can configure CodePipeline to use Snyk to keep your open source environments secure by detecting and fixing security vulnerabilities and updating dependencies in your application code and container images\. You can also use the **Snyk** action in CodePipeline to automate security testing controls in your pipeline\. Learn more: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html)  | 
 
-### Step Functions invoke actions<a name="w23aac11b9c17c13"></a>
+### Step Functions invoke actions<a name="w23aac11b9c17c11"></a>
+
+**Note**  
+This feature is not available in the Asia Pacific \(Hong Kong\) and Europe \(Milan\) Regions\. To reference other available actions, see [Product and service integrations with CodePipeline](integrations.md)\.
 
 
 |  |  | 

@@ -39,9 +39,6 @@ You can use the CodePipeline console to add an approval action to an existing Co
 
    1. \(Optional\) In **Comments**, enter any other information you want to share with the reviewer\.
 
-      Your completed page might look similar to the following:  
-![\[The Edit action page completed for an Approval action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/pipeline-add-action-manual-approval-pol.png)![\[The Edit action page completed for an Approval action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The Edit action page completed for an Approval action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
-
    1. Choose **Save**\.
 
 ## Add a manual approval action to a CodePipeline pipeline \(CLI\)<a name="approvals-action-add-cli"></a>

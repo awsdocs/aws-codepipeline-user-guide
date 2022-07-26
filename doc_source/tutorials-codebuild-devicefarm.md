@@ -8,15 +8,7 @@ You can add cross\-region actions when you create your pipeline\. AWS resources 
 
 You can try this out using your existing Android app and test definitions, or you can use the [sample app and test definitions provided by Device Farm](https://github.com/aws-samples/aws-device-farm-sample-app-for-android)\.
 
-![\[The Step 2: Source page in the CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-push-build-test-GitHub.png)![\[The Step 2: Source page in the CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The Step 2: Source page in the CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
-
-
-****  
-
-|  |  |  |  |  | 
-| --- |--- |--- |--- |--- |
-| Configure | Add definitions | Push | Build and Test | Report | 
-| Configure pipeline resources | Add build and test definitions to your package | Push a package to your repository | App build and test build output artifact kicked off automatically | View test results | 
+**Note**  
 
 **Before you begin**
 
@@ -117,8 +109,7 @@ If you use a CodePipeline service role that was created before July 2018, you ne
 
 1. On the **Step 4: Add deploy stage** page, choose **Skip deploy stage**, and then accept the warning message by choosing **Skip** again\. Choose **Next**\.
 
-1. On **Step 5: Review**, choose **Create pipeline**\. You should see a diagram that shows the source and build stages\.  
-![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-view-pipeline.png)
+1. On **Step 5: Review**, choose **Create pipeline**\. You should see a diagram that shows the source and build stages\.
 
 1. Add a Device Farm test action to your pipeline:
 
@@ -140,8 +131,7 @@ If you use a CodePipeline service role that was created before July 2018, you ne
 
    1. In **DevicePoolArn**, enter the ARN for the device pool\.
 
-   1. In **AppType**, enter **Android**\.  
-![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-choose-test-provider.png)
+   1. In **AppType**, enter **Android**\.
 
       The following is a list of valid values for **AppType**:
       + **iOS**
@@ -179,5 +169,4 @@ Custom environment nodes are not supported\.
 
    1. On the stage you are editing, choose **Done**\. In the AWS CodePipeline pane, choose **Save**, and then choose **Save** on the warning message\.
 
-   1. To submit your changes and start a pipeline build, choose **Release change**, and then choose **Release**\.  
-![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-android-final-view-pipeline.png)
+   1. To submit your changes and start a pipeline build, choose **Release change**, and then choose **Release**\.

@@ -377,6 +377,7 @@ When you create a pipeline with this method, the `PollForSourceChanges` paramete
                 Values:
                   - !Join [ '', [ !ImportValue SourceBucketARN, '/', !Ref SourceObjectKey ] ]
             ReadWriteType: WriteOnly
+            IncludeManagementEvents: false
         IncludeGlobalServiceEvents: true
         IsLogging: true
         IsMultiRegionTrail: true
@@ -496,7 +497,8 @@ When you create a pipeline with this method, the `PollForSourceChanges` paramete
                   ]
                 }
               ],
-              "ReadWriteType": "WriteOnly"
+              "ReadWriteType": "WriteOnly",
+              "IncludeManagementEvents": false
             }
           ],
           "IncludeGlobalServiceEvents": true,

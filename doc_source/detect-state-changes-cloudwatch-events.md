@@ -743,13 +743,9 @@ These steps show how to use the CloudWatch console to create a rule to send noti
 
 1. Specify the state changes the rule applies to:
    + For a rule that applies to all state changes, choose **Any state**\.
-   + For a rule that applies to some state changes only, choose **Specific state\(s\)**, and then choose one or more state values from the list\.  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/test-notifications-in-cwe.png)
+   + For a rule that applies to some state changes only, choose **Specific state\(s\)**, and then choose one or more state values from the list\.
 
-1. For event patterns that are more detailed than the selectors allow, you can also use the **Edit** option in the **Event Pattern Preview** window to designate an event pattern in JSON format\. The following example shows the JSON structure edited manually to specify a pipeline named "myPipeline\."  
-![\[A pipeline name can be edited manually in the JSON structure for the rule.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/cloudwatch-rule-event-pattern.png)![\[A pipeline name can be edited manually in the JSON structure for the rule.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[A pipeline name can be edited manually in the JSON structure for the rule.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
-
-   
+1. For event patterns that are more detailed than the selectors allow, you can also use the **Edit** option in the **Event Pattern Preview** window to designate an event pattern in JSON format\.
 **Note**  
 If not otherwise specified, then the event pattern is created for all pipelines/stages/actions and states\.
 

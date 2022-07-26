@@ -16,9 +16,9 @@ You must have the following resources to use with the AWS CloudFormation sample 
 
 **Create your pipeline in AWS CloudFormation**
 
-1. Open the AWS CloudFormation console, and choose **Create Stack**\.
+1. Open the AWS CloudFormation console, and choose **Create Stack**\. Choose **With new resources \(standard\)**\.
 
-1. In **Choose a template**, choose **Upload a template to Amazon S3**\. Choose **Browse**, and then select the template file from your local computer\. Choose **Next**\.
+1. In **Choose a template**, choose **Upload a template**\. Select **Choose file**, and then choose the template file from your local computer\. Choose **Next**\.
 
 1. In **Stack name**, enter a name for your pipeline\. Parameters specified by the sample template are displayed\. Enter the following parameters: 
 
@@ -30,7 +30,7 @@ You must have the following resources to use with the AWS CloudFormation sample 
 
 1. Choose **Next**\. Accept the defaults on the following page, and then choose **Next**\.
 
-1. In **Capabilities**, select **I acknowledge that AWS CloudFormation might create IAM resources**, and then choose **Create**\.
+1. In **Capabilities**, select **I acknowledge that AWS CloudFormation might create IAM resources**, and then choose **Create stack**\.
 
 1. After your stack creation is complete, view the event list to check for any errors\.
 
@@ -49,11 +49,13 @@ You must have the following resources to use with the AWS CloudFormation sample 
            "events:RemoveTargets",
            "events:DescribeRule"
         ],
-        "Resource": "*"
+        "Resource": "resource_ARN"
    }
    ```
 
 1. In AWS CloudFormation, in the **Resources** tab for your stack, view the resources that were created for your stack\. 
+**Note**  
+To view the pipeline that was created, find the **Logical ID** column under the **Resources** tab for your stack in AWS CloudFormation\. Note the name in the **Physical ID** column for the pipeline\. In CodePipeline, you can view the pipeline with the same Physical ID \(pipeline name\) in the Region where you created your stack\.
 
    Choose the S3 bucket with a `sourcebucket` label in the name, such as `s3-cfn-codepipeline-sourcebucket-y04EXAMPLE.` Do not choose the pipeline artifact bucket\.
 
@@ -95,7 +97,7 @@ When Amazon S3 is the source provider for your pipeline, you must upload to your
            "cloudtrail:StopLogging",
            "cloudtrail:PutEventSelectors"
         ],
-        "Resource": "*"
+        "Resource": "resource_ARN"
    }
    ```
 

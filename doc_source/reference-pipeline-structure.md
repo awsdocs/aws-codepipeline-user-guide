@@ -163,16 +163,13 @@ The action structure has the following requirements:
   ```
 
   This is true for all actions, whether they are in the same stage or in following stages, but the input artifact does not have to be the next action in strict sequence from the action that provided the output artifact\. Actions in parallel can declare different output artifact bundles, which are, in turn, consumed by different following actions\.
-
-  The following illustration provides an example of input and output artifacts in actions in a pipeline:  
-![\[An example of input and output artifacts in actions in a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-artifactsexplained.png)![\[An example of input and output artifacts in actions in a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[An example of input and output artifacts in actions in a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 + Output artifact names must be unique in a pipeline\. For example, a pipeline can include one action that has an output artifact named `"MyApp"` and another action that has an output artifact named `"MyBuiltApp"`\. However, a pipeline cannot include two actions that both have an output artifact named `"MyApp"`\.
 + Cross\-Region actions use the `Region` field to designate the AWS Region where the actions are to be created\. The AWS resources created for this action must be created in the same Region provided in the `region` field\. You cannot create cross\-Region actions for the following action types:
   + Source actions
   + Actions by third\-party providers
   + Actions by custom providers
 + Actions can be configured with variables\. You use the `namespace` field to set the namespace and variable information for execution variables\. For reference information about execution variables and action output variables, see [Variables](reference-variables.md)\.
-+ For all currently supported action types, the only valid owner string is "AWS", "ThirdParty", or "Custom"\. For more information, see the [CodePipeline API Reference](http://docs.aws.amazon.com/codepipeline/latest/APIReference)\.
++ For all currently supported action types, the only valid owner string is `AWS`, `ThirdParty`, or `Custom`\. For more information, see the [CodePipeline API Reference](http://docs.aws.amazon.com/codepipeline/latest/APIReference)\.
 + The default `runOrder` value for an action is 1\. The value must be a positive integer \(natural number\)\. You cannot use fractions, decimals, negative numbers, or zero\. To specify a serial sequence of actions, use the smallest number for the first action and larger numbers for each of the rest of the actions in sequence\. To specify parallel actions, use the same integer for each action you want to run in parallel\. In the console, you can specify a serial sequence for an action by choosing **Add action group** at the level in the stage where you want it to run, or you can specify a parallel sequence by choosing **Add action**\. *Action group* refers to a run order of one or more actions at the same level\.
 
   For example, if you want three actions to run in sequence in a stage, you would give the first action the `runOrder` value of 1, the second action the `runOrder` value of 2, and the third the `runOrder` value of 3\. However, if you want the second and third actions to run in parallel, you would give the first action the `runOrder` value of 1 and both the second and third actions the `runOrder` value of 2\.
@@ -287,16 +284,6 @@ The following example shows a valid configuration for a deploy action that uses 
   "ClientSecret": "****",
   "RefreshToken": "****",
   "SkillId": "amzn1.ask.skill.22649d8f-0451-4b4b-9ed9-bfb6cEXAMPLE"
-}
-```
-
-The following example shows a valid configuration for a deploy action that uses Amazon S3:
-
-```
-"configuration": {
-  "BucketName": "website-bucket",
-  "Extract": "true",
-  "ObjectKey": "MyWebsite"
 }
 ```
 

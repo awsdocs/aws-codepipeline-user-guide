@@ -13,8 +13,6 @@ In cases where you have edited your pipeline structure and so the failed action 
 
 If you are using the console to view a pipeline, a **Retry** button appears on the stage where the failed actions can be retried\. 
 
-![\[A stage that contains one or more failed actions displays a Retry button\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/actions-retry-button.png)![\[A stage that contains one or more failed actions displays a Retry button\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[A stage that contains one or more failed actions displays a Retry button\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
-
 If you are using the AWS CLI, you can use the get\-pipeline\-state command to determine whether any actions have failed\.
 
 **Topics**

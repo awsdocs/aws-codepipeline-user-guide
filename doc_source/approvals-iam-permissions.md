@@ -3,7 +3,7 @@
 Before IAM users in your organization can approve or reject approval actions, they must be granted permissions to access pipelines and to update the status of approval actions\. You can grant permission to access all pipelines and approval actions in your account by attaching the `AWSCodePipelineApproverAccess` managed policy to an IAM user, role, or group; or you can to grant limited permissions by specifying the individual resources that can be accessed by an IAM user, role, or group\.
 
 **Note**  
-The permissions described in this topic grant very limited access\. To enable a user, role, or group to do more than approve or reject approval actions, you can attach other managed policies\. For information about the managed policies available for CodePipeline, see [AWS managed \(predefined\) policies for CodePipeline](managed-policies.md)\.
+The permissions described in this topic grant very limited access\. To enable a user, role, or group to do more than approve or reject approval actions, you can attach other managed policies\. For information about the managed policies available for CodePipeline, see [AWS managed policies for CodePipeline](managed-policies.md)\.
 
 ## Grant approval permission to all pipelines and approval actions<a name="approvals-iam-permissions-all"></a>
 
@@ -46,28 +46,28 @@ Make sure you are signed in to the AWS Management Console with the same account 
        "Version": "2012-10-17",
        "Statement": [
            {
+               "Effect": "Allow",
                "Action": [
                    "codepipeline:ListPipelines"
                ],
                "Resource": [
                    "*"
-               ],
-               "Effect": "Allow"
+               ]
            },
            {
+               "Effect": "Allow",
                "Action": [
                    "codepipeline:GetPipeline",
                    "codepipeline:GetPipelineState",
                    "codepipeline:GetPipelineExecution"
                ],
-               "Effect": "Allow",
                "Resource": "arn:aws:codepipeline:us-east-2:80398EXAMPLE:MyFirstPipeline"
            },
            {
+               "Effect": "Allow",
                "Action": [
                    "codepipeline:PutApprovalResult"
                ],
-               "Effect": "Allow",
                "Resource": "arn:aws:codepipeline:us-east-2:80398EXAMPLE:MyFirstPipeline/MyApprovalStage/MyApprovalAction"
            }
        ]

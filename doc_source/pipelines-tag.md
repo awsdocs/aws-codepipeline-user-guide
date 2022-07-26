@@ -30,13 +30,11 @@ You can use the console to add tags to an existing pipeline\.
 
 1. Under **Pipeline tags**, choose **Edit**\.
 
-1. In the **Key** and **Value** fields, enter a key pair for each set of tags you want to add\. \(The **Value** field is optional\.\) For example, in **Key**, enter **Project**\. In **Value**, enter **ProjectA**\.  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/pipeline-tags-edit-console.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+1. In the **Key** and **Value** fields, enter a key pair for each set of tags you want to add\. \(The **Value** field is optional\.\) For example, in **Key**, enter **Project**\. In **Value**, enter **ProjectA**\.
 
 1. \(Optional\) Choose **Add tag** to add more rows and enter more tags\.
 
-1. Choose **Submit**\. The tags are listed under pipeline settings\.  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/pipeline-tags-console.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+1. Choose **Submit**\. The tags are listed under pipeline settings\.
 
 ### View tags for a pipeline \(console\)<a name="pipelines-tag-list-console"></a>
 

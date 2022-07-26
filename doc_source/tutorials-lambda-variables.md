@@ -67,14 +67,14 @@ Use the following steps to create a Lambda function and a Lambda execution role\
        // Retrieve the Job ID from the Lambda action
        var jobId = event["CodePipeline.job"].id;
        
-       // Retrieve the value of UserParameters from the Lambda action configuration in AWS CodePipeline,
+       // Retrieve the value of UserParameters from the Lambda action configuration in CodePipeline,
        // in this case it is the Commit ID of the latest change of the pipeline.
        var params = event["CodePipeline.job"].data.actionConfiguration.configuration.UserParameters; 
        
        // The region from where the lambda function is being executed.
        var lambdaRegion = process.env.AWS_REGION;
        
-       // Notify AWS CodePipeline of a successful job
+       // Notify CodePipeline of a successful job
        var putJobSuccess = function(message) {
            var params = {
                jobId: jobId,
@@ -93,7 +93,7 @@ Use the following steps to create a Lambda function and a Lambda execution role\
            });
        };
        
-       // Notify AWS CodePipeline of a failed job
+       // Notify CodePipeline of a failed job
        var putJobFailure = function(message) {
            var params = {
                jobId: jobId,
@@ -160,8 +160,7 @@ In this step, you add a Lambda invoke action to your pipeline\. You add the acti
       #{SourceVariables.CommitId}
       ```
 
-   1. In **Variable namespace**, add the namespace name, such as **TestVariables**\.  
-![\[Console screenshot showing the available options when adding a Lambda test action.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/variables-lambda-example.png)![\[Console screenshot showing the available options when adding a Lambda test action.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing the available options when adding a Lambda test action.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+   1. In **Variable namespace**, add the namespace name, such as **TestVariables**\.
 
    1. Choose **Done**\.
 
@@ -185,16 +184,12 @@ In this step, you add a Lambda invoke action to your pipeline\. You add the acti
 
       ```
       Make sure to review the code before approving this action. Test Run ID: #{TestVariables.testRunId}
-      ```  
-![\[Console screenshot showing the boxes where you enter the URL and comments message.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/variables-lambda-example-approval.png)![\[Console screenshot showing the boxes where you enter the URL and comments message.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing the boxes where you enter the URL and comments message.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+      ```
 
-1. Choose **Done** to close the edit screen for the action, and then choose **Done** to close the edit screen for the stage\. To save the pipeline, choose **Done**\. The completed pipeline now contains a structure with source, test, approval, and deploy stages\.  
-![\[Console screenshot showing the source, test, approval, and deploy pipeline stages.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/variables-lambda-example-pipeline.png)![\[Console screenshot showing the source, test, approval, and deploy pipeline stages.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing the source, test, approval, and deploy pipeline stages.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+1. Choose **Done** to close the edit screen for the action, and then choose **Done** to close the edit screen for the stage\. To save the pipeline, choose **Done**\. The completed pipeline now contains a structure with source, test, approval, and deploy stages\.
 
    Choose **Release change** to run the latest change through the pipeline structure\.
 
-1. When the pipeline reaches the manual approval stage, choose **Review**\. The resolved variables appear as the URL for the commit ID\. Your approver can choose the URL to view the commit\.  
-![\[Console screenshot showing the review dialog box with approve and reject buttons.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/variables-lambda-example-URL.png)![\[Console screenshot showing the review dialog box with approve and reject buttons.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing the review dialog box with approve and reject buttons.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+1. When the pipeline reaches the manual approval stage, choose **Review**\. The resolved variables appear as the URL for the commit ID\. Your approver can choose the URL to view the commit\.
 
-1. After the pipeline runs successfully, you can also view the variable values on the action execution history page\.  
-![\[Console screenshot of the action configuration pane showing the resolved configuration.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/variables-lambda-example-details.png)![\[Console screenshot of the action configuration pane showing the resolved configuration.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot of the action configuration pane showing the resolved configuration.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+1. After the pipeline runs successfully, you can also view the variable values on the action execution history page\.

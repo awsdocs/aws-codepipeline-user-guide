@@ -48,7 +48,7 @@ If you already have an image you want to use, you can skip this step\.
 
 1. Sign in to your Linux instance where you have Docker installed\.
 
-   Pull down an image for `nginx`\. This command provides the `nginx:latest` image from Docker Hub:
+   Pull down an image for `nginx`\. This command provides the `nginx:latest` image:
 
    ```
    docker pull nginx
@@ -510,8 +510,7 @@ In this section, you create a pipeline with the following actions:
 
 1. In **Step 4: Add deploy stage**:
 
-   1. In **Deploy provider**, choose **Amazon ECS \(Blue/Green\)**\. In **Application name**, enter or choose the application name from the list, such as `codedeployapp`\. In **Deployment group**, enter or choose the deployment group name from the list, such as `codedeploydeplgroup`\.  
-![\[The Step 4: Deploy page for an Amazon ECS action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/ECS-deploy-action.png)![\[The Step 4: Deploy page for an Amazon ECS action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The Step 4: Deploy page for an Amazon ECS action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+   1. In **Deploy provider**, choose **Amazon ECS \(Blue/Green\)**\. In **Application name**, enter or choose the application name from the list, such as `codedeployapp`\. In **Deployment group**, enter or choose the deployment group name from the list, such as `codedeploydeplgroup`\.
 
        
 **Note**  
@@ -560,8 +559,7 @@ View your pipeline and add an Amazon ECR source action to your pipeline\.
 
 1. In **AWS CodeDeploy AppSpec File**, choose **SourceArtifact**, and then verify **appspec\.yaml** is entered\.
 
-1. In **Dynamically update task definition image**, in **Input Artifact with Image URI**, choose **MyImage**, and then enter the placeholder text that is used in the `taskdef.json` file:** IMAGE1\_NAME**\. Choose **Save**\.  
-![\[The Step 4: Deploy page for an edited Amazon ECS stage\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/tutorial-ECS-pipeline-edit-deploystage.png)![\[The Step 4: Deploy page for an edited Amazon ECS stage\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The Step 4: Deploy page for an edited Amazon ECS stage\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+1. In **Dynamically update task definition image**, in **Input Artifact with Image URI**, choose **MyImage**, and then enter the placeholder text that is used in the `taskdef.json` file:** IMAGE1\_NAME**\. Choose **Save**\.
 
 1. In the AWS CodePipeline pane, choose **Save pipeline change**, and then choose **Save change**\. View your updated pipeline\.
 
@@ -580,8 +578,7 @@ View your pipeline and add an Amazon ECR source action to your pipeline\.
    },
    ```
 
-1. To submit your changes and start a pipeline build, choose **Release change**, and then choose **Release**\.  
-![\[Completed pipeline with an Amazon ECS Blue/Green stage\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/tutorial-ECS-bluegreen-pipeline.png)![\[Completed pipeline with an Amazon ECS Blue/Green stage\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Completed pipeline with an Amazon ECS Blue/Green stage\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+1. To submit your changes and start a pipeline build, choose **Release change**, and then choose **Release**\.
 
 1. Choose the deployment action to view it in CodeDeploy and see the progress of the traffic shifting\.
 **Note**  

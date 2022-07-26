@@ -3,9 +3,12 @@
 AWS CodePipeline includes a number of actions that help you configure build, test, and deploy resources for your automated release process\. You can add actions to your pipeline that are in an AWS Region different from your pipeline\. When an AWS service is the provider for an action, and this action type/provider type are in a different AWS Region from your pipeline, this is a cross\-Region action\. 
 
 **Note**  
-Certain action types in CodePipeline may only be available in certain AWS Regions\. Also note that there may be AWS Regions where an action type is available, but a specific AWS provider for that action type is not available\.
+Cross\-region actions are supported and can only be created in those AWS Regions where CodePipeline is supported\. For a list of the supported AWS Regions for CodePipeline, see [Quotas in AWS CodePipeline](limits.md)\.
 
 You can use the console, AWS CLI, or AWS CloudFormation to add cross\-Region actions in pipelines\.
+
+**Note**  
+Certain action types in CodePipeline may only be available in certain AWS Regions\. Also note that there may be AWS Regions where an action type is available, but a specific AWS provider for that action type is not available\.
 
 When you create or edit a pipeline, you must have an artifact bucket in the pipeline Region and then you must have one artifact bucket per Region where you plan to execute an action\. For more information about the `ArtifactStores` parameter, see [CodePipeline pipeline structure reference](reference-pipeline-structure.md)\.
 
@@ -58,8 +61,7 @@ If the pipeline is running when changes are saved, that execution does not compl
 
    1. In **Action provider**, choose the action provider\.
 
-   1. In **Region**, choose the AWS Region where you have created or plan to create the resource for the action\. When the Region is selected, the available resources for that Region are listed for selection\. The **Region** field designates where the AWS resources are created for this action type and provider type\. This field only displays for actions where the action provider is an AWS service\. The **Region** field defaults to the same AWS Region as your pipeline\.  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/xregion-edit-action.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+   1. In **Region**, choose the AWS Region where you have created or plan to create the resource for the action\. When the Region is selected, the available resources for that Region are listed for selection\. The **Region** field designates where the AWS resources are created for this action type and provider type\. This field only displays for actions where the action provider is an AWS service\. The **Region** field defaults to the same AWS Region as your pipeline\.
 
    1. In **Input artifacts** choose the appropriate input from the previous stage\. For example, if the previous stage is a source stage, choose **SourceArtifact**\.
 
@@ -314,7 +316,7 @@ Be sure to include `file://` before the file name\. It is required in this comma
 **Note**  
 The update\-pipeline command stops the pipeline\. If a revision is being run through the pipeline when you run the update\-pipeline command, that run is stopped\. You must manually start the pipeline to run that revision through the updated pipeline\. Use the `start-pipeline-execution` command to manually start your pipeline\.
 
-1. After you update your pipeline, the cross\-Region actions is displayed in the console, as shown here\.  
+1. After you update your pipeline, the cross\-Region action is displayed in the console\.  
 ![\[A high-level view of a pipeline that includes a cross-Region action.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/cross-region-icon.png)![\[A high-level view of a pipeline that includes a cross-Region action.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[A high-level view of a pipeline that includes a cross-Region action.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
 
 ## Add a cross\-Region action to a pipeline \(AWS CloudFormation\)<a name="actions-create-cross-region-cfn"></a>

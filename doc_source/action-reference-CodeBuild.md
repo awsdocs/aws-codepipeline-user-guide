@@ -54,7 +54,7 @@ When you enter the `name`, `value`, and `type` for your environment variables co
 For more information, see [ EnvironmentVariable](https://docs.aws.amazon.com/codebuild/latest/APIReference/API_EnvironmentVariable.html)\.
 
 ## Input artifacts<a name="action-reference-CodeBuild-input"></a>
-+ **Number of Artifacts:** `1 to 5`
++ **Number of artifacts:** `1 to 5`
 + **Description:** CodeBuild looks for the build spec file and runs the build spec commands from the directory of the primary source artifact\. When more than one input source is specified for the CodeBuild action, this artifact must be set using the `PrimarySource` action configuration parameter in CodePipeline\. 
 
   Each input artifact is extracted to its own directory, the locations of which are stored in environment variables\. The directory for the primary source artifact is made available with `$CODEBUILD_SRC_DIR`\. The directories for all other input artifacts are made available with `$CODEBUILD_SRC_DIR_yourInputArtifactName`\.
@@ -62,7 +62,7 @@ For more information, see [ EnvironmentVariable](https://docs.aws.amazon.com/cod
 The artifact configured in your CodeBuild project becomes the input artifact used by the CodeBuild action in your pipeline\.
 
 ## Output artifacts<a name="action-reference-CodeBuild-output"></a>
-+ **Number of Artifacts:** `0 to 5` 
++ **Number of artifacts:** `0 to 5` 
 + **Description:** These can be used to make the artifacts that are defined in the CodeBuild build spec file available to subsequent actions in the pipeline\. When only one output artifact is defined, this artifact can be defined directly under the `artifacts` section of the build spec file\. When more than one output artifact is specified, all artifacts referenced must be defined as secondary artifacts in the build spec file\. The names of the output artifacts in CodePipeline must match the artifact identifiers in the build spec file\.
 **Note**  
 The artifact configured in your CodeBuild project becomes the CodePipeline input artifact in your pipeline action\.

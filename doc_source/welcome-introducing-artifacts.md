@@ -12,15 +12,7 @@ For example:
 
 1. The output artifact from the previous step \(the built application\) is ingested as an input artifact to the **Deploy** stage, such as staging or production environments in the AWS Cloud\. You can deploy applications to a deployment fleet, or you can deploy container\-based applications to tasks running in ECS clusters\.
 
-When you create or edit an action, you designate the input and output artifact or artifacts for the action\. In this example for a two\-stage pipeline with a **Source** and **Deploy** stage, in **Edit Action**, you choose the artifact name of the source action for the input artifact for the deploy action\.
-
-![\[A high-level artifacts workflow in CodePipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/example-artifact-dropdown.png)![\[A high-level artifacts workflow in CodePipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[A high-level artifacts workflow in CodePipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
-
-The following diagram shows a high\-level artifact workflow between stages in CodePipeline\.
-
-![\[A high-level artifacts workflow in CodePipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/Hi-Level-PipelineFlow.png)![\[A high-level artifacts workflow in CodePipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[A high-level artifacts workflow in CodePipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
-
-
+When you create or edit an action, you designate the input and output artifact or artifacts for the action\. For example, for a two\-stage pipeline with a **Source** and **Deploy** stage, in **Edit Action**, you choose the artifact name of the source action for the input artifact for the deploy action\.
 + When you use the console to create your first pipeline, CodePipeline creates an Amazon S3 bucket in the same AWS Region to store items for all pipelines\. Every time you use the console to create another pipeline in that Region, CodePipeline creates a folder for that pipeline in the bucket\. It uses that folder to store artifacts for your pipeline as the automated release process runs\. This bucket is named codepipeline\-*region*\-*12345EXAMPLE*, where *region* is the AWS Region in which you created the pipeline, and *12345EXAMPLE* is a 12\-digit random number that ensures the bucket name is unique\. 
 **Note**  
 If you already have a bucket starting with codepipeline\-*region*\- in the Region where you are creating the pipeline, CodePipeline uses that as the default bucket\. It also follows lexicographical order; for example, codepipeline\-*region\-abcexample* is chosen before codepipeline\-*region\-defexample*\.
@@ -37,6 +29,3 @@ If you already have a bucket starting with codepipeline\-*region*\- in the Regio
   Every output artifact in the pipeline must have a unique name\. Every input artifact for an action must match the output artifact of an action earlier in the pipeline, whether that action is immediately before the action in a stage or runs in a stage several stages earlier\. 
 
   An artifact can be worked on by more than one action\.
-
-  The following shows how input artifacts and output artifacts are produced and consumed in a pipeline:  
-![\[Input artifacts and output artifacts are produced and consumed in a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-artifactsexplained.png)![\[Input artifacts and output artifacts are produced and consumed in a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Input artifacts and output artifacts are produced and consumed in a pipeline.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)

@@ -102,13 +102,11 @@ In this section, you create a pipeline with the following actions:
 
    1. In **Deployment strategy**, choose the name of your deployment strategy\. This can be either a deployment strategy you created in AppConfig or one you have chosen from predefined deployment strategies in AppConfig\. The field shows the ID for your deployment strategy\.
 
-   1. In **Input artifact configuration path**, enter the file path\. Make sure that your input artifact configuration path matches the directory structure in your S3 bucket \.zip file\. For this example, enter the following file path: `appconfig-configurations/MyConfigurations/us-west-2/configuration.json`\.   
-![\[The action page for an AppConfig action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/appconfig-deploy-action.png)![\[The action page for an AppConfig action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The action page for an AppConfig action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+   1. In **Input artifact configuration path**, enter the file path\. Make sure that your input artifact configuration path matches the directory structure in your S3 bucket \.zip file\. For this example, enter the following file path: `appconfig-configurations/MyConfigurations/us-west-2/configuration.json`\. 
 
    1. Choose **Next**\.
 
-1. In **Step 5: Review**, review the information, and then choose **Create pipeline**\.  
-![\[The completed pipeline for an AppConfig action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/appconfig-pipeline.png)![\[The completed pipeline for an AppConfig action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The completed pipeline for an AppConfig action\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+1. In **Step 5: Review**, review the information, and then choose **Create pipeline**\.
 
 ## Step 4: Make a change to any source file and verify deployment<a name="tutorials-AppConfig-verify"></a>
 

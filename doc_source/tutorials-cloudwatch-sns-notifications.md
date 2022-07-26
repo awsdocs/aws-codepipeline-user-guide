@@ -37,8 +37,7 @@ Subscribe one or more recipients to the topic to receive email notifications\. T
 
 1. For **Protocol**, choose **Email**\.
 
-1. For **Endpoint**, type the recipient's full email address\. Compare your results to the following:  
-![\[Complete the notification creation by subscribing to the topic.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/tutorial-SNS-subscription.png)![\[Complete the notification creation by subscribing to the topic.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Complete the notification creation by subscribing to the topic.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+1. For **Endpoint**, type the recipient's full email address\.
 
 1. Choose **Create Subscription**\.
 
@@ -58,8 +57,7 @@ Create a CloudWatch Events notification rule with CodePipeline as the event sour
 
 1. Choose **Specific state\(s\)**, and choose **FAILED**\.
 
-1. Choose **Edit** to open the JSON editor for the **Event Pattern Preview** pane\. Add the **pipeline** parameter with the name of your pipeline as shown in the following example for a pipeline named "myPipeline\."  
-![\[A pipeline name can be edited manually in the JSON structure for the rule.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/cloudwatch-rule-event-pattern.png)![\[A pipeline name can be edited manually in the JSON structure for the rule.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[A pipeline name can be edited manually in the JSON structure for the rule.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+1. Choose **Edit** to open the JSON editor for the **Event Pattern Preview** pane\. Add the **pipeline** parameter with the name of your pipeline as shown in the following example for a pipeline named "myPipeline\."
 
    You can copy the event pattern here and paste it into the console:
 

@@ -1,4 +1,4 @@
-# Amazon Elastic Container Service and CodeDeploy Blue\-Green<a name="action-reference-ECSbluegreen"></a>
+# Amazon Elastic Container Service and CodeDeploy blue\-green<a name="action-reference-ECSbluegreen"></a>
 
 You can configure a pipeline in AWS CodePipeline that deploys container applications using a blue/green deployment\. In a blue/green deployment, you can launch a new version of your application alongside the old version, and you can test the new version before you reroute traffic to it\. You can also monitor the deployment process and rapidly roll back if there is an issue\.
 
@@ -10,20 +10,20 @@ Before you create your pipeline, you must have already created the Amazon ECS re
 This topic describes the Amazon ECS to CodeDeploy blue/green deployment action for CodePipeline\. For reference information about Amazon ECS standard deployment actions in CodePipeline, see [Amazon Elastic Container Service](action-reference-ECS.md)\.
 
 **Topics**
-+ [Action Type](#action-reference-ECSbluegreen-type)
-+ [Configuration Parameters](#action-reference-ECSbluegreen-config)
-+ [Input Artifacts](#action-reference-ECSbluegreen-input)
-+ [Output Artifacts](#action-reference-ECSbluegreen-output)
-+ [Action Declaration](#action-reference-ECSbluegreen-example)
-+ [See Also](#action-reference-ECSbluegreen-links)
++ [Action type](#action-reference-ECSbluegreen-type)
++ [Configuration parameters](#action-reference-ECSbluegreen-config)
++ [Input artifacts](#action-reference-ECSbluegreen-input)
++ [Output artifacts](#action-reference-ECSbluegreen-output)
++ [Action declaration](#action-reference-ECSbluegreen-example)
++ [See also](#action-reference-ECSbluegreen-links)
 
-## Action Type<a name="action-reference-ECSbluegreen-type"></a>
+## Action type<a name="action-reference-ECSbluegreen-type"></a>
 + Category: `Deploy`
 + Owner: `AWS`
 + Provider: `CodeDeployToECS`
 + Version: `1`
 
-## Configuration Parameters<a name="action-reference-ECSbluegreen-config"></a>
+## Configuration parameters<a name="action-reference-ECSbluegreen-config"></a>
 
 **ApplicationName**  
 Required: Yes  
@@ -59,17 +59,17 @@ Required: No
 The name of the image available from the image repository, such as the Amazon ECR source repository\.  
 Available values for `<Number>` are 1 through 4\.
 
-## Input Artifacts<a name="action-reference-ECSbluegreen-input"></a>
+## Input artifacts<a name="action-reference-ECSbluegreen-input"></a>
 + **Number of Artifacts:** `1 to 5`
 + **Description:** The `CodeDeployToECS` action first looks for the task definition file and the AppSpec file in the source file repository, next looks for the image in the image repository, and then runs the AppSpec commands to deploy the task set and container to the cluster\.
 
   The `CodeDeployToECS` action looks for an `imageDetail.json` file that maps the image URI to the image\. When you commit a change to your Amazon ECR image repository, the pipeline ECR source action creates an `imageDetail.json` file for that commit\. You can also manually add an `imageDetail.json` file for a pipeline where the action is not automated\. For information about the `imageDetail.json` file, see [imageDetail\.json file for Amazon ECS blue/green deployment actions](file-reference.md#file-reference-ecs-bluegreen)\.
 
-## Output Artifacts<a name="action-reference-ECSbluegreen-output"></a>
+## Output artifacts<a name="action-reference-ECSbluegreen-output"></a>
 + **Number of Artifacts:** `0` 
 + **Description:** Output artifacts do not apply for this action type\.
 
-## Action Declaration<a name="action-reference-ECSbluegreen-example"></a>
+## Action declaration<a name="action-reference-ECSbluegreen-example"></a>
 
 ------
 #### [ YAML ]
@@ -145,7 +145,7 @@ Actions:
 
 ------
 
-## See Also<a name="action-reference-ECSbluegreen-links"></a>
+## See also<a name="action-reference-ECSbluegreen-links"></a>
 
 The following related resources can help you as you work with this action\.
 + [Tutorial: Create a pipeline with an Amazon ECR source and ECS\-to\-CodeDeploy deployment](tutorials-ecs-ecr-codedeploy.md) – This tutorial walks you through creation of the CodeDeploy and Amazon ECS resources you need for a blue/green deployment\. The tutorial shows you how to push a Docker image to Amazon ECR and create an Amazon ECS task definition that lists your Docker image name, container name, Amazon ECS service name, and load balancer configuration\. The tutorial then walks you through creating the AppSpec file and pipeline for your deployment\.

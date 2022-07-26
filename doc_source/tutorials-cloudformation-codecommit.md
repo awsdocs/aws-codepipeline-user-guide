@@ -18,9 +18,9 @@ You must have created the following resources to use with the AWS CloudFormation
 
 1. Unzip the files from [SampleApp\_Linux\.zip](samples/SampleApp_Linux.zip) and upload the files to your AWS CodeCommit repository\. You must upload the unzipped files to the root directory of your repository\. You can follow the instructions in [Step 2: Add sample code to your CodeCommit repository](tutorials-simple-codecommit.md#codecommit-add-code) to push the files to your repository\.
 
-1. Open the AWS CloudFormation console and choose **Create Stack**\.
+1. Open the AWS CloudFormation console and choose **Create Stack**\. Choose **With new resources \(standard\)**\.
 
-1. In **Choose a template**, choose **Upload a template to Amazon S3**\. Choose **Browse** and then select the template file from your local computer\. Choose **Next**\.
+1. Under **Specify template**, choose **Upload a template**\. Select **Choose file** and then choose the template file from your local computer\. Choose **Next**\.
 
 1. In **Stack name**, enter a name for your pipeline\. Parameters specified by the sample template are displayed\. Enter the following parameters: 
 
@@ -30,12 +30,11 @@ You must have created the following resources to use with the AWS CloudFormation
 
    1. In **BranchName**, enter the repository branch you want to use\.
 
-   1. In **RepositoryName**, enter the name of your CodeCommit source repository\.  
-![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/create-stack-codecommit-pipeline.png)
+   1. In **RepositoryName**, enter the name of your CodeCommit source repository\.
 
 1. Choose **Next**\. Accept the defaults on the following page, and then choose **Next**\.
 
-1. In **Capabilities**, select **I acknowledge that AWS CloudFormation might create IAM resources**, and then choose **Create**\.
+1. In **Capabilities**, select **I acknowledge that AWS CloudFormation might create IAM resources**, and then choose **Create stack**\.
 
 1. After your stack creation is complete, view the event list to check for any errors\.
 
@@ -54,12 +53,14 @@ You must have created the following resources to use with the AWS CloudFormation
            "events:RemoveTargets",
            "events:DescribeRule"
         ],
-        "Resource": "*"
+        "Resource": "resource_ARN"
    }
    ```
 
 1. Sign in to the AWS Management Console and open the CodePipeline console at [https://console\.aws\.amazon\.com/codepipeline/](https://console.aws.amazon.com/codepipeline/)\.
 
    Under **Pipelines**, choose your pipeline and choose **View**\. The diagram shows your pipeline source and deployment stages\.
+**Note**  
+To view the pipeline that was created, find the **Logical ID** column under the **Resources** tab for your stack in AWS CloudFormation\. Note the name in the **Physical ID** column for the pipeline\. In CodePipeline, you can view the pipeline with the same Physical ID \(pipeline name\) in the Region where you created your stack\.
 
 1. In your source repository, commit and push a change\. Your change\-detection resources pick up the change, and your pipeline starts\.

@@ -8,15 +8,7 @@ You can add cross\-region actions when you create your pipeline\. AWS resources 
 
 You can try this out using your existing iOS app, or you can use the [sample iOS app](samples/s3-ios-test-1.zip)\.
 
-![\[The Step 2: Source page in the CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-push-build-test-S3.png)![\[The Step 2: Source page in the CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The Step 2: Source page in the CodePipeline pipeline wizard\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
-
-
-****  
-
-|  |  |  |  |  | 
-| --- |--- |--- |--- |--- |
-| Configure | Add definitions | Upload | Test | Report | 
-| Configure pipeline resources | Add test definitions to your package | Upload \.zip to your bucket | Test output artifact kicked off automatically | View test results | 
+**Note**  
 
 **Before you begin**
 
@@ -69,8 +61,7 @@ If you use a CodePipeline service role that was created before July 2018, you mu
 
    1. On the **Step 2: Add source stage** page, in **Source provider**, choose **Amazon S3**\.
 
-   1. In **Amazon S3 location**, enter the bucket and object key for your \.zip file\.  
-![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-add-source-S3.png)
+   1. In **Amazon S3 location**, enter the bucket, such as `my-storage-bucket`, and object key, such as `s3-ios-test-1.zip` for your \.zip file\.
 
    1. Choose **Next**\.
 
@@ -84,8 +75,7 @@ If you use a CodePipeline service role that was created before July 2018, you mu
 
    1. In **Server URL**, enter text\. The text is a placeholder\. It is not used\.
 
-   1. In **Project name**, enter a name\. The name is a placeholder\. It is not used\.  
-![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-ios-define-build-S3.png)
+   1. In **Project name**, enter a name\. The name is a placeholder\. It is not used\.
 
    1. Choose **Next**\.
 
@@ -122,8 +112,7 @@ If you use a CodePipeline service role that was created before July 2018, you mu
       aws devicefarm list-device-pools --arn arn:aws:devicefarm:us-west-2:account_ID:project:project_ID
       ```
 
-   1. In **AppType**, enter **iOS**\.  
-![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-choose-test-provider-S3.png)
+   1. In **AppType**, enter **iOS**\.
 
       The following is a list of valid values for **AppType**:
       + **iOS**
@@ -165,5 +154,4 @@ Custom environment nodes are not supported\.
 
    1. On the stage you are editing, choose **Done**\. In the AWS CodePipeline pane, choose **Save**, and then choose **Save** on the warning message\.
 
-   1. To submit your changes and start a pipeline execution, choose **Release change**, and then choose **Release**\.  
-![\[\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-ios-final-view-pipeline.png)
+   1. To submit your changes and start a pipeline execution, choose **Release change**, and then choose **Release**\.

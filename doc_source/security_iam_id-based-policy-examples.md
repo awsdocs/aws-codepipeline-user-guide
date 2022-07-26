@@ -11,7 +11,7 @@ To learn how to create an IAM identity\-based policy using these example JSON po
 + [Identity\-based policies \(IAM\) examples](security-iam-id-policies-examples.md)
 + [Using tags to control access to CodePipeline resources](tag-based-access-control.md)
 + [Permissions required to use the CodePipeline console](security-iam-permissions-console.md)
-+ [AWS managed \(predefined\) policies for CodePipeline](managed-policies.md)
++ [AWS managed policies for CodePipeline](managed-policies.md)
 + [CodePipeline managed policies and notifications](#notifications-permissions)
 + [Customer managed policy examples](customer-managed-policies.md)
 
@@ -37,7 +37,7 @@ The `AWSCodePipeline_FullAccess` managed policy includes the following statement
         ],
         "Resource": "*",
         "Condition" : {
-            "StringLike" : {"codestar-notifications:NotificationsForResource" : "arn:aws:codepipeline:*"} 
+            "StringLike" : {"codestar-notifications:NotificationsForResource" : "arn:aws:codepipeline:us-west-2:111222333444:MyFirstPipeline"} 
         }
     },    
     {
@@ -91,7 +91,7 @@ The `AWSCodePipeline_ReadOnlyAccess` managed policy includes the following state
         ],
         "Resource": "*",
         "Condition" : {
-            "StringLike" : {"codestar-notifications:NotificationsForResource" : "arn:aws:codepipeline:*"} 
+            "StringLike" : {"codestar-notifications:NotificationsForResource" : "arn:aws:codepipeline:us-west-2:111222333444:MyFirstPipeline"} 
         }
     },    
     {

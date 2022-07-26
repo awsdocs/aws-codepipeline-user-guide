@@ -3,7 +3,7 @@
 You use connections to authorize and establish configurations that associate your third\-party provider with your AWS resources\.
 
 **Note**  
-This feature is not available in the Asia Pacific \(Hong Kong\) or Europe \(Milan\) Region\. To use other source actions available in that Region, see [Source action integrations](integrations-action-type.md#integrations-source)\.
+This feature is not available in the Asia Pacific \(Hong Kong\) and Europe \(Milan\) Regions\. To reference other available actions, see [Product and service integrations with CodePipeline](integrations.md)\.
 
 To add a source action for your GitHub or GitHub Enterprise Cloud repository in CodePipeline, you can choose either to:
 + Use the CodePipeline console **Create pipeline** wizard or **Edit action** page to choose the **GitHub \(Version 2\)** provider option\. See [Create a connection to GitHub Enterprise Server \(console\)](connections-ghes.md#connections-ghes-console) to add the action\. The console helps you create a connections resource\.
@@ -50,8 +50,7 @@ After you choose to create the connection, the **Connect to GitHub** page appear
 
 **To create a connection to GitHub**
 
-1. Under **GitHub connection settings**, your connection name appears in **Connection name**\. Choose **Connect to GitHub**\. The access request page appears\.  
-![\[Console screenshot showing the GitHub account access page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/github-conn-access.png)![\[Console screenshot showing the GitHub account access page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing the GitHub account access page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+1. Under **GitHub connection settings**, your connection name appears in **Connection name**\. Choose **Connect to GitHub**\. The access request page appears\.
 
 1. Choose **Authorize AWS Connector for GitHub**\. The connection page displays and shows the **GitHub Apps** field\.  
 ![\[Console screenshot showing the initial GitHub connection page with the GitHub Apps field.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/github-conn-access-app.png)![\[Console screenshot showing the initial GitHub connection page with the GitHub Apps field.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing the initial GitHub connection page with the GitHub Apps field.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
@@ -60,15 +59,11 @@ After you choose to create the connection, the **Connect to GitHub** page appear
 **Note**  
 You install one app for all of your connections to a particular provider\. If you have already installed the AWS Connector for GitHub app, choose it and skip this step\.
 
-1. On the **Install AWS Connector for GitHub** page, choose the account where you want to install the app\.  
-![\[Console screenshot showing the Connector for GitHub installation page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/github-conn-access-app-install1.png)![\[Console screenshot showing the Connector for GitHub installation page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing the Connector for GitHub installation page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+1. On the **Install AWS Connector for GitHub** page, choose the account where you want to install the app\.
 **Note**  
 You only install the app once for each GitHub account\. If you previously installed the app, you can choose **Configure** to proceed to a modification page for your app installation, or you can use the back button to return to the console\.
 
-1. On the **Install AWS Connector for GitHub** page, leave the defaults, and choose **Install**\.  
-![\[Console screenshot showing the second Connector for GitHub installation page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/github-conn-access-app-install2.png)![\[Console screenshot showing the second Connector for GitHub installation page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing the second Connector for GitHub installation page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
-
-   
+1. On the **Install AWS Connector for GitHub** page, leave the defaults, and choose **Install**\.
 
 1. On the **Connect to GitHub** page, the connection ID for your new installation appears in **GitHub Apps**\. Choose **Connect**\.
 

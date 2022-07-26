@@ -3,7 +3,7 @@
 Connections allow you to authorize and establish configurations that associate your third\-party provider with your AWS resources\. To associate your third\-party repository as a source for your pipeline, you use a connection\. 
 
 **Note**  
-This feature is not available in the Asia Pacific \(Hong Kong\) or Europe \(Milan\) Region\. To use other source actions available in that Region, see [Source action integrations](integrations-action-type.md#integrations-source)\.
+This feature is not available in the Asia Pacific \(Hong Kong\) and Europe \(Milan\) Regions\. To reference other available actions, see [Product and service integrations with CodePipeline](integrations.md)\.
 
 To add a GitHub Enterprise Server source action in CodePipeline, you can choose either to: 
 + Use the CodePipeline console **Create pipeline** wizard or **Edit action** page to choose the **GitHub Enterprise Server** provider option\. See [Create a connection to GitHub Enterprise Server \(console\)](#connections-ghes-console) to add the action\. The console helps you create a host resource and a connections resource\.
@@ -17,9 +17,6 @@ You can also create a connection using the Developer Tools console under **Setti
 Before you begin:
 + You must have created an account with GitHub Enterprise Server and installed the GitHub Enterprise Server instance on your infrastructure\.
 + You must have already created a code repository with GitHub Enterprise Server\.
-
-**Important**  
-AWS CodeStar Connections does not support GitHub Enterprise Server version 2\.22\.0 due to a known issue in the release\. To connect, upgrade to version 2\.22\.1 or the latest available version\.
 
 **Topics**
 + [Create a connection to GitHub Enterprise Server \(console\)](#connections-ghes-console)
@@ -86,11 +83,9 @@ If the provided URL has already been used to set up a GitHub Enterprise Server f
 
 1. If prompted, on the GitHub Enterprise login page, sign in with your GitHub Enterprise credentials\.
 
-1. On the **Create GitHub App** page, choose a name for your app\.  
-![\[Console screenshot showing app creation page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/connections-create-ghes-app-name.png)![\[Console screenshot showing app creation page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing app creation page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+1. On the **Create GitHub App** page, choose a name for your app\.
 
-1. On the GitHub authorization page, choose **Authorize <app\-name>**\.  
-![\[Console screenshot showing app authorization page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/connections-create-ghes-app-authorize.png)![\[Console screenshot showing app authorization page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing app authorization page.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+1. On the GitHub authorization page, choose **Authorize <app\-name>**\.
 
 1. On the app installation page, a message shows that the AWS CodeStar Connector app is ready to be installed\. If you have multiple organizations, you might be prompted to choose the organization where you want to install the app\. 
 

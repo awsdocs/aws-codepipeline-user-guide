@@ -25,13 +25,11 @@ Each option results in a different sequence of pipeline and action execution pha
 
 When you choose to stop and wait, the selected execution continues until in\-progress actions are completed\. For example, the following pipeline execution was stopped while the build action was in progress\. 
 
-1. In the pipeline view, the success message banner is displayed, and the build action continues until it is completed\. The pipeline execution status is **Stopping**\.  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/stop-exec-wait-vis-1.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+1. In the pipeline view, the success message banner is displayed, and the build action continues until it is completed\. The pipeline execution status is **Stopping**\.
 
    In the history view, the status for in\-progress actions, such as the build action, is **In progress** until the build action is completed\. While actions are in progress, the pipeline execution status is **Stopping**\.
 
-1. The execution stops when the stopping process is complete\. If the build action is completed successfully, its status is **Succeeded**, and the pipeline execution shows a status of **Stopped**\. Subsequent actions do not start\. The **Retry** button is enabled\.   
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/stop-exec-wait-vis-2.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+1. The execution stops when the stopping process is complete\. If the build action is completed successfully, its status is **Succeeded**, and the pipeline execution shows a status of **Stopped**\. Subsequent actions do not start\. The **Retry** button is enabled\. 
 
    In the history view, the execution status is **Stopped** after the in\-progress action is completed\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/stop-exec-wait-hist-1.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
@@ -40,11 +38,9 @@ When you choose to stop and wait, the selected execution continues until in\-pro
 
 When you choose to stop and abandon, the selected execution does not wait for in\-progress actions to complete\. The actions are abandoned\. For example, the following pipeline execution was stopped and abandoned while the build action was in progress\.
 
-1. In the pipeline view, the success banner message is displayed, the build action shows a status of **In progress**, and the pipeline execution shows a status of **Stopping**\.  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/stop-exec-abandon-vis-1.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+1. In the pipeline view, the success banner message is displayed, the build action shows a status of **In progress**, and the pipeline execution shows a status of **Stopping**\.
 
-1. After the pipeline execution stops, the build action shows a status of **Abandoned**, and the pipeline execution shows a status of **Stopped**\. Subsequent actions do not start\. The **Retry** button is enabled\.  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/stop-exec-abandon-vis-2.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+1. After the pipeline execution stops, the build action shows a status of **Abandoned**, and the pipeline execution shows a status of **Stopped**\. Subsequent actions do not start\. The **Retry** button is enabled\.
 
 1. In the history view, the execution status is **Stopped**\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/stop-exec-abandon-hist-1.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)

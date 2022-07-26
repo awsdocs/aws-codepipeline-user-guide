@@ -52,7 +52,7 @@ For more information about AWS KMS, see the [AWS Key Management Service Develope
 + [View your AWS managed key](#S3-view-default-keys)
 + [Configure server\-side encryption for S3 buckets using AWS CloudFormation or the AWS CLI](#S3-rotate-customer-key)
 
-### View your AWS managed key<a name="S3-view-default-keys"></a>
+## View your AWS managed key<a name="S3-view-default-keys"></a>
 
 When you use the **Create Pipeline** wizard to create your first pipeline, an S3 bucket is created for you in the same Region you created the pipeline\. The bucket is used to store pipeline artifacts\. When a pipeline runs, artifacts are put into and retrieved from the S3 bucket\. By default, CodePipeline uses server\-side encryption with AWS KMS using the AWS managed key for Amazon S3 \(the `aws/s3` key\)\. This AWS managed key is created and stored in your AWS account\. When artifacts are retrieved from the S3 bucket, CodePipeline uses the same SSE\-KMS process to decrypt the artifact\.
 
@@ -72,7 +72,7 @@ When you use the **Create Pipeline** wizard to create your first pipeline, an S3
 
 
 
-### Configure server\-side encryption for S3 buckets using AWS CloudFormation or the AWS CLI<a name="S3-rotate-customer-key"></a>
+## Configure server\-side encryption for S3 buckets using AWS CloudFormation or the AWS CLI<a name="S3-rotate-customer-key"></a>
 
 When you use AWS CloudFormation or the AWS CLI to create a pipeline, you must configure server\-side encryption manually\. Use the sample bucket policy above, and then create your owncustomer managed key\. You can also use your own keys instead of the AWS managed key\. Some reasons to choose your own key include:
 + You want to rotate the key on a schedule to meet business or security requirements for your organization\.

@@ -105,11 +105,11 @@ If you omit `PollForSourceChanges`, CodePipeline defaults to polling your reposi
 + `False`: If set, CodePipeline does not poll your repository for source changes\. Use this setting if you intend to configure a webhook to detect source changes\.
 
 ### Input artifacts<a name="action-reference-GitHub-input"></a>
-+ **Number of Artifacts:** `0`
++ **Number of artifacts:** `0`
 + **Description:** Input artifacts do not apply for this action type\.
 
 ### Output artifacts<a name="action-reference-GitHub-output"></a>
-+ **Number of Artifacts:** `1` 
++ **Number of artifacts:** `1` 
 + **Description:** The output artifact of this action is a ZIP file that contains the contents of the configured repository and branch at the commit specified as the source revision for the pipeline execution\. The artifacts generated from the repository are the output artifacts for the GitHub action\. The source code commit ID is displayed in CodePipeline as the source revision for the triggered pipeline execution\.
 
 ### Output variables<a name="action-reference-GitHub-variables"></a>
@@ -575,7 +575,7 @@ To use AWS CloudFormation to create a webhook, update your template as described
 
 **To add parameters and create a webhook in your template**
 
-We strongly recommend that you use AWS Secrets Manager to store your credentials\. If you use Secrets Manager, you must have already configured and stored your secret parameters in Secrets Manager\. This example uses dynamic references to AWS Secrets Manager for the GitHub credentials for your webhook\. For more information, see [ Using Dynamic References to Specify Template Values](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html#dynamic-references-secretsmanager)\. 
+We strongly recommend that you use AWS Secrets Manager to store your credentials\. If you use Secrets Manager, you must have already configured and stored your secret parameters in Secrets Manager\. This example uses dynamic references to Secrets Manager for the GitHub credentials for your webhook\. For more information, see [ Using Dynamic References to Specify Template Values](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html#dynamic-references-secretsmanager)\. 
 **Important**  
 When passing secret parameters, do not enter the value directly into the template\. The value is rendered as plaintext and is therefore readable\. For security reasons, do not use plaintext in your AWS CloudFormation template to store your credentials\.
 
@@ -1039,7 +1039,7 @@ Resources:
 
 **To add parameters and create a webhook in your template**
 
-We strongly recommend that you use AWS Secrets Manager to store your credentials\. If you use Secrets Manager, you must have already configured and stored your secret parameters in Secrets Manager\. This example uses dynamic references to AWS Secrets Manager for the GitHub credentials for your webhook\. For more information, see [ Using Dynamic References to Specify Template Values](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html#dynamic-references-secretsmanager)\. 
+We strongly recommend that you use AWS Secrets Manager to store your credentials\. If you use Secrets Manager, you must have already configured and stored your secret parameters in Secrets Manager\. This example uses dynamic references to Secrets Manager for the GitHub credentials for your webhook\. For more information, see [ Using Dynamic References to Specify Template Values](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html#dynamic-references-secretsmanager)\. 
 **Important**  
 When passing secret parameters, do not enter the value directly into the template\. The value is rendered as plaintext and is therefore readable\. For security reasons, do not use plaintext in your AWS CloudFormation template to store your credentials\.
 

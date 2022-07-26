@@ -33,7 +33,7 @@ Required: No
 The AWS AppConfig deployment strategy to use for deployment\.
 
 ## Input artifacts<a name="action-reference-AppConfig-input"></a>
-+ **Number of Artifacts:** `1`
++ **Number of artifacts:** `1`
 + **Description:** The input artifact for the deploy action\.
 
 ## Output artifacts<a name="action-reference-AppConfig-output"></a>

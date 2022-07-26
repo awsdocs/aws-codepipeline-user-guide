@@ -47,7 +47,7 @@ After you apply the edited policy, follow the steps in [Start a pipeline manuall
 
 **Problem:** If the Jenkins server is installed on an Amazon EC2 instance, the instance might not have been created with an instance role that has the permissions required for CodePipeline\. If you are using an IAM user on a Jenkins server, an on\-premises instance, or an Amazon EC2 instance created without the required IAM role, the IAM user either does not have the required permissions, or the Jenkins server cannot access those credentials through the profile configured on the server\. 
 
-**Possible fixes:** Make sure that Amazon EC2 instance role or IAM user is configured with the `AWSCodePipelineCustomActionAccess` managed policy or with the equivalent permissions\. For more information, see [AWS managed \(predefined\) policies for CodePipeline](managed-policies.md)\.
+**Possible fixes:** Make sure that Amazon EC2 instance role or IAM user is configured with the `AWSCodePipelineCustomActionAccess` managed policy or with the equivalent permissions\. For more information, see [AWS managed policies for CodePipeline](managed-policies.md)\.
 
 If you are using an IAM user, make sure the AWS profile configured on the instance uses the IAM user configured with the correct permissions\. You might have to provide the IAM user credentials you configured for integration between Jenkins and CodePipeline directly into the Jenkins UI\. This is not a recommended best practice\. If you must do so, be sure the Jenkins server is secured and uses HTTPS instead of HTTP\.
 
@@ -101,17 +101,15 @@ To add permissions to your CodeBuild service role policy, you create a customer\
 
 1. To find the connection ARN for your pipeline, open your pipeline and click the \(i\) icon on your source action\. You add the connection ARN to your CodeBuild service role policy\.
 
-   For this example, the connection ARN is:
+   An example connection ARN is:
 
    ```
    arn:aws:codestar-connections:eu-central-1:123456789123:connection/sample-1908-4932-9ecc-2ddacee15095
-   ```  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/gitclone-configuration.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+   ```
 
 1. To find your CodeBuild service role, open the build project used in your pipeline and navigate to the **Build details** tab\. 
 
-1. Choose the **Service role** link\. This opens the IAM console where you can add a new policy that grants access to your connection\.  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/gitclone-configuration-role.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+1. Choose the **Service role** link\. This opens the IAM console where you can add a new policy that grants access to your connection\.
 
 1. In the IAM console, choose **Attach policies**, and then choose **Create policy**\.
 
@@ -130,8 +128,7 @@ To add permissions to your CodeBuild service role policy, you create a customer\
    }
    ```
 
-   On the **JSON** tab, paste your policy\.  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/gitclone-role-policy.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+   On the **JSON** tab, paste your policy\.
 
 1. Choose **Review policy**\. Enter a name for the policy \(for example, **connection\-permissions**\), and then choose **Create policy**\.
 
@@ -176,11 +173,11 @@ To add permissions to your CodeBuild service role policy, you create a customer\
 
 **Problem:** 
 
-The maximum artifact ZIP size in the CodePipeline deploy action to ECS through CodeDeploy \(the `CodeDeployToECS` action\) is 3 MB\. The following error message is returned when artifact sizes exceed 3 MB: 
+The task definition file is a required artifact for the CodePipeline deploy action to Amazon ECS through CodeDeploy \(the `CodeDeployToECS` action\)\. The maximum artifact ZIP size in the `CodeDeployToECS` deploy action is 3 MB\. The following error message is returned when the file is not found or the artifact size exceeds 3 MB:
 
 Exception while trying to read the task definition artifact file from: <source artifact name>
 
-**Possible fixes:** Create an artifact with a compressed size less than 3 MB\.
+**Possible fixes:** Make sure the task definition file is included as an artifact\. If the file already exists, makes sure the compressed size is less than 3 MB\.
 
 ## GitHub version 1 source action: Repository list shows different repositories<a name="troubleshooting-connections-GitHub-org"></a>
 
@@ -305,9 +302,9 @@ This applies to source actions that use CWE events for change detection as follo
 
 | Source action | Parameters / trigger identifiers \(console\) | 
 | --- | --- | 
-| Amazon ECR |   **Repository name** **Image tag**   | 
-| Amazon S3 |   **Bucket** **S3 object key**   | 
-| CodeCommit |   **Repository name** **Branch name**   | 
+| Amazon ECR |  **Repository name** **Image tag**  | 
+| Amazon S3 |  **Bucket** **S3 object key**  | 
+| CodeCommit |  **Repository name** **Branch name**  | 
 
 **Possible fixes:** 
 

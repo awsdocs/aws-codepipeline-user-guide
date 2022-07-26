@@ -6,6 +6,9 @@ There are two ways to manage permissions for a stack set: self\-managed and AWS\
 
 To most effectively use Stacksets in CodePipeline, you should have a clear understanding of the concepts behind AWS CloudFormation StackSets and how they work\. See [StackSets concepts](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html) in the *AWS CloudFormation User Guide*\.
 
+**Note**  
+This feature is not available in the Asia Pacific \(Hong Kong\) and Europe \(Milan\) Regions\. To reference other available actions, see [Product and service integrations with CodePipeline](integrations.md)\.
+
 **Topics**
 + [Prerequisites](#tutorials-stackset-deployment-prereq)
 + [Step 1: Upload the sample AWS CloudFormation template and parameter file](#tutorials-stackset-deployment-upload)
@@ -20,10 +23,10 @@ To most effectively use Stacksets in CodePipeline, you should have a clear under
 For stack set operations, you use two different accounts: an administration account and a target account\. You create stack sets in the administrator account\. You create individual stacks that belong to a stack set in the target account\.
 
 **To create an administrator role with your administrator account**
-+ Follow the instructions in [Set up basic permissions for stack set operations](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html#stacksets-prereqs-accountsetup)\. Your role must be named **AWSCloudFormationStackSetAdministrationRole**\.
++ Follow the instructions in [Set up basic permissions for stack set operations](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html#stacksets-prereqs-accountsetup)\. Your role must be named **`AWSCloudFormationStackSetAdministrationRole`**\.
 
 **To create a service role in the target account**
-+ Create a service role in the target account that trusts the administrator account\. Follow the instructions in [Set up basic permissions for stack set operations](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html#stacksets-prereqs-accountsetup)\. Your role must be named **AWSCloudFormationStackSetExecutionRole**\. 
++ Create a service role in the target account that trusts the administrator account\. Follow the instructions in [Set up basic permissions for stack set operations](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html#stacksets-prereqs-accountsetup)\. Your role must be named **`AWSCloudFormationStackSetExecutionRole`**\. 
 
 ## Step 1: Upload the sample AWS CloudFormation template and parameter file<a name="tutorials-stackset-deployment-upload"></a>
 
@@ -176,8 +179,7 @@ Make a note of your stack set name\. You will use it when you add the second Sta
 
    1. Choose **Next**\.
 
-   1. Choose **Create pipeline**\. Your pipeline displays\.   
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/pipeline-createstackset.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+   1. Choose **Create pipeline**\. Your pipeline displays\. 
 
    1. Allow your pipeline to run\. 
 
@@ -241,8 +243,7 @@ Create a next action in your pipeline that will allow AWS CloudFormation StackSe
 
    1. Choose **Save**\.
 
-   1. \.Manually release a change\. Your updated pipeline displays with two actions in the Deploy stage\.  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/pipeline-createstackinstances.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+   1. \.Manually release a change\. Your updated pipeline displays with two actions in the Deploy stage\.
 
 ## Step 5: View stack set resources for your deployment<a name="tutorials-stacksets-view"></a>
 
@@ -254,7 +255,7 @@ You can view the resources and status for your stack set deployment\.
 
 1. Under **Pipelines**, choose your pipeline and then choose **View**\. The diagram shows your pipeline source and deployment stages\.
 
-1. Choose the AWS CloudFormation action on the **AWS CloudFormation Stack Instances** action in your pipeline\. The template, resources, and events for your stack set are shown in the AWS CloudFormation console\.
+1. Choose the AWS CloudFormation action on the **`AWS CloudFormation Stack Instances`** action in your pipeline\. The template, resources, and events for your stack set are shown in the AWS CloudFormation console\.
 
 1. In the left navigation panel, choose **StackSets**\. In the list, choose your stack set\.
 

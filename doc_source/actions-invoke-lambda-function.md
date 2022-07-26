@@ -248,10 +248,7 @@ In this step, you add a new stage to your pipeline, and then add a Lambda action
 **Note**  
 You can also choose to add your Lambda action to an existing stage\. For demonstration purposes, we are adding the Lambda function as the only action in a stage to allow you to easily view its progress as artifacts progress through a pipeline\.
 
-1. Choose **\+ Add action group**\. In **Edit action**, in **Action name**, enter a name for your Lambda action \(for example, **MyLambdaAction**\)\. In **Provider**, choose **AWS Lambda**\. In **Function name**, choose or enter the name of your Lambda function \(for example, **MyLambdaFunctionForAWSCodePipeline**\)\. In **User parameters**, specify the IP address for the Amazon EC2 instance you copied earlier \(for example, **http://*192\.0\.2\.4***\), and then choose **Done**\.   
-![\[The configuration for a Lambda action in the Add action form.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/codepipeline-lambda-action-add-pol.png)![\[The configuration for a Lambda action in the Add action form.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[The configuration for a Lambda action in the Add action form.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
-
-    
+1. Choose **\+ Add action group**\. In **Edit action**, in **Action name**, enter a name for your Lambda action \(for example, **MyLambdaAction**\)\. In **Provider**, choose **AWS Lambda**\. In **Function name**, choose or enter the name of your Lambda function \(for example, **MyLambdaFunctionForAWSCodePipeline**\)\. In **User parameters**, specify the IP address for the Amazon EC2 instance you copied earlier \(for example, **http://*192\.0\.2\.4***\), and then choose **Done**\. 
 **Note**  
 This topic uses an IP address, but in a real\-world scenario, you could provide your registered website name instead \(for example, **http://*www\.example\.com***\)\. For more information about event data and handlers in AWS Lambda, see [Programming Model](https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html) in the *AWS Lambda Developer Guide*\.
 
@@ -404,7 +401,7 @@ To create the AWS CloudFormation template, open any plain\-text editor and copy 
 ```
 {
   "AWSTemplateFormatVersion" : "2010-09-09",
-  "Description" : "AWS CloudFormation template which creates an S3 bucket",
+  "Description" : "CloudFormation template which creates an S3 bucket",
   "Resources" : {
     "MySampleBucket" : {
       "Type" : "AWS::S3::Bucket",
@@ -823,7 +820,7 @@ The sample Lambda function expects these file names and compressed structure\. H
 
 1. Choose **Save**\.
 
-1. From the CodePipeline console, edit the pipeline to add the function as an action in a stage in your pipeline\. Choose **Edit** for the pipeline stage you want to change, and choose **Add action group**\. On the **Edit action** page, in **Action name**, enter a name for your action\. In **Action provider**, choose **AWS Lambda**\. 
+1. From the CodePipeline console, edit the pipeline to add the function as an action in a stage in your pipeline\. Choose **Edit** for the pipeline stage you want to change, and choose **Add action group**\. On the **Edit action** page, in **Action name**, enter a name for your action\. In **Action provider**, choose **Lambda**\. 
 
    Under **Input artifacts**, choose `MyTemplate`\. In **UserParameters**, you must provide a JSON string with three parameters:
    + Stack name

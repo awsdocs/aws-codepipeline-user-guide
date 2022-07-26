@@ -3,7 +3,7 @@
 Connections allow you to authorize and establish configurations that associate your third\-party provider with your AWS resources\. To associate your third\-party repository as a source for your pipeline, you use a connection\. 
 
 **Note**  
-This feature is not available in the Asia Pacific \(Hong Kong\) or Europe \(Milan\) Region\. To use other source actions available in that Region, see [Source action integrations](integrations-action-type.md#integrations-source)\.
+This feature is not available in the Asia Pacific \(Hong Kong\) and Europe \(Milan\) Regions\. To reference other available actions, see [Product and service integrations with CodePipeline](integrations.md)\.
 
 To add a Bitbucket Cloud source action in CodePipeline, you can choose either to: 
 + Use the CodePipeline console **Create pipeline** wizard or **Edit action** page to choose the **Bitbucket** provider option\. See [Create a connection to Bitbucket \(console\)](#connections-bitbucket-console) to add the action\. The console helps you create a connections resource\.
@@ -42,8 +42,7 @@ You can create connections to a Bitbucket Cloud repository\. Installed Bitbucket
 
 1. Choose one of the following\.
    + Choose to create a pipeline\. Follow the steps in *Create a Pipeline* to complete the first screen and choose **Next**\. On the **Source** page, under **Source Provider**, choose **Bitbucket**\.  
-![\[Console screenshot showing the Add source stage dialog box with Bitbucket chosen as the source provider.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/bitbucket-add-source.png)![\[Console screenshot showing the Add source stage dialog box with Bitbucket chosen as the source provider.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing the Add source stage dialog box with Bitbucket chosen as the source provider.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)  
-![\[Console screenshot showing the Add source stage dialog box with Bitbucket Cloud chosen as the source provider.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/bitbucket-add-source-edit.png)![\[Console screenshot showing the Add source stage dialog box with Bitbucket Cloud chosen as the source provider.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing the Add source stage dialog box with Bitbucket Cloud chosen as the source provider.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+![\[Console screenshot showing the Add source stage dialog box with Bitbucket chosen as the source provider.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/bitbucket-add-source.png)![\[Console screenshot showing the Add source stage dialog box with Bitbucket chosen as the source provider.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing the Add source stage dialog box with Bitbucket chosen as the source provider.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
    + Choose to edit an existing pipeline\. Choose **Edit**, and then choose **Edit stage**\. Choose to add or edit your source action\. On the **Edit action** page, under **Action name**, enter the name for your action\. In **Action provider**, choose **Bitbucket**\.
 
 1. Do one of the following:
@@ -66,8 +65,7 @@ You install one app for all of your connections to a particular provider\. If yo
 
 1. If the login page for Bitbucket displays, log in with your credentials and then choose to continue\.
 
-1. On the app installation page, a message shows that the AWS CodeStar app is trying to connect to your Bitbucket account\. Choose **Grant access**\.  
-![\[Console screenshot showing request for access.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/bitbucket-access-popup.png)![\[Console screenshot showing request for access.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing request for access.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+1. On the app installation page, a message shows that the AWS CodeStar app is trying to connect to your Bitbucket account\. Choose **Grant access**\.
 
 1. In **Bitbucket apps**, the connection ID for your new installation is displayed\. Choose **Connect**\. The created connection displays in the connections list\.  
 ![\[Console screenshot showing request for access.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/create-connection-bitbucket-app-ID.png)![\[Console screenshot showing request for access.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing request for access.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)

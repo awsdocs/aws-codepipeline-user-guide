@@ -12,6 +12,10 @@ For data protection purposes, we recommend that you protect AWS account credenti
 
 We strongly recommend that you never put confidential or sensitive information, such as your customers' email addresses, into tags or free\-form fields such as a **Name** field\. This includes when you work with CodePipeline or other AWS services using the console, API, AWS CLI, or AWS SDKs\. Any data that you enter into tags or free\-form fields used for names may be used for billing or diagnostic logs\. If you provide a URL to an external server, we strongly recommend that you do not include credentials information in the URL to validate your request to that server\.
 
+The following security best practices also address data protection in CodePipeline:
++ [Configure server\-side encryption for artifacts stored in Amazon S3 for CodePipeline](S3-artifact-encryption.md)
++ [ Use AWS Secrets Manager to track database passwords or third\-party API keys](parameter-store-encryption.md)
+
 ## Internetwork traffic privacy<a name="inter-network-traffic-privacy"></a>
 
  Amazon VPC is an AWS service that you can use to launch AWS resources in a virtual network \(*virtual private cloud*\) that you define\. CodePipeline supports Amazon VPC endpoints powered by AWS PrivateLink, an AWS technology that facilitates private communication between AWS services using an elastic network interface with private IP addresses\. This means you can connect directly to CodePipeline through a private endpoint in your VPC, keeping all traffic inside your VPC and the AWS network\. Previously, applications running inside a VPC required internet access to connect to CodePipeline\. With a VPC, you have control over your network settings, such as:
@@ -37,15 +41,4 @@ If you choose the default option for encrypting code artifacts, CodePipeline use
 **Important**  
 CodePipeline only supports symmetric KMS keys\. Do not use an asymmetric KMS key to encrypt the data in your S3 bucket\.
 
-## Data protection configuration<a name="security-configuration"></a>
-
-This section describes data protection configuration for the following:
-+ S3 artifacts server\-side encryption \(SSE\)\.
-+ GitHub personal access tokens\.
-+ Secret parameter tracking in AWS Secrets Manager\.
-
-
-
 **Topics**
-+ [Configure server\-side encryption for artifacts stored in Amazon S3 for CodePipeline](S3-artifact-encryption.md)
-+ [Use AWS Secrets Manager to track database passwords or third\-party API keys](parameter-store-encryption.md)

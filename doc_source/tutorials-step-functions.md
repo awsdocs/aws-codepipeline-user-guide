@@ -7,6 +7,9 @@ In this tutorial, you do the following tasks:
 + Enter the state machine input JSON directly\. You can also upload the state machine input file to an Amazon Simple Storage Service \(Amazon S3\) bucket\.
 + Update your pipeline by adding the state machine action\.
 
+**Note**  
+This feature is not available in the Asia Pacific \(Hong Kong\) and Europe \(Milan\) Regions\. To reference other available actions, see [Product and service integrations with CodePipeline](integrations.md)\.
+
 **Topics**
 + [Prerequisite: Create or choose a simple pipeline](#tutorials-step-functions-prereq)
 + [Step 1: Create the sample state machine](#tutorials-step-functions-sample)
@@ -65,15 +68,13 @@ The input to the state machine execution is different from the term used in Code
 
    ```
    {"IsHelloWorldExample": true}
-   ```  
-![\[Console screenshot showing details of adding Step Functions invoke action.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/stepfunctions-edit-action.png)![\[Console screenshot showing details of adding Step Functions invoke action.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing details of adding Step Functions invoke action.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+   ```
 
 1. Choose **Done**\.
 
 1. On the stage that you're editing, choose **Done**\. In the AWS CodePipeline pane, choose **Save**, and then choose **Save** on the warning message\.
 
-1. To submit your changes and start a pipeline execution, choose **Release change**, and then choose **Release**\.  
-![\[Console screenshot showing successfully completed pipeline with pipeline execution ID.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/images/stepfunctions-pipelines.png)![\[Console screenshot showing successfully completed pipeline with pipeline execution ID.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)![\[Console screenshot showing successfully completed pipeline with pipeline execution ID.\]](http://docs.aws.amazon.com/codepipeline/latest/userguide/)
+1. To submit your changes and start a pipeline execution, choose **Release change**, and then choose **Release**\.
 
 1. On your completed pipeline, choose **AWS Step Functions** in your invoke action\. In the AWS Step Functions console, view your state machine execution ID\. The ID shows your state machine name `HelloWorld` and the state machine execution ID with the prefix `my-prefix`\.
 

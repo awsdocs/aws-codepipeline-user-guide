@@ -54,11 +54,11 @@ The `CODEBUILD_CLONE_REF` option can only be used by CodeBuild downstream action
 If you choose this option, you need to add the `codecommit:GitPull` permission to your CodeBuild service role as shown in [Add CodeBuild GitClone permissions for CodeCommit source actions](troubleshooting.md#codebuild-role-codecommitclone)\. You also need to add the `codecommit:GetRepository` permission to your CodePipeline service role as shown in [Add permissions to the CodePipeline service role](security-iam.md#how-to-update-role-new-services)\. For a tutorial that shows you how to use the **Full clone** option, see [Tutorial: Use full clone with a CodeCommit pipeline source](tutorials-codecommit-gitclone.md)\.
 
 ## Input artifacts<a name="action-reference-CodeCommit-input"></a>
-+ **Number of Artifacts:** `0`
++ **Number of artifacts:** `0`
 + **Description:** Input artifacts do not apply for this action type\.
 
 ## Output artifacts<a name="action-reference-CodeCommit-output"></a>
-+ **Number of Artifacts:** `1` 
++ **Number of artifacts:** `1` 
 + **Description:** The output artifact of this action is a ZIP file that contains the contents of the configured repository and branch at the commit specified as the source revision for the pipeline execution\. The artifacts generated from the repository are the output artifacts for the CodeCommit action\. The source code commit ID is displayed in CodePipeline as the source revision for the triggered pipeline execution\.
 
 ## Output variables<a name="action-reference-CodeCommit-variables"></a>
@@ -89,7 +89,7 @@ For more information about the difference between an author and a committer in G
 
 ## Example action configuration<a name="action-reference-CodeCommit-example"></a>
 
-### Example for default output artifact format<a name="w23aac44c29c25b3"></a>
+### Example for default output artifact format<a name="w23aac42c31c25b3"></a>
 
 ------
 #### [ YAML ]
@@ -147,7 +147,7 @@ Actions:
 
 ------
 
-### Example for full clone output artifact format<a name="w23aac44c29c25b5"></a>
+### Example for full clone output artifact format<a name="w23aac42c31c25b5"></a>
 
 ------
 #### [ YAML ]

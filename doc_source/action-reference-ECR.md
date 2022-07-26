@@ -33,11 +33,11 @@ The tag used for the image\.
 If a value for `ImageTag` is not specified, the value defaults to `latest`\.
 
 ## Input artifacts<a name="action-reference-ECR-input"></a>
-+ **Number of Artifacts:** `0`
++ **Number of artifacts:** `0`
 + **Description:** Input artifacts do not apply for this action type\.
 
 ## Output artifacts<a name="action-reference-ECR-output"></a>
-+ **Number of Artifacts:** `1` 
++ **Number of artifacts:** `1` 
 + **Description:** This action produces an artifact that contains an `imageDetail.json` file that contains the URI for the image that triggered the pipeline execution\. For information about the `imageDetail.json` file, see [imageDetail\.json file for Amazon ECS blue/green deployment actions](file-reference.md#file-reference-ecs-bluegreen)\.
 
 ## Output variables<a name="action-reference-ECR-variables"></a>
