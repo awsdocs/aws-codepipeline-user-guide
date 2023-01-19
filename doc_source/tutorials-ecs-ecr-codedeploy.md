@@ -506,7 +506,28 @@ In this section, you create a pipeline with the following actions:
 
    Choose **Next**\.
 
-1. In **Step 3: Add build stage**, choose **Skip build stage**, and then accept the warning message by choosing **Skip** again\. Choose **Next**\.
+1. In **Step 3: Add build stage**
+2. We need to have a CodeBuild Project for CodePipeline which will create Docker Image and push it to our ECR Repository.
+3. Add Build stage
+4. Build provider - AWS CodeBuild
+5. Click on Create build project
+6. Environment
+7. managed images
+8. opeating system - amazon linux 2
+9. runtime - standard
+10. Image -aws/codebuild/amazonlinux2-x86_64-standard:4.0
+11. Image version - Always use the latest image for this runtime version
+12. Privileged -
+13. Enable this flag if you want to build Docker images or want your builds to get elevated privileges - Enabled
+14. Service role - New service role
+15. Role name - service rolename
+16. Buildspec
+17. Build specifications - use buildspec file
+18. Buildspec name - buildspec.yml
+19. Create build project - Next
+20. Region -RegionName
+21. Next
+22. PLease refer "Step 1: Add a Build Specification File to Your Source Repository" of the below document for buildspec.yml - https://docs.aws.amazon.com/codepipeline/latest/userguide/ecs-cd-pipeline.html
 
 1. In **Step 4: Add deploy stage**:
 
