@@ -82,7 +82,7 @@ Make sure to ZIP the source files before you upload to your S3 source bucket, ev
 
    ```
    [
-       "111111222222,333333444444"
+       "111111222222","333333444444"
    ]
    ```
 
